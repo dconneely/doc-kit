@@ -80,10 +80,26 @@ founding statement, and Spec Kit, Kiro and BMAD-METHOD as the flagship implement
 development now has its own Wikipedia article, which is a reasonable marker of the genre being
 established rather than emergent.
 
+Searching more widely for any standard that prescribes either filename at a repository root turned
+up none. What exists instead:
+
+- **GitHub community health files** — the one formal root-file convention, covering
+  `CODE_OF_CONDUCT`, `CONTRIBUTING`, `FUNDING`, `SECURITY`, `SUPPORT` and the issue/PR templates,
+  alongside `README` and `LICENSE`. Neither `SPECIFICATION.md` nor `PLAN.md` appears in it.
+- **`AGENTS.md`** — de-facto rather than formal, but widely adopted.
+- **`ROADMAP.md`** — the nearest analogue to `PLAN.md`, and project-specific rather than
+  standardised.
+- Individual projects using a `specification.md` (OpenTracing, for one), which is one project's
+  choice rather than a convention.
+
 **Conclusion: this kit's `SPECIFICATION.md` and `PLAN.md` are its own naming, not inherited.** The
 familiarity is genre resemblance — a spec file and a plan file, in that order — not a convention
 anyone else prescribes. Nothing licenses claiming otherwise, and the kit should stop trying to
 attribute them.
+
+This is a negative result, and negative results from search are weaker than positive ones: absence
+of evidence across several queries is not proof no such convention exists. It is enough to stop the
+kit asserting one.
 
 ## Evidence
 
