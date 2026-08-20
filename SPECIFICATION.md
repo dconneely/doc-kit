@@ -13,6 +13,35 @@ repository satisfies them however it likes — by review, by habit, or by hand. 
 checker** apply only to software implementing these checks, and are written as "a checker MUST …".
 No repository is obliged to run one. Verifying by hand is fully conformant.
 
+## Purpose and scope
+
+A repository adopting this kit gains one property: **every fact about the project has exactly one
+place it belongs, and the tense of the sentence tells you which.** Everything below is machinery for
+holding that property.
+
+Three things follow, and they bound what the rest of this document is trying to achieve.
+
+**It is for facts that cannot be derived from the code.** Why something is as it is; what is
+deliberately wrong; what is out of scope; what can no longer be dated. Behaviour a reader can
+establish by reading the source is better established that way — prose restating it competes with a
+source of truth that cannot go stale, and loses.
+
+**It is a write discipline before it is a reference.** Its most-asked question is "where does this
+go?", at the moment something is written down. That is when sprawl is cheapest to prevent, and it is
+the question a growing share of documentation authors — human and otherwise — get wrong by default.
+
+**Volume is a cost, not a measure of success.** An artifact nobody has a reason to write is one the
+map should not name. A repository whose constraints fit on one page does not need this structure and
+should not adopt it.
+
+### Not in scope
+
+This specification governs where facts live and how documents relate. It says nothing about writing
+quality, house style, or what a project ought to document. It does not cover generated API
+reference, documentation sites, or code comments, except to say where their outputs sit (§4).
+Adopting it is not a claim that a repository is well documented — only that what is documented is
+findable, current, and in one place.
+
 ## 1. Terms
 
 Defined in `docs/glossary.md`. The ones this document leans on hardest are **map**, **artifact**,
@@ -52,6 +81,30 @@ kit fails §2.5 on its own templates, which is the check reporting the opposite 
 
 ## 3. Artifacts
 
+**How much ceremony an artifact needs follows from its mutability, not from its importance.**
+
+- **Immutable** artifacts need a freeze point, because after it nothing can be corrected in place.
+  That is what `Proposed` → `Accepted` is for, and it is the only place this specification requires
+  a moment of agreement.
+- **Rewritten-in-place** artifacts — the specification, the map, quirks, the glossary — need no
+  freeze point. A wrong statement is corrected, not superseded. Where such a change encodes a real
+  choice, the choice belongs in a record and is gated there; restating the gate would gate one
+  decision twice.
+- **Volatile** artifacts — the plan, task notes — should be gated as little as possible. Friction at
+  capture is what empties a backlog. The decision point is ranking an entry and picking it up, not
+  filing it.
+- **Append-only** artifacts — the changelog — are gated by release, not by review.
+
+**Use the gate you already have.** For most projects that is the pull request, and the flip to
+`Accepted` then costs nothing extra: merging it *is* the approval. Projects without pull requests are
+not excluded — a meeting, a mailing list, or one person deciding all satisfy this specification,
+which requires that agreement be recorded, not that it be reached any particular way.
+
+The status is the durable half of that record. A pull request lives in a forge that can be migrated,
+archived, or quietly lose its history; the record stays in the tree. The flip is the in-repository
+trace of an out-of-repository event — the same reason this structure keeps facts in the repository
+rather than in a tracker.
+
 ### 3.1 Architecture decision records
 
 Filenames MUST match `NNNN-kebab-case-title.md` with a four-digit zero-padded number, and numbers
@@ -60,9 +113,33 @@ MUST be unique. Each record MUST carry `Status`, `Context`, `Decision` and `Cons
 `Status` MUST be exactly one of `Proposed`, `Accepted`, `Deprecated`, or `Superseded by ADR-NNNN`
 naming a record that exists.
 
+**Immutability attaches to the status, not to the commit.** A record whose status is `Proposed` MAY
+be edited freely, and MAY be merged while still undecided — a pending decision in the tree is more
+discoverable than one living in an unmerged branch, which is the point of having the status at all.
 A record whose status is `Accepted` MUST NOT be edited except to change its status. Correcting one
-means writing its successor. A checker cannot verify this from a working tree and SHOULD verify it
-from history instead, treating any content diff to an accepted record as a violation.
+means writing its successor.
+
+**Only `Accepted` records bind.** A `Proposed` record is a suggestion, and no reader — human or
+automated — may treat it as a constraint.
+
+**Changing a record's status is a human action.** A tool MAY draft, argue and merge a record as
+`Proposed`; the flip to `Accepted`, `Deprecated` or `Superseded by` MUST be made by a person, who is
+thereby asserting that a decision was actually made. This is not mechanically verifiable and is held
+by review. See ADR-0008.
+
+Projects using pull requests SHOULD make the status change **its own pull request**, separate from
+the one that introduced the record. Not merely a separate commit: a squash merge collapses the
+branch into one commit on the trunk, taking the separation with it. A dedicated pull request keeps
+the moment of acceptance visible whatever the merge strategy, and reduces it to a one-line diff
+whose entire content is "we have decided this" — the easiest thing in a repository to review, and
+the hardest to slip past a reviewer.
+
+Approval beyond that is the adopting project's business. Review on a pull request satisfies this
+specification; so does a meeting, or one person deciding. What matters is that the flip from
+`Proposed` to `Accepted` records that the decision was made, and that nothing is edited afterwards.
+
+A checker cannot verify immutability from a working tree and SHOULD verify it from history instead,
+treating any content diff to a record that was already `Accepted` as a violation.
 
 ### 3.2 Changelog
 

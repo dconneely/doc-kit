@@ -12,6 +12,9 @@ constraint recorded in an ADR, and knowing which files are safe to delete. None 
 today, because agents read `AGENTS.md` or `CLAUDE.md` and nothing points from there to the map. A
 dozen lines naming the trust ordering — specification is current and authoritative, changelog is
 past, plan is intent and describes nothing that exists — would collect most of the available value.
+It needs write constraints as well as read ones: the specification follows the work rather than
+leading it, purpose and scope are not an agent's to revise, and a status flip on a record is a human
+action. This repository's own `AGENTS.md` is the working draft to extract from.
 Ship it as a snippet to paste, not a file: `AGENTS.md` is exactly the colliding case ADR-0007
 describes. Keep it short, because it competes with code for the agent's context.
 

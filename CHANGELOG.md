@@ -7,6 +7,19 @@ All notable changes to this project are documented here, following
 
 ### Added
 
+- A rule that changing a decision record's status is a human action: a tool may draft, argue and
+  merge a record as `Proposed`, but only a person accepts one, thereby asserting that a decision was
+  actually made. Only `Accepted` records bind, so an over-productive tool can generate clutter but
+  not authority. Projects using pull requests should make the status change its own pull request —
+  a separate commit does not survive a squash merge. See ADR-0008.
+- A rule for when a decision record freezes: immutability attaches to the `Accepted` status, not to
+  the commit. `Proposed` records may be edited freely and merged while still undecided, which makes
+  an open question visible in the tree rather than in an unmerged branch.
+- A statement that ceremony follows an artifact's mutability: only accepting a record asks for
+  agreement, and the plan should be gated as little as possible.
+- A purpose and scope section in `SPECIFICATION.md`, stating what the structure is for — facts that
+  cannot be derived from the code — and what it excludes. Volume is named as a cost, and a
+  repository whose constraints fit on one page is told not to adopt.
 - A third category alongside product and documentation: **infrastructure** — files configuring this
   repository's own operation, such as `.gitattributes`, which never reach an adopter. Validation
   scripts may one day be product an adopter takes on optionally, but adopting the structure will

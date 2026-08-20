@@ -30,14 +30,43 @@ reaches an adopter. See [ADR-0007](docs/adr/0007-keep-repository-infrastructure-
 
 ## Before you edit
 
-- **Never edit an accepted ADR.** Write its successor and set the old `Status` to
-  `Superseded by ADR-NNNN`. An unpublished draft is still a draft; a committed one is immutable.
+- **Never change an ADR's `Status` yourself.** Drafting a record is yours to do; accepting one is
+  not. Write it as `Proposed`, say so, and leave the flip to `Accepted` — or to `Deprecated` or
+  `Superseded by` — to a person, in a pull request of its own. Only `Accepted` records bind, so a
+  `Proposed` one constrains nobody, including you.
+  See [ADR-0008](docs/adr/0008-accepting-a-decision-record-is-a-human-action.md).
+- **Never edit an ADR whose status is `Accepted`.** Write its successor. Immutability attaches to the
+  status, not the commit: a `Proposed` record is editable and may be merged while still undecided.
+  If a decision is still being argued, leave it `Proposed` rather than accepting it and revising.
 - **Delete completed `PLAN.md` entries.** Do not annotate, strike through, or move them to a done
   section — that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
 - **Adding a document means updating `DOCUMENTATION.md` in the same commit.** Every artifact the map
   names must exist, and every Markdown file outside `docs/archive/` must appear in the map.
+
+## Changing the specification
+
+**The specification follows the work; it does not lead it.** Change it for one of two reasons:
+behaviour changed because you implemented something, or it misdescribes what the project actually
+does. Never because you have decided it would read better, cover more, or be organised differently.
+
+The flow in the map is the whole procedure: an ADR first if a real choice was made, then
+`SPECIFICATION.md` in the present tense, then a `CHANGELOG.md` line if an adopter can see the
+change, then delete the `PLAN.md` entry if there was one.
+
+Two things to watch:
+
+- **A missing plan entry does not mean the work was unsanctioned.** Requests arrive from issue
+  trackers and conversations this repository cannot see. It does mean you should say what prompted
+  the change, so a reviewer can tell the difference between implementing a request and improvising.
+- **Purpose and scope are not yours to revise.** The section stating what this project is for and
+  what it excludes is positioning, not description. Changing it is a decision — an ADR, accepted by
+  a person — never a side effect of implementing something else. The same holds for restructuring
+  the map.
+
+If you think the specification is wrong and nothing has changed, **say so and leave it alone**. That
+is a finding to report, not an edit to make.
 
 ## Conventions
 

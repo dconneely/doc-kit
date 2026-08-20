@@ -48,7 +48,7 @@ Two outputs: a decision, and `PLAN.md`.
 
 **Decide.** This structure costs more than it returns below a certain size. A single-purpose script,
 a repository one person will maintain for a month, or anything whose entire documentation genuinely
-fits in one honest `README.md` should stop here. The signal to proceed is not size in lines but
+fits in one honest `README.md` — or one tight `AGENTS.md` — should stop here. The signal to proceed is not size in lines but
 **more than one reader**: someone who has to obey the behaviour, or someone who will inherit the
 reasoning. Record the outcome either way — a rejection that is written down is a decision, and one
 that is not gets re-litigated every six months.
@@ -364,6 +364,14 @@ Apply the three-property test honestly, and note that it failed twice during thi
 development — technical debt and machine-readable contracts both looked like obvious new categories
 and both turned out to belong somewhere that already existed. If it passes, add it to both tables
 in the map in the same commit.
+
+**"Do documentation changes need approving?"**
+One does. Accepting an ADR is the only moment this structure asks for agreement, because it is the
+only artifact that cannot be corrected afterwards. Everything else is rewritten in place or deleted
+freely, and ordinary review covers it. If you already have pull requests you already have the gate:
+leave a record `Proposed` while it is being argued — merging it undecided is fine and makes the open
+question visible — and merge the flip to `Accepted` once it is settled. Resist adding ceremony to
+the plan in particular; friction at capture is what empties a backlog.
 
 **"There is an ADR I now think was wrong."**
 Leave it alone and write the replacement, marking the old one superseded. A wrong decision plus its

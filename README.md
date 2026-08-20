@@ -9,6 +9,26 @@ backlog, and decisions that survive only as comments above the code they explain
 The kit is a small set of documents organised by three properties — **tense**, **mutability** and
 **audience** — plus the procedure for migrating existing material into them.
 
+## What it is for
+
+Facts the code cannot tell you: why something is as it is, what is deliberately wrong, what is out
+of scope, what can no longer be dated. Behaviour you can establish by reading the source is better
+established that way.
+
+It is a write discipline more than a reference. The question it answers most often is "where does
+this go?", asked while something is being written down — which is when sprawl is cheapest to
+prevent.
+
+That question is increasingly asked by coding agents, which produce documentation readily and sprawl
+by default: three files restating one thing, nothing ever deleted. A structure that says where a
+fact belongs, and when it is deleted, constrains generation in a way that "write good docs" does
+not. What it will not do is make a repository legible to an agent through sheer volume — an agent
+reads code faster than prose, and a stale document is more dangerous to one than to a sceptical
+human.
+
+**If your project's constraints fit on one page, write that page instead.** A tight `AGENTS.md` or
+an honest `README.md` beats this structure until there is more to say than fits in it.
+
 ## What's here
 
 | Path | What it is |
