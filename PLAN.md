@@ -2,6 +2,19 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
+### Ship an agent entry-point stanza
+
+*Type: feature — Importance: high — Effort: low*
+
+The structure's value to a coding agent concentrates in three things: knowing which document to
+trust when they conflict, knowing not to "fix" anything in `docs/quirks.md` or contradict a
+constraint recorded in an ADR, and knowing which files are safe to delete. None of it is reachable
+today, because agents read `AGENTS.md` or `CLAUDE.md` and nothing points from there to the map. A
+dozen lines naming the trust ordering — specification is current and authoritative, changelog is
+past, plan is intent and describes nothing that exists — would collect most of the available value.
+Ship it as a snippet to paste, not a file: `AGENTS.md` is exactly the colliding case ADR-0007
+describes. Keep it short, because it competes with code for the agent's context.
+
 ### Split `ADOPTING.md` into a procedure and its rationale
 
 *Type: docs — Importance: high — Effort: medium*
@@ -114,6 +127,18 @@ mapping is written down somewhere enforceable: product changes — `ADOPTING.md`
 checker, the installer — take `feat`/`fix`/`refactor`, while this repository's own documentation
 takes `docs`. Without that rule a documentation kit types every commit `docs` and the history stops
 carrying information.
+
+### Restate who `docs/quirks.md` is for
+
+*Type: docs — Importance: medium — Effort: low*
+
+The artifacts table gives its audience as "users comparing against a reference", which was right and
+is now half the story: its highest-value reader is a coding agent about to delete a workaround it
+has mistaken for a defect. Say so in the template's audience column and in the file's own preamble.
+While there, make entries greppable — consistent field labels, one per line — so an agent scanning
+for a symbol finds the entry that governs it rather than having to read the file. The same argument
+applies more weakly to ADRs recording a constraint, which is worth a sentence in the map but not a
+format change.
 
 ### Move the format skeletons out of the map
 
