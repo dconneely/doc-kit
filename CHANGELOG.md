@@ -7,6 +7,13 @@ All notable changes to this project are documented here, following
 
 ### Added
 
+- A licence: [MIT No Attribution](LICENCE). Adopters copy `templates/` into their own repositories
+  and owe nothing — no notice to preserve, no attribution. Plain MIT would have followed the copied
+  templates into every adopting repository as a surviving obligation nobody would honour.
+- `tools/doc-kit-check.sh`, a standalone checker for §2.2–2.5, §3.1 and §3.3. Run it by hand;
+  nothing in this kit requires it, and a repository holding these properties without ever running it
+  is conformant.
+
 - `SPECIFICATION.md`, defining what a conformant repository looks like, with a purpose and scope
   section stating what the structure is for and what it excludes.
 - Conventions the kit previously relied on without stating: research confidence levels, plan

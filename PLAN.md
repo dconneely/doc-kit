@@ -2,42 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Write the conformance checker
-
-*Type: feature — Importance: high — Effort: medium*
-
-`SPECIFICATION.md` §6 defines structural conformance as mechanically checkable and nothing checks
-it. A standalone CLI, run by hand, per ADR-0007 — never a condition of adopting the structure. Start
-with the two rules that rot, §2.3 and §2.4: every artifact the map names exists, every documentation
-file appears in the map. Then ADR integrity (§3.1) and the plan graveyard (§3.3). Checks must be
-individually selectable, since a repository with no research notes should not be told about research
-notes. Exclude `templates/` by default per §2.8, or any repository distributing the kit fails on its
-own templates. This repository is the first consumer, which is the real test of whether the failure
-messages mean anything to someone who has not read it.
-
-Likely a POSIX shell script: no runtime to install, invoked identically by CI and by hand, and —
-because it executes inside someone else's repository — short enough that they can read it before
-trusting it. Two caveats to settle when starting. Take the artifact set from the artifacts table per
-§2.2 — its first cell is a backticked full path, where the layout block is an indented tree needing
-reconstruction. And decide the Windows story deliberately, since `sh` needs Git Bash or WSL and
-will not run from PowerShell unqualified — this project's own
-author is on Windows, and a maintainer with a second-class path to the checker is how dogfooding
-stops happening. `identigon` found that `prek`'s Node hooks install cross-platform including
-Windows while its Ruby ones do not, which is worth knowing if a runtime is chosen after all.
-
-### Decide whether the checker ships, and how
-
-*Type: feature — Importance: medium — Effort: medium*
-
-Deliberately deferred by ADR-0007 until a working tool exists. The options — a pre-commit hook
-provider, a CI action, a packaged CLI, a plain vendored script, or shipping nothing and leaving
-adopters to write their own — differ mainly in ecosystem assumptions, and picking one blind commits
-the kit to somebody else's toolchain. Two findings to carry in: repository-wide invariants such as
-§2.3 and §2.4 suit a merge check better than a commit hook, because a migration spends weeks in
-intermediate states the kit explicitly permits; and the one rule visible only in a diff, edits to an
-accepted record, needs diff access rather than any particular mechanism, which a pull request's base
-diff also provides.
-
 ### Provide an install mechanism
 
 *Type: feature — Importance: high — Effort: low*
@@ -56,11 +20,18 @@ lives, and an adopter has no local copy of the answers. Against copying it: 164 
 weight, staleness the moment the kit improves, and three links into `docs/adr/` that resolve only
 here. Weigh those before assuming the answer is the same for both files.
 
-### Add a licence
+### Decide whether the checker ships, and how
 
-*Type: docs — Importance: high — Effort: low*
+*Type: feature — Importance: medium — Effort: medium*
 
-A kit meant to be copied into other repositories without a licence is unusable by anyone careful.
+Deliberately deferred by ADR-0007 until a working tool exists. The options — a pre-commit hook
+provider, a CI action, a packaged CLI, a plain vendored script, or shipping nothing and leaving
+adopters to write their own — differ mainly in ecosystem assumptions, and picking one blind commits
+the kit to somebody else's toolchain. Two findings to carry in: repository-wide invariants such as
+§2.3 and §2.4 suit a merge check better than a commit hook, because a migration spends weeks in
+intermediate states the kit explicitly permits; and the one rule visible only in a diff, edits to an
+accepted record, needs diff access rather than any particular mechanism, which a pull request's base
+diff also provides.
 
 ### Check links
 

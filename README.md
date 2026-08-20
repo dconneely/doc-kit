@@ -57,6 +57,12 @@ better than an unmigrated one, which is the property the whole design optimises 
 
 Below a certain size it is not worth it at all. Step 0 says how to tell.
 
+## Licence
+
+[MIT No Attribution](LICENCE). Copy any of this into your repository and own it — there is no notice
+to preserve and nothing to attribute. That is deliberate: a kit whose product is text you are meant
+to edit should not follow you home.
+
 ## Status
 
 Early. The structure and the procedure are settled and in use; the tooling around them is not built
