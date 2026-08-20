@@ -5,6 +5,17 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+### Changed
+
+- Decision records now follow the [MADR](https://adr.github.io/madr/) minimal template: YAML
+  front-matter with `status`, `date` and `decision-makers`, then Context and Problem Statement,
+  Considered Options, Decision Outcome and Consequences. The kit previously used Nygard's four
+  sections while claiming to follow a recognised convention; checking the template showed it did
+  not. `Considered Options` is now required — it is what makes a record a decision rather than a
+  statement. See ADR-0010.
+- Status values take MADR's lowercase spelling, gain `rejected`, and each now has a stated meaning.
+  `deprecated` covers a record that no longer applies with nothing replacing it.
+
 ### Added
 
 - A rule that changing a decision record's status is a human action: a tool may draft, argue and
@@ -12,6 +23,9 @@ All notable changes to this project are documented here, following
   actually made. Only `Accepted` records bind, so an over-productive tool can generate clutter but
   not authority. Projects using pull requests should make the status change its own pull request —
   a separate commit does not survive a squash merge. See ADR-0008.
+- A publication boundary on ADR immutability: a record nobody outside its author could have read has
+  no reader who relied on it, so a drafting error may be corrected in place until the first push to
+  a shared remote. Relevant during adoption, where records are often drafted in a batch.
 - A rule for when a decision record freezes: immutability attaches to the `Accepted` status, not to
   the commit. `Proposed` records may be edited freely and merged while still undecided, which makes
   an open question visible in the tree rather than in an unmerged branch.

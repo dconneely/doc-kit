@@ -84,7 +84,7 @@ kit fails §2.5 on its own templates, which is the check reporting the opposite 
 **How much ceremony an artifact needs follows from its mutability, not from its importance.**
 
 - **Immutable** artifacts need a freeze point, because after it nothing can be corrected in place.
-  That is what `Proposed` → `Accepted` is for, and it is the only place this specification requires
+  That is what `proposed` → `accepted` is for, and it is the only place this specification requires
   a moment of agreement.
 - **Rewritten-in-place** artifacts — the specification, the map, quirks, the glossary — need no
   freeze point. A wrong statement is corrected, not superseded. Where such a change encodes a real
@@ -96,7 +96,7 @@ kit fails §2.5 on its own templates, which is the check reporting the opposite 
 - **Append-only** artifacts — the changelog — are gated by release, not by review.
 
 **Use the gate you already have.** For most projects that is the pull request, and the flip to
-`Accepted` then costs nothing extra: merging it *is* the approval. Projects without pull requests are
+`accepted` then costs nothing extra: merging it *is* the approval. Projects without pull requests are
 not excluded — a meeting, a mailing list, or one person deciding all satisfy this specification,
 which requires that agreement be recorded, not that it be reached any particular way.
 
@@ -107,25 +107,48 @@ rather than in a tracker.
 
 ### 3.1 Architecture decision records
 
-Filenames MUST match `NNNN-kebab-case-title.md` with a four-digit zero-padded number, and numbers
-MUST be unique. Each record MUST carry `Status`, `Context`, `Decision` and `Consequences` sections.
+Records follow the [MADR](https://adr.github.io/madr/) minimal template. Filenames MUST match
+`NNNN-kebab-case-title.md` with a four-digit zero-padded number, and numbers MUST be unique and
+never reused. The heading MUST repeat the number. See ADR-0010.
 
-`Status` MUST be exactly one of `Proposed`, `Accepted`, `Deprecated`, or `Superseded by ADR-NNNN`
-naming a record that exists.
+Each record MUST carry YAML front-matter with `status` and `date`, and SHOULD carry
+`decision-makers`. MADR's `consulted` and `informed` are permitted and not required — RACI fields
+are overhead below a certain team size.
 
-**Immutability attaches to the status, not to the commit.** A record whose status is `Proposed` MAY
+Each record MUST carry `Context and Problem Statement`, `Considered Options` and `Decision Outcome`
+sections, and SHOULD carry `Consequences` as a subsection of the last. **`Considered Options` is
+what makes a record a decision rather than a statement**; a record with only one option to consider
+is usually a specification entry that has been misfiled.
+
+`status` MUST begin with exactly one of these, lowercase:
+
+| Value | Meaning |
+|---|---|
+| `proposed` | Suggested, not yet decided. Binds nothing |
+| `rejected` | Considered and turned down. Kept so the option is not re-proposed |
+| `accepted` | Decided and in effect |
+| `deprecated` | No longer applies, and nothing replaced it |
+| `superseded by ADR-NNNN` | Replaced by a later record, which MUST exist |
+
+**Immutability attaches to the status, not to the commit.** A record whose status is `proposed` MAY
 be edited freely, and MAY be merged while still undecided — a pending decision in the tree is more
 discoverable than one living in an unmerged branch, which is the point of having the status at all.
-A record whose status is `Accepted` MUST NOT be edited except to change its status. Correcting one
-means writing its successor.
+A record whose status is `accepted` MUST NOT be edited except to change its status and `date`.
+Correcting one means writing its successor.
 
-**Only `Accepted` records bind.** A `Proposed` record is a suggestion, and no reader — human or
+**Immutability begins at publication.** A record nobody outside its author could have read has no
+reader who relied on it, so correcting a drafting error in one is not rewriting history. In practice
+the line is the first push to a shared remote. This matters during adoption, where records are
+often drafted in a batch before anything is shared. The exception MUST NOT be stretched past that
+line: once a record is visible to others, it is fixed, and the remedy for a mistake is a successor.
+
+**Only `accepted` records bind.** A `proposed` record is a suggestion, and no reader — human or
 automated — may treat it as a constraint.
 
 **Changing a record's status is a human action.** A tool MAY draft, argue and merge a record as
-`Proposed`; the flip to `Accepted`, `Deprecated` or `Superseded by` MUST be made by a person, who is
-thereby asserting that a decision was actually made. This is not mechanically verifiable and is held
-by review. See ADR-0008.
+`proposed`; any other status MUST be set by a person, who is thereby asserting that a decision was
+actually made, and who SHOULD name themselves in `decision-makers`. The assertion is not mechanically
+verifiable, but the *presence* of `decision-makers` on a non-proposed record is. See ADR-0008.
 
 Projects using pull requests SHOULD make the status change **its own pull request**, separate from
 the one that introduced the record. Not merely a separate commit: a squash merge collapses the

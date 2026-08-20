@@ -147,12 +147,11 @@ format change.
 
 *Type: docs — Importance: medium — Effort: low*
 
-The map restates the ADR skeleton inline, which every adopter then copies into their own map;
-`templates/docs/adr/0000-template.md` now holds the same shape. The map should link and keep only
-what the file cannot express. Same reconciliation is due for the research confidence levels and the
-quirk entry shape, which the template files define and the map's "prescribed formats" section does
-not yet mention — do all three together rather than adding a fourth duplicate first. Noted as a
-consequence in ADR-0004; no longer blocked.
+The ADR skeleton has been removed from the map and now links to
+`templates/docs/adr/0000-template.md`. The same reconciliation is still due for the research
+confidence levels and the quirk entry shape, which the template files define and the map's
+"prescribed formats" section does not mention. Also check the changelog and plan-entry skeletons,
+which the map still restates.
 
 ### Reconcile the judgement calls in `ADOPTING.md` against the ADRs
 

@@ -71,7 +71,7 @@ machine-readable member of it when it exists.
 | `SPECIFICATION.md` | What a conformant repository looks like — the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength | present | rewritten in place, always current | adopters + tool authors |
 | `ADOPTING.md` | **Product. Source of truth, not description** — the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms | imperative | rewritten in place | adopters |
 | `templates/*` | **Product. Source of truth, not description** — the artifact half. Copied into the adopter's repository and customised there | present | rewritten in place | adopters, via their own repositories |
-| `docs/adr/*.md` | Why we chose this. **Real convention:** Nygard 2011; [adr.github.io](https://adr.github.io), [MADR](https://adr.github.io/madr/) template, [adr-tools](https://github.com/npryce/adr-tools) CLI | past | **immutable** — superseded, never edited | future maintainers |
+| `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | **immutable** once accepted — superseded, never edited | future maintainers |
 | `CHANGELOG.md` | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org) | past | append-only | adopters |
 | `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard** | future | volatile — reordered and deleted freely | the team |
 | `docs/glossary.md` | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html) | present | rewritten in place | readers of every other document |
@@ -104,23 +104,11 @@ Most changes skip the ADR. Nothing skips the deletion.
 
 ## Prescribed formats
 
-**ADR** — one file per decision, numbered `0001-short-title.md`, five sections:
-
-```markdown
-# 1. Short title in the imperative
-
-## Status
-Accepted            # Proposed | Accepted | Deprecated | Superseded by ADR-0012
-
-## Context
-What forces were at play. What was known at the time — including what was *not* known.
-
-## Decision
-What we are doing, in the active voice: "We will …"
-
-## Consequences
-What becomes easier, what becomes harder, and what we accept as a result.
-```
+**ADR** — one file per decision, numbered `0001-short-title.md`, following the
+[MADR](https://adr.github.io/madr/) minimal template. The shape lives in
+[`templates/docs/adr/0000-template.md`](templates/docs/adr/0000-template.md) and is not restated
+here; `SPECIFICATION.md` §3.1 carries the rules that file cannot express — status meanings,
+immutability, and who may change a status.
 
 **Changelog** — reverse-chronological, an `Unreleased` section at the top, six fixed categories:
 `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe effects an adopter

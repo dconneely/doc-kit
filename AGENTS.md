@@ -30,14 +30,15 @@ reaches an adopter. See [ADR-0007](docs/adr/0007-keep-repository-infrastructure-
 
 ## Before you edit
 
-- **Never change an ADR's `Status` yourself.** Drafting a record is yours to do; accepting one is
-  not. Write it as `Proposed`, say so, and leave the flip to `Accepted` — or to `Deprecated` or
-  `Superseded by` — to a person, in a pull request of its own. Only `Accepted` records bind, so a
-  `Proposed` one constrains nobody, including you.
+- **Never change an ADR's `status` yourself.** Drafting a record is yours to do; accepting one is
+  not. Write it as `proposed`, say so, and leave any other status to a person, in a pull request of
+  its own. Only `accepted` records bind, so a `proposed` one constrains nobody, including you.
   See [ADR-0008](docs/adr/0008-accepting-a-decision-record-is-a-human-action.md).
-- **Never edit an ADR whose status is `Accepted`.** Write its successor. Immutability attaches to the
-  status, not the commit: a `Proposed` record is editable and may be merged while still undecided.
-  If a decision is still being argued, leave it `Proposed` rather than accepting it and revising.
+- **Never edit an ADR whose status is `accepted`.** Write its successor. Immutability attaches to
+  the status, not the commit: a `proposed` record is editable and may be merged while still
+  undecided. If a decision is still being argued, leave it `proposed` rather than accepting it and
+  revising. Records follow the [MADR](https://adr.github.io/madr/) minimal template — copy
+  `templates/docs/adr/0000-template.md`, and fill in `Considered Options` honestly.
 - **Delete completed `PLAN.md` entries.** Do not annotate, strike through, or move them to a done
   section — that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are

@@ -1,10 +1,12 @@
+---
+status: "accepted"
+date: 2026-08-20
+decision-makers: David Conneely
+---
+
 # 7. Keep repository infrastructure out of the product
 
-## Status
-
-Accepted
-
-## Context
+## Context and Problem Statement
 
 ADR-0006 classified as product everything the kit ships for use in another repository. It did not
 answer a question that arrives immediately afterwards: this repository also contains files that
@@ -19,45 +21,47 @@ operation the kit does not have and should not acquire for two files. Nothing el
 either property.
 
 A different question arrived alongside them: whether the kit should ship validation scripts for the
-structure it creates. That one is genuinely open, and has no good answer before such a script exists.
+structure it creates. That one is genuinely open, and has no good answer before such a script
+exists.
 
-## Decision
+## Considered Options
 
-Files configuring this repository's own operation are **infrastructure**, not product. They stay
-here, and are never applied to adopting repositories.
+* Ship `.gitattributes` and `.pre-commit-config.yaml` as product
+* Ship them, with a merge step in the installer for repositories that already have them
+* Keep them as this repository's own infrastructure, and ship neither
+
+## Decision Outcome
+
+Chosen option: **keep them as infrastructure**. Files configuring this repository's own operation
+stay here and are never applied to adopting repositories.
 
 The test for product is: **is it about the documents the kit creates, and does it land somewhere the
-kit can own?** Infrastructure fails the second half.
+kit can own?** Infrastructure fails the second half. A merge step was rejected as machinery bought
+for two files, neither of which the kit has authority over.
 
 This is a documentation kit, not an infrastructure kit. **Any infrastructure it ever offers an
 adopter is optional** — made available, never applied. That is what distinguishes it from the
-templates, which adoption does apply.
-
-The rule holds for anything that might qualify later. Validation scripts for the structure are the
-obvious candidate, with CI workflow examples and an installer behind them. Nothing here forecloses
-such an artifact, and nothing here designs one.
+templates, which adoption does apply. The rule holds for anything qualifying later: validation
+scripts are the obvious candidate, with CI workflow examples and an installer behind them. Nothing
+here forecloses such an artifact, and nothing here designs one.
 
 Whatever ships, **adopting the documentation structure will never require running anything.**
-Conformance is a property of a repository's state, not of whether it executes our tooling. A
-repository that verifies by review, by habit, or by hand is fully conformant.
+Conformance is a property of a repository's state, not of whether it executes our tooling.
 
-The single line of `.gitattributes` that is genuinely about documentation —
+The single line of `.gitattributes` genuinely about documentation —
 `*.md text eol=lf diff=markdown` — ships as a documented snippet in `ADOPTING.md`, not as a file.
 
-## Consequences
+### Consequences
 
-Generic hygiene stays the adopter's business. We accept that an adopter gets no help from us with
-secret scanning or line endings, which is correct: those are well served by providers that do
-nothing else.
-
-`SPECIFICATION.md` has to distinguish requirements on **repositories** from requirements on
-**checkers**. It stated in §2.3 that a check "MUST be enforced mechanically rather than by review",
-which made tooling a condition of conformance and contradicted the last part of this decision.
-Corrected as part of it.
-
-The open door has to stay honestly open. It would be easy to read "validation scripts may become
-product" as a commitment to build them, and it is not one — the kit works without any, and shipping
-none remains a legitimate outcome.
-
-This decision covers the cases that will arrive next — `.editorconfig`, CI workflow files,
-docs-site configuration — without needing to be revisited for each.
+* Good, because this covers the cases arriving next — `.editorconfig`, CI workflow files, docs-site
+  configuration — without being revisited for each.
+* Bad, because generic hygiene stays the adopter's business: they get no help from us with secret
+  scanning or line endings. Correct, though — those are well served by providers that do nothing
+  else.
+* Neutral: `SPECIFICATION.md` had to distinguish requirements on **repositories** from requirements
+  on **checkers**. §2.3 stated that a check "MUST be enforced mechanically rather than by review",
+  which made tooling a condition of conformance and contradicted this decision. Corrected as part of
+  it.
+* Neutral: the open door must stay honestly open. It would be easy to read "validation scripts may
+  become product" as a commitment to build them. It is not — the kit works without any, and shipping
+  none remains a legitimate outcome.

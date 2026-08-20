@@ -1,10 +1,12 @@
+---
+status: "accepted"
+date: 2026-08-20
+decision-makers: David Conneely
+---
+
 # 8. Accepting a decision record is a human action
 
-## Status
-
-Accepted
-
-## Context
+## Context and Problem Statement
 
 This structure tells its readers to treat decision records as authoritative, and ADR-0001 makes
 immutability the property that gives them their value. Both assumptions were formed when records
@@ -27,40 +29,43 @@ Three properties of this structure make that worse rather than better:
 What was not known when the structure was designed: how cheap authoring would become relative to
 deciding. The two were previously the same act, and the structure quietly assumed it.
 
-## Decision
+## Considered Options
 
-Authoring a record and accepting one are different acts, and only the second is reserved.
+* Leave it to review, with no stated rule
+* Forbid tools from authoring records at all
+* Separate authoring from accepting, and reserve only the second
 
-An agent MAY draft a record, argue it, and merge it as `Proposed`. **Changing a record's status —
-to `Accepted`, `Deprecated`, or `Superseded by` — is a human action.** An agent must not do it
-unprompted, and a person doing it is asserting that a decision was actually made.
+## Decision Outcome
 
-**Only `Accepted` records bind.** A `Proposed` record is a suggestion, and no reader — human or
-agent — may treat it as a constraint. This is what bounds the damage: an enthusiastic agent can
-generate noise, but it cannot generate authority.
+Chosen option: **separate authoring from accepting**. A tool MAY draft a record, argue it, and merge
+it as `proposed`. Changing a record's status — to `accepted`, `rejected`, `deprecated`, or
+`superseded by` — is a human action, and a person doing it asserts that a decision was actually made.
 
-## Consequences
+**Only `accepted` records bind.** A `proposed` record is a suggestion, and no reader may treat it as
+a constraint. This is what bounds the damage: an enthusiastic tool can generate noise, but it cannot
+generate authority.
 
-The blast radius of an over-productive agent is limited to clutter. Clutter is a real cost and the
-plan should carry an entry when it appears, but it is recoverable in a way that false constraint is
-not — a `Proposed` record can simply be deleted, since nothing depended on it.
-
-The rule is not mechanically enforceable, and we do not pretend otherwise. Commit metadata can be
-set by anything. This is a convention held by review, and its main value is being written down so
-that a reviewer seeing an agent-authored status flip knows to object.
+Forbidding tools from authoring was rejected — drafting is genuinely useful, and the hazard is not
+authorship but unearned authority. Leaving it to review was rejected because an unwritten rule gives
+a reviewer nothing to point at.
 
 Projects using pull requests should make the status flip **its own pull request**. A separate commit
 is not enough: squash merging collapses a branch into a single commit on the trunk, so a flip made
 alongside the drafting disappears into it, and the control becomes unobservable exactly where it
-needs to be seen. A dedicated pull request survives any merge strategy and reduces acceptance to a
-one-line diff — trivial to review, and conspicuous if it arrives unaccompanied by a decision.
+needs to be seen. This stays a recommendation, because projects without pull requests are not
+excluded from this structure and should not be told they are.
 
-This stays a recommendation rather than a requirement, because projects without pull requests are
-not excluded from this structure and should not be told they are.
+### Consequences
 
-The cost is one word edited by a person. That is deliberately trivial: a control expensive enough to
-resent is one that gets bypassed.
-
-The reasoning generalises past records. Any artifact whose authority comes from someone having
-decided — rather than from being checkable — needs the same separation between drafting and
-committing to it. Accepting a record is the only such artifact in this structure today.
+* Good, because the blast radius of an over-productive tool is limited to clutter — recoverable in a
+  way false constraint is not, since a `proposed` record can simply be deleted.
+* Good, because the cost is one word edited by a person. Deliberately trivial: a control expensive
+  enough to resent is one that gets bypassed.
+* Bad, because the rule is not mechanically enforceable and we do not pretend otherwise. Commit
+  metadata can be set by anything. It is a convention held by review, whose value is being written
+  down so a reviewer seeing a tool-authored status flip knows to object.
+* Neutral: clutter remains a real cost even when inert, and the plan should carry an entry when it
+  appears.
+* Neutral: ADR-0010 later adopted MADR front-matter, whose `decision-makers` field records *who*
+  decided. Its presence on a non-proposed record is checkable, which is a stronger signal than this
+  decision could offer on its own.

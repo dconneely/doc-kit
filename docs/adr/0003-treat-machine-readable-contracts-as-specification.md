@@ -1,10 +1,12 @@
+---
+status: "accepted"
+date: 2026-08-20
+decision-makers: David Conneely
+---
+
 # 3. Treat machine-readable contracts as specification
 
-## Status
-
-Accepted
-
-## Context
+## Context and Problem Statement
 
 Schemas, OpenAPI and AsyncAPI documents, interface definitions, migrations: the second candidate for
 a new top-level category, after technical debt (ADR-0002). The intuition was that these are not
@@ -13,12 +15,21 @@ own, or to be declared out of scope.
 
 The intuition is wrong in an instructive way, and the temptation is to invent a category per medium.
 
-## Decision
+## Considered Options
 
-We will treat machine-readable contracts as **members of the specification**, not as a separate
-category. The specification is a set, not a file, and its members may be prose or machine-readable.
+* A new top-level category for machine-readable contracts
+* Declare them out of scope, as code rather than documentation
+* Treat them as members of the specification
 
-We will distinguish three things that get confused with each other:
+## Decision Outcome
+
+Chosen option: **members of the specification**, because a schema passes the same three tests as a
+reference chapter — present tense, rewritten in place, audience of users and implementers. Nothing
+distinguishes it except the medium, and being machine-checked makes it *better* specification, not
+something lesser. The specification is a set, not a file, and its members may be prose or
+machine-readable.
+
+Three things that get confused with each other must stay distinguished:
 
 - **Source of truth** — the contract itself. Versioned and reviewed like code.
 - **Generated view** — diagrams, rendered references, snapshots, clients. Never hand-edited, carries
@@ -28,21 +39,15 @@ We will distinguish three things that get confused with each other:
 
 Prose may link to a machine-readable contract. It must never restate one.
 
-## Consequences
+### Consequences
 
-A schema passes the same three tests as a reference chapter: present tense, rewritten in place,
-audience of users and implementers. Nothing distinguishes it except the medium — and being
-machine-checked makes it *better* specification, not something lesser.
-
-Applying this reclassifies more than it adds. A conformance target is specification while its known
-gaps are quirks; a runbook is a procedure for a different audience at a different moment; a threat
-model is an assessment whose conclusions become ADRs and whose findings become plan entries. Most
-things that look like new categories are the contract in a different medium.
-
-Ordered migrations come out changelog-shaped rather than specification, whatever they describe. The
-specification is the *current* shape, which is why a generated snapshot of it earns a place
-alongside them.
-
-The link-never-restate rule is the one that is expensive to hold. The moment prose repeats a field
-list there are two sources of truth and one is already wrong — but restating is precisely what feels
-helpful to a reader, so this rule has to be enforced in review rather than trusted to instinct.
+* Good, because applying this reclassifies more than it adds. A conformance target is specification
+  while its known gaps are quirks; a runbook is a procedure for a different audience at a different
+  moment; a threat model is an assessment whose conclusions become records and whose findings become
+  plan entries. Most things that look like new categories are the contract in a different medium.
+* Good, because ordered migrations come out changelog-shaped rather than specification, whatever
+  they describe — the specification is the *current* shape, which is why a generated snapshot of it
+  earns a place alongside them.
+* Bad, because the link-never-restate rule is expensive to hold. The moment prose repeats a field
+  list there are two sources of truth and one is already wrong — but restating is precisely what
+  feels helpful to a reader, so this has to be enforced in review rather than trusted to instinct.
