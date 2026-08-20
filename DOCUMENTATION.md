@@ -54,6 +54,7 @@ PLAN.md                  single ranked backlog, items tagged bug/debt/feature/do
 ADOPTING.md              product — the procedure for applying the kit to a repository
 ADOPTING-NOTES.md        product — the reasoning behind that procedure
 templates/               product — the documents an adopter copies and customises
+tools/                   product — the conformance checker, optional and vendored
 docs/
   adr/*.md               decisions, numbered, immutable once accepted
   research/*.md          sourced findings, with confidence levels
@@ -76,6 +77,7 @@ machine-readable member of it when it exists.
 | `ADOPTING.md` | **Product. Source of truth, not description** — the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms | imperative | rewritten in place | adopters |
 | `ADOPTING-NOTES.md` | **Product.** The reasoning behind the procedure — judgement calls, how far to trust each convention cited, what the sticking points mean. Split out so that `ADOPTING.md` stays a credible front door — neither file is copied to an adopter, so the gain is approachability, not weight. Explanation in [Diátaxis](https://diataxis.fr) terms | explanatory | rewritten in place | adopters who are stuck or deciding |
 | `templates/*` | **Product. Source of truth, not description** — the artifact half. Copied into the adopter's repository and customised there | present | rewritten in place | adopters, via their own repositories |
+| `tools/*` | **Product.** The conformance checker — what `SPECIFICATION.md` says, made executable. Vendored into adopting repositories and optional there. **Source of truth, not description** | present | rewritten in place | adopters who want the check, and anyone editing the specification |
 | `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | **immutable** once accepted — superseded, never edited | future maintainers |
 | `CHANGELOG.md` | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org) | past | append-only | adopters |
 | `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard** | future | volatile — reordered and deleted freely | the team |
@@ -94,6 +96,7 @@ machine-readable member of it when it exists.
 | `ADOPTING.md` | the kit is first given to someone else | never |
 | `ADOPTING-NOTES.md` | the procedure accumulated reasoning that was slowing it down | never |
 | `templates/*` | an artifact earns a place in the product | when the artifact leaves the product |
+| `tools/*` | a specification rule becomes worth checking mechanically | when the rule it checks is removed |
 | `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `superseded by ADR-NNNN` |
 | `CHANGELOG.md` entry | at release, if visible to adopters | never |
 | `PLAN.md` entry | idea occurs — one paragraph, no design | **deleted** when done, not struck through |

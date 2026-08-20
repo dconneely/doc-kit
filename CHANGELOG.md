@@ -12,7 +12,9 @@ All notable changes to this project are documented here, following
   templates into every adopting repository as a surviving obligation nobody would honour.
 - `tools/doc-kit-check.sh`, a standalone checker for §2.2–2.5, §3.1 and §3.3. Run it by hand;
   nothing in this kit requires it, and a repository holding these properties without ever running it
-  is conformant.
+  is conformant. It is vendored rather than referenced — copy it alongside the templates — so an
+  adopter's checker matches the structure they adopted and cannot start failing them because the kit
+  moved on. See ADR-0012.
 
 - `SPECIFICATION.md`, defining what a conformant repository looks like, with a purpose and scope
   section stating what the structure is for and what it excludes.

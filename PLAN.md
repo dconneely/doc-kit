@@ -2,19 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Decide whether the checker ships, and how
-
-*Type: feature — Importance: medium — Effort: medium*
-
-Deliberately deferred by ADR-0007 until a working tool exists. The options — a pre-commit hook
-provider, a CI action, a packaged CLI, a plain vendored script, or shipping nothing and leaving
-adopters to write their own — differ mainly in ecosystem assumptions, and picking one blind commits
-the kit to somebody else's toolchain. Two findings to carry in: repository-wide invariants such as
-§2.3 and §2.4 suit a merge check better than a commit hook, because a migration spends weeks in
-intermediate states the kit explicitly permits; and the one rule visible only in a diff, edits to an
-accepted record, needs diff access rather than any particular mechanism, which a pull request's base
-diff also provides.
-
 ### Check links
 
 *Type: feature — Importance: medium — Effort: low*

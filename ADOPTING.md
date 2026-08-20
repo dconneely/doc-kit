@@ -146,8 +146,13 @@ matter of taking the ones Step 1 said you had earned:
 | `docs/tasks/` | your backlog is past roughly 20 items — plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
 | `docs/archive/README.md` | Step 4 turned up documentation whose currency you cannot establish |
 
-Copy them by hand, or fetch the subtree if you would rather — `npx degit`, a sparse checkout, or
-clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the
+One file sits outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
+against `SPECIFICATION.md`. Copy it too if you want the check; skip it if you would rather verify by
+review. It is about 170 lines of POSIX shell depending on nothing but `awk`, `sed`, `grep` and
+`find` — read it before you run it. On Windows invoke it with `sh`, not `bash`.
+
+Copy everything by hand, or fetch the subtree if you would rather — `npx degit`, a sparse checkout,
+or clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the
 supported path and running anything is optional (ADR-0007).
 
 A map that names a file which does not exist is worse than no map, because it is believed. For each
