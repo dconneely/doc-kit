@@ -40,9 +40,8 @@ Four consequences shape this procedure in particular:
 
 One caveat to carry into Step 2: **this is not one standard**, but several conventions of differing
 authority. Paths and scope are yours — a monorepo moves everything, and an artifact you will not
-maintain should not exist. Names and formats are not: they are the kit's opinion, and changing them
-costs the recognisability that makes any of this worth adopting. `ADOPTING-NOTES.md` says how far to
-trust each convention, and where the two genuine standards make deviation actively expensive.
+maintain should not exist. Names and formats are not. `ADOPTING-NOTES.md` says why, and how far to
+trust each convention.
 
 ---
 
@@ -110,7 +109,7 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 
 | In `DOCUMENTATION.md` | Do this |
 |---|---|
-| Filenames | Keep them. They are this kit's own naming, and consistency across adopters is the point. Substitute only where your repository already has an established equivalent, and never `ROADMAP.md` — see the notes |
+| Filenames | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md` |
 | "Where does it go?" table | Delete rows for artifacts this repo does not have |
 | Layout block | Delete unused lines; replace with **real paths** — in a monorepo, `docs/` moves under the module it describes and only the root four stay at the top |
 | Specification line | State whether it is one file or an index, and name its machine-readable members if any |
