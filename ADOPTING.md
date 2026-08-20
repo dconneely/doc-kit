@@ -8,6 +8,11 @@ The contents of `templates/` are copied into the target repository. This file an
 [`ADOPTING-NOTES.md`](ADOPTING-NOTES.md) stay with the kit — you read them here, and what lands in
 your repository is the templates, customised.
 
+Neither guide is copied, deliberately. This one is spent once the structure exists, and the map you
+customise carries the rules you need afterwards. The notes answer questions that do recur, but
+copying them would add 160 lines that go stale the moment the kit changes, and their links into the
+kit's own decision records would not resolve in your repository. Come back here instead.
+
 **Done means:** every artifact named in that repository's map exists, every documentation file in
 that repository appears in its map, and each fact in them sits in exactly one place.
 
@@ -126,6 +131,24 @@ gitignored prefix for working documents, a docs directory that is generated — 
 rather than leaving them undocumented.
 
 ## Step 3 — Create the documents the map now promises
+
+Everything in `templates/` maps onto your repository root at the same relative path, so copying is a
+matter of taking the ones Step 1 said you had earned:
+
+| From `templates/` | Take it when |
+|---|---|
+| `DOCUMENTATION.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always — the core five |
+| `docs/adr/0000-template.md` | always; records are worth having from day one, since their value is being written contemporaneously |
+| `docs/quirks.md` | you deviate from a reference, or carry behaviour you know is wrong |
+| `docs/glossary.md` | your domain has terms, or ordinary words used precisely |
+| `docs/testing.md` | you have more than one test approach |
+| `docs/research/0000-template.md` | you reverse-engineer, or reconcile sources that disagree |
+| `docs/tasks/` | your backlog is past roughly 20 items — plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
+| `docs/archive/README.md` | Step 4 turned up documentation whose currency you cannot establish |
+
+Copy them by hand, or fetch the subtree if you would rather — `npx degit`, a sparse checkout, or
+clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the
+supported path and running anything is optional (ADR-0007).
 
 A map that names a file which does not exist is worse than no map, because it is believed. For each
 artifact you kept:

@@ -23,6 +23,9 @@ All notable changes to this project are documented here, following
 - An archive convention for documentation whose currency cannot be established — exempt from the
   map's completeness check, with a provenance header on every file. See ADR-0005.
 - Step 0 of the adoption procedure: decide whether to adopt, then write `PLAN.md` first.
+- A copy table in Step 3 saying which template to take and when. There is no installer: the kit
+  ships text, hand-copying is the supported path, and `npx degit` or a sparse checkout are
+  conveniences rather than requirements.
 - A paste-in stanza for `AGENTS.md` or `CLAUDE.md`, giving a coding agent the trust ordering between
   documents and the constraints on changing them. Shipped as text rather than a file, since those
   paths usually already exist.
