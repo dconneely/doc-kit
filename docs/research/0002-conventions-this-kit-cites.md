@@ -87,32 +87,20 @@ Kiro is the same shape, one level more hidden:
   tasks.md          ordered implementation checklist
 ```
 
-`bugfix.md` replaces `requirements.md` for bugfix specs. Again lowercase, again per-feature — and
-inside a dotted, tool-owned directory.
+`bugfix.md` replaces `requirements.md` for bugfix specs.
 
-That last detail sharpens the whole finding. **Neither tool is proposing a documentation convention
-at all.** Spec Kit keeps configuration in `.specify/` and Kiro keeps everything in `.kiro/`: these
-are tool working directories, holding per-feature state that a tool reads and writes. There was
-never a naming convention here to inherit, only a resemblance in vocabulary.
+**Neither tool is proposing a documentation convention at all.** Both keep per-feature state in a
+tool-owned directory — `.specify/`, `.kiro/` — that a tool reads and writes. Their `spec.md`
+describes one feature and is spent when it ships; this kit's `SPECIFICATION.md` describes the
+repository and outlives every feature. Different artefacts sharing a word, so there was never a
+naming convention here to inherit.
 
-**The important difference is not the names but the scope.** Spec Kit's `spec.md` and `plan.md`
-describe *one feature*, live on that feature's branch, and are consumed when it ships. This kit's
-`SPECIFICATION.md` and `PLAN.md` describe *the repository*, sit at its root, and outlive every
-feature. They are different kinds of artefact that happen to share two words, which is why the
-lowercase-and-nested convention does not transfer and why the ALL-CAPS root-meta-document
-convention applies here instead.
+The genre converged during 2025 — Spec Kit, Kiro and BMAD-METHOD its flagship implementations, Sean
+Grove's "The New Code" (AI Engineer World's Fair, 2025) commonly cited as its founding statement.
+That timeline is the one claim here from a secondary source.
 
-Worth noting in passing that Spec Kit also has a `research.md`, per feature, where this kit has a
-repository-level `docs/research/`. The same parallel holds: same idea, different scope.
-
-What the genre does have is a rough origin date and a founding talk: the tooling converged during
-2025, with Sean Grove's "The New Code" (AI Engineer World's Fair, 2025) commonly cited as the
-founding statement, and Spec Kit, Kiro and BMAD-METHOD as the flagship implementations. Spec-driven
-development now has its own Wikipedia article, which is a reasonable marker of the genre being
-established rather than emergent.
-
-Searching more widely for any standard that prescribes either filename at a repository root turned
-up none. What exists instead:
+Searching more widely for any standard prescribing either filename at a repository root found none.
+What exists instead:
 
 - **GitHub community health files** — the one formal root-file convention, covering
   `CODE_OF_CONDUCT`, `CONTRIBUTING`, `FUNDING`, `SECURITY`, `SUPPORT` and the issue/PR templates,
@@ -128,12 +116,10 @@ up none. What exists instead:
   for the same reason the kit already sets aside ISO/IEC/IEEE 29119-3 for testing.
 
 **Conclusion: this kit's `SPECIFICATION.md` and `PLAN.md` are its own naming, not inherited.** The
-familiarity is genre resemblance — a spec file and a plan file, in that order — not a convention
-anyone else prescribes. Nothing licenses claiming otherwise, and the kit should stop trying to
-attribute them.
+familiarity is genre resemblance, not convention.
 
-This is a negative result, and negative results from search are weaker than positive ones: absence
-of evidence across several queries is not proof no such convention exists. It is enough to stop the
+This is a negative result from search, which is weaker than a positive one: absence of evidence
+across several queries is not proof no such convention exists. It is enough to stop the
 kit asserting one.
 
 ## Evidence
