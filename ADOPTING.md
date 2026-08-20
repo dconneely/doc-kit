@@ -153,6 +153,43 @@ probably already has one, and a documentation kit has no business holding opinio
 files. Nor does it require you to run anything: verifying this structure by hand is fully
 conformant. See ADR-0007.
 
+### If coding agents work in this repository
+
+Agents read `AGENTS.md` or `CLAUDE.md`, and nothing there points at the map — so the structure you
+have just built is unreachable to the reader most able to damage it. Paste this into whichever of
+those files you keep, deleting lines for artifacts you did not create:
+
+```markdown
+## Documentation
+
+`DOCUMENTATION.md` is the map: it says which file a given fact belongs in. Read it before writing
+anything down.
+
+When documents disagree, tense settles it:
+
+- `SPECIFICATION.md` — present tense, authoritative about what the system does now.
+- `CHANGELOG.md` — past tense. What changed, never what is true today.
+- `PLAN.md` — intent. Nothing described in it exists yet.
+- `docs/adr/` — why. Only `accepted` records bind; check the status before relying on one.
+- `docs/quirks.md` — deliberate deviations. **Do not "fix" anything listed here.**
+- `docs/archive/` — not authoritative, undated. Never cite it as a source.
+
+Before you edit:
+
+- The specification follows the work. Change it because behaviour changed, not because it would
+  read better. Its purpose and scope are not yours to revise.
+- Never change an ADR's `status`, and never edit one that says `accepted`. Drafting a record is
+  yours; deciding one is not.
+- Delete completed `PLAN.md` entries rather than marking them done.
+- Adding a document means updating `DOCUMENTATION.md` in the same commit.
+```
+
+It is deliberately short. It competes with your code for the agent's context, and its value is
+being at the path an agent already reads — not in restating the map, which is one click away.
+
+The kit ships this as text rather than a file for the reason in ADR-0007: your repository probably
+already has an `AGENTS.md`, and a file that collides has to be merged rather than copied.
+
 ## Step 4 — Migrate what already exists
 
 Only relevant when adopting into an existing codebase — and on any repository old enough to need

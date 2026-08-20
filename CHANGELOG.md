@@ -16,6 +16,9 @@ All notable changes to this project are documented here, following
 - An archive convention for documentation whose currency cannot be established — exempt from the
   map's completeness check, with a provenance header on every file. See ADR-0005.
 - Step 0 of the adoption procedure: decide whether to adopt, then write `PLAN.md` first.
+- A paste-in stanza for `AGENTS.md` or `CLAUDE.md`, giving a coding agent the trust ordering between
+  documents and the constraints on changing them. Shipped as text rather than a file, since those
+  paths usually already exist.
 - An inventory phase for Step 4, with the dispositions move, split, absorb, archive, delete and
   leave, and a worksheet at `templates/docs/tasks/adopt-doc-kit.md`.
 - Rules for decision records: immutability attaches to the `accepted` status rather than the commit

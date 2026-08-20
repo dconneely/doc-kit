@@ -2,22 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Ship an agent entry-point stanza
-
-*Type: feature — Importance: high — Effort: low*
-
-The structure's value to a coding agent concentrates in three things: knowing which document to
-trust when they conflict, knowing not to "fix" anything in `docs/quirks.md` or contradict a
-constraint recorded in an ADR, and knowing which files are safe to delete. None of it is reachable
-today, because agents read `AGENTS.md` or `CLAUDE.md` and nothing points from there to the map. A
-dozen lines naming the trust ordering — specification is current and authoritative, changelog is
-past, plan is intent and describes nothing that exists — would collect most of the available value.
-It needs write constraints as well as read ones: the specification follows the work rather than
-leading it, purpose and scope are not an agent's to revise, and a status flip on a record is a human
-action. This repository's own `AGENTS.md` is the working draft to extract from.
-Ship it as a snippet to paste, not a file: `AGENTS.md` is exactly the colliding case ADR-0007
-describes. Keep it short, because it competes with code for the agent's context.
-
 ### Split `ADOPTING.md` into a procedure and its rationale
 
 *Type: docs — Importance: high — Effort: medium*

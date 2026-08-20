@@ -94,7 +94,7 @@ Most changes skip the ADR and the task note. Nothing skips the deletion.
 
 ## Prescribed formats
 
-Three artifacts have a shape worth keeping to; the rest are free-form prose.
+These artifacts have a shape worth keeping to; the rest are free-form prose.
 
 **ADR** — one file per decision, numbered `0001-short-title.md`, following the
 [MADR](https://adr.github.io/madr/) minimal template. Copy `docs/adr/0000-template.md` for the
