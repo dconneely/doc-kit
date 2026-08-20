@@ -121,8 +121,58 @@ material for those first entries is already scattered through it — that is Ste
 
 ## Step 4 — Migrate what already exists
 
-Only relevant when adopting into an existing codebase. In order of payoff; expect the first three
-to find real content and the fourth to find less than you would think.
+Only relevant when adopting into an existing codebase — and on any repository old enough to need
+this, it is the part that does not fit in an afternoon. Work it in three phases: enumerate, decide,
+then act. Deciding everything before moving anything is what keeps the repository consistent at
+every point rather than only at the end.
+
+### 4a — Build the inventory
+
+List every documentation file before touching any of them, in a worksheet:
+`docs/tasks/adopt-doc-kit.md`. This is the one case where `docs/tasks/` earns its place below the
+usual threshold, because migration is exactly the work that spans weeks and gets interrupted.
+
+| File | Tense | Destination | Disposition | Done |
+|---|---|---|---|---|
+| `docs/design-notes.md` | mixed | spec + changelog | split | |
+| `docs/old-api.md` | present | — | archive | ✓ |
+
+**Tense** is the dominant one — present, past, future, or **mixed**. Mixed is not a failure to
+classify; it is the finding, and it always means *split*.
+
+Cast wider than the repository. Wikis, Confluence spaces, shared drives and issue-tracker
+descriptions hold documentation too, and they are where the undatable material concentrates. List
+them with their location in place of a path.
+
+The worksheet mixes tenses itself — a survey of what is, plus what you intend to do about it — which
+is precisely why it is a task note and disposable. It is a worksheet, not a record, and it gets
+emptied into its proper homes before it is deleted.
+
+### 4b — Assign a disposition
+
+Six, and every file gets exactly one:
+
+| Disposition | When | What it means |
+|---|---|---|
+| **move** | one tense, wrong place | relocate as-is. Use `git mv` so history and blame survive |
+| **split** | mixed tense | divide by tense and file each part. The most common outcome, and the highest-value one |
+| **absorb** | belongs inside something that already exists | merge the content in, delete the original |
+| **archive** | currency cannot be established | to `docs/archive/` with a provenance header, never into the specification |
+| **delete** | superseded, duplicated, or wrong with nothing worth keeping | git still has it |
+| **leave** | already correct where it is | still has to appear in the map |
+
+Two rules stop this going wrong. **Archive is not a synonym for "not sure yet"** — it is a positive
+finding that a claim cannot be dated, and promoting an undatable claim into the specification is
+worse than leaving it untrusted. And **anything moving out of a directory people navigate leaves a
+one-line pointer behind**, because links from issues, wikis and bookmarks do not follow renames.
+
+Get the dispositions reviewed before acting on them. It is the cheapest point at which someone who
+remembers why a document exists can say so.
+
+### 4c — Work the sweeps
+
+In order of payoff; expect the first three to find real content and the fourth to find less than you
+would think.
 
 **1. Find the file doing several jobs at once.** Almost every repository has one — part record of
 work done, part backlog, part architecture assessment. Splitting it by tense is usually the single

@@ -5,6 +5,10 @@ Working notes for one backlog item. **Disposable** — deleted when the work lan
 Optional, and usually overhead below roughly 20 open items. Adopt this directory only if plan
 entries are genuinely too small to hold work in progress.
 
+One exception, regardless of backlog size: `adopt-doc-kit.md`, the Step 4 migration worksheet.
+Adopting into an existing repository is precisely the work that spans weeks and gets interrupted,
+and a worksheet is what makes it resumable rather than re-derived.
+
 ## What goes in one
 
 Scratch: what has been tried, what is half-done, where you left off. Written for whoever picks the

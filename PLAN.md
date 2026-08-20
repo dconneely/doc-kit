@@ -2,15 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Define the Step 4 inventory format and disposition vocabulary
-
-*Type: feature — Importance: high — Effort: low*
-
-Step 4 tells an adopter what to look for but gives them nowhere to put it and no words for what to
-do with each file. It needs an inventory table — file, dominant tense, destination, disposition —
-and a fixed set of dispositions: move, split, absorb, archive, delete, leave. Without a written
-inventory, migration on a large repository is not resumable, which is the case it exists for.
-
 ### Split `ADOPTING.md` into a procedure and its rationale
 
 *Type: docs — Importance: high — Effort: medium*

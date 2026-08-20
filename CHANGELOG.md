@@ -7,6 +7,10 @@ All notable changes to this project are documented here, following
 
 ### Added
 
+- An inventory phase for Step 4, with a six-word disposition vocabulary — move, split, absorb,
+  archive, delete, leave — and a ready-made worksheet at `templates/docs/tasks/adopt-doc-kit.md`.
+  Migration into an existing repository is now enumerate, decide, act, and is resumable across
+  sessions rather than re-derived each time.
 - Starter files for every artifact the template map promises: specification, README, changelog,
   plan, ADR, research note, quirks, glossary, testing and task notes. Step 3 of the adoption
   procedure is now a copy rather than a writing exercise.
