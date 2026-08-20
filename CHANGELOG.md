@@ -15,6 +15,8 @@ All notable changes to this project are documented here, following
   statement. See ADR-0010.
 - Status values take MADR's lowercase spelling, gain `rejected`, and each now has a stated meaning.
   `deprecated` covers a record that no longer applies with nothing replacing it.
+- A status may carry a forward pointer — `accepted (refined by ADR-NNNN)` — for a decision that
+  stands while a later record revises something following from it. See ADR-0009.
 
 ### Added
 

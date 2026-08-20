@@ -20,6 +20,10 @@ This follows the MADR minimal template (https://adr.github.io/madr/). Status val
   deprecated               no longer applies, and nothing replaced it
   superseded by ADR-NNNN   replaced by a later record, which must exist
 
+Any status may carry a forward pointer: "accepted (refined by ADR-0006)" means this decision stands
+but a later record revised something following from it. Use it only when the Decision Outcome is
+still true — if it stopped being true, that is supersession instead.
+
 Immutability attaches to the STATUS, not to the commit. While it says proposed, edit it freely —
 and merge it if the decision is still open, since a pending decision is more discoverable in the
 tree than in a branch nobody is watching. Once it says accepted it is immutable: never edit it

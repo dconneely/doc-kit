@@ -130,6 +130,18 @@ is usually a specification entry that has been misfiled.
 | `deprecated` | No longer applies, and nothing replaced it |
 | `superseded by ADR-NNNN` | Replaced by a later record, which MUST exist |
 
+A status MAY carry a parenthesised forward pointer naming a record that exists:
+
+```text
+accepted (refined by ADR-0006)
+```
+
+`refined by` means the decision stands, and a later record has revised something that follows from
+it. It is set on the earlier record when the later one is accepted. It MUST NOT be used where the
+`Decision Outcome` itself stopped being true — that is supersession, and the heavier form is
+correct. Choosing between them is a judgement, which is why it is a human action like any other
+status change. See ADR-0009.
+
 **Immutability attaches to the status, not to the commit.** A record whose status is `proposed` MAY
 be edited freely, and MAY be merged while still undecided — a pending decision in the tree is more
 discoverable than one living in an unmerged branch, which is the point of having the status at all.
