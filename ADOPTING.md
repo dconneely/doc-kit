@@ -305,19 +305,28 @@ alone. Their value is largely that other people and tools already recognise them
 
 ### Which optional artifacts are worth it?
 
-Ranked by payoff for a project that does not yet have them:
+Ranked by payoff per line written, not by how large a gap they fill. All four stay optional — plenty
+of repositories genuinely need none of them — but if you are adopting more than the core five, this
+is the order to do it in.
 
-1. **`docs/research/`** — usually the largest gap. Any project that reverse-engineers, targets a
-   reference implementation, or reconciles contradictory sources accumulates findings with nowhere
-   to live, and they end up scattered across a backlog entry, a code comment and a test comment.
-2. **A deviation register (`docs/quirks.md`)** — answers "is this a bug or a decision?" for anyone
+1. **A deviation register (`docs/quirks.md`)** — answers "is this a bug or a decision?" for anyone
    comparing behaviour against a reference. Extend it to *accepted-wrong* behaviour: a known defect
    with a test asserting today's incorrect output is a quirk with an expiry date, and recording it
-   stops the next person "fixing" the test.
-3. **`docs/glossary.md`** — cheap, and worth it as soon as the domain has terms that mean something
-   specific here, or ordinary words used precisely.
-4. **`docs/testing.md`** — moderate. What is verified exactly versus approximately, and what is
-   deliberately not covered, otherwise lives only in test comments.
+   stops the next person "fixing" the test. It is first because it is the only artifact here that
+   says **do not change this**, and because the reader most likely to need telling is a coding
+   agent, which will otherwise read deliberate strangeness as a defect and correct it.
+2. **`docs/glossary.md`** — cheap, and worth it as soon as the domain has terms that mean something
+   specific here, or ordinary words used precisely. Cheap to write, greppable, and it heads off the
+   misreadings that are hardest to spot in review.
+3. **`docs/testing.md`** — what is verified exactly versus approximately, and what is deliberately
+   not covered, which otherwise lives only in test comments. The last of those is the part that
+   earns the file: without it, an uncovered area is indistinguishable from an oversight, and someone
+   — or something — will eventually "fix" it.
+4. **`docs/research/`** — usually the largest gap, but conditional rather than general. Any project
+   that reverse-engineers, targets a reference implementation, or reconciles contradictory sources
+   accumulates findings with nowhere to live, and they end up scattered across a backlog entry, a
+   code comment and a test comment. **If yours is such a project, move this to first** — the ranking
+   above assumes it is not.
 
 Skip until earned: `CONTRIBUTING.md` / `CODE_OF_CONDUCT.md` / `SECURITY.md` (these earn their place
 when outside contributions start), `RELEASING.md` (waits on releases), runbooks (services, not

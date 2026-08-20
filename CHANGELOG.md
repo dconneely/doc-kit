@@ -33,4 +33,7 @@ All notable changes to this project are documented here, following
 - The template moved to `templates/DOCUMENTATION.md`; `templates/` is source of truth rather than
   documentation, and the root `DOCUMENTATION.md` is this repository's own map. See ADR-0004.
 - `ADOPTING.md` is product alongside `templates/`. See ADR-0006.
+- The optional artifacts are ranked by payoff per line rather than by gap size: quirks, glossary,
+  testing, then research — which moves to first for a project that reverse-engineers or reconciles
+  sources.
 - `DOCUMENTATION-CUSTOMISATION.md` is now `ADOPTING.md`.
