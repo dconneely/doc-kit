@@ -10,11 +10,10 @@ decision-makers: David Conneely
 
 This kit's records used Nygard's original four sections — Status, Context, Decision, Consequences —
 and `ADOPTING.md` tells adopters that ADRs are one of only two genuine standards here, whose value
-is largely that other people and tools already recognise them. Checking that claim against
-[MADR's template](https://raw.githubusercontent.com/adr/madr/main/template/adr-template.md) showed
-the kit was not following the convention it cited: MADR carries YAML front-matter with `status`,
-`date`, `decision-makers`, `consulted` and `informed`, names its sections differently, and makes
-rejected alternatives structural rather than leaving them in prose.
+is largely that other people and tools already recognise them. Checking that claim showed the kit
+was not following the convention it cited: MADR carries YAML front-matter, names its sections
+differently, and makes rejected alternatives structural rather than leaving them in prose. The
+sources are in [`docs/research/0001-adr-conventions.md`](../research/0001-adr-conventions.md).
 
 Two gaps mattered beyond naming. MADR defines a `rejected` status this kit omitted. And
 `decision-makers` records *who* decided — the thing ADR-0008 wants and currently leaves to review.

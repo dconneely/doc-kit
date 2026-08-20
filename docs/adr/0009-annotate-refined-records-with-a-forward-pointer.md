@@ -15,11 +15,9 @@ A third relationship between records has no pointer: **refinement**, where a dec
 later record revises something that follows from it. A reader of the earlier record cannot tell that
 a later one bears on it. ADR-0006 refines ADR-0004 in exactly this way.
 
-Checked against [MADR's template](https://raw.githubusercontent.com/adr/madr/main/template/adr-template.md)
-rather than recalled, because this kit's credibility depends on being right about the conventions it
-cites. Its status field reads `"{proposed | rejected | accepted | deprecated | … | superseded by
-ADR-0123}"`. The ellipsis is in the template: the permitted set is **deliberately open**, so
-extending it is sanctioned rather than deviant.
+MADR's status field carries an explicit ellipsis — the permitted set is **deliberately open**, so
+extending it is sanctioned rather than deviant. Checked against the template rather than recalled;
+see [`docs/research/0001-adr-conventions.md`](../research/0001-adr-conventions.md).
 
 ## Considered Options
 
