@@ -39,8 +39,8 @@ genuine work, and this one does the work of two documents at once.
 
 Checking MADR against its source found the kit was not following the convention it claimed to
 follow, and that recalling the schema had produced a plausible but wrong answer — see
-`docs/research/0001-adr-conventions.md`. Every other cited convention rests on the same recollection.
-In rough order of exposure: **Keep a Changelog**, whose six categories `SPECIFICATION.md` §3.2
+`docs/research/0001-adr-conventions.md`. Every other cited convention rests on that same
+recollection. In rough order of exposure: **Keep a Changelog**, whose six categories §3.2
 prescribes; **Spec Kit**, which `ADOPTING.md` already flags as "a lead rather than an established
 convention, verify directly before leaning on it"; **agents.md**, cited in the map as the convention
 `AGENTS.md` follows; **Nygard's original post**, the attribution for the four classic statuses; and
@@ -77,7 +77,8 @@ trusting it. Two caveats to settle when starting. Parse the Layout block rather 
 tables; it is the only part already shaped like data. And decide the Windows story deliberately,
 since `sh` needs Git Bash or WSL and will not run from PowerShell unqualified — this project's own
 author is on Windows, and a maintainer with a second-class path to the checker is how dogfooding
-stops happening.
+stops happening. `identigon` found that `prek`'s Node hooks install cross-platform including
+Windows while its Ruby ones do not, which is worth knowing if a runtime is chosen after all.
 
 ### Decide whether the checker ships, and how
 
@@ -112,23 +113,38 @@ A kit meant to be copied into other repositories without a licence is unusable b
 
 *Type: feature — Importance: medium — Effort: low*
 
-Adopt the `pre-commit` framework with the standard hygiene set — trailing whitespace, end-of-file
-newline, merge-conflict markers, large files — plus `gitleaks` for secrets. `.gitattributes` already
-pins line endings, so `mixed-line-ending` is a guard against it being weakened rather than the fix.
-Configure `trailing-whitespace` with `--markdown-linebreak-ext=md`: two trailing spaces are a hard
-line break in Markdown, and the default hook silently eats them across a repository that is entirely
-prose. Note that `pre-commit` needs Python, which is a dependency the kit does not otherwise have;
-if that is unacceptable, decide the alternative here rather than in the CI entry.
+Model it on `identigon`'s `.pre-commit-config.yaml`, which solves the problems this entry had left
+open. Take the standard hygiene set — `trailing-whitespace`, `end-of-file-fixer`, `check-yaml`,
+`check-added-large-files` — plus `gitleaks` for secrets, and drop the Java-specific `local` hooks.
+`.gitattributes` already pins line endings, so `mixed-line-ending` guards against it being weakened
+rather than being the fix.
+
+Two questions answered rather than left open. **Run it with `prek`, not `pre-commit`** — no Python
+dependency, which was this entry's one real objection. And `--markdown-linebreak-ext=md` turns out
+to be unnecessary here: this repository has zero trailing-double-space line breaks, so the default
+hook has nothing to eat.
+
+Copy the commenting style too. That config explains *why* each exclusion exists, including one
+found the hard way, which is the difference between a config someone can maintain and one they
+delete when it fights them.
 
 ### Lint Markdown
 
 *Type: feature — Importance: medium — Effort: low*
 
-`markdownlint` over a repository that is entirely Markdown. Two decisions to make rather than
-default through: whether to enforce the ~100-column wrap the prose already follows, and how to treat
-`templates/`, whose deliberate placeholder headings and unfilled sections will trip rules that are
-correct everywhere else. Add `codespell` alongside it, configured for British spelling — `customise`
-and `behaviour` run throughout and a default dictionary will fight them.
+`markdownlint-cli2` via `prek`, configured as `identigon` does it: `default: false` with `MD013`
+alone at 100 columns, exempting tables, code blocks and headings — none of which can be wrapped
+without corrupting them. Everything else markdownlint checks stays off until someone asks, which
+also settles how to treat `templates/`: a line-length-only gate does not care about placeholder
+headings.
+
+One interaction to resolve first. Fourteen lines here sit at exactly 101 characters, three of them
+inside accepted records — so enabling this gate makes the linter demand an edit the immutability
+rule forbids. Fix them before turning it on, while the repository is still unpublished and §3.1
+permits it; excluding `docs/adr/` instead would exempt the files most likely to be read carefully.
+
+Add `codespell` alongside, configured for British spelling — `customise` and `behaviour` run
+throughout and a default dictionary will fight them.
 
 ### Check links
 

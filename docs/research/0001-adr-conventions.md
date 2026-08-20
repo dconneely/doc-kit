@@ -37,11 +37,12 @@ Three things matter and were not obvious:
 
 ## Evidence
 
-- [`template/adr-template.md`](https://raw.githubusercontent.com/adr/madr/main/template/adr-template.md)
-  — full template, fetched 2026-08-20.
-- [`template/adr-template-minimal.md`](https://raw.githubusercontent.com/adr/madr/main/template/adr-template-minimal.md)
-  — minimal template, same date.
+- [`template/adr-template.md`][full] — full template, fetched 2026-08-20.
+- [`template/adr-template-minimal.md`][minimal] — minimal template, same date.
 - [adr.github.io/madr](https://adr.github.io/madr/) — project page, consistent with both.
+
+[full]: https://raw.githubusercontent.com/adr/madr/main/template/adr-template.md
+[minimal]: https://raw.githubusercontent.com/adr/madr/main/template/adr-template-minimal.md
 
 Sources agree; nothing needed reconciling. Confidence is `high` because the templates were read
 directly rather than described by a third party.
@@ -57,10 +58,10 @@ convention this kit cites — see "Open questions".
 
 - **Nygard's original post** was not checked. The four classic statuses are attributed to it
   throughout this kit on recollection alone.
-- **`adr-tools`** filename and numbering behaviour was not checked. ADR-0010 asserts it uses numbered
-  headings, which is the basis for keeping them.
-- **Keep a Changelog's** six categories are prescribed by `SPECIFICATION.md` §3.2 without having been
-  verified against the source.
+- **`adr-tools`** filename and numbering behaviour was not checked. ADR-0010 asserts it uses
+  numbered headings, which is the basis for keeping them.
+- **Keep a Changelog's** six categories are prescribed by `SPECIFICATION.md` §3.2 without having
+  been verified against the source.
 - Whether MADR's front-matter should be adopted beyond `status`, `date` and `decision-makers`
   remains open; `consulted` and `informed` were judged overhead for a small project rather than
   wrong.

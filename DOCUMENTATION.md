@@ -11,12 +11,12 @@ Start here when you have something to write down and are not sure which file it 
 > Everything else is this repository's own documentation, produced by applying the kit to itself.
 >
 > The line is what a file is *about*. Product files describe the adopter's repository; documentation
-> files describe this one. `SPECIFICATION.md` sits on the documentation side because it describes the
-> product rather than being it. See [ADR-0006](docs/adr/0006-treat-the-adoption-procedure-as-product.md).
+> files describe this one. `SPECIFICATION.md` sits on the documentation side because it describes
+> the product rather than being it. See [ADR-0006][adr6].
 >
 > A third category is neither, and is not mapped here: **infrastructure** — `.gitattributes` and
-> anything like it that configures this repository's own operation. It never reaches an adopter. See
-> [ADR-0007](docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md).
+> anything like it that configures this repository's own operation. It never reaches an adopter.
+> See [ADR-0007][adr7].
 >
 > `templates/DOCUMENTATION.md` and this file share a name and nothing else — that one is the
 > template, this one is an instance of it.
@@ -100,9 +100,9 @@ machine-readable member of it when it exists.
 
 A change moves through the documents in this order:
 
-`PLAN.md` entry → **ADR** if a real choice was made → **`SPECIFICATION.md`** updated in present tense
-→ `templates/` updated if the product changed → **`CHANGELOG.md`** line if adopters can see it →
-`PLAN.md` entry **deleted**.
+`PLAN.md` entry → **ADR** if a real choice was made → **`SPECIFICATION.md`** updated in present
+tense → `templates/` updated if the product changed → **`CHANGELOG.md`** line if adopters can see
+it → `PLAN.md` entry **deleted**.
 
 Most changes skip the ADR. Nothing skips the deletion.
 
@@ -115,8 +115,8 @@ here; `SPECIFICATION.md` §3.1 carries the rules that file cannot express — st
 immutability, and who may change a status.
 
 **Changelog** — reverse-chronological, an `Unreleased` section at the top, six fixed categories:
-`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe effects an adopter
-can see, not internal refactors.
+`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe effects an
+adopter can see, not internal refactors.
 
 **Plan entry** — a heading, a type tag and a rough size, then one paragraph. No design:
 
@@ -159,8 +159,8 @@ be derived. `SPECIFICATION.md` §4 has the rules for when that changes.
 
 Absent on purpose, so that adding any of them later is a decision rather than a drift:
 
-- **A separate technical-debt file** — see [ADR-0002](docs/adr/0002-keep-technical-debt-in-the-plan.md).
-- **`docs/quirks.md`, `docs/testing.md`, `docs/tasks/`** — all in `templates/`, none earned here yet.
+- **A separate technical-debt file** — see [ADR-0002][adr2].
+- **`docs/quirks.md`, `docs/testing.md`, `docs/tasks/`** — all in `templates/`, none earned yet.
   `docs/testing.md` is expected as soon as the checker exists, because there will then be something
   to have a test strategy about.
 - **An issue tracker**, until the backlog outgrows a file — roughly 20–30 open items.
@@ -176,3 +176,7 @@ that document, not a new file. Most proposed additions fail this test — which 
 
 If it passes, add it to both tables here in the same commit. A map that omits an artifact is worse
 than no map, because it is believed.
+
+[adr2]: docs/adr/0002-keep-technical-debt-in-the-plan.md
+[adr6]: docs/adr/0006-treat-the-adoption-procedure-as-product.md
+[adr7]: docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md

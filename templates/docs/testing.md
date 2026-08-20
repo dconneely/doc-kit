@@ -10,7 +10,8 @@ contributor does not have to infer the convention from whichever file they opene
 ## What is verified only approximately
 
 Anything checked by sampling, snapshot, property, or tolerance rather than exactly. State the
-tolerance and why it is acceptable. A reader who assumes exactness here will eventually be surprised.
+tolerance and why it is acceptable. A reader who assumes exactness here will eventually be
+surprised.
 
 ## What is deliberately not covered
 

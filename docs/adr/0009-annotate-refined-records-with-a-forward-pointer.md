@@ -45,9 +45,10 @@ status changes and nothing else.
 supersession and the heavier form is correct. The annotation is not a way to avoid writing a
 successor.
 
-Superseding was rejected as overstating — it says the decision was replaced when it was not. Editing
-the earlier record is forbidden by the immutability rule. A fifth status *value* was rejected because
-growing the vocabulary is what this structure resists; the annotation framing avoids that entirely.
+Superseding was rejected as overstating — it says the decision was replaced when it was not.
+Editing the earlier record is forbidden by the immutability rule. A fifth status *value* was
+rejected because growing the vocabulary is what this structure resists; the annotation framing
+avoids that entirely.
 Renaming `superseded` to `obsolete` would make pointers uniformly optional and read more
 consistently, but it renames a term Nygard, MADR and `adr-tools` all share, and the case it would
 serve — a record that no longer applies with nothing replacing it — is already `deprecated`.

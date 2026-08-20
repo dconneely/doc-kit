@@ -29,8 +29,8 @@ generated into an ignored directory, and not below an archive. Defined precisely
 **Instance** — a customised copy of a template, living in an adopting repository. The root
 `DOCUMENTATION.md` here is an instance; `templates/DOCUMENTATION.md` is the template.
 
-**Map** — `DOCUMENTATION.md`. Names every artifact, what each is for, and where a given fact belongs.
-The entry point, and the thing that must never promise a file that does not exist.
+**Map** — `DOCUMENTATION.md`. Names every artifact, what each is for, and where a given fact
+belongs. The entry point, and the thing that must never promise a file that does not exist.
 
 **Mixed-tense file** — a document doing several jobs at once: part record of work done, part
 backlog, part assessment. The characteristic failure the structure exists to prevent, and the first

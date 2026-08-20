@@ -98,8 +98,8 @@ kit fails §2.5 on its own templates, which is the check reporting the opposite 
 - **Append-only** artifacts — the changelog — are gated by release, not by review.
 
 **Use the gate you already have.** For most projects that is the pull request, and the flip to
-`accepted` then costs nothing extra: merging it *is* the approval. Projects without pull requests are
-not excluded — a meeting, a mailing list, or one person deciding all satisfy this specification,
+`accepted` then costs nothing extra: merging it *is* the approval. Projects without pull requests
+are not excluded — a meeting, a mailing list, or one person deciding all satisfy this specification,
 which requires that agreement be recorded, not that it be reached any particular way.
 
 The status is the durable half of that record. A pull request lives in a forge that can be migrated,
@@ -163,8 +163,8 @@ automated — may treat it as a constraint.
 
 **Changing a record's status is a human action.** A tool MAY draft, argue and merge a record as
 `proposed`; any other status MUST be set by a person, who is thereby asserting that a decision was
-actually made, and who SHOULD name themselves in `decision-makers`. The assertion is not mechanically
-verifiable, but the *presence* of `decision-makers` on a non-proposed record is. See ADR-0008.
+actually made, and who SHOULD name themselves in `decision-makers`. The assertion is not
+mechanically verifiable, but the *presence* of `decision-makers` on a record is. See ADR-0008.
 
 Projects using pull requests SHOULD make the status change **its own pull request**, separate from
 the one that introduced the record. Not merely a separate commit: a squash merge collapses the

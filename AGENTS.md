@@ -26,7 +26,8 @@ Their banners, placeholder headings and unfilled sections are the deliverable, n
 not tidy them, fill them in, or lint them into shape.
 
 `.gitattributes` and anything like it is infrastructure — it configures this repository and never
-reaches an adopter. See [ADR-0007](docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md).
+reaches an adopter. See
+[ADR-0007](docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md).
 
 ## Before you edit
 

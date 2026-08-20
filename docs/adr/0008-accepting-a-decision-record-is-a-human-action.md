@@ -39,7 +39,8 @@ deciding. The two were previously the same act, and the structure quietly assume
 
 Chosen option: **separate authoring from accepting**. A tool MAY draft a record, argue it, and merge
 it as `proposed`. Changing a record's status — to `accepted`, `rejected`, `deprecated`, or
-`superseded by` — is a human action, and a person doing it asserts that a decision was actually made.
+`superseded by` — is a human action, and a person doing it asserts that a decision was actually
+made.
 
 **Only `accepted` records bind.** A `proposed` record is a suggestion, and no reader may treat it as
 a constraint. This is what bounds the damage: an enthusiastic tool can generate noise, but it cannot

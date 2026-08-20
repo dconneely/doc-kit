@@ -44,7 +44,8 @@ tries it arrives at the same place.
   usually settles it, and a sentence that resists is usually two sentences.
 * Good, because splitting a mixed-tense file becomes mechanical too — the migration is a sort, not a
   rewrite, which matters most on exactly the repositories this kit targets.
-* Good, because the structure stays small. Most proposed additions fail the test, which is the point.
+* Good, because the structure stays small. Most proposed additions fail the test, which is the
+  point.
 * Bad, because a genuinely new category feels harder to add than it is, and the test has to be
   applied honestly rather than as a formality.
 * Neutral: the three properties are a heuristic with no external authority behind them. They are
