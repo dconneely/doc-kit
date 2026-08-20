@@ -46,6 +46,47 @@ should not shift underneath them.
 
 A kit meant to be copied into other repositories without a licence is unusable by anyone careful.
 
+### Add pre-commit hooks for file hygiene and secret scanning
+
+*Type: feature — Importance: medium — Effort: low*
+
+Adopt the `pre-commit` framework with the standard hygiene set — trailing whitespace, end-of-file
+newline, merge-conflict markers, large files — plus `gitleaks` for secrets. `mixed-line-ending`
+earns its place immediately: this repository already produces CRLF/LF warnings on every `git add`,
+and a `.gitattributes` is the real fix with the hook as the guard. Note that `pre-commit` needs
+Python, which is a dependency the kit does not otherwise have; if that is unacceptable, decide the
+alternative here rather than in the CI entry.
+
+### Lint Markdown
+
+*Type: feature — Importance: medium — Effort: low*
+
+`markdownlint` over a repository that is entirely Markdown. Two decisions to make rather than
+default through: whether to enforce the ~100-column wrap the prose already follows, and how to treat
+`templates/`, whose deliberate placeholder headings and unfilled sections will trip rules that are
+correct everywhere else. Add `codespell` alongside it, configured for British spelling — `customise`
+and `behaviour` run throughout and a default dictionary will fight them.
+
+### Check links
+
+*Type: feature — Importance: medium — Effort: low*
+
+The map and the specification link heavily to external standards, and those rot silently. A link
+checker in CI — nightly rather than per-commit, since external hosts fail for reasons unrelated to
+the change under review. Keep the boundary with the conformance checker explicit: that one verifies
+the map against the filesystem, this one verifies that URLs resolve. Overlap is only on internal
+links, and those belong to the conformance checker.
+
+### Lint commit messages
+
+*Type: feature — Importance: low — Effort: low*
+
+`commitlint` on a `commit-msg` hook, enforcing Conventional Commits. Worth doing only once the type
+mapping is written down somewhere enforceable: product changes — `ADOPTING.md`, `templates/`, the
+checker, the installer — take `feat`/`fix`/`refactor`, while this repository's own documentation
+takes `docs`. Without that rule a documentation kit types every commit `docs` and the history stops
+carrying information.
+
 ### Move the format skeletons out of the map
 
 *Type: docs — Importance: medium — Effort: low*
