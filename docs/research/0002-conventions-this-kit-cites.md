@@ -61,18 +61,49 @@ The flow's *shape* is real; the claim about the filenames it produces was not.
 
 ### Where the `SPECIFICATION.md` / `PLAN.md` naming actually comes from — nowhere
 
-**Confidence for this subsection: medium.** The primary sources were checked for Spec Kit; the rest
-rests on secondary write-ups and has not been verified against the tools themselves.
+Neither leading spec-driven toolchain produces those filenames. Spec Kit's own `spec-driven.md`
+gives the structure directly:
 
-Neither leading spec-driven toolchain produces those filenames:
+```text
+specs/003-chat-system/
+  spec.md          feature specification — user stories, acceptance criteria
+  plan.md          implementation plan
+  research.md      technical research
+  data-model.md    schemas and entity definitions
+  contracts/       API specifications and event definitions
+  quickstart.md    key validation scenarios
+  tasks.md         executable task list derived from the plan
+```
 
-| Tool | Artefacts | Location |
-|---|---|---|
-| GitHub Spec Kit | `constitution.md`, `spec.md`, `plan.md`, `tasks.md` | `specs/`, `.specify/` |
-| AWS Kiro | `requirements.md`, `design.md`, `tasks.md` | per-feature spec directory |
+Branches and directories are numbered `[NNN]-[description]`. Every filename is **lowercase with
+hyphens**, and every one is **nested under a per-feature directory** — none at the repository root.
 
-The closest match anywhere is Spec Kit's `plan.md` — same word, different case, different location,
-and paired with `spec.md` rather than `SPECIFICATION.md`.
+Kiro is the same shape, one level more hidden:
+
+```text
+.kiro/specs/user-authentication/
+  requirements.md   user stories with acceptance criteria
+  design.md         technical architecture, data models, interfaces
+  tasks.md          ordered implementation checklist
+```
+
+`bugfix.md` replaces `requirements.md` for bugfix specs. Again lowercase, again per-feature — and
+inside a dotted, tool-owned directory.
+
+That last detail sharpens the whole finding. **Neither tool is proposing a documentation convention
+at all.** Spec Kit keeps configuration in `.specify/` and Kiro keeps everything in `.kiro/`: these
+are tool working directories, holding per-feature state that a tool reads and writes. There was
+never a naming convention here to inherit, only a resemblance in vocabulary.
+
+**The important difference is not the names but the scope.** Spec Kit's `spec.md` and `plan.md`
+describe *one feature*, live on that feature's branch, and are consumed when it ships. This kit's
+`SPECIFICATION.md` and `PLAN.md` describe *the repository*, sit at its root, and outlive every
+feature. They are different kinds of artefact that happen to share two words, which is why the
+lowercase-and-nested convention does not transfer and why the ALL-CAPS root-meta-document
+convention applies here instead.
+
+Worth noting in passing that Spec Kit also has a `research.md`, per feature, where this kit has a
+repository-level `docs/research/`. The same parallel holds: same idea, different scope.
 
 What the genre does have is a rough origin date and a founding talk: the tooling converged during
 2025, with Sean Grove's "The New Code" (AI Engineer World's Fair, 2025) commonly cited as the
@@ -111,10 +142,14 @@ kit asserting one.
 - [Nygard, *Documenting Architecture Decisions*, 2011][nygard]
 - [`adr-tools` template][adrtools]
 - [agents.md](https://agents.md)
-- [github/spec-kit](https://github.com/github/spec-kit) — checked directly
-- [Kiro specs documentation](https://kiro.dev/docs/specs/) and
-  [spec-driven development](https://en.wikipedia.org/wiki/Spec-driven_development) — for the naming
-  subsection only, via secondary summaries rather than direct reading, hence its lower confidence
+- [github/spec-kit](https://github.com/github/spec-kit), and its [`spec-driven.md`][sdd] for the
+  file tree — both read directly
+- [Kiro specs documentation](https://kiro.dev/docs/specs/) for the filenames, and its
+  [best practices page](https://kiro.dev/docs/specs/best-practices/) for the `.kiro/specs/` tree
+- [Spec-driven development](https://en.wikipedia.org/wiki/Spec-driven_development) — for the genre's
+  timeline only, which is the one claim here resting on a secondary source
+
+[sdd]: https://raw.githubusercontent.com/github/spec-kit/main/spec-driven.md
 
 [nygard]: https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 [adrtools]: https://raw.githubusercontent.com/npryce/adr-tools/master/src/template.md
@@ -127,8 +162,7 @@ same as checking the artefact it generates.
 
 ## Open questions
 
-- The naming subsection rests on secondary sources. Reading Kiro's and Spec Kit's generated output
-  directly would raise it to `high`, and is worth doing before the kit repeats the claim anywhere
-  load-bearing.
+- Nothing outstanding. The genre's 2025 timeline is the one claim here still resting on a secondary
+  source, and nothing in this kit depends on it.
 - MADR's `consulted` and `informed` fields remain unadopted by choice, not by evidence — carried
   over from `0001-adr-conventions.md`.
