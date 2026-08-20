@@ -48,10 +48,10 @@ Two outputs: a decision, and `PLAN.md`.
 
 **Decide.** This structure costs more than it returns below a certain size. A single-purpose script,
 a repository one person will maintain for a month, or anything whose entire documentation genuinely
-fits in one honest `README.md` — or one tight `AGENTS.md` — should stop here. The signal to proceed is not size in lines but
-**more than one reader**: someone who has to obey the behaviour, or someone who will inherit the
-reasoning. Record the outcome either way — a rejection that is written down is a decision, and one
-that is not gets re-litigated every six months.
+fits in one honest `README.md` — or one tight `AGENTS.md` — should stop here. The signal to proceed
+is not size in lines but **more than one reader**: someone who has to obey the behaviour, or
+someone who will inherit the reasoning. Record the outcome either way — a rejection that is written
+down is a decision, and one that is not gets re-litigated every six months.
 
 **Then write `PLAN.md` before anything else.** It is the one artifact you can create knowing nothing
 about the repository yet, and the adoption work itself is its first content: one entry per artifact
@@ -106,7 +106,6 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 
 | In `DOCUMENTATION.md` | Do this |
 |---|---|
-| The "this file is a template" banner | Delete it |
 | "Where does it go?" table | Delete rows for artifacts this repo does not have |
 | Layout block | Delete unused lines; replace with **real paths** — in a monorepo, `docs/` moves under the module it describes and only the root four stay at the top |
 | Specification line | State whether it is one file or an index, and name its machine-readable members if any |
@@ -115,7 +114,6 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 | Flow | Keep, deleting any step that names an artifact you removed — most projects drop the optional task-note step |
 | Prescribed formats | Keep the formats for artifacts you kept; delete the rest |
 | "Machine-readable and generated parts" | Keep if anything here is generated or machine-readable; delete outright if the documentation is entirely hand-written prose |
-| "What each capability adds" | Delete it once applied — it is scaffolding for this step, not part of the finished map |
 | Three rules, failure modes, "adding a new kind of document" | **Keep verbatim.** These are the parts that do the work, and they are the same in every repository |
 | "Deliberately not here" | Keep, and add anything else you consciously rejected for this repo |
 
@@ -243,7 +241,7 @@ The customisation has been applied successfully when all of these hold:
 - [ ] No file serves two tenses — nothing is part changelog and part backlog.
 - [ ] No fact appears in two places; in particular, no prose restates a machine-readable contract.
 - [ ] Generated files say so, and regenerating them produces no diff.
-- [ ] The template banner is gone.
+- [ ] No placeholder content survives — no example artifact row, no unreplaced heading.
 
 Re-run the first two checks whenever an artifact is added or removed. They are the ones that rot.
 

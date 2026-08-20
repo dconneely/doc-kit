@@ -162,25 +162,6 @@ for a symbol finds the entry that governs it rather than having to read the file
 applies more weakly to ADRs recording a constraint, which is worth a sentence in the map but not a
 format change.
 
-### Move the format skeletons out of the map
-
-*Type: docs — Importance: medium — Effort: low*
-
-The ADR skeleton has been removed from the map and now links to
-`templates/docs/adr/0000-template.md`. The same reconciliation is still due for the research
-confidence levels and the quirk entry shape, which the template files define and the map's
-"prescribed formats" section does not mention. Also check the changelog and plan-entry skeletons,
-which the map still restates.
-
-### Reconcile the judgement calls in `ADOPTING.md` against the ADRs
-
-*Type: docs — Importance: medium — Effort: low*
-
-ADR-0002 and ADR-0003 now record decisions that `ADOPTING.md` also argues at length, so the same
-fact lives in two places. The ADRs keep the alternatives and consequences; the guide keeps the
-adopter-facing answer and links. Known violation of `SPECIFICATION.md` §4.1, recorded rather than
-hidden.
-
 ### Write the adoption skill
 
 *Type: feature — Importance: medium — Effort: medium*

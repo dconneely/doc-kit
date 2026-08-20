@@ -90,7 +90,7 @@ machine-readable member of it when it exists.
 | `SPECIFICATION.md` | behaviour is decided | never — edited forever |
 | `ADOPTING.md` | the kit is first given to someone else | never |
 | `templates/*` | an artifact earns a place in the product | when the artifact leaves the product |
-| `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `Superseded by ADR-00NN` |
+| `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `superseded by ADR-NNNN` |
 | `CHANGELOG.md` entry | at release, if visible to adopters | never |
 | `PLAN.md` entry | idea occurs — one paragraph, no design | **deleted** when done, not struck through |
 | `docs/research/*.md` | a cited convention is checked against its source | never — confidence gets revised |
