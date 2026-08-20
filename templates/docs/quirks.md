@@ -1,7 +1,5 @@
 # Quirks
 
-> **This file is a template.** Delete this banner and the example when you customise.
-
 Deliberate deviations from the reference, specification or obvious expectation, and defects
 knowingly left unfixed. It answers one question: **is this a bug, or a decision?**
 

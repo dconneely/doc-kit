@@ -65,7 +65,9 @@ rather than left to memory.
 2.4 Every documentation file MUST appear in the map, either individually or under a directory
 pattern the map names. This is the check that rots second.
 
-2.5 The map MUST NOT retain the template banner. Its presence means customisation was never done.
+2.5 The map MUST NOT retain placeholder content from the template — an example artifact row, an
+unreplaced heading. Templates carry an example rather than instructions (ADR-0011), so a surviving
+example is the signal that customisation was never finished.
 
 2.6 Paths in the map MUST be the repository's real paths. In a monorepo the per-module artifacts
 MUST sit under the module they describe, and only the map, `README.md`, `CHANGELOG.md` and
@@ -145,8 +147,10 @@ status change. See ADR-0009.
 **Immutability attaches to the status, not to the commit.** A record whose status is `proposed` MAY
 be edited freely, and MAY be merged while still undecided — a pending decision in the tree is more
 discoverable than one living in an unmerged branch, which is the point of having the status at all.
-A record whose status is `accepted` MUST NOT be edited except to change its status and `date`.
-Correcting one means writing its successor.
+A record whose status is `accepted` MUST NOT be edited except to change its `status`, `date` and
+`decision-makers`. Those three change together at acceptance, which is the moment `decision-makers`
+becomes required — a rule permitting only the first two would make it impossible to comply with the
+second.
 
 **Immutability begins at publication.** A record nobody outside its author could have read has no
 reader who relied on it, so correcting a drafting error in one is not rewriting history. In practice

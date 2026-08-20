@@ -1,8 +1,5 @@
 # Project name
 
-> **This file is a template.** Replace every section with real content, or delete the section. A
-> README with unfilled headings is worse than a short one. Delete this banner when you customise.
-
 One sentence saying what this is and who it is for. If a reader stops here, this is what they keep.
 
 ## Install

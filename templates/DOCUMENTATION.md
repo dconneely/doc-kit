@@ -5,12 +5,6 @@ lives, and — the question it exists to answer — **where a given fact belongs
 
 Start here when you have something to write down and are not sure which file it goes in.
 
-> **This file is a template.** Copy it to the root of a repository, delete the artifacts that
-> project does not have, and keep the rules. The kit's `ADOPTING.md` is the procedure for doing
-> that: what to trim, what to create afterwards, how to migrate an existing codebase's
-> documentation into it, and why it is shaped this way. That reasoning deliberately lives there
-> rather than here, so this file stays short enough to be read often.
-
 ## Where does it go?
 
 The tense of the sentence you are writing usually settles it:
@@ -38,7 +32,7 @@ SPECIFICATION.md         the behaviour contract — an index once it grows (see 
 CHANGELOG.md             what shipped
 PLAN.md                  single ranked backlog, items tagged bug/debt/feature/docs
 docs/
-  adr/0001-*.md          decisions, numbered, immutable
+  adr/*.md               decisions, numbered, immutable once accepted
   quirks.md              deliberate deviations and accepted-wrong behaviour
   research/*.md          sourced findings with confidence levels
   glossary.md            domain vocabulary
@@ -63,7 +57,7 @@ specification. See "Machine-readable and generated parts" below.
 | `DOCUMENTATION.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
 | `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten freely | anyone |
 | `SPECIFICATION.md` | The behaviour contract. **No standard for the file.** Use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords (MUST/SHOULD/MAY) for requirement strength, [Diátaxis](https://diataxis.fr) for structuring the reference set once it becomes a tree | present | rewritten in place, always current | users + implementers |
-| `docs/adr/*.md` | Why we chose this. **Real convention:** Nygard 2011; [adr.github.io](https://adr.github.io), [MADR](https://adr.github.io/madr/) template, [adr-tools](https://github.com/npryce/adr-tools) CLI | past | **immutable** — superseded, never edited | future maintainers |
+| `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | **immutable once accepted** — superseded, never edited | future maintainers |
 | `CHANGELOG.md` | What shipped, user-visible. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org); generatable from [Conventional Commits](https://www.conventionalcommits.org) | past | append-only | users |
 | `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard.** Closest named source is [GitHub Spec Kit](https://github.com/github/spec-kit)'s specify→plan→tasks flow | future | volatile — reordered and deleted freely | the team |
 | `docs/quirks.md` | Deliberate deviations, and bugs knowingly left unfixed. **No standard.** Nearest analogues are W3C conformance clauses and browser-compat tables | present | rewritten in place | users comparing against a reference |
@@ -121,14 +115,27 @@ shape. The rules that file cannot express, and which live here:
 `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe user-visible
 effects, not internal refactors.
 
-**Plan entry** — a heading, a type tag and a rough size, then one paragraph. No design:
+**Plan entry** — a heading, a tag line, then one paragraph. No design; anything longer needs a task
+note or an ADR. Entries are deleted when done, never annotated.
 
 ```markdown
-### Short title
+### Short title, imperative
 *Type: bug — Importance: high — Effort: medium*
-
-One paragraph on what and why. If it needs more than that, it needs a task note or an ADR.
 ```
+
+- **Type** — `bug`, `debt`, `feature` or `docs`. Debt is a tag here, not a separate file: the
+  debt-versus-feature trade-off can only be made inside one ordered list.
+- **Importance** — `low`, `medium`, `high`: what it costs to keep not doing this.
+- **Effort** — `low` under a day, `medium` under a week, `high` larger or not yet known.
+
+**Research note** — sources, and a confidence level of `high` (verified directly against the thing
+itself), `medium` (sources agree, not verified directly) or `low` (inferred, or a single unverified
+source). Confidence is revised in place as evidence changes. An unsourced note is not research: it
+is specification if it states behaviour, an ADR if it states a choice.
+
+**Quirk entry** — the expected behaviour, the actual behaviour, and whether the deviation is
+**deliberate** or **accepted-wrong**. An accepted-wrong entry names the test pinning today's output,
+so nobody "fixes" it, and states what would have to change for the entry to go.
 
 ## Machine-readable and generated parts
 
@@ -188,27 +195,6 @@ Absent on purpose, so that adding any of them later is a decision rather than a 
 Only **Keep a Changelog** and **ADRs** are genuine standards; everything else here is convention,
 and the artifacts table says so per row. The companion guide covers where each convention comes
 from and how far to trust it.
-
-## What each capability adds
-
-The table above is what every project needs. These are earned by having a particular capability —
-and most of them join the **specification** rather than becoming new categories, because they are
-present tense, always current, and a contract someone relies on.
-
-| If the project has… | It gains | Where it lands |
-|---|---|---|
-| a data store | the schema (generated snapshot), plus a **data dictionary**: units, ownership, retention, which fields are sensitive, invariants constraints cannot express | specification |
-| | ordered migrations | changelog-shaped — see above |
-| a network API | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth | specification |
-| | cross-cutting conventions: pagination, versioning, idempotency, error shape ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457); crib [Google AIP](https://google.aip.dev) or [Zalando](https://opensource.zalando.com/restful-api-guidelines/)) | specification |
-| deployment as a service | a **runbook** — deploy, roll back, common failures | neither: a how-to, different audience (on call) |
-| | environment and configuration reference ([12-Factor](https://12factor.net) conventions) | specification |
-| | a **threat model** ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) as the checklist) | neither: an assessment — its conclusions become ADRs, its findings become plan entries |
-| a user interface | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/)) | target → specification; gaps → quirks |
-
-The pattern is worth internalising: **most new artifacts are specification members, not new
-categories.** Before inventing a category, check whether the thing is simply the contract in a
-different medium.
 
 ## Adding a new kind of document
 

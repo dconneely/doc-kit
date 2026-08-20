@@ -14,8 +14,7 @@ Copy to NNNN-kebab-case-title.md, four-digit zero-padded, unique and never reuse
 number matches the filename. Keep this file as 0000; it is the template.
 
 Follows the MADR minimal template (https://adr.github.io/madr/). DOCUMENTATION.md carries the rules
-about status, immutability and who may change one — the two worth remembering here are that an
-accepted record is never edited, and that only a person may accept one.
+about status, immutability and who may change one.
 
 Write it when the decision is made, not later. A record reconstructed years afterwards is usually an
 argument for what you already do, and it dilutes the ones written contemporaneously.

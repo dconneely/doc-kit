@@ -72,8 +72,26 @@ Every project takes the core five: `DOCUMENTATION.md`, `README.md`, the specific
 `CHANGELOG.md` and `PLAN.md`. ADRs are strongly recommended from day one, because their value is
 almost entirely in being written contemporaneously.
 
-Then work through the template's "what each capability adds" table and note which apply. Be strict:
-an artifact you will not maintain is worse than its absence, because the map promises it.
+Then work through the table below and note which apply. Be strict: an artifact you will not maintain
+is worse than its absence, because the map promises it.
+
+Most of these join the **specification** rather than becoming new categories, because they are
+present tense, always current, and a contract someone relies on.
+
+| If the project has… | It gains | Where it lands |
+|---|---|---|
+| a data store | the schema (generated snapshot), plus a **data dictionary**: units, ownership, retention, which fields are sensitive, invariants constraints cannot express | specification |
+| | ordered migrations | changelog-shaped: an ordered, immutable-once-applied sequence is a changelog whatever it describes |
+| a network API | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth | specification |
+| | cross-cutting conventions: pagination, versioning, idempotency, error shape ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457); crib [Google AIP](https://google.aip.dev) or [Zalando](https://opensource.zalando.com/restful-api-guidelines/)) | specification |
+| deployment as a service | a **runbook** — deploy, roll back, common failures | neither: a how-to, different audience (on call) |
+| | environment and configuration reference ([12-Factor](https://12factor.net) conventions) | specification |
+| | a **threat model** ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) as the checklist) | neither: an assessment — its conclusions become records, its findings become plan entries |
+| a user interface | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/)) | target → specification; gaps → quirks |
+
+The pattern is worth internalising: **most new artifacts are specification members, not new
+categories.** Before inventing a category, check whether the thing is simply the contract in a
+different medium.
 
 Two questions decide most of the rest:
 
@@ -115,6 +133,12 @@ artifact you kept:
 - **Do not backfill history.** A changelog that starts today is fine. ADRs written years after the
   fact are usually reconstruction, and they dilute the ones written contemporaneously.
 - **Seed each with its first real entry** if one is to hand — see Step 4, which will find several.
+- **Replace the placeholder content or delete it.** The templates carry an example entry rather than
+  instructions; a `README.md` with unfilled headings is worse than a short one.
+
+The templates deliberately contain no advice about the kit — that is this file's job, and it is not
+copied into your repository. The one exception is `docs/adr/0000-template.md` and its counterpart in
+`docs/research/`, which stay as templates to copy from and keep a short comment for that reason.
 
 For an empty repository this step is quick and you are finished. For an existing codebase, the
 material for those first entries is already scattered through it — that is Step 4.

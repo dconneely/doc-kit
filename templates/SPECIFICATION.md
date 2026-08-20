@@ -1,29 +1,8 @@
 # Specification
 
-> **This file is a template.** It is the behaviour contract: what the system does, in the present
-> tense, always current. Delete this banner when you customise.
-
 Requirement keywords — MUST, MUST NOT, SHOULD, SHOULD NOT, MAY — are used as defined in
 [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119). Use them for requirement strength; do not use
 them decoratively.
-
-<!--
-Three rules govern this document.
-
-1. Present tense only. "The system does X", never "the system used to do Y". History is the
-   changelog's job; the moment this file narrates, it stops being reference material.
-
-2. No rationale. "Why we chose X" is an ADR. This file states what is, not why.
-
-3. Never restate a machine-readable contract. Schemas, OpenAPI documents and interface definitions
-   ARE specification — they are members of this document, not a lesser category. Link to them, then
-   cover only what they cannot express: invariants, units, ownership, retention, policy.
-
-The specification is a set, not a file. When it stops being comfortable to read end to end, this
-file becomes an index and its sections become members. That is growth, not failure.
-
-Delete this comment once the document has real content.
--->
 
 ## 1. Scope
 

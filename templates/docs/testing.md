@@ -1,7 +1,5 @@
 # Testing
 
-> **This file is a template.** Delete this banner when you customise.
-
 The test strategy, and — the part that only lives here — what is deliberately **not** covered.
 
 ## What is verified
