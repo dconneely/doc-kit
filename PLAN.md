@@ -28,18 +28,24 @@ conditions, an output contract, and an approval gate before anything is modified
 reader needs the judgement calls and the troubleshooting. Progressive disclosure — a short procedure
 linking outward — rather than deeper headings.
 
-### Simplify — the kit is failing its own single-source rule
+This is now the main size lever. A deduplication pass removed only about 4% of the repository's
+prose, which falsified the theory that its bulk was restatement: the duplication was real but thin,
+and what it actually cost was drift, not volume. The remaining weight is in two files that each do
+genuine work, and this one does the work of two documents at once.
 
-*Type: debt — Importance: high — Effort: medium*
+### Verify the rest of the conventions this kit cites
 
-Roughly 1,900 lines of Markdown for a structure whose pitch is being small enough to hold in your
-head, grown by accretion over a single day. The specific failure is `SPECIFICATION.md` §4.1: facts
-now live in several places at once. The ADR rules are stated three times — §3.1, `AGENTS.md`, and
-the comments in `templates/docs/adr/0000-template.md`; the map's "three rules" and "failure modes"
-overlap §4; `ADOPTING.md`'s judgement calls restate ADR-0002 and ADR-0003; and the changelog has
-drifted into paragraph-length entries where it should carry lines. Decide which artifact owns each
-rule, leave a link at every other site, and measure the result — if the total does not fall
-materially, the diagnosis was wrong.
+*Type: bug — Importance: high — Effort: low*
+
+Checking MADR against its source found the kit was not following the convention it claimed to
+follow, and that recalling the schema had produced a plausible but wrong answer — see
+`docs/research/0001-adr-conventions.md`. Every other cited convention rests on the same recollection.
+In rough order of exposure: **Keep a Changelog**, whose six categories `SPECIFICATION.md` §3.2
+prescribes; **Spec Kit**, which `ADOPTING.md` already flags as "a lead rather than an established
+convention, verify directly before leaning on it"; **agents.md**, cited in the map as the convention
+`AGENTS.md` follows; **Nygard's original post**, the attribution for the four classic statuses; and
+**adr-tools**, whose numbering behaviour ADR-0010 relies on. Filed as a bug because the kit's
+credibility rests on being right about exactly this, and it has already been wrong once.
 
 ### Decide which list of artifacts is authoritative
 

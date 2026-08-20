@@ -1,46 +1,24 @@
 ---
 status: "proposed"
+# proposed | rejected | accepted | deprecated | superseded by ADR-NNNN
+# may carry a pointer, e.g. accepted (refined by ADR-0006) — see DOCUMENTATION.md
 date: {YYYY-MM-DD, when the status last changed}
 decision-makers: {who decided — required once the status is not "proposed"}
-# consulted: {optional — whose opinion was sought}
-# informed:  {optional — who is kept up to date}
+# consulted / informed: optional, and overhead on a small team
 ---
 
 # 0. Short title, imperative, naming the problem and the answer
 
 <!--
-Copy to NNNN-kebab-case-title.md, four-digit zero-padded, numbers unique and never reused.
-The heading number matches the filename. Keep this file as 0000; it is the template.
+Copy to NNNN-kebab-case-title.md, four-digit zero-padded, unique and never reused. The heading
+number matches the filename. Keep this file as 0000; it is the template.
 
-This follows the MADR minimal template (https://adr.github.io/madr/). Status values, lowercase:
+Follows the MADR minimal template (https://adr.github.io/madr/). DOCUMENTATION.md carries the rules
+about status, immutability and who may change one — the two worth remembering here are that an
+accepted record is never edited, and that only a person may accept one.
 
-  proposed                 suggested, not yet decided — binds nothing
-  rejected                 considered and turned down, kept so it is not re-proposed
-  accepted                 decided and in effect
-  deprecated               no longer applies, and nothing replaced it
-  superseded by ADR-NNNN   replaced by a later record, which must exist
-
-Any status may carry a forward pointer: "accepted (refined by ADR-0006)" means this decision stands
-but a later record revised something following from it. Use it only when the Decision Outcome is
-still true — if it stopped being true, that is supersession instead.
-
-Immutability attaches to the STATUS, not to the commit. While it says proposed, edit it freely —
-and merge it if the decision is still open, since a pending decision is more discoverable in the
-tree than in a branch nobody is watching. Once it says accepted it is immutable: never edit it
-except to change its status and date. Correcting a decision means writing its successor.
-
-If a decision is still being argued, leave it proposed. Accepting early and then revising is the
-common failure, and it destroys exactly the property the record exists for.
-
-CHANGING THE STATUS IS A HUMAN ACTION. A tool may draft this file, argue it, and merge it as
-proposed. Only a person moves it off proposed, and doing so asserts that a decision was really
-made — which is what decision-makers records. Only accepted records bind anything.
-
-Make that flip its own pull request. A separate commit is not enough — squash merging folds it back
-into the commit that drafted the record, and the one moment worth seeing becomes invisible.
-
-Write it when the decision is made, not later. A record reconstructed years afterwards is usually
-an argument for what you already do, and it dilutes the ones written contemporaneously.
+Write it when the decision is made, not later. A record reconstructed years afterwards is usually an
+argument for what you already do, and it dilutes the ones written contemporaneously.
 
 Delete this comment in the copy.
 -->
@@ -62,7 +40,7 @@ This section is what makes the file a decision rather than a statement. A record
 option to consider is usually a specification entry that has been misfiled.
 
 Include the option you rejected even when it now looks obviously wrong — especially then. The next
-person will think of it too, and the record is what stops them re-litigating it.
+person will think of it too, and this is what stops them re-litigating it.
 -->
 
 ## Decision Outcome

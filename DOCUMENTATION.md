@@ -29,6 +29,7 @@ The tense of the sentence you are writing usually settles it:
 |---|---|
 | "a conformant repository does X" | `SPECIFICATION.md` |
 | "we chose X because Y" | an ADR |
+| "source A says X, and I checked" | a research note |
 | "X used to be Y, now it is Z" | the changelog |
 | "we should do X" | the plan |
 | "here is how you adopt this" | `ADOPTING.md` |
@@ -52,7 +53,8 @@ PLAN.md                  single ranked backlog, items tagged bug/debt/feature/do
 ADOPTING.md              product — the procedure for applying the kit to a repository
 templates/               product — the documents an adopter copies and customises
 docs/
-  adr/0001-*.md          decisions, numbered, immutable
+  adr/*.md               decisions, numbered, immutable once accepted
+  research/*.md          sourced findings, with confidence levels
   glossary.md            project vocabulary
 ```
 
@@ -74,6 +76,7 @@ machine-readable member of it when it exists.
 | `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | **immutable** once accepted — superseded, never edited | future maintainers |
 | `CHANGELOG.md` | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org) | past | append-only | adopters |
 | `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard** | future | volatile — reordered and deleted freely | the team |
+| `docs/research/*.md` | Sourced findings about the conventions this kit cites, with explicit confidence levels. **No standard.** Orthodox home is a record's *Context*; split out here because these findings are cited by several records and decay independently of them | past | append-mostly; confidence revised in place | anyone relying on a cited convention |
 | `docs/glossary.md` | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html) | present | rewritten in place | readers of every other document |
 
 ## Lifecycle
@@ -90,6 +93,7 @@ machine-readable member of it when it exists.
 | `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `Superseded by ADR-00NN` |
 | `CHANGELOG.md` entry | at release, if visible to adopters | never |
 | `PLAN.md` entry | idea occurs — one paragraph, no design | **deleted** when done, not struck through |
+| `docs/research/*.md` | a cited convention is checked against its source | never — confidence gets revised |
 | `docs/glossary.md` entry | a term acquires a project-specific meaning | when the term leaves the project |
 
 ## Flow
@@ -125,23 +129,16 @@ One paragraph on what and why. If it needs more than that, it needs an ADR.
 
 ## Machine-readable and generated parts
 
-Three kinds of thing get confused with each other, and the rules differ:
-
-| Kind | Rule |
-|---|---|
-| **Source of truth** — `ADOPTING.md` and the contents of `templates/` | versioned and reviewed like code; it *is* the product, not a description of one |
-| **Generated view** — none yet | never hand-edited; carries a generated-by header; CI fails if regenerating produces a diff |
-| **Prose that cannot be derived** — rationale, procedure, policy | the only part that belongs in `docs/` as writing |
-
-Without that CI check, "generated" quietly becomes "generated once, then hand-edited", and a
-partly-stale generated specification is worse than none: it is believed.
+Nothing here is generated. `ADOPTING.md` and `templates/` are source of truth — versioned and
+reviewed like code, not a description of something else. Everything in `docs/` is prose that cannot
+be derived. `SPECIFICATION.md` §4 has the rules for when that changes.
 
 ## Three rules that hold it together
 
 1. **Each fact lives in exactly one place**, and the tense of the sentence tells you which:
    rationale → ADR, behaviour → specification, history → changelog, intent → plan.
 2. **Never edit an accepted ADR** — supersede it, and set the old status to
-   `Superseded by ADR-00NN`. Its whole value is being faithful to what was known at the time.
+   `superseded by ADR-NNNN`. Its whole value is being faithful to what was known at the time.
 3. **The specification may link to a machine-readable contract; it must never restate it.** The
    moment prose repeats a field list, there are two sources of truth and one of them is already
    wrong. Link to the artifact, then cover only what the artifact cannot express.
@@ -163,9 +160,9 @@ partly-stale generated specification is worse than none: it is believed.
 Absent on purpose, so that adding any of them later is a decision rather than a drift:
 
 - **A separate technical-debt file** — see [ADR-0002](docs/adr/0002-keep-technical-debt-in-the-plan.md).
-- **`docs/research/`, `docs/quirks.md`, `docs/testing.md`, `docs/tasks/`** — all in `templates/`,
-  none earned here yet. `docs/testing.md` is expected as soon as the checker exists, because there
-  will then be something to have a test strategy about.
+- **`docs/quirks.md`, `docs/testing.md`, `docs/tasks/`** — all in `templates/`, none earned here yet.
+  `docs/testing.md` is expected as soon as the checker exists, because there will then be something
+  to have a test strategy about.
 - **An issue tracker**, until the backlog outgrows a file — roughly 20–30 open items.
 - **Community health files** — `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` — which earn
   their place when outside contributions begin, not before.

@@ -103,9 +103,19 @@ Most changes skip the ADR and the task note. Nothing skips the deletion.
 Three artifacts have a shape worth keeping to; the rest are free-form prose.
 
 **ADR** — one file per decision, numbered `0001-short-title.md`, following the
-[MADR](https://adr.github.io/madr/) minimal template. The shape lives in
-`docs/adr/0000-template.md`; copy that rather than restating it here. Statuses are `proposed`,
-`rejected`, `accepted`, `deprecated`, or `superseded by ADR-NNNN`, and only `accepted` binds.
+[MADR](https://adr.github.io/madr/) minimal template. Copy `docs/adr/0000-template.md` for the
+shape. The rules that file cannot express, and which live here:
+
+- Status is one of `proposed`, `rejected`, `accepted`, `deprecated`, `superseded by ADR-NNNN`, and
+  may carry a forward pointer: `accepted (refined by ADR-NNNN)` when a decision stands but a later
+  record revised something following from it.
+- **Only `accepted` binds.** A `proposed` record is a suggestion — merge it undecided if you like,
+  since an open question is more visible in the tree than in a branch nobody is watching.
+- **Immutable once accepted**, except to change status and date. Correct one by writing its
+  successor, not by editing it.
+- **Changing a status is a human action.** A tool may draft a record and argue it; only a person
+  decides one. Make that flip its own pull request — a separate commit does not survive a squash
+  merge, and the one moment worth seeing becomes invisible.
 
 **Changelog** — reverse-chronological, an `Unreleased` section at the top, six fixed categories:
 `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe user-visible

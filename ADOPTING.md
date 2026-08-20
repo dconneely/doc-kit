@@ -238,40 +238,24 @@ The decisions Steps 1 and 4 tend to force, and the reasoning that resolves them.
 
 ### Do we need a technical-debt file?
 
-No, and the reasoning generalises to most proposed additions.
+No. Debt is a **type tag within the single ranked plan**, alongside `bug`, `feature` and `docs`.
 
-1. **It splits on the wrong axis.** Technical debt has the same tense (future), the same mutability
-   (volatile) and the same audience (the team) as the plan. The structure is organised by those
-   three properties; splitting by *category* instead is what makes such files drift apart in format
-   and go stale.
-2. **It hides the trade-off that matters most.** Debt versus feature is exactly the decision worth
-   making explicitly, and it can only be made inside a single ordered list.
-3. **The boundary is genuinely fuzzy.** Is "decompose this god object" debt or architecture? Is a
-   long-standing parser defect a bug, debt, or a specification gap? Effort goes into filing rather
-   than deciding.
-
-The worry behind the request — that features get drowned — is real. The answer is **tagging within
-one ranked list**, not a second file.
+The worry behind the request — that features drown debt — is real, and the answer is ranking it
+higher, not filing it elsewhere. Splitting by *category* where the structure splits on tense,
+mutability and audience is what makes such files drift apart and go stale; the argument is
+[ADR-0002](docs/adr/0002-keep-technical-debt-in-the-plan.md), and it generalises to most proposed
+additions.
 
 ### Where do schemas, API definitions and other formal contracts go?
 
-Into the **specification** — and getting this wrong is instructive.
+Into the **specification**. They pass the same three tests as prose reference material — present
+tense, rewritten in place, audience of users and implementers — and being machine-checked makes them
+*better* specification, not something lesser.
 
-The tempting answer is to invent categories for them. The correct answer is that they pass the same
-three tests as prose reference material. Present tense: they describe what the system is now.
-Rewritten in place: always current, no history. Audience: users and implementers. Nothing
-distinguishes a schema file from a reference chapter except the medium — and being machine-checked
-makes it *better* specification, not something lesser.
-
-Three consequences, which the map states as rules: source of truth, generated view and prose are
-different things and only the third is writing; append-only sequences such as ordered migrations
-are changelog-shaped whatever they describe; and prose may link to a machine-readable contract but
-must never restate it.
-
-Applying the same tests to the rest of a service's documentation reclassifies more than it adds: a
-conformance target is specification while its known gaps are quirks; a runbook is a procedure for a
-different audience at a different moment; a threat model is an assessment whose conclusions become
-ADRs and whose findings become plan entries.
+Applying those tests reclassifies more than it adds: a conformance target is specification while its
+known gaps are quirks; a runbook is a procedure for a different audience at a different moment; a
+threat model is an assessment whose conclusions become records and whose findings become plan
+entries. See [ADR-0003](docs/adr/0003-treat-machine-readable-contracts-as-specification.md).
 
 ### How far do I trust each convention?
 
@@ -281,6 +265,8 @@ Only two entries deserve the word "standard":
   [SemVer](https://semver.org) and [Conventional Commits](https://www.conventionalcommits.org).
 - **ADRs** — Nygard 2011, with [adr.github.io](https://adr.github.io), the
   [MADR](https://adr.github.io/madr/) template and [adr-tools](https://github.com/npryce/adr-tools).
+  This kit follows MADR's **minimal** template; see
+  [ADR-0010](docs/adr/0010-adopt-the-madr-minimal-template.md) for why that one.
 
 `SPECIFICATION.md` and `PLAN.md` as filenames have no governing convention. Their ancestry is the
 RFC/design-doc tradition (IETF RFCs, Python PEPs, Rust RFCs, Kubernetes KEPs, Google-style design
