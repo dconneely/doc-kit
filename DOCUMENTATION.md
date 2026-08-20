@@ -33,6 +33,7 @@ The tense of the sentence you are writing usually settles it:
 | "X used to be Y, now it is Z" | the changelog |
 | "we should do X" | the plan |
 | "here is how you adopt this" | `ADOPTING.md` |
+| "here is why the procedure is shaped this way" | `ADOPTING-NOTES.md` |
 | "here is the text an adopter starts from" | `templates/` — never restated in prose |
 | "X means Y in this project" | the glossary |
 | "an agent working here needs to know X" | `AGENTS.md`, if it is routing or a hazard — otherwise the document that owns the fact |
@@ -51,6 +52,7 @@ SPECIFICATION.md         what a conformant repository looks like
 CHANGELOG.md             what shipped
 PLAN.md                  single ranked backlog, items tagged bug/debt/feature/docs
 ADOPTING.md              product — the procedure for applying the kit to a repository
+ADOPTING-NOTES.md        product — the reasoning behind that procedure
 templates/               product — the documents an adopter copies and customises
 docs/
   adr/*.md               decisions, numbered, immutable once accepted
@@ -72,6 +74,7 @@ machine-readable member of it when it exists.
 | `CLAUDE.md` | One line pointing at `AGENTS.md`. Holds no content of its own, because two copies would be two sources of truth | present | rewritten in place (rarely) | coding agents |
 | `SPECIFICATION.md` | What a conformant repository looks like — the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength | present | rewritten in place, always current | adopters + tool authors |
 | `ADOPTING.md` | **Product. Source of truth, not description** — the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms | imperative | rewritten in place | adopters |
+| `ADOPTING-NOTES.md` | **Product.** The reasoning behind the procedure — judgement calls, how far to trust each convention cited, what the sticking points mean. Split out so the procedure stays loadable; explanation in [Diátaxis](https://diataxis.fr) terms | explanatory | rewritten in place | adopters who are stuck or deciding |
 | `templates/*` | **Product. Source of truth, not description** — the artifact half. Copied into the adopter's repository and customised there | present | rewritten in place | adopters, via their own repositories |
 | `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | **immutable** once accepted — superseded, never edited | future maintainers |
 | `CHANGELOG.md` | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org) | past | append-only | adopters |
@@ -89,6 +92,7 @@ machine-readable member of it when it exists.
 | `CLAUDE.md` | a tool looks for that filename specifically | when no tool needs the alias any more |
 | `SPECIFICATION.md` | behaviour is decided | never — edited forever |
 | `ADOPTING.md` | the kit is first given to someone else | never |
+| `ADOPTING-NOTES.md` | the procedure accumulated reasoning that was slowing it down | never |
 | `templates/*` | an artifact earns a place in the product | when the artifact leaves the product |
 | `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `superseded by ADR-NNNN` |
 | `CHANGELOG.md` entry | at release, if visible to adopters | never |

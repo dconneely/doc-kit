@@ -2,21 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Split `ADOPTING.md` into a procedure and its rationale
-
-*Type: docs — Importance: high — Effort: medium*
-
-One file currently serves a reader deciding whether to adopt and a reader executing the migration.
-The executing reader needs about 120 of its 300 lines: ordered steps, preconditions, stop
-conditions, an output contract, and an approval gate before anything is modified. The deciding
-reader needs the judgement calls and the troubleshooting. Progressive disclosure — a short procedure
-linking outward — rather than deeper headings.
-
-This is now the main size lever. A deduplication pass removed only about 4% of the repository's
-prose, which falsified the theory that its bulk was restatement: the duplication was real but thin,
-and what it actually cost was drift, not volume. The remaining weight is in two files that each do
-genuine work, and this one does the work of two documents at once.
-
 ### Verify the rest of the conventions this kit cites
 
 *Type: bug — Importance: high — Effort: low*

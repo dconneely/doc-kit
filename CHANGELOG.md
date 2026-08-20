@@ -36,6 +36,9 @@ All notable changes to this project are documented here, following
 - The template moved to `templates/DOCUMENTATION.md`; `templates/` is source of truth rather than
   documentation, and the root `DOCUMENTATION.md` is this repository's own map. See ADR-0004.
 - `ADOPTING.md` is product alongside `templates/`. See ADR-0006.
+- `ADOPTING.md` is split: the procedure stays there, and the reasoning behind it — judgement calls,
+  how far to trust each convention, troubleshooting — moves to `ADOPTING-NOTES.md`. The procedure
+  drops from 451 lines to 284, which matters because it is what an agent loads.
 - The optional artifacts are ranked by payoff per line rather than by gap size: quirks, glossary,
   testing, then research — which moves to first for a project that reverse-engineers or reconciles
   sources.
