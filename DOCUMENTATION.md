@@ -6,10 +6,16 @@ lives, and — the question it exists to answer — **where a given fact belongs
 Start here when you have something to write down and are not sure which file it goes in.
 
 > This repository's product *is* documentation structure, which makes two things easy to confuse.
-> `templates/` is the product: source of truth, versioned and reviewed like code, copied into other
-> repositories. Everything else is this repository's own documentation, produced by applying the kit
-> to itself. `templates/DOCUMENTATION.md` and this file share a name and nothing else — that one is
-> the template, this one is an instance of it.
+> **`ADOPTING.md` and `templates/` are the product** — the procedure, and the artifacts it produces.
+> Both are source of truth: versioned and reviewed like code, not prose about this repository.
+> Everything else is this repository's own documentation, produced by applying the kit to itself.
+>
+> The line is what a file is *about*. Product files describe the adopter's repository; documentation
+> files describe this one. `SPECIFICATION.md` sits on the documentation side because it describes the
+> product rather than being it. See [ADR-0006](docs/adr/0006-treat-the-adoption-procedure-as-product.md).
+>
+> `templates/DOCUMENTATION.md` and this file share a name and nothing else — that one is the
+> template, this one is an instance of it.
 
 ## Where does it go?
 
@@ -36,8 +42,8 @@ README.md                orientation, one screen, links outward
 SPECIFICATION.md         what a conformant repository looks like
 CHANGELOG.md             what shipped
 PLAN.md                  single ranked backlog, items tagged bug/debt/feature/docs
-ADOPTING.md              the procedure for applying the kit to a repository
-templates/               the product: the documents an adopter copies and customises
+ADOPTING.md              product — the procedure for applying the kit to a repository
+templates/               product — the documents an adopter copies and customises
 docs/
   adr/0001-*.md          decisions, numbered, immutable
   glossary.md            project vocabulary
@@ -54,8 +60,8 @@ machine-readable member of it when it exists.
 | `DOCUMENTATION.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
 | `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten freely | anyone |
 | `SPECIFICATION.md` | What a conformant repository looks like — the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength | present | rewritten in place, always current | adopters + tool authors |
-| `ADOPTING.md` | How to apply the kit to a repository. A how-to in [Diátaxis](https://diataxis.fr) terms — a procedure for a different audience at a different moment than the specification | imperative | rewritten in place | adopters |
-| `templates/*` | The documents an adopter copies. **Source of truth, not description** — versioned and reviewed like code | present | rewritten in place | adopters, via their own repositories |
+| `ADOPTING.md` | **Product. Source of truth, not description** — the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms | imperative | rewritten in place | adopters |
+| `templates/*` | **Product. Source of truth, not description** — the artifact half. Copied into the adopter's repository and customised there | present | rewritten in place | adopters, via their own repositories |
 | `docs/adr/*.md` | Why we chose this. **Real convention:** Nygard 2011; [adr.github.io](https://adr.github.io), [MADR](https://adr.github.io/madr/) template, [adr-tools](https://github.com/npryce/adr-tools) CLI | past | **immutable** — superseded, never edited | future maintainers |
 | `CHANGELOG.md` | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org) | past | append-only | adopters |
 | `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard** | future | volatile — reordered and deleted freely | the team |
@@ -124,7 +130,7 @@ Three kinds of thing get confused with each other, and the rules differ:
 
 | Kind | Rule |
 |---|---|
-| **Source of truth** — the contents of `templates/` | versioned and reviewed like code; it *is* the product, not a description of one |
+| **Source of truth** — `ADOPTING.md` and the contents of `templates/` | versioned and reviewed like code; it *is* the product, not a description of one |
 | **Generated view** — none yet | never hand-edited; carries a generated-by header; CI fails if regenerating produces a diff |
 | **Prose that cannot be derived** — rationale, procedure, policy | the only part that belongs in `docs/` as writing |
 

@@ -38,6 +38,11 @@ MUST sit under the module they describe, and only the map, `README.md`, `CHANGEL
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
 durability and an audience, since that is what makes the next addition decidable.
 
+2.8 A repository MAY contain uncustomised template artifacts — a repository distributing this kit
+necessarily does. A checker MUST evaluate only the root map as an instance, and MUST NOT evaluate
+any artifact the map identifies as a template or as product. Without this, a repository shipping the
+kit fails §2.5 on its own templates, which is the check reporting the opposite of the truth.
+
 ## 3. Artifacts
 
 ### 3.1 Architecture decision records

@@ -22,4 +22,7 @@ All notable changes to this project are documented here, following
 - The template now lives at `templates/DOCUMENTATION.md` rather than the repository root, and
   `templates/` is treated as the kit's source of truth rather than as documentation. The root
   `DOCUMENTATION.md` is now this repository's own map. See ADR-0004.
+- `ADOPTING.md` is classified as product alongside `templates/`, rather than as documentation. The
+  dividing question is what a file is about: product describes the adopter's repository,
+  documentation describes this one. See ADR-0006.
 - `DOCUMENTATION-CUSTOMISATION.md` is now `ADOPTING.md`.

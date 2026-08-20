@@ -46,6 +46,9 @@ worth less than the specification it implements.
 
 Copying is manual and undocumented beyond a sentence in the README. Decide between a script, a
 `degit`-style fetch, and documented manual steps, and write down which artifacts an adopter takes.
+This is where ADR-0006's deferred question gets answered: whether the adopter also receives a pinned
+copy of `ADOPTING.md`, given that a migration into a mature repository spans weeks and the procedure
+should not shift underneath them.
 
 ### Add a licence
 

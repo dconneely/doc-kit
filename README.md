@@ -13,8 +13,8 @@ The kit is a small set of documents organised by three properties — **tense**,
 
 | Path | What it is |
 |---|---|
-| `templates/` | The product. Copy into the target repository and customise by deletion |
-| `ADOPTING.md` | The procedure: decide, inventory, customise, create, migrate, verify |
+| `ADOPTING.md` | Product — the procedure: decide, inventory, customise, create, migrate, verify |
+| `templates/` | Product — copy into the target repository and customise by deletion |
 | `SPECIFICATION.md` | What a conformant repository looks like — the contract a checker enforces |
 | `DOCUMENTATION.md` | This repository's own map, produced by applying the kit to itself |
 | `docs/adr/` | Why the kit is shaped this way |
