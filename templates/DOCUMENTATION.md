@@ -204,4 +204,3 @@ that document, not a new file. Most proposed additions fail this test — which 
 
 If it passes, add it to both tables here in the same commit. A map that omits an artifact is worse
 than no map, because it is believed.
-

@@ -36,8 +36,14 @@ repos:
   # these catch the semantic kind, which is what actually bit — four separate instances of stale
   # status casing survived three manual reviews before a grep found them.
   #
-  # `language: pygrep` fails when the pattern MATCHES. Confirm prek supports it before relying on
-  # this in CI; pre-commit does natively.
+  # `language: pygrep` is built into pre-commit — a cross-platform grep whose `entry` is a Python
+  # regex, failing when a file MATCHES. No install cost. Case-sensitive by default; `(?i)` or
+  # `args: [-i]` to relax that, `--multiline` to span lines, `--negate` to require a match instead
+  # of forbidding one. prek supports it too (its docs claim every pre-commit language, and offer
+  # native deny-pattern/require-pattern equivalents) — both checked against upstream docs.
+  #
+  # `--negate` is the tool for the checks this cannot yet express: "every record HAS front-matter"
+  # rather than "no file has a Status section". Worth reaching for before writing a script.
   - repo: local
     hooks:
       - id: lowercase-adr-status
