@@ -1,0 +1,20 @@
+{
+  // Line-length gate only (MD013), matching the 100-column wrap AGENTS.md states as this repo's
+  // convention. Tables and code blocks are exempt because neither can be wrapped without
+  // corrupting it; headings are exempt because a heading is one line by construction — the only
+  // fix would be a rename, which is not this tool's job.
+  //
+  // Everything else markdownlint offers is deliberately off. This repository is prose, its house
+  // style is settled, and rules nobody has asked for would produce churn on files that are
+  // immutable once accepted. Turn one on when it earns its place, not before.
+  "config": {
+    "default": false,
+    "MD013": {
+      "line_length": 100,
+      "code_blocks": false,
+      "tables": false,
+      "headings": false
+    }
+  },
+  "globs": ["**/*.md"]
+}

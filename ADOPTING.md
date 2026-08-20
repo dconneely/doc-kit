@@ -386,8 +386,8 @@ in the map in the same commit.
 One does. Accepting an ADR is the only moment this structure asks for agreement, because it is the
 only artifact that cannot be corrected afterwards. Everything else is rewritten in place or deleted
 freely, and ordinary review covers it. If you already have pull requests you already have the gate:
-leave a record `Proposed` while it is being argued — merging it undecided is fine and makes the open
-question visible — and merge the flip to `Accepted` once it is settled. Resist adding ceremony to
+leave a record `proposed` while it is being argued — merging it undecided is fine and makes the open
+question visible — and merge the flip to `accepted` once it is settled. Resist adding ceremony to
 the plan in particular; friction at capture is what empties a backlog.
 
 **"There is an ADR I now think was wrong."**

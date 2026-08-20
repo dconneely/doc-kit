@@ -175,10 +175,10 @@ the hardest to slip past a reviewer.
 
 Approval beyond that is the adopting project's business. Review on a pull request satisfies this
 specification; so does a meeting, or one person deciding. What matters is that the flip from
-`Proposed` to `Accepted` records that the decision was made, and that nothing is edited afterwards.
+`proposed` to `accepted` records that the decision was made, and that nothing is edited afterwards.
 
 A checker cannot verify immutability from a working tree and SHOULD verify it from history instead,
-treating any content diff to a record that was already `Accepted` as a violation.
+treating any content diff to a record that was already `accepted` as a violation.
 
 ### 3.2 Changelog
 

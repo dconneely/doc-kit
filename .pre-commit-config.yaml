@@ -1,0 +1,61 @@
+# Hygiene hooks for a repository that is entirely prose. Run with `prek` (no Python needed) or
+# `pre-commit`. Kept deliberately small: this catches drift, not correctness. The conformance
+# checker in PLAN.md is a separate thing and does not exist yet.
+#
+# This file is infrastructure, not product (ADR-0007) — it configures this repository and is never
+# copied into an adopting one. Revisions are pinned to versions known to work on Windows.
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # No --markdown-linebreak-ext here: this repo has zero trailing-double-space line breaks
+      # (checked), so the default behaviour has nothing to eat. Add the flag if that changes.
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      # .gitattributes already pins eol=lf; this guards against that being weakened rather than
+      # being the fix for it.
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # Line-length gate only — see .markdownlint-cli2.jsonc. MD013 has no auto-fix in any markdownlint
+  # implementation, so this reports and does not rewrap.
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.23.2
+    hooks:
+      - id: markdownlint-cli2
+
+  # Drift guards. Every defect found in this repository so far has been drift rather than design:
+  # a convention changed in one file and not the others. markdownlint catches formatting drift;
+  # these catch the semantic kind, which is what actually bit — four separate instances of stale
+  # status casing survived three manual reviews before a grep found them.
+  #
+  # `language: pygrep` fails when the pattern MATCHES. Confirm prek supports it before relying on
+  # this in CI; pre-commit does natively.
+  - repo: local
+    hooks:
+      - id: lowercase-adr-status
+        name: "ADR statuses are lowercase (MADR spelling)"
+        language: pygrep
+        # `Deprecated` is deliberately absent: it is also a Keep a Changelog category, so matching
+        # it flags three legitimate lines. Verified by running the pattern both ways.
+        entry: 'Superseded by ADR-|`(Accepted|Proposed|Rejected)`'
+        types: [markdown]
+
+      - id: no-nygard-status-section
+        name: "Records use MADR front-matter, not a Status section"
+        language: pygrep
+        entry: '^## Status$'
+        files: ^docs/adr/
+
+      - id: no-template-banner
+        name: "Templates carry no instructional banner (ADR-0011)"
+        language: pygrep
+        entry: 'This file is a template'
+        types: [markdown]

@@ -109,43 +109,6 @@ should not shift underneath them.
 
 A kit meant to be copied into other repositories without a licence is unusable by anyone careful.
 
-### Add pre-commit hooks for file hygiene and secret scanning
-
-*Type: feature — Importance: medium — Effort: low*
-
-Model it on `identigon`'s `.pre-commit-config.yaml`, which solves the problems this entry had left
-open. Take the standard hygiene set — `trailing-whitespace`, `end-of-file-fixer`, `check-yaml`,
-`check-added-large-files` — plus `gitleaks` for secrets, and drop the Java-specific `local` hooks.
-`.gitattributes` already pins line endings, so `mixed-line-ending` guards against it being weakened
-rather than being the fix.
-
-Two questions answered rather than left open. **Run it with `prek`, not `pre-commit`** — no Python
-dependency, which was this entry's one real objection. And `--markdown-linebreak-ext=md` turns out
-to be unnecessary here: this repository has zero trailing-double-space line breaks, so the default
-hook has nothing to eat.
-
-Copy the commenting style too. That config explains *why* each exclusion exists, including one
-found the hard way, which is the difference between a config someone can maintain and one they
-delete when it fights them.
-
-### Lint Markdown
-
-*Type: feature — Importance: medium — Effort: low*
-
-`markdownlint-cli2` via `prek`, configured as `identigon` does it: `default: false` with `MD013`
-alone at 100 columns, exempting tables, code blocks and headings — none of which can be wrapped
-without corrupting them. Everything else markdownlint checks stays off until someone asks, which
-also settles how to treat `templates/`: a line-length-only gate does not care about placeholder
-headings.
-
-One interaction to resolve first. Fourteen lines here sit at exactly 101 characters, three of them
-inside accepted records — so enabling this gate makes the linter demand an edit the immutability
-rule forbids. Fix them before turning it on, while the repository is still unpublished and §3.1
-permits it; excluding `docs/adr/` instead would exempt the files most likely to be read carefully.
-
-Add `codespell` alongside, configured for British spelling — `customise` and `behaviour` run
-throughout and a default dictionary will fight them.
-
 ### Check links
 
 *Type: feature — Importance: medium — Effort: low*
