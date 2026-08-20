@@ -42,14 +42,24 @@ Only two entries deserve the word "standard":
 
 `SPECIFICATION.md` and `PLAN.md` as filenames have no governing convention. Their ancestry is the
 RFC/design-doc tradition (IETF RFCs, Python PEPs, Rust RFCs, Kubernetes KEPs, Google-style design
-docs), none of which prescribe a root-level file of that name. Where that trio looks familiar from
-other repositories, the likely proximate cause is spec-driven development tooling for coding agents
-— GitHub's Spec Kit drives a `specify → plan → tasks` flow producing exactly it. **Verify Spec Kit
-directly before leaning on it**: it is recent, and it is the one item here to treat as a lead
-rather than an established convention.
+docs), none of which prescribe a root-level file of that name.
+
+An earlier version of this file blamed spec-driven tooling — GitHub's Spec Kit, whose
+`specify → plan → tasks` flow was said to produce exactly those filenames. Checked, and it does not.
+Spec Kit writes `spec.md`, `plan.md` and `tasks.md` under `specs/`; AWS's Kiro writes
+`requirements.md`, `design.md` and `tasks.md`. Neither puts a `SPECIFICATION.md` or a `PLAN.md` at a
+repository root.
+
+So these two filenames are **this kit's own**, and the familiarity is genre resemblance rather than
+convention: a spec file and a plan file, in that order, as spec-driven tooling converged through
+2025. Treat them as local naming you may change freely — unlike the changelog and the record
+template, nobody else recognises them. See [research note 0002][conv].
+
+[conv]: docs/research/0002-conventions-this-kit-cites.md
 
 Practical consequence: adapt the conventions freely, but leave Keep a Changelog and the ADR template
-alone. Their value is largely that other people and tools already recognise them.
+alone. Their value is largely that other people and tools already recognise them — and both have now
+been verified against their sources rather than recalled.
 
 ### Which optional artifacts are worth it?
 

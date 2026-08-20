@@ -2,20 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Verify the rest of the conventions this kit cites
-
-*Type: bug — Importance: high — Effort: low*
-
-Checking MADR against its source found the kit was not following the convention it claimed to
-follow, and that recalling the schema had produced a plausible but wrong answer — see
-`docs/research/0001-adr-conventions.md`. Every other cited convention rests on that same
-recollection. In rough order of exposure: **Keep a Changelog**, whose six categories §3.2
-prescribes; **Spec Kit**, which `ADOPTING.md` already flags as "a lead rather than an established
-convention, verify directly before leaning on it"; **agents.md**, cited in the map as the convention
-`AGENTS.md` follows; **Nygard's original post**, the attribution for the four classic statuses; and
-**adr-tools**, whose numbering behaviour ADR-0010 relies on. Filed as a bug because the kit's
-credibility rests on being right about exactly this, and it has already been wrong once.
-
 ### Decide which list of artifacts is authoritative
 
 *Type: bug — Importance: high — Effort: low*

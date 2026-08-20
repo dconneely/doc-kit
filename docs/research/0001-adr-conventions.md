@@ -56,12 +56,10 @@ convention this kit cites — see "Open questions".
 
 ## Open questions
 
-- **Nygard's original post** was not checked. The four classic statuses are attributed to it
-  throughout this kit on recollection alone.
-- **`adr-tools`** filename and numbering behaviour was not checked. ADR-0010 asserts it uses
-  numbered headings, which is the basis for keeping them.
-- **Keep a Changelog's** six categories are prescribed by `SPECIFICATION.md` §3.2 without having
-  been verified against the source.
+Closed by [`0002-conventions-this-kit-cites.md`](0002-conventions-this-kit-cites.md): Nygard's
+original post, `adr-tools` numbering, and Keep a Changelog's categories were all checked and all
+proved accurate. Nygard's statuses turned out to be lowercase in the original, which supports
+ADR-0010 on a ground it had not claimed.
 - Whether MADR's front-matter should be adopted beyond `status`, `date` and `decision-makers`
   remains open; `consulted` and `informed` were judged overhead for a small project rather than
   wrong.
