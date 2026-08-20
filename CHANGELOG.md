@@ -7,6 +7,11 @@ All notable changes to this project are documented here, following
 
 ### Added
 
+- Starter files for every artifact the template map promises: specification, README, changelog,
+  plan, ADR, research note, quirks, glossary, testing and task notes. Step 3 of the adoption
+  procedure is now a copy rather than a writing exercise.
+- `templates/docs/archive/README.md`, carrying the archive rules and the provenance header an
+  adopter pastes into each archived file.
 - `SPECIFICATION.md`, defining what a conformant repository looks like — including the conventions
   the kit previously relied on without stating: research confidence levels, plan importance and
   effort scales, quirk entry shape, and the archive rules.

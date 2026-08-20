@@ -2,16 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Build the `templates/` tree
-
-*Type: feature — Importance: high — Effort: medium*
-
-`templates/` currently holds only the map. Every other artifact the map promises an adopter — the
-specification, changelog, plan, README, ADR, research note, quirks, glossary, testing — needs a
-starter file, so that Step 3 is a copy rather than a writing exercise. Empty directories carry a
-`README.md` explaining the convention rather than a `.gitkeep`, since that is where the conventions
-defined in `SPECIFICATION.md` §3 become visible at the point of use.
-
 ### Define the Step 4 inventory format and disposition vocabulary
 
 *Type: feature — Importance: high — Effort: low*
@@ -60,9 +50,12 @@ A kit meant to be copied into other repositories without a licence is unusable b
 
 *Type: docs — Importance: medium — Effort: low*
 
-The map restates the ADR skeleton inline, which every adopter then copies into their own map. Once
-`templates/docs/adr/0000-template.md` exists it should link instead, keeping only what the file
-cannot express. Noted as a consequence in ADR-0004; blocked on the templates tree.
+The map restates the ADR skeleton inline, which every adopter then copies into their own map;
+`templates/docs/adr/0000-template.md` now holds the same shape. The map should link and keep only
+what the file cannot express. Same reconciliation is due for the research confidence levels and the
+quirk entry shape, which the template files define and the map's "prescribed formats" section does
+not yet mention — do all three together rather than adding a fourth duplicate first. Noted as a
+consequence in ADR-0004; no longer blocked.
 
 ### Reconcile the judgement calls in `ADOPTING.md` against the ADRs
 
