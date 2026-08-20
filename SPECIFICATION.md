@@ -55,8 +55,16 @@ is what makes the map's completeness check decidable, so a checker MUST implemen
 
 2.1 A conformant repository MUST contain a map at `DOCUMENTATION.md` in its root.
 
-2.2 The map MUST contain an artifacts table and a lifecycle table, and both MUST name the same set
-of artifacts. A checker MUST report any artifact appearing in one and not the other.
+2.2 The map names its artifacts in three places: the layout block, the artifacts table and the
+lifecycle table. All three MUST name the same set, and a checker MUST report any artifact appearing
+in one and not another.
+
+**The artifacts table is authoritative.** Its first cell is a backticked path, one artifact per row,
+so it is the only one of the three that a checker can read without inference: the layout block is an
+indented tree whose entries are relative to their parent, and the lifecycle table omits paths where
+an entry is per-item rather than per-file. Tools MUST take the artifact set from the artifacts
+table, and treat the other two as views that must agree with it. When comparing, a trailing `/` and
+a trailing `/*` denote the same directory artifact.
 
 2.3 Every artifact named in the map MUST exist at the path the map gives. This is the check that
 rots first, and it SHOULD be given a mechanism — a checker, a review step, a release ritual —

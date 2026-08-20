@@ -2,17 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Decide which list of artifacts is authoritative
-
-*Type: bug — Importance: high — Effort: low*
-
-The map names its artifacts three times — the Layout block, the artifacts table and the lifecycle
-table — and `SPECIFICATION.md` §2.2 only requires the latter two to agree. They already disagree in
-this repository: `DOCUMENTATION.md:48` gives `adr/0001-*.md` where lines 65 and 79 give
-`docs/adr/*.md`. Make the Layout block authoritative and machine-readable, since it is the only one
-already shaped like data, and extend §2.2 to require all three to agree. Blocks the checker, which
-cannot compare anything until it knows what to compare against.
-
 ### Write the conformance checker
 
 *Type: feature — Importance: high — Effort: medium*
@@ -28,9 +17,10 @@ messages mean anything to someone who has not read it.
 
 Likely a POSIX shell script: no runtime to install, invoked identically by CI and by hand, and —
 because it executes inside someone else's repository — short enough that they can read it before
-trusting it. Two caveats to settle when starting. Parse the Layout block rather than the prose
-tables; it is the only part already shaped like data. And decide the Windows story deliberately,
-since `sh` needs Git Bash or WSL and will not run from PowerShell unqualified — this project's own
+trusting it. Two caveats to settle when starting. Take the artifact set from the artifacts table per
+§2.2 — its first cell is a backticked full path, where the layout block is an indented tree needing
+reconstruction. And decide the Windows story deliberately, since `sh` needs Git Bash or WSL and
+will not run from PowerShell unqualified — this project's own
 author is on Windows, and a maintainer with a second-class path to the checker is how dogfooding
 stops happening. `identigon` found that `prek`'s Node hooks install cross-platform including
 Windows while its Ruby ones do not, which is worth knowing if a runtime is chosen after all.
