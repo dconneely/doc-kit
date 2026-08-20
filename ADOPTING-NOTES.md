@@ -43,14 +43,19 @@ Only two entries deserve the word "standard":
 Both have been checked against their sources. Leave them alone: their value is that other people and
 tools already recognise them.
 
-**Everything else here is local naming.** No standard prescribes `SPECIFICATION.md` or `PLAN.md`,
-and the spec-driven tools that look like precedent — Spec Kit, Kiro — keep per-feature files inside
-their own directories instead. Rename them to whatever your project already calls these things.
+**The rest are this kit's own names. Use them.** No standard prescribes `SPECIFICATION.md` or
+`PLAN.md` — the spec-driven tools that look like precedent keep per-feature files in their own
+directories instead — and the kit does not pretend otherwise. It is the opinion. Consistency across
+adopters is the same thing that makes Keep a Changelog worth deferring to, and it is worth having
+here for the same reason.
 
-Two caveats. Keep root documents **ALL-CAPS**, which *is* conventional: uppercase sorts first, so
-they head a directory listing instead of scattering among source. And avoid `ROADMAP.md`, which
-promises users a dated roadmap rather than the team a ranked backlog — the name would pull the file
-towards what it advertises.
+One exception: if your repository already has an established equivalent, keep yours. Churning
+filenames breaks links from issues, wikis and bookmarks, and that cost is real where the naming
+difference is cosmetic. Record whichever you use in the map.
+
+`ROADMAP.md` is not such an equivalent, and is the one substitution to refuse outright: it promises
+users a dated roadmap rather than the team a ranked backlog, and the file drifts towards what its
+name advertises.
 
 [Research note 0002](docs/research/0002-conventions-this-kit-cites.md) has the sources.
 
