@@ -91,6 +91,10 @@ up none. What exists instead:
   standardised.
 - Individual projects using a `specification.md` (OpenTracing, for one), which is one project's
   choice rather than a convention.
+- **IEEE 830-1998**, superseded by **ISO/IEC/IEEE 29148:2011**, which do standardise a requirements
+  specification — but its *content and structure*, not what the file is called or where it sits.
+  IEEE 830 is still widely referenced by name despite the supersession. Both are enterprise-scale,
+  for the same reason the kit already sets aside ISO/IEC/IEEE 29119-3 for testing.
 
 **Conclusion: this kit's `SPECIFICATION.md` and `PLAN.md` are its own naming, not inherited.** The
 familiarity is genre resemblance — a spec file and a plan file, in that order — not a convention

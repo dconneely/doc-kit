@@ -108,6 +108,7 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 
 | In `DOCUMENTATION.md` | Do this |
 |---|---|
+| Filenames | Keep them, or use whatever your project already calls these things. `SPECIFICATION.md` and `PLAN.md` are this kit's own naming and no standard prescribes them — only the changelog and the record template are worth leaving alone. Whatever you choose, the map records it |
 | "Where does it go?" table | Delete rows for artifacts this repo does not have |
 | Layout block | Delete unused lines; replace with **real paths** — in a monorepo, `docs/` moves under the module it describes and only the root four stay at the top |
 | Specification line | State whether it is one file or an index, and name its machine-readable members if any |

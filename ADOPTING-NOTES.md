@@ -55,6 +55,15 @@ convention: a spec file and a plan file, in that order, as spec-driven tooling c
 2025. Treat them as local naming you may change freely — unlike the changelog and the record
 template, nobody else recognises them. See [research note 0002][conv].
 
+There is no better-standardised name to swap in, and the nearest candidates are worse.
+**`ROADMAP.md`** is the closest thing to a recognised convention for a forward-looking file, but it
+carries a different audience: a roadmap faces users and is ordered by time or milestone, while this
+plan faces the team, is ranked rather than dated, and is deleted on completion. Adopting the name
+imports the expectation, and the file drifts toward what its name promises. **`SPEC.md`** is merely
+shorter, and **`REFERENCE.md`** — the Diátaxis term for this kind of material — loses the normative
+sense that RFC 2119 language needs. Keep the local names, or pick whatever your project already
+uses; the map records the choice either way.
+
 [conv]: docs/research/0002-conventions-this-kit-cites.md
 
 Practical consequence: adapt the conventions freely, but leave Keep a Changelog and the ADR template
