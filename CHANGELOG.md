@@ -7,6 +7,11 @@ All notable changes to this project are documented here, following
 
 ### Added
 
+- A third category alongside product and documentation: **infrastructure** — files configuring this
+  repository's own operation, such as `.gitattributes`, which never reach an adopter. Validation
+  scripts may one day be product an adopter takes on optionally, but adopting the structure will
+  never require running anything, and a repository that verifies by hand is fully conformant. See
+  ADR-0007.
 - An inventory phase for Step 4, with a six-word disposition vocabulary — move, split, absorb,
   archive, delete, leave — and a ready-made worksheet at `templates/docs/tasks/adopt-doc-kit.md`.
   Migration into an existing repository is now enumerate, decide, act, and is resumable across

@@ -119,6 +119,18 @@ artifact you kept:
 For an empty repository this step is quick and you are finished. For an existing codebase, the
 material for those first entries is already scattered through it — that is Step 4.
 
+**One optional line, if you keep a `.gitattributes`:**
+
+```gitattributes
+*.md text eol=lf diff=markdown
+```
+
+Git's Markdown diff driver puts the enclosing heading in the hunk header, which is worth having once
+a meaningful share of review is prose. The kit does not ship a `.gitattributes` — your repository
+probably already has one, and a documentation kit has no business holding opinions about your batch
+files. Nor does it require you to run anything: verifying this structure by hand is fully
+conformant. See ADR-0007.
+
 ## Step 4 — Migrate what already exists
 
 Only relevant when adopting into an existing codebase — and on any repository old enough to need

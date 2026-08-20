@@ -7,6 +7,12 @@ have some of the filenames?"
 Requirement keywords — MUST, MUST NOT, SHOULD, SHOULD NOT, MAY — are used as defined in
 [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
+Requirements here fall into two kinds, and conflating them would make tooling a condition of
+adopting a documentation structure. Requirements **on a repository** describe its state, and a
+repository satisfies them however it likes — by review, by habit, or by hand. Requirements **on a
+checker** apply only to software implementing these checks, and are written as "a checker MUST …".
+No repository is obliged to run one. Verifying by hand is fully conformant.
+
 ## 1. Terms
 
 Defined in `docs/glossary.md`. The ones this document leans on hardest are **map**, **artifact**,
@@ -24,7 +30,8 @@ is what makes the map's completeness check decidable, so a checker MUST implemen
 of artifacts. A checker MUST report any artifact appearing in one and not the other.
 
 2.3 Every artifact named in the map MUST exist at the path the map gives. This is the check that
-rots first; it MUST be enforced mechanically rather than by review.
+rots first, and it SHOULD be given a mechanism — a checker, a review step, a release ritual —
+rather than left to memory.
 
 2.4 Every documentation file MUST appear in the map, either individually or under a directory
 pattern the map names. This is the check that rots second.
@@ -147,7 +154,8 @@ structure instructs everyone to trust it.
 ## 6. Conformance
 
 A repository is **structurally conformant** if it satisfies every MUST in §2 and §3. This is
-mechanically checkable and is what the checker reports on.
+mechanically checkable, and is what a checker reports on — but it is checkable, not checked-by-
+obligation. A repository that never runs one and holds the properties anyway is conformant.
 
 A repository is **substantively conformant** if it also satisfies §4 — no duplicated facts, no prose
 restating a contract. This is not mechanically checkable in general and is a review responsibility.

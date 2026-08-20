@@ -14,6 +14,10 @@ Start here when you have something to write down and are not sure which file it 
 > files describe this one. `SPECIFICATION.md` sits on the documentation side because it describes the
 > product rather than being it. See [ADR-0006](docs/adr/0006-treat-the-adoption-procedure-as-product.md).
 >
+> A third category is neither, and is not mapped here: **infrastructure** — `.gitattributes` and
+> anything like it that configures this repository's own operation. It never reaches an adopter. See
+> [ADR-0007](docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md).
+>
 > `templates/DOCUMENTATION.md` and this file share a name and nothing else — that one is the
 > template, this one is an instance of it.
 

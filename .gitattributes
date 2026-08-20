@@ -1,0 +1,36 @@
+# Line endings
+#
+# Normalise every text file to LF in the repository, and check it out as LF on
+# every platform. The explicit `eol=lf` is the part that matters: with only
+# `text=auto`, Git stores LF but hands Windows a CRLF working tree, so the tree
+# never matches the index and `git add` warns on every file.
+
+* text=auto eol=lf
+
+# Files that genuinely require CRLF. Batch scripts are the real case — cmd.exe
+# can mis-parse labels and `goto` targets in an LF file.
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+# Files that break if they ever acquire CRLF, stated explicitly so an override
+# above can never reach them. A shell script with CRLF fails on its shebang;
+# a Makefile fails on its recipe lines.
+*.sh        text eol=lf
+*.bash      text eol=lf
+Makefile    text eol=lf
+*.mk        text eol=lf
+
+# Documentation
+#
+# Git's markdown diff driver puts the enclosing heading in the hunk header,
+# which is worth having in a repository that is almost entirely prose.
+*.md    text eol=lf diff=markdown
+
+# Never normalise, never diff as text.
+*.png   binary
+*.jpg   binary
+*.gif   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.zip   binary

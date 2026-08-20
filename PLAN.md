@@ -12,14 +12,50 @@ conditions, an output contract, and an approval gate before anything is modified
 reader needs the judgement calls and the troubleshooting. Progressive disclosure — a short procedure
 linking outward — rather than deeper headings.
 
+### Decide which list of artifacts is authoritative
+
+*Type: bug — Importance: high — Effort: low*
+
+The map names its artifacts three times — the Layout block, the artifacts table and the lifecycle
+table — and `SPECIFICATION.md` §2.2 only requires the latter two to agree. They already disagree in
+this repository: `DOCUMENTATION.md:48` gives `adr/0001-*.md` where lines 65 and 79 give
+`docs/adr/*.md`. Make the Layout block authoritative and machine-readable, since it is the only one
+already shaped like data, and extend §2.2 to require all three to agree. Blocks the checker, which
+cannot compare anything until it knows what to compare against.
+
 ### Write the conformance checker
 
 *Type: feature — Importance: high — Effort: medium*
 
 `SPECIFICATION.md` §6 defines structural conformance as mechanically checkable and nothing checks
-it. The two rules that rot are §2.3 and §2.4 — every artifact named exists, every documentation file
-appears. Everything else is a bonus. Ship it with a CI workflow, because a checker nobody runs is
-worth less than the specification it implements.
+it. A standalone CLI, run by hand, per ADR-0007 — never a condition of adopting the structure. Start
+with the two rules that rot, §2.3 and §2.4: every artifact the map names exists, every documentation
+file appears in the map. Then ADR integrity (§3.1) and the plan graveyard (§3.3). Checks must be
+individually selectable, since a repository with no research notes should not be told about research
+notes. Exclude `templates/` by default per §2.8, or any repository distributing the kit fails on its
+own templates. This repository is the first consumer, which is the real test of whether the failure
+messages mean anything to someone who has not read it.
+
+Likely a POSIX shell script: no runtime to install, invoked identically by CI and by hand, and —
+because it executes inside someone else's repository — short enough that they can read it before
+trusting it. Two caveats to settle when starting. Parse the Layout block rather than the prose
+tables; it is the only part already shaped like data. And decide the Windows story deliberately,
+since `sh` needs Git Bash or WSL and will not run from PowerShell unqualified — this project's own
+author is on Windows, and a maintainer with a second-class path to the checker is how dogfooding
+stops happening.
+
+### Decide whether the checker ships, and how
+
+*Type: feature — Importance: medium — Effort: medium*
+
+Deliberately deferred by ADR-0007 until a working tool exists. The options — a pre-commit hook
+provider, a CI action, a packaged CLI, a plain vendored script, or shipping nothing and leaving
+adopters to write their own — differ mainly in ecosystem assumptions, and picking one blind commits
+the kit to somebody else's toolchain. Two findings to carry in: repository-wide invariants such as
+§2.3 and §2.4 suit a merge check better than a commit hook, because a migration spends weeks in
+intermediate states the kit explicitly permits; and the one rule visible only in a diff, edits to an
+accepted record, needs diff access rather than any particular mechanism, which a pull request's base
+diff also provides.
 
 ### Provide an install mechanism
 
@@ -42,11 +78,12 @@ A kit meant to be copied into other repositories without a licence is unusable b
 *Type: feature — Importance: medium — Effort: low*
 
 Adopt the `pre-commit` framework with the standard hygiene set — trailing whitespace, end-of-file
-newline, merge-conflict markers, large files — plus `gitleaks` for secrets. `mixed-line-ending`
-earns its place immediately: this repository already produces CRLF/LF warnings on every `git add`,
-and a `.gitattributes` is the real fix with the hook as the guard. Note that `pre-commit` needs
-Python, which is a dependency the kit does not otherwise have; if that is unacceptable, decide the
-alternative here rather than in the CI entry.
+newline, merge-conflict markers, large files — plus `gitleaks` for secrets. `.gitattributes` already
+pins line endings, so `mixed-line-ending` is a guard against it being weakened rather than the fix.
+Configure `trailing-whitespace` with `--markdown-linebreak-ext=md`: two trailing spaces are a hard
+line break in Markdown, and the default hook silently eats them across a repository that is entirely
+prose. Note that `pre-commit` needs Python, which is a dependency the kit does not otherwise have;
+if that is unacceptable, decide the alternative here rather than in the CI entry.
 
 ### Lint Markdown
 
@@ -113,7 +150,8 @@ state. Blocked on the `ADOPTING.md` split and the inventory format.
 An adopter copies the map and then customises it by deletion, so there is no way to take a later
 improvement. Either version-stamp copied artifacts and ship migration notes per release, or state
 explicitly that adoption is fork-and-forget. The second is a legitimate answer and should be chosen
-deliberately rather than by omission.
+deliberately rather than by omission. Scope is now narrower than it was: ADR-0007 gives checks a
+working upgrade path via `rev`, so this entry covers only the copied prose artifacts.
 
 ### Write `docs/testing.md`
 
