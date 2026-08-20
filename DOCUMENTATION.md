@@ -34,6 +34,7 @@ The tense of the sentence you are writing usually settles it:
 | "here is how you adopt this" | `ADOPTING.md` |
 | "here is the text an adopter starts from" | `templates/` — never restated in prose |
 | "X means Y in this project" | the glossary |
+| "an agent working here needs to know X" | `AGENTS.md`, if it is routing or a hazard — otherwise the document that owns the fact |
 | "this is how each document is used" | this file |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
@@ -43,6 +44,8 @@ If a sentence seems to fit two places, it is usually two sentences. Split it and
 ```text
 DOCUMENTATION.md         this file — the map
 README.md                orientation, one screen, links outward
+AGENTS.md                orientation for coding agents — routes here
+CLAUDE.md                one line pointing at AGENTS.md
 SPECIFICATION.md         what a conformant repository looks like
 CHANGELOG.md             what shipped
 PLAN.md                  single ranked backlog, items tagged bug/debt/feature/docs
@@ -63,6 +66,8 @@ machine-readable member of it when it exists.
 |---|---|---|---|---|
 | `DOCUMENTATION.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
 | `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten freely | anyone |
+| `AGENTS.md` | Routes a coding agent to this map, and names the hazards specific to working here. Routes rather than restates. Convention: [agents.md](https://agents.md) | present | rewritten in place | coding agents |
+| `CLAUDE.md` | One line pointing at `AGENTS.md`. Holds no content of its own, because two copies would be two sources of truth | present | rewritten in place (rarely) | coding agents |
 | `SPECIFICATION.md` | What a conformant repository looks like — the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength | present | rewritten in place, always current | adopters + tool authors |
 | `ADOPTING.md` | **Product. Source of truth, not description** — the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms | imperative | rewritten in place | adopters |
 | `templates/*` | **Product. Source of truth, not description** — the artifact half. Copied into the adopter's repository and customised there | present | rewritten in place | adopters, via their own repositories |
@@ -77,6 +82,8 @@ machine-readable member of it when it exists.
 |---|---|---|
 | `DOCUMENTATION.md` | the structure is first agreed | never — revised when an artifact is added, removed or repurposed |
 | `README.md` | project starts | never |
+| `AGENTS.md` | agents began working in the repository | never |
+| `CLAUDE.md` | a tool looks for that filename specifically | when no tool needs the alias any more |
 | `SPECIFICATION.md` | behaviour is decided | never — edited forever |
 | `ADOPTING.md` | the kit is first given to someone else | never |
 | `templates/*` | an artifact earns a place in the product | when the artifact leaves the product |
