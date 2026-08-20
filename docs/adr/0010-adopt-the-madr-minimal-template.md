@@ -9,9 +9,9 @@ decision-makers: David Conneely
 ## Context and Problem Statement
 
 This kit's records used Nygard's original four sections — Status, Context, Decision, Consequences —
-and `ADOPTING.md` tells adopters that ADRs are one of only two genuine standards here, whose value
-is largely that other people and tools already recognise them. Checking that claim showed the kit
-was not following the convention it cited: MADR carries YAML front-matter, names its sections
+and the adoption guide tells adopters that ADRs are one of only two genuine standards here, whose
+value is largely that other people and tools already recognise them. Checking that claim showed the
+kit was not following the convention it cited: MADR carries YAML front-matter, names its sections
 differently, and makes rejected alternatives structural rather than leaving them in prose. The
 sources are in [`docs/research/0001-adr-conventions.md`](../research/0001-adr-conventions.md).
 
