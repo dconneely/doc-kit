@@ -55,14 +55,34 @@ convention: a spec file and a plan file, in that order, as spec-driven tooling c
 2025. Treat them as local naming you may change freely — unlike the changelog and the record
 template, nobody else recognises them. See [research note 0002][conv].
 
-There is no better-standardised name to swap in, and the nearest candidates are worse.
-**`ROADMAP.md`** is the closest thing to a recognised convention for a forward-looking file, but it
-carries a different audience: a roadmap faces users and is ordered by time or milestone, while this
-plan faces the team, is ranked rather than dated, and is deleted on completion. Adopting the name
-imports the expectation, and the file drifts toward what its name promises. **`SPEC.md`** is merely
-shorter, and **`REFERENCE.md`** — the Diátaxis term for this kind of material — loses the normative
-sense that RFC 2119 language needs. Keep the local names, or pick whatever your project already
-uses; the map records the choice either way.
+There is no better-standardised name to swap in. Of the obvious candidates, two are worse and one
+is a genuine alternative.
+
+**`ROADMAP.md`** is the closest thing to a recognised convention for a forward-looking file, and the
+worst swap of the three. A roadmap faces users and is ordered by time or milestone; this plan faces
+the team, is ranked rather than dated, and is deleted on completion. Adopting the name imports the
+expectation, and the file drifts toward what its name promises.
+
+**`REFERENCE.md`** is the Diátaxis term for this kind of material, but loses the normative sense
+that RFC 2119 language needs. A specification constrains; a reference describes.
+
+**`SPEC.md`** is a fair alternative, not a worse one. It is shorter and the abbreviation is
+universally understood. Against it: `spec` is overloaded — `.spec.js` and `.spec.ts` are a common
+test-file convention, so the name invites a misread in a JavaScript or TypeScript repository — and
+every other file here is a full word, so abbreviating one breaks the register. Neither point is
+decisive. Pick either.
+
+**Casing is a separate question, and the one place a convention does apply.** Root-level
+meta-documents are conventionally ALL-CAPS — `README.md`, `CHANGELOG.md`, `LICENCE`, and GitHub's
+community health files. The reason is mechanical: uppercase sorts before lowercase in ASCII, so
+those files float to the top of a directory listing rather than scattering among source. The casing
+says "this document is about the repository", not "this is part of it".
+
+So `spec.md` sinks into the source listing and loses that signal, and `Spec.md` matches no
+convention at all. Whichever word you choose, keep it uppercase.
+
+Keep the local names, or use whatever your project already calls these things; the map records the
+choice either way.
 
 [conv]: docs/research/0002-conventions-this-kit-cites.md
 
