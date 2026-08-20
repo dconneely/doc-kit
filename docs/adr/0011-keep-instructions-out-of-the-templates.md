@@ -1,7 +1,7 @@
 ---
 status: "accepted"
 date: 2026-08-20
-decision-makers:
+decision-makers: David Conneely
 ---
 
 # 11. Keep instructions out of the templates
