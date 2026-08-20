@@ -28,6 +28,19 @@ conditions, an output contract, and an approval gate before anything is modified
 reader needs the judgement calls and the troubleshooting. Progressive disclosure — a short procedure
 linking outward — rather than deeper headings.
 
+### Simplify — the kit is failing its own single-source rule
+
+*Type: debt — Importance: high — Effort: medium*
+
+Roughly 1,900 lines of Markdown for a structure whose pitch is being small enough to hold in your
+head, grown by accretion over a single day. The specific failure is `SPECIFICATION.md` §4.1: facts
+now live in several places at once. The ADR rules are stated three times — §3.1, `AGENTS.md`, and
+the comments in `templates/docs/adr/0000-template.md`; the map's "three rules" and "failure modes"
+overlap §4; `ADOPTING.md`'s judgement calls restate ADR-0002 and ADR-0003; and the changelog has
+drifted into paragraph-length entries where it should carry lines. Decide which artifact owns each
+rule, leave a link at every other site, and measure the result — if the total does not fall
+materially, the diagnosis was wrong.
+
 ### Decide which list of artifacts is authoritative
 
 *Type: bug — Importance: high — Effort: low*

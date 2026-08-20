@@ -79,7 +79,7 @@ specification. See "Machine-readable and generated parts" below.
 | `DOCUMENTATION.md` | the structure is first agreed | never — revised when an artifact is added, removed or repurposed |
 | `README.md` | project starts | never |
 | `SPECIFICATION.md` | behaviour is decided | never — edited forever |
-| `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `Superseded by ADR-00NN` |
+| `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `superseded by ADR-NNNN` |
 | `CHANGELOG.md` entry | at release, if user-visible | never |
 | `PLAN.md` entry | idea occurs — one paragraph, no design | **deleted** when done, not struck through |
 | `docs/quirks.md` entry | a deviation is chosen, or a bug accepted | when the deviation ends |
@@ -102,23 +102,10 @@ Most changes skip the ADR and the task note. Nothing skips the deletion.
 
 Three artifacts have a shape worth keeping to; the rest are free-form prose.
 
-**ADR** — one file per decision, numbered `0001-short-title.md`, five sections:
-
-```markdown
-# 1. Short title in the imperative
-
-## Status
-Accepted            # Proposed | Accepted | Deprecated | Superseded by ADR-0012
-
-## Context
-What forces were at play. What was known at the time — including what was *not* known.
-
-## Decision
-What we are doing, in the active voice: "We will …"
-
-## Consequences
-What becomes easier, what becomes harder, and what we accept as a result.
-```
+**ADR** — one file per decision, numbered `0001-short-title.md`, following the
+[MADR](https://adr.github.io/madr/) minimal template. The shape lives in
+`docs/adr/0000-template.md`; copy that rather than restating it here. Statuses are `proposed`,
+`rejected`, `accepted`, `deprecated`, or `superseded by ADR-NNNN`, and only `accepted` binds.
 
 **Changelog** — reverse-chronological, an `Unreleased` section at the top, six fixed categories:
 `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe user-visible
@@ -156,7 +143,7 @@ alongside them.
 1. **Each fact lives in exactly one place**, and the tense of the sentence tells you which:
    rationale → ADR, behaviour → specification, history → changelog, intent → plan.
 2. **Never edit an accepted ADR** — supersede it, and set the old status to
-   `Superseded by ADR-00NN`. Its whole value is being faithful to what was known at the time.
+   `superseded by ADR-NNNN`. Its whole value is being faithful to what was known at the time.
 3. **The specification may link to a machine-readable contract; it must never restate it.** The
    moment prose repeats a field list, there are two sources of truth and one of them is already
    wrong. Link to the artifact, then cover only what the artifact cannot express.
