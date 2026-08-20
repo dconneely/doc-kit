@@ -4,7 +4,9 @@
 particular repository's documentation map, and for creating the set of documents that map then
 describes.
 
-The contents of `templates/` are copied into the target repository. This file stays with the kit.
+The contents of `templates/` are copied into the target repository. This file and
+[`ADOPTING-NOTES.md`](ADOPTING-NOTES.md) stay with the kit — you read them here, and what lands in
+your repository is the templates, customised.
 
 **Done means:** every artifact named in that repository's map exists, every documentation file in
 that repository appears in its map, and each fact in them sits in exactly one place.

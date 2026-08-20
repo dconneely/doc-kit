@@ -72,6 +72,14 @@ This is where ADR-0006's deferred question gets answered: whether the adopter al
 copy of `ADOPTING.md`, given that a migration into a mature repository spans weeks and the procedure
 should not shift underneath them.
 
+Splitting the guide made that question two questions, which is the more useful finding.
+`ADOPTING.md` is genuinely one-time — once the structure exists, the procedure is spent, and the map
+carries the rules an adopter needs afterwards. `ADOPTING-NOTES.md` is not: "is this a bug or a
+decision?" and "I cannot decide which file this belongs in" recur for as long as the repository
+lives, and an adopter has no local copy of the answers. Against copying it: 164 lines of added
+weight, staleness the moment the kit improves, and three links into `docs/adr/` that resolve only
+here. Weigh those before assuming the answer is the same for both files.
+
 ### Add a licence
 
 *Type: docs — Importance: high — Effort: low*
