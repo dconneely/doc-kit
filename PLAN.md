@@ -2,15 +2,14 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Check links
+### Run the link sweep nightly in CI
 
-*Type: feature — Importance: medium — Effort: low*
+*Type: feature — Importance: low — Effort: low*
 
-The map and the specification link heavily to external standards, and those rot silently. A link
-checker in CI — nightly rather than per-commit, since external hosts fail for reasons unrelated to
-the change under review. Keep the boundary with the conformance checker explicit: that one verifies
-the map against the filesystem, this one verifies that URLs resolve. Overlap is only on internal
-links, and those belong to the conformance checker.
+`lychee` is configured as a manual-stage hook, so the sweep exists but only when someone runs it.
+Nightly CI is where it belongs, since link rot happens without anyone touching the repository —
+blocked on this repository being published and having CI at all. All 32 external links resolved when
+last checked (2026-08-20).
 
 ### Lint commit messages
 

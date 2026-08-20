@@ -31,6 +31,29 @@ repos:
     hooks:
       - id: markdownlint-cli2
 
+  # Link rot, on demand only: `prek run --hook-stage manual lychee`.
+  #
+  # Deliberately NOT on commit. External hosts fail for reasons unrelated to the change under
+  # review, and a hook that blocks a commit because someone else's server is down is a hook that
+  # gets bypassed. Nightly CI is the right home once this repository is published; until then it is
+  # a manual sweep.
+  #
+  # --method get, not the default HEAD: rfc-editor.org answers HEAD with 500 and GET with 200
+  # (checked both ways), so a HEAD-based sweep reports two false failures against RFC 2119 and
+  # RFC 9457. Other standards bodies are likely to behave the same way.
+  # Note the tag prefix: lychee tags releases `lychee-vX.Y.Z`, not `vX.Y.Z`.
+  #
+  # `lychee-system` needs lychee on PATH — `scoop install lychee`, `brew install lychee` or
+  # `cargo install lychee`. The auto-installing `lychee` hook would avoid that, but its install
+  # script mangles Windows paths (strips the backslashes, then fails with exit 127), so it is not
+  # usable here. Same class of gap as prek's Ruby hooks on Windows.
+  - repo: https://github.com/lycheeverse/lychee
+    rev: lychee-v0.24.2
+    hooks:
+      - id: lychee-system
+        stages: [manual]
+        args: [--no-progress, --method, get, --max-concurrency, "4"]
+
   # Drift guards. Every defect found in this repository so far has been drift rather than design:
   # a convention changed in one file and not the others. markdownlint catches formatting drift;
   # these catch the semantic kind, which is what actually bit — four separate instances of stale
