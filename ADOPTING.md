@@ -1,9 +1,10 @@
-# Customising the documentation template
+# Adopting the documentation kit
 
-`DOCUMENTATION.md` is a template. This file is the procedure for turning it into a particular
-repository's documentation map, and for creating the set of documents that map then describes.
+`templates/DOCUMENTATION.md` is a template. This file is the procedure for turning it into a
+particular repository's documentation map, and for creating the set of documents that map then
+describes.
 
-Only `DOCUMENTATION.md` is copied into the target repository. This file stays with the template.
+The contents of `templates/` are copied into the target repository. This file stays with the kit.
 
 **Done means:** every artifact named in that repository's map exists, every documentation file in
 that repository appears in its map, and each fact in them sits in exactly one place.
@@ -40,6 +41,30 @@ authority. Adapt names, paths and scope freely — but before altering the chang
 ADR template, read "How far do I trust each convention?" below.
 
 ---
+
+## Step 0 — Decide whether to adopt, and write the plan
+
+Two outputs: a decision, and `PLAN.md`.
+
+**Decide.** This structure costs more than it returns below a certain size. A single-purpose script,
+a repository one person will maintain for a month, or anything whose entire documentation genuinely
+fits in one honest `README.md` should stop here. The signal to proceed is not size in lines but
+**more than one reader**: someone who has to obey the behaviour, or someone who will inherit the
+reasoning. Record the outcome either way — a rejection that is written down is a decision, and one
+that is not gets re-litigated every six months.
+
+**Then write `PLAN.md` before anything else.** It is the one artifact you can create knowing nothing
+about the repository yet, and the adoption work itself is its first content: one entry per artifact
+to create, one per document to migrate, ranked. Steps 1–4 then consume and delete those entries in
+the ordinary way.
+
+This is not ceremony. It is what makes adoption survive being interrupted, which — on any repository
+old enough to need it — it will be. It also means the structure is doing real work from the first
+hour rather than after the migration completes, and it puts the first honest entry in the first
+file, which is worth more than a tidy empty one.
+
+Adopting into an existing codebase, expect Step 1 to add entries to this plan rather than replace
+it. Nothing here has to be right first time; the plan is the volatile artifact by design.
 
 ## Step 1 — Inventory what this repository actually has
 

@@ -5,11 +5,11 @@ lives, and — the question it exists to answer — **where a given fact belongs
 
 Start here when you have something to write down and are not sure which file it goes in.
 
-> **This file is a template.** Copy it into a repository, delete the artifacts that project does
-> not have, and keep the rules. Its companion, `DOCUMENTATION-CUSTOMISATION.md`, is the procedure for
-> doing that: what to trim, what to create afterwards, how to migrate an existing codebase's
-> documentation into it, and why it is shaped this way. That reasoning deliberately lives there
-> rather than here, so this file stays short enough to be read often.
+> This repository's product *is* documentation structure, which makes two things easy to confuse.
+> `templates/` is the product: source of truth, versioned and reviewed like code, copied into other
+> repositories. Everything else is this repository's own documentation, produced by applying the kit
+> to itself. `templates/DOCUMENTATION.md` and this file share a name and nothing else — that one is
+> the template, this one is an instance of it.
 
 ## Where does it go?
 
@@ -17,14 +17,13 @@ The tense of the sentence you are writing usually settles it:
 
 | If you are writing… | It belongs in |
 |---|---|
-| "the system does X" | the specification |
+| "a conformant repository does X" | `SPECIFICATION.md` |
 | "we chose X because Y" | an ADR |
 | "X used to be Y, now it is Z" | the changelog |
 | "we should do X" | the plan |
-| "we knowingly differ from the reference/spec here" | `docs/quirks.md` |
-| "source A says X, source B says Y, and A won because…" | a research note |
-| "X means Y in this codebase" | the glossary |
-| "the schema / wire format / API accepts X" | the machine-readable contract, linked from the specification — never restated in prose |
+| "here is how you adopt this" | `ADOPTING.md` |
+| "here is the text an adopter starts from" | `templates/` — never restated in prose |
+| "X means Y in this project" | the glossary |
 | "this is how each document is used" | this file |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
@@ -34,27 +33,19 @@ If a sentence seems to fit two places, it is usually two sentences. Split it and
 ```text
 DOCUMENTATION.md         this file — the map
 README.md                orientation, one screen, links outward
-SPECIFICATION.md         the behaviour contract — an index once it grows (see below)
+SPECIFICATION.md         what a conformant repository looks like
 CHANGELOG.md             what shipped
 PLAN.md                  single ranked backlog, items tagged bug/debt/feature/docs
+ADOPTING.md              the procedure for applying the kit to a repository
+templates/               the product: the documents an adopter copies and customises
 docs/
   adr/0001-*.md          decisions, numbered, immutable
-  quirks.md              deliberate deviations and accepted-wrong behaviour
-  research/*.md          sourced findings with confidence levels
-  glossary.md            domain vocabulary
-  testing.md             test strategy, and what is deliberately not covered
-  tasks/*.md             optional: per-item working notes, disposable
+  glossary.md            project vocabulary
 ```
 
-In a monorepo, everything below `docs/` moves under the module it describes, and only
-`DOCUMENTATION.md`, `README.md`, `CHANGELOG.md` and `PLAN.md` stay at the root.
-
-**The specification is a set, not a file, and it may be partly machine-readable.** Once it outgrows
-one document it becomes an index plus a tree, and members of that tree can be schemas, interface
-definitions or other executable contracts rather than prose. They are still the specification: they
-are present tense, always current, and the contract someone relies on. What changes is only that
-they are *checked by a machine* rather than by a reader — which makes them better, not lesser,
-specification. See "Machine-readable and generated parts" below.
+The specification is one file. It will stay one file for as long as it is comfortable to read end to
+end; its members are prose today, and the checker described in `PLAN.md` will become a
+machine-readable member of it when it exists.
 
 ## Artifacts
 
@@ -62,15 +53,13 @@ specification. See "Machine-readable and generated parts" below.
 |---|---|---|---|---|
 | `DOCUMENTATION.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
 | `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten freely | anyone |
-| `SPECIFICATION.md` | The behaviour contract. **No standard for the file.** Use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords (MUST/SHOULD/MAY) for requirement strength, [Diátaxis](https://diataxis.fr) for structuring the reference set once it becomes a tree | present | rewritten in place, always current | users + implementers |
+| `SPECIFICATION.md` | What a conformant repository looks like — the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength | present | rewritten in place, always current | adopters + tool authors |
+| `ADOPTING.md` | How to apply the kit to a repository. A how-to in [Diátaxis](https://diataxis.fr) terms — a procedure for a different audience at a different moment than the specification | imperative | rewritten in place | adopters |
+| `templates/*` | The documents an adopter copies. **Source of truth, not description** — versioned and reviewed like code | present | rewritten in place | adopters, via their own repositories |
 | `docs/adr/*.md` | Why we chose this. **Real convention:** Nygard 2011; [adr.github.io](https://adr.github.io), [MADR](https://adr.github.io/madr/) template, [adr-tools](https://github.com/npryce/adr-tools) CLI | past | **immutable** — superseded, never edited | future maintainers |
-| `CHANGELOG.md` | What shipped, user-visible. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org); generatable from [Conventional Commits](https://www.conventionalcommits.org) | past | append-only | users |
-| `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard.** Closest named source is [GitHub Spec Kit](https://github.com/github/spec-kit)'s specify→plan→tasks flow | future | volatile — reordered and deleted freely | the team |
-| `docs/quirks.md` | Deliberate deviations, and bugs knowingly left unfixed. **No standard.** Nearest analogues are W3C conformance clauses and browser-compat tables | present | rewritten in place | users comparing against a reference |
-| `docs/research/*.md` | Sourced findings with explicit confidence levels. **No standard.** Orthodox home is an ADR's *Context* section; splitting it out suits projects that do real investigation | past | append-mostly; confidence revised in place | implementers |
-| `docs/glossary.md` | Domain vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html); ISO 704 for formal terminology work | present | rewritten in place | readers of every other document |
-| `docs/testing.md` | Test strategy, and what is deliberately *not* covered. ISO/IEC/IEEE 29119-3 exists (superseded IEEE 829) but is enterprise-heavy for most projects | present | rewritten in place | contributors |
-| `docs/tasks/*.md` | Working notes for one backlog item. **No standard**; Spec Kit again. Optional — usually overhead below ~20 open items | near-future | **disposable** — deleted on completion | whoever picks it up |
+| `CHANGELOG.md` | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org) | past | append-only | adopters |
+| `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard** | future | volatile — reordered and deleted freely | the team |
+| `docs/glossary.md` | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html) | present | rewritten in place | readers of every other document |
 
 ## Lifecycle
 
@@ -79,28 +68,24 @@ specification. See "Machine-readable and generated parts" below.
 | `DOCUMENTATION.md` | the structure is first agreed | never — revised when an artifact is added, removed or repurposed |
 | `README.md` | project starts | never |
 | `SPECIFICATION.md` | behaviour is decided | never — edited forever |
+| `ADOPTING.md` | the kit is first given to someone else | never |
+| `templates/*` | an artifact earns a place in the product | when the artifact leaves the product |
 | `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `Superseded by ADR-00NN` |
-| `CHANGELOG.md` entry | at release, if user-visible | never |
+| `CHANGELOG.md` entry | at release, if visible to adopters | never |
 | `PLAN.md` entry | idea occurs — one paragraph, no design | **deleted** when done, not struck through |
-| `docs/quirks.md` entry | a deviation is chosen, or a bug accepted | when the deviation ends |
-| `docs/research/*.md` | a question is investigated | never — confidence gets revised |
-| `docs/glossary.md` entry | a term acquires a project-specific meaning | when the term leaves the codebase |
-| `docs/testing.md` | the second test approach appears | never |
-| `docs/tasks/*.md` | work begins on an item | work completes |
+| `docs/glossary.md` entry | a term acquires a project-specific meaning | when the term leaves the project |
 
 ## Flow
 
 A change moves through the documents in this order:
 
-`PLAN.md` entry → (optional `docs/tasks/` note) → **ADR** if a real choice was made →
-**`SPECIFICATION.md`** updated in present tense → **`CHANGELOG.md`** line if user-visible →
+`PLAN.md` entry → **ADR** if a real choice was made → **`SPECIFICATION.md`** updated in present tense
+→ `templates/` updated if the product changed → **`CHANGELOG.md`** line if adopters can see it →
 `PLAN.md` entry **deleted**.
 
-Most changes skip the ADR and the task note. Nothing skips the deletion.
+Most changes skip the ADR. Nothing skips the deletion.
 
 ## Prescribed formats
-
-Three artifacts have a shape worth keeping to; the rest are free-form prose.
 
 **ADR** — one file per decision, numbered `0001-short-title.md`, five sections:
 
@@ -121,8 +106,8 @@ What becomes easier, what becomes harder, and what we accept as a result.
 ```
 
 **Changelog** — reverse-chronological, an `Unreleased` section at the top, six fixed categories:
-`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe user-visible
-effects, not internal refactors.
+`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe effects an adopter
+can see, not internal refactors.
 
 **Plan entry** — a heading, a type tag and a rough size, then one paragraph. No design:
 
@@ -130,7 +115,7 @@ effects, not internal refactors.
 ### Short title
 *Type: bug — Importance: high — Effort: medium*
 
-One paragraph on what and why. If it needs more than that, it needs a task note or an ADR.
+One paragraph on what and why. If it needs more than that, it needs an ADR.
 ```
 
 ## Machine-readable and generated parts
@@ -139,17 +124,12 @@ Three kinds of thing get confused with each other, and the rules differ:
 
 | Kind | Rule |
 |---|---|
-| **Source of truth** — schemas, interface definitions, migrations | versioned and reviewed like code; it *is* the contract, not a description of one |
-| **Generated view** — diagrams, rendered references, snapshots, clients | never hand-edited; carries a generated-by header; CI fails if regenerating produces a diff |
-| **Prose that cannot be derived** — rationale, invariants, policy, units | the only part that belongs in `docs/` as writing |
+| **Source of truth** — the contents of `templates/` | versioned and reviewed like code; it *is* the product, not a description of one |
+| **Generated view** — none yet | never hand-edited; carries a generated-by header; CI fails if regenerating produces a diff |
+| **Prose that cannot be derived** — rationale, procedure, policy | the only part that belongs in `docs/` as writing |
 
 Without that CI check, "generated" quietly becomes "generated once, then hand-edited", and a
 partly-stale generated specification is worse than none: it is believed.
-
-Note also that **append-only sequences are changelog-shaped, whatever they describe.** A directory
-of ordered, immutable-once-applied migrations is the data store's changelog, not its specification;
-the specification is the *current* shape, which is why a generated snapshot of it earns its place
-alongside them.
 
 ## Three rules that hold it together
 
@@ -177,41 +157,14 @@ alongside them.
 
 Absent on purpose, so that adding any of them later is a decision rather than a drift:
 
-- **A separate technical-debt file.** Debt shares its tense, mutability and audience with the plan,
-  so splitting it out divides on category where everything else divides on those three properties.
-  Worse, it hides the debt-versus-feature trade-off, which can only be weighed inside one ordered
-  list. Use the type tag instead.
-- **An issue tracker**, until the backlog outgrows a file — roughly 20–30 open items. Below that,
-  being in-repo and reviewable alongside the code is worth more than labels and queries.
+- **A separate technical-debt file** — see [ADR-0002](docs/adr/0002-keep-technical-debt-in-the-plan.md).
+- **`docs/research/`, `docs/quirks.md`, `docs/testing.md`, `docs/tasks/`** — all in `templates/`,
+  none earned here yet. `docs/testing.md` is expected as soon as the checker exists, because there
+  will then be something to have a test strategy about.
+- **An issue tracker**, until the backlog outgrows a file — roughly 20–30 open items.
 - **Community health files** — `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` — which earn
   their place when outside contributions begin, not before.
-- **`RELEASING.md`**, which waits on there being releases, and **runbooks**, which belong to
-  services rather than libraries and tools.
-
-Only **Keep a Changelog** and **ADRs** are genuine standards; everything else here is convention,
-and the artifacts table says so per row. The companion guide covers where each convention comes
-from and how far to trust it.
-
-## What each capability adds
-
-The table above is what every project needs. These are earned by having a particular capability —
-and most of them join the **specification** rather than becoming new categories, because they are
-present tense, always current, and a contract someone relies on.
-
-| If the project has… | It gains | Where it lands |
-|---|---|---|
-| a data store | the schema (generated snapshot), plus a **data dictionary**: units, ownership, retention, which fields are sensitive, invariants constraints cannot express | specification |
-| | ordered migrations | changelog-shaped — see above |
-| a network API | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth | specification |
-| | cross-cutting conventions: pagination, versioning, idempotency, error shape ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457); crib [Google AIP](https://google.aip.dev) or [Zalando](https://opensource.zalando.com/restful-api-guidelines/)) | specification |
-| deployment as a service | a **runbook** — deploy, roll back, common failures | neither: a how-to, different audience (on call) |
-| | environment and configuration reference ([12-Factor](https://12factor.net) conventions) | specification |
-| | a **threat model** ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) as the checklist) | neither: an assessment — its conclusions become ADRs, its findings become plan entries |
-| a user interface | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/)) | target → specification; gaps → quirks |
-
-The pattern is worth internalising: **most new artifacts are specification members, not new
-categories.** Before inventing a category, check whether the thing is simply the contract in a
-different medium.
+- **`RELEASING.md`**, which waits on there being releases.
 
 ## Adding a new kind of document
 
@@ -221,4 +174,3 @@ that document, not a new file. Most proposed additions fail this test — which 
 
 If it passes, add it to both tables here in the same commit. A map that omits an artifact is worse
 than no map, because it is believed.
-
