@@ -54,17 +54,17 @@ specification. See "Machine-readable and generated parts" below.
 
 | Artifact | Purpose — and the standard it follows, if any | Tense | Durability | Audience |
 |---|---|---|---|---|
-| `DOC-MAP.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
-| `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten freely | anyone |
-| `SPECIFICATION.md` | The behaviour contract. **No standard for the file.** Use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords (MUST/SHOULD/MAY) for requirement strength, [Diátaxis](https://diataxis.fr) for structuring the reference set once it becomes a tree | present | rewritten in place, always current | users + implementers |
-| `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | **immutable once accepted** — superseded, never edited | future maintainers |
+| `DOC-MAP.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten in place | anyone adding documentation |
+| `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten in place | anyone |
+| `SPECIFICATION.md` | The behaviour contract. **No standard for the file.** Use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords (MUST/SHOULD/MAY) for requirement strength, [Diátaxis](https://diataxis.fr) for structuring the reference set once it becomes a tree | present | rewritten in place | users + implementers |
+| `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | immutable | future maintainers |
 | `CHANGELOG.md` | What shipped, user-visible. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org); generatable from [Conventional Commits](https://www.conventionalcommits.org) | past | append-only | users |
-| `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard**, and no named source — the closest analogue is the RFC/design-doc tradition, which prescribes no root-level file of this name | future | volatile — reordered and deleted freely | the team |
+| `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard**, and no named source — the closest analogue is the RFC/design-doc tradition, which prescribes no root-level file of this name | future | volatile | the team |
 | `docs/quirks.md` | Deliberate deviations, and bugs knowingly left unfixed — the one artifact that says *do not change this*. **No standard.** Nearest analogues are W3C conformance clauses and browser-compat tables | present | rewritten in place | users comparing against a reference, and anyone — human or agent — about to "fix" something odd |
-| `docs/research/*.md` | Sourced findings with explicit confidence levels. **No standard.** Orthodox home is an ADR's *Context* section; splitting it out suits projects that do real investigation | past | append-mostly; confidence revised in place | implementers |
+| `docs/research/*.md` | Sourced findings with explicit confidence levels. **No standard.** Orthodox home is an ADR's *Context* section; splitting it out suits projects that do real investigation | past | append-only | implementers |
 | `docs/glossary.md` | Domain vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html); ISO 704 for formal terminology work | present | rewritten in place | readers of every other document |
 | `docs/testing.md` | Test strategy, and what is deliberately *not* covered. ISO/IEC/IEEE 29119-3 exists (superseded IEEE 829) but is enterprise-heavy for most projects | present | rewritten in place | contributors |
-| `docs/tasks/*.md` | Working notes for one backlog item. **No standard.** Optional — usually overhead below ~20 open items | near-future | **disposable** — deleted on completion | whoever picks it up |
+| `docs/tasks/*.md` | Working notes for one backlog item. **No standard.** Optional — usually overhead below ~20 open items | future | disposable | whoever picks it up |
 
 ## Lifecycle
 

@@ -40,7 +40,12 @@ This specification governs where facts live and how documents relate. It says no
 quality, house style, or what a project ought to document. It does not cover generated API
 reference, documentation sites, or code comments, except to say where their outputs sit (§4).
 Adopting it is not a claim that a repository is well documented — only that what is documented is
-findable, current, and in one place.
+findable and in one place.
+
+**It does not make documentation true.** Nothing here prevents a clause from going stale, and a
+checker cannot tell. Only two things resist rot: a claim derived from something else (§4.3), and a
+claim with a test behind it, as quirk entries record with `Pinned by:`. A specification clause with
+neither is a claim nobody checks.
 
 ## 1. Terms
 
@@ -82,7 +87,20 @@ MUST sit under the module they describe, and only the map, `README.md`, `CHANGEL
 `PLAN.md` remain at the root.
 
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
-durability and an audience, since that is what makes the next addition decidable.
+durability and an audience, drawn from these sets:
+
+| Property | Values |
+|---|---|
+| Tense | `present`, `past`, `future`, `imperative`, `explanatory` |
+| Durability | `rewritten in place`, `append-only`, `immutable`, `volatile`, `disposable` |
+
+Audience is free text. Two artifacts sharing all three are one artifact: merge them, or make one a
+section of the other. Free-text tense and durability defeat that test — near-duplicates escape on
+phrasing rather than substance — which is why these are closed sets.
+
+An **alias** is exempt: a file whose entire content points at another artifact, existing only
+because a tool looks for that filename. It appears in the map, carries the properties of what it
+points at, and adds nothing of its own.
 
 2.8 A repository MAY contain uncustomised template artifacts — a repository distributing this kit
 necessarily does. A checker MUST evaluate only the root map as an instance, and MUST NOT evaluate
