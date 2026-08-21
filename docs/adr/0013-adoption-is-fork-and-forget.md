@@ -1,7 +1,7 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-08-21
-decision-makers:
+decision-makers: David Conneely
 ---
 
 # 13. Adoption is fork-and-forget
