@@ -23,8 +23,9 @@ That reasoning does not survive contact with what the kit actually is. Two tests
   not an explanation of the deliverable; it is half the deliverable.
 
 The question generalises immediately, which is the reason to settle it now rather than adjudicate
-one file. The checker and the installer in `PLAN.md` are both shipped, both describe the adopter's
-repository, and both would otherwise arrive with the same argument unresolved.
+one file. Everything else the kit comes to ship — a conformance checker is the nearest candidate in
+`PLAN.md` — describes the adopter's repository too, and would otherwise arrive with the same
+argument unresolved.
 
 ## Considered Options
 
@@ -35,7 +36,7 @@ repository, and both would otherwise arrive with the same argument unresolved.
 ## Decision Outcome
 
 Chosen option: **treat as product everything the kit ships for use in another repository** —
-`ADOPTING.md`, the contents of `templates/`, and, when they exist, the checker and the installer.
+`ADOPTING.md`, the contents of `templates/`, and anything else it comes to ship for use elsewhere.
 All of it is source of truth, versioned and reviewed like code.
 
 The dividing question is what a file is *about*: product describes the adopter's repository,
@@ -54,15 +55,15 @@ it drew implicitly is now drawn explicitly.
 
 ### Consequences
 
-* Good, because two artifacts get classified before they are written: the checker and the installer
-  are product, so they are reviewed as code and their changes are adopter-visible in the changelog.
+* Good, because future artifacts get classified before they are written: anything the kit ships for
+  use elsewhere is product, reviewed as code, with its changes adopter-visible in the changelog.
 * Bad, because the map has to carry classification the filesystem does not. A reader cannot infer
   from `ADOPTING.md`'s path that it is product. Accepted because the map exists precisely to state
   what each file is; a directory layout encoding it would be a second source of truth.
-* Neutral: a question is opened for the installer — whether an adopter receives a copy of
-  `ADOPTING.md` alongside the templates. There is a real argument that they should, since a
-  migration spans weeks and the procedure ought to be pinned locally rather than shifting underneath
-  them. Deferred rather than guessed at.
+* Neutral: a question is left open — whether an adopter receives a copy of `ADOPTING.md` alongside
+  the templates. There is a real argument that they should, since a migration spans weeks and the
+  procedure ought to be pinned locally rather than shifting underneath them. Deferred rather than
+  guessed at, and to be settled wherever copying is eventually specified.
 * Neutral: the Diátaxis reading that produced the original misclassification is worth naming,
   because it will recur. Diátaxis classifies documentation by what a reader needs; it says nothing
   about whether a file is a deliverable. Asking it a question it does not answer is what went wrong.

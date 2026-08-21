@@ -42,7 +42,7 @@ for two files, neither of which the kit has authority over.
 This is a documentation kit, not an infrastructure kit. **Any infrastructure it ever offers an
 adopter is optional** — made available, never applied. That is what distinguishes it from the
 templates, which adoption does apply. The rule holds for anything qualifying later: validation
-scripts are the obvious candidate, with CI workflow examples and an installer behind them. Nothing
+scripts are the obvious candidate, with CI workflow examples behind them. Nothing
 here forecloses such an artifact, and nothing here designs one.
 
 Whatever ships, **adopting the documentation structure will never require running anything.**

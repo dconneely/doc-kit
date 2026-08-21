@@ -8,6 +8,8 @@ decision-makers: David Conneely
 
 ## Context and Problem Statement
 
+All figures here were measured at the time of writing.
+
 An adopter copies 666 lines from `templates/`. Measuring where they go found that the template map
 alone is 221 of them — a third of everything copied, and the adopter's entire ongoing reading
 burden — while its own banner claims it is "short enough to be read often".
