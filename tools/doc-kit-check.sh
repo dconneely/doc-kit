@@ -122,6 +122,37 @@ check_map() {
 	done
 	set +f
 
+	# §2.7 — tense and durability come from closed sets, and no two artifacts share all three
+	# properties. Free text defeats the test: near-duplicates escape on phrasing. Aliases, which
+	# hold no content of their own, are exempt.
+	rows=$(section "$MAP" '## Artifacts' | grep '^| `' | grep -v '\*\*Alias\*\*' |
+		awk -F' *\\| *' '{ print $2 "~" $4 "~" $5 "~" $6 }')
+	oldifs=$IFS
+	IFS='
+'
+	for row in $rows; do
+		IFS=$oldifs
+		tense=$(printf '%s' "$row" | cut -d'~' -f2)
+		dur=$(printf '%s' "$row" | cut -d'~' -f3)
+		art=$(printf '%s' "$row" | cut -d'~' -f1)
+		case "$tense" in
+			present|past|future|imperative|explanatory) ;;
+			*) fail "$art has tense '$tense'" "§2.7 — present, past, future, imperative, explanatory" ;;
+		esac
+		case "$dur" in
+			"rewritten in place"|append-only|immutable|volatile|disposable) ;;
+			*) fail "$art has durability '$dur'" "§2.7 — see the permitted set" ;;
+		esac
+		IFS='
+'
+	done
+	IFS=$oldifs
+
+	for key in $(printf '%s\n' "$rows" | cut -d'~' -f2- | sort | uniq -d | tr ' ' '_'); do
+		fail "two artifacts share [$(printf '%s' "$key" | tr '_' ' ' | tr '~' '|')]" \
+			"§2.7 — merge them, or mark one an alias"
+	done
+
 	# §2.5 — customisation actually happened.
 	grep -q 'This file is a template' "$MAP" &&
 		fail "the map still carries template text" "§2.5"
@@ -183,14 +214,19 @@ check_plan() {
 	group plan
 	[ -f PLAN.md ] || return 0
 
-	grep -nE '^#+ .*(~~|\bDONE\b|\[x\]|\bCOMPLETED?\b)' PLAN.md | while IFS= read -r hit; do
+	# Loops feed from a variable, not a pipe: a piped `while` runs in a subshell, so increments to
+	# `failures` are lost and the exit code stays 0 while the failure prints.
+	oldifs=$IFS
+	for hit in $(IFS='
+'; grep -nE '^#+ .*(~~|\bDONE\b|\[x\]|\bCOMPLETED?\b)' PLAN.md | tr ' ' '_'); do
+		IFS=$oldifs
 		fail "PLAN.md:${hit%%:*} looks like a completed entry" "§3.3 — delete entries when done, do not annotate"
 	done
+	IFS=$oldifs
 
-	grep -nE '^\*Type:' PLAN.md | while IFS= read -r line; do
+	for line in $(grep -nE '^\*Type:' PLAN.md | tr ' ' '_'); do
 		no=${line%%:*}
-		# Strip the "NN:" prefix grep -n adds before matching the tag itself.
-		printf '%s' "${line#*:}" | grep -qE '^\*Type: (bug|debt|feature|docs)( |—)' ||
+		printf '%s' "${line#*:}" | tr '_' ' ' | grep -qE '^\*Type: (bug|debt|feature|docs)( |—)' ||
 			fail "PLAN.md:$no has no valid type tag" "§3.3 — bug, debt, feature or docs"
 	done
 	return 0
