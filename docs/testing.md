@@ -63,6 +63,23 @@ changelog and research notes do exist, so those two are genuine omissions rather
 **Prose quality of any kind.** A repository can pass every check and be badly written. Structural
 conformance is a floor.
 
+## What has never been exercised
+
+Four claims this repository makes have no evidence behind them yet, and a release invites people to
+rely on all four:
+
+- **The checker has only run under Cygwin's `bash` on Windows.** It is POSIX shell and `shellcheck`
+  passes, but it has never run on Linux, on macOS, or in CI.
+- **The `doc-kit-adopt` skill has never driven an adoption.** It is written, not exercised.
+- **No template has been copied into a real repository.** The structure is proven by
+  self-application, which is a weaker test: this repository was built structured rather than
+  migrated.
+- **The hooks are tested with `prek` only**, not with `pre-commit` itself, though the config is
+  meant for both.
+
+Step 4 — migration — is the largest of these. It is the half of the procedure the kit exists for,
+and it has never met somebody else's mess.
+
 ## The checker has no tests of its own
 
 It was verified by running it against deliberate violations — an unmapped file, a Title-Case status,
