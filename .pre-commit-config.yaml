@@ -4,6 +4,11 @@
 #
 # This file is infrastructure, not product (ADR-0007) — it configures this repository and is never
 # copied into an adopting one. Revisions are pinned to versions known to work on Windows.
+# `prek install` (and `pre-commit install`) wire only the pre-commit hook type unless told
+# otherwise, which would leave the commit-msg hook below installed but never invoked. Declaring the
+# types here means a plain `prek install` is enough — nobody has to remember `--hook-type`.
+default_install_hook_types: [pre-commit, commit-msg]
+
 repos:
   # Secrets reach Markdown too — a connection string pasted into a research note, an example key
   # left in a template, a token named in a changelog entry about rotating it.
@@ -46,6 +51,27 @@ repos:
     rev: v0.23.2
     hooks:
       - id: markdownlint-cli2
+
+  # Conventional Commits, on the commit-msg stage. Python rather than the Node commitlint hook:
+  # no config file, no additional_dependencies, and nothing compiled — which matters on Windows,
+  # where Smart App Control blocks locally built binaries.
+  #
+  # The types are narrower than the default set, and are exactly the ones this repository's history
+  # uses. The mapping is recorded in AGENTS.md: product changes (ADOPTING.md, templates/, tools/,
+  # the skill) take feat/fix/refactor; this repository's own documentation takes docs; build covers
+  # infrastructure like .gitattributes and this file; style is formatting with no change in meaning.
+  # `chore` is deliberately absent — it is the catch-all that erodes the point of typing commits at
+  # all. Add a type when a commit needs it, not in advance.
+  #
+  # Two things this does not do. It checks the *shape* of a subject, not whether the type is the
+  # right one: `docs:` on a change to templates/ passes and is still wrong. And it accepts `Feat:`
+  # — there is no case-sensitivity option, and --strict only blocks fixup and merge commits.
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [build, docs, feat, fix, refactor, style]
 
   # Link rot, on demand only: `prek run --hook-stage manual lychee`.
   #

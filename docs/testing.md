@@ -18,14 +18,20 @@ than to the tool's opinion.
 | `plan` | No entry is annotated done, struck through or marked completed. Every entry carries a valid type tag (§3.3) |
 
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
-(`.markdownlint-cli2.jsonc`), secrets, file hygiene, and three `pygrep` drift guards for the
-failure this repository actually produces — a convention changed in one file and not the others.
+(`.markdownlint-cli2.jsonc`), secrets, file hygiene, three `pygrep` drift guards for the failure
+this repository actually produces — a convention changed in one file and not the others — and
+Conventional Commits on the `commit-msg` stage, restricted to the six types this history uses.
 
 ## What is verified only approximately
 
 **Link resolution.** `lychee` runs on demand, not on commit, and reports HTTP status rather than
 whether a page still says what it was cited for. A standards body can reorganise a document without
 changing its URL. Last full sweep: 2026-08-20, all 32 links resolving.
+
+**Commit types.** The commit-msg hook checks a subject's *shape*, not whether the type is the right
+one — `docs:` on a change to `templates/` passes and is still wrong, and that is the half of
+ADR-0006's mapping worth catching. It also accepts `Feat:`, since the hook has no case-sensitivity
+option and `--strict` only blocks fixup and merge commits.
 
 **Line length.** `MD013` is not a strict character count. It applies wrap-feasibility heuristics and
 will pass a line a few characters over the limit, or one that cannot be broken at all — a long URL,

@@ -2,16 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Lint commit messages
-
-*Type: feature — Importance: low — Effort: low*
-
-`commitlint` on a `commit-msg` hook, enforcing Conventional Commits. Worth doing only once the type
-mapping is written down somewhere enforceable: product changes — `ADOPTING.md`, `templates/`, the
-checker, the installer — take `feat`/`fix`/`refactor`, while this repository's own documentation
-takes `docs`. Without that rule a documentation kit types every commit `docs` and the history stops
-carrying information.
-
 ### Run the link sweep nightly in CI
 
 *Type: feature — Importance: low — Effort: low*
