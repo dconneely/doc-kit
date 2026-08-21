@@ -6,20 +6,16 @@ lives, and — the question it exists to answer — **where a given fact belongs
 Start here when you have something to write down and are not sure which file it goes in.
 
 > This repository's product *is* documentation structure, which makes two things easy to confuse.
-> **`ADOPTING.md` and `templates/` are the product** — the procedure, and the artifacts it produces.
-> Both are source of truth: versioned and reviewed like code, not prose about this repository.
-> Everything else is this repository's own documentation, produced by applying the kit to itself.
+> The test is what a file is **about**: product describes the adopter's repository, documentation
+> describes this one. The artifacts table marks which is which. `SPECIFICATION.md` is documentation
+> despite concerning adopters, because it describes the product rather than being it
+> ([ADR-0006][adr6]).
 >
-> The line is what a file is *about*. Product files describe the adopter's repository; documentation
-> files describe this one. `SPECIFICATION.md` sits on the documentation side because it describes
-> the product rather than being it. See [ADR-0006][adr6].
+> A third category is not mapped at all: **infrastructure** — `.gitattributes`, the hook config —
+> which configures this repository and never reaches an adopter ([ADR-0007][adr7]).
 >
-> A third category is neither, and is not mapped here: **infrastructure** — `.gitattributes` and
-> anything like it that configures this repository's own operation. It never reaches an adopter.
-> See [ADR-0007][adr7].
->
-> `templates/DOCUMENTATION.md` and this file share a name and nothing else — that one is the
-> template, this one is an instance of it.
+> `templates/DOCUMENTATION.md` and this file share a name and nothing else: that one is the
+> template, this one an instance.
 
 ## Where does it go?
 

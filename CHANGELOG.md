@@ -5,62 +5,35 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+Nothing has been released yet, so everything below is an addition — including the several things
+that replaced an earlier shape, which are recorded here as the shape that will ship.
+
 ### Added
 
-- A statement that adoption is fork-and-forget: what you copy is yours, with no version stamp, no
-  migration tooling and nothing to track. This changelog is the only upgrade path, read by hand if
-  and when an adopter wants one. See ADR-0013.
-- A `Where:` field on quirk entries, naming the file, function or symbol the entry governs — so a
-  search for the symbol finds the entry that says *do not change this*, rather than requiring the
-  whole file be read first. The same advice now applies to records that protect a constraint.
-- `docs/testing.md`, stating what the checker and hooks verify exactly, what they verify only
-  approximately, and what is deliberately left to review — record immutability and §4 substantive
-  conformance in particular. A green check is a floor, not a claim the documentation is good.
-- A licence: [MIT No Attribution](LICENCE). Adopters copy `templates/` into their own repositories
-  and owe nothing — no notice to preserve, no attribution. Plain MIT would have followed the copied
-  templates into every adopting repository as a surviving obligation nobody would honour.
-- `tools/doc-kit-check.sh`, a standalone checker for §2.2–2.5, §3.1 and §3.3. Run it by hand;
-  nothing in this kit requires it, and a repository holding these properties without ever running it
-  is conformant. It is vendored rather than referenced — copy it alongside the templates — so an
-  adopter's checker matches the structure they adopted and cannot start failing them because the kit
-  moved on. See ADR-0012.
-
-- `SPECIFICATION.md`, defining what a conformant repository looks like, with a purpose and scope
-  section stating what the structure is for and what it excludes.
-- Conventions the kit previously relied on without stating: research confidence levels, plan
-  importance and effort scales, and the quirk entry shape.
-- Starter files for every artifact the template map promises, so Step 3 is a copy rather than a
-  writing exercise.
-- An archive convention for documentation whose currency cannot be established — exempt from the
-  map's completeness check, with a provenance header on every file. See ADR-0005.
-- Step 0 of the adoption procedure: decide whether to adopt, then write `PLAN.md` first.
-- A copy table in Step 3 saying which template to take and when. There is no installer: the kit
-  ships text, hand-copying is the supported path, and `npx degit` or a sparse checkout are
-  conveniences rather than requirements.
-- A paste-in stanza for `AGENTS.md` or `CLAUDE.md`, giving a coding agent the trust ordering between
-  documents and the constraints on changing them. Shipped as text rather than a file, since those
-  paths usually already exist.
-- An inventory phase for Step 4, with the dispositions move, split, absorb, archive, delete and
-  leave, and a worksheet at `templates/docs/tasks/adopt-doc-kit.md`.
-- Rules for decision records: immutability attaches to the `accepted` status rather than the commit
-  and begins at publication; only `accepted` records bind; changing a status is a human action, best
-  made in its own pull request. See ADR-0008.
-- `infrastructure` as a third category alongside product and documentation — files configuring this
-  repository, which never reach an adopter. Adopting never requires running anything. See ADR-0007.
-
-### Changed
-
-- Decision records follow the [MADR](https://adr.github.io/madr/) minimal template. `Considered
-  Options` is now required. See ADR-0010.
-- Statuses take MADR's lowercase spelling, gain `rejected`, and may carry a forward pointer —
-  `accepted (refined by ADR-NNNN)`. See ADR-0009.
-- The template moved to `templates/DOCUMENTATION.md`; `templates/` is source of truth rather than
-  documentation, and the root `DOCUMENTATION.md` is this repository's own map. See ADR-0004.
-- `ADOPTING.md` is product alongside `templates/`. See ADR-0006.
-- `ADOPTING.md` is split: the procedure stays there, and the reasoning behind it — judgement calls,
-  how far to trust each convention, troubleshooting — moves to `ADOPTING-NOTES.md`. The procedure
-  drops from 451 lines to 284, which matters because it is what an agent loads.
-- The optional artifacts are ranked by payoff per line rather than by gap size: quirks, glossary,
-  testing, then research — which moves to first for a project that reverse-engineers or reconciles
-  sources.
-- `DOCUMENTATION-CUSTOMISATION.md` is now `ADOPTING.md`.
+- A licence: [MIT No Attribution](LICENCE). Copy anything here and own it — no notice to preserve,
+  nothing to attribute, and no upgrade path to track (ADR-0013).
+- `templates/`, holding a starter for every artifact the map promises, so Step 3 is a copy rather
+  than a writing exercise. It is the product and source of truth; the root `DOCUMENTATION.md` is
+  this repository's own map, produced by applying the kit to itself (ADR-0004, ADR-0006).
+- `SPECIFICATION.md`, defining what a conformant repository looks like, and stating the conventions
+  the kit had relied on without writing down: research confidence levels, plan scales, quirk shape.
+- `ADOPTING.md`, the procedure — decide, inventory, customise, create, migrate, verify — with
+  `ADOPTING-NOTES.md` carrying the judgement calls and troubleshooting behind it.
+- Step 0: decide whether to adopt at all, and write the plan before anything else.
+- A Step 4 inventory phase with six dispositions — move, split, absorb, archive, delete, leave —
+  and a worksheet that makes an interrupted migration resumable.
+- `tools/doc-kit-check.sh`, an optional conformance checker, vendored rather than referenced so an
+  adopter's copy matches the structure they adopted (ADR-0012).
+- A `doc-kit-adopt` skill that drives an adoption from this repository into a target, stopping for
+  approval before anything is modified.
+- A paste-in `AGENTS.md` stanza giving a coding agent the trust ordering between documents and the
+  constraints on changing them.
+- An archive convention for documentation whose currency cannot be established (ADR-0005).
+- Decision records following the [MADR](https://adr.github.io/madr/) minimal template, with
+  `Considered Options` required. Statuses are lowercase and may carry a forward pointer —
+  `accepted (refined by ADR-NNNN)` (ADR-0009, ADR-0010).
+- Rules for those records: immutability attaches to `accepted` and begins at publication, only
+  `accepted` binds, and changing a status is a human action (ADR-0008).
+- `infrastructure` as a third category alongside product and documentation (ADR-0007).
+- A ranking of the optional artifacts by payoff per line: quirks, glossary, testing, then research.
+- `docs/testing.md`, stating what is verified exactly, what only approximately, and what not at all.

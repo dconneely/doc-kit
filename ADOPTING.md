@@ -24,10 +24,7 @@ intended?), **mutability** (rewritten in place, append-only, immutable, or dispo
 is part record of work done, part backlog, part assessment, so that no part of it can be trusted or
 pruned with confidence.
 
-Everything else follows from that, including the rules stated in the map itself — which you keep
-verbatim rather than customise, so they are not repeated here.
-
-Four consequences shape this procedure in particular:
+Everything else follows from that. Four consequences shape this procedure in particular:
 
 1. **You customise mostly by deleting.** The template is roughly the union of what projects need;
    any given repository needs a subset. Almost nothing has to be invented — which is why Step 2 is
@@ -35,10 +32,9 @@ Four consequences shape this procedure in particular:
 2. **What you keep is decided by capabilities, not taste.** A data store earns a data dictionary; a
    network API earns an interface definition; a deployed service earns a runbook. That is why
    Step 1 is an inventory rather than a preference.
-3. **The rules are not the customisable part.** Paths, artifact lists and formats are local; the
-   three rules, the failure modes and the test for adding a new document are the same everywhere
-   and should survive customisation verbatim. They are what stops the structure decaying back into
-   the mixed-tense file it replaced.
+3. **The rules are not the customisable part.** The three rules, the failure modes and the test for
+   adding a new document survive customisation verbatim, which is why they are not repeated here.
+   They are what stops the structure decaying back into the mixed-tense file it replaced.
 4. **Resist growth.** Most proposed additions share all three properties with something that
    already exists, which makes them a section or a tag rather than a file. The structure works
    because it is small enough to hold in your head.
