@@ -60,7 +60,7 @@ specification. See "Machine-readable and generated parts" below.
 | `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | **immutable once accepted** — superseded, never edited | future maintainers |
 | `CHANGELOG.md` | What shipped, user-visible. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org); generatable from [Conventional Commits](https://www.conventionalcommits.org) | past | append-only | users |
 | `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard**, and no named source — the closest analogue is the RFC/design-doc tradition, which prescribes no root-level file of this name | future | volatile — reordered and deleted freely | the team |
-| `docs/quirks.md` | Deliberate deviations, and bugs knowingly left unfixed. **No standard.** Nearest analogues are W3C conformance clauses and browser-compat tables | present | rewritten in place | users comparing against a reference |
+| `docs/quirks.md` | Deliberate deviations, and bugs knowingly left unfixed — the one artifact that says *do not change this*. **No standard.** Nearest analogues are W3C conformance clauses and browser-compat tables | present | rewritten in place | users comparing against a reference, and anyone — human or agent — about to "fix" something odd |
 | `docs/research/*.md` | Sourced findings with explicit confidence levels. **No standard.** Orthodox home is an ADR's *Context* section; splitting it out suits projects that do real investigation | past | append-mostly; confidence revised in place | implementers |
 | `docs/glossary.md` | Domain vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html); ISO 704 for formal terminology work | present | rewritten in place | readers of every other document |
 | `docs/testing.md` | Test strategy, and what is deliberately *not* covered. ISO/IEC/IEEE 29119-3 exists (superseded IEEE 829) but is enterprise-heavy for most projects | present | rewritten in place | contributors |
@@ -110,6 +110,10 @@ shape. The rules that file cannot express, and which live here:
 - **Changing a status is a human action.** A tool may draft a record and argue it; only a person
   decides one. Make that flip its own pull request — a separate commit does not survive a squash
   merge, and the one moment worth seeing becomes invisible.
+
+A record that exists to protect a constraint — *we do not do the obvious thing here, because it
+breaks* — is worth naming the constrained code in, for the same reason quirk entries do. The next
+reader to reach for the obvious thing may be searching rather than browsing.
 
 **Changelog** — reverse-chronological, an `Unreleased` section at the top, six fixed categories:
 `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe user-visible

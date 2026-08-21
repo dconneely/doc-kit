@@ -3,6 +3,11 @@
 Deliberate deviations from the reference, specification or obvious expectation, and defects
 knowingly left unfixed. It answers one question: **is this a bug, or a decision?**
 
+**Look here before "fixing" anything that looks wrong.** This is the only file in the structure that
+says *do not change this*, and the reader most likely to need telling is a coding agent, which reads
+deliberate strangeness as a defect and corrects it. Every entry names the code it governs, so a
+search for the symbol finds the entry rather than requiring someone to read the whole file first.
+
 Two kinds of entry, and the distinction matters:
 
 - **Deliberate** — we differ on purpose, and intend to keep differing.
@@ -15,6 +20,8 @@ Two kinds of entry, and the distinction matters:
 ### Short title
 
 **Kind:** accepted-wrong
+**Where:** the file, function or symbol this governs — the string someone would grep for on their
+way to changing it. List every site if there is more than one.
 **Expected:** what the reference, specification or a reasonable reader would predict.
 **Actual:** what this project does.
 **Why:** the reason, in a sentence. If it is long, it is an ADR and this entry links to it.
