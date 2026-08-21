@@ -7,6 +7,9 @@ All notable changes to this project are documented here, following
 
 ### Added
 
+- `docs/testing.md`, stating what the checker and hooks verify exactly, what they verify only
+  approximately, and what is deliberately left to review — record immutability and §4 substantive
+  conformance in particular. A green check is a floor, not a claim the documentation is good.
 - A licence: [MIT No Attribution](LICENCE). Adopters copy `templates/` into their own repositories
   and owe nothing — no notice to preserve, no attribution. Plain MIT would have followed the copied
   templates into every adopting repository as a surviving obligation nobody would honour.

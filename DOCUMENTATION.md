@@ -59,6 +59,7 @@ docs/
   adr/*.md               decisions, numbered, immutable once accepted
   research/*.md          sourced findings, with confidence levels
   glossary.md            project vocabulary
+  testing.md             what the checker verifies, and what it does not
 ```
 
 The specification is one file. It will stay one file for as long as it is comfortable to read end to
@@ -82,6 +83,7 @@ machine-readable member of it when it exists.
 | `CHANGELOG.md` | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org) | past | append-only | adopters |
 | `PLAN.md` | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard** | future | volatile — reordered and deleted freely | the team |
 | `docs/research/*.md` | Sourced findings about the conventions this kit cites, with explicit confidence levels. **No standard.** Orthodox home is a record's *Context*; split out here because these findings are cited by several records and decay independently of them | past | append-mostly; confidence revised in place | anyone relying on a cited convention |
+| `docs/testing.md` | What `tools/doc-kit-check.sh` and the hooks verify exactly, approximately, and deliberately not at all. ISO/IEC/IEEE 29119-3 exists but is enterprise-heavy for a repository this size | present | rewritten in place | contributors, and anyone reading a green check |
 | `docs/glossary.md` | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html) | present | rewritten in place | readers of every other document |
 
 ## Lifecycle
@@ -101,6 +103,7 @@ machine-readable member of it when it exists.
 | `CHANGELOG.md` entry | at release, if visible to adopters | never |
 | `PLAN.md` entry | idea occurs — one paragraph, no design | **deleted** when done, not struck through |
 | `docs/research/*.md` | a cited convention is checked against its source | never — confidence gets revised |
+| `docs/testing.md` | something started verifying the documentation mechanically | never |
 | `docs/glossary.md` entry | a term acquires a project-specific meaning | when the term leaves the project |
 
 ## Flow
@@ -167,9 +170,7 @@ be derived. `SPECIFICATION.md` §4 has the rules for when that changes.
 Absent on purpose, so that adding any of them later is a decision rather than a drift:
 
 - **A separate technical-debt file** — see [ADR-0002][adr2].
-- **`docs/quirks.md`, `docs/testing.md`, `docs/tasks/`** — all in `templates/`, none earned yet.
-  `docs/testing.md` is expected as soon as the checker exists, because there will then be something
-  to have a test strategy about.
+- **`docs/quirks.md` and `docs/tasks/`** — both in `templates/`, neither earned here yet.
 - **An issue tracker**, until the backlog outgrows a file — roughly 20–30 open items.
 - **Community health files** — `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` — which earn
   their place when outside contributions begin, not before.

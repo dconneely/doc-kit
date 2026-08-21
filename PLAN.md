@@ -48,16 +48,9 @@ state. Blocked on the `ADOPTING.md` split and the inventory format.
 An adopter copies the map and then customises it by deletion, so there is no way to take a later
 improvement. Either version-stamp copied artifacts and ship migration notes per release, or state
 explicitly that adoption is fork-and-forget. The second is a legitimate answer and should be chosen
-deliberately rather than by omission. Scope is now narrower than it was: ADR-0007 gives checks a
-working upgrade path via `rev`, so this entry covers only the copied prose artifacts.
-
-### Write `docs/testing.md`
-
-*Type: docs — Importance: medium — Effort: low*
-
-Earned as soon as the checker exists: what it verifies exactly, what it verifies approximately, and
-what is deliberately left to review — §4 substantive conformance in particular. Blocked on the
-checker.
+deliberately rather than by omission. Scope is wider than it looks: ADR-0012 vendored the checker
+rather than referencing it, so `tools/doc-kit-check.sh` has the same problem as the copied prose —
+and a stale checker fails quietly, by not testing something newer, rather than loudly.
 
 ### Build a worked example
 
