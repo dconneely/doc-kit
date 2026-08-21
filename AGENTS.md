@@ -40,7 +40,8 @@ reaches an adopter. See
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
 - **Adding a document means updating `DOCUMENTATION.md` in the same commit.** Every artifact the map
-  names must exist, and every Markdown file outside `docs/archive/` must appear in the map.
+  names must exist, and every Markdown file must appear in the map. `tools/doc-kit-check.sh` will
+  tell you, but only if you run it.
 
 ## Changing the specification
 
