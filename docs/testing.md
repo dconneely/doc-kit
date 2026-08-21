@@ -27,6 +27,12 @@ failure this repository actually produces — a convention changed in one file a
 whether a page still says what it was cited for. A standards body can reorganise a document without
 changing its URL. Last full sweep: 2026-08-20, all 32 links resolving.
 
+**Line length.** `MD013` is not a strict character count. It applies wrap-feasibility heuristics and
+will pass a line a few characters over the limit, or one that cannot be broken at all — a long URL,
+or a skill's single-line `description` in front matter. Measured directly, the boundary sat between
+102 and 105 characters against a configured limit of 100. Treat it as a guard against runaway lines
+rather than a precise gate.
+
 **Glob matching in §2.4.** A file is considered mapped if any artifact pattern matches it under
 shell `case` semantics, where `*` crosses `/`. So `templates/*` matches arbitrarily deep paths. That
 is deliberate — it is what makes a directory artifact work — but it means a coarse pattern can cover

@@ -2,14 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Write the adoption skill
-
-*Type: feature — Importance: medium — Effort: medium*
-
-Most adoptions of this kit into a mature repository will be executed by an agent. That needs the
-imperative procedure, an inventory output for approval before any file is modified, and resumable
-state. Blocked on the `ADOPTING.md` split and the inventory format.
-
 ### Decide the template upgrade path
 
 *Type: feature — Importance: medium — Effort: high*
