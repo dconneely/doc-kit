@@ -40,6 +40,14 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
+      - id: check-merge-conflict
+      # Windows and macOS have case-insensitive filesystems, so `LICENCE` and `LICENSE` would
+      # collide silently on checkout. This repository deliberately uses the British spelling, which
+      # makes that near-miss live rather than theoretical.
+      - id: check-case-conflict
+      # Caught tools/doc-kit-check.sh committed as 100644 with a shebang: harmless on Windows,
+      # but `./tools/doc-kit-check.sh` fails on Linux and macOS.
+      - id: check-shebang-scripts-are-executable
       # .gitattributes already pins eol=lf; this guards against that being weakened rather than
       # being the fix for it.
       - id: mixed-line-ending
@@ -51,6 +59,15 @@ repos:
     rev: v0.23.2
     hooks:
       - id: markdownlint-cli2
+
+  # The checker is POSIX shell that has only ever run under Cygwin's bash on Windows. shellcheck is
+  # what stands in for the Linux and macOS testing it has never had — it catches the GNU-isms that
+  # would fail there (`find -not` for `!`, `head -1` for `head -n 1`, both found by hand before
+  # this hook existed). Python rather than the Docker variant, for the same reason as gitleaks.
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.9.0.6
+    hooks:
+      - id: shellcheck
 
   # Conventional Commits, on the commit-msg stage. Python rather than the Node commitlint hook:
   # no config file, no additional_dependencies, and nothing compiled — which matters on Windows,

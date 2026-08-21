@@ -38,6 +38,7 @@ section() {
 }
 
 # First backticked cell of each table row: the artifact's path.
+# shellcheck disable=SC2016  # the backticks are literal Markdown, not command substitution
 table_paths() {
 	section "$MAP" "$1" | sed -n 's/^| `\([^`]*\)`.*/\1/p'
 }
@@ -107,7 +108,7 @@ check_map() {
 
 	# §2.4 — every documentation file appears in the map.
 	set +f
-	files=$(find . -name '*.md' -not -path './.git/*' | sed 's:^\./::' | sort)
+	files=$(find . -name '*.md' ! -path './.git/*' | sed 's:^\./::' | sort)
 	set -f
 	for f in $files; do
 		excluded "$f" && continue
@@ -142,7 +143,7 @@ check_adr() {
 		echo "$base" | grep -qE '^[0-9]{4}-[a-z0-9]+(-[a-z0-9]+)*\.md$' ||
 			fail "$f is misnamed" "§3.1 — NNNN-kebab-case-title.md"
 
-		status=$(sed -n 's/^status: *"\{0,1\}\([^"]*\)"\{0,1\} *$/\1/p' "$f" | head -1)
+		status=$(sed -n 's/^status: *"\{0,1\}\([^"]*\)"\{0,1\} *$/\1/p' "$f" | head -n 1)
 		[ -n "$status" ] || fail "$f has no status" "§3.1 — MADR front-matter"
 
 		case "$status" in
@@ -168,7 +169,10 @@ check_adr() {
 		done
 	done
 
-	dupes=$(ls "$dir" 2>/dev/null | sed -n 's/^\([0-9]\{4\}\)-.*/\1/p' | sort | uniq -d)
+	dupes=$(for f in "$dir"/*.md; do
+		[ -e "$f" ] || continue
+		basename "$f" | sed -n 's/^\([0-9]\{4\}\)-.*/\1/p'
+	done | sort | uniq -d)
 	for d in $dupes; do fail "ADR number $d is used more than once" "§3.1 — numbers are unique"; done
 	return 0
 }
