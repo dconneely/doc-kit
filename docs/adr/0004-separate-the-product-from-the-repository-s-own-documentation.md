@@ -8,13 +8,11 @@ decision-makers: David Conneely
 
 ## Context and Problem Statement
 
-This repository began as two files at its root: `DOCUMENTATION.md`, a template to be copied into
-other repositories, and `DOCUMENTATION-CUSTOMISATION.md`, the procedure for customising it.
-
-That layout has a paradox in it. Applying the kit to itself — which it should survive, and which is
-the cheapest way to produce a worked example — means customising `DOCUMENTATION.md` by deleting the
-rows this repository does not need. But customising it destroys the template, because the template
-*is* the uncustomised text.
+The kit's product is a template map, meant to be copied into another repository and customised
+there. That creates a paradox for the kit itself. Applying the kit to itself — which it should
+survive, and which is the cheapest way to produce a worked example — means customising that map by
+deleting the rows this repository does not need. But customising it destroys the template, because
+the template *is* the uncustomised text.
 
 The paradox is not really about documentation. It comes from a repository whose product happens to
 be made of the same material as its documentation, so the two were never distinguished.
@@ -33,7 +31,7 @@ of truth rather than description.
 
 Everything at the root — the map, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md`,
 `docs/` — is this repository's own documentation, produced by applying the kit to itself.
-`templates/DOCUMENTATION.md` is therefore the template; the root `DOCUMENTATION.md` is an instance
+`templates/DOC-MAP.md` is therefore the template; the root `DOC-MAP.md` is an instance
 of it. They share a name and nothing else, and the path disambiguates them.
 
 Not self-applying was rejected because it forfeits the worked example, and because a documentation

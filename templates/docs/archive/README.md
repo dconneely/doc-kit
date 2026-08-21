@@ -3,7 +3,7 @@
 Documentation kept for its historical value, whose **currency cannot be established**. Nothing here
 is maintained. Nothing here may be relied on.
 
-This directory is exempt from the map's completeness check, and appears in `DOCUMENTATION.md` as a
+This directory is exempt from the map's completeness check, and appears in `DOC-MAP.md` as a
 single entry rather than file by file.
 
 ## What belongs here

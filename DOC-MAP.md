@@ -1,4 +1,4 @@
-# Documentation
+# Documentation map
 
 This is the map. It describes what each document in this project is for, who reads it, how long it
 lives, and — the question it exists to answer — **where a given fact belongs**.
@@ -14,7 +14,7 @@ Start here when you have something to write down and are not sure which file it 
 > A third category is not mapped at all: **infrastructure** — `.gitattributes`, the hook config —
 > which configures this repository and never reaches an adopter ([ADR-0007][adr7]).
 >
-> `templates/DOCUMENTATION.md` and this file share a name and nothing else: that one is the
+> `templates/DOC-MAP.md` and this file share a name and nothing else: that one is the
 > template, this one an instance.
 
 ## Where does it go?
@@ -40,7 +40,7 @@ If a sentence seems to fit two places, it is usually two sentences. Split it and
 ## Layout
 
 ```text
-DOCUMENTATION.md         this file — the map
+DOC-MAP.md         this file — the map
 README.md                orientation, one screen, links outward
 AGENTS.md                orientation for coding agents — routes here
 CLAUDE.md                one line pointing at AGENTS.md
@@ -67,7 +67,7 @@ machine-readable member of it when it exists.
 
 | Artifact | Purpose — and the standard it follows, if any | Tense | Durability | Audience |
 |---|---|---|---|---|
-| `DOCUMENTATION.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
+| `DOC-MAP.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
 | `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten freely | anyone |
 | `AGENTS.md` | Routes a coding agent to this map, and names the hazards specific to working here. Routes rather than restates. Convention: [agents.md](https://agents.md) | present | rewritten in place | coding agents |
 | `CLAUDE.md` | One line pointing at `AGENTS.md`. Holds no content of its own, because two copies would be two sources of truth | present | rewritten in place (rarely) | coding agents |
@@ -88,7 +88,7 @@ machine-readable member of it when it exists.
 
 | Artifact | Created when | Removed / closed when |
 |---|---|---|
-| `DOCUMENTATION.md` | the structure is first agreed | never — revised when an artifact is added, removed or repurposed |
+| `DOC-MAP.md` | the structure is first agreed | never — revised when an artifact is added, removed or repurposed |
 | `README.md` | project starts | never |
 | `AGENTS.md` | agents began working in the repository | never |
 | `CLAUDE.md` | a tool looks for that filename specifically | when no tool needs the alias any more |

@@ -1,7 +1,7 @@
 ---
 status: "proposed"
 # proposed | rejected | accepted | deprecated | superseded by ADR-NNNN
-# may carry a pointer, e.g. accepted (refined by ADR-0006) — see DOCUMENTATION.md
+# may carry a pointer, e.g. accepted (refined by ADR-0006) — see DOC-MAP.md
 date: {YYYY-MM-DD, when the status last changed}
 decision-makers: {who decided — required once the status is not "proposed"}
 # consulted / informed: optional, and overhead on a small team
@@ -13,7 +13,7 @@ decision-makers: {who decided — required once the status is not "proposed"}
 Copy to NNNN-kebab-case-title.md, four-digit zero-padded, unique and never reused. The heading
 number matches the filename. Keep this file as 0000; it is the template.
 
-Follows the MADR minimal template (https://adr.github.io/madr/). DOCUMENTATION.md carries the rules
+Follows the MADR minimal template (https://adr.github.io/madr/). DOC-MAP.md carries the rules
 about status, immutability and who may change one.
 
 Write it when the decision is made, not later. A record reconstructed years afterwards is usually an

@@ -13,7 +13,7 @@ that replaced an earlier shape, which are recorded here as the shape that will s
 - A licence: [MIT No Attribution](LICENCE). Copy anything here and own it — no notice to preserve,
   nothing to attribute, and no upgrade path to track (ADR-0013).
 - `templates/`, holding a starter for every artifact the map promises, so Step 3 is a copy rather
-  than a writing exercise. It is the product and source of truth; the root `DOCUMENTATION.md` is
+  than a writing exercise. It is the product and source of truth; the root `DOC-MAP.md` is
   this repository's own map, produced by applying the kit to itself (ADR-0004, ADR-0006).
 - `SPECIFICATION.md`, defining what a conformant repository looks like, and stating the conventions
   the kit had relied on without writing down: research confidence levels, plan scales, quirk shape.

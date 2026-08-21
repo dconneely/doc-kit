@@ -1,8 +1,7 @@
 # Adopting the documentation kit
 
-`templates/DOCUMENTATION.md` is a template. This file is the procedure for turning it into a
-particular repository's documentation map, and for creating the set of documents that map then
-describes.
+`templates/DOC-MAP.md` is a template. This file is the procedure for turning it into a particular
+repository's documentation map, and for creating the set of documents that map then describes.
 
 The contents of `templates/` are copied into the target repository. This file and
 [`ADOPTING-NOTES.md`](ADOPTING-NOTES.md) stay with the kit — you read them here, and what lands in
@@ -72,9 +71,9 @@ it. Nothing here has to be right first time; the plan is the volatile artifact b
 
 ## Step 1 — Inventory what this repository actually has
 
-Every project takes the core five: `DOCUMENTATION.md`, `README.md`, the specification,
-`CHANGELOG.md` and `PLAN.md`. ADRs are strongly recommended from day one, because their value is
-almost entirely in being written contemporaneously.
+Every project takes the core five: `DOC-MAP.md`, `README.md`, the specification, `CHANGELOG.md` and
+`PLAN.md`. ADRs are strongly recommended from day one, because their value is almost entirely in
+being written contemporaneously.
 
 Then work through the table below and note which apply. Be strict: an artifact you will not maintain
 is worse than its absence, because the map promises it.
@@ -108,7 +107,7 @@ Two questions decide most of the rest:
 
 Work top to bottom. Every edit is a deletion or a substitution; nothing needs to be invented.
 
-| In `DOCUMENTATION.md` | Do this |
+| In `DOC-MAP.md` | Do this |
 |---|---|
 | Filenames | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md` |
 | "Where does it go?" table | Delete rows for artifacts this repo does not have |
@@ -133,7 +132,7 @@ matter of taking the ones Step 1 said you had earned:
 
 | From `templates/` | Take it when |
 |---|---|
-| `DOCUMENTATION.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always — the core five |
+| `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always — the core five |
 | `docs/adr/0000-template.md` | always; records are worth having from day one, since their value is being written contemporaneously |
 | `docs/quirks.md` | you deviate from a reference, or carry behaviour you know is wrong |
 | `docs/glossary.md` | your domain has terms, or ordinary words used precisely |
@@ -196,7 +195,7 @@ those files you keep, deleting lines for artifacts you did not create:
 ```markdown
 ## Documentation
 
-`DOCUMENTATION.md` is the map: it says which file a given fact belongs in. Read it before writing
+`DOC-MAP.md` is the map: it says which file a given fact belongs in. Read it before writing
 anything down.
 
 When documents disagree, tense settles it:
@@ -215,7 +214,7 @@ Before you edit:
 - Never change an ADR's `status`, and never edit one that says `accepted`. Drafting a record is
   yours; deciding one is not.
 - Delete completed `PLAN.md` entries rather than marking them done.
-- Adding a document means updating `DOCUMENTATION.md` in the same commit.
+- Adding a document means updating `DOC-MAP.md` in the same commit.
 ```
 
 It is deliberately short. It competes with your code for the agent's context, and its value is

@@ -53,7 +53,7 @@ is what makes the map's completeness check decidable, so a checker MUST implemen
 
 ## 2. The map
 
-2.1 A conformant repository MUST contain a map at `DOCUMENTATION.md` in its root.
+2.1 A conformant repository MUST contain a map at `DOC-MAP.md` in its root.
 
 2.2 The map names its artifacts in three places: the layout block, the artifacts table and the
 lifecycle table. All three MUST name the same set, and a checker MUST report any artifact appearing

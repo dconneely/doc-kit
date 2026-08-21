@@ -13,7 +13,7 @@ not define. Behaviour that a reimplementation would have to obey belongs in the 
 
 ## Documentation
 
-See [`DOCUMENTATION.md`](DOCUMENTATION.md) for what each document is for and where a given fact
+See [`DOC-MAP.md`](DOC-MAP.md) for what each document is for and where a given fact
 belongs.
 
 ## Licence

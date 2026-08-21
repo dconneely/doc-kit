@@ -17,7 +17,7 @@
 
 set -eu
 
-MAP=DOCUMENTATION.md
+MAP=DOC-MAP.md
 # Excluded from §2.4 by §2.8 (templates are not instances) and §5.1 (archives).
 EXCLUDE_PREFIXES='templates/ docs/archive/'
 

@@ -2,7 +2,7 @@
 
 Orientation for coding agents. Humans start at [`README.md`](README.md).
 
-**Read [`DOCUMENTATION.md`](DOCUMENTATION.md) before writing anything down.** It is the map: it says
+**Read [`DOC-MAP.md`](DOC-MAP.md) before writing anything down.** It is the map: it says
 which file a given fact belongs in, and the answer is rarely the file you already have open. This
 page routes; the map decides.
 
@@ -39,7 +39,7 @@ reaches an adopter. See
   section — that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
-- **Adding a document means updating `DOCUMENTATION.md` in the same commit.** Every artifact the map
+- **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map
   names must exist, and every Markdown file must appear in the map. `tools/doc-kit-check.sh` will
   tell you, but only if you run it.
 

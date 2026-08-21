@@ -1,4 +1,4 @@
-# Documentation
+# Documentation map
 
 This is the map. It describes what each document in this project is for, who reads it, how long it
 lives, and — the question it exists to answer — **where a given fact belongs**.
@@ -26,7 +26,7 @@ If a sentence seems to fit two places, it is usually two sentences. Split it and
 ## Layout
 
 ```text
-DOCUMENTATION.md         this file — the map
+DOC-MAP.md         this file — the map
 README.md                orientation, one screen, links outward
 SPECIFICATION.md         the behaviour contract — an index once it grows (see below)
 CHANGELOG.md             what shipped
@@ -41,7 +41,7 @@ docs/
 ```
 
 In a monorepo, everything below `docs/` moves under the module it describes, and only
-`DOCUMENTATION.md`, `README.md`, `CHANGELOG.md` and `PLAN.md` stay at the root.
+`DOC-MAP.md`, `README.md`, `CHANGELOG.md` and `PLAN.md` stay at the root.
 
 **The specification is a set, not a file, and it may be partly machine-readable.** Once it outgrows
 one document it becomes an index plus a tree, and members of that tree can be schemas, interface
@@ -54,7 +54,7 @@ specification. See "Machine-readable and generated parts" below.
 
 | Artifact | Purpose — and the standard it follows, if any | Tense | Durability | Audience |
 |---|---|---|---|---|
-| `DOCUMENTATION.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
+| `DOC-MAP.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten when the structure changes (rare) | anyone adding documentation |
 | `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten freely | anyone |
 | `SPECIFICATION.md` | The behaviour contract. **No standard for the file.** Use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords (MUST/SHOULD/MAY) for requirement strength, [Diátaxis](https://diataxis.fr) for structuring the reference set once it becomes a tree | present | rewritten in place, always current | users + implementers |
 | `docs/adr/*.md` | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past | **immutable once accepted** — superseded, never edited | future maintainers |
@@ -70,7 +70,7 @@ specification. See "Machine-readable and generated parts" below.
 
 | Artifact | Created when | Removed / closed when |
 |---|---|---|
-| `DOCUMENTATION.md` | the structure is first agreed | never — revised when an artifact is added, removed or repurposed |
+| `DOC-MAP.md` | the structure is first agreed | never — revised when an artifact is added, removed or repurposed |
 | `README.md` | project starts | never |
 | `SPECIFICATION.md` | behaviour is decided | never — edited forever |
 | `docs/adr/*.md` | a choice a newcomer would question | never — status flips to `superseded by ADR-NNNN` |

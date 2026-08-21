@@ -37,7 +37,7 @@ an honest `README.md` beats this structure until there is more to say than fits 
 | `ADOPTING-NOTES.md` | Product — the reasoning, for when the procedure will not settle a case |
 | `templates/` | Product — copy into the target repository and customise by deletion |
 | `SPECIFICATION.md` | What a conformant repository looks like — the contract a checker enforces |
-| `DOCUMENTATION.md` | This repository's own map, produced by applying the kit to itself |
+| `DOC-MAP.md` | This repository's own map, produced by applying the kit to itself |
 | `docs/adr/` | Why the kit is shaped this way |
 | `tools/` | An optional conformance checker |
 
