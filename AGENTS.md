@@ -68,6 +68,8 @@ is a finding to report, not an edit to make.
 
 ## Conventions
 
-British spelling throughout — *customise*, *behaviour*, *licence* as the noun. Prose wraps at 100
+British spelling throughout — *customise*, *behaviour*, *licence* as the noun — in prose we write.
+Never in quoted text: `LICENCE` holds verbatim MIT-0 and contains `sublicense`, which is correct and
+must stay. The same goes for anything quoted from a standard. Prose wraps at 100
 columns. Commit subjects follow Conventional Commits: product changes take `feat`/`fix`/`refactor`,
 this repository's own documentation takes `docs`.

@@ -54,7 +54,7 @@ meaning root-level `SPECIFICATION.md` and `PLAN.md`. It does not.
 
 Spec Kit defines seven slash commands — `/speckit.constitution`, `/speckit.specify`,
 `/speckit.plan`, `/speckit.tasks`, `/speckit.taskstoissues`, `/speckit.implement`,
-`/speckit.converge` — and stores artefacts under `specs/` with configuration in `.specify/`. It
+`/speckit.converge` — and stores artifacts under `specs/` with configuration in `.specify/`. It
 produces no root-level file of either name.
 
 The flow's *shape* is real; the claim about the filenames it produces was not.
@@ -92,7 +92,7 @@ Kiro is the same shape, one level more hidden:
 **Neither tool is proposing a documentation convention at all.** Both keep per-feature state in a
 tool-owned directory — `.specify/`, `.kiro/` — that a tool reads and writes. Their `spec.md`
 describes one feature and is spent when it ships; this kit's `SPECIFICATION.md` describes the
-repository and outlives every feature. Different artefacts sharing a word, so there was never a
+repository and outlives every feature. Different artifacts sharing a word, so there was never a
 naming convention here to inherit.
 
 The genre converged during 2025 — Spec Kit, Kiro and BMAD-METHOD its flagship implementations, Sean
@@ -144,7 +144,7 @@ kit asserting one.
 
 `adr-tools`' own README does not state its filename format or status vocabulary — the README search
 was inconclusive and the answer came from `src/template.md`. Checking a project's README is not the
-same as checking the artefact it generates.
+same as checking the artifact it generates.
 
 ## Open questions
 
