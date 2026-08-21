@@ -7,6 +7,9 @@ All notable changes to this project are documented here, following
 
 ### Added
 
+- A statement that adoption is fork-and-forget: what you copy is yours, with no version stamp, no
+  migration tooling and nothing to track. This changelog is the only upgrade path, read by hand if
+  and when an adopter wants one. See ADR-0013.
 - A `Where:` field on quirk entries, naming the file, function or symbol the entry governs — so a
   search for the symbol finds the entry that says *do not change this*, rather than requiring the
   whole file be read first. The same advice now applies to records that protect a constraint.

@@ -2,17 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-### Decide the template upgrade path
-
-*Type: feature — Importance: medium — Effort: high*
-
-An adopter copies the map and then customises it by deletion, so there is no way to take a later
-improvement. Either version-stamp copied artifacts and ship migration notes per release, or state
-explicitly that adoption is fork-and-forget. The second is a legitimate answer and should be chosen
-deliberately rather than by omission. Scope is wider than it looks: ADR-0012 vendored the checker
-rather than referencing it, so `tools/doc-kit-check.sh` has the same problem as the copied prose —
-and a stale checker fails quietly, by not testing something newer, rather than loudly.
-
 ### Lint commit messages
 
 *Type: feature — Importance: low — Effort: low*

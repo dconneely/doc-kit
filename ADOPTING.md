@@ -155,6 +155,12 @@ Copy everything by hand, or fetch the subtree if you would rather — `npx degit
 or clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the
 supported path and running anything is optional (ADR-0007).
 
+**What you copy is yours.** There is no upgrade path and nothing to track: no version stamp, no
+migration tooling, no obligation to follow this repository (ADR-0013). Most of it diverges within
+the hour anyway — your specification describes your system. If you ever want to know what has
+changed here since, the kit's `CHANGELOG.md` is the whole mechanism, and applying any of it is your
+choice by hand.
+
 A map that names a file which does not exist is worse than no map, because it is believed. For each
 artifact you kept:
 
