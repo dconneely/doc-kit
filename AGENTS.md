@@ -1,6 +1,6 @@
 # Agent guide
 
-Orientation for coding agents. Humans start at [`README.md`](README.md).
+Orientation for coding agents working in this repository.
 
 **Read [`DOC-MAP.md`](DOC-MAP.md) before writing anything down.** It is the map: it says
 which file a given fact belongs in, and the answer is rarely the file you already have open. This
