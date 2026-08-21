@@ -1,7 +1,7 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-08-20
-decision-makers:
+decision-makers: David Conneely
 ---
 
 # 12. Ship the checker by vendoring it
