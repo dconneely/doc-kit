@@ -17,6 +17,12 @@ path that is not under the target, stop: you are about to damage the kit instead
 doc-kit's own `AGENTS.md` is loaded and describes *this* repository. It does not apply to the
 target.
 
+Check the target's `git status` before making any changes. Anything already uncommitted there is
+not yours — note it, and keep it separate from what you touch, so it doesn't get silently swept
+into a later summary or an accidental blanket `git add -A`. A person doing this by hand would
+notice a dirty working tree without being told; it is stated here because nothing else prompts an
+agent to check first.
+
 ## The procedure
 
 `ADOPTING.md` is the procedure. Read it and follow Steps 0–5 in order — do not work from memory of

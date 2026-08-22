@@ -12,6 +12,12 @@ All notable changes to this project are documented here, following
 - The paste-in `AGENTS.md` stanza's ADR rule now also says to leave `decision-makers` as the
   template's placeholder on a drafted record, not just to leave `status` alone.
 
+### Changed
+
+- The `doc-kit-adopt` skill moved from `.claude/skills/` to `.agents/skills/` — recognised by
+  Claude Code exactly as before, and consistent with treating root `AGENTS.md` as the canonical,
+  cross-tool agent-instructions surface rather than a Claude-specific one (ADR-0015).
+
 ## [0.1.0] - 2026-08-22
 
 Nothing had been released before this, so everything below is an addition — including the several
