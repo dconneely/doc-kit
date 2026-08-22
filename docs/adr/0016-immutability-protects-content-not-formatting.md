@@ -1,7 +1,7 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-08-22
-decision-makers:
+decision-makers: David Conneely
 ---
 
 # 16. Immutability protects content, not formatting
