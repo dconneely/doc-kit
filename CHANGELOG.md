@@ -5,6 +5,8 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+## [0.2.0] - 2026-08-22
+
 ### Added
 
 - A gitignored documentation file is still checked against the map, but a hit in one is reported as
