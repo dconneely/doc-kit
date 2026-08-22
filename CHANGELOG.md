@@ -9,6 +9,8 @@ All notable changes to this project are documented here, following
 
 - A gitignored documentation file is still checked against the map, but a hit in one is reported as
   advisory and never blocks the checker's exit status (ADR-0014, proposed).
+- The paste-in `AGENTS.md` stanza's ADR rule now also says to leave `decision-makers` as the
+  template's placeholder on a drafted record, not just to leave `status` alone.
 
 ## [0.1.0] - 2026-08-22
 
