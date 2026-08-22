@@ -32,9 +32,11 @@ reaches an adopter. See
 ## Before you edit
 
 - **Never change an ADR's `status`, and never edit one that says `accepted`.** Drafting a record is
-  yours; deciding one is not. Write it `proposed` and say so. `SPECIFICATION.md` §3.1 has the rest —
-  read it before touching `docs/adr/`. Copy `templates/docs/adr/0000-template.md` for the shape, and
-  fill in `Considered Options` honestly.
+  yours; deciding one is not. Write it `proposed` and say so — and leave `decision-makers` as the
+  template's placeholder too, not your own name or a guess at whose it will be. That field names who
+  decided, and nobody has yet; filling it in early presumes the outcome the same way changing
+  `status` would. `SPECIFICATION.md` §3.1 has the rest — read it before touching `docs/adr/`. Copy
+  `templates/docs/adr/0000-template.md` for the shape, and fill in `Considered Options` honestly.
 - **Delete completed `PLAN.md` entries.** Do not annotate, strike through, or move them to a done
   section — that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
