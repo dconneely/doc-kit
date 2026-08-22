@@ -5,8 +5,10 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
-Nothing has been released yet, so everything below is an addition — including the several things
-that replaced an earlier shape, which are recorded here as the shape that will ship.
+## [0.1.0] - 2026-08-22
+
+Nothing had been released before this, so everything below is an addition — including the several
+things that replaced an earlier shape, which are recorded here as the shape that shipped.
 
 ### Added
 
