@@ -37,12 +37,12 @@ cannot be moved there. Only guidance used once, during adoption, can.
 
 Chosen option: **split by when the instruction is needed**, giving three owners:
 
-- **Templates carry shape.** Headings, front-matter keys, an example entry. Enough that a reader
+* **Templates carry shape.** Headings, front-matter keys, an example entry. Enough that a reader
   can see what fills the file, with no meta-commentary about the kit.
-- **The map carries rules.** Anything needed while *using* the structure, because the map is what
+* **The map carries rules.** Anything needed while *using* the structure, because the map is what
   the adopter keeps. This is where the ADR statuses, immutability and the human-action rule already
   went.
-- **`ADOPTING.md` carries the one-time procedure.** Anything read once while adopting, including
+* **`ADOPTING.md` carries the one-time procedure.** Anything read once while adopting, including
   "what each capability adds", which moves out of the map entirely.
 
 Moving everything to `ADOPTING.md` was rejected because it is not copied; use-time guidance would

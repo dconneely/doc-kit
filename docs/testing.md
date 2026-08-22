@@ -12,7 +12,7 @@ cites the `SPECIFICATION.md` clause it comes from, so a failure is traceable to 
 than to the tool's opinion.
 
 | Group | Verified |
-|---|---|
+| --- | --- |
 | `map` | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `templates/` and `docs/archive/` is named by some artifact pattern (§2.4). No template placeholder text survives (§2.5) |
 | `adr` | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` from the permitted set, a `date`, and `decision-makers` on anything past `proposed`. Forward pointers name a record that exists. The three MADR minimal headings are present (§3.1) |
 | `plan` | No entry is annotated done, struck through or marked completed. Every entry carries a valid type tag (§3.3) |

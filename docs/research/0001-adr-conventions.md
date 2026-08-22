@@ -1,6 +1,6 @@
 # What the ADR conventions actually specify
 
-**Confidence: high**
+**Confidence:** high
 
 Verified directly against the MADR repository on 2026-08-20. Prompted by the kit claiming to follow
 "a recognised convention" while using section names none of the conventions use.
@@ -60,6 +60,7 @@ Closed by [`0002-conventions-this-kit-cites.md`](0002-conventions-this-kit-cites
 original post, `adr-tools` numbering, and Keep a Changelog's categories were all checked and all
 proved accurate. Nygard's statuses turned out to be lowercase in the original, which supports
 ADR-0010 on a ground it had not claimed.
+
 - Whether MADR's front-matter should be adopted beyond `status`, `date` and `decision-makers`
   remains open; `consulted` and `informed` were judged overhead for a small project rather than
   wrong.

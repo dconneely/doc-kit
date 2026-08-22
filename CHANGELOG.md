@@ -29,6 +29,9 @@ All notable changes to this project are documented here, following
   and to keep anything already dirty there separate from what the adoption itself touches.
 - The paste-in `AGENTS.md` stanza's ADR rule now also says to leave `decision-makers` as the
   template's placeholder on a drafted record, not just to leave `status` alone.
+- `.markdownlint-cli2.jsonc` now runs the full default ruleset instead of just `MD013` — running
+  this kit's own linter at "default: false" could not have caught the templates tripping an
+  adopter's default config, which is how MD036 and MD049 were actually found.
 
 ### Changed
 
@@ -50,6 +53,26 @@ All notable changes to this project are documented here, following
   indentation-keyed prefix stack, not just one flat level under the repository root — `docs/spec/`
   (or any other nested directory) can be written nested in the fenced layout diagram as it actually
   sits on disk, rather than as a workaround second top-level block.
+- `SPECIFICATION.md` §3.1 now permits formatting-only edits to an `accepted` record — whitespace,
+  list markers, other rendering-only tokens that change no word — alongside `status`, `date` and
+  `decision-makers` (ADR-0016). Immutability protects a record's substance, not its bullet
+  character.
+
+### Fixed
+
+- The plan-entry and research-note metadata line (`*Type: ...*`, `**Confidence: ...**`) was a
+  whole-line emphasis block with no other content — exactly what MD036 exists to catch in a
+  project running its own markdownlint. It's now a bold label on plain text (`**Type:** ...`),
+  matching the style `docs/quirks.md` already used.
+- Plan and quirks entries used `###` directly under the file's `#` title, skipping `##` — fixed to
+  `##` so the outline increments by one level at a time (MD001).
+- A handful of one-off formatting issues an adopter's default markdownlint config would catch:
+  a double blank line in `ADOPTING.md`, a list missing its surrounding blank line in a research
+  note, an unlabelled fenced code block in `README.md`, and inconsistent Markdown table pipe
+  spacing across several files.
+- Four already-accepted ADRs (0003, 0006, 0008, 0011) mixed `-` and `*` list markers within a
+  single file; normalised to `*` throughout, matching the ADR template (ADR-0016 permits this as a
+  formatting-only edit).
 
 ## [0.1.0] - 2026-08-22
 

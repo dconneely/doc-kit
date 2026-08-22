@@ -22,7 +22,7 @@ Start here when you have something to write down and are not sure which file it 
 The tense of the sentence you are writing usually settles it:
 
 | If you are writing… | It belongs in |
-|---|---|
+| --- | --- |
 | "a conformant repository does X" | `SPECIFICATION.md` |
 | "we chose X because Y" | an ADR |
 | "source A says X, and I checked" | a research note |
@@ -66,7 +66,7 @@ machine-readable member of it when it exists.
 ## Artifacts
 
 | Artifact | Purpose — and the standard it follows, if any | Tense | Durability | Audience |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | `DOC-MAP.md` | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all | present | rewritten in place | anyone adding documentation |
 | `README.md` | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec | present | rewritten in place | anyone |
 | `AGENTS.md` | Routes a coding agent to this map, and names the hazards specific to working here. Routes rather than restates. Convention: [agents.md](https://agents.md) | present | rewritten in place | coding agents |
@@ -87,7 +87,7 @@ machine-readable member of it when it exists.
 ## Lifecycle
 
 | Artifact | Created when | Removed / closed when |
-|---|---|---|
+| --- | --- | --- |
 | `DOC-MAP.md` | the structure is first agreed | never — revised when an artifact is added, removed or repurposed |
 | `README.md` | project starts | never |
 | `AGENTS.md` | agents began working in the repository | never |
@@ -130,8 +130,8 @@ adopter can see, not internal refactors.
 **Plan entry** — a heading, a type tag and a rough size, then one paragraph. No design:
 
 ```markdown
-### Short title
-*Type: bug — Importance: high — Effort: medium*
+## Short title
+**Type:** bug — **Importance:** high — **Effort:** medium
 
 One paragraph on what and why. If it needs more than that, it needs an ADR.
 ```

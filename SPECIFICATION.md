@@ -91,7 +91,7 @@ MUST sit under the module they describe, and only the map, `README.md`, `CHANGEL
 durability and an audience, drawn from these sets:
 
 | Property | Values |
-|---|---|
+| --- | --- |
 | Tense | `present`, `past`, `future`, `imperative`, `explanatory` |
 | Durability | `rewritten in place`, `append-only`, `immutable`, `volatile`, `disposable` |
 
@@ -160,7 +160,7 @@ is usually a specification entry that has been misfiled.
 `status` MUST begin with exactly one of these, lowercase:
 
 | Value | Meaning |
-|---|---|
+| --- | --- |
 | `proposed` | Suggested, not yet decided. Binds nothing |
 | `rejected` | Considered and turned down. Kept so the option is not re-proposed |
 | `accepted` | Decided and in effect |
@@ -183,9 +183,10 @@ status change. See ADR-0009.
 be edited freely, and MAY be merged while still undecided — a pending decision in the tree is more
 discoverable than one living in an unmerged branch, which is the point of having the status at all.
 A record whose status is `accepted` MUST NOT be edited except to change its `status`, `date` and
-`decision-makers`. Those three change together at acceptance, which is the moment `decision-makers`
-becomes required — a rule permitting only the first two would make it impossible to comply with the
-second.
+`decision-makers`, or to correct formatting that changes no word — whitespace, list markers, or
+other rendering-only tokens (ADR-0016). The first three change together at acceptance, which is the
+moment `decision-makers` becomes required — a rule permitting only the first two would make it
+impossible to comply with the second.
 
 **Immutability begins at publication.** A record nobody outside its author could have read has no
 reader who relied on it, so correcting a drafting error in one is not rewriting history. In practice
@@ -213,7 +214,8 @@ specification; so does a meeting, or one person deciding. What matters is that t
 `proposed` to `accepted` records that the decision was made, and that nothing is edited afterwards.
 
 A checker cannot verify immutability from a working tree and SHOULD verify it from history instead,
-treating any content diff to a record that was already `accepted` as a violation.
+treating any content diff to a record that was already `accepted` as a violation — a formatting-only
+diff (ADR-0016) is not one.
 
 ### 3.2 Changelog
 

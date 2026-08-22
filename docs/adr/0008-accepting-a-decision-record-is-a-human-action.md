@@ -19,11 +19,11 @@ every other developer's agent then reads as settled constraint.
 
 Three properties of this structure make that worse rather than better:
 
-- `AGENTS.md` and the map explicitly direct agents to records for the reasoning behind constraints,
+* `AGENTS.md` and the map explicitly direct agents to records for the reasoning behind constraints,
   so a trust channel exists and is currently unguarded.
-- An accepted record is immutable by design, so a mistaken one is **sticky**: correcting it requires
+* An accepted record is immutable by design, so a mistaken one is **sticky**: correcting it requires
   writing a successor, which is heavy machinery for content nobody decided.
-- Volume alone degrades the set. A directory of forty records, most of them unconsidered, is one
+* Volume alone degrades the set. A directory of forty records, most of them unconsidered, is one
   nobody reads carefully, which costs the ten real ones their authority.
 
 What was not known when the structure was designed: how cheap authoring would become relative to

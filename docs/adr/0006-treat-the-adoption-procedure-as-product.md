@@ -15,10 +15,10 @@ documentation artifact, on the reasoning that a how-to guide is documentation in
 
 That reasoning does not survive contact with what the kit actually is. Two tests disagree with it:
 
-- **What is it about?** Nothing in `ADOPTING.md` describes this repository. Delete every other file
+* **What is it about?** Nothing in `ADOPTING.md` describes this repository. Delete every other file
   here and not a word of it changes, because it describes what happens in the *adopter's*
   repository. That is precisely what `templates/` does.
-- **What survives its deletion?** Deleting a library's how-to guide leaves a working library.
+* **What survives its deletion?** Deleting a library's how-to guide leaves a working library.
   Deleting `ADOPTING.md` leaves a folder of blank templates that nobody can apply. The procedure is
   not an explanation of the deliverable; it is half the deliverable.
 

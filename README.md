@@ -32,7 +32,7 @@ an honest `README.md` beats this structure until there is more to say than fits 
 ## What's here
 
 | Path | What it is |
-|---|---|
+| --- | --- |
 | `ADOPTING.md` | Product — the procedure: decide, inventory, customise, create, migrate, verify |
 | `ADOPTING-NOTES.md` | Product — the reasoning, for when the procedure will not settle a case |
 | `templates/` | Product — copy into the target repository and customise by deletion |
@@ -59,7 +59,7 @@ table in Step 3, then work Steps 1–5. There is no installer, because the kit s
 Clone this repository alongside the one you are adopting into, start the agent **here**, and point
 it at the target:
 
-```
+```text
 apply this kit to ../my-cool-repo/
 ```
 

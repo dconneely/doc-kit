@@ -31,10 +31,10 @@ machine-readable.
 
 Three things that get confused with each other must stay distinguished:
 
-- **Source of truth** — the contract itself. Versioned and reviewed like code.
-- **Generated view** — diagrams, rendered references, snapshots, clients. Never hand-edited, carries
+* **Source of truth** — the contract itself. Versioned and reviewed like code.
+* **Generated view** — diagrams, rendered references, snapshots, clients. Never hand-edited, carries
   a generated-by header, and CI fails if regenerating produces a diff.
-- **Prose that cannot be derived** — rationale, invariants, units, ownership, policy. The only part
+* **Prose that cannot be derived** — rationale, invariants, units, ownership, policy. The only part
   that is writing.
 
 Prose may link to a machine-readable contract. It must never restate one.

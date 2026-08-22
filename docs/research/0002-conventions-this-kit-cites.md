@@ -1,6 +1,6 @@
 # What the other cited conventions actually specify
 
-**Confidence: high**
+**Confidence:** high
 
 Checked directly against primary sources on 2026-08-20, closing the open questions left by
 [`0001-adr-conventions.md`](0001-adr-conventions.md). That note found the kit was not following the
