@@ -14,6 +14,16 @@
 #
 # On Windows use `sh`, not `bash` — the `bash` on PATH is usually WSL's, which
 # sees a different filesystem and will report every file missing.
+#
+# §2.4's sweep queries gitignored files exactly like tracked ones, but a hit
+# in a gitignored file is reported as a WARN, never a FAIL — gitignored docs
+# (a vendored third-party tree, a personal working-notes convention) are a
+# real, recurring category this kit doesn't get to assume away, but they
+# should never block CI over content nobody asked this repository's map to
+# describe. This needs `git`; where it's unavailable, or the target isn't a
+# git work tree, every hit is a FAIL as before — the one point in this script
+# that isn't pure awk/sed/grep/find, and it degrades to the old behaviour
+# rather than erroring when git is missing.
 
 set -eu
 
@@ -22,6 +32,7 @@ MAP=DOC-MAP.md
 EXCLUDE_PREFIXES='templates/ docs/archive/'
 
 failures=0
+warnings=0
 current=''
 
 group() { current=$1; }
@@ -30,6 +41,20 @@ fail() {
 	printf '%s\n' "FAIL [$current] $1" >&2
 	[ $# -gt 1 ] && printf '       %s\n' "$2" >&2
 	return 0
+}
+warn() {
+	warnings=$((warnings + 1))
+	printf '%s\n' "WARN [$current] $1" >&2
+	[ $# -gt 1 ] && printf '       %s\n' "$2" >&2
+	return 0
+}
+
+# True when git is usable here and PATH is gitignored. False (never errors)
+# when git is missing, this isn't a work tree, or the path isn't ignored.
+is_ignored() {
+	command -v git >/dev/null 2>&1 || return 1
+	git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 1
+	git check-ignore -q "$1"
 }
 
 # section FILE HEADING — the lines under a "## Heading" up to the next "## "
@@ -117,8 +142,14 @@ check_map() {
 			# shellcheck disable=SC2254
 			case "$f" in $a|"${a%/}"/*) hit=0; break ;; esac
 		done
-		[ "$hit" -eq 0 ] ||
-			fail "$f is not named in the map" "§2.4 — add a row, or move it under an archive"
+		if [ "$hit" -ne 0 ]; then
+			if is_ignored "$f"; then
+				warn "$f is not named in the map (gitignored)" \
+					"§2.4 — add a row, or move it under an archive"
+			else
+				fail "$f is not named in the map" "§2.4 — add a row, or move it under an archive"
+			fi
+		fi
 	done
 	set +f
 
@@ -245,8 +276,14 @@ for want in "$@"; do
 done
 
 if [ "$failures" -eq 0 ]; then
-	printf 'doc-kit: conformant (%s)\n' "$*"
+	if [ "$warnings" -eq 0 ]; then
+		printf 'doc-kit: conformant (%s)\n' "$*"
+	else
+		printf 'doc-kit: conformant (%s) — %s gitignored warning(s), see above\n' "$*" "$warnings"
+	fi
 else
-	printf '\ndoc-kit: %s failure(s)\n' "$failures" >&2
+	printf '\ndoc-kit: %s failure(s)' "$failures" >&2
+	[ "$warnings" -eq 0 ] || printf ', %s gitignored warning(s)' "$warnings" >&2
+	printf '\n' >&2
 	exit 1
 fi

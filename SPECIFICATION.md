@@ -52,9 +52,10 @@ neither is a claim nobody checks.
 Defined in `docs/glossary.md`. The ones this document leans on hardest are **map**, **artifact**,
 **adopting repository** and **documentation file**.
 
-A **documentation file** is any Markdown file in the repository that is not part of a vendored
-dependency, not generated into an ignored directory, and not below an archive (§5). This definition
-is what makes the map's completeness check decidable, so a checker MUST implement exactly it.
+A **documentation file** is any Markdown file in the repository that is not below an archive (§5).
+This definition is what makes the map's completeness check decidable, so a checker MUST implement
+exactly it. A file being gitignored does not remove it from this definition — see §2.9 for how a
+checker MUST treat one.
 
 ## 2. The map
 
@@ -106,6 +107,14 @@ points at, and adds nothing of its own.
 necessarily does. A checker MUST evaluate only the root map as an instance, and MUST NOT evaluate
 any artifact the map identifies as a template or as product. Without this, a repository shipping the
 kit fails §2.5 on its own templates, which is the check reporting the opposite of the truth.
+
+2.9 A documentation file that is gitignored is not exempt from §2.4 — a checker MUST still evaluate
+it against the map. But a checker MUST report a hit in one as advisory, and MUST NOT let it affect
+exit status: gitignored documentation (a repository's own working-notes convention, a vendored
+dependency that happens to carry its own README) is a real, recurring category this specification
+does not get to assume away, and it deserves checking without ever blocking on content the map was
+never meant to describe (ADR-0014). A reviewer verifying by hand applies the same judgement: check
+it, don't block on it.
 
 ## 3. Artifacts
 

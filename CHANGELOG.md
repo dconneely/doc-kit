@@ -5,6 +5,11 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+### Added
+
+- A gitignored documentation file is still checked against the map, but a hit in one is reported as
+  advisory and never blocks the checker's exit status (ADR-0014, proposed).
+
 ## [0.1.0] - 2026-08-22
 
 Nothing had been released before this, so everything below is an addition — including the several
