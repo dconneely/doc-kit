@@ -18,7 +18,7 @@ classify — it is the finding, and it always means `split`.
 **Disposition** is exactly one of:
 
 | | When | What it means |
-|---|---|---|
+| --- | --- | --- |
 | `move` | one tense, wrong place | relocate as-is, with `git mv` so history and blame survive |
 | `split` | mixed tense | divide by tense, file each part separately |
 | `absorb` | belongs inside something that already exists | merge in, delete the original |
@@ -27,8 +27,8 @@ classify — it is the finding, and it always means `split`.
 | `leave` | already correct where it is | must still appear in the map |
 
 | File or location | Tense | Destination | Disposition | Notes | Done |
-|---|---|---|---|---|---|
-| | | | | | |
+| ---------------- | ----- | ----------- | ----------- | ----- | ---- |
+|                  |       |             |             |       |      |
 
 ## Decisions found
 
@@ -36,8 +36,8 @@ Comments and documents explaining why something is *not* written the obvious way
 that was never filed. Leave a one-line pointer behind at the original site.
 
 | Where it lives now | Proposed ADR title | Filed |
-|---|---|---|
-| | | |
+| ------------------ | ------------------ | ----- |
+|                    |                    |       |
 
 ## Findings found
 
@@ -45,8 +45,8 @@ Anything citing external sources, reconciling sources that disagree, or carrying
 Record the confidence when filing.
 
 | Where it lives now | Question it answers | Confidence | Filed |
-|---|---|---|---|
-| | | | |
+| ------------------ | ------------------- | ---------- | ----- |
+|                    |                     |            |       |
 
 ## Sources outside the repository
 

@@ -83,7 +83,7 @@ Most of these join the **specification** rather than becoming new categories, be
 present tense, always current, and a contract someone relies on.
 
 | If the project has… | It gains | Where it lands |
-|---|---|---|
+| --- | --- | --- |
 | a data store | the schema (generated snapshot), plus a **data dictionary**: units, ownership, retention, which fields are sensitive, invariants constraints cannot express | specification |
 | | ordered migrations | changelog-shaped: an ordered, immutable-once-applied sequence is a changelog whatever it describes |
 | a network API | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth | specification |
@@ -120,7 +120,7 @@ Two questions decide most of the rest:
 Work top to bottom. Every edit is a deletion or a substitution; nothing needs to be invented.
 
 | In `DOC-MAP.md` | Do this |
-|---|---|
+| --- | --- |
 | Filenames | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md` |
 | "Where does it go?" table | Delete rows for artifacts this repo does not have |
 | Layout block | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either — see `ADOPTING-NOTES.md` |
@@ -143,7 +143,7 @@ Everything in `templates/` maps onto your repository root at the same relative p
 matter of taking the ones Step 1 said you had earned:
 
 | From `templates/` | Take it when |
-|---|---|
+| --- | --- |
 | `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always — the core five |
 | `docs/adr/0000-template.md` | always; records are worth having from day one, since their value is being written contemporaneously |
 | `docs/quirks.md` | you deviate from a reference, or carry behaviour you know is wrong |
@@ -267,7 +267,7 @@ List every documentation file before touching any of them, in a worksheet:
 usual threshold, because migration is exactly the work that spans weeks and gets interrupted.
 
 | File | Tense | Destination | Disposition | Done |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | `docs/design-notes.md` | mixed | spec + changelog | split | |
 | `docs/old-api.md` | present | — | archive | ✓ |
 
@@ -287,7 +287,7 @@ emptied into its proper homes before it is deleted.
 Six, and every file gets exactly one:
 
 | Disposition | When | What it means |
-|---|---|---|
+| --- | --- | --- |
 | **move** | one tense, wrong place | relocate as-is. Use `git mv` so history and blame survive |
 | **split** | mixed tense | divide by tense and file each part. The most common outcome, and the highest-value one |
 | **absorb** | belongs inside something that already exists | merge the content in, delete the original |
@@ -349,7 +349,6 @@ The customisation has been applied successfully when all of these hold:
 - [ ] No placeholder content survives — no example artifact row, no unreplaced heading.
 
 Re-run the first two checks whenever an artifact is added or removed. They are the ones that rot.
-
 
 ---
 

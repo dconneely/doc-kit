@@ -17,7 +17,7 @@ Two kinds of entry, and the distinction matters:
 
 ---
 
-### Short title
+## Short title
 
 **Kind:** accepted-wrong
 **Where:** the file, function or symbol this governs — the string someone would grep for on their
