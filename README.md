@@ -87,6 +87,6 @@ to edit should not follow you home.
 
 ## Status
 
-Early, and unreleased. The structure, the procedure and the checker are settled and in use here; no
-other repository has adopted it yet, so nothing has been tested against someone else's mess. See
-`PLAN.md` for what is still open.
+Released, and still early. The structure, the procedure and the checker are settled and in use
+here; no other repository has adopted it yet, so nothing has been tested against someone else's
+mess. See `CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.
