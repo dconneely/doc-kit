@@ -68,12 +68,39 @@ table_paths() {
 	section "$MAP" "$1" | sed -n 's/^| `\([^`]*\)`.*/\1/p'
 }
 
-# The layout block is an indented tree; rebuild full paths from it.
+# The layout block is an indented tree, to any depth; rebuild full paths from
+# it with a prefix stack keyed on indentation, not just one flat level. A line
+# is a container for what follows only when it is a *bare* `name/` — nothing
+# else on the line. A directory named with trailing description text (e.g.
+# `templates/   product — ...`) is a leaf instead, representing the whole
+# directory as one artifact — matching a `dirname/*` row after norm() — the
+# same distinction the original single-level parser relied on, now checked at
+# every depth rather than only at the top.
 layout_paths() {
 	awk '/^```text/ { f = 1; next } /^```/ { if (f) exit } f' "$MAP" | awk '
-		/^[^ \t]+\/[ \t]*$/ { split($0, a, /[ \t]/); prefix = a[1]; next }
-		/^[^ \t]/          { prefix = ""; print $1; next }
-		/^[ \t]+[^ \t]/    { print prefix $1 }
+		{
+			line = $0
+			indent = 0
+			while (indent < length(line) && substr(line, indent + 1, 1) ~ /[ \t]/) indent++
+			rest = substr(line, indent + 1)
+			if (rest == "") next
+
+			while (depth > 0 && stack_indent[depth] >= indent) depth--
+
+			prefix = ""
+			for (i = 1; i <= depth; i++) prefix = prefix stack_name[i]
+
+			if (rest ~ /^[^ \t]+\/[ \t]*$/) {
+				split(rest, a, /[ \t]/)
+				depth++
+				stack_indent[depth] = indent
+				stack_name[depth] = a[1]
+				next
+			}
+
+			split(rest, a, /[ \t]/)
+			print prefix a[1]
+		}
 	'
 }
 

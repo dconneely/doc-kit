@@ -141,6 +141,14 @@ is specification if it states behaviour, an ADR if it states a choice.
 **deliberate** or **accepted-wrong**. An accepted-wrong entry names the test pinning today's output,
 so nobody "fixes" it, and states what would have to change for the entry to go.
 
+**Alias** — a file whose entire content points at another artifact, existing only because some tool
+or convention looks for that exact filename: a second `README.md` at a different path a newcomer
+would actually look in, a specification member duplicated per module. Mark it `**Alias**` in the
+artifacts table's purpose cell; it carries the tense, durability and audience of what it points at
+rather than declaring its own. This is the one case exempt from the duplicate-properties check
+below — use it before inventing artificially different audience wording just to dodge that test. If
+the file has anything to say beyond the pointer, it is not an alias.
+
 ## Machine-readable and generated parts
 
 Three kinds of thing get confused with each other, and the rules differ:
@@ -204,7 +212,10 @@ from and how far to trust it.
 
 Before adding one, check it has a **distinct tense, mutability and audience** from everything in the
 artifacts table. If it shares all three with an existing document, it is a section or a tag within
-that document, not a new file. Most proposed additions fail this test — which is the point.
+that document, not a new file — unless it has to exist as its own file for a reason unrelated to its
+content (a second `README.md` at a path a newcomer would actually look in, a spec member repeated
+per module). That case is an **alias**, not a merge — see "Prescribed formats" above. Most proposed
+additions still fail the test outright, which is the point.
 
 If it passes, add it to both tables here in the same commit. A map that omits an artifact is worse
 than no map, because it is believed.

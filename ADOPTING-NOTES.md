@@ -8,6 +8,43 @@ a decision resists, or when something is not working.
 
 The decisions Steps 1 and 4 tend to force, and the reasoning that resolves them.
 
+### A documentation file you find during inventory is already gitignored — track it, or leave it be?
+
+Ask; do not silently pick either default. A pre-existing gitignored documentation file (a personal
+working-notes convention, a habit inherited from a previous tool) is a real, recurring shape, and
+both silent answers are wrong often enough to matter: force-tracking it can commit something the
+author deliberately kept private or provisional, and leaving it ignored can quietly exempt a real
+artifact from ever being checked against the map. This is Step 1/4's version of a question
+`tools/doc-kit-check.sh` also has to answer once such a file is adopted — see `§2.9`, which queries
+a gitignored documentation file the same as any other but reports a hit in one as advisory rather
+than blocking. The two are related, not the same decision twice: this one is a one-time call made
+while building the inventory, the checker's is a permanent, ongoing property of every run
+afterwards.
+
+### Multi-module repository — one documentation structure, or one per module?
+
+Ask; do not resolve this yourself from the shape of the build or the pre-existing docs. Whichever
+way it goes, it is the repository owner's call, not a test for you to run and answer on their
+behalf.
+
+What you can usefully do is gather and present the evidence they would want when deciding: how many
+modules have any consumer or audience outside this repository, versus being internal-only
+dependencies of one product; whether the existing documentation already lives entirely under one
+module, or is already split; what each "other module" currently has beyond a bare `README.md`. State
+what you found plainly. Do not characterise it as "this looks like one product" or "these are
+peers" — that framing is already halfway to answering the question for them, which is theirs to do.
+
+The trap is letting that same evidence quietly become the decision instead of staying evidence — a
+repository can easily have organically drifted into a documentation shape nobody chose, and
+inheriting that drift silently is exactly the failure this kit exists to stop. As a rough prior,
+repository-wide is right more often than not, and a per-module structure is worth taking seriously
+often enough that it should never be dismissed out of hand — but that prior is context to hand the
+person deciding, not a rule for you to apply in their place.
+
+This is a decision a newcomer could reasonably question, which is the test for whether it earns a
+record — it often will. Once made, write it up as an ADR rather than letting it live only in how
+`DOC-MAP.md` ended up shaped.
+
 ### Do we need a technical-debt file?
 
 No. Debt is a **type tag within the single ranked plan**, alongside `bug`, `feature` and `docs`.
@@ -28,6 +65,43 @@ Applying those tests reclassifies more than it adds: a conformance target is spe
 known gaps are quirks; a runbook is a procedure for a different audience at a different moment; a
 threat model is an assessment whose conclusions become records and whose findings become plan
 entries. See [ADR-0003](docs/adr/0003-treat-machine-readable-contracts-as-specification.md).
+
+### The specification is a tree now — where exactly?
+
+`docs/spec/`, once there are **two or more members** — don't force the subdirectory on a single-file
+specification pre-emptively, there is nothing to group yet. `SPECIFICATION.md` stays at the
+repository root regardless: it is a fixed element that changes role, not location, and each member
+still keeps its own row in the artifacts table (tense/durability/audience can genuinely differ
+between them — that is the whole reason they are separate files, and grouping them by directory is a
+convenience on top of that, not a replacement for it). Nest it normally in the layout diagram:
+
+```text
+docs/
+  spec/
+    language.md
+    architecture.md
+  quirks.md
+  adr/*.md
+```
+
+The checker's layout parser follows genuine nesting to any depth. The one thing it still needs: a
+line that introduces a directory *for what's indented under it* must be bare — nothing else on that
+line. A directory named with trailing description text (`templates/   product — ...`) is read as a
+leaf representing the whole directory as one artifact instead, which is also a real, useful shape —
+just a different one from a container with children.
+
+### A second README (or spec member) shares tense, durability and audience with one that exists?
+
+Neither merge nor invent a fake distinction — if it has to exist at that path for someone to find
+it, it's an **alias**. A module `README.md` and the root one are both present/rewritten-in-place/
+anyone, which would normally mean merging them (`templates/DOC-MAP.md` "Adding a new kind of
+document"), but a module `README.md` exists so a newcomer working there finds orientation without
+first navigating to the root. Mark it `**Alias**` in the artifacts table, give it no content of its
+own, and let it inherit the properties of what it points to — the same applies to a specification
+member repeated per module, or any file some tool looks for by exact name (`CLAUDE.md` pointing at
+`AGENTS.md` is the case this kit's own map uses). See `templates/DOC-MAP.md`'s "Prescribed formats"
+for the shape, and resist the temptation to word the audience column differently just to dodge the
+duplicate-properties check — that hides the fact that the file has nothing of its own to say.
 
 ### How far do I trust each convention?
 

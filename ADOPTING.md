@@ -39,9 +39,10 @@ Everything else follows from that. Four consequences shape this procedure in par
    because it is small enough to hold in your head.
 
 One caveat to carry into Step 2: **this is not one standard**, but several conventions of differing
-authority. Paths and scope are yours — a monorepo moves everything, and an artifact you will not
-maintain should not exist. Names and formats are not. `ADOPTING-NOTES.md` says why, and how far to
-trust each convention.
+authority. Paths and scope are yours — whether a multi-module repository gets one documentation
+structure or one per module is a real decision to make deliberately, not a default to apply, and an
+artifact you will not maintain should not exist. Names and formats are not. `ADOPTING-NOTES.md` says
+why, and how far to trust each convention.
 
 ---
 
@@ -99,7 +100,18 @@ different medium.
 Two questions decide most of the rest:
 
 - **Is the specification one file or a tree?** One file until it stops being comfortable to read
-  end to end. A tree means `SPECIFICATION.md` becomes an index that links to its members.
+  end to end. A tree means `SPECIFICATION.md` becomes an index that links to its members — and each
+  member still has to clear the same **tense, mutability and audience** test as any top-level
+  artifact; splitting by topic or because the whole thing got big is not on its own a reason two
+  members should stay separate. Once there is more than one, give `SPECIFICATION.md` the same kind
+  of routing table `DOC-MAP.md`'s own "Where does it go?" is, scoped to the members and keyed on
+  audience — "which member does this fact go in" is the same problem one level down, and it does not
+  resolve itself just because the top-level map already exists. Put the members under `docs/spec/`,
+  the same way decisions live under `docs/adr/` and findings under `docs/research/` — a directory an
+  agent or a `docs/spec/*.md` glob can answer "is this part of the contract" from, without reading
+  `SPECIFICATION.md` first. `SPECIFICATION.md` itself never moves there: it is a fixed root element
+  that changes *role*, not location — the specification outright when it is one file, the map and
+  overview of `docs/spec/` once it is not.
 - **Does the specification include machine-readable members** — schemas, interface definitions?
   If so, they are specification, not a separate category, and the link-never-restate rule applies.
 
@@ -111,7 +123,7 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 |---|---|
 | Filenames | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md` |
 | "Where does it go?" table | Delete rows for artifacts this repo does not have |
-| Layout block | Delete unused lines; replace with **real paths** — in a monorepo, `docs/` moves under the module it describes and only the root four stay at the top |
+| Layout block | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either — see `ADOPTING-NOTES.md` |
 | Specification line | State whether it is one file or an index, and name its machine-readable members if any |
 | Artifacts table | Delete unused rows. Keep the standard links — they tell a future maintainer how much to trust each convention |
 | Lifecycle table | Delete the same rows, so the two tables stay aligned |
@@ -189,8 +201,26 @@ conformant. See ADR-0007.
 ### If coding agents work in this repository
 
 Agents read `AGENTS.md` or `CLAUDE.md`, and nothing there points at the map — so the structure you
-have just built is unreachable to the reader most able to damage it. Paste this into whichever of
-those files you keep, deleting lines for artifacts you did not create:
+have just built is unreachable to the reader most able to damage it.
+
+The rule is simple even though the states it applies to aren't: **never throw away user-generated
+content in an `AGENTS.md` or `CLAUDE.md` you didn't write.** Create one if neither exists. If one
+does, ask before editing it rather than pasting over it. If both exist and disagree, don't assume
+either is a stale duplicate of the other — ask how the user wants them reconciled; if it turns out
+they genuinely serve different audiences (`CLAUDE.md` for Claude Code specifically, `AGENTS.md` for
+other agents), the right answer may be that both stay content-bearing, both get their own row in
+the map, and the stanza below goes into both files rather than one. And flag it if any of these
+turn out to be untracked by git — an unusual state for a file whose whole purpose is being read by
+tooling.
+
+The same rule extends to any other per-tool instruction file the repository might already have —
+`.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, or similar. Check for
+them; if you find one, ask rather than deciding on your own whether it should point at the map, get
+folded into `AGENTS.md`, or stay exactly as it is. The intent is to improve the documentation, not
+to replace instructions the user already wrote for a tool of their choosing.
+
+Paste the stanza below into whichever file(s) you keep, deleting lines for artifacts you did not
+create:
 
 ```markdown
 ## Documentation
@@ -286,11 +316,16 @@ to the changelog, future-tense to the plan, present-tense to the specification.
 Watch for the tell that this has already cost something: an important item filed in the "other"
 file, where nobody looks when deciding what to do next.
 
-**2. Look for decisions living in code comments.** A comment explaining why something is *not*
-written the obvious way — especially one added after a painful debugging session — is an ADR that
-was never filed. These are the highest-value ADRs precisely because the reasoning is invisible from
-the code, so the next maintainer will "simplify" the constraint away and reintroduce the bug it
-prevents. Convert it and leave a one-line pointer behind.
+**2. Look for decisions living in code comments — or in the specification's own prose.** A comment
+explaining why something is *not* written the obvious way — especially one added after a painful
+debugging session — is an ADR that was never filed. So is a present-tense specification or
+architecture page's aside explaining not just *what* the system does but *why a rejected
+alternative was wrong*; that mix is easy to write without noticing, since the surrounding page
+reads as ordinary reference prose. Do not stop at code comments — a page-by-page read of the docs
+usually turns up more of these than the comments do. These are the highest-value ADRs precisely
+because the reasoning is invisible from the code (or from a skim of the spec), so the next
+maintainer will "simplify" the constraint away and reintroduce the bug it prevents. Convert it and
+leave a one-line pointer behind.
 
 **3. Look for findings with sources.** Anything citing external references, reconciling sources
 that disagree, or carrying a confidence level is research and needs a home before the details fade.
