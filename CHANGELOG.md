@@ -5,6 +5,11 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+### Added
+
+- `ADOPTING-NOTES.md` now answers the objection that deleting completed `PLAN.md` entries erases
+  engineering history — `git log` already preserves it; a hand-kept "done" log would only rot.
+
 ## [0.2.0] - 2026-08-22
 
 ### Added

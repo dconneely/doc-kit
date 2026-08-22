@@ -198,6 +198,12 @@ before trying to classify it whole.
 You are past the ceiling a file-based backlog was ever meant to serve. Move it to an issue tracker
 and leave a pointer in `PLAN.md`. This is a success condition, not a failure.
 
+**"Deleting completed plan entries feels like erasing our engineering history."**
+It isn't; it just leaves it where it belongs. Version control (`git log`) natively preserves
+the complete, accurate history of what was done and why. Annotating a plan with "DONE" or
+maintaining an internal changelog just creates a redundant prose log that competes with git
+and eventually rots.
+
 **"Nobody updates the changelog."**
 Do not hand-maintain it per commit — that is the version that always decays. Generate it from
 Conventional Commits, or write it once per release from the commit range. If there are no releases
