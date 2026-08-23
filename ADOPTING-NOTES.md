@@ -4,6 +4,25 @@ The reasoning behind the structure, and what to do when the procedure will not s
 itself. None of it is needed to apply [`ADOPTING.md`](ADOPTING.md) Steps 0-5 — come back here when
 a decision resists, or when something is not working.
 
+## Why the procedure is shaped the way it is
+
+Three properties define every artifact: **tense** (does it describe what is, what was, or what is
+intended?), **mutability** (rewritten in place, append-only, immutable, or disposable?) and
+**audience**. Documentation rots when one file mixes them — the classic case being a document that
+is part record of work done, part backlog, part assessment, so that no part of it can be trusted or
+pruned with confidence. `ADOPTING.md`'s four numbered consequences all follow from that:
+
+1. **You customise mostly by deleting.** The template is roughly the union of what projects need;
+   any given repository needs a subset. Almost nothing has to be invented.
+2. **What you keep is decided by capabilities, not taste.** A data store earns a data dictionary; a
+   network API earns an interface definition; a deployed service earns a runbook.
+3. **The rules are not the customisable part.** The three rules, the failure modes and the test for
+   adding a new document survive customisation verbatim. They are what stops the structure decaying
+   back into the mixed-tense file it replaced.
+4. **Resist growth.** Most proposed additions share all three properties with something that
+   already exists, which makes them a section or a tag rather than a file. The structure works
+   because it is small enough to hold in your head.
+
 ## Judgement calls
 
 The decisions Steps 1 and 4 tend to force, and the reasoning that resolves them.
@@ -45,6 +64,17 @@ This is a decision a newcomer could reasonably question, which is the test for w
 record — it often will. Once made, write it up as an ADR rather than letting it live only in how
 `DOC-MAP.md` ended up shaped.
 
+### Should something flag a docs/tasks/*.md file with no matching PLAN.md entry?
+
+No. The rule is `PLAN.md` entry → optional `docs/tasks/` note, but nothing enforces that order, and
+a mechanical check here would fight the same "no standard" call that keeps this directory otherwise
+unchecked — a task file is ad hoc by design, not a second artifact with its own conformance rules.
+
+If you find one by hand — during Step 4, or an ordinary read of the plan — there are two cases, not
+one: the entry was deleted without deleting its note (delete the note too, or restore the entry if
+the work isn't actually done), or the note was written first, before its entry (add the missing
+entry rather than deleting a note that describes real work).
+
 ### Do we need a technical-debt file?
 
 No. Debt is a **type tag within the single ranked plan**, alongside `bug`, `feature` and `docs`.
@@ -73,7 +103,14 @@ specification pre-emptively, there is nothing to group yet. `SPECIFICATION.md` s
 repository root regardless: it is a fixed element that changes role, not location, and each member
 still keeps its own row in the artifacts table (tense/durability/audience can genuinely differ
 between them — that is the whole reason they are separate files, and grouping them by directory is a
-convenience on top of that, not a replacement for it). Nest it normally in the layout diagram:
+convenience on top of that, not a replacement for it).
+
+Once there's more than one member, give `SPECIFICATION.md` a routing table of its own — the same
+kind of thing `DOC-MAP.md`'s "Where does it go?" is, scoped to the members and keyed on audience.
+"Which member does this fact go in" is the same problem one level down; the top-level map existing
+doesn't answer it for you.
+
+Nest it normally in the layout diagram:
 
 ```text
 docs/

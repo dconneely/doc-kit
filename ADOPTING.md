@@ -17,32 +17,21 @@ that repository appears in its map, and each fact in them sits in exactly one pl
 
 ## The idea, and why it shapes the procedure
 
-Three properties define every artifact: **tense** (does it describe what is, what was, or what is
-intended?), **mutability** (rewritten in place, append-only, immutable, or disposable?) and
-**audience**. Documentation rots when one file mixes them — the classic case being a document that
-is part record of work done, part backlog, part assessment, so that no part of it can be trusted or
-pruned with confidence.
+Three properties define every artifact — tense, mutability, audience — and documentation rots when
+a file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoning behind each):
 
-Everything else follows from that. Four consequences shape this procedure in particular:
+1. **Customise mostly by deleting.** Step 2 is a table of deletions and substitutions, not a
+   writing exercise.
+2. **What you keep is decided by capabilities, not taste.** Step 1 is an inventory, not a
+   preference.
+3. **The rules are not customisable.** The three rules, the failure modes, and the test for adding
+   a document survive verbatim — not repeated here.
+4. **Resist growth.** Most proposed additions are a section or tag in something that already
+   exists, not a new file.
 
-1. **You customise mostly by deleting.** The template is roughly the union of what projects need;
-   any given repository needs a subset. Almost nothing has to be invented — which is why Step 2 is
-   a table of deletions and substitutions rather than a writing exercise.
-2. **What you keep is decided by capabilities, not taste.** A data store earns a data dictionary; a
-   network API earns an interface definition; a deployed service earns a runbook. That is why
-   Step 1 is an inventory rather than a preference.
-3. **The rules are not the customisable part.** The three rules, the failure modes and the test for
-   adding a new document survive customisation verbatim, which is why they are not repeated here.
-   They are what stops the structure decaying back into the mixed-tense file it replaced.
-4. **Resist growth.** Most proposed additions share all three properties with something that
-   already exists, which makes them a section or a tag rather than a file. The structure works
-   because it is small enough to hold in your head.
-
-One caveat to carry into Step 2: **this is not one standard**, but several conventions of differing
-authority. Paths and scope are yours — whether a multi-module repository gets one documentation
-structure or one per module is a real decision to make deliberately, not a default to apply, and an
-artifact you will not maintain should not exist. Names and formats are not. `ADOPTING-NOTES.md` says
-why, and how far to trust each convention.
+One caveat for Step 2: this is not one standard. Paths and scope are yours to decide — a
+multi-module repository's structure is a real decision, not a default; names and formats are not
+yours to change. `ADOPTING-NOTES.md` says why, and how far to trust each convention.
 
 ---
 
@@ -100,18 +89,9 @@ different medium.
 Two questions decide most of the rest:
 
 - **Is the specification one file or a tree?** One file until it stops being comfortable to read
-  end to end. A tree means `SPECIFICATION.md` becomes an index that links to its members — and each
-  member still has to clear the same **tense, mutability and audience** test as any top-level
-  artifact; splitting by topic or because the whole thing got big is not on its own a reason two
-  members should stay separate. Once there is more than one, give `SPECIFICATION.md` the same kind
-  of routing table `DOC-MAP.md`'s own "Where does it go?" is, scoped to the members and keyed on
-  audience — "which member does this fact go in" is the same problem one level down, and it does not
-  resolve itself just because the top-level map already exists. Put the members under `docs/spec/`,
-  the same way decisions live under `docs/adr/` and findings under `docs/research/` — a directory an
-  agent or a `docs/spec/*.md` glob can answer "is this part of the contract" from, without reading
-  `SPECIFICATION.md` first. `SPECIFICATION.md` itself never moves there: it is a fixed root element
-  that changes *role*, not location — the specification outright when it is one file, the map and
-  overview of `docs/spec/` once it is not.
+  end to end. Once it's a tree, members go under `docs/spec/` and `SPECIFICATION.md` becomes their
+  index — full shape, the routing-table point, and the layout-block gotcha are all in
+  `ADOPTING-NOTES.md`.
 - **Does the specification include machine-readable members** — schemas, interface definitions?
   If so, they are specification, not a separate category, and the link-never-restate rule applies.
 
@@ -123,7 +103,7 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 | --- | --- |
 | Filenames | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md` |
 | "Where does it go?" table | Delete rows for artifacts this repo does not have |
-| Layout block | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either — see `ADOPTING-NOTES.md` |
+| Layout block | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either — see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare — nothing else on it — or the checker reads it as one leaf artifact instead of a container |
 | Specification line | State whether it is one file or an index, and name its machine-readable members if any |
 | Artifacts table | Delete unused rows. Keep the standard links — they tell a future maintainer how much to trust each convention |
 | Lifecycle table | Delete the same rows, so the two tables stay aligned |
@@ -225,30 +205,32 @@ create:
 ```markdown
 ## Documentation
 
-`DOC-MAP.md` is the map: it says which file a given fact belongs in. Read it before writing
-anything down.
+`DOC-MAP.md` says which file a fact belongs in. Read it first.
 
-When documents disagree, tense settles it:
+Tense settles disagreements:
 
-- `SPECIFICATION.md` — present tense, authoritative about what the system does now.
-- `CHANGELOG.md` — past tense. What changed, never what is true today.
-- `PLAN.md` — intent. Nothing described in it exists yet.
-- `docs/adr/` — why. Only `accepted` records bind; check the status before relying on one.
-- `docs/quirks.md` — deliberate deviations. **Do not "fix" anything listed here.**
-- `docs/archive/` — not authoritative, undated. Never cite it as a source.
+- `SPECIFICATION.md` — present tense: what the system does now.
+- `CHANGELOG.md` — past tense: what changed, never what's true today.
+- `PLAN.md` — intent: nothing in it exists yet.
+- `docs/adr/` — why: only `accepted` records bind; check status first.
+- `docs/quirks.md` — deliberate deviations. **Never "fix" these.**
+- `docs/archive/` — undated, not authoritative. Never cite it.
 
 Before you edit:
 
-- The specification follows the work. Change it because behaviour changed, not because it would
-  read better. Its purpose and scope are not yours to revise.
-- Never change an ADR's `status`, and never edit one that says `accepted`. Drafting a record is
-  yours; deciding one is not — leave `decision-makers` as the template's placeholder too.
-- Delete completed `PLAN.md` entries rather than marking them done.
+- Change the specification because behaviour changed, never because it'd read better. Purpose and
+  scope aren't yours to revise.
+- Never change an ADR's `status`, or edit an `accepted` one. Draft, don't decide — leave
+  `decision-makers` as the placeholder too.
+- Delete finished `PLAN.md` entries; don't mark them done.
 - Adding a document means updating `DOC-MAP.md` in the same commit.
 ```
 
-It is deliberately short. It competes with your code for the agent's context, and its value is
-being at the path an agent already reads — not in restating the map, which is one click away.
+Deliberately short: it competes with your code for the agent's context, and its value is being at
+the path an agent already reads, not in restating the map.
+
+The same logic outlives the stanza — cut derivable content first, then reword what's left tighter,
+never the reverse. A shorter missing warning is still missing.
 
 The kit ships this as text rather than a file for the reason in ADR-0007: your repository probably
 already has an `AGENTS.md`, and a file that collides has to be merged rather than copied.
