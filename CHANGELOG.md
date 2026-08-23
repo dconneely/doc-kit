@@ -5,6 +5,8 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+## [0.3.0] - 2026-08-23
+
 ### Added
 
 - `ADOPTING-NOTES.md` now answers the objection that deleting completed `PLAN.md` entries erases
