@@ -27,6 +27,19 @@ something worth keeping, that thing is in the wrong file:
 Emptying a task note into its proper homes before deleting it is the last step of the work, not an
 optional tidy-up.
 
+## What makes one worth keeping
+
+No fixed shape, and none is coming — but some task notes carry their weight and some don't. The
+difference is usually two things: a **definition of done** specific enough that "finished" isn't a
+judgement call, and a line of **risk** — what could quietly go wrong, what the next reader should
+check before trusting the result. A note with both survives being picked up cold by someone who
+isn't you; a note with neither is close to no note at all.
+
+If you want a starting shape rather than inventing one: a `Status:` line, numbered `##` steps, a
+"Definition of done" section, a "Risk note" section. Two task notes written independently, in two
+separate adoptions of this kit, converged on exactly that without being told to — weak evidence it's
+a reasonable default, not a rule.
+
 ## Naming
 
 Match the plan entry: `short-title.md`. Delete the file and the plan entry in the same commit.
