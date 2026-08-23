@@ -9,6 +9,31 @@ All notable changes to this project are documented here, following
 
 - `ADOPTING-NOTES.md` now answers the objection that deleting completed `PLAN.md` entries erases
   engineering history — `git log` already preserves it; a hand-kept "done" log would only rot.
+- `templates/docs/tasks/README.md` now says what makes a task note worth keeping — a specific
+  definition of done and a line of risk — rather than staying silent on quality now that "no fixed
+  shape" is settled. Offers a starting shape (`Status:` line, numbered steps, a "Definition of done"
+  section, a "Risk note" section) as one way to satisfy that, not a rule: two task notes written
+  independently, in two separate adoptions of this kit, converged on it unprompted.
+- `ADOPTING.md` Step 3 now says wording brevity in a repository's own `AGENTS.md`/`CLAUDE.md` is a
+  second pass, separate from and after cutting content a session could derive from the codebase —
+  the same true, non-derivable fact can usually still be said in fewer words without losing it. The
+  paste-in stanza itself is also tighter (~140 → ~105 words), since it's the part that actually
+  ships into every adopter's repository.
+- The `doc-kit-adopt` skill's own text is tighter (~550 → ~475 words), with no step, hazard, or
+  gate cut — same treatment as the stanza, since it's the other piece of this kit an agent reads and
+  acts on rather than a human skimming it.
+- `ADOPTING.md`'s "The idea, and why it shapes the procedure" section, and its "spec is a tree"
+  bullet in Step 1, moved their rationale into `ADOPTING-NOTES.md` instead of restating it —
+  matching the how-to/explanation split the two files already claimed to have. `ADOPTING.md` is
+  lighter; nothing that was said is gone, it's just in the file whose job is to say it. One
+  correctness hazard stayed behind in Step 2's "Layout block" row rather than moving with the rest:
+  a nested directory's introducing line must be bare or the checker misreads it as a single leaf
+  artifact — that's a mistake made *while executing* the step, not background reasoning, so it
+  needed to survive without a trip to `ADOPTING-NOTES.md`.
+- `ADOPTING-NOTES.md` now answers whether a `docs/tasks/*.md` file with no matching `PLAN.md` entry
+  should be flagged: no, tooling here would fight the same "no standard" call that keeps the
+  directory otherwise unchecked — with the by-hand fix for either direction of mismatch spelled out
+  instead.
 
 ## [0.2.0] - 2026-08-22
 

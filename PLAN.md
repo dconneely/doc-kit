@@ -2,15 +2,6 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
-## Run the link sweep nightly in CI
-
-**Type:** feature — **Importance:** low — **Effort:** low
-
-`lychee` is configured as a manual-stage hook, so the sweep exists but only when someone runs it.
-Nightly CI is where it belongs, since link rot happens without anyone touching the repository —
-blocked on this repository having CI at all. All 49 unique external links resolved when last
-checked (2026-08-22), 2 via redirect.
-
 ## Build a worked example
 
 **Type:** docs — **Importance:** low — **Effort:** high
