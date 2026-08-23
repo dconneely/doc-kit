@@ -94,8 +94,9 @@ repos:
   #
   # Deliberately NOT on commit. External hosts fail for reasons unrelated to the change under
   # review, and a hook that blocks a commit because someone else's server is down is a hook that
-  # gets bypassed. Nightly CI is the right home once this repository is published; until then it is
-  # a manual sweep.
+  # gets bypassed. `.github/workflows/link-check.yml` runs the identical command nightly, which is
+  # where routine rot detection belongs; this manual stage is for checking a link-heavy change
+  # before it's committed, not a stand-in for CI any more.
   #
   # --method get, not the default HEAD: rfc-editor.org answers HEAD with 500 and GET with 200
   # (checked both ways), so a HEAD-based sweep reports two false failures against RFC 2119 and
