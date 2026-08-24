@@ -15,7 +15,7 @@ A third relationship between records has no pointer: **refinement**, where a dec
 later record revises something that follows from it. A reader of the earlier record cannot tell that
 a later one bears on it. ADR-0006 refines ADR-0004 in exactly this way.
 
-MADR's status field carries an explicit ellipsis — the permitted set is **deliberately open**, so
+MADR's status field carries an explicit ellipsis - the permitted set is **deliberately open**, so
 extending it is sanctioned rather than deviant. Checked against the template rather than recalled;
 see [`docs/research/0001-adr-conventions.md`](../research/0001-adr-conventions.md).
 
@@ -45,13 +45,13 @@ status changes and nothing else.
 supersession and the heavier form is correct. The annotation is not a way to avoid writing a
 successor.
 
-Superseding was rejected as overstating — it says the decision was replaced when it was not.
+Superseding was rejected as overstating - it says the decision was replaced when it was not.
 Editing the earlier record is forbidden by the immutability rule. A fifth status *value* was
 rejected because growing the vocabulary is what this structure resists; the annotation framing
 avoids that entirely.
 Renaming `superseded` to `obsolete` would make pointers uniformly optional and read more
 consistently, but it renames a term Nygard, MADR and `adr-tools` all share, and the case it would
-serve — a record that no longer applies with nothing replacing it — is already `deprecated`.
+serve - a record that no longer applies with nothing replacing it - is already `deprecated`.
 
 ### Consequences
 

@@ -4,7 +4,7 @@ One sentence saying what this is and who it is for. If a reader stops here, this
 
 ## Install
 
-The shortest thing that works. Not every option — the one most people need.
+The shortest thing that works. Not every option - the one most people need.
 
 ## Usage
 

@@ -2,22 +2,22 @@
 # `pre-commit`. Kept deliberately small: this catches drift, not correctness. The conformance
 # checker in PLAN.md is a separate thing and does not exist yet.
 #
-# This file is infrastructure, not product (ADR-0007) — it configures this repository and is never
+# This file is infrastructure, not product (ADR-0007) - it configures this repository and is never
 # copied into an adopting one. Revisions are pinned to versions known to work on Windows.
 # `prek install` (and `pre-commit install`) wire only the pre-commit hook type unless told
 # otherwise, which would leave the commit-msg hook below installed but never invoked. Declaring the
-# types here means a plain `prek install` is enough — nobody has to remember `--hook-type`.
+# types here means a plain `prek install` is enough - nobody has to remember `--hook-type`.
 default_install_hook_types: [pre-commit, commit-msg]
 
 repos:
-  # Secrets reach Markdown too — a connection string pasted into a research note, an example key
+  # Secrets reach Markdown too - a connection string pasted into a research note, an example key
   # left in a template, a token named in a changelog entry about rotating it.
   #
   # `gitleaks-system` rather than the default `gitleaks`, which builds the binary from source with
   # Go: that produces an unsigned, reputation-less executable in AppData, which Windows Smart App
   # Control blocks outright (os error 4551). A packaged release carries enough download reputation
   # to run even with Smart App Control enforced, so this hook works whether or not a given machine
-  # has it on. Needs gitleaks on PATH — `scoop install gitleaks`, `brew install gitleaks`, or a
+  # has it on. Needs gitleaks on PATH - `scoop install gitleaks`, `brew install gitleaks`, or a
   # release binary.
   #
   # Keep this rev in step with the installed binary. The hook's entry changed from
@@ -53,7 +53,7 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
 
-  # Line-length gate only — see .markdownlint-cli2.jsonc. MD013 has no auto-fix in any markdownlint
+  # Line-length gate only - see .markdownlint-cli2.jsonc. MD013 has no auto-fix in any markdownlint
   # implementation, so this reports and does not rewrap.
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.23.2
@@ -61,7 +61,7 @@ repos:
       - id: markdownlint-cli2
 
   # The checker is POSIX shell that has only ever run under Cygwin's bash on Windows. shellcheck is
-  # what stands in for the Linux and macOS testing it has never had — it catches the GNU-isms that
+  # what stands in for the Linux and macOS testing it has never had - it catches the GNU-isms that
   # would fail there (`find -not` for `!`, `head -1` for `head -n 1`, both found by hand before
   # this hook existed). Python rather than the Docker variant, for the same reason as gitleaks.
   - repo: https://github.com/shellcheck-py/shellcheck-py
@@ -70,19 +70,19 @@ repos:
       - id: shellcheck
 
   # Conventional Commits, on the commit-msg stage. Python rather than the Node commitlint hook:
-  # no config file, no additional_dependencies, and nothing compiled — which matters on Windows,
+  # no config file, no additional_dependencies, and nothing compiled - which matters on Windows,
   # where Smart App Control blocks locally built binaries.
   #
   # The types are narrower than the default set, and are exactly the ones this repository's history
   # uses. The mapping is recorded in AGENTS.md: product changes (ADOPTING.md, templates/, tools/,
   # the skill) take feat/fix/refactor; this repository's own documentation takes docs; build covers
   # infrastructure like .gitattributes and this file; style is formatting with no change in meaning.
-  # `chore` is deliberately absent — it is the catch-all that erodes the point of typing commits at
+  # `chore` is deliberately absent - it is the catch-all that erodes the point of typing commits at
   # all. Add a type when a commit needs it, not in advance.
   #
   # Two things this does not do. It checks the *shape* of a subject, not whether the type is the
   # right one: `docs:` on a change to templates/ passes and is still wrong. And it accepts `Feat:`
-  # — there is no case-sensitivity option, and --strict only blocks fixup and merge commits.
+  # - there is no case-sensitivity option, and --strict only blocks fixup and merge commits.
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v4.4.0
     hooks:
@@ -103,7 +103,7 @@ repos:
   # RFC 9457. Other standards bodies are likely to behave the same way.
   # Note the tag prefix: lychee tags releases `lychee-vX.Y.Z`, not `vX.Y.Z`.
   #
-  # `lychee-system` needs lychee on PATH — `scoop install lychee`, `brew install lychee` or
+  # `lychee-system` needs lychee on PATH - `scoop install lychee`, `brew install lychee` or
   # `cargo install lychee`. The auto-installing `lychee` hook would avoid that, but its install
   # script mangles Windows paths (strips the backslashes, then fails with exit 127), so it is not
   # usable here. Same class of gap as prek's Ruby hooks on Windows.
@@ -116,14 +116,14 @@ repos:
 
   # Drift guards. Every defect found in this repository so far has been drift rather than design:
   # a convention changed in one file and not the others. markdownlint catches formatting drift;
-  # these catch the semantic kind, which is what actually bit — four separate instances of stale
+  # these catch the semantic kind, which is what actually bit - four separate instances of stale
   # status casing survived three manual reviews before a grep found them.
   #
-  # `language: pygrep` is built into pre-commit — a cross-platform grep whose `entry` is a Python
+  # `language: pygrep` is built into pre-commit - a cross-platform grep whose `entry` is a Python
   # regex, failing when a file MATCHES. No install cost. Case-sensitive by default; `(?i)` or
   # `args: [-i]` to relax that, `--multiline` to span lines, `--negate` to require a match instead
   # of forbidding one. prek supports it too (its docs claim every pre-commit language, and offer
-  # native deny-pattern/require-pattern equivalents) — both checked against upstream docs.
+  # native deny-pattern/require-pattern equivalents) - both checked against upstream docs.
   #
   # `--negate` is the tool for the checks this cannot yet express: "every record HAS front-matter"
   # rather than "no file has a Status section". Worth reaching for before writing a script.

@@ -1,6 +1,6 @@
 # Adopt the documentation kit
 
-Worksheet for Step 4 of `ADOPTING.md`. **Disposable** — delete it, and its `PLAN.md` entry, when the
+Worksheet for Step 4 of `ADOPTING.md`. **Disposable** - delete it, and its `PLAN.md` entry, when the
 migration lands.
 
 Fill the inventory completely before moving any file. Deciding everything first is what keeps the
@@ -9,11 +9,11 @@ gets interrupted.
 
 ## Inventory
 
-Every documentation file in the repository, plus documentation held outside it — wikis, Confluence
+Every documentation file in the repository, plus documentation held outside it - wikis, Confluence
 spaces, shared drives, long issue descriptions. Give those their location in place of a path.
 
 **Tense** is the dominant one: `present`, `past`, `future`, or `mixed`. Mixed is not a failure to
-classify — it is the finding, and it always means `split`.
+classify - it is the finding, and it always means `split`.
 
 **Disposition** is exactly one of:
 
@@ -26,9 +26,9 @@ classify — it is the finding, and it always means `split`.
 | `delete` | superseded, duplicated, or wrong with nothing worth keeping | git still has it |
 | `leave` | already correct where it is | must still appear in the map |
 
-| File or location | Tense | Destination | Disposition | Notes | Done |
-| ---------------- | ----- | ----------- | ----------- | ----- | ---- |
-|                  |       |             |             |       |      |
+| File or location | Tense | Destination | Disposition | Notes | Status |
+| ---------------- | ----- | ----------- | ----------- | ----- | ------ |
+|                  |       |             |             |       |        |
 
 ## Decisions found
 
@@ -55,7 +55,7 @@ is a decision; an unlisted one is an oversight.
 
 ## Blocked
 
-Anything needing someone else's knowledge to classify — usually a document whose currency only one
+Anything needing someone else's knowledge to classify - usually a document whose currency only one
 person can confirm. Name the person and what you need from them. If the answer never comes, the
 disposition is `archive`, not a guess.
 

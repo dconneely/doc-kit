@@ -10,35 +10,35 @@ page routes; the map decides.
 
 When two documents disagree, tense settles it:
 
-- **`SPECIFICATION.md`** — present tense, authoritative about what a conformant repository is.
-- **`CHANGELOG.md`** — past tense. Records what changed, never what is currently true.
-- **`PLAN.md`** — intent. Nothing described in it exists yet.
-- **`docs/adr/`** — past tense, and records *why*. Check `Status` before relying on one; it may have
+- **`SPECIFICATION.md`** - present tense, authoritative about what a conformant repository is.
+- **`CHANGELOG.md`** - past tense. Records what changed, never what is currently true.
+- **`PLAN.md`** - intent. Nothing described in it exists yet.
+- **`docs/adr/`** - past tense, and records *why*. Check `Status` before relying on one; it may have
   been superseded.
 
 ## This repository is its own first adopter
 
-`ADOPTING.md` and `templates/` are **product** — source, not documentation. Everything else at the
+`ADOPTING.md` and `templates/` are **product** - source, not documentation. Everything else at the
 root is this repository's own documentation, produced by applying the kit to itself.
 
 The consequence that catches agents: **files under `templates/` are meant to stay uncustomised.**
 Their banners, placeholder headings and unfilled sections are the deliverable, not an oversight. Do
 not tidy them, fill them in, or lint them into shape.
 
-`.gitattributes` and anything like it is infrastructure — it configures this repository and never
+`.gitattributes` and anything like it is infrastructure - it configures this repository and never
 reaches an adopter. See
 [ADR-0007](docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md).
 
 ## Before you edit
 
 - **Never change an ADR's `status`, and never edit one that says `accepted`.** Drafting a record is
-  yours; deciding one is not. Write it `proposed` and say so — and leave `decision-makers` as the
+  yours; deciding one is not. Write it `proposed` and say so - and leave `decision-makers` as the
   template's placeholder too, not your own name or a guess at whose it will be. That field names who
   decided, and nobody has yet; filling it in early presumes the outcome the same way changing
-  `status` would. `SPECIFICATION.md` §3.1 has the rest — read it before touching `docs/adr/`. Copy
+  `status` would. `SPECIFICATION.md` §3.1 has the rest - read it before touching `docs/adr/`. Copy
   `templates/docs/adr/0000-template.md` for the shape, and fill in `Considered Options` honestly.
 - **Delete completed `PLAN.md` entries.** Do not annotate, strike through, or move them to a done
-  section — that is the specific failure that makes a plan stop being read.
+  section - that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
 - **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map
@@ -61,8 +61,8 @@ Two things to watch:
   trackers and conversations this repository cannot see. It does mean you should say what prompted
   the change, so a reviewer can tell the difference between implementing a request and improvising.
 - **Purpose and scope are not yours to revise.** The section stating what this project is for and
-  what it excludes is positioning, not description. Changing it is a decision — an ADR, accepted by
-  a person — never a side effect of implementing something else. The same holds for restructuring
+  what it excludes is positioning, not description. Changing it is a decision - an ADR, accepted by
+  a person - never a side effect of implementing something else. The same holds for restructuring
   the map.
 
 If you think the specification is wrong and nothing has changed, **say so and leave it alone**. That
@@ -70,13 +70,13 @@ is a finding to report, not an edit to make.
 
 ## Conventions
 
-British spelling throughout — *customise*, *behaviour*, *licence* as the noun — in prose we write.
+British spelling throughout - *customise*, *behaviour*, *licence* as the noun - in prose we write.
 Never in quoted text: `LICENCE` holds verbatim MIT-0 and contains `sublicense`, which is correct and
 must stay. The same goes for anything quoted from a standard. Prose wraps at 100
 columns. Commit subjects follow Conventional Commits: product changes take `feat`/`fix`/`refactor`,
 this repository's own documentation takes `docs`.
 
 Text an agent reads and acts on (`SKILL.md`, the `AGENTS.md` stanza, `ADOPTING.md`'s steps) gets cut
-hardest: shorter costs less context and is less likely to bury a rule until it's missed. Exception —
+hardest: shorter costs less context and is less likely to bury a rule until it's missed. Exception -
 a hazard or hard gate keeps its own heading or bold, isolated line regardless; compress its wording,
 never its salience.

@@ -1,4 +1,4 @@
-# Archive — not authoritative
+# Archive - not authoritative
 
 Documentation kept for its historical value, whose **currency cannot be established**. Nothing here
 is maintained. Nothing here may be relied on.
@@ -31,7 +31,7 @@ cost of losing that is invisible until years later.
 ## Rules
 
 1. **Every file carries a provenance header.** This one is not optional and this README does not
-   substitute for it — readers and tools arrive at these files directly, by search, and never see
+   substitute for it - readers and tools arrive at these files directly, by search, and never see
    this page.
 2. **Every entry states why it was not migrated.** Without a stated reason the archive becomes a
    landfill, which is the plan-graveyard failure in a new location.
@@ -43,8 +43,8 @@ cost of losing that is invisible until years later.
 Paste this at the very top of every file added here:
 
 ```markdown
-> **ARCHIVED — NOT AUTHORITATIVE. Do not rely on this file.**
-> Last known accurate: YYYY-MM (unverified) — or "unknown", which is an honest answer.
+> **ARCHIVED - NOT AUTHORITATIVE. Do not rely on this file.**
+> Last known accurate: YYYY-MM (unverified) - or "unknown", which is an honest answer.
 > Not migrated because: the specific reason. "Could not establish whether the behaviour it
 > describes is current" is the usual one, and is worth stating rather than implying.
 > Superseded by: where to look instead, if anywhere. "Nothing" is a valid answer.

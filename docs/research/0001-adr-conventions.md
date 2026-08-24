@@ -19,7 +19,7 @@ Consequences (optional).
 Both carry YAML front-matter, all of it optional:
 
 ```yaml
-status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123}"
+status: "{proposed | rejected | accepted | deprecated | ... | superseded by ADR-0123}"
 date: {YYYY-MM-DD when the decision was last updated}
 decision-makers: {list everyone involved in the decision}
 consulted: {list everyone whose opinions are sought}
@@ -29,7 +29,7 @@ informed: {list everyone who is kept up-to-date on progress}
 Three things matter and were not obvious:
 
 - **The ellipsis is in the template.** The permitted status set is explicitly not closed, so
-  extending it — as ADR-0009 does with `accepted (refined by ADR-NNNN)` — is sanctioned by the
+  extending it - as ADR-0009 does with `accepted (refined by ADR-NNNN)` - is sanctioned by the
   convention rather than a deviation from it.
 - **`rejected` is standard.** This kit had omitted it.
 - **`decision-makers`, `consulted` and `informed` are RACI fields.** `decision-makers` records who
@@ -37,9 +37,9 @@ Three things matter and were not obvious:
 
 ## Evidence
 
-- [`template/adr-template.md`][full] — full template, fetched 2026-08-20.
-- [`template/adr-template-minimal.md`][minimal] — minimal template, same date.
-- [adr.github.io/madr](https://adr.github.io/madr/) — project page, consistent with both.
+- [`template/adr-template.md`][full] - full template, fetched 2026-08-20.
+- [`template/adr-template-minimal.md`][minimal] - minimal template, same date.
+- [adr.github.io/madr](https://adr.github.io/madr/) - project page, consistent with both.
 
 [full]: https://raw.githubusercontent.com/adr/madr/main/template/adr-template.md
 [minimal]: https://raw.githubusercontent.com/adr/madr/main/template/adr-template-minimal.md
@@ -52,7 +52,7 @@ directly rather than described by a third party.
 Recalling the schema from memory produced a plausible but wrong answer: it missed `rejected`
 entirely, missed that two templates exist, and would have led to adopting the full template's
 Pros-and-Cons structure as though it were the only option. The lesson generalises to every other
-convention this kit cites — see "Open questions".
+convention this kit cites - see "Open questions".
 
 ## Open questions
 

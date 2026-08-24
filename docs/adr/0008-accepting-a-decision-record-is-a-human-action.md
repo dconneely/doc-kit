@@ -38,15 +38,15 @@ deciding. The two were previously the same act, and the structure quietly assume
 ## Decision Outcome
 
 Chosen option: **separate authoring from accepting**. A tool MAY draft a record, argue it, and merge
-it as `proposed`. Changing a record's status — to `accepted`, `rejected`, `deprecated`, or
-`superseded by` — is a human action, and a person doing it asserts that a decision was actually
+it as `proposed`. Changing a record's status - to `accepted`, `rejected`, `deprecated`, or
+`superseded by` - is a human action, and a person doing it asserts that a decision was actually
 made.
 
 **Only `accepted` records bind.** A `proposed` record is a suggestion, and no reader may treat it as
 a constraint. This is what bounds the damage: an enthusiastic tool can generate noise, but it cannot
 generate authority.
 
-Forbidding tools from authoring was rejected — drafting is genuinely useful, and the hazard is not
+Forbidding tools from authoring was rejected - drafting is genuinely useful, and the hazard is not
 authorship but unearned authority. Leaving it to review was rejected because an unwritten rule gives
 a reviewer nothing to point at.
 
@@ -58,7 +58,7 @@ excluded from this structure and should not be told they are.
 
 ### Consequences
 
-* Good, because the blast radius of an over-productive tool is limited to clutter — recoverable in a
+* Good, because the blast radius of an over-productive tool is limited to clutter - recoverable in a
   way false constraint is not, since a `proposed` record can simply be deleted.
 * Good, because the cost is one word edited by a person. Deliberately trivial: a control expensive
   enough to resent is one that gets bypassed.

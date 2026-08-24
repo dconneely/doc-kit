@@ -4,7 +4,7 @@
 repository's documentation map, and for creating the set of documents that map then describes.
 
 The contents of `templates/` are copied into the target repository. This file and
-[`ADOPTING-NOTES.md`](ADOPTING-NOTES.md) stay with the kit — you read them here, and what lands in
+[`ADOPTING-NOTES.md`](ADOPTING-NOTES.md) stay with the kit - you read them here, and what lands in
 your repository is the templates, customised.
 
 Neither guide is copied, deliberately. This one is spent once the structure exists, and the map you
@@ -17,7 +17,7 @@ that repository appears in its map, and each fact in them sits in exactly one pl
 
 ## The idea, and why it shapes the procedure
 
-Three properties define every artifact — tense, mutability, audience — and documentation rots when
+Three properties define every artifact - tense, mutability, audience - and documentation rots when
 a file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoning behind each):
 
 1. **Customise mostly by deleting.** Step 2 is a table of deletions and substitutions, not a
@@ -25,41 +25,41 @@ a file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoni
 2. **What you keep is decided by capabilities, not taste.** Step 1 is an inventory, not a
    preference.
 3. **The rules are not customisable.** The three rules, the failure modes, and the test for adding
-   a document survive verbatim — not repeated here.
+   a document survive verbatim - not repeated here.
 4. **Resist growth.** Most proposed additions are a section or tag in something that already
    exists, not a new file.
 
-One caveat for Step 2: this is not one standard. Paths and scope are yours to decide — a
+One caveat for Step 2: this is not one standard. Paths and scope are yours to decide - a
 multi-module repository's structure is a real decision, not a default; names and formats are not
 yours to change. `ADOPTING-NOTES.md` says why, and how far to trust each convention.
 
 ---
 
-## Step 0 — Decide whether to adopt, and write the plan
+## Step 0 - Decide whether to adopt, and write the plan
 
 Two outputs: a decision, and `PLAN.md`.
 
 **Decide.** This structure costs more than it returns below a certain size. A single-purpose script,
 a repository one person will maintain for a month, or anything whose entire documentation genuinely
-fits in one honest `README.md` — or one tight `AGENTS.md` — should stop here. The signal to proceed
+fits in one honest `README.md` - or one tight `AGENTS.md` - should stop here. The signal to proceed
 is not size in lines but **more than one reader**: someone who has to obey the behaviour, or
-someone who will inherit the reasoning. Record the outcome either way — a rejection that is written
+someone who will inherit the reasoning. Record the outcome either way - a rejection that is written
 down is a decision, and one that is not gets re-litigated every six months.
 
 **Then write `PLAN.md` before anything else.** It is the one artifact you can create knowing nothing
 about the repository yet, and the adoption work itself is its first content: one entry per artifact
-to create, one per document to migrate, ranked. Steps 1–4 then consume and delete those entries in
+to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those entries in
 the ordinary way.
 
-This is not ceremony. It is what makes adoption survive being interrupted, which — on any repository
-old enough to need it — it will be. It also means the structure is doing real work from the first
+This is not ceremony. It is what makes adoption survive being interrupted, which - on any repository
+old enough to need it - it will be. It also means the structure is doing real work from the first
 hour rather than after the migration completes, and it puts the first honest entry in the first
 file, which is worth more than a tidy empty one.
 
 Adopting into an existing codebase, expect Step 1 to add entries to this plan rather than replace
 it. Nothing here has to be right first time; the plan is the volatile artifact by design.
 
-## Step 1 — Inventory what this repository actually has
+## Step 1 - Inventory what this repository actually has
 
 Every project takes the core five: `DOC-MAP.md`, `README.md`, the specification, `CHANGELOG.md` and
 `PLAN.md`. ADRs are strongly recommended from day one, because their value is almost entirely in
@@ -71,16 +71,16 @@ is worse than its absence, because the map promises it.
 Most of these join the **specification** rather than becoming new categories, because they are
 present tense, always current, and a contract someone relies on.
 
-| If the project has… | It gains | Where it lands |
+| If the project has... | It gains | Where it lands |
 | --- | --- | --- |
 | a data store | the schema (generated snapshot), plus a **data dictionary**: units, ownership, retention, which fields are sensitive, invariants constraints cannot express | specification |
 | | ordered migrations | changelog-shaped: an ordered, immutable-once-applied sequence is a changelog whatever it describes |
 | a network API | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth | specification |
 | | cross-cutting conventions: pagination, versioning, idempotency, error shape ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457); crib [Google AIP](https://google.aip.dev) or [Zalando](https://opensource.zalando.com/restful-api-guidelines/)) | specification |
-| deployment as a service | a **runbook** — deploy, roll back, common failures | neither: a how-to, different audience (on call) |
+| deployment as a service | a **runbook** - deploy, roll back, common failures | neither: a how-to, different audience (on call) |
 | | environment and configuration reference ([12-Factor](https://12factor.net) conventions) | specification |
-| | a **threat model** ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) as the checklist) | neither: an assessment — its conclusions become records, its findings become plan entries |
-| a user interface | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/)) | target → specification; gaps → quirks |
+| | a **threat model** ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) as the checklist) | neither: an assessment - its conclusions become records, its findings become plan entries |
+| a user interface | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/)) | target -> specification; gaps -> quirks |
 
 The pattern is worth internalising: **most new artifacts are specification members, not new
 categories.** Before inventing a category, check whether the thing is simply the contract in a
@@ -90,12 +90,12 @@ Two questions decide most of the rest:
 
 - **Is the specification one file or a tree?** One file until it stops being comfortable to read
   end to end. Once it's a tree, members go under `docs/spec/` and `SPECIFICATION.md` becomes their
-  index — full shape, the routing-table point, and the layout-block gotcha are all in
+  index - full shape, the routing-table point, and the layout-block gotcha are all in
   `ADOPTING-NOTES.md`.
-- **Does the specification include machine-readable members** — schemas, interface definitions?
+- **Does the specification include machine-readable members** - schemas, interface definitions?
   If so, they are specification, not a separate category, and the link-never-restate rule applies.
 
-## Step 2 — Edit the template
+## Step 2 - Edit the template
 
 Work top to bottom. Every edit is a deletion or a substitution; nothing needs to be invented.
 
@@ -103,48 +103,48 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 | --- | --- |
 | Filenames | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md` |
 | "Where does it go?" table | Delete rows for artifacts this repo does not have |
-| Layout block | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either — see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare — nothing else on it — or the checker reads it as one leaf artifact instead of a container |
+| Layout block | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either - see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare - nothing else on it - or the checker reads it as one leaf artifact instead of a container |
 | Specification line | State whether it is one file or an index, and name its machine-readable members if any |
-| Artifacts table | Delete unused rows. Keep the standard links — they tell a future maintainer how much to trust each convention |
+| Artifacts table | Delete unused rows. Keep the standard links - they tell a future maintainer how much to trust each convention |
 | Lifecycle table | Delete the same rows, so the two tables stay aligned |
-| Flow | Keep, deleting any step that names an artifact you removed — most projects drop the optional task-note step |
+| Flow | Keep, deleting any step that names an artifact you removed - most projects drop the optional task-note step |
 | Prescribed formats | Keep the formats for artifacts you kept; delete the rest |
 | "Machine-readable and generated parts" | Keep if anything here is generated or machine-readable; delete outright if the documentation is entirely hand-written prose |
 | Three rules, failure modes, "adding a new kind of document" | **Keep verbatim.** These are the parts that do the work, and they are the same in every repository |
 | "Deliberately not here" | Keep, and add anything else you consciously rejected for this repo |
 
-If the repository has house conventions the template does not mention — a naming scheme, a
-gitignored prefix for working documents, a docs directory that is generated — add a row for each
+If the repository has house conventions the template does not mention - a naming scheme, a
+gitignored prefix for working documents, a docs directory that is generated - add a row for each
 rather than leaving them undocumented.
 
-## Step 3 — Create the documents the map now promises
+## Step 3 - Create the documents the map now promises
 
 Everything in `templates/` maps onto your repository root at the same relative path, so copying is a
 matter of taking the ones Step 1 said you had earned:
 
 | From `templates/` | Take it when |
 | --- | --- |
-| `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always — the core five |
+| `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always - the core five |
 | `docs/adr/0000-template.md` | always; records are worth having from day one, since their value is being written contemporaneously |
 | `docs/quirks.md` | you deviate from a reference, or carry behaviour you know is wrong |
 | `docs/glossary.md` | your domain has terms, or ordinary words used precisely |
 | `docs/testing.md` | you have more than one test approach |
 | `docs/research/0000-template.md` | you reverse-engineer, or reconcile sources that disagree |
-| `docs/tasks/` | your backlog is past roughly 20 items — plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
+| `docs/tasks/` | your backlog is past roughly 20 items - plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
 | `docs/archive/README.md` | Step 4 turned up documentation whose currency you cannot establish |
 
 One file sits outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `SPECIFICATION.md`. Copy it too if you want the check; skip it if you would rather verify by
 review. It is about 170 lines of POSIX shell depending on nothing but `awk`, `sed`, `grep` and
-`find` — read it before you run it. On Windows invoke it with `sh`, not `bash`.
+`find` - read it before you run it. On Windows invoke it with `sh`, not `bash`.
 
-Copy everything by hand, or fetch the subtree if you would rather — `npx degit`, a sparse checkout,
+Copy everything by hand, or fetch the subtree if you would rather - `npx degit`, a sparse checkout,
 or clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the
 supported path and running anything is optional (ADR-0007).
 
 **What you copy is yours.** There is no upgrade path and nothing to track: no version stamp, no
 migration tooling, no obligation to follow this repository (ADR-0013). Most of it diverges within
-the hour anyway — your specification describes your system. If you ever want to know what has
+the hour anyway - your specification describes your system. If you ever want to know what has
 changed here since, the kit's `CHANGELOG.md` is the whole mechanism, and applying any of it is your
 choice by hand.
 
@@ -155,16 +155,16 @@ artifact you kept:
   and honest; a missing one is a broken promise.
 - **Do not backfill history.** A changelog that starts today is fine. ADRs written years after the
   fact are usually reconstruction, and they dilute the ones written contemporaneously.
-- **Seed each with its first real entry** if one is to hand — see Step 4, which will find several.
+- **Seed each with its first real entry** if one is to hand - see Step 4, which will find several.
 - **Replace the placeholder content or delete it.** The templates carry an example entry rather than
   instructions; a `README.md` with unfilled headings is worse than a short one.
 
-The templates deliberately contain no advice about the kit — that is this file's job, and it is not
+The templates deliberately contain no advice about the kit - that is this file's job, and it is not
 copied into your repository. The one exception is `docs/adr/0000-template.md` and its counterpart in
 `docs/research/`, which stay as templates to copy from and keep a short comment for that reason.
 
 For an empty repository this step is quick and you are finished. For an existing codebase, the
-material for those first entries is already scattered through it — that is Step 4.
+material for those first entries is already scattered through it - that is Step 4.
 
 **One optional line, if you keep a `.gitattributes`:**
 
@@ -173,27 +173,27 @@ material for those first entries is already scattered through it — that is Ste
 ```
 
 Git's Markdown diff driver puts the enclosing heading in the hunk header, which is worth having once
-a meaningful share of review is prose. The kit does not ship a `.gitattributes` — your repository
+a meaningful share of review is prose. The kit does not ship a `.gitattributes` - your repository
 probably already has one, and a documentation kit has no business holding opinions about your batch
 files. Nor does it require you to run anything: verifying this structure by hand is fully
 conformant. See ADR-0007.
 
 ### If coding agents work in this repository
 
-Agents read `AGENTS.md` or `CLAUDE.md`, and nothing there points at the map — so the structure you
+Agents read `AGENTS.md` or `CLAUDE.md`, and nothing there points at the map - so the structure you
 have just built is unreachable to the reader most able to damage it.
 
 The rule is simple even though the states it applies to aren't: **never throw away user-generated
 content in an `AGENTS.md` or `CLAUDE.md` you didn't write.** Create one if neither exists. If one
 does, ask before editing it rather than pasting over it. If both exist and disagree, don't assume
-either is a stale duplicate of the other — ask how the user wants them reconciled; if it turns out
+either is a stale duplicate of the other - ask how the user wants them reconciled; if it turns out
 they genuinely serve different audiences (`CLAUDE.md` for Claude Code specifically, `AGENTS.md` for
 other agents), the right answer may be that both stay content-bearing, both get their own row in
 the map, and the stanza below goes into both files rather than one. And flag it if any of these
-turn out to be untracked by git — an unusual state for a file whose whole purpose is being read by
+turn out to be untracked by git - an unusual state for a file whose whole purpose is being read by
 tooling.
 
-The same rule extends to any other per-tool instruction file the repository might already have —
+The same rule extends to any other per-tool instruction file the repository might already have -
 `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, or similar. Check for
 them; if you find one, ask rather than deciding on your own whether it should point at the map, get
 folded into `AGENTS.md`, or stay exactly as it is. The intent is to improve the documentation, not
@@ -209,18 +209,18 @@ create:
 
 Tense settles disagreements:
 
-- `SPECIFICATION.md` — present tense: what the system does now.
-- `CHANGELOG.md` — past tense: what changed, never what's true today.
-- `PLAN.md` — intent: nothing in it exists yet.
-- `docs/adr/` — why: only `accepted` records bind; check status first.
-- `docs/quirks.md` — deliberate deviations. **Never "fix" these.**
-- `docs/archive/` — undated, not authoritative. Never cite it.
+- `SPECIFICATION.md` - present tense: what the system does now.
+- `CHANGELOG.md` - past tense: what changed, never what's true today.
+- `PLAN.md` - intent: nothing in it exists yet.
+- `docs/adr/` - why: only `accepted` records bind; check status first.
+- `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
+- `docs/archive/` - undated, not authoritative. Never cite it.
 
 Before you edit:
 
 - Change the specification because behaviour changed, never because it'd read better. Purpose and
   scope aren't yours to revise.
-- Never change an ADR's `status`, or edit an `accepted` one. Draft, don't decide — leave
+- Never change an ADR's `status`, or edit an `accepted` one. Draft, don't decide - leave
   `decision-makers` as the placeholder too.
 - Delete finished `PLAN.md` entries; don't mark them done.
 - Adding a document means updating `DOC-MAP.md` in the same commit.
@@ -229,42 +229,42 @@ Before you edit:
 Deliberately short: it competes with your code for the agent's context, and its value is being at
 the path an agent already reads, not in restating the map.
 
-The same logic outlives the stanza — cut derivable content first, then reword what's left tighter,
+The same logic outlives the stanza - cut derivable content first, then reword what's left tighter,
 never the reverse. A shorter missing warning is still missing.
 
 The kit ships this as text rather than a file for the reason in ADR-0007: your repository probably
 already has an `AGENTS.md`, and a file that collides has to be merged rather than copied.
 
-## Step 4 — Migrate what already exists
+## Step 4 - Migrate what already exists
 
-Only relevant when adopting into an existing codebase — and on any repository old enough to need
+Only relevant when adopting into an existing codebase - and on any repository old enough to need
 this, it is the part that does not fit in an afternoon. Work it in three phases: enumerate, decide,
 then act. Deciding everything before moving anything is what keeps the repository consistent at
 every point rather than only at the end.
 
-### 4a — Build the inventory
+### 4a - Build the inventory
 
 List every documentation file before touching any of them, in a worksheet:
 `docs/tasks/adopt-doc-kit.md`. This is the one case where `docs/tasks/` earns its place below the
 usual threshold, because migration is exactly the work that spans weeks and gets interrupted.
 
-| File | Tense | Destination | Disposition | Done |
+| File | Tense | Destination | Disposition | Status |
 | --- | --- | --- | --- | --- |
 | `docs/design-notes.md` | mixed | spec + changelog | split | |
-| `docs/old-api.md` | present | — | archive | ✓ |
+| `docs/old-api.md` | present | - | archive | done |
 
-**Tense** is the dominant one — present, past, future, or **mixed**. Mixed is not a failure to
+**Tense** is the dominant one - present, past, future, or **mixed**. Mixed is not a failure to
 classify; it is the finding, and it always means *split*.
 
 Cast wider than the repository. Wikis, Confluence spaces, shared drives and issue-tracker
 descriptions hold documentation too, and they are where the undatable material concentrates. List
 them with their location in place of a path.
 
-The worksheet mixes tenses itself — a survey of what is, plus what you intend to do about it — which
+The worksheet mixes tenses itself - a survey of what is, plus what you intend to do about it - which
 is precisely why it is a task note and disposable. It is a worksheet, not a record, and it gets
 emptied into its proper homes before it is deleted.
 
-### 4b — Assign a disposition
+### 4b - Assign a disposition
 
 Six, and every file gets exactly one:
 
@@ -277,7 +277,7 @@ Six, and every file gets exactly one:
 | **delete** | superseded, duplicated, or wrong with nothing worth keeping | git still has it |
 | **leave** | already correct where it is | still has to appear in the map |
 
-Two rules stop this going wrong. **Archive is not a synonym for "not sure yet"** — it is a positive
+Two rules stop this going wrong. **Archive is not a synonym for "not sure yet"** - it is a positive
 finding that a claim cannot be dated, and promoting an undatable claim into the specification is
 worse than leaving it untrusted. And **anything moving out of a directory people navigate leaves a
 one-line pointer behind**, because links from issues, wikis and bookmarks do not follow renames.
@@ -285,12 +285,12 @@ one-line pointer behind**, because links from issues, wikis and bookmarks do not
 Get the dispositions reviewed before acting on them. It is the cheapest point at which someone who
 remembers why a document exists can say so.
 
-### 4c — Work the sweeps
+### 4c - Work the sweeps
 
 In order of payoff; expect the first three to find real content and the fourth to find less than you
 would think.
 
-**1. Find the file doing several jobs at once.** Almost every repository has one — part record of
+**1. Find the file doing several jobs at once.** Almost every repository has one - part record of
 work done, part backlog, part architecture assessment. Splitting it by tense is usually the single
 largest improvement available, and it is mechanical rather than a judgement call: past-tense entries
 to the changelog, future-tense to the plan, present-tense to the specification.
@@ -298,12 +298,12 @@ to the changelog, future-tense to the plan, present-tense to the specification.
 Watch for the tell that this has already cost something: an important item filed in the "other"
 file, where nobody looks when deciding what to do next.
 
-**2. Look for decisions living in code comments — or in the specification's own prose.** A comment
-explaining why something is *not* written the obvious way — especially one added after a painful
-debugging session — is an ADR that was never filed. So is a present-tense specification or
+**2. Look for decisions living in code comments - or in the specification's own prose.** A comment
+explaining why something is *not* written the obvious way - especially one added after a painful
+debugging session - is an ADR that was never filed. So is a present-tense specification or
 architecture page's aside explaining not just *what* the system does but *why a rejected
 alternative was wrong*; that mix is easy to write without noticing, since the surrounding page
-reads as ordinary reference prose. Do not stop at code comments — a page-by-page read of the docs
+reads as ordinary reference prose. Do not stop at code comments - a page-by-page read of the docs
 usually turns up more of these than the comments do. These are the highest-value ADRs precisely
 because the reasoning is invisible from the code (or from a skim of the spec), so the next
 maintainer will "simplify" the constraint away and reintroduce the bug it prevents. Convert it and
@@ -317,7 +317,7 @@ This is the artifact most often missing entirely.
 have turned out to be sections of documents that already exist. Apply the test in the map's "adding
 a new kind of document" section before adding anything.
 
-## Step 5 — Verify
+## Step 5 - Verify
 
 The customisation has been applied successfully when all of these hold:
 
@@ -325,10 +325,10 @@ The customisation has been applied successfully when all of these hold:
 - [ ] Every documentation file in the repository appears in the map.
 - [ ] The artifacts table and the lifecycle table list the same artifacts.
 - [ ] Paths in the map are the repository's real paths.
-- [ ] No file serves two tenses — nothing is part changelog and part backlog.
+- [ ] No file serves two tenses - nothing is part changelog and part backlog.
 - [ ] No fact appears in two places; in particular, no prose restates a machine-readable contract.
 - [ ] Generated files say so, and regenerating them produces no diff.
-- [ ] No placeholder content survives — no example artifact row, no unreplaced heading.
+- [ ] No placeholder content survives - no example artifact row, no unreplaced heading.
 
 Re-run the first two checks whenever an artifact is added or removed. They are the ones that rot.
 

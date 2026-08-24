@@ -7,7 +7,7 @@
 
 * text=auto eol=lf
 
-# Files that genuinely require CRLF. Batch scripts are the real case — cmd.exe
+# Files that genuinely require CRLF. Batch scripts are the real case - cmd.exe
 # can mis-parse labels and `goto` targets in an LF file.
 *.bat   text eol=crlf
 *.cmd   text eol=crlf

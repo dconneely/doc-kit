@@ -11,7 +11,7 @@ decision-makers: David Conneely
 A separate technical-debt file is one of the most commonly requested additions to any documentation
 structure, and it was the first candidate to test the three-property rule from ADR-0001. It looked
 obviously necessary: debt is a distinct kind of work, teams track it separately, and there is a real
-worry behind the request — that debt items get drowned by feature items and never surface.
+worry behind the request - that debt items get drowned by feature items and never surface.
 
 ## Considered Options
 
@@ -34,12 +34,12 @@ reason as a separate file: it prevents the comparison that matters.
   decided inside one ordered list; two lists mean the comparison never happens, and the second list
   is the one that stops being read.
 * Good, because filing stops being a classification exercise. "Is decomposing this god object debt
-  or architecture? Is a long-standing parser defect a bug, debt, or a specification gap?" — the
+  or architecture? Is a long-standing parser defect a bug, debt, or a specification gap?" - the
   boundary is genuinely fuzzy, and with one list the answer only changes a tag rather than a
   location.
 * Bad, because the worry behind the request is real and this decision does not address it. If debt
-  items are being drowned, that is a ranking problem, and the answer is to rank them higher — which
+  items are being drowned, that is a ranking problem, and the answer is to rank them higher - which
   is at least now possible, because they sit in the same list as the things outranking them.
-* Neutral: the general lesson, which ADR-0003 then repeated — this candidate split on **category**
+* Neutral: the general lesson, which ADR-0003 then repeated - this candidate split on **category**
   where the structure splits on tense, mutability and audience. Splitting on the wrong axis is what
   makes such files drift apart in format and go stale.

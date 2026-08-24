@@ -1,5 +1,5 @@
 #!/bin/sh
-# doc-kit-check — verify a repository against SPECIFICATION.md.
+# doc-kit-check - verify a repository against SPECIFICATION.md.
 #
 # Usage:  sh tools/doc-kit-check.sh [check ...]
 #         with no arguments, runs every check
@@ -12,16 +12,16 @@
 # requires it, and a repository that holds these properties without ever
 # running it is conformant (SPECIFICATION.md §6).
 #
-# On Windows use `sh`, not `bash` — the `bash` on PATH is usually WSL's, which
+# On Windows use `sh`, not `bash` - the `bash` on PATH is usually WSL's, which
 # sees a different filesystem and will report every file missing.
 #
 # §2.4's sweep queries gitignored files exactly like tracked ones, but a hit
-# in a gitignored file is reported as a WARN, never a FAIL — gitignored docs
+# in a gitignored file is reported as a WARN, never a FAIL - gitignored docs
 # (a vendored third-party tree, a personal working-notes convention) are a
 # real, recurring category this kit doesn't get to assume away, but they
 # should never block CI over content nobody asked this repository's map to
 # describe. This needs `git`; where it's unavailable, or the target isn't a
-# git work tree, every hit is a FAIL as before — the one point in this script
+# git work tree, every hit is a FAIL as before - the one point in this script
 # that isn't pure awk/sed/grep/find, and it degrades to the old behaviour
 # rather than erroring when git is missing.
 
@@ -57,7 +57,7 @@ is_ignored() {
 	git check-ignore -q "$1"
 }
 
-# section FILE HEADING — the lines under a "## Heading" up to the next "## "
+# section FILE HEADING - the lines under a "## Heading" up to the next "## "
 section() {
 	awk -v h="$2" '$0 == h { f = 1; next } /^## / && f { exit } f' "$1"
 }
@@ -70,10 +70,10 @@ table_paths() {
 
 # The layout block is an indented tree, to any depth; rebuild full paths from
 # it with a prefix stack keyed on indentation, not just one flat level. A line
-# is a container for what follows only when it is a *bare* `name/` — nothing
+# is a container for what follows only when it is a *bare* `name/` - nothing
 # else on the line. A directory named with trailing description text (e.g.
-# `templates/   product — ...`) is a leaf instead, representing the whole
-# directory as one artifact — matching a `dirname/*` row after norm() — the
+# `templates/   product - ...`) is a leaf instead, representing the whole
+# directory as one artifact - matching a `dirname/*` row after norm() - the
 # same distinction the original single-level parser relied on, now checked at
 # every depth rather than only at the top.
 layout_paths() {
@@ -133,9 +133,9 @@ check_map() {
 	lifes=$(table_paths '## Lifecycle' | norm | sort)
 	lays=$(layout_paths | norm | sort)
 
-	[ -n "$arts" ] || fail "the artifacts table names nothing" "§2.2 — is the heading exactly '## Artifacts'?"
+	[ -n "$arts" ] || fail "the artifacts table names nothing" "§2.2 - is the heading exactly '## Artifacts'?"
 
-	# §2.2 — all three lists name the same set, artifacts table authoritative.
+	# §2.2 - all three lists name the same set, artifacts table authoritative.
 	# Globbing off: these lists contain patterns like docs/adr/*.md, and an
 	# unquoted loop would expand them into the files they match.
 	set -f
@@ -147,18 +147,18 @@ check_map() {
 	done
 	for l in $lifes; do
 		printf '%s\n' "$arts" | grep -qxF "$l" ||
-			fail "$l is in the lifecycle table but not the artifacts table" "§2.2 — the table is authoritative"
+			fail "$l is in the lifecycle table but not the artifacts table" "§2.2 - the table is authoritative"
 	done
 
-	# §2.3 — every artifact the map names exists.
+	# §2.3 - every artifact the map names exists.
 	for a in $arts; do
 		set +f
 		pattern_exists "$a" ||
-			fail "the map names $a but nothing matches it" "§2.3 — create it, or remove the row"
+			fail "the map names $a but nothing matches it" "§2.3 - create it, or remove the row"
 		set -f
 	done
 
-	# §2.4 — every documentation file appears in the map.
+	# §2.4 - every documentation file appears in the map.
 	set +f
 	files=$(find . -name '*.md' ! -path './.git/*' | sed 's:^\./::' | sort)
 	set -f
@@ -172,15 +172,15 @@ check_map() {
 		if [ "$hit" -ne 0 ]; then
 			if is_ignored "$f"; then
 				warn "$f is not named in the map (gitignored)" \
-					"§2.4 — add a row, or move it under an archive"
+					"§2.4 - add a row, or move it under an archive"
 			else
-				fail "$f is not named in the map" "§2.4 — add a row, or move it under an archive"
+				fail "$f is not named in the map" "§2.4 - add a row, or move it under an archive"
 			fi
 		fi
 	done
 	set +f
 
-	# §2.7 — tense and durability come from closed sets, and no two artifacts share all three
+	# §2.7 - tense and durability come from closed sets, and no two artifacts share all three
 	# properties. Free text defeats the test: near-duplicates escape on phrasing. Aliases, which
 	# hold no content of their own, are exempt.
 	rows=$(section "$MAP" '## Artifacts' | grep '^| `' | grep -v '\*\*Alias\*\*' |
@@ -195,11 +195,11 @@ check_map() {
 		art=$(printf '%s' "$row" | cut -d'~' -f1)
 		case "$tense" in
 			present|past|future|imperative|explanatory) ;;
-			*) fail "$art has tense '$tense'" "§2.7 — present, past, future, imperative, explanatory" ;;
+			*) fail "$art has tense '$tense'" "§2.7 - present, past, future, imperative, explanatory" ;;
 		esac
 		case "$dur" in
 			"rewritten in place"|append-only|immutable|volatile|disposable) ;;
-			*) fail "$art has durability '$dur'" "§2.7 — see the permitted set" ;;
+			*) fail "$art has durability '$dur'" "§2.7 - see the permitted set" ;;
 		esac
 		IFS='
 '
@@ -208,10 +208,10 @@ check_map() {
 
 	for key in $(printf '%s\n' "$rows" | cut -d'~' -f2- | sort | uniq -d | tr ' ' '_'); do
 		fail "two artifacts share [$(printf '%s' "$key" | tr '_' ' ' | tr '~' '|')]" \
-			"§2.7 — merge them, or mark one an alias"
+			"§2.7 - merge them, or mark one an alias"
 	done
 
-	# §2.5 — customisation actually happened.
+	# §2.5 - customisation actually happened.
 	grep -q 'This file is a template' "$MAP" &&
 		fail "the map still carries template text" "§2.5"
 	return 0
@@ -230,17 +230,17 @@ check_adr() {
 		case "$base" in 0000-*) continue ;; esac
 
 		echo "$base" | grep -qE '^[0-9]{4}-[a-z0-9]+(-[a-z0-9]+)*\.md$' ||
-			fail "$f is misnamed" "§3.1 — NNNN-kebab-case-title.md"
+			fail "$f is misnamed" "§3.1 - NNNN-kebab-case-title.md"
 
 		status=$(sed -n 's/^status: *"\{0,1\}\([^"]*\)"\{0,1\} *$/\1/p' "$f" | head -n 1)
-		[ -n "$status" ] || fail "$f has no status" "§3.1 — MADR front-matter"
+		[ -n "$status" ] || fail "$f has no status" "§3.1 - MADR front-matter"
 
 		case "$status" in
 			proposed|rejected|accepted|deprecated) ;;
 			"superseded by ADR-"[0-9][0-9][0-9][0-9]) ;;
 			"accepted (refined by ADR-"[0-9][0-9][0-9][0-9]")") ;;
 			'') ;;
-			*) fail "$f has status '$status'" "§3.1 — see the table of permitted values" ;;
+			*) fail "$f has status '$status'" "§3.1 - see the table of permitted values" ;;
 		esac
 
 		# A forward pointer must name a record that exists.
@@ -251,10 +251,10 @@ check_adr() {
 
 		grep -q '^date:' "$f" || fail "$f has no date" "§3.1"
 		[ "$status" = proposed ] || grep -q '^decision-makers: *[^ ]' "$f" ||
-			fail "$f is '$status' but names no decision-makers" "§3.1 — who decided?"
+			fail "$f is '$status' but names no decision-makers" "§3.1 - who decided?"
 
 		for heading in '## Context and Problem Statement' '## Considered Options' '## Decision Outcome'; do
-			grep -qF "$heading" "$f" || fail "$f has no '$heading'" "§3.1 — MADR minimal template"
+			grep -qF "$heading" "$f" || fail "$f has no '$heading'" "§3.1 - MADR minimal template"
 		done
 	done
 
@@ -262,7 +262,7 @@ check_adr() {
 		[ -e "$f" ] || continue
 		basename "$f" | sed -n 's/^\([0-9]\{4\}\)-.*/\1/p'
 	done | sort | uniq -d)
-	for d in $dupes; do fail "ADR number $d is used more than once" "§3.1 — numbers are unique"; done
+	for d in $dupes; do fail "ADR number $d is used more than once" "§3.1 - numbers are unique"; done
 	return 0
 }
 
@@ -278,14 +278,14 @@ check_plan() {
 	for hit in $(IFS='
 '; grep -nE '^#+ .*(~~|\bDONE\b|\[x\]|\bCOMPLETED?\b)' PLAN.md | tr ' ' '_'); do
 		IFS=$oldifs
-		fail "PLAN.md:${hit%%:*} looks like a completed entry" "§3.3 — delete entries when done, do not annotate"
+		fail "PLAN.md:${hit%%:*} looks like a completed entry" "§3.3 - delete entries when done, do not annotate"
 	done
 	IFS=$oldifs
 
 	for line in $(grep -nE '^\*Type:' PLAN.md | tr ' ' '_'); do
 		no=${line%%:*}
-		printf '%s' "${line#*:}" | tr '_' ' ' | grep -qE '^\*Type: (bug|debt|feature|docs)( |—)' ||
-			fail "PLAN.md:$no has no valid type tag" "§3.3 — bug, debt, feature or docs"
+		printf '%s' "${line#*:}" | tr '_' ' ' | grep -qE '^\*Type: (bug|debt|feature|docs)( |-)' ||
+			fail "PLAN.md:$no has no valid type tag" "§3.3 - bug, debt, feature or docs"
 	done
 	return 0
 }
@@ -306,7 +306,7 @@ if [ "$failures" -eq 0 ]; then
 	if [ "$warnings" -eq 0 ]; then
 		printf 'doc-kit: conformant (%s)\n' "$*"
 	else
-		printf 'doc-kit: conformant (%s) — %s gitignored warning(s), see above\n' "$*" "$warnings"
+		printf 'doc-kit: conformant (%s) - %s gitignored warning(s), see above\n' "$*" "$warnings"
 	fi
 else
 	printf '\ndoc-kit: %s failure(s)' "$failures" >&2

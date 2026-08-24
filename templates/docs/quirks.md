@@ -10,8 +10,8 @@ search for the symbol finds the entry rather than requiring someone to read the 
 
 Two kinds of entry, and the distinction matters:
 
-- **Deliberate** — we differ on purpose, and intend to keep differing.
-- **Accepted-wrong** — we know this is incorrect and have not fixed it. Usually there is a test
+- **Deliberate** - we differ on purpose, and intend to keep differing.
+- **Accepted-wrong** - we know this is incorrect and have not fixed it. Usually there is a test
   asserting today's incorrect output, which is why recording it matters: without an entry here, the
   next person "fixes" the test and reintroduces the behaviour it was pinning.
 
@@ -20,7 +20,7 @@ Two kinds of entry, and the distinction matters:
 ## Short title
 
 **Kind:** accepted-wrong
-**Where:** the file, function or symbol this governs — the string someone would grep for on their
+**Where:** the file, function or symbol this governs - the string someone would grep for on their
 way to changing it. List every site if there is more than one.
 **Expected:** what the reference, specification or a reasonable reader would predict.
 **Actual:** what this project does.

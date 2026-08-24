@@ -1,4 +1,4 @@
-# Nightly link sweep. Infrastructure (ADR-0007) — configures this repository, never copied into an
+# Nightly link sweep. Infrastructure (ADR-0007) - configures this repository, never copied into an
 # adopting one. Mirrors the local `lychee-system` pre-commit hook's exact args (.pre-commit-config.yaml)
 # deliberately: two checks running the same command differently is drift waiting to happen.
 name: Link check

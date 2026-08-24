@@ -12,7 +12,7 @@ Adoption into a mature repository turns up documentation that is neither worth m
 delete: design notes from three reorganisations ago, a `docs/` folder nobody has opened in years, a
 file that describes behaviour which may or may not still be true.
 
-The initial framing was that the unmigratable material is what a reader cannot *read* — scanned
+The initial framing was that the unmigratable material is what a reader cannot *read* - scanned
 PDFs, binary diagram formats, whiteboard photographs, diagrams whose meaning is in their layout.
 That category is real but small, and capable readers, human or otherwise, keep shrinking it.
 
@@ -38,7 +38,7 @@ Chosen option: **quarantine in an archive directory**, under four rules:
 
 1. The archive holds material whose **currency cannot be established**, not merely material that is
    hard to read.
-2. Every archived file carries a **provenance header** — not authoritative, last known accurate
+2. Every archived file carries a **provenance header** - not authoritative, last known accurate
    when, why not migrated. A folder-level warning is not enough.
 3. Every entry states **why it was not migrated**.
 4. Archived files are **exempt** from the map's completeness check, and the archive appears in the
@@ -56,11 +56,11 @@ rejected because it is the laundering hazard above.
 * Good, because the per-file header protects readers who arrive by search and never see the folder.
   A `README.md` in the archive protects nobody; a file found by grep must carry its own warning.
 * Good, because requiring a stated reason per entry is what stops the archive becoming a landfill. A
-  blanket "here be dragons" folder is unfalsifiable and grows without limit — the plan-graveyard
+  blanket "here be dragons" folder is unfalsifiable and grows without limit - the plan-graveyard
   failure in a new location.
 * Bad, because rule 4 is a real concession. Without it the archive fights the completeness check on
   day one, and the predictable outcome is that someone disables the check rather than empties the
   archive.
-* Neutral: the archive may never be emptied. That is tolerable — an archive with honest headers is a
+* Neutral: the archive may never be emptied. That is tolerable - an archive with honest headers is a
   known-untrusted region, which is a stable state. The failure this prevents is not a large archive
   but a contaminated specification.

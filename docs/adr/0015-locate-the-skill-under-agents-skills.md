@@ -8,7 +8,7 @@ decision-makers: David Conneely
 
 ## Context and Problem Statement
 
-`doc-kit-adopt` — the skill that drives an adoption into another repository — lived at
+`doc-kit-adopt` - the skill that drives an adoption into another repository - lived at
 `.claude/skills/doc-kit-adopt/SKILL.md`, the conventional Claude Code project-skill location.
 Claude Code's own documentation map also lists `.agents/skills` as a recognised project-level skill
 location alongside `.claude/skills`. Given the kit already treats `AGENTS.md` at the repository root
@@ -26,9 +26,9 @@ skill's own location was inconsistent with that choice.
 
 Chosen option: move to `.agents/skills/doc-kit-adopt/`. Claude Code discovers skills there exactly
 as it does under `.claude/skills/`, so nothing is lost for this tool, and the path itself now
-signals — the same way root `AGENTS.md` does — that this is written for coding agents generally,
+signals - the same way root `AGENTS.md` does - that this is written for coding agents generally,
 not exclusively for one vendor's tool. Keeping both was rejected: a `SKILL.md` is not the kind of
-single-purpose pointer file `CLAUDE.md`→`AGENTS.md` aliasing suits (see `DOC-MAP.md` §2.7); it is the
+single-purpose pointer file `CLAUDE.md`->`AGENTS.md` aliasing suits (see `DOC-MAP.md` §2.7); it is the
 skill's entire content, and there is nothing for a second copy to point at without duplicating it.
 
 ### Consequences
@@ -37,5 +37,5 @@ skill's entire content, and there is nothing for a second copy to point at witho
   it.
 * Good, because nothing about Claude Code's own discovery of the skill changes.
 * Neutral: other tools that read `.agents/skills/` but expect a different frontmatter or invocation
-  convention than Claude Code's `SKILL.md` format would still need their own adapter — this move
+  convention than Claude Code's `SKILL.md` format would still need their own adapter - this move
   signals intent, it does not itself guarantee cross-tool compatibility.

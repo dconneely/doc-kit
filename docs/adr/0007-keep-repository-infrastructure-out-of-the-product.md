@@ -13,8 +13,8 @@ answer a question that arrives immediately afterwards: this repository also cont
 configure *itself*. A `.gitattributes` today; plausibly a pre-commit configuration, CI workflows and
 an `.editorconfig` later. An adopter has files like those too, so they present as product.
 
-Two things say otherwise. **Most of their content is not about documentation** — line endings for
-batch files, secret scanning, large-file limits — and the kit has no authority there. And **they
+Two things say otherwise. **Most of their content is not about documentation** - line endings for
+batch files, secret scanning, large-file limits - and the kit has no authority there. And **they
 collide**: a ten-year-old repository already has a `.gitattributes`, and quite possibly a
 `.pre-commit-config.yaml`. They could not be copied, only merged, and merging is an install
 operation the kit does not have and should not acquire for two files. Nothing else the kit ships has
@@ -40,7 +40,7 @@ kit can own?** Infrastructure fails the second half. A merge step was rejected a
 for two files, neither of which the kit has authority over.
 
 This is a documentation kit, not an infrastructure kit. **Any infrastructure it ever offers an
-adopter is optional** — made available, never applied. That is what distinguishes it from the
+adopter is optional** - made available, never applied. That is what distinguishes it from the
 templates, which adoption does apply. The rule holds for anything qualifying later: validation
 scripts are the obvious candidate, with CI workflow examples behind them. Nothing
 here forecloses such an artifact, and nothing here designs one.
@@ -48,20 +48,20 @@ here forecloses such an artifact, and nothing here designs one.
 Whatever ships, **adopting the documentation structure will never require running anything.**
 Conformance is a property of a repository's state, not of whether it executes our tooling.
 
-The single line of `.gitattributes` genuinely about documentation —
-`*.md text eol=lf diff=markdown` — ships as a documented snippet in `ADOPTING.md`, not as a file.
+The single line of `.gitattributes` genuinely about documentation -
+`*.md text eol=lf diff=markdown` - ships as a documented snippet in `ADOPTING.md`, not as a file.
 
 ### Consequences
 
-* Good, because this covers the cases arriving next — `.editorconfig`, CI workflow files, docs-site
-  configuration — without being revisited for each.
+* Good, because this covers the cases arriving next - `.editorconfig`, CI workflow files, docs-site
+  configuration - without being revisited for each.
 * Bad, because generic hygiene stays the adopter's business: they get no help from us with secret
-  scanning or line endings. Correct, though — those are well served by providers that do nothing
+  scanning or line endings. Correct, though - those are well served by providers that do nothing
   else.
 * Neutral: `SPECIFICATION.md` had to distinguish requirements on **repositories** from requirements
   on **checkers**. §2.3 stated that a check "MUST be enforced mechanically rather than by review",
   which made tooling a condition of conformance and contradicted this decision. Corrected as part of
   it.
 * Neutral: the open door must stay honestly open. It would be easy to read "validation scripts may
-  become product" as a commitment to build them. It is not — the kit works without any, and shipping
+  become product" as a commitment to build them. It is not - the kit works without any, and shipping
   none remains a legitimate outcome.

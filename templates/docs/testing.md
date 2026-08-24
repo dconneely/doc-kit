@@ -1,6 +1,6 @@
 # Testing
 
-The test strategy, and — the part that only lives here — what is deliberately **not** covered.
+The test strategy, and - the part that only lives here - what is deliberately **not** covered.
 
 ## What is verified
 
@@ -19,7 +19,7 @@ The section that earns this file. For each gap: what is uncovered, why that is a
 and what would change the answer.
 
 Without this, an uncovered area is indistinguishable from an oversight, and the reasoning survives
-only in a test comment nobody reads — or nowhere at all.
+only in a test comment nobody reads - or nowhere at all.
 
 ## Running them
 

@@ -19,7 +19,7 @@ than to the tool's opinion.
 
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
 (`.markdownlint-cli2.jsonc`), secrets, file hygiene, three `pygrep` drift guards for the failure
-this repository actually produces — a convention changed in one file and not the others — and
+this repository actually produces - a convention changed in one file and not the others - and
 Conventional Commits on the `commit-msg` stage, restricted to the six types this history uses.
 
 ## What is verified only approximately
@@ -30,19 +30,19 @@ standards body can reorganise a document without changing its URL. Last full swe
 unique links, all resolving (2 via redirect).
 
 **Commit types.** The commit-msg hook checks a subject's *shape*, not whether the type is the right
-one — `docs:` on a change to `templates/` passes and is still wrong, and that is the half of
+one - `docs:` on a change to `templates/` passes and is still wrong, and that is the half of
 ADR-0006's mapping worth catching. It also accepts `Feat:`, since the hook has no case-sensitivity
 option and `--strict` only blocks fixup and merge commits.
 
 **Line length.** `MD013` is not a strict character count. It applies wrap-feasibility heuristics and
-will pass a line a few characters over the limit, or one that cannot be broken at all — a long URL,
+will pass a line a few characters over the limit, or one that cannot be broken at all - a long URL,
 or a skill's single-line `description` in front matter. Measured directly, the boundary sat between
 102 and 105 characters against a configured limit of 100. Treat it as a guard against runaway lines
 rather than a precise gate.
 
 **Glob matching in §2.4.** A file is considered mapped if any artifact pattern matches it under
 shell `case` semantics, where `*` crosses `/`. So `templates/*` matches arbitrarily deep paths. That
-is deliberate — it is what makes a directory artifact work — but it means a coarse pattern can cover
+is deliberate - it is what makes a directory artifact work - but it means a coarse pattern can cover
 a file nobody intended to map.
 
 ## What is deliberately not covered
@@ -58,7 +58,7 @@ passes this repository has needed were all found by reading, not by tooling.
 
 **Specification clauses with no instance here.** §3.2 changelog categories, §3.4 research confidence
 levels, §3.5 quirk entry shape, and §5 archive provenance headers are unimplemented. Three of the
-four have nothing to check against — this repository has no quirks file and no archive — but the
+four have nothing to check against - this repository has no quirks file and no archive - but the
 changelog and research notes do exist, so those two are genuine omissions rather than vacuous ones.
 
 **Prose quality of any kind.** A repository can pass every check and be badly written. Structural
@@ -78,13 +78,13 @@ rely on all four:
 - **The hooks are tested with `prek` only**, not with `pre-commit` itself, though the config is
   meant for both.
 
-Step 4 — migration — is the largest of these. It is the half of the procedure the kit exists for,
+Step 4 - migration - is the largest of these. It is the half of the procedure the kit exists for,
 and it has never met somebody else's mess.
 
 ## The checker has no tests of its own
 
-It was verified by running it against deliberate violations — an unmapped file, a Title-Case status,
-a plan entry marked done — and confirming each was caught and that the repository was clean again
+It was verified by running it against deliberate violations - an unmapped file, a Title-Case status,
+a plan entry marked done - and confirming each was caught and that the repository was clean again
 afterwards. That is a manual ritual, not a suite, and it is not repeated on change.
 
 Four real bugs surfaced on first run, which is the argument for treating the tool with suspicion:
