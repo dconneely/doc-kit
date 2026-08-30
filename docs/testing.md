@@ -66,20 +66,19 @@ conformance is a floor.
 
 ## What has never been exercised
 
-Four claims this repository makes have no evidence behind them yet, and a release invites people to
-rely on all four:
+Two claims this repository makes have no evidence behind them yet, and a release invites people to
+rely on both:
 
 - **The checker has only run under Cygwin's `bash` on Windows.** It is POSIX shell and `shellcheck`
   passes, but it has never run on Linux, on macOS, or in CI.
-- **The `doc-kit-adopt` skill has never driven an adoption.** It is written, not exercised.
-- **No template has been copied into a real repository.** The structure is proven by
-  self-application, which is a weaker test: this repository was built structured rather than
-  migrated.
 - **The hooks are tested with `prek` only**, not with `pre-commit` itself, though the config is
   meant for both.
 
-Step 4 - migration - is the largest of these. It is the half of the procedure the kit exists for,
-and it has never met somebody else's mess.
+Two others no longer belong on this list. Independent repositories have since adopted the
+structure, including a migration into an existing, multi-module codebase - real templates, a real
+Step 4 worksheet, and a real mess. That doesn't retire Step 4 as a risk: each migration is still one
+data point, on repositories one person controls, and the procedure has yet to meet an adopter it
+disagrees with.
 
 ## The checker has no tests of its own
 
@@ -92,6 +91,13 @@ unquoted loops glob-expanding artifact patterns into the files they matched, art
 to `grep` as regexes so `*` was not literal, `grep -n`'s line prefix breaking a match, and a no-op
 `sed`. A checker that reports conformance while silently checking nothing is worse than no checker,
 and nothing currently protects against that.
+
+A fifth bug proved the point months later, not on first run: the plan check's type-tag regex
+required a single `*` before `Type:`, but every real `PLAN.md` - this repository's own, both
+adopting repositories', the template - has used `**Type:**` since the MD036 fix retired the
+single-asterisk format. The check matched zero lines in any of them and had been silently passing
+regardless of content since. Found only by reading real adopting repositories' output, not by
+anything here.
 
 ## Running everything
 

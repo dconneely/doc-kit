@@ -5,6 +5,22 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+### Changed
+
+- Non-ASCII prose punctuation (em/en dashes, curly quotes) normalised to ASCII throughout,
+  including `templates/`. No wording changed.
+
+### Fixed
+
+- `templates/PLAN.md` now cues "one paragraph each" at the point of use, linking to `DOC-MAP.md`
+  for the rule - the same point-of-use mitigation ADR-0011 already gave the ADR template, applied
+  to the one artifact it was missing from.
+- `tools/doc-kit-check.sh`'s plan check matched a type tag against `^\*Type:`, a single-asterisk
+  format retired by the MD036 fix in 0.2.0. Every real `PLAN.md` uses `**Type:**` and the check has
+  matched nothing since - conformant output regardless of content. Fixed to match the current
+  format; `docs/testing.md` records it as a fifth instance of the class of bug that section already
+  warned about.
+
 ## [0.3.0] - 2026-08-23
 
 ### Added

@@ -282,9 +282,9 @@ check_plan() {
 	done
 	IFS=$oldifs
 
-	for line in $(grep -nE '^\*Type:' PLAN.md | tr ' ' '_'); do
+	for line in $(grep -nE '^\*\*Type:\*\*' PLAN.md | tr ' ' '_'); do
 		no=${line%%:*}
-		printf '%s' "${line#*:}" | tr '_' ' ' | grep -qE '^\*Type: (bug|debt|feature|docs)( |-)' ||
+		printf '%s' "${line#*:}" | tr '_' ' ' | grep -qE '^\*\*Type:\*\* (bug|debt|feature|docs)( |-)' ||
 			fail "PLAN.md:$no has no valid type tag" "§3.3 - bug, debt, feature or docs"
 	done
 	return 0

@@ -1,7 +1,8 @@
 # Plan
 
 Single ranked backlog, most important first. Entries are **deleted** when done, never annotated -
-a plan that accumulates completed items stops being read.
+a plan that accumulates completed items stops being read. **One paragraph each** - see
+[DOC-MAP.md](DOC-MAP.md).
 
 ## Short title, imperative
 
