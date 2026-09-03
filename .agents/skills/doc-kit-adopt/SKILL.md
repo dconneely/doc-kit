@@ -14,7 +14,7 @@ You're running inside **doc-kit**. The target repository is elsewhere, given as 
 an adoption - not its map, plan, or changelog. Editing a path outside the target means you're
 damaging the kit, not adopting it.
 
-doc-kit's own `AGENTS.md` describes *this* repository, not the target - it doesn't apply there.
+doc-kit's own `AGENTS.md` describes _this_ repository, not the target - it doesn't apply there.
 
 Check the target's `git status` first. Anything already uncommitted there isn't yours - note it and
 keep it separate from what you touch, so it isn't swept into a summary or a blanket `git add -A`. A
@@ -48,7 +48,7 @@ Real adoptions span weeks and get interrupted. Before starting, check whether
   Step 0.
 - **It doesn't** - a fresh adoption. Start at Step 0.
 
-The worksheet *is* the state. Keeping it accurate matters more than speed - the next session has
+The worksheet _is_ the state. Keeping it accurate matters more than speed - the next session has
 nothing else to go on.
 
 ## Finishing

@@ -17,17 +17,17 @@ that repository appears in its map, and each fact in them sits in exactly one pl
 
 ## The idea, and why it shapes the procedure
 
-Three properties define every artifact - tense, mutability, audience - and documentation rots when
-a file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoning behind each):
+Three properties define every artifact - tense, mutability, audience - and documentation rots when a
+file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoning behind each):
 
-1. **Customise mostly by deleting.** Step 2 is a table of deletions and substitutions, not a
-   writing exercise.
+1. **Customise mostly by deleting.** Step 2 is a table of deletions and substitutions, not a writing
+   exercise.
 2. **What you keep is decided by capabilities, not taste.** Step 1 is an inventory, not a
    preference.
-3. **The rules are not customisable.** The three rules, the failure modes, and the test for adding
-   a document survive verbatim - not repeated here.
-4. **Resist growth.** Most proposed additions are a section or tag in something that already
-   exists, not a new file.
+3. **The rules are not customisable.** The three rules, the failure modes, and the test for adding a
+   document survive verbatim - not repeated here.
+4. **Resist growth.** Most proposed additions are a section or tag in something that already exists,
+   not a new file.
 
 One caveat for Step 2: this is not one standard. Paths and scope are yours to decide - a
 multi-module repository's structure is a real decision, not a default; names and formats are not
@@ -42,9 +42,9 @@ Two outputs: a decision, and `PLAN.md`.
 **Decide.** This structure costs more than it returns below a certain size. A single-purpose script,
 a repository one person will maintain for a month, or anything whose entire documentation genuinely
 fits in one honest `README.md` - or one tight `AGENTS.md` - should stop here. The signal to proceed
-is not size in lines but **more than one reader**: someone who has to obey the behaviour, or
-someone who will inherit the reasoning. Record the outcome either way - a rejection that is written
-down is a decision, and one that is not gets re-litigated every six months.
+is not size in lines but **more than one reader**: someone who has to obey the behaviour, or someone
+who will inherit the reasoning. Record the outcome either way - a rejection that is written down is
+a decision, and one that is not gets re-litigated every six months.
 
 **Then write `PLAN.md` before anything else.** It is the one artifact you can create knowing nothing
 about the repository yet, and the adoption work itself is its first content: one entry per artifact
@@ -71,16 +71,16 @@ is worse than its absence, because the map promises it.
 Most of these join the **specification** rather than becoming new categories, because they are
 present tense, always current, and a contract someone relies on.
 
-| If the project has... | It gains | Where it lands |
-| --- | --- | --- |
-| a data store | the schema (generated snapshot), plus a **data dictionary**: units, ownership, retention, which fields are sensitive, invariants constraints cannot express | specification |
-| | ordered migrations | changelog-shaped: an ordered, immutable-once-applied sequence is a changelog whatever it describes |
-| a network API | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth | specification |
-| | cross-cutting conventions: pagination, versioning, idempotency, error shape ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457); crib [Google AIP](https://google.aip.dev) or [Zalando](https://opensource.zalando.com/restful-api-guidelines/)) | specification |
-| deployment as a service | a **runbook** - deploy, roll back, common failures | neither: a how-to, different audience (on call) |
-| | environment and configuration reference ([12-Factor](https://12factor.net) conventions) | specification |
-| | a **threat model** ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) as the checklist) | neither: an assessment - its conclusions become records, its findings become plan entries |
-| a user interface | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/)) | target -> specification; gaps -> quirks |
+| If the project has...   | It gains                                                                                                                                                                                                                                         | Where it lands                                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| a data store            | the schema (generated snapshot), plus a **data dictionary**: units, ownership, retention, which fields are sensitive, invariants constraints cannot express                                                                                      | specification                                                                                      |
+|                         | ordered migrations                                                                                                                                                                                                                               | changelog-shaped: an ordered, immutable-once-applied sequence is a changelog whatever it describes |
+| a network API           | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth                                                                                             | specification                                                                                      |
+|                         | cross-cutting conventions: pagination, versioning, idempotency, error shape ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457); crib [Google AIP](https://google.aip.dev) or [Zalando](https://opensource.zalando.com/restful-api-guidelines/)) | specification                                                                                      |
+| deployment as a service | a **runbook** - deploy, roll back, common failures                                                                                                                                                                                               | neither: a how-to, different audience (on call)                                                    |
+|                         | environment and configuration reference ([12-Factor](https://12factor.net) conventions)                                                                                                                                                          | specification                                                                                      |
+|                         | a **threat model** ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) as the checklist)                                                                                                                    | neither: an assessment - its conclusions become records, its findings become plan entries          |
+| a user interface        | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/))                                                                                                                                                                      | target -> specification; gaps -> quirks                                                            |
 
 The pattern is worth internalising: **most new artifacts are specification members, not new
 categories.** Before inventing a category, check whether the thing is simply the contract in a
@@ -88,30 +88,30 @@ different medium.
 
 Two questions decide most of the rest:
 
-- **Is the specification one file or a tree?** One file until it stops being comfortable to read
-  end to end. Once it's a tree, members go under `docs/spec/` and `SPECIFICATION.md` becomes their
+- **Is the specification one file or a tree?** One file until it stops being comfortable to read end
+  to end. Once it's a tree, members go under `docs/spec/` and `SPECIFICATION.md` becomes their
   index - full shape, the routing-table point, and the layout-block gotcha are all in
   `ADOPTING-NOTES.md`.
-- **Does the specification include machine-readable members** - schemas, interface definitions?
-  If so, they are specification, not a separate category, and the link-never-restate rule applies.
+- **Does the specification include machine-readable members** - schemas, interface definitions? If
+  so, they are specification, not a separate category, and the link-never-restate rule applies.
 
 ## Step 2 - Edit the template
 
 Work top to bottom. Every edit is a deletion or a substitution; nothing needs to be invented.
 
-| In `DOC-MAP.md` | Do this |
-| --- | --- |
-| Filenames | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md` |
-| "Where does it go?" table | Delete rows for artifacts this repo does not have |
-| Layout block | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either - see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare - nothing else on it - or the checker reads it as one leaf artifact instead of a container |
-| Specification line | State whether it is one file or an index, and name its machine-readable members if any |
-| Artifacts table | Delete unused rows. Keep the standard links - they tell a future maintainer how much to trust each convention |
-| Lifecycle table | Delete the same rows, so the two tables stay aligned |
-| Flow | Keep, deleting any step that names an artifact you removed - most projects drop the optional task-note step |
-| Prescribed formats | Keep the formats for artifacts you kept; delete the rest |
-| "Machine-readable and generated parts" | Keep if anything here is generated or machine-readable; delete outright if the documentation is entirely hand-written prose |
-| Three rules, failure modes, "adding a new kind of document" | **Keep verbatim.** These are the parts that do the work, and they are the same in every repository |
-| "Deliberately not here" | Keep, and add anything else you consciously rejected for this repo |
+| In `DOC-MAP.md`                                             | Do this                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Filenames                                                   | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md`                                                                                                                                                                                                                                                               |
+| "Where does it go?" table                                   | Delete rows for artifacts this repo does not have                                                                                                                                                                                                                                                                                                                            |
+| Layout block                                                | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either - see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare - nothing else on it - or the checker reads it as one leaf artifact instead of a container |
+| Specification line                                          | State whether it is one file or an index, and name its machine-readable members if any                                                                                                                                                                                                                                                                                       |
+| Artifacts table                                             | Delete unused rows. Keep the standard links - they tell a future maintainer how much to trust each convention                                                                                                                                                                                                                                                                |
+| Lifecycle table                                             | Delete the same rows, so the two tables stay aligned                                                                                                                                                                                                                                                                                                                         |
+| Flow                                                        | Keep, deleting any step that names an artifact you removed - most projects drop the optional task-note step                                                                                                                                                                                                                                                                  |
+| Prescribed formats                                          | Keep the formats for artifacts you kept; delete the rest                                                                                                                                                                                                                                                                                                                     |
+| "Machine-readable and generated parts"                      | Keep if anything here is generated or machine-readable; delete outright if the documentation is entirely hand-written prose                                                                                                                                                                                                                                                  |
+| Three rules, failure modes, "adding a new kind of document" | **Keep verbatim.** These are the parts that do the work, and they are the same in every repository                                                                                                                                                                                                                                                                           |
+| "Deliberately not here"                                     | Keep, and add anything else you consciously rejected for this repo                                                                                                                                                                                                                                                                                                           |
 
 If the repository has house conventions the template does not mention - a naming scheme, a
 gitignored prefix for working documents, a docs directory that is generated - add a row for each
@@ -122,16 +122,16 @@ rather than leaving them undocumented.
 Everything in `templates/` maps onto your repository root at the same relative path, so copying is a
 matter of taking the ones Step 1 said you had earned:
 
-| From `templates/` | Take it when |
-| --- | --- |
-| `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always - the core five |
-| `docs/adr/0000-template.md` | always; records are worth having from day one, since their value is being written contemporaneously |
-| `docs/quirks.md` | you deviate from a reference, or carry behaviour you know is wrong |
-| `docs/glossary.md` | your domain has terms, or ordinary words used precisely |
-| `docs/testing.md` | you have more than one test approach |
-| `docs/research/0000-template.md` | you reverse-engineer, or reconcile sources that disagree |
-| `docs/tasks/` | your backlog is past roughly 20 items - plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
-| `docs/archive/README.md` | Step 4 turned up documentation whose currency you cannot establish |
+| From `templates/`                                                        | Take it when                                                                                                                         |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always - the core five                                                                                                               |
+| `docs/adr/0000-template.md`                                              | always; records are worth having from day one, since their value is being written contemporaneously                                  |
+| `docs/quirks.md`                                                         | you deviate from a reference, or carry behaviour you know is wrong                                                                   |
+| `docs/glossary.md`                                                       | your domain has terms, or ordinary words used precisely                                                                              |
+| `docs/testing.md`                                                        | you have more than one test approach                                                                                                 |
+| `docs/research/0000-template.md`                                         | you reverse-engineer, or reconcile sources that disagree                                                                             |
+| `docs/tasks/`                                                            | your backlog is past roughly 20 items - plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
+| `docs/archive/README.md`                                                 | Step 4 turned up documentation whose currency you cannot establish                                                                   |
 
 One file sits outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `SPECIFICATION.md`. Copy it too if you want the check; skip it if you would rather verify by
@@ -188,10 +188,9 @@ content in an `AGENTS.md` or `CLAUDE.md` you didn't write.** Create one if neith
 does, ask before editing it rather than pasting over it. If both exist and disagree, don't assume
 either is a stale duplicate of the other - ask how the user wants them reconciled; if it turns out
 they genuinely serve different audiences (`CLAUDE.md` for Claude Code specifically, `AGENTS.md` for
-other agents), the right answer may be that both stay content-bearing, both get their own row in
-the map, and the stanza below goes into both files rather than one. And flag it if any of these
-turn out to be untracked by git - an unusual state for a file whose whole purpose is being read by
-tooling.
+other agents), the right answer may be that both stay content-bearing, both get their own row in the
+map, and the stanza below goes into both files rather than one. And flag it if any of these turn out
+to be untracked by git - an unusual state for a file whose whole purpose is being read by tooling.
 
 The same rule extends to any other per-tool instruction file the repository might already have -
 `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, or similar. Check for
@@ -248,13 +247,13 @@ List every documentation file before touching any of them, in a worksheet:
 `docs/tasks/adopt-doc-kit.md`. This is the one case where `docs/tasks/` earns its place below the
 usual threshold, because migration is exactly the work that spans weeks and gets interrupted.
 
-| File | Tense | Destination | Disposition | Status |
-| --- | --- | --- | --- | --- |
-| `docs/design-notes.md` | mixed | spec + changelog | split | |
-| `docs/old-api.md` | present | - | archive | done |
+| File                   | Tense   | Destination      | Disposition | Status |
+| ---------------------- | ------- | ---------------- | ----------- | ------ |
+| `docs/design-notes.md` | mixed   | spec + changelog | split       |        |
+| `docs/old-api.md`      | present | -                | archive     | done   |
 
 **Tense** is the dominant one - present, past, future, or **mixed**. Mixed is not a failure to
-classify; it is the finding, and it always means *split*.
+classify; it is the finding, and it always means _split_.
 
 Cast wider than the repository. Wikis, Confluence spaces, shared drives and issue-tracker
 descriptions hold documentation too, and they are where the undatable material concentrates. List
@@ -268,14 +267,14 @@ emptied into its proper homes before it is deleted.
 
 Six, and every file gets exactly one:
 
-| Disposition | When | What it means |
-| --- | --- | --- |
-| **move** | one tense, wrong place | relocate as-is. Use `git mv` so history and blame survive |
-| **split** | mixed tense | divide by tense and file each part. The most common outcome, and the highest-value one |
-| **absorb** | belongs inside something that already exists | merge the content in, delete the original |
-| **archive** | currency cannot be established | to `docs/archive/` with a provenance header, never into the specification |
-| **delete** | superseded, duplicated, or wrong with nothing worth keeping | git still has it |
-| **leave** | already correct where it is | still has to appear in the map |
+| Disposition | When                                                        | What it means                                                                          |
+| ----------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **move**    | one tense, wrong place                                      | relocate as-is. Use `git mv` so history and blame survive                              |
+| **split**   | mixed tense                                                 | divide by tense and file each part. The most common outcome, and the highest-value one |
+| **absorb**  | belongs inside something that already exists                | merge the content in, delete the original                                              |
+| **archive** | currency cannot be established                              | to `docs/archive/` with a provenance header, never into the specification              |
+| **delete**  | superseded, duplicated, or wrong with nothing worth keeping | git still has it                                                                       |
+| **leave**   | already correct where it is                                 | still has to appear in the map                                                         |
 
 Two rules stop this going wrong. **Archive is not a synonym for "not sure yet"** - it is a positive
 finding that a claim cannot be dated, and promoting an undatable claim into the specification is
@@ -299,19 +298,18 @@ Watch for the tell that this has already cost something: an important item filed
 file, where nobody looks when deciding what to do next.
 
 **2. Look for decisions living in code comments - or in the specification's own prose.** A comment
-explaining why something is *not* written the obvious way - especially one added after a painful
+explaining why something is _not_ written the obvious way - especially one added after a painful
 debugging session - is an ADR that was never filed. So is a present-tense specification or
-architecture page's aside explaining not just *what* the system does but *why a rejected
-alternative was wrong*; that mix is easy to write without noticing, since the surrounding page
-reads as ordinary reference prose. Do not stop at code comments - a page-by-page read of the docs
-usually turns up more of these than the comments do. These are the highest-value ADRs precisely
-because the reasoning is invisible from the code (or from a skim of the spec), so the next
-maintainer will "simplify" the constraint away and reintroduce the bug it prevents. Convert it and
-leave a one-line pointer behind.
+architecture page's aside explaining not just _what_ the system does but _why a rejected alternative
+was wrong_; that mix is easy to write without noticing, since the surrounding page reads as ordinary
+reference prose. Do not stop at code comments - a page-by-page read of the docs usually turns up
+more of these than the comments do. These are the highest-value ADRs precisely because the reasoning
+is invisible from the code (or from a skim of the spec), so the next maintainer will "simplify" the
+constraint away and reintroduce the bug it prevents. Convert it and leave a one-line pointer behind.
 
-**3. Look for findings with sources.** Anything citing external references, reconciling sources
-that disagree, or carrying a confidence level is research and needs a home before the details fade.
-This is the artifact most often missing entirely.
+**3. Look for findings with sources.** Anything citing external references, reconciling sources that
+disagree, or carrying a confidence level is research and needs a home before the details fade. This
+is the artifact most often missing entirely.
 
 **4. Only then consider artifacts the template does not have.** By this point most candidates will
 have turned out to be sections of documents that already exist. Apply the test in the map's "adding

@@ -11,11 +11,11 @@ a reader.
 cites the `SPECIFICATION.md` clause it comes from, so a failure is traceable to the contract rather
 than to the tool's opinion.
 
-| Group | Verified |
-| --- | --- |
-| `map` | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `templates/` and `docs/archive/` is named by some artifact pattern (§2.4). No template placeholder text survives (§2.5) |
-| `adr` | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` from the permitted set, a `date`, and `decision-makers` on anything past `proposed`. Forward pointers name a record that exists. The three MADR minimal headings are present (§3.1) |
-| `plan` | No entry is annotated done, struck through or marked completed. Every entry carries a valid type tag (§3.3) |
+| Group  | Verified                                                                                                                                                                                                                                                                                                                                   |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `map`  | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `templates/` and `docs/archive/` is named by some artifact pattern (§2.4). No template placeholder text survives (§2.5) |
+| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` from the permitted set, a `date`, and `decision-makers` on anything past `proposed`. Forward pointers name a record that exists. The three MADR minimal headings are present (§3.1)                                                        |
+| `plan` | No entry is annotated done, struck through or marked completed. Every entry carries a valid type tag (§3.3)                                                                                                                                                                                                                                |
 
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
 (`.markdownlint-cli2.jsonc`), secrets, file hygiene, three `pygrep` drift guards for the failure
@@ -29,7 +29,7 @@ locally, and reports HTTP status rather than whether a page still says what it w
 standards body can reorganise a document without changing its URL. Last full sweep: 2026-08-23, 43
 unique links, all resolving (2 via redirect).
 
-**Commit types.** The commit-msg hook checks a subject's *shape*, not whether the type is the right
+**Commit types.** The commit-msg hook checks a subject's _shape_, not whether the type is the right
 one - `docs:` on a change to `templates/` passes and is still wrong, and that is the half of
 ADR-0006's mapping worth catching. It also accepts `Feat:`, since the hook has no case-sensitivity
 option and `--strict` only blocks fixup and merge commits.
@@ -74,10 +74,10 @@ rely on both:
 - **The hooks are tested with `prek` only**, not with `pre-commit` itself, though the config is
   meant for both.
 
-Two others no longer belong on this list. Independent repositories have since adopted the
-structure, including a migration into an existing, multi-module codebase - real templates, a real
-Step 4 worksheet, and a real mess. That doesn't retire Step 4 as a risk: each migration is still one
-data point, on repositories one person controls, and the procedure has yet to meet an adopter it
+Two others no longer belong on this list. Independent repositories have since adopted the structure,
+including a migration into an existing, multi-module codebase - real templates, a real Step 4
+worksheet, and a real mess. That doesn't retire Step 4 as a risk: each migration is still one data
+point, on repositories one person controls, and the procedure has yet to meet an adopter it
 disagrees with.
 
 ## The checker has no tests of its own

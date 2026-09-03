@@ -15,9 +15,9 @@ worry behind the request - that debt items get drowned by feature items and neve
 
 ## Considered Options
 
-* A separate `DEBT.md` or `docs/debt.md` alongside `PLAN.md`
-* A type tag within the single ranked plan
-* A separate section within `PLAN.md`, ranked independently
+- A separate `DEBT.md` or `docs/debt.md` alongside `PLAN.md`
+- A type tag within the single ranked plan
+- A separate section within `PLAN.md`, ranked independently
 
 ## Decision Outcome
 
@@ -30,16 +30,16 @@ reason as a separate file: it prevents the comparison that matters.
 
 ### Consequences
 
-* Good, because the trade-off that matters most stays visible. Debt versus feature can only be
+- Good, because the trade-off that matters most stays visible. Debt versus feature can only be
   decided inside one ordered list; two lists mean the comparison never happens, and the second list
   is the one that stops being read.
-* Good, because filing stops being a classification exercise. "Is decomposing this god object debt
+- Good, because filing stops being a classification exercise. "Is decomposing this god object debt
   or architecture? Is a long-standing parser defect a bug, debt, or a specification gap?" - the
   boundary is genuinely fuzzy, and with one list the answer only changes a tag rather than a
   location.
-* Bad, because the worry behind the request is real and this decision does not address it. If debt
+- Bad, because the worry behind the request is real and this decision does not address it. If debt
   items are being drowned, that is a ranking problem, and the answer is to rank them higher - which
   is at least now possible, because they sit in the same list as the things outranking them.
-* Neutral: the general lesson, which ADR-0003 then repeated - this candidate split on **category**
+- Neutral: the general lesson, which ADR-0003 then repeated - this candidate split on **category**
   where the structure splits on tense, mutability and audience. Splitting on the wrong axis is what
   makes such files drift apart in format and go stale.

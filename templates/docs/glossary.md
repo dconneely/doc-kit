@@ -14,4 +14,4 @@ Definitions live here once. Every other document links rather than re-defining.
 the ordinary meaning, say what it excludes; that is usually the useful half.
 
 **Term with a rejected synonym** - the definition. Note the word this project deliberately does
-*not* use for it, and why, if a reader is likely to reach for it.
+_not_ use for it, and why, if a reader is likely to reach for it.

@@ -19,11 +19,11 @@ every other developer's agent then reads as settled constraint.
 
 Three properties of this structure make that worse rather than better:
 
-* `AGENTS.md` and the map explicitly direct agents to records for the reasoning behind constraints,
+- `AGENTS.md` and the map explicitly direct agents to records for the reasoning behind constraints,
   so a trust channel exists and is currently unguarded.
-* An accepted record is immutable by design, so a mistaken one is **sticky**: correcting it requires
+- An accepted record is immutable by design, so a mistaken one is **sticky**: correcting it requires
   writing a successor, which is heavy machinery for content nobody decided.
-* Volume alone degrades the set. A directory of forty records, most of them unconsidered, is one
+- Volume alone degrades the set. A directory of forty records, most of them unconsidered, is one
   nobody reads carefully, which costs the ten real ones their authority.
 
 What was not known when the structure was designed: how cheap authoring would become relative to
@@ -31,9 +31,9 @@ deciding. The two were previously the same act, and the structure quietly assume
 
 ## Considered Options
 
-* Leave it to review, with no stated rule
-* Forbid tools from authoring records at all
-* Separate authoring from accepting, and reserve only the second
+- Leave it to review, with no stated rule
+- Forbid tools from authoring records at all
+- Separate authoring from accepting, and reserve only the second
 
 ## Decision Outcome
 
@@ -58,15 +58,15 @@ excluded from this structure and should not be told they are.
 
 ### Consequences
 
-* Good, because the blast radius of an over-productive tool is limited to clutter - recoverable in a
+- Good, because the blast radius of an over-productive tool is limited to clutter - recoverable in a
   way false constraint is not, since a `proposed` record can simply be deleted.
-* Good, because the cost is one word edited by a person. Deliberately trivial: a control expensive
+- Good, because the cost is one word edited by a person. Deliberately trivial: a control expensive
   enough to resent is one that gets bypassed.
-* Bad, because the rule is not mechanically enforceable and we do not pretend otherwise. Commit
+- Bad, because the rule is not mechanically enforceable and we do not pretend otherwise. Commit
   metadata can be set by anything. It is a convention held by review, whose value is being written
   down so a reviewer seeing a tool-authored status flip knows to object.
-* Neutral: clutter remains a real cost even when inert, and the plan should carry an entry when it
+- Neutral: clutter remains a real cost even when inert, and the plan should carry an entry when it
   appears.
-* Neutral: ADR-0010 later adopted MADR front-matter, whose `decision-makers` field records *who*
+- Neutral: ADR-0010 later adopted MADR front-matter, whose `decision-makers` field records _who_
   decided. Its presence on a non-proposed record is checkable, which is a stronger signal than this
   decision could offer on its own.

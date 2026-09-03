@@ -6,8 +6,8 @@ them decoratively.
 
 ## 1. Scope
 
-What this document covers, and what it deliberately does not. Name the boundary explicitly -
-readers otherwise assume silence means "unspecified" when it often means "elsewhere".
+What this document covers, and what it deliberately does not. Name the boundary explicitly - readers
+otherwise assume silence means "unspecified" when it often means "elsewhere".
 
 ## 2. Terms
 

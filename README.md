@@ -31,15 +31,15 @@ an honest `README.md` beats this structure until there is more to say than fits 
 
 ## What's here
 
-| Path | What it is |
-| --- | --- |
-| `ADOPTING.md` | Product - the procedure: decide, inventory, customise, create, migrate, verify |
-| `ADOPTING-NOTES.md` | Product - the reasoning, for when the procedure will not settle a case |
-| `templates/` | Product - copy into the target repository and customise by deletion |
-| `SPECIFICATION.md` | What a conformant repository looks like - the contract a checker enforces |
-| `DOC-MAP.md` | This repository's own map, produced by applying the kit to itself |
-| `docs/adr/` | Why the kit is shaped this way |
-| `tools/` | An optional conformance checker |
+| Path                | What it is                                                                     |
+| ------------------- | ------------------------------------------------------------------------------ |
+| `ADOPTING.md`       | Product - the procedure: decide, inventory, customise, create, migrate, verify |
+| `ADOPTING-NOTES.md` | Product - the reasoning, for when the procedure will not settle a case         |
+| `templates/`        | Product - copy into the target repository and customise by deletion            |
+| `SPECIFICATION.md`  | What a conformant repository looks like - the contract a checker enforces      |
+| `DOC-MAP.md`        | This repository's own map, produced by applying the kit to itself              |
+| `docs/adr/`         | Why the kit is shaped this way                                                 |
+| `tools/`            | An optional conformance checker                                                |
 
 **This repository is an adopted instance of itself.** Its map, specification, plan, records and
 research notes are what the structure looks like in use, rather than what it looks like on a
@@ -87,6 +87,6 @@ to edit should not follow you home.
 
 ## Status
 
-Released, and still early. The structure, the procedure and the checker are settled and in use
-here; no other repository has adopted it yet, so nothing has been tested against someone else's
-mess. See `CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.
+Released, and still early. The structure, the procedure and the checker are settled and in use here;
+no other repository has adopted it yet, so nothing has been tested against someone else's mess. See
+`CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.

@@ -1,8 +1,8 @@
 # Adoption notes
 
 The reasoning behind the structure, and what to do when the procedure will not settle a case by
-itself. None of it is needed to apply [`ADOPTING.md`](ADOPTING.md) Steps 0-5 - come back here when
-a decision resists, or when something is not working.
+itself. None of it is needed to apply [`ADOPTING.md`](ADOPTING.md) Steps 0-5 - come back here when a
+decision resists, or when something is not working.
 
 ## Why the procedure is shaped the way it is
 
@@ -19,9 +19,9 @@ pruned with confidence. `ADOPTING.md`'s four numbered consequences all follow fr
 3. **The rules are not the customisable part.** The three rules, the failure modes and the test for
    adding a new document survive customisation verbatim. They are what stops the structure decaying
    back into the mixed-tense file it replaced.
-4. **Resist growth.** Most proposed additions share all three properties with something that
-   already exists, which makes them a section or a tag rather than a file. The structure works
-   because it is small enough to hold in your head.
+4. **Resist growth.** Most proposed additions share all three properties with something that already
+   exists, which makes them a section or a tag rather than a file. The structure works because it is
+   small enough to hold in your head.
 
 ## Judgement calls
 
@@ -80,7 +80,7 @@ entry rather than deleting a note that describes real work).
 No. Debt is a **type tag within the single ranked plan**, alongside `bug`, `feature` and `docs`.
 
 The worry behind the request - that features drown debt - is real, and the answer is ranking it
-higher, not filing it elsewhere. Splitting by *category* where the structure splits on tense,
+higher, not filing it elsewhere. Splitting by _category_ where the structure splits on tense,
 mutability and audience is what makes such files drift apart and go stale; the argument is
 [ADR-0002](docs/adr/0002-keep-technical-debt-in-the-plan.md), and it generalises to most proposed
 additions.
@@ -89,7 +89,7 @@ additions.
 
 Into the **specification**. They pass the same three tests as prose reference material - present
 tense, rewritten in place, audience of users and implementers - and being machine-checked makes them
-*better* specification, not something lesser.
+_better_ specification, not something lesser.
 
 Applying those tests reclassifies more than it adds: a conformance target is specification while its
 known gaps are quirks; a runbook is a procedure for a different audience at a different moment; a
@@ -122,7 +122,7 @@ docs/
 ```
 
 The checker's layout parser follows genuine nesting to any depth. The one thing it still needs: a
-line that introduces a directory *for what's indented under it* must be bare - nothing else on that
+line that introduces a directory _for what's indented under it_ must be bare - nothing else on that
 line. A directory named with trailing description text (`templates/   product - ...`) is read as a
 leaf representing the whole directory as one artifact instead, which is also a real, useful shape -
 just a different one from a container with children.
@@ -177,7 +177,7 @@ of repositories genuinely need none of them - but if you are adopting more than 
 is the order to do it in.
 
 1. **A deviation register (`docs/quirks.md`)** - answers "is this a bug or a decision?" for anyone
-   comparing behaviour against a reference. Extend it to *accepted-wrong* behaviour: a known defect
+   comparing behaviour against a reference. Extend it to _accepted-wrong_ behaviour: a known defect
    with a test asserting today's incorrect output is a quirk with an expiry date, and recording it
    stops the next person "fixing" the test. It is first because it is the only artifact here that
    says **do not change this**, and because the reader most likely to need telling is a coding
@@ -203,77 +203,71 @@ libraries or tools), and `docs/tasks/` (overhead exceeds value below ~20 open it
 
 Where people actually get stuck, and what the difficulty usually means.
 
-**"I cannot decide which file this belongs in."**
-Usually the sentence contains two facts. Split it and file each half; that resolves most cases. If
-one fragment still resists, ask what would make it *wrong*: a wrong statement about behaviour is a
-specification defect, a wrong statement about reasoning is an ADR to supersede, a wrong statement
-about what happened is a changelog error. Whichever question stings, that is the home.
+**"I cannot decide which file this belongs in."** Usually the sentence contains two facts. Split it
+and file each half; that resolves most cases. If one fragment still resists, ask what would make it
+_wrong_: a wrong statement about behaviour is a specification defect, a wrong statement about
+reasoning is an ADR to supersede, a wrong statement about what happened is a changelog error.
+Whichever question stings, that is the home.
 
-**"This looks like both an ADR and a research note."**
-Did you *choose* something, or *learn* something? A choice has alternatives that were rejected - an
-ADR. A finding is a fact about the world that would be true whoever discovered it - research. An
-investigation that led to a decision produces both: the finding, and an ADR that cites it. That is
-not duplication, because they answer different questions and decay differently.
+**"This looks like both an ADR and a research note."** Did you _choose_ something, or _learn_
+something? A choice has alternatives that were rejected - an ADR. A finding is a fact about the
+world that would be true whoever discovered it - research. An investigation that led to a decision
+produces both: the finding, and an ADR that cites it. That is not duplication, because they answer
+different questions and decay differently.
 
-**"Everything seems to belong in the specification."**
-That is usually correct and not a problem. The specification is a set, and most of what a project
-knows about itself is present-tense contract. Grow it into a tree with an index rather than
-inventing categories. Pull something out only when its tense, mutability *and* audience genuinely
-differ.
+**"Everything seems to belong in the specification."** That is usually correct and not a problem.
+The specification is a set, and most of what a project knows about itself is present-tense contract.
+Grow it into a tree with an index rather than inventing categories. Pull something out only when its
+tense, mutability _and_ audience genuinely differ.
 
-**"The README and the specification overlap."**
-The README orients and links; the specification defines and constrains. A useful test: if the
-sentence would survive a complete reimplementation, it is probably README. If it would have to be
-obeyed by that reimplementation, it is specification.
+**"The README and the specification overlap."** The README orients and links; the specification
+defines and constrains. A useful test: if the sentence would survive a complete reimplementation, it
+is probably README. If it would have to be obeyed by that reimplementation, it is specification.
 
-**"I have a document I cannot classify at all."**
-Two likely cases. It is a disposable working note, in which case it is a task file and can be
-deleted when the work lands. Or it is two documents sharing a filename - try splitting it by tense
-before trying to classify it whole.
+**"I have a document I cannot classify at all."** Two likely cases. It is a disposable working note,
+in which case it is a task file and can be deleted when the work lands. Or it is two documents
+sharing a filename - try splitting it by tense before trying to classify it whole.
 
-**"The plan has grown to dozens of items and ranking has stopped meaning anything."**
-You are past the ceiling a file-based backlog was ever meant to serve. Move it to an issue tracker
-and leave a pointer in `PLAN.md`. This is a success condition, not a failure.
+**"The plan has grown to dozens of items and ranking has stopped meaning anything."** You are past
+the ceiling a file-based backlog was ever meant to serve. Move it to an issue tracker and leave a
+pointer in `PLAN.md`. This is a success condition, not a failure.
 
-**"Deleting completed plan entries feels like erasing our engineering history."**
-It isn't; it just leaves it where it belongs. Version control (`git log`) natively preserves
-the complete, accurate history of what was done and why. Annotating a plan with "DONE" or
-maintaining an internal changelog just creates a redundant prose log that competes with git
-and eventually rots.
+**"Deleting completed plan entries feels like erasing our engineering history."** It isn't; it just
+leaves it where it belongs. Version control (`git log`) natively preserves the complete, accurate
+history of what was done and why. Annotating a plan with "DONE" or maintaining an internal changelog
+just creates a redundant prose log that competes with git and eventually rots.
 
-**"Nobody updates the changelog."**
-Do not hand-maintain it per commit - that is the version that always decays. Generate it from
-Conventional Commits, or write it once per release from the commit range. If there are no releases
-yet, you do not need one yet.
+**"Nobody updates the changelog."** Do not hand-maintain it per commit - that is the version that
+always decays. Generate it from Conventional Commits, or write it once per release from the commit
+range. If there are no releases yet, you do not need one yet.
 
-**"The map has drifted from reality."**
-Only two checks actually rot: every artifact named in the map exists, and every documentation file
-appears in the map. Wire those into review, or into a CI check over filenames, rather than relying
-on anyone remembering. The rest of the map changes rarely enough to look after itself.
+**"The map has drifted from reality."** Only two checks actually rot: every artifact named in the
+map exists, and every documentation file appears in the map. Wire those into review, or into a CI
+check over filenames, rather than relying on anyone remembering. The rest of the map changes rarely
+enough to look after itself.
 
-**"I want to add a new file and it genuinely seems necessary."**
-Apply the three-property test honestly, and note that it failed twice during this template's own
-development - technical debt and machine-readable contracts both looked like obvious new categories
-and both turned out to belong somewhere that already existed. If it passes, add it to both tables
-in the map in the same commit.
+**"I want to add a new file and it genuinely seems necessary."** Apply the three-property test
+honestly, and note that it failed twice during this template's own development - technical debt and
+machine-readable contracts both looked like obvious new categories and both turned out to belong
+somewhere that already existed. If it passes, add it to both tables in the map in the same commit.
 
-**"Do documentation changes need approving?"**
-One does. Accepting an ADR is the only moment this structure asks for agreement, because it is the
-only artifact that cannot be corrected afterwards. Everything else is rewritten in place or deleted
-freely, and ordinary review covers it. If you already have pull requests you already have the gate:
-leave a record `proposed` while it is being argued - merging it undecided is fine and makes the open
-question visible - and merge the flip to `accepted` once it is settled. Resist adding ceremony to
-the plan in particular; friction at capture is what empties a backlog.
+**"Do documentation changes need approving?"** One does. Accepting an ADR is the only moment this
+structure asks for agreement, because it is the only artifact that cannot be corrected afterwards.
+Everything else is rewritten in place or deleted freely, and ordinary review covers it. If you
+already have pull requests you already have the gate: leave a record `proposed` while it is being
+argued - merging it undecided is fine and makes the open question visible - and merge the flip to
+`accepted` once it is settled. Resist adding ceremony to the plan in particular; friction at capture
+is what empties a backlog.
 
-**"There is an ADR I now think was wrong."**
-Leave it alone and write the replacement, marking the old one superseded. A wrong decision plus its
-supersession tells a future reader far more than a tidy history in which nobody was ever mistaken -
-including *why* the reasoning looked sound at the time, which is what stops it being repeated.
+**"There is an ADR I now think was wrong."** Leave it alone and write the replacement, marking the
+old one superseded. A wrong decision plus its supersession tells a future reader far more than a
+tidy history in which nobody was ever mistaken - including _why_ the reasoning looked sound at the
+time, which is what stops it being repeated.
 
-**"This feels like a large migration and I keep not starting it."**
-It is not all-or-nothing. Steps 1-3 - write the map, create the files it promises - are worth doing
-on their own and take an afternoon. Step 4 can then proceed one artifact at a time, indefinitely.
-An honest map over a partly-migrated repository is already better than no map.
+**"This feels like a large migration and I keep not starting it."** It is not all-or-nothing. Steps
+1-3 - write the map, create the files it promises - are worth doing on their own and take an
+afternoon. Step 4 can then proceed one artifact at a time, indefinitely. An honest map over a
+partly-migrated repository is already better than no map.
 
 ## The lesson worth carrying
 
@@ -282,7 +276,7 @@ debt, then machine-readable contracts. Both times the correct answer was that an
 already covered it, and the apparent need came from splitting on the wrong axis.
 
 So: **when something new turns up, test it against the existing categories before adding one.** Does
-it have a distinct tense, mutability *and* audience? If it shares all three with an existing
+it have a distinct tense, mutability _and_ audience? If it shares all three with an existing
 document, it is a section or a tag within that document. Most candidates fail this test, which is
 what keeps the structure small enough to survive.
 

@@ -17,14 +17,14 @@ classify - it is the finding, and it always means `split`.
 
 **Disposition** is exactly one of:
 
-| | When | What it means |
-| --- | --- | --- |
-| `move` | one tense, wrong place | relocate as-is, with `git mv` so history and blame survive |
-| `split` | mixed tense | divide by tense, file each part separately |
-| `absorb` | belongs inside something that already exists | merge in, delete the original |
-| `archive` | currency cannot be established | `docs/archive/` with a provenance header |
-| `delete` | superseded, duplicated, or wrong with nothing worth keeping | git still has it |
-| `leave` | already correct where it is | must still appear in the map |
+|           | When                                                        | What it means                                              |
+| --------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
+| `move`    | one tense, wrong place                                      | relocate as-is, with `git mv` so history and blame survive |
+| `split`   | mixed tense                                                 | divide by tense, file each part separately                 |
+| `absorb`  | belongs inside something that already exists                | merge in, delete the original                              |
+| `archive` | currency cannot be established                              | `docs/archive/` with a provenance header                   |
+| `delete`  | superseded, duplicated, or wrong with nothing worth keeping | git still has it                                           |
+| `leave`   | already correct where it is                                 | must still appear in the map                               |
 
 | File or location | Tense | Destination | Disposition | Notes | Status |
 | ---------------- | ----- | ----------- | ----------- | ----- | ------ |
@@ -32,7 +32,7 @@ classify - it is the finding, and it always means `split`.
 
 ## Decisions found
 
-Comments and documents explaining why something is *not* written the obvious way. Each is an ADR
+Comments and documents explaining why something is _not_ written the obvious way. Each is an ADR
 that was never filed. Leave a one-line pointer behind at the original site.
 
 | Where it lives now | Proposed ADR title | Filed |

@@ -12,7 +12,7 @@ Adoption into a mature repository turns up documentation that is neither worth m
 delete: design notes from three reorganisations ago, a `docs/` folder nobody has opened in years, a
 file that describes behaviour which may or may not still be true.
 
-The initial framing was that the unmigratable material is what a reader cannot *read* - scanned
+The initial framing was that the unmigratable material is what a reader cannot _read_ - scanned
 PDFs, binary diagram formats, whiteboard photographs, diagrams whose meaning is in their layout.
 That category is real but small, and capable readers, human or otherwise, keep shrinking it.
 
@@ -28,9 +28,9 @@ folder. A confident migration is worse than no migration.
 
 ## Considered Options
 
-* Migrate everything, resolving currency by judgement
-* Delete what cannot be verified
-* Quarantine it in an archive directory, under explicit rules
+- Migrate everything, resolving currency by judgement
+- Delete what cannot be verified
+- Quarantine it in an archive directory, under explicit rules
 
 ## Decision Outcome
 
@@ -53,14 +53,14 @@ rejected because it is the laundering hazard above.
 
 ### Consequences
 
-* Good, because the per-file header protects readers who arrive by search and never see the folder.
+- Good, because the per-file header protects readers who arrive by search and never see the folder.
   A `README.md` in the archive protects nobody; a file found by grep must carry its own warning.
-* Good, because requiring a stated reason per entry is what stops the archive becoming a landfill. A
+- Good, because requiring a stated reason per entry is what stops the archive becoming a landfill. A
   blanket "here be dragons" folder is unfalsifiable and grows without limit - the plan-graveyard
   failure in a new location.
-* Bad, because rule 4 is a real concession. Without it the archive fights the completeness check on
+- Bad, because rule 4 is a real concession. Without it the archive fights the completeness check on
   day one, and the predictable outcome is that someone disables the check rather than empties the
   archive.
-* Neutral: the archive may never be emptied. That is tolerable - an archive with honest headers is a
+- Neutral: the archive may never be emptied. That is tolerable - an archive with honest headers is a
   known-untrusted region, which is a stable state. The failure this prevents is not a large archive
   but a contaminated specification.

@@ -2,9 +2,9 @@
 
 Orientation for coding agents working in this repository.
 
-**Read [`DOC-MAP.md`](DOC-MAP.md) before writing anything down.** It is the map: it says
-which file a given fact belongs in, and the answer is rarely the file you already have open. This
-page routes; the map decides.
+**Read [`DOC-MAP.md`](DOC-MAP.md) before writing anything down.** It is the map: it says which file
+a given fact belongs in, and the answer is rarely the file you already have open. This page routes;
+the map decides.
 
 ## Which document to trust
 
@@ -13,7 +13,7 @@ When two documents disagree, tense settles it:
 - **`SPECIFICATION.md`** - present tense, authoritative about what a conformant repository is.
 - **`CHANGELOG.md`** - past tense. Records what changed, never what is currently true.
 - **`PLAN.md`** - intent. Nothing described in it exists yet.
-- **`docs/adr/`** - past tense, and records *why*. Check `Status` before relying on one; it may have
+- **`docs/adr/`** - past tense, and records _why_. Check `Status` before relying on one; it may have
   been superseded.
 
 ## This repository is its own first adopter
@@ -41,9 +41,9 @@ reaches an adopter. See
   section - that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
-- **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map
-  names must exist, and every Markdown file must appear in the map. `tools/doc-kit-check.sh` will
-  tell you, but only if you run it.
+- **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map names
+  must exist, and every Markdown file must appear in the map. `tools/doc-kit-check.sh` will tell
+  you, but only if you run it.
 
 ## Changing the specification
 
@@ -70,11 +70,11 @@ is a finding to report, not an edit to make.
 
 ## Conventions
 
-British spelling throughout - *customise*, *behaviour*, *licence* as the noun - in prose we write.
+British spelling throughout - _customise_, _behaviour_, _licence_ as the noun - in prose we write.
 Never in quoted text: `LICENCE` holds verbatim MIT-0 and contains `sublicense`, which is correct and
-must stay. The same goes for anything quoted from a standard. Prose wraps at 100
-columns. Commit subjects follow Conventional Commits: product changes take `feat`/`fix`/`refactor`,
-this repository's own documentation takes `docs`.
+must stay. The same goes for anything quoted from a standard. Prose wraps at 100 columns. Commit
+subjects follow Conventional Commits: product changes take `feat`/`fix`/`refactor`, this
+repository's own documentation takes `docs`.
 
 Text an agent reads and acts on (`SKILL.md`, the `AGENTS.md` stanza, `ADOPTING.md`'s steps) gets cut
 hardest: shorter costs less context and is less likely to bury a rule until it's missed. Exception -

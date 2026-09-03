@@ -15,10 +15,10 @@ documentation artifact, on the reasoning that a how-to guide is documentation in
 
 That reasoning does not survive contact with what the kit actually is. Two tests disagree with it:
 
-* **What is it about?** Nothing in `ADOPTING.md` describes this repository. Delete every other file
-  here and not a word of it changes, because it describes what happens in the *adopter's*
+- **What is it about?** Nothing in `ADOPTING.md` describes this repository. Delete every other file
+  here and not a word of it changes, because it describes what happens in the _adopter's_
   repository. That is precisely what `templates/` does.
-* **What survives its deletion?** Deleting a library's how-to guide leaves a working library.
+- **What survives its deletion?** Deleting a library's how-to guide leaves a working library.
   Deleting `ADOPTING.md` leaves a folder of blank templates that nobody can apply. The procedure is
   not an explanation of the deliverable; it is half the deliverable.
 
@@ -29,9 +29,9 @@ argument unresolved.
 
 ## Considered Options
 
-* Keep `ADOPTING.md` as documentation, per the Diátaxis reading
-* Treat as product everything the kit ships for use elsewhere
-* Move `ADOPTING.md` under `templates/` so the layout encodes its classification
+- Keep `ADOPTING.md` as documentation, per the Diátaxis reading
+- Treat as product everything the kit ships for use elsewhere
+- Move `ADOPTING.md` under `templates/` so the layout encodes its classification
 
 ## Decision Outcome
 
@@ -39,7 +39,7 @@ Chosen option: **treat as product everything the kit ships for use in another re
 `ADOPTING.md`, the contents of `templates/`, and anything else it comes to ship for use elsewhere.
 All of it is source of truth, versioned and reviewed like code.
 
-The dividing question is what a file is *about*: product describes the adopter's repository,
+The dividing question is what a file is _about_: product describes the adopter's repository,
 documentation describes this one. Where a file describes the product rather than being it, it is
 documentation - which keeps `SPECIFICATION.md`, `README.md` and the map on the documentation side.
 `SPECIFICATION.md` is the case that fixes the boundary: it also concerns the adopter's repository,
@@ -55,15 +55,15 @@ it drew implicitly is now drawn explicitly.
 
 ### Consequences
 
-* Good, because future artifacts get classified before they are written: anything the kit ships for
+- Good, because future artifacts get classified before they are written: anything the kit ships for
   use elsewhere is product, reviewed as code, with its changes adopter-visible in the changelog.
-* Bad, because the map has to carry classification the filesystem does not. A reader cannot infer
+- Bad, because the map has to carry classification the filesystem does not. A reader cannot infer
   from `ADOPTING.md`'s path that it is product. Accepted because the map exists precisely to state
   what each file is; a directory layout encoding it would be a second source of truth.
-* Neutral: a question is left open - whether an adopter receives a copy of `ADOPTING.md` alongside
+- Neutral: a question is left open - whether an adopter receives a copy of `ADOPTING.md` alongside
   the templates. There is a real argument that they should, since a migration spans weeks and the
   procedure ought to be pinned locally rather than shifting underneath them. Deferred rather than
   guessed at, and to be settled wherever copying is eventually specified.
-* Neutral: the Diátaxis reading that produced the original misclassification is worth naming,
+- Neutral: the Diátaxis reading that produced the original misclassification is worth naming,
   because it will recur. Diátaxis classifies documentation by what a reader needs; it says nothing
   about whether a file is a deliverable. Asking it a question it does not answer is what went wrong.

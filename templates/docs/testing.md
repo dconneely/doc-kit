@@ -23,5 +23,5 @@ only in a test comment nobody reads - or nowhere at all.
 
 ## Running them
 
-The command. Anything a newcomer needs that is not obvious: fixtures, containers, environment,
-which suites are slow enough to skip locally.
+The command. Anything a newcomer needs that is not obvious: fixtures, containers, environment, which
+suites are slow enough to skip locally.

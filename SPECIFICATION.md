@@ -73,8 +73,8 @@ table, and treat the other two as views that must agree with it. When comparing,
 a trailing `/*` denote the same directory artifact.
 
 2.3 Every artifact named in the map MUST exist at the path the map gives. This is the check that
-rots first, and it SHOULD be given a mechanism - a checker, a review step, a release ritual -
-rather than left to memory.
+rots first, and it SHOULD be given a mechanism - a checker, a review step, a release ritual - rather
+than left to memory.
 
 2.4 Every documentation file MUST appear in the map, either individually or under a directory
 pattern the map names. This is the check that rots second.
@@ -84,15 +84,15 @@ unreplaced heading. Templates carry an example rather than instructions (ADR-001
 example is the signal that customisation was never finished.
 
 2.6 Paths in the map MUST be the repository's real paths. In a monorepo the per-module artifacts
-MUST sit under the module they describe, and only the map, `README.md`, `CHANGELOG.md` and
-`PLAN.md` remain at the root.
+MUST sit under the module they describe, and only the map, `README.md`, `CHANGELOG.md` and `PLAN.md`
+remain at the root.
 
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
 durability and an audience, drawn from these sets:
 
-| Property | Values |
-| --- | --- |
-| Tense | `present`, `past`, `future`, `imperative`, `explanatory` |
+| Property   | Values                                                                     |
+| ---------- | -------------------------------------------------------------------------- |
+| Tense      | `present`, `past`, `future`, `imperative`, `explanatory`                   |
 | Durability | `rewritten in place`, `append-only`, `immutable`, `volatile`, `disposable` |
 
 Audience is free text. Two artifacts sharing all three are one artifact: merge them, or make one a
@@ -133,7 +133,7 @@ it, don't block on it.
 - **Append-only** artifacts - the changelog - are gated by release, not by review.
 
 **Use the gate you already have.** For most projects that is the pull request, and the flip to
-`accepted` then costs nothing extra: merging it *is* the approval. Projects without pull requests
+`accepted` then costs nothing extra: merging it _is_ the approval. Projects without pull requests
 are not excluded - a meeting, a mailing list, or one person deciding all satisfy this specification,
 which requires that agreement be recorded, not that it be reached any particular way.
 
@@ -159,13 +159,13 @@ is usually a specification entry that has been misfiled.
 
 `status` MUST begin with exactly one of these, lowercase:
 
-| Value | Meaning |
-| --- | --- |
-| `proposed` | Suggested, not yet decided. Binds nothing |
-| `rejected` | Considered and turned down. Kept so the option is not re-proposed |
-| `accepted` | Decided and in effect |
-| `deprecated` | No longer applies, and nothing replaced it |
-| `superseded by ADR-NNNN` | Replaced by a later record, which MUST exist |
+| Value                    | Meaning                                                           |
+| ------------------------ | ----------------------------------------------------------------- |
+| `proposed`               | Suggested, not yet decided. Binds nothing                         |
+| `rejected`               | Considered and turned down. Kept so the option is not re-proposed |
+| `accepted`               | Decided and in effect                                             |
+| `deprecated`             | No longer applies, and nothing replaced it                        |
+| `superseded by ADR-NNNN` | Replaced by a later record, which MUST exist                      |
 
 A status MAY carry a parenthesised forward pointer naming a record that exists:
 
@@ -190,9 +190,9 @@ impossible to comply with the second.
 
 **Immutability begins at publication.** A record nobody outside its author could have read has no
 reader who relied on it, so correcting a drafting error in one is not rewriting history. In practice
-the line is the first push to a shared remote. This matters during adoption, where records are
-often drafted in a batch before anything is shared. The exception MUST NOT be stretched past that
-line: once a record is visible to others, it is fixed, and the remedy for a mistake is a successor.
+the line is the first push to a shared remote. This matters during adoption, where records are often
+drafted in a batch before anything is shared. The exception MUST NOT be stretched past that line:
+once a record is visible to others, it is fixed, and the remedy for a mistake is a successor.
 
 **Only `accepted` records bind.** A `proposed` record is a suggestion, and no reader - human or
 automated - may treat it as a constraint.
@@ -200,7 +200,7 @@ automated - may treat it as a constraint.
 **Changing a record's status is a human action.** A tool MAY draft, argue and merge a record as
 `proposed`; any other status MUST be set by a person, who is thereby asserting that a decision was
 actually made, and who SHOULD name themselves in `decision-makers`. The assertion is not
-mechanically verifiable, but the *presence* of `decision-makers` on a record is. See ADR-0008.
+mechanically verifiable, but the _presence_ of `decision-makers` on a record is. See ADR-0008.
 
 Projects using pull requests SHOULD make the status change **its own pull request**, separate from
 the one that introduced the record. Not merely a separate commit: a squash merge collapses the

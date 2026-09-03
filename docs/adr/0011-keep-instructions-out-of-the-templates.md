@@ -24,25 +24,25 @@ reading and deleting them. Worse, the same guidance exists in `ADOPTING.md`, so 
 the kind `SPECIFICATION.md` §4.1 forbids, replicated into every adopting repository.
 
 The constraint that shapes the answer: **`ADOPTING.md` is not copied.** It stays with the kit. So
-guidance an adopter needs *after* adoption - what the statuses mean, what belongs in a section -
+guidance an adopter needs _after_ adoption - what the statuses mean, what belongs in a section -
 cannot be moved there. Only guidance used once, during adoption, can.
 
 ## Considered Options
 
-* Leave instructions embedded in the templates
-* Move all instructions to `ADOPTING.md`
-* Split by when the instruction is needed: adoption-time to `ADOPTING.md`, use-time to the map
+- Leave instructions embedded in the templates
+- Move all instructions to `ADOPTING.md`
+- Split by when the instruction is needed: adoption-time to `ADOPTING.md`, use-time to the map
 
 ## Decision Outcome
 
 Chosen option: **split by when the instruction is needed**, giving three owners:
 
-* **Templates carry shape.** Headings, front-matter keys, an example entry. Enough that a reader
-  can see what fills the file, with no meta-commentary about the kit.
-* **The map carries rules.** Anything needed while *using* the structure, because the map is what
+- **Templates carry shape.** Headings, front-matter keys, an example entry. Enough that a reader can
+  see what fills the file, with no meta-commentary about the kit.
+- **The map carries rules.** Anything needed while _using_ the structure, because the map is what
   the adopter keeps. This is where the ADR statuses, immutability and the human-action rule already
   went.
-* **`ADOPTING.md` carries the one-time procedure.** Anything read once while adopting, including
+- **`ADOPTING.md` carries the one-time procedure.** Anything read once while adopting, including
   "what each capability adds", which moves out of the map entirely.
 
 Moving everything to `ADOPTING.md` was rejected because it is not copied; use-time guidance would
@@ -51,15 +51,15 @@ paid by every adopter, forever, for text written once.
 
 ### Consequences
 
-* Good, because the map gets materially smaller - the section that every adopter is told to delete
+- Good, because the map gets materially smaller - the section that every adopter is told to delete
   stops being shipped at all, and the format skeletons stop being duplicated.
-* Good, because templates become correct on arrival rather than after a deletion pass. Copying one
+- Good, because templates become correct on arrival rather than after a deletion pass. Copying one
   and filling it in is the whole interaction.
-* Good, because `SPECIFICATION.md` §2.5 - "the map MUST NOT retain the template banner" - becomes
+- Good, because `SPECIFICATION.md` §2.5 - "the map MUST NOT retain the template banner" - becomes
   unnecessary. With no banner there is nothing to retain, and §2.3 and §2.4 already fail an
   uncustomised map, since it names artifacts the adopter does not have.
-* Bad, because point-of-use guidance is genuinely useful, and some is lost. A person writing a
+- Bad, because point-of-use guidance is genuinely useful, and some is lost. A person writing a
   record no longer has the status list in front of them. Mitigated by the front-matter comment,
   which is one line and stays.
-* Neutral: `ADOPTING.md` grows. It is not copied, so its length costs the adopter reading time once
+- Neutral: `ADOPTING.md` grows. It is not copied, so its length costs the adopter reading time once
   rather than repository weight forever - a better place to carry the same words.

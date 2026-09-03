@@ -23,11 +23,11 @@ whatever ships is optional. And any infrastructure the kit offers is made availa
 
 ## Considered Options
 
-* A pre-commit hook provider, referenced by URL and revision
-* A CI action
-* A packaged CLI on npm or PyPI
-* Vendoring: the adopter copies the script alongside the templates
-* Ship nothing, and let adopters write their own
+- A pre-commit hook provider, referenced by URL and revision
+- A CI action
+- A packaged CLI on npm or PyPI
+- Vendoring: the adopter copies the script alongside the templates
+- Ship nothing, and let adopters write their own
 
 ## Decision Outcome
 
@@ -54,14 +54,14 @@ framing of the checker as product alongside the templates rather than one of the
 
 ### Consequences
 
-* Good, because the checker inherits the kit's whole distribution model: no runtime, no registry, no
+- Good, because the checker inherits the kit's whole distribution model: no runtime, no registry, no
   network, auditable before use, and optional throughout.
-* Good, because an adopter's checker matches the structure they actually adopted, and cannot start
+- Good, because an adopter's checker matches the structure they actually adopted, and cannot start
   failing them because the kit moved on.
-* Bad, because a vendored copy has no upgrade path. This is the same problem the copied templates
+- Bad, because a vendored copy has no upgrade path. This is the same problem the copied templates
   have, and it now applies to executable content - where a stale checker fails quietly by not
   testing something newer, rather than loudly.
-* Bad, because the adopter carries a shell dependency they may not want. Mitigated by it being
+- Bad, because the adopter carries a shell dependency they may not want. Mitigated by it being
   optional: `SPECIFICATION.md` §6 makes verification-by-hand fully conformant.
-* Neutral: nothing forecloses adding a hook provider or an action later. Those become alternative
+- Neutral: nothing forecloses adding a hook provider or an action later. Those become alternative
   front ends to the same script rather than replacements for it.

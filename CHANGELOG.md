@@ -7,19 +7,25 @@ All notable changes to this project are documented here, following
 
 ### Changed
 
-- Non-ASCII prose punctuation (em/en dashes, curly quotes) normalised to ASCII throughout,
-  including `templates/`. No wording changed.
+- Non-ASCII prose punctuation (em/en dashes, curly quotes) normalised to ASCII throughout, including
+  `templates/`. No wording changed.
 - `DOC-MAP.md`, `templates/DOC-MAP.md` and `templates/docs/research/0000-template.md` now say a
   research note's Finding, Evidence and Dead ends are the current answer, not a narrative of how it
   was reached - the same "previously X, now Y" failure already named for the specification, closed
   for research notes too. Prompted by a research note in an adopting repository drifting into a
   process diary.
+- Prettier now formats `*.md` on commit, alongside `markdownlint-cli2` (ADR-0017): automatic
+  wrapping at the 100-column line length `MD013` already enforced by hand. Every `*emphasis*` in
+  `templates/` became `_emphasis_` in the one-time bulk reformat that came with it - Prettier's
+  markdown printer has no config option to keep asterisks. No wording changed; verified by a
+  per-file word-count check across the whole repository and a byte-for-byte diff of the one fenced
+  YAML block at risk from embedded-language formatting.
 
 ### Fixed
 
-- `templates/PLAN.md` now cues "one paragraph each" at the point of use, linking to `DOC-MAP.md`
-  for the rule - the same point-of-use mitigation ADR-0011 already gave the ADR template, applied
-  to the one artifact it was missing from.
+- `templates/PLAN.md` now cues "one paragraph each" at the point of use, linking to `DOC-MAP.md` for
+  the rule - the same point-of-use mitigation ADR-0011 already gave the ADR template, applied to the
+  one artifact it was missing from.
 - `tools/doc-kit-check.sh`'s plan check matched a type tag against `^\*Type:`, a single-asterisk
   format retired by the MD036 fix in 0.2.0. Every real `PLAN.md` uses `**Type:**` and the check has
   matched nothing since - conformant output regardless of content. Fixed to match the current
@@ -51,7 +57,7 @@ All notable changes to this project are documented here, following
   lighter; nothing that was said is gone, it's just in the file whose job is to say it. One
   correctness hazard stayed behind in Step 2's "Layout block" row rather than moving with the rest:
   a nested directory's introducing line must be bare or the checker misreads it as a single leaf
-  artifact - that's a mistake made *while executing* the step, not background reasoning, so it
+  artifact - that's a mistake made _while executing_ the step, not background reasoning, so it
   needed to survive without a trip to `ADOPTING-NOTES.md`.
 - `ADOPTING-NOTES.md` now answers whether a `docs/tasks/*.md` file with no matching `PLAN.md` entry
   should be flagged: no, tooling here would fight the same "no standard" call that keeps the
@@ -77,9 +83,9 @@ All notable changes to this project are documented here, following
   present (ask before editing; never treat one as a stale duplicate of the other without asking -
   they may genuinely serve different audiences), not just the case where neither exists yet, and
   says to flag either file turning out to be untracked by git. The same section now also says to
-  check for other per-tool instruction files (Copilot's, or similar) and ask rather than deciding
-  on their fate unprompted - the intent is to improve the documentation, not replace instructions
-  the user already wrote for a tool of their choosing.
+  check for other per-tool instruction files (Copilot's, or similar) and ask rather than deciding on
+  their fate unprompted - the intent is to improve the documentation, not replace instructions the
+  user already wrote for a tool of their choosing.
 - The `doc-kit-adopt` skill now says to check the target's `git status` before making any changes,
   and to keep anything already dirty there separate from what the adoption itself touches.
 - The paste-in `AGENTS.md` stanza's ADR rule now also says to leave `decision-makers` as the
@@ -90,9 +96,9 @@ All notable changes to this project are documented here, following
 
 ### Changed
 
-- The `doc-kit-adopt` skill moved from `.claude/skills/` to `.agents/skills/` - recognised by
-  Claude Code exactly as before, and consistent with treating root `AGENTS.md` as the canonical,
-  cross-tool agent-instructions surface rather than a Claude-specific one (ADR-0015).
+- The `doc-kit-adopt` skill moved from `.claude/skills/` to `.agents/skills/` - recognised by Claude
+  Code exactly as before, and consistent with treating root `AGENTS.md` as the canonical, cross-tool
+  agent-instructions surface rather than a Claude-specific one (ADR-0015).
 - `templates/DOC-MAP.md` now documents the **Alias** shape directly - a file whose entire content
   points at another artifact (a second `README.md`, a spec member repeated per module) - and points
   to it from "Adding a new kind of document", instead of only being implemented in the checker with
@@ -116,17 +122,17 @@ All notable changes to this project are documented here, following
 ### Fixed
 
 - The plan-entry and research-note metadata line (`*Type: ...*`, `**Confidence: ...**`) was a
-  whole-line emphasis block with no other content - exactly what MD036 exists to catch in a
-  project running its own markdownlint. It's now a bold label on plain text (`**Type:** ...`),
-  matching the style `docs/quirks.md` already used.
+  whole-line emphasis block with no other content - exactly what MD036 exists to catch in a project
+  running its own markdownlint. It's now a bold label on plain text (`**Type:** ...`), matching the
+  style `docs/quirks.md` already used.
 - Plan and quirks entries used `###` directly under the file's `#` title, skipping `##` - fixed to
   `##` so the outline increments by one level at a time (MD001).
-- A handful of one-off formatting issues an adopter's default markdownlint config would catch:
-  a double blank line in `ADOPTING.md`, a list missing its surrounding blank line in a research
-  note, an unlabelled fenced code block in `README.md`, and inconsistent Markdown table pipe
-  spacing across several files.
-- Four already-accepted ADRs (0003, 0006, 0008, 0011) mixed `-` and `*` list markers within a
-  single file; normalised to `*` throughout, matching the ADR template (ADR-0016 permits this as a
+- A handful of one-off formatting issues an adopter's default markdownlint config would catch: a
+  double blank line in `ADOPTING.md`, a list missing its surrounding blank line in a research note,
+  an unlabelled fenced code block in `README.md`, and inconsistent Markdown table pipe spacing
+  across several files.
+- Four already-accepted ADRs (0003, 0006, 0008, 0011) mixed `-` and `*` list markers within a single
+  file; normalised to `*` throughout, matching the ADR template (ADR-0016 permits this as a
   formatting-only edit).
 
 ## [0.1.0] - 2026-08-22
@@ -139,15 +145,15 @@ things that replaced an earlier shape, which are recorded here as the shape that
 - A licence: [MIT No Attribution](LICENCE). Copy anything here and own it - no notice to preserve,
   nothing to attribute, and no upgrade path to track (ADR-0013).
 - `templates/`, holding a starter for every artifact the map promises, so Step 3 is a copy rather
-  than a writing exercise. It is the product and source of truth; the root `DOC-MAP.md` is
-  this repository's own map, produced by applying the kit to itself (ADR-0004, ADR-0006).
+  than a writing exercise. It is the product and source of truth; the root `DOC-MAP.md` is this
+  repository's own map, produced by applying the kit to itself (ADR-0004, ADR-0006).
 - `SPECIFICATION.md`, defining what a conformant repository looks like, and stating the conventions
   the kit had relied on without writing down: research confidence levels, plan scales, quirk shape.
 - `ADOPTING.md`, the procedure - decide, inventory, customise, create, migrate, verify - with
   `ADOPTING-NOTES.md` carrying the judgement calls and troubleshooting behind it.
 - Step 0: decide whether to adopt at all, and write the plan before anything else.
-- A Step 4 inventory phase with six dispositions - move, split, absorb, archive, delete, leave -
-  and a worksheet that makes an interrupted migration resumable.
+- A Step 4 inventory phase with six dispositions - move, split, absorb, archive, delete, leave - and
+  a worksheet that makes an interrupted migration resumable.
 - `tools/doc-kit-check.sh`, an optional conformance checker, vendored rather than referenced so an
   adopter's copy matches the structure they adopted (ADR-0012).
 - A `doc-kit-adopt` skill that drives an adoption from this repository into a target, stopping for

@@ -57,7 +57,7 @@ Spec Kit defines seven slash commands - `/speckit.constitution`, `/speckit.speci
 `/speckit.converge` - and stores artifacts under `specs/` with configuration in `.specify/`. It
 produces no root-level file of either name.
 
-The flow's *shape* is real; the claim about the filenames it produces was not.
+The flow's _shape_ is real; the claim about the filenames it produces was not.
 
 ### Where the `SPECIFICATION.md` / `PLAN.md` naming actually comes from - nowhere
 
@@ -111,7 +111,7 @@ What exists instead:
 - Individual projects using a `specification.md` (OpenTracing, for one), which is one project's
   choice rather than a convention.
 - **IEEE 830-1998**, superseded by **ISO/IEC/IEEE 29148:2011**, which do standardise a requirements
-  specification - but its *content and structure*, not what the file is called or where it sits.
+  specification - but its _content and structure_, not what the file is called or where it sits.
   IEEE 830 is still widely referenced by name despite the supersession. Both are enterprise-scale,
   for the same reason the kit already sets aside ISO/IEC/IEEE 29119-3 for testing.
 
@@ -119,13 +119,13 @@ What exists instead:
 familiarity is genre resemblance, not convention.
 
 This is a negative result from search, which is weaker than a positive one: absence of evidence
-across several queries is not proof no such convention exists. It is enough to stop the
-kit asserting one.
+across several queries is not proof no such convention exists. It is enough to stop the kit
+asserting one.
 
 ## Evidence
 
 - [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/)
-- [Nygard, *Documenting Architecture Decisions*, 2011][nygard]
+- [Nygard, _Documenting Architecture Decisions_, 2011][nygard]
 - [`adr-tools` template][adrtools]
 - [agents.md](https://agents.md)
 - [github/spec-kit](https://github.com/github/spec-kit), and its [`spec-driven.md`][sdd] for the
@@ -136,7 +136,6 @@ kit asserting one.
   timeline only, which is the one claim here resting on a secondary source
 
 [sdd]: https://raw.githubusercontent.com/github/spec-kit/main/spec-driven.md
-
 [nygard]: https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 [adrtools]: https://raw.githubusercontent.com/npryce/adr-tools/master/src/template.md
 
