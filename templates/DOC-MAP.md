@@ -137,6 +137,13 @@ itself), `medium` (sources agree, not verified directly) or `low` (inferred, or 
 source). Confidence is revised in place as evidence changes. An unsourced note is not research: it
 is specification if it states behaviour, an ADR if it states a choice.
 
+**Findings and Evidence are the current answer, not a log of how it was reached.** State what is
+true and its source; when new evidence supersedes an earlier read, rewrite the finding and its
+confidence in place - the same discipline the specification uses against "previously X, now Y" (see
+Failure modes). Dead ends are substantive wrong turns - a hypothesis that failed, a source that
+misled - not the research process itself (pass counts, who suggested a search, which tool call
+failed first).
+
 **Quirk entry** - the expected behaviour, the actual behaviour, and whether the deviation is
 **deliberate** or **accepted-wrong**. An accepted-wrong entry names the test pinning today's output,
 so nobody "fixes" it, and states what would have to change for the entry to go.
@@ -188,6 +195,10 @@ alongside them.
   into narrative.
 - **Findings evaporate** - an investigation's sources and dead ends survive only in a commit
   message or a code comment, and the next person repeats the work.
+- **A research note becomes a research diary** - "found in a second pass", "this note originally
+  claimed X, now corrected" - narrating how a finding was reached instead of stating what is
+  currently true. The same "previously X, now Y" failure as the specification, just as easy to fall
+  into here: revise the finding and its confidence in place instead.
 
 ## Deliberately not here
 

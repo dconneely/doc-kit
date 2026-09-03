@@ -163,6 +163,10 @@ be derived. `SPECIFICATION.md` §4 has the rules for when that changes.
   into narrative.
 - **Findings evaporate** - an investigation's sources and dead ends survive only in a commit
   message or a code comment, and the next person repeats the work.
+- **A research note becomes a research diary** - "found in a second pass", "this note originally
+  claimed X, now corrected" - narrating how a finding was reached instead of stating what is
+  currently true. The same "previously X, now Y" failure as the specification, just as easy to fall
+  into here: revise the finding and its confidence in place instead.
 
 ## Deliberately not here
 

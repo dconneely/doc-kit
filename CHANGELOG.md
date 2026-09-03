@@ -9,6 +9,11 @@ All notable changes to this project are documented here, following
 
 - Non-ASCII prose punctuation (em/en dashes, curly quotes) normalised to ASCII throughout,
   including `templates/`. No wording changed.
+- `DOC-MAP.md`, `templates/DOC-MAP.md` and `templates/docs/research/0000-template.md` now say a
+  research note's Finding, Evidence and Dead ends are the current answer, not a narrative of how it
+  was reached - the same "previously X, now Y" failure already named for the specification, closed
+  for research notes too. Prompted by a research note in an adopting repository drifting into a
+  process diary.
 
 ### Fixed
 
