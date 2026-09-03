@@ -13,13 +13,21 @@
   //
   // MD024: siblings_only, because a changelog repeating "### Added" under each version heading is
   // the format Keep a Changelog prescribes, not a duplication bug.
+  //
+  // `stern` closes the gap non-strict mode leaves open: an ordinary prose line with one long
+  // trailing word is otherwise silently forgiven. It does not flag a line that is purely one
+  // unbreakable token (a bare URL alone on its own line, most commonly) - only a long token that
+  // shares a line with other prose. Confirmed zero-diff against this repo as of adding it:
+  // Prettier's proseWrap: always (.prettierrc.json, ADR-0017) already rewraps every prose line, so
+  // stern is defence against future drift, not a fix for anything currently unwrapped.
   "config": {
     "default": true,
     "MD013": {
       "line_length": 100,
       "code_blocks": false,
       "tables": false,
-      "headings": false
+      "headings": false,
+      "stern": true
     },
     "MD024": {
       "siblings_only": true

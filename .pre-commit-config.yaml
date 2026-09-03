@@ -83,7 +83,7 @@ repos:
   # would fail there (`find -not` for `!`, `head -1` for `head -n 1`, both found by hand before
   # this hook existed). Python rather than the Docker variant, for the same reason as gitleaks.
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.9.0.6
+    rev: v0.11.0.1
     hooks:
       - id: shellcheck
 
@@ -153,7 +153,12 @@ repos:
         # `Deprecated` is deliberately absent: it is also a Keep a Changelog category, so matching
         # it flags three legitimate lines. Verified by running the pattern both ways.
         entry: 'Superseded by ADR-|`(Accepted|Proposed|Rejected)`'
-        types: [markdown]
+        # Scoped to docs/adr/, not repo-wide: this hook polices ADR status casing specifically, and
+        # a repo-wide types: [markdown] scope would flag any future prose that discusses the
+        # convention itself (an AGENTS.md passage explaining it, say) as if it were a violation.
+        # No current file outside docs/adr/ matches the pattern - checked directly - so this is a
+        # no-diff hardening, not a fix.
+        files: ^docs/adr/
 
       - id: no-nygard-status-section
         name: "Records use MADR front-matter, not a Status section"
