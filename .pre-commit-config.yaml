@@ -1,26 +1,20 @@
 # Hygiene hooks for a repository that is entirely prose. Run with `prek` (no Python needed) or
-# `pre-commit`. Kept deliberately small: this catches drift, not correctness. The conformance
-# checker in PLAN.md is a separate thing and does not exist yet.
+# `pre-commit`. The conformance checker described in PLAN.md is a separate thing and does not
+# exist yet.
 #
 # This file is infrastructure, not product (ADR-0007) - it configures this repository and is never
 # copied into an adopting one. Revisions are pinned to versions known to work on Windows.
 # `prek install` (and `pre-commit install`) wire only the pre-commit hook type unless told
-# otherwise, which would leave the commit-msg hook below installed but never invoked. Declaring the
-# types here means a plain `prek install` is enough - nobody has to remember `--hook-type`.
+# otherwise, which would leave the commit-msg hook below installed but never invoked.
 default_install_hook_types: [pre-commit, commit-msg]
 
 repos:
-  # Secrets reach Markdown too - a connection string pasted into a research note, an example key
-  # left in a template, a token named in a changelog entry about rotating it.
-  #
   # `gitleaks-system` rather than the default `gitleaks`, which builds the binary from source with
   # Go: that produces an unsigned, reputation-less executable in AppData, which Windows Smart App
-  # Control blocks outright (os error 4551). A packaged release carries enough download reputation
-  # to run even with Smart App Control enforced, so this hook works whether or not a given machine
-  # has it on. Needs gitleaks on PATH - `scoop install gitleaks`, `brew install gitleaks`, or a
-  # release binary.
+  # Control blocks outright (os error 4551). Needs gitleaks on PATH - `scoop install gitleaks`,
+  # `brew install gitleaks`, or a release binary.
   #
-  # Keep this rev in step with the installed binary. The hook's entry changed from
+  # Keep this rev in step with the installed binary: the hook's entry changed from
   # `gitleaks protect` to `gitleaks git --pre-commit` around v8.19, so an old rev driving a new
   # binary invokes a deprecated subcommand.
   - repo: https://github.com/gitleaks/gitleaks
@@ -34,34 +28,30 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
-      # No --markdown-linebreak-ext here: this repo has zero trailing-double-space line breaks
-      # (checked), so the default behaviour has nothing to eat. Add the flag if that changes.
+      # No --markdown-linebreak-ext here: this repo has zero trailing-double-space line breaks, so
+      # the default behaviour has nothing to eat. Add the flag if that changes.
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
       - id: check-merge-conflict
       # Windows and macOS have case-insensitive filesystems, so `LICENCE` and `LICENSE` would
-      # collide silently on checkout. This repository deliberately uses the British spelling, which
-      # makes that near-miss live rather than theoretical.
+      # collide silently on checkout. This repository deliberately uses the British spelling.
       - id: check-case-conflict
-      # Caught tools/doc-kit-check.sh committed as 100644 with a shebang: harmless on Windows,
-      # but `./tools/doc-kit-check.sh` fails on Linux and macOS.
       - id: check-shebang-scripts-are-executable
       # .gitattributes already pins eol=lf; this guards against that being weakened rather than
       # being the fix for it.
       - id: mixed-line-ending
         args: [--fix=lf]
 
-  # Formatter, not linter - complements markdownlint-cli2 below rather than replacing it (it
-  # doesn't check MD024/MD032 and the rest; markdownlint-cli2 has no line-wrap logic of its own).
-  # The config in .prettierrc.json (proseWrap/printWidth/embeddedLanguageFormatting) is what does
-  # the actual work - see ADR-0017: CLI flags alone were tried elsewhere and silently wrapped
-  # nothing. `local`, not the `pre-commit/mirrors-prettier` repo: that mirror is stale (newest
-  # stable tag v3.1.0, checked directly - several minor versions behind), so pinning the exact
-  # version via npx instead, the same pattern used for every other npx-invoked tool here.
-  # `*emphasis*` becomes `_emphasis_` on first run and forever after - Prettier's markdown printer
-  # has no config option for this; ADR-0017 accepts the one-time bulk rewrite as the cost.
+  # Formatter, not linter - complements markdownlint-cli2 below (it doesn't check MD024/MD032 and
+  # the rest; markdownlint-cli2 has no line-wrap logic of its own). Config lives in
+  # .prettierrc.json (CLI flags alone silently wrapped nothing - see ADR-0017). `local`, not
+  # `pre-commit/mirrors-prettier`: that mirror is stale (v3.1.0), so pinning the exact version via
+  # npx instead.
+  #
+  # `*emphasis*` becomes `_emphasis_` on first run and forever after - no config option to avoid
+  # it; ADR-0017 accepts the one-time bulk rewrite as the cost.
   - repo: local
     hooks:
       - id: prettier-markdown
@@ -78,25 +68,23 @@ repos:
     hooks:
       - id: markdownlint-cli2
 
-  # The checker is POSIX shell that has only ever run under Cygwin's bash on Windows. shellcheck is
-  # what stands in for the Linux and macOS testing it has never had - it catches the GNU-isms that
-  # would fail there (`find -not` for `!`, `head -1` for `head -n 1`, both found by hand before
-  # this hook existed). Python rather than the Docker variant, for the same reason as gitleaks.
+  # The checker has only ever run under Cygwin's bash on Windows; shellcheck is what stands in for
+  # the Linux/macOS testing it has never had. Python rather than the Docker variant, for the same
+  # reason as gitleaks.
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
       - id: shellcheck
 
-  # Conventional Commits, on the commit-msg stage. Python rather than the Node commitlint hook:
-  # no config file, no additional_dependencies, and nothing compiled - which matters on Windows,
-  # where Smart App Control blocks locally built binaries.
+  # Conventional Commits, on the commit-msg stage. Python rather than the Node commitlint hook: no
+  # config file, no additional_dependencies, and nothing compiled - matters on Windows, where
+  # Smart App Control blocks locally built binaries.
   #
-  # The types are narrower than the default set, and are exactly the ones this repository's history
-  # uses. The mapping is recorded in AGENTS.md: product changes (ADOPTING.md, templates/, tools/,
-  # the skill) take feat/fix/refactor; this repository's own documentation takes docs; build covers
-  # infrastructure like .gitattributes and this file; style is formatting with no change in meaning.
-  # `chore` is deliberately absent - it is the catch-all that erodes the point of typing commits at
-  # all. Add a type when a commit needs it, not in advance.
+  # No `args:` - left at the hook's own built-in default type list (build, chore, ci, docs, feat,
+  # fix, perf, refactor, revert, style, test), shared across every pre-commit-managed repo in this
+  # workspace rather than a repo-specific subset: one fewer list to keep in sync. Product changes
+  # (ADOPTING.md, templates/, tools/, the skill) take feat/fix/refactor; this repository's own
+  # documentation takes docs; build covers infrastructure like .gitattributes and this file.
   #
   # Two things this does not do. It checks the *shape* of a subject, not whether the type is the
   # right one: `docs:` on a change to templates/ passes and is still wrong. And it accepts `Feat:`
@@ -106,25 +94,19 @@ repos:
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
-        args: [build, docs, feat, fix, refactor, style]
 
-  # Link rot, on demand only: `prek run --hook-stage manual lychee`.
+  # Link rot, on demand only: `prek run --hook-stage manual lychee`. Deliberately NOT on commit -
+  # external hosts fail for reasons unrelated to the change under review, and a hook that blocks a
+  # commit because someone else's server is down is a hook that gets bypassed.
+  # `.github/workflows/link-check.yml` runs the identical command nightly.
   #
-  # Deliberately NOT on commit. External hosts fail for reasons unrelated to the change under
-  # review, and a hook that blocks a commit because someone else's server is down is a hook that
-  # gets bypassed. `.github/workflows/link-check.yml` runs the identical command nightly, which is
-  # where routine rot detection belongs; this manual stage is for checking a link-heavy change
-  # before it's committed, not a stand-in for CI any more.
-  #
-  # --method get, not the default HEAD: rfc-editor.org answers HEAD with 500 and GET with 200
-  # (checked both ways), so a HEAD-based sweep reports two false failures against RFC 2119 and
-  # RFC 9457. Other standards bodies are likely to behave the same way.
-  # Note the tag prefix: lychee tags releases `lychee-vX.Y.Z`, not `vX.Y.Z`.
+  # --method get, not the default HEAD: rfc-editor.org answers HEAD with 500 and GET with 200, so
+  # a HEAD-based sweep reports false failures against RFC-cited links. Note the tag prefix: lychee
+  # tags releases `lychee-vX.Y.Z`, not `vX.Y.Z`.
   #
   # `lychee-system` needs lychee on PATH - `scoop install lychee`, `brew install lychee` or
   # `cargo install lychee`. The auto-installing `lychee` hook would avoid that, but its install
-  # script mangles Windows paths (strips the backslashes, then fails with exit 127), so it is not
-  # usable here. Same class of gap as prek's Ruby hooks on Windows.
+  # script mangles Windows paths (strips the backslashes, then fails with exit 127).
   - repo: https://github.com/lycheeverse/lychee
     rev: lychee-v0.24.2
     hooks:
@@ -132,32 +114,19 @@ repos:
         stages: [manual]
         args: [--no-progress, --method, get, --max-concurrency, "4"]
 
-  # Drift guards. Every defect found in this repository so far has been drift rather than design:
-  # a convention changed in one file and not the others. markdownlint catches formatting drift;
-  # these catch the semantic kind, which is what actually bit - four separate instances of stale
-  # status casing survived three manual reviews before a grep found them.
-  #
-  # `language: pygrep` is built into pre-commit - a cross-platform grep whose `entry` is a Python
-  # regex, failing when a file MATCHES. No install cost. Case-sensitive by default; `(?i)` or
-  # `args: [-i]` to relax that, `--multiline` to span lines, `--negate` to require a match instead
-  # of forbidding one. prek supports it too (its docs claim every pre-commit language, and offer
-  # native deny-pattern/require-pattern equivalents) - both checked against upstream docs.
-  #
-  # `--negate` is the tool for the checks this cannot yet express: "every record HAS front-matter"
-  # rather than "no file has a Status section". Worth reaching for before writing a script.
+  # Drift guards - markdownlint catches formatting drift, these catch the semantic kind:
+  # `language: pygrep` is a cross-platform grep whose `entry` is a Python regex, failing when a
+  # file MATCHES (case-sensitive by default).
   - repo: local
     hooks:
       - id: lowercase-adr-status
         name: "ADR statuses are lowercase (MADR spelling)"
         language: pygrep
         # `Deprecated` is deliberately absent: it is also a Keep a Changelog category, so matching
-        # it flags three legitimate lines. Verified by running the pattern both ways.
+        # it would flag legitimate lines.
         entry: 'Superseded by ADR-|`(Accepted|Proposed|Rejected)`'
-        # Scoped to docs/adr/, not repo-wide: this hook polices ADR status casing specifically, and
-        # a repo-wide types: [markdown] scope would flag any future prose that discusses the
-        # convention itself (an AGENTS.md passage explaining it, say) as if it were a violation.
-        # No current file outside docs/adr/ matches the pattern - checked directly - so this is a
-        # no-diff hardening, not a fix.
+        # Scoped to docs/adr/, not repo-wide: a repo-wide types: [markdown] scope would flag any
+        # prose that discusses the convention itself (an AGENTS.md passage explaining it, say).
         files: ^docs/adr/
 
       - id: no-nygard-status-section

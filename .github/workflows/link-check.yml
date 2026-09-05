@@ -1,6 +1,3 @@
-# Nightly link sweep. Infrastructure (ADR-0007) - configures this repository, never copied into an
-# adopting one. Mirrors the local `lychee-system` pre-commit hook's exact args (.pre-commit-config.yaml)
-# deliberately: two checks running the same command differently is drift waiting to happen.
 name: Link check
 
 on:
@@ -11,9 +8,12 @@ on:
 jobs:
   lychee:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
+          # --method get, not the default HEAD: rfc-editor.org (among others) errors on HEAD.
           args: --no-progress --method get --max-concurrency 4 "**/*.md"
           fail: true

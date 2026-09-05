@@ -1,25 +1,21 @@
 {
-  // Full default ruleset, not just MD013. That was the deliberate original choice - turn a rule
-  // on when it earns its place, not before - but adopting this kit into a project with its own
-  // markdownlint config (MD036 and MD049 both surfaced this way) is what "earning its place"
-  // looks like: the templates were tripping rules a downstream project runs by default, and this
-  // repository's own linter, sitting at "default: false", could not have told us. Running the
-  // full ruleset against ourselves is what an adopter's linter would already have done.
+  // Full default ruleset, not just MD013: an adopting project runs the full default set against
+  // templates copied from this kit, so linting this repo the same way is what surfaces a
+  // violation before an adopter's own linter does.
   //
-  // MD013: matches the 100-column wrap AGENTS.md states as this repo's convention. Tables and
-  // code blocks are exempt because neither can be wrapped without corrupting it; headings are
-  // exempt because a heading is one line by construction - the only fix would be a rename, which
-  // is not this tool's job.
+  // MD013: matches the 100-column wrap AGENTS.md states as this repo's convention. printWidth in
+  // .prettierrc.json MUST match this line_length - change one, change both. Tables and code
+  // blocks are exempt because neither can be wrapped without corrupting it; headings are exempt
+  // because a heading is one line by construction.
   //
   // MD024: siblings_only, because a changelog repeating "### Added" under each version heading is
   // the format Keep a Changelog prescribes, not a duplication bug.
   //
   // `stern` closes the gap non-strict mode leaves open: an ordinary prose line with one long
   // trailing word is otherwise silently forgiven. It does not flag a line that is purely one
-  // unbreakable token (a bare URL alone on its own line, most commonly) - only a long token that
-  // shares a line with other prose. Confirmed zero-diff against this repo as of adding it:
-  // Prettier's proseWrap: always (.prettierrc.json, ADR-0017) already rewraps every prose line, so
-  // stern is defence against future drift, not a fix for anything currently unwrapped.
+  // unbreakable token (a bare URL alone on its own line) - only a long token that shares a line
+  // with other prose. Prettier's proseWrap: "always" already rewraps every prose line, so `stern`
+  // is defence against future drift, not a fix for anything currently unwrapped.
   "config": {
     "default": true,
     "MD013": {
