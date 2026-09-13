@@ -140,3 +140,15 @@ repos:
         language: pygrep
         entry: 'This file is a template'
         types: [markdown]
+
+      # tools/doc-kit-check.sh declares #!/bin/sh precisely so shellcheck (above) checks it against
+      # POSIX rules, standing in for the Linux/macOS testing it has never had - a bash-only
+      # construct slipped in under that same shebang would defeat the whole point silently, since
+      # shellcheck itself just trusts whatever dialect the shebang claims. A script that genuinely
+      # needs bash is free to exist; it just has to be named .bash instead, so shellcheck checks it
+      # against the rules its name actually promises.
+      - id: sh-scripts-are-posix
+        name: ".sh scripts must not declare a bash shebang (use .bash for bash-specific scripts)"
+        language: pygrep
+        entry: '^#!.*\bbash\b'
+        files: \.sh$
