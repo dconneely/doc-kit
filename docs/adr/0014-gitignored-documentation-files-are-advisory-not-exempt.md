@@ -1,5 +1,5 @@
 ---
-status: "accepted"
+status: "accepted (refined by ADR-0018)"
 date: 2026-08-22
 decision-makers: David Conneely
 ---
