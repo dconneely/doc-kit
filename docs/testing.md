@@ -66,43 +66,29 @@ conformance is a floor.
 
 ## What has never been exercised
 
-Two claims this repository makes have no evidence behind them yet, and a release invites people to
-rely on both:
+**The hooks are tested with `prek` only**, not with `pre-commit` itself, though the config is meant
+for both.
 
-- **The checker has only run under Cygwin's `bash` on Windows.** It is POSIX shell and `shellcheck`
-  passes, but it has never run on Linux, on macOS, or in CI.
-- **The hooks are tested with `prek` only**, not with `pre-commit` itself, though the config is
-  meant for both.
+## The checker's own tests
 
-Two others no longer belong on this list. Independent repositories have since adopted the structure,
-including a migration into an existing, multi-module codebase - real templates, a real Step 4
-worksheet, and a real mess. That doesn't retire Step 4 as a risk: each migration is still one data
-point, on repositories one person controls, and the procedure has yet to meet an adopter it
-disagrees with.
+`tests/doc-kit-check.test.sh` builds a small conformant repository per case in a temporary
+directory, breaks one thing, and asserts the exit code and the message - a case for most rules in
+the table above, plus the clean fixture. It is infrastructure (ADR-0007): it tests the vendored
+checker and is not vendored with it.
 
-## The checker has no tests of its own
+CI (`.github/workflows/ci.yml`) runs the checker and its tests on Linux and macOS, and the hooks on
+Linux, on every push to `main` and every pull request. `gitleaks` is skipped there: it scans only
+the staged diff, which CI does not have.
 
-It was verified by running it against deliberate violations - an unmapped file, a Title-Case status,
-a plan entry marked done - and confirming each was caught and that the repository was clean again
-afterwards. That is a manual ritual, not a suite, and it is not repeated on change.
-
-Four real bugs surfaced on first run, which is the argument for treating the tool with suspicion:
-unquoted loops glob-expanding artifact patterns into the files they matched, artifact paths passed
-to `grep` as regexes so `*` was not literal, `grep -n`'s line prefix breaking a match, and a no-op
-`sed`. A checker that reports conformance while silently checking nothing is worse than no checker,
-and nothing currently protects against that.
-
-A fifth bug proved the point months later, not on first run: the plan check's type-tag regex
-required a single `*` before `Type:`, but every real `PLAN.md` - this repository's own, both
-adopting repositories', the template - has used `**Type:**` since the MD036 fix retired the
-single-asterisk format. The check matched zero lines in any of them and had been silently passing
-regardless of content since. Found only by reading real adopting repositories' output, not by
-anything here.
+The tests exist because this checker's characteristic failure is silence. Every bug found in it so
+far reported conformance while checking nothing: glob expansion, regex-unsafe paths, a no-op `sed`,
+and a type-tag pattern no real `PLAN.md` matched.
 
 ## Running everything
 
 ```sh
 sh tools/doc-kit-check.sh          # conformance
+sh tests/doc-kit-check.test.sh     # the checker's own tests
 prek run --all-files               # hygiene, line length, drift guards
 prek run --hook-stage manual lychee-system --all-files
 ```
