@@ -2,15 +2,13 @@
 
 **Confidence:** high
 
-Checked directly against primary sources on 2026-08-20, closing the open questions left by
-[`0001-adr-conventions.md`](0001-adr-conventions.md). That note found the kit was not following the
-convention it claimed to follow, and that recalling a schema had produced a plausible but wrong
-answer; this one checks everything else the kit cites rather than assuming the first miss was
-isolated.
+Checked directly against primary sources on 2026-08-20. Covers every convention the kit cites except
+MADR, which [`0001-adr-conventions.md`](0001-adr-conventions.md) covers.
 
 ## Finding
 
-Four of five citations were accurate. **The Spec Kit claim was wrong.**
+Keep a Changelog, Nygard, adr-tools and agents.md say what the kit cites them for. **GitHub Spec Kit
+produces no root-level `SPECIFICATION.md` or `PLAN.md`**, and no convention prescribes those names.
 
 ### Keep a Changelog - accurate
 
@@ -30,8 +28,7 @@ noise."
 
 Sections: Title, Context, Decision, Status, Consequences. Statuses: **proposed**, **accepted**,
 **deprecated**, **superseded** - written lowercase in the original. ADR-0010 adopted MADR's
-lowercase spelling on MADR's authority; it turns out to match Nygard too, which the kit had not
-noticed.
+lowercase spelling on MADR's authority; it matches Nygard too.
 
 ### adr-tools - accurate
 
@@ -47,17 +44,14 @@ the nearest file in the directory tree, so the closest one takes precedence" - a
 all about `CLAUDE.md` or other tool-specific files. So the kit's `CLAUDE.md` pointer is neither
 blessed nor contradicted by it.
 
-### GitHub Spec Kit - **the kit's claim was wrong**
-
-`ADOPTING-NOTES.md` said Spec Kit "drives a `specify -> plan -> tasks` flow producing exactly it",
-meaning root-level `SPECIFICATION.md` and `PLAN.md`. It does not.
+### GitHub Spec Kit - not the source of this kit's filenames
 
 Spec Kit defines seven slash commands - `/speckit.constitution`, `/speckit.specify`,
 `/speckit.plan`, `/speckit.tasks`, `/speckit.taskstoissues`, `/speckit.implement`,
 `/speckit.converge` - and stores artifacts under `specs/` with configuration in `.specify/`. It
 produces no root-level file of either name.
 
-The flow's _shape_ is real; the claim about the filenames it produces was not.
+Its `specify -> plan -> tasks` flow resembles this kit's; the filenames it produces do not.
 
 ### Where the `SPECIFICATION.md` / `PLAN.md` naming actually comes from - nowhere
 
@@ -119,8 +113,8 @@ What exists instead:
 familiarity is genre resemblance, not convention.
 
 This is a negative result from search, which is weaker than a positive one: absence of evidence
-across several queries is not proof no such convention exists. It is enough to stop the kit
-asserting one.
+across several queries is not proof no such convention exists. It is enough that the kit asserts
+none.
 
 ## Evidence
 
