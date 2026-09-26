@@ -11,16 +11,16 @@ a reader.
 cites the `SPECIFICATION.md` clause it comes from, so a failure is traceable to the contract rather
 than to the tool's opinion.
 
-| Group  | Verified                                                                                                                                                                                                                                                                                                                                   |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `map`  | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `templates/` and `docs/archive/` is named by some artifact pattern (§2.4). No template placeholder text survives (§2.5) |
-| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` from the permitted set, a `date`, and `decision-makers` on anything past `proposed`. Forward pointers name a record that exists. The three MADR minimal headings are present (§3.1)                                                        |
-| `plan` | No entry is annotated done, struck through or marked completed. Every entry carries a valid type tag (§3.3)                                                                                                                                                                                                                                |
+| Group  | Verified                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `map`  | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `templates/` and `docs/archive/` is named by some artifact pattern (§2.4). No template placeholder text survives (§2.5). Tense and durability come from the closed sets, and no two non-alias artifacts share all three properties (§2.7) |
+| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` from the permitted set, a `date`, and `decision-makers` on anything past `proposed`. Forward pointers name a record that exists. The three MADR minimal headings are present (§3.1)                                                                                                                                                                          |
+| `plan` | No entry is annotated done, struck through or marked completed. Every entry carries a valid type tag (§3.3)                                                                                                                                                                                                                                                                                                                                                  |
 
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
-(`.markdownlint-cli2.jsonc`), secrets, file hygiene, three `pygrep` drift guards for the failure
-this repository actually produces - a convention changed in one file and not the others - and
-Conventional Commits on the `commit-msg` stage, restricted to the six types this history uses.
+(`.markdownlint-cli2.jsonc`), secrets, file hygiene, `pygrep` drift guards for the failure this
+repository actually produces - a convention changed in one file and not the others - and
+Conventional Commits on the `commit-msg` stage, using the hook's default type list.
 
 ## What is verified only approximately
 

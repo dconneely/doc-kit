@@ -1,6 +1,5 @@
 # Hygiene hooks for a repository that is entirely prose. Run with `prek` (no Python needed) or
-# `pre-commit`. The conformance checker described in PLAN.md is a separate thing and does not
-# exist yet.
+# `pre-commit`. The conformance checker, tools/doc-kit-check.sh, is product and runs separately.
 #
 # This file is infrastructure, not product (ADR-0007) - it configures this repository and is never
 # copied into an adopting one. Revisions are pinned to versions known to work on Windows.

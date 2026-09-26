@@ -40,7 +40,7 @@ If a sentence seems to fit two places, it is usually two sentences. Split it and
 ## Layout
 
 ```text
-DOC-MAP.md         this file - the map
+DOC-MAP.md               this file - the map
 README.md                orientation, one screen, links outward
 AGENTS.md                orientation for coding agents - routes here
 CLAUDE.md                one line pointing at AGENTS.md
@@ -60,8 +60,7 @@ docs/
 ```
 
 The specification is one file. It will stay one file for as long as it is comfortable to read end to
-end; its members are prose today, and the checker described in `PLAN.md` will become a
-machine-readable member of it when it exists.
+end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 
 ## Artifacts
 

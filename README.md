@@ -87,6 +87,7 @@ to edit should not follow you home.
 
 ## Status
 
-Released, and still early. The structure, the procedure and the checker are settled and in use here;
-no other repository has adopted it yet, so nothing has been tested against someone else's mess. See
-`CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.
+Released, and still early. The structure, the procedure and the checker are settled and in use here
+and in two other repositories, one a migration into an existing multi-module codebase. Both are
+controlled by the same person, so the procedure has yet to meet an adopter who disagrees with it.
+See `CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.
