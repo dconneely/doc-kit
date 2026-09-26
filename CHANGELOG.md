@@ -26,6 +26,8 @@ All notable changes to this project are documented here, following
   checked like any other.
 - `templates/PLAN.md` says "one paragraph each" where entries are written, linking to `DOC-MAP.md`
   for the rule.
+- `ADOPTING.md` Step 5 checks the layout block against the two tables too, and says which of its
+  checks `tools/doc-kit-check.sh` covers.
 - `ADOPTING.md` no longer quotes line counts for the checker and `ADOPTING-NOTES.md`, both of which
   had gone stale.
 

@@ -321,12 +321,15 @@ The customisation has been applied successfully when all of these hold:
 
 - [ ] Every artifact named in the map exists in the repository.
 - [ ] Every documentation file in the repository appears in the map.
-- [ ] The artifacts table and the lifecycle table list the same artifacts.
+- [ ] The artifacts table, the lifecycle table and the layout block list the same artifacts.
 - [ ] Paths in the map are the repository's real paths.
 - [ ] No file serves two tenses - nothing is part changelog and part backlog.
 - [ ] No fact appears in two places; in particular, no prose restates a machine-readable contract.
 - [ ] Generated files say so, and regenerating them produces no diff.
 - [ ] No placeholder content survives - no example artifact row, no unreplaced heading.
+
+If you copied `tools/doc-kit-check.sh`, run it from the repository root - it covers the first three
+mechanically. The rest are for review.
 
 Re-run the first two checks whenever an artifact is added or removed. They are the ones that rot.
 
