@@ -101,7 +101,7 @@ entries. See [ADR-0003](docs/adr/0003-treat-machine-readable-contracts-as-specif
 `docs/spec/`, once there are **two or more members** - don't force the subdirectory on a single-file
 specification pre-emptively, there is nothing to group yet. `SPECIFICATION.md` stays at the
 repository root regardless: it is a fixed element that changes role, not location, and each member
-still keeps its own row in the artifacts table (tense/durability/audience can genuinely differ
+still keeps its own row in the artifacts table (tense/mutability/audience can genuinely differ
 between them - that is the whole reason they are separate files, and grouping them by directory is a
 convenience on top of that, not a replacement for it).
 
@@ -127,7 +127,7 @@ line. A directory named with trailing description text (`templates/   product - 
 leaf representing the whole directory as one artifact instead, which is also a real, useful shape -
 just a different one from a container with children.
 
-### A second README (or spec member) shares tense, durability and audience with one that exists?
+### A second README (or spec member) shares tense, mutability and audience with one that exists?
 
 Neither merge nor invent a fake distinction - if it has to exist at that path for someone to find
 it, it's an **alias**. A module `README.md` and the root one are both present/rewritten-in-place/

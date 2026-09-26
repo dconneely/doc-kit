@@ -16,7 +16,7 @@ reader does not "fix" the test.
 from the map's completeness check; every file in it carries a provenance header. See ADR-0005.
 
 **Artifact** - one document, or one directory of documents, named in the map and given a tense, a
-durability and an audience. The unit the structure is built from.
+mutability and an audience. The unit the structure is built from.
 
 **Confidence level** - `high`, `medium` or `low`, attached to a research note. Defined in
 `SPECIFICATION.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence,

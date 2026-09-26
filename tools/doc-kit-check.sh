@@ -178,7 +178,7 @@ check_map() {
 	IFS=$oldifs
 	set +f
 
-	# §2.7 - tense and durability come from closed sets, and no two artifacts share all three
+	# §2.7 - tense and mutability come from closed sets, and no two artifacts share all three
 	# properties. Free text defeats the test: near-duplicates escape on phrasing. Aliases, which
 	# hold no content of their own, are exempt.
 	rows=$(section "$MAP" '## Artifacts' | grep '^| `' | grep -v '\*\*Alias\*\*' |
@@ -188,15 +188,15 @@ check_map() {
 	for row in $rows; do
 		IFS=$oldifs
 		tense=$(printf '%s' "$row" | cut -d'~' -f2)
-		dur=$(printf '%s' "$row" | cut -d'~' -f3)
+		mut=$(printf '%s' "$row" | cut -d'~' -f3)
 		art=$(printf '%s' "$row" | cut -d'~' -f1 | tr -d '`')
 		case "$tense" in
 			present|past|future|imperative|explanatory) ;;
 			*) fail "$art has tense '$tense'" "§2.7 - present, past, future, imperative, explanatory" ;;
 		esac
-		case "$dur" in
+		case "$mut" in
 			"rewritten in place"|append-only|immutable|volatile|disposable) ;;
-			*) fail "$art has durability '$dur'" "§2.7 - see the permitted set" ;;
+			*) fail "$art has mutability '$mut'" "§2.7 - see the permitted set" ;;
 		esac
 		IFS=$NL
 	done

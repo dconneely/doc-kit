@@ -53,7 +53,7 @@ specification. See "Machine-readable and generated parts" below.
 
 ## Artifacts
 
-| Artifact             | Purpose - and the standard it follows, if any                                                                                                                                                                                                              | Tense   | Durability         | Audience                                                                                        |
+| Artifact             | Purpose - and the standard it follows, if any                                                                                                                                                                                                              | Tense   | Mutability         | Audience                                                                                        |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------------------ | ----------------------------------------------------------------------------------------------- |
 | `DOC-MAP.md`         | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all                                       | present | rewritten in place | anyone adding documentation                                                                     |
 | `README.md`          | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec                                                                                                                    | present | rewritten in place | anyone                                                                                          |
@@ -154,7 +154,7 @@ so nobody "fixes" it, and states what would have to change for the entry to go.
 **Alias** - a file whose entire content points at another artifact, existing only because some tool
 or convention looks for that exact filename: a second `README.md` at a different path a newcomer
 would actually look in, a specification member duplicated per module. Mark it `**Alias**` in the
-artifacts table's purpose cell; it carries the tense, durability and audience of what it points at
+artifacts table's purpose cell; it carries the tense, mutability and audience of what it points at
 rather than declaring its own. This is the one case exempt from the duplicate-properties check
 below - use it before inventing artificially different audience wording just to dodge that test. If
 the file has anything to say beyond the pointer, it is not an alias.

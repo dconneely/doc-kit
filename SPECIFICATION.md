@@ -88,15 +88,15 @@ MUST sit under the module they describe, and only the map, `README.md`, `CHANGEL
 remain at the root.
 
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
-durability and an audience, drawn from these sets:
+mutability and an audience, drawn from these sets:
 
 | Property   | Values                                                                     |
 | ---------- | -------------------------------------------------------------------------- |
 | Tense      | `present`, `past`, `future`, `imperative`, `explanatory`                   |
-| Durability | `rewritten in place`, `append-only`, `immutable`, `volatile`, `disposable` |
+| Mutability | `rewritten in place`, `append-only`, `immutable`, `volatile`, `disposable` |
 
 Audience is free text. Two artifacts sharing all three are one artifact: merge them, or make one a
-section of the other. Free-text tense and durability defeat that test - near-duplicates escape on
+section of the other. Free-text tense and mutability defeat that test - near-duplicates escape on
 phrasing rather than substance - which is why these are closed sets.
 
 An **alias** is exempt: a file whose entire content points at another artifact, existing only

@@ -18,6 +18,9 @@ All notable changes to this project are documented here, following
   note's Finding, Evidence and Dead ends state the current answer, not how it was reached.
 - Emphasis in `templates/` is written `_like this_` rather than `*like this*`, the form Prettier
   produces (ADR-0017). No wording changed.
+- The third property is called **mutability** everywhere, matching ADR-0001. The artifacts table's
+  `Durability` column in `templates/DOC-MAP.md` is now `Mutability`, as is `SPECIFICATION.md` §2.7;
+  the permitted values are unchanged.
 - `tools/doc-kit-check.sh` groups gitignored warnings by top-level directory, so a vendored tree
   such as `node_modules/` reports once rather than once per file.
 

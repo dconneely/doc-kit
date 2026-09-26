@@ -37,7 +37,7 @@ docs/
 
 ## Artifacts
 
-| Artifact        | Purpose   | Tense   | Durability         | Audience    |
+| Artifact        | Purpose   | Tense   | Mutability         | Audience    |
 | --------------- | --------- | ------- | ------------------ | ----------- |
 | `DOC-MAP.md`    | the map   | present | rewritten in place | anyone      |
 | `PLAN.md`       | backlog   | future  | volatile           | the team    |
