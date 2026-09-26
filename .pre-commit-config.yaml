@@ -1,56 +1,43 @@
 # Hygiene hooks for a repository that is entirely prose. Run with `prek` (no Python needed) or
 # `pre-commit`. The conformance checker, tools/doc-kit-check.sh, is product and runs separately.
 #
-# This file is infrastructure, not product (ADR-0007) - it configures this repository and is never
-# copied into an adopting one. Revisions are pinned to versions known to work on Windows.
-# `prek install` (and `pre-commit install`) wire only the pre-commit hook type unless told
-# otherwise, which would leave the commit-msg hook below installed but never invoked.
+# Infrastructure, not product (ADR-0007): never copied into an adopting repository. Revisions are
+# pinned to versions known to work on Windows.
+#
+# Without this, `install` wires only the pre-commit stage and the commit-msg hook never runs.
 default_install_hook_types: [pre-commit, commit-msg]
 
 repos:
-  # `gitleaks-system` rather than the default `gitleaks`, which builds the binary from source with
-  # Go: that produces an unsigned, reputation-less executable in AppData, which Windows Smart App
-  # Control blocks outright (os error 4551). Needs gitleaks on PATH - `scoop install gitleaks`,
-  # `brew install gitleaks`, or a release binary.
+  # `gitleaks-system`, not `gitleaks`: the default builds an unsigned binary with Go, which Windows
+  # Smart App Control blocks (os error 4551). Needs gitleaks on PATH.
   #
-  # Keep this rev in step with the installed binary: the hook's entry changed from
-  # `gitleaks protect` to `gitleaks git --pre-commit` around v8.19, so an old rev driving a new
-  # binary invokes a deprecated subcommand.
+  # Keep this rev in step with the installed binary - the hook's subcommand changed around v8.19.
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1
     hooks:
       - id: gitleaks-system
-        # `gitleaks git --staged` reads the staged diff itself and takes at most one path, so
-        # passing it the changed filenames makes it exit with "accepts at most 1 arg(s)".
+        # It reads the staged diff itself and rejects more than one path argument.
         pass_filenames: false
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
-      # No --markdown-linebreak-ext here: this repo has zero trailing-double-space line breaks, so
-      # the default behaviour has nothing to eat. Add the flag if that changes.
+      # No --markdown-linebreak-ext: nothing here uses trailing-double-space line breaks.
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
       - id: check-merge-conflict
-      # Windows and macOS have case-insensitive filesystems, so `LICENCE` and `LICENSE` would
-      # collide silently on checkout. This repository deliberately uses the British spelling.
+      # `LICENCE` and `LICENSE` would collide silently on a case-insensitive filesystem.
       - id: check-case-conflict
       - id: check-shebang-scripts-are-executable
-      # .gitattributes already pins eol=lf; this guards against that being weakened rather than
-      # being the fix for it.
+      # Guards .gitattributes' eol=lf against being weakened.
       - id: mixed-line-ending
         args: [--fix=lf]
 
-  # Formatter, not linter - complements markdownlint-cli2 below (it doesn't check MD024/MD032 and
-  # the rest; markdownlint-cli2 has no line-wrap logic of its own). Config lives in
-  # .prettierrc.json (CLI flags alone silently wrapped nothing - see ADR-0017). `local`, not
-  # `pre-commit/mirrors-prettier`: that mirror is stale (v3.1.0), so pinning the exact version via
-  # npx instead.
-  #
-  # `*emphasis*` becomes `_emphasis_` on first run and forever after - no config option to avoid
-  # it; ADR-0017 accepts the one-time bulk rewrite as the cost.
+  # Formatter; markdownlint-cli2 below is the linter. Config is in .prettierrc.json - CLI flags
+  # alone wrapped nothing (ADR-0017). `local` because pre-commit/mirrors-prettier is stale.
+  # Rewrites `*emphasis*` to `_emphasis_`, with no option to avoid it.
   - repo: local
     hooks:
       - id: prettier-markdown
@@ -60,52 +47,33 @@ repos:
         pass_filenames: true
         types: [markdown]
 
-  # Line-length gate only - see .markdownlint-cli2.jsonc. MD013 has no auto-fix in any markdownlint
-  # implementation, so this reports and does not rewrap - Prettier above does that half now.
+  # Config in .markdownlint-cli2.jsonc. Reports only; Prettier does the rewrapping.
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.23.2
     hooks:
       - id: markdownlint-cli2
 
-  # The checker has only ever run under Cygwin's bash on Windows; shellcheck is what stands in for
-  # the Linux/macOS testing it has never had. Python rather than the Docker variant, for the same
-  # reason as gitleaks.
+  # Python rather than Docker, for the same reason as gitleaks.
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
       - id: shellcheck
 
-  # Conventional Commits, on the commit-msg stage. Python rather than the Node commitlint hook: no
-  # config file, no additional_dependencies, and nothing compiled - matters on Windows, where
-  # Smart App Control blocks locally built binaries.
-  #
-  # No `args:` - left at the hook's own built-in default type list (build, chore, ci, docs, feat,
-  # fix, perf, refactor, revert, style, test), shared across every pre-commit-managed repo in this
-  # workspace rather than a repo-specific subset: one fewer list to keep in sync. Product changes
-  # (ADOPTING.md, templates/, tools/, the skill) take feat/fix/refactor; this repository's own
-  # documentation takes docs; build covers infrastructure like .gitattributes and this file.
-  #
-  # Two things this does not do. It checks the *shape* of a subject, not whether the type is the
-  # right one: `docs:` on a change to templates/ passes and is still wrong. And it accepts `Feat:`
-  # - there is no case-sensitivity option, and --strict only blocks fixup and merge commits.
+  # Conventional Commits on commit-msg, with the hook's default type list; `build` covers
+  # infrastructure such as this file, alongside AGENTS.md's mapping. Python rather than Node
+  # commitlint: nothing compiled, which matters under Smart App Control. It checks a subject's
+  # shape, not whether the type is right, and accepts `Feat:` - see docs/testing.md.
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v4.4.0
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
 
-  # Link rot, on demand only: `prek run --hook-stage manual lychee`. Deliberately NOT on commit -
-  # external hosts fail for reasons unrelated to the change under review, and a hook that blocks a
-  # commit because someone else's server is down is a hook that gets bypassed.
-  # `.github/workflows/link-check.yml` runs the identical command nightly.
+  # Link rot, on demand only (`prek run --hook-stage manual lychee-system`): a hook that blocks a
+  # commit because someone else's server is down gets bypassed. CI runs the same command nightly.
   #
-  # --method get, not the default HEAD: rfc-editor.org answers HEAD with 500 and GET with 200, so
-  # a HEAD-based sweep reports false failures against RFC-cited links. Note the tag prefix: lychee
-  # tags releases `lychee-vX.Y.Z`, not `vX.Y.Z`.
-  #
-  # `lychee-system` needs lychee on PATH - `scoop install lychee`, `brew install lychee` or
-  # `cargo install lychee`. The auto-installing `lychee` hook would avoid that, but its install
-  # script mangles Windows paths (strips the backslashes, then fails with exit 127).
+  # --method get: rfc-editor.org answers HEAD with 500. `lychee-system` needs lychee on PATH; the
+  # auto-installing hook mangles Windows paths. Tags are `lychee-vX.Y.Z`, not `vX.Y.Z`.
   - repo: https://github.com/lycheeverse/lychee
     rev: lychee-v0.24.2
     hooks:
@@ -113,19 +81,15 @@ repos:
         stages: [manual]
         args: [--no-progress, --method, get, --max-concurrency, "4"]
 
-  # Drift guards - markdownlint catches formatting drift, these catch the semantic kind:
-  # `language: pygrep` is a cross-platform grep whose `entry` is a Python regex, failing when a
-  # file MATCHES (case-sensitive by default).
+  # Drift guards. `pygrep` fails when a file MATCHES the Python regex in `entry`.
   - repo: local
     hooks:
       - id: lowercase-adr-status
         name: "ADR statuses are lowercase (MADR spelling)"
         language: pygrep
-        # `Deprecated` is deliberately absent: it is also a Keep a Changelog category, so matching
-        # it would flag legitimate lines.
+        # No `Deprecated`: it is also a Keep a Changelog category. Scoped to docs/adr/ so prose
+        # discussing the convention elsewhere is not flagged.
         entry: 'Superseded by ADR-|`(Accepted|Proposed|Rejected)`'
-        # Scoped to docs/adr/, not repo-wide: a repo-wide types: [markdown] scope would flag any
-        # prose that discusses the convention itself (an AGENTS.md passage explaining it, say).
         files: ^docs/adr/
 
       - id: no-nygard-status-section
@@ -140,12 +104,8 @@ repos:
         entry: 'This file is a template'
         types: [markdown]
 
-      # tools/doc-kit-check.sh declares #!/bin/sh precisely so shellcheck (above) checks it against
-      # POSIX rules, standing in for the Linux/macOS testing it has never had - a bash-only
-      # construct slipped in under that same shebang would defeat the whole point silently, since
-      # shellcheck itself just trusts whatever dialect the shebang claims. A script that genuinely
-      # needs bash is free to exist; it just has to be named .bash instead, so shellcheck checks it
-      # against the rules its name actually promises.
+      # shellcheck trusts the shebang, so a bash-only construct under #!/bin/sh would pass
+      # silently. Bash scripts are welcome, named .bash.
       - id: sh-scripts-are-posix
         name: ".sh scripts must not declare a bash shebang (use .bash for bash-specific scripts)"
         language: pygrep
