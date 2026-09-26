@@ -47,7 +47,7 @@ warn() {
 # git is missing or this is not a work tree.
 ignored_of() {
 	if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-		git check-ignore --stdin || true
+		git -c core.quotePath=false check-ignore --stdin || true
 	else
 		cat >/dev/null
 	fi
@@ -142,12 +142,15 @@ check_map() {
 		set -f
 	done
 
-	# §2.4 - every documentation file appears in the map. Templates (§2.8) and an
-	# archive (§5.1) need no special case: each is covered by its own map entry.
+	# §2.4 - every documentation file appears in the map. Files below the conventional
+	# archive are not documentation files (§5.1); an archive elsewhere is covered by its map
+	# entry. Split on newlines only, so a path may contain spaces.
 	set +f
-	files=$(find . -name '*.md' ! -path './.git/*' | sed 's:^\./::' | sort)
+	files=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' | sort)
 	set -f
 	unmapped=''
+	oldifs=$IFS
+	IFS=$NL
 	for f in $files; do
 		hit=1
 		for a in $arts; do
@@ -159,10 +162,8 @@ check_map() {
 	ignored=$(printf '%s' "$unmapped" | ignored_of)
 	for f in $unmapped; do
 		printf '%s\n' "$ignored" | grep -qxF "$f" ||
-			fail "$f is not named in the map" "§2.4 - add a row, or move it under a mapped archive"
+			fail "$f is not named in the map" "§2.4 - add a row, or move it under an archive"
 	done
-	oldifs=$IFS
-	IFS=$NL
 	for g in $(printf '%s\n' "$ignored" | awk -F/ '
 		NF {
 			k = (NF > 1) ? $1 "/" : $0

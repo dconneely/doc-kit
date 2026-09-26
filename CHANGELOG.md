@@ -21,9 +21,10 @@ All notable changes to this project are documented here, following
 - `tools/doc-kit-check.sh`'s plan check matched only the retired `*Type:*` format, so it passed any
   `PLAN.md`. It now checks the `**Type:**` format, fails an entry with no type tag, accepts a tag
   alone on its line, and catches lowercase completion markers such as `(done)`.
-- `tools/doc-kit-check.sh` no longer exempts `templates/` and `docs/archive/` by name. An archive at
-  any path is covered by its own map entry (§5.1), and an adopter's own `templates/` directory is
-  checked like any other.
+- `tools/doc-kit-check.sh` no longer exempts `templates/` by name, so an adopter's own `templates/`
+  directory is checked like any other. An archive outside `docs/archive/` is covered by its own map
+  entry (§5.1).
+- `tools/doc-kit-check.sh` no longer splits a path containing spaces into several unmapped files.
 - `templates/PLAN.md` says "one paragraph each" where entries are written, linking to `DOC-MAP.md`
   for the rule.
 - `ADOPTING.md` Step 5 checks the layout block against the two tables too, and says which of its

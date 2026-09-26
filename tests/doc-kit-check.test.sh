@@ -130,6 +130,17 @@ after '^[|] `PLAN.md` +[|] start' '| `old/` | archived | never |'
 expect "an archive at any mapped path covers its files" 0 "conformant" map
 
 fixture
+mkdir -p docs/archive
+echo x >docs/archive/stale.md
+expect "docs/archive/ is exempt without a row" 0 "conformant" map
+
+fixture
+echo x >"docs/adr/0002 old notes.md"
+echo x >"loose notes.md"
+expect "a mapped path with spaces passes" 1 "FAIL [map] loose notes.md is not named in the map" map
+expect "a path with spaces is not split" 1 "doc-kit: 1 failure(s)" map
+
+fixture
 git init -q .
 printf 'node_modules/\nscratch.md\n' >.gitignore
 mkdir -p node_modules/a node_modules/b
