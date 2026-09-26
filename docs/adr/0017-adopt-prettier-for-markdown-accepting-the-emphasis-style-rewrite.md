@@ -1,7 +1,7 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-09-03
-decision-makers: {who decided - required once the status is not "proposed"}
+decision-makers: David Conneely
 ---
 
 # 17. Adopt Prettier for Markdown, accepting the emphasis-style rewrite
