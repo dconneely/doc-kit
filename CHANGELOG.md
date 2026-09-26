@@ -37,6 +37,9 @@ All notable changes to this project are documented here, following
   entry (§5.1).
 - `tools/doc-kit-check.sh` no longer splits a path containing spaces into several unmapped files.
 - `templates/DOC-MAP.md`'s layout block no longer misaligns its first line.
+- Every guidance comment in `templates/docs/adr/0000-template.md` now ends "Delete this comment in
+  the copy.", and the first says every HTML comment in it is author guidance. The research
+  template's comment gains the same blank line before its delete line.
 - `templates/PLAN.md` says "one paragraph each" where entries are written, linking to `DOC-MAP.md`
   for the rule.
 - `ADOPTING.md` Step 5 checks the layout block against the two tables too, and says which of its
