@@ -59,7 +59,8 @@ passes this repository has needed were all found by reading, not by tooling.
 **Specification clauses with no instance here.** §3.2 changelog categories, §3.4 research confidence
 levels, §3.5 quirk entry shape, and §5 archive provenance headers are unimplemented. Three of the
 four have nothing to check against - this repository has no quirks file and no archive - but the
-changelog and research notes do exist, so those two are genuine omissions rather than vacuous ones.
+changelog and research notes do exist, so those two are intentional omissions rather than vacuous
+ones.
 
 **Prose quality of any kind.** A repository can pass every check and be badly written. Structural
 conformance is a floor.
