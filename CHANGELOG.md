@@ -5,6 +5,8 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+## [0.4.0] - 2026-09-26
+
 ### Added
 
 - A file marked `linguist-vendored` in `.gitattributes` is not a documentation file, so vendored
