@@ -23,6 +23,14 @@ All notable changes to this project are documented here, following
 
 ### Fixed
 
+- `tools/doc-kit-check.sh` now fails a `PLAN.md` entry with no type tag at all - it previously
+  checked only tags that were present - and accepts a tag alone on its line. Lowercase completion
+  markers such as `(done)` are caught too.
+- `tools/doc-kit-check.sh` no longer exempts `templates/` and `docs/archive/` by name. An archive at
+  any path is covered by its own map entry (§5.1), and an adopter's own `templates/` directory is
+  checked like any other.
+- `tools/doc-kit-check.sh` groups gitignored warnings by top-level directory, so a vendored tree
+  such as `node_modules/` reports once rather than once per file.
 - `templates/PLAN.md` now cues "one paragraph each" at the point of use, linking to `DOC-MAP.md` for
   the rule - the same point-of-use mitigation ADR-0011 already gave the ADR template, applied to the
   one artifact it was missing from.

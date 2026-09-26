@@ -4,7 +4,7 @@
 # Usage:  sh tools/doc-kit-check.sh [check ...]
 #         with no arguments, runs every check
 #
-# Checks: map    §2.2-2.5  the map is complete, consistent and customised
+# Checks: map    §2.2-2.7  the map is complete, consistent and customised
 #         adr    §3.1      records are numbered, statused and structured
 #         plan   §3.3      the plan has not become a graveyard
 #
@@ -15,21 +15,15 @@
 # On Windows use `sh`, not `bash` - the `bash` on PATH is usually WSL's, which
 # sees a different filesystem and will report every file missing.
 #
-# §2.4's sweep queries gitignored files exactly like tracked ones, but a hit
-# in a gitignored file is reported as a WARN, never a FAIL - gitignored docs
-# (a vendored third-party tree, a personal working-notes convention) are a
-# real, recurring category this kit doesn't get to assume away, but they
-# should never block CI over content nobody asked this repository's map to
-# describe. This needs `git`; where it's unavailable, or the target isn't a
-# git work tree, every hit is a FAIL as before - the one point in this script
-# that isn't pure awk/sed/grep/find, and it degrades to the old behaviour
-# rather than erroring when git is missing.
+# An unmapped gitignored file is a WARN, never a FAIL (§2.9), grouped by its
+# top-level directory so a vendored tree reports once. Telling ignored from
+# tracked needs `git`; without it, every unmapped file is a FAIL.
 
 set -eu
 
 MAP=DOC-MAP.md
-# Excluded from §2.4 by §2.8 (templates are not instances) and §5.1 (archives).
-EXCLUDE_PREFIXES='templates/ docs/archive/'
+NL='
+'
 
 failures=0
 warnings=0
@@ -49,12 +43,14 @@ warn() {
 	return 0
 }
 
-# True when git is usable here and PATH is gitignored. False (never errors)
-# when git is missing, this isn't a work tree, or the path isn't ignored.
-is_ignored() {
-	command -v git >/dev/null 2>&1 || return 1
-	git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 1
-	git check-ignore -q "$1"
+# Filter stdin (one path per line) to the gitignored ones. Prints nothing when
+# git is missing or this is not a work tree.
+ignored_of() {
+	if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+		git check-ignore --stdin || true
+	else
+		cat >/dev/null
+	fi
 }
 
 # section FILE HEADING - the lines under a "## Heading" up to the next "## "
@@ -68,14 +64,9 @@ table_paths() {
 	section "$MAP" "$1" | sed -n 's/^| `\([^`]*\)`.*/\1/p'
 }
 
-# The layout block is an indented tree, to any depth; rebuild full paths from
-# it with a prefix stack keyed on indentation, not just one flat level. A line
-# is a container for what follows only when it is a *bare* `name/` - nothing
-# else on the line. A directory named with trailing description text (e.g.
-# `templates/   product - ...`) is a leaf instead, representing the whole
-# directory as one artifact - matching a `dirname/*` row after norm() - the
-# same distinction the original single-level parser relied on, now checked at
-# every depth rather than only at the top.
+# The layout block is an indented tree; rebuild full paths with a prefix stack
+# keyed on indentation. Only a bare `name/` line is a container. A directory
+# followed by description text is a leaf: one artifact, matching a `name/*` row.
 layout_paths() {
 	awk '/^```text/ { f = 1; next } /^```/ { if (f) exit } f' "$MAP" | awk '
 		{
@@ -115,13 +106,6 @@ pattern_exists() {
 	[ -e "$1" ]
 }
 
-excluded() {
-	for prefix in $EXCLUDE_PREFIXES; do
-		case "$1" in "$prefix"*) return 0 ;; esac
-	done
-	return 1
-}
-
 # ---------------------------------------------------------------- map
 
 check_map() {
@@ -158,26 +142,39 @@ check_map() {
 		set -f
 	done
 
-	# §2.4 - every documentation file appears in the map.
+	# §2.4 - every documentation file appears in the map. Templates (§2.8) and an
+	# archive (§5.1) need no special case: each is covered by its own map entry.
 	set +f
 	files=$(find . -name '*.md' ! -path './.git/*' | sed 's:^\./::' | sort)
 	set -f
+	unmapped=''
 	for f in $files; do
-		excluded "$f" && continue
 		hit=1
 		for a in $arts; do
 			# shellcheck disable=SC2254
 			case "$f" in $a|"${a%/}"/*) hit=0; break ;; esac
 		done
-		if [ "$hit" -ne 0 ]; then
-			if is_ignored "$f"; then
-				warn "$f is not named in the map (gitignored)" \
-					"§2.4 - add a row, or move it under an archive"
-			else
-				fail "$f is not named in the map" "§2.4 - add a row, or move it under an archive"
-			fi
-		fi
+		[ "$hit" -eq 0 ] || unmapped="$unmapped$f$NL"
 	done
+	ignored=$(printf '%s' "$unmapped" | ignored_of)
+	for f in $unmapped; do
+		printf '%s\n' "$ignored" | grep -qxF "$f" ||
+			fail "$f is not named in the map" "§2.4 - add a row, or move it under a mapped archive"
+	done
+	oldifs=$IFS
+	IFS=$NL
+	for g in $(printf '%s\n' "$ignored" | awk -F/ '
+		NF {
+			k = (NF > 1) ? $1 "/" : $0
+			if (!(k in n)) { first[k] = $0; order[++c] = k }
+			n[k]++
+		}
+		END { for (i = 1; i <= c; i++) { k = order[i]; print (n[k] == 1) ? first[k] : k " (" n[k] " files)" } }
+	'); do
+		IFS=$oldifs
+		warn "$g is not named in the map (gitignored)" "§2.9 - advisory; add a row to map it"
+	done
+	IFS=$oldifs
 	set +f
 
 	# §2.7 - tense and durability come from closed sets, and no two artifacts share all three
@@ -186,13 +183,12 @@ check_map() {
 	rows=$(section "$MAP" '## Artifacts' | grep '^| `' | grep -v '\*\*Alias\*\*' |
 		awk -F' *\\| *' '{ print $2 "~" $4 "~" $5 "~" $6 }')
 	oldifs=$IFS
-	IFS='
-'
+	IFS=$NL
 	for row in $rows; do
 		IFS=$oldifs
 		tense=$(printf '%s' "$row" | cut -d'~' -f2)
 		dur=$(printf '%s' "$row" | cut -d'~' -f3)
-		art=$(printf '%s' "$row" | cut -d'~' -f1)
+		art=$(printf '%s' "$row" | cut -d'~' -f1 | tr -d '`')
 		case "$tense" in
 			present|past|future|imperative|explanatory) ;;
 			*) fail "$art has tense '$tense'" "§2.7 - present, past, future, imperative, explanatory" ;;
@@ -201,8 +197,7 @@ check_map() {
 			"rewritten in place"|append-only|immutable|volatile|disposable) ;;
 			*) fail "$art has durability '$dur'" "§2.7 - see the permitted set" ;;
 		esac
-		IFS='
-'
+		IFS=$NL
 	done
 	IFS=$oldifs
 
@@ -272,21 +267,36 @@ check_plan() {
 	group plan
 	[ -f PLAN.md ] || return 0
 
-	# Loops feed from a variable, not a pipe: a piped `while` runs in a subshell, so increments to
-	# `failures` are lost and the exit code stays 0 while the failure prints.
+	# One awk pass: `done N` for a heading marked complete, `type N` for an entry (a `##` heading)
+	# with no valid type tag beneath it. Lowercase "done" counts only when set off as a marker -
+	# "(done)", "- done" - so a title like "Define done" passes.
+	hits=$(awk '
+		function flush() { if (h && !t) print "type " h }
+		/^#+ / {
+			l = tolower($0)
+			if (l ~ /~~|\[x\]|[(\[](done|completed?)[)\]]|[-:] *(done|completed?) *$/ ||
+				$0 ~ /(^|[^A-Za-z])(DONE|COMPLETED?)([^A-Za-z]|$)/) print "done " NR
+		}
+		/^## / { flush(); h = NR; t = 0; next }
+		/^\*\*Type:\*\* (bug|debt|feature|docs)([ -]|$)/ { t = 1 }
+		END { flush() }
+	' PLAN.md)
+
+	# Fed from a variable, not a pipe: a piped `while` runs in a subshell, and increments to
+	# `failures` would be lost.
+	set -f
 	oldifs=$IFS
-	for hit in $(IFS='
-'; grep -nE '^#+ .*(~~|\bDONE\b|\[x\]|\bCOMPLETED?\b)' PLAN.md | tr ' ' '_'); do
+	IFS=$NL
+	for hit in $hits; do
 		IFS=$oldifs
-		fail "PLAN.md:${hit%%:*} looks like a completed entry" "§3.3 - delete entries when done, do not annotate"
+		no=${hit#* }
+		case "$hit" in
+			done*) fail "PLAN.md:$no looks like a completed entry" "§3.3 - delete entries when done, do not annotate" ;;
+			type*) fail "PLAN.md:$no has no valid type tag" "§3.3 - bug, debt, feature or docs" ;;
+		esac
 	done
 	IFS=$oldifs
-
-	for line in $(grep -nE '^\*\*Type:\*\*' PLAN.md | tr ' ' '_'); do
-		no=${line%%:*}
-		printf '%s' "${line#*:}" | tr '_' ' ' | grep -qE '^\*\*Type:\*\* (bug|debt|feature|docs)( |-)' ||
-			fail "PLAN.md:$no has no valid type tag" "§3.3 - bug, debt, feature or docs"
-	done
+	set +f
 	return 0
 }
 
