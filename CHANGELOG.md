@@ -33,8 +33,7 @@ All notable changes to this project are documented here, following
   `PLAN.md`. It now checks the `**Type:**` format, fails an entry with no type tag, accepts a tag
   alone on its line, and catches lowercase completion markers such as `(done)`.
 - `tools/doc-kit-check.sh` no longer exempts `templates/` by name, so an adopter's own `templates/`
-  directory is checked like any other. An archive outside `docs/archive/` is covered by its own map
-  entry (§5.1).
+  directory is checked like any other.
 - `tools/doc-kit-check.sh` no longer splits a path containing spaces into several unmapped files.
 - `templates/DOC-MAP.md`'s layout block no longer misaligns its first line, and its plan-entry
   example matches `templates/PLAN.md`.
