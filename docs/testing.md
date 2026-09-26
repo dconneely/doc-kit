@@ -26,8 +26,7 @@ Conventional Commits on the `commit-msg` stage, using the hook's default type li
 
 **Link resolution.** `lychee` runs nightly in CI (`.github/workflows/link-check.yml`) and on demand
 locally, and reports HTTP status rather than whether a page still says what it was cited for. A
-standards body can reorganise a document without changing its URL. Last full sweep: 2026-08-23, 43
-unique links, all resolving (2 via redirect).
+standards body can reorganise a document without changing its URL.
 
 **Commit types.** The commit-msg hook checks a subject's _shape_, not whether the type is the right
 one - `docs:` on a change to `templates/` passes and is still wrong, and that is the half of
