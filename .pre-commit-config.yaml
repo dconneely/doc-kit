@@ -45,6 +45,9 @@ repos:
         language: system
         entry: npx --yes prettier@3.9.6 --write
         pass_filenames: true
+        # Parallel batches on a cold npx cache race to install Prettier and read a half-written
+        # package.json.
+        require_serial: true
         types: [markdown]
 
   # Config in .markdownlint-cli2.jsonc. Reports only; Prettier does the rewrapping.
