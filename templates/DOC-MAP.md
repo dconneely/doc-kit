@@ -127,7 +127,10 @@ note or an ADR. Entries are deleted when done, never annotated.
 
 ```markdown
 ## Short title, imperative
+
 **Type:** bug - **Importance:** high - **Effort:** medium
+
+One paragraph on what and why.
 ```
 
 - **Type** - `bug`, `debt`, `feature` or `docs`. Debt is a tag here, not a separate file: the

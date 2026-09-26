@@ -130,6 +130,7 @@ adopter can see, not internal refactors.
 
 ```markdown
 ## Short title
+
 **Type:** bug - **Importance:** high - **Effort:** medium
 
 One paragraph on what and why. If it needs more than that, it needs an ADR.

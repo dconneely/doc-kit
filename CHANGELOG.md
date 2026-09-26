@@ -36,7 +36,8 @@ All notable changes to this project are documented here, following
   directory is checked like any other. An archive outside `docs/archive/` is covered by its own map
   entry (§5.1).
 - `tools/doc-kit-check.sh` no longer splits a path containing spaces into several unmapped files.
-- `templates/DOC-MAP.md`'s layout block no longer misaligns its first line.
+- `templates/DOC-MAP.md`'s layout block no longer misaligns its first line, and its plan-entry
+  example matches `templates/PLAN.md`.
 - `ADOPTING.md` Step 4c and `templates/docs/tasks/adopt-doc-kit.md` say to record where an extracted
   ADR came from in the commit message, since a finished ADR contains no HTML comments.
 - Every guidance comment in `templates/docs/adr/0000-template.md` now ends "Delete this comment in
