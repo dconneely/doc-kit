@@ -22,9 +22,9 @@ mutability and an audience. The unit the structure is built from.
 `SPECIFICATION.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence,
 only consequences.
 
-**Documentation file** - for checking purposes, any Markdown file that is not vendored, not
-generated into an ignored directory, and not below an archive. Defined precisely in
-`SPECIFICATION.md` §1, because the map's completeness check is undecidable without it.
+**Documentation file** - a file the map's completeness check runs over. Defined in
+`SPECIFICATION.md` §1 and not restated here, because the check is undecidable without the exact
+wording.
 
 **Instance** - a customised copy of a template, living in an adopting repository. The root
 `DOC-MAP.md` here is an instance; `templates/DOC-MAP.md` is the template.
@@ -36,8 +36,8 @@ entry point, and the thing that must never promise a file that does not exist.
 backlog, part assessment. The characteristic failure the structure exists to prevent, and the first
 thing to look for when adopting.
 
-**Mutability** - how a document changes: rewritten in place, append-only, immutable, or disposable.
-One of the three properties.
+**Mutability** - how a document changes over its life, from the closed set in `SPECIFICATION.md`
+§2.7. One of the three properties.
 
 **Provenance header** - the block at the top of an archived file stating that it is not
 authoritative, when it was last known accurate, and why it was not migrated.
