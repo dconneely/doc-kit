@@ -26,7 +26,7 @@ If a sentence seems to fit two places, it is usually two sentences. Split it and
 ## Layout
 
 ```text
-DOC-MAP.md         this file - the map
+DOC-MAP.md               this file - the map
 README.md                orientation, one screen, links outward
 SPECIFICATION.md         the behaviour contract - an index once it grows (see below)
 CHANGELOG.md             what shipped
@@ -38,6 +38,7 @@ docs/
   glossary.md            domain vocabulary
   testing.md             test strategy, and what is deliberately not covered
   tasks/*.md             optional: per-item working notes, disposable
+  archive/               optional: undatable documents kept, not authoritative
 ```
 
 In a monorepo, everything below `docs/` moves under the module it describes, and only `DOC-MAP.md`,
@@ -65,6 +66,7 @@ specification. See "Machine-readable and generated parts" below.
 | `docs/glossary.md`   | Domain vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html); ISO 704 for formal terminology work                                                                                                    | present | rewritten in place | readers of every other document                                                                 |
 | `docs/testing.md`    | Test strategy, and what is deliberately _not_ covered. ISO/IEC/IEEE 29119-3 exists (superseded IEEE 829) but is enterprise-heavy for most projects                                                                                                         | present | rewritten in place | contributors                                                                                    |
 | `docs/tasks/*.md`    | Working notes for one backlog item. **No standard.** Optional - usually overhead below ~20 open items                                                                                                                                                      | future  | disposable         | whoever picks it up                                                                             |
+| `docs/archive/`      | Documentation whose currency cannot be established, kept rather than discarded. Every file carries a provenance header; nothing here may be cited. **No standard.** Optional                                                                               | past    | immutable          | nobody - kept for history                                                                       |
 
 ## Lifecycle
 
@@ -81,6 +83,7 @@ specification. See "Machine-readable and generated parts" below.
 | `docs/glossary.md` entry | a term acquires a project-specific meaning | when the term leaves the codebase                                |
 | `docs/testing.md`        | the second test approach appears           | never                                                            |
 | `docs/tasks/*.md`        | work begins on an item                     | work completes                                                   |
+| `docs/archive/`          | migration finds a document nobody can date | when nothing in it is worth keeping                              |
 
 ## Flow
 

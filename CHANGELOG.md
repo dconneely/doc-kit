@@ -5,6 +5,11 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+### Added
+
+- `templates/DOC-MAP.md` has an optional `docs/archive/` row, the single map entry §5.1 requires of
+  an archive.
+
 ### Changed
 
 - Prose punctuation throughout, `templates/` included, is plain ASCII - hyphens and straight quotes
@@ -25,6 +30,7 @@ All notable changes to this project are documented here, following
   directory is checked like any other. An archive outside `docs/archive/` is covered by its own map
   entry (§5.1).
 - `tools/doc-kit-check.sh` no longer splits a path containing spaces into several unmapped files.
+- `templates/DOC-MAP.md`'s layout block no longer misaligns its first line.
 - `templates/PLAN.md` says "one paragraph each" where entries are written, linking to `DOC-MAP.md`
   for the rule.
 - `ADOPTING.md` Step 5 checks the layout block against the two tables too, and says which of its
