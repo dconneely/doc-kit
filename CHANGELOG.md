@@ -7,70 +7,48 @@ All notable changes to this project are documented here, following
 
 ### Changed
 
-- Non-ASCII prose punctuation (em/en dashes, curly quotes) normalised to ASCII throughout, including
-  `templates/`. No wording changed.
-- `DOC-MAP.md`, `templates/DOC-MAP.md` and `templates/docs/research/0000-template.md` now say a
-  research note's Finding, Evidence and Dead ends are the current answer, not a narrative of how it
-  was reached - the same "previously X, now Y" failure already named for the specification, closed
-  for research notes too. Prompted by a research note in an adopting repository drifting into a
-  process diary.
-- Prettier now formats `*.md` on commit, alongside `markdownlint-cli2` (ADR-0017): automatic
-  wrapping at the 100-column line length `MD013` already enforced by hand. Every `*emphasis*` in
-  `templates/` became `_emphasis_` in the one-time bulk reformat that came with it - Prettier's
-  markdown printer has no config option to keep asterisks. No wording changed; verified by a
-  per-file word-count check across the whole repository and a byte-for-byte diff of the one fenced
-  YAML block at risk from embedded-language formatting.
+- Prose punctuation throughout, `templates/` included, is plain ASCII - hyphens and straight quotes
+  rather than dashes and curly quotes. No wording changed.
+- `DOC-MAP.md`, `templates/DOC-MAP.md` and `templates/docs/research/0000-template.md` say a research
+  note's Finding, Evidence and Dead ends state the current answer, not how it was reached.
+- Emphasis in `templates/` is written `_like this_` rather than `*like this*`, the form Prettier
+  produces (ADR-0017). No wording changed.
+- `tools/doc-kit-check.sh` groups gitignored warnings by top-level directory, so a vendored tree
+  such as `node_modules/` reports once rather than once per file.
 
 ### Fixed
 
-- `tools/doc-kit-check.sh` now fails a `PLAN.md` entry with no type tag at all - it previously
-  checked only tags that were present - and accepts a tag alone on its line. Lowercase completion
-  markers such as `(done)` are caught too.
+- `tools/doc-kit-check.sh`'s plan check matched only the retired `*Type:*` format, so it passed any
+  `PLAN.md`. It now checks the `**Type:**` format, fails an entry with no type tag, accepts a tag
+  alone on its line, and catches lowercase completion markers such as `(done)`.
 - `tools/doc-kit-check.sh` no longer exempts `templates/` and `docs/archive/` by name. An archive at
   any path is covered by its own map entry (§5.1), and an adopter's own `templates/` directory is
   checked like any other.
-- `tools/doc-kit-check.sh` groups gitignored warnings by top-level directory, so a vendored tree
-  such as `node_modules/` reports once rather than once per file.
-- `templates/PLAN.md` now cues "one paragraph each" at the point of use, linking to `DOC-MAP.md` for
-  the rule - the same point-of-use mitigation ADR-0011 already gave the ADR template, applied to the
-  one artifact it was missing from.
-- `tools/doc-kit-check.sh`'s plan check matched a type tag against `^\*Type:`, a single-asterisk
-  format retired by the MD036 fix in 0.2.0. Every real `PLAN.md` uses `**Type:**` and the check has
-  matched nothing since - conformant output regardless of content. Fixed to match the current
-  format; `docs/testing.md` records it as a fifth instance of the class of bug that section already
-  warned about.
+- `templates/PLAN.md` says "one paragraph each" where entries are written, linking to `DOC-MAP.md`
+  for the rule.
+- `ADOPTING.md` no longer quotes line counts for the checker and `ADOPTING-NOTES.md`, both of which
+  had gone stale.
 
 ## [0.3.0] - 2026-08-23
 
 ### Added
 
-- `ADOPTING-NOTES.md` now answers the objection that deleting completed `PLAN.md` entries erases
-  engineering history - `git log` already preserves it; a hand-kept "done" log would only rot.
-- `templates/docs/tasks/README.md` now says what makes a task note worth keeping - a specific
-  definition of done and a line of risk - rather than staying silent on quality now that "no fixed
-  shape" is settled. Offers a starting shape (`Status:` line, numbered steps, a "Definition of done"
-  section, a "Risk note" section) as one way to satisfy that, not a rule: two task notes written
-  independently, in two separate adoptions of this kit, converged on it unprompted.
-- `ADOPTING.md` Step 3 now says wording brevity in a repository's own `AGENTS.md`/`CLAUDE.md` is a
-  second pass, separate from and after cutting content a session could derive from the codebase -
-  the same true, non-derivable fact can usually still be said in fewer words without losing it. The
-  paste-in stanza itself is also tighter (~140 -> ~105 words), since it's the part that actually
-  ships into every adopter's repository.
-- The `doc-kit-adopt` skill's own text is tighter (~550 -> ~475 words), with no step, hazard, or
-  gate cut - same treatment as the stanza, since it's the other piece of this kit an agent reads and
-  acts on rather than a human skimming it.
-- `ADOPTING.md`'s "The idea, and why it shapes the procedure" section, and its "spec is a tree"
-  bullet in Step 1, moved their rationale into `ADOPTING-NOTES.md` instead of restating it -
-  matching the how-to/explanation split the two files already claimed to have. `ADOPTING.md` is
-  lighter; nothing that was said is gone, it's just in the file whose job is to say it. One
-  correctness hazard stayed behind in Step 2's "Layout block" row rather than moving with the rest:
-  a nested directory's introducing line must be bare or the checker misreads it as a single leaf
-  artifact - that's a mistake made _while executing_ the step, not background reasoning, so it
-  needed to survive without a trip to `ADOPTING-NOTES.md`.
-- `ADOPTING-NOTES.md` now answers whether a `docs/tasks/*.md` file with no matching `PLAN.md` entry
-  should be flagged: no, tooling here would fight the same "no standard" call that keeps the
-  directory otherwise unchecked - with the by-hand fix for either direction of mismatch spelled out
-  instead.
+- `ADOPTING-NOTES.md` answers the objection that deleting completed `PLAN.md` entries erases
+  history: `git log` keeps it, and a hand-kept "done" log would only rot.
+- `ADOPTING-NOTES.md` answers whether a `docs/tasks/*.md` file with no matching `PLAN.md` entry
+  should be flagged: no, and says how to fix either mismatch by hand.
+- `templates/docs/tasks/README.md` says what makes a task note worth keeping - a specific definition
+  of done and a line of risk - and offers an optional starting shape.
+- `ADOPTING.md` Step 3 says to tighten the wording of a repository's own `AGENTS.md` or `CLAUDE.md`
+  as a second pass, after cutting anything derivable from the code.
+
+### Changed
+
+- The paste-in `AGENTS.md` stanza is shorter, with no rule removed.
+- The `doc-kit-adopt` skill is shorter, with no step, hazard or gate removed.
+- The rationale behind `ADOPTING.md`'s opening section and Step 1's "spec is a tree" bullet moved to
+  `ADOPTING-NOTES.md`. Step 2 keeps the one hazard: a nested directory's introducing line in the
+  layout block must be bare, or the checker reads it as a single artifact.
 
 ## [0.2.0] - 2026-08-22
 
