@@ -33,7 +33,8 @@ classify - it is the finding, and it always means `split`.
 ## Decisions found
 
 Comments and documents explaining why something is _not_ written the obvious way. Each is an ADR
-that was never filed. Leave a one-line pointer behind at the original site.
+that was never filed. Leave a one-line pointer behind at the original site. Record where it came
+from in the commit message, not in the record - a finished ADR contains no HTML comments.
 
 | Where it lives now | Proposed ADR title | Filed |
 | ------------------ | ------------------ | ----- |

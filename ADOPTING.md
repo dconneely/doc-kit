@@ -308,6 +308,8 @@ reference prose. Do not stop at code comments - a page-by-page read of the docs 
 more of these than the comments do. These are the highest-value ADRs precisely because the reasoning
 is invisible from the code (or from a skim of the spec), so the next maintainer will "simplify" the
 constraint away and reintroduce the bug it prevents. Convert it and leave a one-line pointer behind.
+Record where it came from in the commit message, not in the record - a finished ADR contains no HTML
+comments.
 
 **3. Look for findings with sources.** Anything citing external references, reconciling sources that
 disagree, or carrying a confidence level is research and needs a home before the details fade. This
