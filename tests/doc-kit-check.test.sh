@@ -142,6 +142,25 @@ expect "a path with spaces is not split" 1 "doc-kit: 1 failure(s)" map
 
 fixture
 git init -q .
+printf 'vendor/** linguist-vendored\nvendor/ours/** -linguist-vendored\nthird/** linguist-vendored=false\n' >.gitattributes
+mkdir -p vendor/lib vendor/ours third
+echo x >vendor/lib/README.md
+echo x >vendor/ours/notes.md
+echo x >third/README.md
+expect "vendored tree is skipped" 1 "doc-kit: 2 failure(s)" map
+expect "unset attribute is not vendored" 1 "FAIL [map] vendor/ours/notes.md is not named" map
+expect "linguist-vendored=false is not vendored" 1 "FAIL [map] third/README.md is not named" map
+
+fixture
+git init -q .
+printf 'vendor/\n' >.gitignore
+printf 'vendor/** linguist-vendored\n' >.gitattributes
+mkdir -p vendor/lib
+echo x >vendor/lib/README.md
+expect "gitignored and vendored is skipped silently" 0 "doc-kit: conformant (map)" map
+
+fixture
+git init -q .
 printf 'node_modules/\nscratch.md\n' >.gitignore
 mkdir -p node_modules/a node_modules/b
 echo x >node_modules/a/README.md

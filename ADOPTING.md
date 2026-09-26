@@ -166,17 +166,19 @@ copied into your repository. The one exception is `docs/adr/0000-template.md` an
 For an empty repository this step is quick and you are finished. For an existing codebase, the
 material for those first entries is already scattered through it - that is Step 4.
 
-**One optional line, if you keep a `.gitattributes`:**
+**Two optional lines, if you keep a `.gitattributes`:**
 
 ```gitattributes
 *.md text eol=lf diff=markdown
+third_party/** linguist-vendored
 ```
 
 Git's Markdown diff driver puts the enclosing heading in the hunk header, which is worth having once
-a meaningful share of review is prose. The kit does not ship a `.gitattributes` - your repository
-probably already has one, and a documentation kit has no business holding opinions about your batch
-files. Nor does it require you to run anything: verifying this structure by hand is fully
-conformant. See ADR-0007.
+a meaningful share of review is prose. `linguist-vendored` marks third-party source you have copied
+in - use your real path - so its Markdown is not documentation the map has to name. The kit does not
+ship a `.gitattributes` - your repository probably already has one, and a documentation kit has no
+business holding opinions about your batch files. Nor does it require you to run anything: verifying
+this structure by hand is fully conformant. See ADR-0007.
 
 ### If coding agents work in this repository
 

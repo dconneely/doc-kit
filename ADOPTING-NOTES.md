@@ -38,7 +38,8 @@ artifact from ever being checked against the map. This is Step 1/4's version of 
 a gitignored documentation file the same as any other but reports a hit in one as advisory rather
 than blocking. The two are related, not the same decision twice: this one is a one-time call made
 while building the inventory, the checker's is a permanent, ongoing property of every run
-afterwards.
+afterwards. Vendored third-party source is a different case, gitignored or not: mark it
+`linguist-vendored` in `.gitattributes`, and it is not documentation at all (§1).
 
 ### Multi-module repository - one documentation structure, or one per module?
 

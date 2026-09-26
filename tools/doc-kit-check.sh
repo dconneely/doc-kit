@@ -15,9 +15,9 @@
 # On Windows use `sh`, not `bash` - the `bash` on PATH is usually WSL's, which
 # sees a different filesystem and will report every file missing.
 #
-# An unmapped gitignored file is a WARN, never a FAIL (§2.9), grouped by its
-# top-level directory so a vendored tree reports once. Telling ignored from
-# tracked needs `git`; without it, every unmapped file is a FAIL.
+# A file marked linguist-vendored in .gitattributes is skipped (§1). An unmapped
+# gitignored file is a WARN, never a FAIL (§2.9), grouped by its top-level
+# directory. Both need `git`; without it, every unmapped file is a FAIL.
 
 set -eu
 
@@ -43,11 +43,26 @@ warn() {
 	return 0
 }
 
+has_git() {
+	command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1
+}
+
 # Filter stdin (one path per line) to the gitignored ones. Prints nothing when
 # git is missing or this is not a work tree.
 ignored_of() {
-	if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+	if has_git; then
 		git -c core.quotePath=false check-ignore --stdin || true
+	else
+		cat >/dev/null
+	fi
+}
+
+# Filter stdin (one path per line) to the ones whose linguist-vendored attribute
+# is set in .gitattributes (§1). Prints nothing without git.
+vendored_of() {
+	if has_git; then
+		git -c core.quotePath=false check-attr --stdin linguist-vendored |
+			sed -n -e 's/: linguist-vendored: set$//p' -e 's/: linguist-vendored: true$//p'
 	else
 		cat >/dev/null
 	fi
@@ -143,8 +158,8 @@ check_map() {
 	done
 
 	# §2.4 - every documentation file appears in the map. Files below the conventional
-	# archive are not documentation files (§5.1); an archive elsewhere is covered by its map
-	# entry. Split on newlines only, so a path may contain spaces.
+	# archive (§5.1) and vendored files (§1) are not documentation files; an archive elsewhere
+	# is covered by its map entry. Split on newlines only, so a path may contain spaces.
 	set +f
 	files=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' | sort)
 	set -f
@@ -159,6 +174,15 @@ check_map() {
 		done
 		[ "$hit" -eq 0 ] || unmapped="$unmapped$f$NL"
 	done
+	vendored=$(printf '%s' "$unmapped" | vendored_of)
+	if [ -n "$vendored" ]; then
+		rest=''
+		for f in $unmapped; do
+			printf '%s
+' "$vendored" | grep -qxF "$f" || rest="$rest$f$NL"
+		done
+		unmapped=$rest
+	fi
 	ignored=$(printf '%s' "$unmapped" | ignored_of)
 	for f in $unmapped; do
 		printf '%s\n' "$ignored" | grep -qxF "$f" ||

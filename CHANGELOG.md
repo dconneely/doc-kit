@@ -7,6 +7,9 @@ All notable changes to this project are documented here, following
 
 ### Added
 
+- A file marked `linguist-vendored` in `.gitattributes` is not a documentation file, so vendored
+  third-party Markdown needs no map row (ADR-0018). `tools/doc-kit-check.sh` skips it silently;
+  `ADOPTING.md` Step 3 shows the line.
 - `templates/DOC-MAP.md` has an optional `docs/archive/` row, the single map entry §5.1 requires of
   an archive.
 
