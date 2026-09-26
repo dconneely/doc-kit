@@ -9,8 +9,8 @@ your repository is the templates, customised.
 
 Neither guide is copied, deliberately. This one is spent once the structure exists, and the map you
 customise carries the rules you need afterwards. The notes answer questions that do recur, but
-copying them would add 160 lines that go stale the moment the kit changes, and their links into the
-kit's own decision records would not resolve in your repository. Come back here instead.
+copying them would add a long file that goes stale the moment the kit changes, and their links into
+the kit's own decision records would not resolve in your repository. Come back here instead.
 
 **Done means:** every artifact named in that repository's map exists, every documentation file in
 that repository appears in its map, and each fact in them sits in exactly one place.
@@ -135,8 +135,8 @@ matter of taking the ones Step 1 said you had earned:
 
 One file sits outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `SPECIFICATION.md`. Copy it too if you want the check; skip it if you would rather verify by
-review. It is about 170 lines of POSIX shell depending on nothing but `awk`, `sed`, `grep` and
-`find` - read it before you run it. On Windows invoke it with `sh`, not `bash`.
+review. It is a single POSIX shell script depending on nothing but `awk`, `sed`, `grep` and `find` -
+read it before you run it. On Windows invoke it with `sh`, not `bash`.
 
 Copy everything by hand, or fetch the subtree if you would rather - `npx degit`, a sparse checkout,
 or clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the
