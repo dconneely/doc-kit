@@ -113,6 +113,9 @@ shape. The rules that file cannot express, and which live here:
   record revised something following from it.
 - **Only `accepted` binds.** A `proposed` record is a suggestion - merge it undecided if you like,
   since an open question is more visible in the tree than in a branch nobody is watching.
+- **Iterate while `proposed`.** A decision that takes several rounds to get right is revised in
+  place, and accepted once experience stops changing it. Accepting early is what makes records
+  proliferate: after that, every revision needs a successor.
 - **Immutable once accepted**, except to change status and date. Correct one by writing its
   successor, not by editing it.
 - **Changing a status is a human action.** A tool may draft a record and argue it; only a person

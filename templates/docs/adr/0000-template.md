@@ -17,7 +17,8 @@ Follows the MADR minimal template (https://adr.github.io/madr/). DOC-MAP.md carr
 about status, immutability and who may change one.
 
 Write it when the decision is made, not later. A record reconstructed years afterwards is usually an
-argument for what you already do, and it dilutes the ones written contemporaneously.
+argument for what you already do, and it dilutes the ones written contemporaneously. Revise it
+freely while it is "proposed"; accept it once experience stops changing it.
 
 Delete this comment, and every other HTML comment in this template, in the copy: they are
 guidance for the author, not part of the record.
