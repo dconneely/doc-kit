@@ -19,8 +19,7 @@ Start here when you have something to write down and are not sure which file it 
 
 ## Where does it go?
 
-Read it from either side - the question you are asking, or the sentence you are writing. The tense
-of the sentence usually settles it:
+The tense of the sentence you are writing usually settles it:
 
 | If you are asking...                    | If you are writing...                          | It belongs in                                                                         |
 | --------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------- |

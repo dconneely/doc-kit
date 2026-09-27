@@ -51,10 +51,10 @@ and a long form:
 > `<downside/undesired consequences>`, because `<additional rationale>`.
 
 It is MADR's ancestor, not a rival: MADR 1.3.0 (2018-01-30) "Changed template to be closer to the
-Y-Statements", and the long form maps clause for clause onto the minimal template. _Context_ and
+Y-Statements". The long form maps clause for clause onto the minimal template: _context_ and
 _facing_ are Context and Problem Statement; _decided for_ and _neglected_ are Considered Options and
 Decision Outcome; _to achieve_ and _accepting_ are the Good and Bad consequences; _because_ is the
-justification in "Chosen option: X, because Y". A record in either form says the same things.
+justification in "Chosen option: X, because Y".
 
 What differs is where it lives and whether it changes:
 
@@ -70,8 +70,7 @@ What differs is where it lives and whether it changes:
   the three-property test that makes an in-code Y-statement a different artifact from an ADR, not a
   shorter spelling of one.
 
-ADR-0010 did not consider Y-statements as an option. Nothing found here argues it should have chosen
-them: the minimal template already carries every clause.
+ADR-0010 did not consider Y-statements, and nothing here argues it should have chosen them.
 
 ## Evidence
 
@@ -114,5 +113,5 @@ ADR-0010 on a ground it had not claimed.
 - Whether MADR's front-matter should be adopted beyond `status`, `date` and `decision-makers`
   remains open; `consulted` and `informed` were judged overhead for a small project rather than
   wrong.
-- Whether the map should route anything to code comments - an in-code Y-statement included - is
-  open. `SPECIFICATION.md` currently puts comments out of scope.
+- Whether the map should route anything to code comments, in-code Y-statements included: see
+  ADR-0019, proposed.
