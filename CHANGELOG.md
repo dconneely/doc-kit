@@ -13,12 +13,13 @@ All notable changes to this project are documented here, following
 - `templates/DOC-MAP.md` routes code comments by tense: a present-tense reason beside the code, an
   ADR the comment names when the reason spans more than one site, a `TODO` that names its plan entry
   rather than replacing it, and history to the commit message. A new failure mode, "Text narrates",
-  generalises the specification's and research note's (ADR-0019, proposed).
-- The `AGENTS.md` stanza in `ADOPTING.md` tells agents to write the least that is true (ADR-0019,
-  proposed).
+  generalises the specification's and research note's (ADR-0019).
+- The `AGENTS.md` stanza in `ADOPTING.md` tells agents to write the least that is true (ADR-0019).
 
 ### Changed
 
+- `SPECIFICATION.md`'s scope covers the tense and volume of what is written, code comments included,
+  and excludes only style and what a project ought to document (ADR-0019).
 - `templates/DOC-MAP.md` says to iterate on a decision while it is `proposed`, and accept it once
   experience stops changing it.
 

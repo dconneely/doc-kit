@@ -36,11 +36,11 @@ should not adopt it.
 
 ### Not in scope
 
-This specification governs where facts live and how documents relate. It says nothing about writing
-quality, house style, or what a project ought to document. It does not cover generated API
-reference, documentation sites, or code comments, except to say where their outputs sit (§4).
-Adopting it is not a claim that a repository is well documented - only that what is documented is
-findable and in one place.
+This specification governs where facts live, how documents relate, and the tense and volume of what
+is written. Code comments it governs for tense and routing only (ADR-0019). It says nothing about
+house style or what a project ought to document. It does not cover generated API reference or
+documentation sites, except to say where their outputs sit (§4). Adopting it is not a claim that a
+repository is well documented - only that what is documented is findable and in one place.
 
 **It does not make documentation true.** Nothing here prevents a clause from going stale, and a
 checker cannot tell. Only two things resist rot: a claim derived from something else (§4.3), and a
