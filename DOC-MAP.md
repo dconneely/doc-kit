@@ -19,21 +19,22 @@ Start here when you have something to write down and are not sure which file it 
 
 ## Where does it go?
 
-The tense of the sentence you are writing usually settles it:
+Read it from either side - the question you are asking, or the sentence you are writing. The tense
+of the sentence usually settles it:
 
-| If you are writing...                          | It belongs in                                                                         |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------- |
-| "a conformant repository does X"               | `SPECIFICATION.md`                                                                    |
-| "we chose X because Y"                         | an ADR                                                                                |
-| "source A says X, and I checked"               | a research note                                                                       |
-| "X used to be Y, now it is Z"                  | the changelog                                                                         |
-| "we should do X"                               | the plan                                                                              |
-| "here is how you adopt this"                   | `ADOPTING.md`                                                                         |
-| "here is why the procedure is shaped this way" | `ADOPTING-NOTES.md`                                                                   |
-| "here is the text an adopter starts from"      | `templates/` - never restated in prose                                                |
-| "X means Y in this project"                    | the glossary                                                                          |
-| "an agent working here needs to know X"        | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact |
-| "this is how each document is used"            | this file                                                                             |
+| If you are asking...                    | If you are writing...                          | It belongs in                                                                         |
+| --------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------- |
+| "what makes a repository conformant?"   | "a conformant repository does X"               | `SPECIFICATION.md`                                                                    |
+| "why is the kit shaped like this?"      | "we chose X because Y"                         | an ADR                                                                                |
+| "has anyone checked that?"              | "source A says X, and I checked"               | a research note                                                                       |
+| "what changed in this release?"         | "X used to be Y, now it is Z"                  | the changelog                                                                         |
+| "is this known? is it planned?"         | "we should do X"                               | the plan                                                                              |
+| "how do I adopt this?"                  | "here is how you adopt this"                   | `ADOPTING.md`                                                                         |
+| "why does the procedure say that?"      | "here is why the procedure is shaped this way" | `ADOPTING-NOTES.md`                                                                   |
+| "what does an adopter start from?"      | "here is the text an adopter starts from"      | `templates/` - never restated in prose                                                |
+| "what does this word mean here?"        | "X means Y in this project"                    | the glossary                                                                          |
+| "what must an agent know to work here?" | "an agent working here needs to know X"        | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact |
+| "where does this go?"                   | "this is how each document is used"            | this file                                                                             |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
 
