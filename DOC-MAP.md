@@ -21,19 +21,22 @@ Start here when you have something to write down and are not sure which file it 
 
 The tense of the sentence you are writing usually settles it:
 
-| If you are asking...                    | If you are writing...                          | It belongs in                                                                         |
-| --------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------- |
-| "what makes a repository conformant?"   | "a conformant repository does X"               | `SPECIFICATION.md`                                                                    |
-| "why is the kit shaped like this?"      | "we chose X because Y"                         | an ADR                                                                                |
-| "has anyone checked that?"              | "source A says X, and I checked"               | a research note                                                                       |
-| "what changed in this release?"         | "X used to be Y, now it is Z"                  | the changelog                                                                         |
-| "is this known? is it planned?"         | "we should do X"                               | the plan                                                                              |
-| "how do I adopt this?"                  | "here is how you adopt this"                   | `ADOPTING.md`                                                                         |
-| "why does the procedure say that?"      | "here is why the procedure is shaped this way" | `ADOPTING-NOTES.md`                                                                   |
-| "what does an adopter start from?"      | "here is the text an adopter starts from"      | `templates/` - never restated in prose                                                |
-| "what does this word mean here?"        | "X means Y in this project"                    | the glossary                                                                          |
-| "what must an agent know to work here?" | "an agent working here needs to know X"        | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact |
-| "where does this go?"                   | "this is how each document is used"            | this file                                                                             |
+| If you are asking...                    | If you are writing...                              | It belongs in                                                                             |
+| --------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| "what makes a repository conformant?"   | "a conformant repository does X"                   | `SPECIFICATION.md`                                                                        |
+| "why is the kit shaped like this?"      | "we chose X because Y"                             | an ADR                                                                                    |
+| "has anyone checked that?"              | "source A says X, and I checked"                   | a research note                                                                           |
+| "what changed in this release?"         | "X used to be Y, now it is Z"                      | the changelog                                                                             |
+| "is this known? is it planned?"         | "we should do X"                                   | the plan                                                                                  |
+| "how do I adopt this?"                  | "here is how you adopt this"                       | `ADOPTING.md`                                                                             |
+| "why does the procedure say that?"      | "here is why the procedure is shaped this way"     | `ADOPTING-NOTES.md`                                                                       |
+| "what does an adopter start from?"      | "here is the text an adopter starts from"          | `templates/` - never restated in prose                                                    |
+| "why is this code like this?"           | "this code is like this because..."                | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
+| "what did this code do before?"         | "this code used to..." or "fixed the bug where..." | the commit message - never a comment                                                      |
+| "is anything left to do here?"          | "this code should also..."                         | the plan - a `TODO` beside the code names the entry, never replaces it                    |
+| "what does this word mean here?"        | "X means Y in this project"                        | the glossary                                                                              |
+| "what must an agent know to work here?" | "an agent working here needs to know X"            | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact     |
+| "where does this go?"                   | "this is how each document is used"                | this file                                                                                 |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
 
@@ -167,6 +170,10 @@ be derived. `SPECIFICATION.md` §4 has the rules for when that changes.
   claimed X, now corrected" - narrating how a finding was reached instead of stating what is
   currently true. The same "previously X, now Y" failure as the specification, just as easy to fall
   into here: revise the finding and its confidence in place instead.
+- **Text narrates** - comments and documents recount how they came to be ("previously", "after
+  investigating", "fixed the bug where") instead of stating what is true, and every reader pays to
+  skip it. The two failures above are this one in particular files; agents commit it everywhere by
+  default.
 
 ## Deliberately not here
 

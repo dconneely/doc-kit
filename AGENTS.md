@@ -44,6 +44,8 @@ reaches an adopter. See
 - **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map names
   must exist, and every Markdown file must appear in the map. `tools/doc-kit-check.sh` will tell
   you, but only if you run it.
+- **Write the least that is true.** No history or account of how you got there, in documents or code
+  comments - `DOC-MAP.md` says where those go (ADR-0019).
 
 ## Changing the specification
 
