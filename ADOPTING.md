@@ -224,6 +224,8 @@ Before you edit:
 - Never change an ADR's `status`, or edit an `accepted` one. Draft, don't decide - leave
   `decision-makers` as the placeholder too.
 - Delete finished `PLAN.md` entries; don't mark them done.
+- **Write the least that is true.** No history or account of how you got there, in documents or
+  code comments - the map says where those go.
 - Adding a document means updating `DOC-MAP.md` in the same commit.
 ```
 

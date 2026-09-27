@@ -10,6 +10,12 @@ All notable changes to this project are documented here, following
 - `templates/DOC-MAP.md`'s "Where does it go?" table has an "If you are asking..." column, and rows
   for what is absent on purpose: out of scope, decided against, knowingly unhandled, untested, or
   deferred until a trigger.
+- `templates/DOC-MAP.md` routes code comments by tense: a present-tense reason beside the code, an
+  ADR the comment names when the reason spans more than one site, and history to the commit message.
+  A new failure mode, "Text narrates", generalises the specification's and research note's
+  (ADR-0019, proposed).
+- The `AGENTS.md` stanza in `ADOPTING.md` tells agents to write the least that is true (ADR-0019,
+  proposed).
 
 ### Changed
 
