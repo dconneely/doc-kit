@@ -12,6 +12,11 @@ All notable changes to this project are documented here, following
   purpose: scope, options decided against, known-unhandled cases, deliberately untested areas, and
   work deferred until a trigger.
 
+### Changed
+
+- `templates/DOC-MAP.md` and the ADR template say to iterate on a decision while it is `proposed`,
+  and to accept it once experience stops changing it.
+
 ## [0.4.0] - 2026-09-26
 
 ### Added
