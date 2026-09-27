@@ -61,15 +61,9 @@ reason it is long.
   `tools/doc-kit-check.sh` cannot see it.
 - Neutral: if accepted, `SPECIFICATION.md`'s "Not in scope" narrows to style and to what a project
   ought to document, and says comments are governed for tense and routing only.
-- Neutral: if accepted, `templates/DOC-MAP.md` gains two "Where does it go?" rows routing a
-  comment's content as the Decision Outcome does, and one failure mode:
-
-  > **Text narrates** - comments and documents recount how they came to be ("previously", "after
-  > investigating", "fixed the bug where") instead of stating what is true, and every reader pays to
-  > skip it. Agents do this by default.
-
-- Neutral: if accepted, the `AGENTS.md` stanza in `ADOPTING.md` gains one line:
-
-  > **Write the least that is true.** No history or account of how you got there, in documents or
-  > comments. History goes in the commit message; a reason spanning more than one site goes in an
-  > ADR the comment names.
+- Neutral: `templates/DOC-MAP.md` routes a comment's content as the Decision Outcome does, and gains
+  the failure mode "Text narrates". It overlaps the specification's and research note's failures,
+  which it names as special cases rather than replacing them, because each carries its own file's
+  examples and remedy.
+- Neutral: the `AGENTS.md` stanza in `ADOPTING.md` gains "Write the least that is true", deferring
+  to the map for where history and reasons go rather than restating it.
