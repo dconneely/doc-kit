@@ -23,6 +23,7 @@ The tense of the sentence you are writing usually settles it:
 | "how do we know that?"                | "source A says X, source B says Y, and A won because..." | a research note                                                                           |
 | "why is this code like this?"         | "this code is like this because..."                      | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
 | "what did this code do before?"       | "this code used to..." or "fixed the bug where..."       | the commit message - never a comment                                                      |
+| "is anything left to do here?"        | "this code should also..."                               | the plan - a `TODO` beside the code names the entry, never replaces it                    |
 | "what does this word mean here?"      | "X means Y in this codebase"                             | the glossary                                                                              |
 | "exactly what does the API accept?"   | "the schema / wire format / API accepts X"               | the machine-readable contract, linked from the specification - never restated in prose    |
 | "where does this go?"                 | "this is how each document is used"                      | this file                                                                                 |
