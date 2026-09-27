@@ -1,7 +1,7 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-09-27
-decision-makers: {who decided - required once the status is not "proposed"}
+decision-makers: David Conneely
 ---
 
 # 19. Govern the tense and volume of what is written, not its style
