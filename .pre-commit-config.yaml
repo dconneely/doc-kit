@@ -11,7 +11,8 @@ repos:
   # `gitleaks-system`, not `gitleaks`: the default builds an unsigned binary with Go, which Windows
   # Smart App Control blocks (os error 4551). Needs gitleaks on PATH.
   #
-  # Keep this rev in step with the installed binary - the hook's subcommand changed around v8.19.
+  # Keep this rev in step with the installed binary: the hook's subcommand differs either side of
+  # v8.19.
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1
     hooks:
@@ -35,8 +36,8 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
 
-  # Formatter; markdownlint-cli2 below is the linter. Config is in .prettierrc.json - CLI flags
-  # alone wrapped nothing (ADR-0017). `local` because pre-commit/mirrors-prettier is stale.
+  # Formatter; markdownlint-cli2 below is the linter. Wrapping is set in .prettierrc.json, not by
+  # CLI flags (ADR-0017). `local` because pre-commit/mirrors-prettier is stale.
   # Rewrites `*emphasis*` to `_emphasis_`, with no option to avoid it.
   - repo: local
     hooks:

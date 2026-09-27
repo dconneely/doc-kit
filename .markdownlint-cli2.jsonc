@@ -15,7 +15,7 @@
   // trailing word is otherwise silently forgiven. It does not flag a line that is purely one
   // unbreakable token (a bare URL alone on its own line) - only a long token that shares a line
   // with other prose. Prettier's proseWrap: "always" already rewraps every prose line, so `stern`
-  // is defence against future drift, not a fix for anything currently unwrapped.
+  // guards against drift rather than fixing anything.
   "config": {
     "default": true,
     "MD013": {
