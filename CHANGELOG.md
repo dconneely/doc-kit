@@ -7,15 +7,14 @@ All notable changes to this project are documented here, following
 
 ### Added
 
-- `templates/DOC-MAP.md`'s "Where does it go?" table has an "If you are asking..." column, so it
-  routes a reader's question as well as a writer's sentence. New rows cover what is absent on
-  purpose: scope, options decided against, known-unhandled cases, deliberately untested areas, and
-  work deferred until a trigger.
+- `templates/DOC-MAP.md`'s "Where does it go?" table has an "If you are asking..." column, and rows
+  for what is absent on purpose: out of scope, decided against, knowingly unhandled, untested, or
+  deferred until a trigger.
 
 ### Changed
 
-- `templates/DOC-MAP.md` and the ADR template say to iterate on a decision while it is `proposed`,
-  and to accept it once experience stops changing it.
+- `templates/DOC-MAP.md` says to iterate on a decision while it is `proposed`, and accept it once
+  experience stops changing it.
 
 ## [0.4.0] - 2026-09-26
 

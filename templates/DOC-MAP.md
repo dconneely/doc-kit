@@ -7,8 +7,7 @@ Start here when you have something to write down and are not sure which file it 
 
 ## Where does it go?
 
-Read it from either side - the question you are asking, or the sentence you are writing. The tense
-of the sentence usually settles it:
+The tense of the sentence you are writing usually settles it:
 
 | If you are asking...                  | If you are writing...                                    | It belongs in                                                                          |
 | ------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -19,7 +18,7 @@ of the sentence usually settles it:
 | "is this known? is anyone fixing it?" | "we should do X"                                         | the plan                                                                               |
 | "could this be faster, or smarter?"   | "X is worth doing once Y is true"                        | the plan, with Y named as the trigger                                                  |
 | "is this a bug, or a decision?"       | "we knowingly differ from the reference/spec here"       | `docs/quirks.md`                                                                       |
-| "why does it fail on X?"              | "X is unhandled, and we know it"                         | `docs/quirks.md` as accepted-wrong, pinned by the test or assert that trips on X       |
+| "why does it fail on X?"              | "X is unhandled, and we know it"                         | `docs/quirks.md` as accepted-wrong, pinned by a test or assert                         |
 | "is X tested?"                        | "X is deliberately not tested"                           | `docs/testing.md`                                                                      |
 | "how do we know that?"                | "source A says X, source B says Y, and A won because..." | a research note                                                                        |
 | "what does this word mean here?"      | "X means Y in this codebase"                             | the glossary                                                                           |
@@ -112,10 +111,9 @@ shape. The rules that file cannot express, and which live here:
   may carry a forward pointer: `accepted (refined by ADR-NNNN)` when a decision stands but a later
   record revised something following from it.
 - **Only `accepted` binds.** A `proposed` record is a suggestion - merge it undecided if you like,
-  since an open question is more visible in the tree than in a branch nobody is watching.
-- **Iterate while `proposed`.** A decision that takes several rounds to get right is revised in
-  place, and accepted once experience stops changing it. Accepting early is what makes records
-  proliferate: after that, every revision needs a successor.
+  since an open question is more visible in the tree than in a branch nobody is watching. **Iterate
+  while `proposed`**, and accept once experience stops changing the record: accepting early is what
+  makes records proliferate - every later revision then needs a successor.
 - **Immutable once accepted**, except to change status and date. Correct one by writing its
   successor, not by editing it.
 - **Changing a status is a human action.** A tool may draft a record and argue it; only a person
