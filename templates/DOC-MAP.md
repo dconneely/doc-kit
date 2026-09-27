@@ -9,21 +9,23 @@ Start here when you have something to write down and are not sure which file it 
 
 The tense of the sentence you are writing usually settles it:
 
-| If you are asking...                  | If you are writing...                                    | It belongs in                                                                          |
-| ------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| "what does it do? can I rely on X?"   | "the system does X"                                      | the specification                                                                      |
-| "should it do X at all?"              | "X is out of scope" or "callers must not rely on X"      | the specification's scope, or what it leaves unspecified                               |
-| "why is it like this? was X tried?"   | "we chose X because Y", or "we chose not to do X"        | an ADR                                                                                 |
-| "when did this change?"               | "X used to be Y, now it is Z"                            | the changelog                                                                          |
-| "is this known? is anyone fixing it?" | "we should do X"                                         | the plan                                                                               |
-| "could this be faster, or smarter?"   | "X is worth doing once Y is true"                        | the plan, with Y named as the trigger                                                  |
-| "is this a bug, or a decision?"       | "we knowingly differ from the reference/spec here"       | `docs/quirks.md`                                                                       |
-| "why does it fail on X?"              | "X is unhandled, and we know it"                         | `docs/quirks.md` as accepted-wrong, pinned by a test or assert                         |
-| "is X tested?"                        | "X is deliberately not tested"                           | `docs/testing.md`                                                                      |
-| "how do we know that?"                | "source A says X, source B says Y, and A won because..." | a research note                                                                        |
-| "what does this word mean here?"      | "X means Y in this codebase"                             | the glossary                                                                           |
-| "exactly what does the API accept?"   | "the schema / wire format / API accepts X"               | the machine-readable contract, linked from the specification - never restated in prose |
-| "where does this go?"                 | "this is how each document is used"                      | this file                                                                              |
+| If you are asking...                  | If you are writing...                                    | It belongs in                                                                             |
+| ------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| "what does it do? can I rely on X?"   | "the system does X"                                      | the specification                                                                         |
+| "should it do X at all?"              | "X is out of scope" or "callers must not rely on X"      | the specification's scope, or what it leaves unspecified                                  |
+| "why is it like this? was X tried?"   | "we chose X because Y", or "we chose not to do X"        | an ADR                                                                                    |
+| "when did this change?"               | "X used to be Y, now it is Z"                            | the changelog                                                                             |
+| "is this known? is anyone fixing it?" | "we should do X"                                         | the plan                                                                                  |
+| "could this be faster, or smarter?"   | "X is worth doing once Y is true"                        | the plan, with Y named as the trigger                                                     |
+| "is this a bug, or a decision?"       | "we knowingly differ from the reference/spec here"       | `docs/quirks.md`                                                                          |
+| "why does it fail on X?"              | "X is unhandled, and we know it"                         | `docs/quirks.md` as accepted-wrong, pinned by a test or assert                            |
+| "is X tested?"                        | "X is deliberately not tested"                           | `docs/testing.md`                                                                         |
+| "how do we know that?"                | "source A says X, source B says Y, and A won because..." | a research note                                                                           |
+| "why is this code like this?"         | "this code is like this because..."                      | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
+| "what did this code do before?"       | "this code used to..." or "fixed the bug where..."       | the commit message - never a comment                                                      |
+| "what does this word mean here?"      | "X means Y in this codebase"                             | the glossary                                                                              |
+| "exactly what does the API accept?"   | "the schema / wire format / API accepts X"               | the machine-readable contract, linked from the specification - never restated in prose    |
+| "where does this go?"                 | "this is how each document is used"                      | this file                                                                                 |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
 
@@ -211,6 +213,10 @@ alongside them.
   claimed X, now corrected" - narrating how a finding was reached instead of stating what is
   currently true. The same "previously X, now Y" failure as the specification, just as easy to fall
   into here: revise the finding and its confidence in place instead.
+- **Text narrates** - comments and documents recount how they came to be ("previously", "after
+  investigating", "fixed the bug where") instead of stating what is true, and every reader pays to
+  skip it. The two failures above are this one in particular files; agents commit it everywhere by
+  default.
 
 ## Deliberately not here
 
