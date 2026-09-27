@@ -7,19 +7,24 @@ Start here when you have something to write down and are not sure which file it 
 
 ## Where does it go?
 
-The tense of the sentence you are writing usually settles it:
+Read it from either side - the question you are asking, or the sentence you are writing. The tense
+of the sentence usually settles it:
 
-| If you are writing...                                    | It belongs in                                                                          |
-| -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| "the system does X"                                      | the specification                                                                      |
-| "we chose X because Y"                                   | an ADR                                                                                 |
-| "X used to be Y, now it is Z"                            | the changelog                                                                          |
-| "we should do X"                                         | the plan                                                                               |
-| "we knowingly differ from the reference/spec here"       | `docs/quirks.md`                                                                       |
-| "source A says X, source B says Y, and A won because..." | a research note                                                                        |
-| "X means Y in this codebase"                             | the glossary                                                                           |
-| "the schema / wire format / API accepts X"               | the machine-readable contract, linked from the specification - never restated in prose |
-| "this is how each document is used"                      | this file                                                                              |
+| If you are asking...                  | If you are writing...                                    | It belongs in                                                                          |
+| ------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| "what does it do? can I rely on X?"   | "the system does X"                                      | the specification                                                                      |
+| "should it do X at all?"              | "X is out of scope" or "callers must not rely on X"      | the specification's scope, or what it leaves unspecified                               |
+| "why is it like this? was X tried?"   | "we chose X because Y", or "we chose not to do X"        | an ADR                                                                                 |
+| "when did this change?"               | "X used to be Y, now it is Z"                            | the changelog                                                                          |
+| "is this known? is anyone fixing it?" | "we should do X"                                         | the plan                                                                               |
+| "could this be faster, or smarter?"   | "X is worth doing once Y is true"                        | the plan, with Y named as the trigger                                                  |
+| "is this a bug, or a decision?"       | "we knowingly differ from the reference/spec here"       | `docs/quirks.md`                                                                       |
+| "why does it fail on X?"              | "X is unhandled, and we know it"                         | `docs/quirks.md` as accepted-wrong, pinned by the test or assert that trips on X       |
+| "is X tested?"                        | "X is deliberately not tested"                           | `docs/testing.md`                                                                      |
+| "how do we know that?"                | "source A says X, source B says Y, and A won because..." | a research note                                                                        |
+| "what does this word mean here?"      | "X means Y in this codebase"                             | the glossary                                                                           |
+| "exactly what does the API accept?"   | "the schema / wire format / API accepts X"               | the machine-readable contract, linked from the specification - never restated in prose |
+| "where does this go?"                 | "this is how each document is used"                      | this file                                                                              |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
 

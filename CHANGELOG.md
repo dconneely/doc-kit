@@ -5,6 +5,13 @@ All notable changes to this project are documented here, following
 
 ## Unreleased
 
+### Added
+
+- `templates/DOC-MAP.md`'s "Where does it go?" table has an "If you are asking..." column, so it
+  routes a reader's question as well as a writer's sentence. New rows cover what is absent on
+  purpose: scope, options decided against, known-unhandled cases, deliberately untested areas, and
+  work deferred until a trigger.
+
 ## [0.4.0] - 2026-09-26
 
 ### Added
