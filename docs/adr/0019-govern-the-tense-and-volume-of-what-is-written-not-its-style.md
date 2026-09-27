@@ -42,18 +42,16 @@ message; intent in the plan; a reason governing more than one site in an ADR, wh
 names so a reader of the code finds it. A reason local to one site may stay in the comment, whatever
 its form - an in-code Y-statement included. Everywhere, write the least that is true.
 
-Keeping the exclusion was rejected because it leaves both reported problems where they are, and
-because the tense test already applies to every other artifact - exempting comments is the
-inconsistency. Standards were rejected because categories and style are judgement a project owns;
-the kit's rules are about where facts live and what tense they take, and a style guide is neither.
+Keeping the exclusion was rejected because it leaves both reported problems where they are.
+Standards were rejected because categories and style are judgement a project owns; the kit's rules
+are about where facts live and what tense they take, and a style guide is neither.
 
 This does not settle how long a comment or document should be, only that narrative is never the
 reason it is long.
 
 ### Consequences
 
-- Good, because the most-read documentation an agent sees - the comment beside the code it is
-  changing - is governed by the same test as everything else, and points at the record when the
+- Good, because comments - the documentation an agent is sure to read - point at the record when the
   reason lives in one.
 - Good, because it gives adopters' agents a brevity rule they currently lack, in the one text that
   reaches them.
@@ -63,10 +61,8 @@ reason it is long.
   `tools/doc-kit-check.sh` cannot see it.
 - Neutral: if accepted, `SPECIFICATION.md`'s "Not in scope" narrows to style and to what a project
   ought to document, and says comments are governed for tense and routing only.
-- Neutral: if accepted, the "Where does it go?" table in `templates/DOC-MAP.md` gains two rows -
-  "why is this line like this?" / "this code is like this because..." to a comment beside it, or an
-  ADR it names when the reason spans more than one site; and "this code used to..." to the commit
-  message, never a comment - and its failure modes gain one:
+- Neutral: if accepted, `templates/DOC-MAP.md` gains two "Where does it go?" rows routing a
+  comment's content as the Decision Outcome does, and one failure mode:
 
   > **Text narrates** - comments and documents recount how they came to be ("previously", "after
   > investigating", "fixed the bug where") instead of stating what is true, and every reader pays to
