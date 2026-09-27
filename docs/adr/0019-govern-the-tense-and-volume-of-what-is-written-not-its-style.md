@@ -33,21 +33,25 @@ comments that carry the _why_ the code cannot. The kit already links from docume
 
 ## Decision Outcome
 
-Chosen option: **govern tense and volume, not style**, because both problems are ones the kit
-already solves elsewhere. Narrative in a comment is the failure "the specification accumulates
-history", in a different file, and the tense test that catches it there catches it here.
+Chosen option: **govern tense and volume, not style**, because the kit already holds both rules and
+applies neither where these problems occur. Narrative in a comment is the failure "the specification
+accumulates history" in a different file, and the tense test that catches it there catches it here.
+"Volume is a cost" and the kit's cut-hardest rule for its own text are the same principle, not yet
+extended to what adopters write.
 
 A comment says, in the present tense, why the code beside it is as it is. History goes in the commit
-message; intent in the plan; a reason governing more than one site in an ADR, which the comment
-names so a reader of the code finds it. A reason local to one site may stay in the comment, whatever
-its form - an in-code Y-statement included. Everywhere, write the least that is true.
+message. A reason governing more than one site goes in an ADR, and intent in the plan; the comment
+names the record - a `TODO` names its plan entry, never replaces it - so a reader of the code finds
+it. A reason local to one site may stay in the comment, whatever its form: an in-code Y-statement is
+one, though its changelog is history and belongs in the commit. Everywhere, write the least that is
+true.
 
 Keeping the exclusion was rejected because it leaves both reported problems where they are.
 Standards were rejected because categories and style are judgement a project owns; the kit's rules
 are about where facts live and what tense they take, and a style guide is neither.
 
-This does not settle how long a comment or document should be, only that narrative is never the
-reason it is long.
+This sets no length limit. "The least that is true" is a direction: a long comment carrying a real
+correctness argument meets it, and a short one narrating its own history does not.
 
 ### Consequences
 
@@ -57,13 +61,16 @@ reason it is long.
   reaches them.
 - Bad, because it widens the kit's stated scope, and the boundary between "tense and volume" and
   "style" is a judgement a reviewer will sometimes draw differently.
+- Bad, because a `TODO` that only points at the plan departs from common practice, Gjengset's
+  included, of describing the work in place. The trade is that the work then competes in one ranked
+  list, as ADR-0002 requires of debt.
 - Bad, because nothing mechanical checks it. A comment is not an artifact in the map, so
   `tools/doc-kit-check.sh` cannot see it.
 - Neutral: if accepted, `SPECIFICATION.md`'s "Not in scope" narrows to style and to what a project
   ought to document, and says comments are governed for tense and routing only.
-- Neutral: `templates/DOC-MAP.md` routes a comment's content as the Decision Outcome does, and gains
-  the failure mode "Text narrates". It overlaps the specification's and research note's failures,
-  which it names as special cases rather than replacing them, because each carries its own file's
-  examples and remedy.
+- Neutral: `templates/DOC-MAP.md` routes a comment's content, `TODO`s included, as the Decision
+  Outcome does, and gains the failure mode "Text narrates". It overlaps the specification's and
+  research note's failures, which it names as special cases rather than replacing them, because each
+  carries its own file's examples and remedy.
 - Neutral: the `AGENTS.md` stanza in `ADOPTING.md` gains "Write the least that is true", deferring
   to the map for where history and reasons go rather than restating it.
