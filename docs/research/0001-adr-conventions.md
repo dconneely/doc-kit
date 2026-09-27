@@ -70,7 +70,8 @@ What differs is where it lives and whether it changes:
   the three-property test that makes an in-code Y-statement a different artifact from an ADR, not a
   shorter spelling of one.
 
-ADR-0010 did not consider Y-statements, and nothing here argues it should have chosen them.
+ADR-0010 did not consider Y-statements, and nothing here argues it should have chosen them: the
+minimal template already carries every clause.
 
 ## Evidence
 
