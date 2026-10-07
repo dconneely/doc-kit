@@ -15,5 +15,9 @@ jobs:
       - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
           # --method get, not the default HEAD: rfc-editor.org (among others) errors on HEAD.
-          args: --no-progress --method get --max-concurrency 4 "**/*.md"
+          # Longer retry waits ride out brief 503s from github.com.
+          args: >-
+            --no-progress --method get --max-concurrency 4
+            --max-retries 5 --retry-wait-time 5
+            "**/*.md"
           fail: true
