@@ -46,7 +46,8 @@ free number, with `status: "proposed"`.
 To get one accepted, ask the owner "Accept ADR-NNNN?". If they agree, set `status: "accepted"`,
 `decision-makers` to their name, `approval` to their words, and `date` to today. Commit it then.
 
-A record being changed goes back to `proposed` until the owner accepts the change, the same way.
+Changing a record takes two agreements: one to make the change, after which the record is `proposed`
+again, and one to accept it, after which it is `accepted` again.
 
 A change includes fixing, in the same commit, the citations it makes untrue. Formatting applied by a
 tool is not a change. `SPECIFICATION.md` §3.1 has the rest.
