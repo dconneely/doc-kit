@@ -18,6 +18,9 @@ from the map's completeness check; every file in it carries a provenance header.
 **Artifact** - one document, or one directory of documents, named in the map and given a tense, a
 mutability and an audience. The unit the structure is built from.
 
+**Audience** - who an artifact is written for: one or more of the roles `owner`, `contributor`,
+`consumer`, `end-user` and `operator`, defined in ADR-0015 and listed in `docs/spec.md` §2.7.
+
 **Confidence level** - `high`, `medium` or `low`, attached to a research note. Defined in
 `docs/spec.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence, only
 consequences.

@@ -113,10 +113,18 @@ mutability and an audience, drawn from these sets:
 | ---------- | --------------------------------------------------------------------------------------- |
 | Tense      | `present`, `past`, `future`, `imperative`, `explanatory`                                |
 | Mutability | `rewritten in place`, `amendable`, `append-only`, `immutable`, `volatile`, `disposable` |
+| Audience   | one or more of `owner`, `contributor`, `consumer`, `end-user`, `operator`               |
 
-Audience is free text. Two artifacts sharing all three are one artifact: merge them, or make one a
-section of the other. Free-text tense and mutability defeat that test - near-duplicates escape on
-phrasing rather than substance - which is why these are closed sets.
+The roles are defined in ADR-0015: the owner decides; a contributor changes the repository; a
+consumer builds on what it publishes; an end-user uses the running product; an operator deploys and
+runs it. A role covers human and agent readers both, and one read by only one kind says so after the
+role - `contributor (agents)` or `contributor (humans)`. Roles are separated by commas, in any
+order.
+
+Two artifacts sharing all three are usually one artifact: merge them, or make one a section of the
+other, unless they hold different facts. A checker MUST report a shared triple as advisory, and MUST
+NOT let it affect the exit status (ADR-0015). Free-text properties defeat that test -
+near-duplicates escape on phrasing rather than substance - which is why all three are closed sets.
 
 An **alias** is exempt: a file whose entire content points at another artifact, existing only
 because a tool looks for that filename. It appears in the map, carries the properties of what it

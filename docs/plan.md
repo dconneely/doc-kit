@@ -6,23 +6,15 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR. `docs/spec.md` §3.3 defines the scales.
 
-## Restructure the paths and close the audience set
-
-**Type:** feature - **Importance:** medium - **Effort:** high
-
-Implement ADR-0014 and ADR-0015 once the owner accepts them; ADR-0015 also needs ADR-0002 reopened.
-Move the paths, rewrite every link and the checker's paths, close the audience column in both maps,
-make a shared triple a warning, and tell adopters how to move in `ADOPTING.md` and the changelog.
-
 ## Add how-to guides and external sources
 
 **Type:** feature - **Importance:** medium - **Effort:** medium
 
-Needs an ADR, after the restructure. `docs/howto/` holds procedures that recur across several
-places, citing conventions and exemplars rather than copying them. `docs/sources/` holds external
-material: an index of URL, retrieval date, licence, redistributability and checksum; a `.gitignore`
-that ignores everything not explicitly redistributable; a fetch script; and Markdown extracts beside
-their PDFs, as generated artifacts.
+Needs an ADR. `docs/howto/` holds procedures that recur across several places, citing conventions
+and exemplars rather than copying them. `docs/sources/` holds external material: an index of URL,
+retrieval date, licence, redistributability and checksum; a `.gitignore` that ignores everything not
+explicitly redistributable; a fetch script; and Markdown extracts beside their PDFs, as generated
+artifacts.
 
 ## Keep decisions readable for a new session
 

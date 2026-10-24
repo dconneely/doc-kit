@@ -213,38 +213,63 @@ check_map() {
 	IFS=$oldifs
 	set +f
 
-	# §2.7 - tense and mutability come from closed sets, and no two artifacts share all three
-	# properties. Free text defeats the test: near-duplicates escape on phrasing. Aliases, which
-	# hold no content of their own, are exempt.
-	rows=$(section "$MAP" '## Artifacts' | grep '^| `' | grep -v '\*\*Alias\*\*' |
-		awk -F' *\\| *' '{ print $2 "~" $4 "~" $5 "~" $6 }')
+	# §2.7 - tense, mutability and audience come from closed sets: free text lets near-duplicates
+	# escape on phrasing. Artifacts sharing all three are reported as a prompt to check, not a
+	# failure (ADR-0015). Aliases, which hold no content of their own, are exempt. One awk pass
+	# prints a tab-separated line per finding: a kind, the artifact, and the value.
+	hits=$(section "$MAP" '## Artifacts' | grep '^| `' | grep -v '\*\*Alias\*\*' | awk -F' *[|] *' '
+		BEGIN {
+			split("present past future imperative explanatory", t, " ")
+			for (i in t) tenses[t[i]] = 1
+			n = split("rewritten in place|amendable|append-only|immutable|volatile|disposable", m, "|")
+			for (i = 1; i <= n; i++) muts[m[i]] = 1
+			split("owner contributor consumer end-user operator", r, " ")
+			for (i in r) roles[r[i]] = 1
+		}
+		{
+			art = $2
+			gsub(/`/, "", art)
+			if (!($4 in tenses)) print "tense\t" art "\t" $4
+			if (!($5 in muts)) print "mut\t" art "\t" $5
+			# Each role once, optionally marked "(agents)" or "(humans)", in any order: sorted
+			# here so that order does not hide a shared triple.
+			k = split($6, items, /, */)
+			if (k == 0) print "aud\t" art "\t" $6
+			for (i = 1; i <= k; i++) {
+				role = items[i]
+				sub(/ \((agents|humans)\)$/, "", role)
+				if (!(role in roles)) print "aud\t" art "\t" items[i]
+				for (j = i; j > 1 && items[j - 1] > items[j]; j--) {
+					x = items[j]; items[j] = items[j - 1]; items[j - 1] = x
+				}
+			}
+			aud = ""
+			for (i = 1; i <= k; i++) aud = aud (i > 1 ? ", " : "") items[i]
+			key = $4 " | " $5 " | " aud
+			if (key in first) shared[key] = shared[key] ", " art
+			else { first[key] = art; order[++c] = key }
+		}
+		END { for (i = 1; i <= c; i++) if (order[i] in shared) print "share\t" first[order[i]] shared[order[i]] "\t" order[i] }
+	')
+	set -f
 	oldifs=$IFS
 	IFS=$NL
-	for row in $rows; do
+	for hit in $hits; do
 		IFS=$oldifs
-		art=${row%%~*}
-		art=${art#\`}
-		art=${art%\`}
-		rest=${row#*~}
-		tense=${rest%%~*}
-		rest=${rest#*~}
-		mut=${rest%%~*}
-		case "$tense" in
-			present|past|future|imperative|explanatory) ;;
-			*) fail "$art has tense '$tense'" "§2.7 - present, past, future, imperative, explanatory" ;;
-		esac
-		case "$mut" in
-			"rewritten in place"|amendable|append-only|immutable|volatile|disposable) ;;
-			*) fail "$art has mutability '$mut'" "§2.7 - see the permitted set" ;;
+		kind=${hit%%"$TAB"*}
+		art=${hit#*"$TAB"}
+		val=${art#*"$TAB"}
+		art=${art%%"$TAB"*}
+		case "$kind" in
+			tense) fail "$art has tense '$val'" "§2.7 - present, past, future, imperative, explanatory" ;;
+			mut) fail "$art has mutability '$val'" "§2.7 - see the permitted set" ;;
+			aud) fail "$art has audience '$val'" "§2.7 - owner, contributor, consumer, end-user, operator" ;;
+			share) warn "$art share [$val]" "§2.7 - merge them unless they hold different facts, or mark one an alias" ;;
 		esac
 		IFS=$NL
 	done
 	IFS=$oldifs
-
-	for key in $(printf '%s\n' "$rows" | cut -d'~' -f2- | sort | uniq -d | tr ' ' '_'); do
-		fail "two artifacts share [$(printf '%s' "$key" | tr '_' ' ' | tr '~' '|')]" \
-			"§2.7 - merge them, or mark one an alias"
-	done
+	set +f
 
 	# §2.5 - customisation actually happened.
 	grep -q 'This file is a template' "$MAP" &&
@@ -459,11 +484,11 @@ if [ "$failures" -eq 0 ]; then
 	if [ "$warnings" -eq 0 ]; then
 		printf 'doc-kit: conformant (%s)\n' "$*"
 	else
-		printf 'doc-kit: conformant (%s) - %s gitignored warning(s), see above\n' "$*" "$warnings"
+		printf 'doc-kit: conformant (%s) - %s warning(s), see above\n' "$*" "$warnings"
 	fi
 else
 	printf '\ndoc-kit: %s failure(s)' "$failures" >&2
-	[ "$warnings" -eq 0 ] || printf ', %s gitignored warning(s)' "$warnings" >&2
+	[ "$warnings" -eq 0 ] || printf ', %s warning(s)' "$warnings" >&2
 	printf '\n' >&2
 	exit 1
 fi

@@ -37,11 +37,11 @@ docs/
 
 ## Artifacts
 
-| Artifact        | Purpose   | Tense   | Mutability         | Audience    |
-| --------------- | --------- | ------- | ------------------ | ----------- |
-| `DOC-MAP.md`    | the map   | present | rewritten in place | anyone      |
-| `docs/plan.md`       | backlog   | future  | volatile           | the team    |
-| `docs/decisions/*.md` | decisions | past    | immutable          | maintainers |
+| Artifact              | Purpose   | Tense   | Mutability         | Audience    |
+| --------------------- | --------- | ------- | ------------------ | ----------- |
+| `DOC-MAP.md`          | the map   | present | rewritten in place | contributor |
+| `docs/plan.md`        | backlog   | future  | volatile           | owner       |
+| `docs/decisions/*.md` | decisions | past    | immutable          | owner, contributor |
 
 ## Lifecycle
 
@@ -126,7 +126,7 @@ fixture
 mkdir -p old
 echo x >old/stale.md
 after '^DOC-MAP.md ' 'old/           archive, not authoritative'
-after '^[|] `docs/plan.md` +[|] backlog' '| `old/` | archive | past | immutable | nobody |'
+after '^[|] `docs/plan.md` +[|] backlog' '| `old/` | archive | past | immutable | contributor |'
 after '^[|] `docs/plan.md` +[|] start' '| `old/` | archived | never |'
 expect "an archive at any mapped path covers its files" 0 "conformant" map
 
@@ -187,8 +187,16 @@ sed -i.bak 's/| future  | volatile /| later   | volatile /' DOC-MAP.md
 expect "tense outside the closed set fails" 1 "docs/plan.md has tense 'later'" map
 
 fixture
-sed -i.bak 's/| future  | volatile           | the team /| past    | immutable          | maintainers /' DOC-MAP.md
-expect "two artifacts sharing all properties fail" 1 "two artifacts share" map
+sed -i.bak 's/| future  | volatile           | owner /| past | immutable | contributor, owner /' DOC-MAP.md
+expect "artifacts sharing all properties warn, in any role order" 0 	"WARN [map] docs/plan.md, docs/decisions/*.md share [past | immutable | contributor, owner]" map
+
+fixture
+sed -i.bak 's/| volatile           | owner /| volatile | the team /' DOC-MAP.md
+expect "audience outside the closed set fails" 1 "docs/plan.md has audience 'the team'" map
+
+fixture
+sed -i.bak 's/| rewritten in place | contributor /| rewritten in place | contributor (agents) /' DOC-MAP.md
+expect "a role marked for agents only passes" 0 "doc-kit: conformant (map)" map
 
 fixture
 echo 'This file is a template.' >>DOC-MAP.md

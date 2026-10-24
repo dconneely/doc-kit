@@ -20,8 +20,8 @@ trusted or pruned with confidence. `ADOPTING.md`'s four numbered consequences al
    document survive customisation verbatim. They are what stops the structure decaying back into the
    mixed-tense file it replaced.
 4. **Resist growth.** Most proposed additions share all three properties with something that already
-   exists, which makes them a section or a tag rather than a file. The structure works because it is
-   small enough to hold in your head.
+   exists, which usually makes them a section or a tag rather than a file. The structure works
+   because it is small enough to hold in your head.
 
 ## What the rules prevent
 
@@ -308,7 +308,7 @@ already covered it, and the apparent need came from splitting on the wrong axis.
 
 So: **when something new turns up, test it against the existing categories before adding one.** Does
 it have a distinct tense, mutability _and_ audience? If it shares all three with an existing
-document, it is a section or a tag within that document. Most candidates fail this test, which is
-what keeps the structure small enough to survive.
+document, it is a section or a tag within that document unless it holds different facts. Most
+candidates fail this test, which is what keeps the structure small enough to survive.
 
 If you take one thing from this file into a repository that never adopts the rest, take that.

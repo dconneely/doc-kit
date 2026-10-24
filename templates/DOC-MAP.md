@@ -59,20 +59,20 @@ schemas, interface definitions - and each gets its own row below.
 
 ## Artifacts
 
-| Artifact              | Purpose                                                                                                                  | Tense   | Mutability         | Audience                                                                                        |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------------ | ----------------------------------------------------------------------------------------------- |
-| `DOC-MAP.md`          | This map: what each document is for, and where a fact belongs                                                            | present | rewritten in place | anyone adding documentation                                                                     |
-| `README.md`           | Orients a newcomer in one screen, and links outward                                                                      | present | rewritten in place | anyone                                                                                          |
-| `docs/spec.md`        | The behaviour contract. Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength        | present | rewritten in place | users + implementers                                                                            |
-| `docs/decisions/*.md` | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past    | amendable          | future maintainers                                                                              |
-| `CHANGELOG.md`        | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past    | append-only        | users                                                                                           |
-| `docs/plan.md`        | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future  | volatile           | the owner and contributors                                                                      |
-| `docs/quirks.md`      | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present | rewritten in place | users comparing against a reference, and anyone - human or agent - about to "fix" something odd |
-| `docs/research/*.md`  | Sourced findings with explicit confidence levels; shape and confidence levels in `0000-template.md`                      | past    | append-only        | implementers                                                                                    |
-| `docs/glossary.md`    | Domain vocabulary                                                                                                        | present | rewritten in place | readers of every other document                                                                 |
-| `docs/testing.md`     | Test strategy, and what is deliberately _not_ covered                                                                    | present | rewritten in place | contributors                                                                                    |
-| `docs/plan/*.md`      | Working notes for one backlog item. Optional                                                                             | future  | disposable         | whoever picks it up                                                                             |
-| `docs/archive/`       | Documentation whose currency cannot be established, kept rather than discarded; rules in its `README.md`. Optional       | past    | immutable          | nobody - kept for history                                                                       |
+| Artifact              | Purpose                                                                                                                  | Tense   | Mutability         | Audience                     |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------------ | ---------------------------- |
+| `DOC-MAP.md`          | This map: what each document is for, and where a fact belongs                                                            | present | rewritten in place | contributor                  |
+| `README.md`           | Orients a newcomer in one screen, and links outward                                                                      | present | rewritten in place | owner, contributor, consumer |
+| `docs/spec.md`        | The behaviour contract. Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength        | present | rewritten in place | consumer, contributor        |
+| `docs/decisions/*.md` | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past    | amendable          | owner, contributor           |
+| `CHANGELOG.md`        | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past    | append-only        | consumer                     |
+| `docs/plan.md`        | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future  | volatile           | owner, contributor           |
+| `docs/quirks.md`      | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present | rewritten in place | consumer, contributor        |
+| `docs/research/*.md`  | Sourced findings with explicit confidence levels; shape and confidence levels in `0000-template.md`                      | past    | append-only        | contributor                  |
+| `docs/glossary.md`    | Domain vocabulary                                                                                                        | present | rewritten in place | owner, contributor, consumer |
+| `docs/testing.md`     | Test strategy, and what is deliberately _not_ covered                                                                    | present | rewritten in place | contributor                  |
+| `docs/plan/*.md`      | Working notes for one backlog item. Optional                                                                             | future  | disposable         | contributor                  |
+| `docs/archive/`       | Documentation whose currency cannot be established, kept rather than discarded; rules in its `README.md`. Optional       | past    | immutable          | contributor                  |
 
 ## Lifecycle
 
@@ -133,7 +133,8 @@ Absent on purpose, so that adding any of them later is a decision rather than a 
 
 Before adding one, check it has a **distinct tense, mutability and audience** from everything in the
 artifacts table. If it shares all three with an existing document, it is a section or a tag within
-that document, not a new file.
+that document, unless it holds different facts. The checker warns about a shared triple; it cannot
+tell whether the facts differ.
 
 The one exception is an **alias**: a file whose entire content points at another artifact, existing
 only because a tool or reader looks for that exact path - a module `README.md`, a `CLAUDE.md`
