@@ -1,8 +1,8 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-10-24
-decision-makers: {the owner - required once the status is not "proposed"}
-approval: {the owner's words, verbatim - required once the status is not "proposed"}
+decision-makers: David Conneely
+approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
 ---
 
 # 1. What the kit is for, and who decides

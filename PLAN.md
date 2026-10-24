@@ -6,15 +6,6 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR. `SPECIFICATION.md` §3.3 defines the scales.
 
-## Accept the migrated decision records
-
-**Type:** docs - **Importance:** high - **Effort:** low
-
-ADR-0001 to ADR-0013 replace the earlier 22 records, merged one per question, and are `proposed`.
-The owner reviews them and gives permission to accept them; each then gets `status: "accepted"`,
-`decision-makers`, the owner's words in `approval`, and the date. Until then nothing in `docs/adr/`
-binds, and the rules they record are carried by `SPECIFICATION.md` §3.1 and `AGENTS.md`.
-
 ## Restructure the paths and close the audience set
 
 **Type:** feature - **Importance:** medium - **Effort:** high
