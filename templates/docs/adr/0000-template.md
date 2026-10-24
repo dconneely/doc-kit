@@ -16,25 +16,24 @@ live here.
 
 Follows the MADR minimal template (https://adr.github.io/madr/).
 
-Rules:
+Rules - absolute:
 
-- Only `accepted` binds. A `proposed` record is a suggestion: commit it undecided, and iterate on it
-  freely until the owner decides.
-- An accepted record is the current answer to its question. Amend it in place, even to reverse it;
-  supersede it only when its question splits, merges with another, or is cited from outside the
-  repository. A later choice between real options is its own record, linked from this one.
-- Cite records as ADR-NNNN. Another repository's record is cited by a link.
+- Ask the owner before creating, changing, deleting or obsoleting a record - any record, any
+  status. Do it only with their explicit agreement.
+- Create one by copying this file, never an existing record, to the next free number. It starts
+  "proposed".
+- Get one accepted by asking the owner "Accept ADR-NNNN?". If they agree, set status,
+  decision-makers (their name), approval (their words) and date (today).
 
-Change a status, or an accepted record's content, only when all of these hold:
+How records work:
 
-- [ ] The owner asked, in this session, for this record - by number - to take this status or this
-      change. "Looks good", "go ahead", or approval of other work is not that.
-- [ ] Their words are copied verbatim into `approval`, `decision-makers` names them, and `date` is
-      today.
-- [ ] Every citation of this record that the change makes untrue is fixed in the same commit.
-      Search for its ID; leave commit messages alone.
-
-A formatting-only change, which alters no word, needs none of this.
+- Only `accepted` binds. An accepted record is the current answer to its question: amend it, even to
+  reverse it, and supersede it only when its question splits, merges with another, or is cited from
+  outside the repository. A later choice between real options is its own record, linked from this
+  one.
+- Cite records as ADR-NNNN, and another repository's record by a link. A change fixes, in the same
+  commit, every citation it makes untrue; commit messages are left alone.
+- Formatting applied by a tool is not a change.
 
 Write it when the decision is made, not later. A record reconstructed years afterwards is usually an
 argument for what you already do, and it dilutes the ones written contemporaneously.

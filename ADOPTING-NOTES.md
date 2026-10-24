@@ -281,12 +281,12 @@ honestly, and note that it failed twice during this template's own development -
 machine-readable contracts both looked like obvious new categories and both turned out to belong
 somewhere that already existed. If it passes, add it to both tables in the map in the same commit.
 
-**"Do documentation changes need approving?"** One kind does. Changing a decision record's status,
-or an accepted record's content, needs the owner's explicit instruction, because a record is the one
-artifact whose content binds every session. Everything else is rewritten in place or deleted freely.
-Leave a record `proposed` while it is being argued - committing it undecided is fine and makes the
-open question visible. Resist adding ceremony to the plan in particular; friction at capture is what
-empties a backlog.
+**"Do documentation changes need approving?"** One kind does. Creating, changing, deleting or
+obsoleting a decision record needs the owner's explicit agreement, asked for first, because a record
+is the one artifact whose content binds every session. Everything else is rewritten in place or
+deleted freely. A record can stay `proposed` while it is being argued - committed undecided, the
+open question is visible. Resist adding ceremony to the plan in particular; friction at capture is
+what empties a backlog.
 
 **"There is an ADR I now think was wrong."** Amend it: a record is the current answer to its
 question. Keep the option it used to choose under `Considered Options`, with the reason it lost, so

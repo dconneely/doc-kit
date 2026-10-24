@@ -34,8 +34,9 @@ path; Step 3 says what to take and when.
 **Step 4a produces an inventory. Present it and stop.**
 
 Don't move, split, absorb, archive, or delete anything until the owner has reviewed the
-dispositions. On a mature repository this is the only point where a mistake is cheap - after this,
-it's a commit to undo and the reasoning behind it is gone.
+dispositions. Their review is also their agreement to the decision records the inventory lists - ask
+before creating any other. On a mature repository this is the only point where a mistake is cheap -
+after this, it's a commit to undo and the reasoning behind it is gone.
 
 A hard stop, not a checkpoint to mention in passing.
 

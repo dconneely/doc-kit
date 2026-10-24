@@ -126,7 +126,7 @@ matter of taking the ones Step 1 said you had earned:
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always - the core five                                                                                                               |
 | `docs/adr/0000-template.md`                                              | always; records are worth having from day one, since their value is being written contemporaneously                                  |
-| `docs/adr/0001-how-the-documentation-is-organised.md`                    | always - renumber it if records exist, fill it in, and leave it `proposed` for a person to accept                                    |
+| `docs/adr/0001-how-the-documentation-is-organised.md`                    | always, with the owner's agreement - renumber it if records exist, and leave it `proposed`                                           |
 | `docs/quirks.md`                                                         | you deviate from a reference, or carry behaviour you know is wrong                                                                   |
 | `docs/glossary.md`                                                       | your domain has terms, or ordinary words used precisely                                                                              |
 | `docs/testing.md`                                                        | you have more than one test approach                                                                                                 |
@@ -223,9 +223,11 @@ Before you edit:
 
 - Change the specification because behaviour changed, never because it'd read better. Purpose and
   scope aren't yours to revise.
-- Change an ADR's `status`, or an `accepted` one's content, only when the owner explicitly asks,
-  naming the record. Copy their words into `approval`. Otherwise draft it `proposed`, leaving
-  `decision-makers` as the placeholder.
+- **Ask the owner before creating, changing, deleting or obsoleting a decision record** - any
+  record, any change. Do it only with their explicit agreement. This is absolute.
+- Create one by copying `docs/adr/0000-template.md`, never an existing record, as `proposed`. Get
+  one accepted by asking "Accept ADR-NNNN?"; if the owner agrees, set `status`, `decision-makers`,
+  `approval` (their words) and `date`.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
 - Delete finished `PLAN.md` entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or

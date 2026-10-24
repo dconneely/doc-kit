@@ -132,9 +132,9 @@ hand applies the same judgement: check it, don't block on it.
 
 **How much ceremony an artifact needs follows from its mutability, not from its importance.**
 
-- **Amendable** artifacts - decision records - need the owner. A change of status, and a change to
-  an accepted record, is made on the owner's explicit instruction (§3.1). It is the only place this
-  specification requires a decision by a person.
+- **Amendable** artifacts - decision records - need the owner. Every record, and every change to
+  one - deletion and obsoletion included - is made with the owner's explicit agreement, asked for
+  first (§3.1). It is the only place this specification requires a decision by a person.
 - **Rewritten-in-place** artifacts - the specification, the map, quirks, the glossary - need no
   freeze point. A wrong statement is corrected, not superseded. Where such a change encodes a real
   choice, the choice belongs in a record and is decided there; deciding it again here would decide
@@ -156,8 +156,8 @@ never reused. The heading MUST repeat the number. The title SHOULD name the ques
 answers rather than the answer, so that a changed answer leaves it true. See ADR-0010 and ADR-0022.
 
 Each record MUST carry YAML front-matter with `status` and `date`. A record past `proposed` MUST
-also carry `decision-makers`, naming the owner, and `approval`: the owner's words, verbatim, that
-instructed its latest change of status or content. `date` is the date of that change. MADR's
+also carry `decision-makers`, naming the owner, and `approval`: the owner's words, verbatim,
+agreeing to its latest change of status or content. `date` is the date of that change. MADR's
 `consulted` and `informed` are permitted and not required.
 
 Each record MUST carry `Context and Problem Statement`, `Considered Options` and `Decision Outcome`
@@ -169,21 +169,22 @@ is usually a specification entry that has been misfiled.
 
 | Value                    | Meaning                                                           |
 | ------------------------ | ----------------------------------------------------------------- |
-| `proposed`               | Suggested, not yet decided. Binds nothing                         |
+| `proposed`               | Put to the owner, not yet decided. Binds nothing                  |
 | `rejected`               | Considered and turned down. Kept so the option is not re-proposed |
-| `accepted`               | Decided and in effect                                             |
+| `accepted`               | Decided by the owner, and in effect                               |
 | `deprecated`             | No longer applies, and nothing replaced it                        |
 | `superseded by ADR-NNNN` | Replaced by another record, which MUST exist                      |
 
-**Only `accepted` records bind.** A `proposed` record is a suggestion, and no reader - human or
-automated - may treat it as a constraint.
+**Only `accepted` records bind.** `proposed` exists so that an agent can put a decision in front of
+the owner before it is decided. No reader - human or automated - may treat a `proposed` record as a
+constraint.
 
-**The owner changes records.** Any contributor MAY draft, argue and commit a record as `proposed`,
-and edit it freely while it is. A record's status, and an accepted record's content, change only on
-the owner's explicit instruction, given in the session making the change and naming the record.
-General approval - "looks good", "go ahead", approval of other work - is not that instruction. A
-formatting-only change, which alters no word, needs none (ADR-0016). Until the owner instructs it, a
-change to an accepted record is not committed. See ADR-0008 and ADR-0021.
+**The owner agrees to every record and every change.** A contributor MUST ask the owner before
+creating, changing, deleting, superseding or deprecating a record - any record, of any status - and
+MUST do it only with the owner's explicit agreement. General approval - "looks good", "go ahead",
+approval of other work - is not agreement to a record. A record starts `proposed`, copied from the
+template rather than from another record. Formatting applied by a tool, which alters no word, is not
+a change (ADR-0016). See ADR-0008 and ADR-0021.
 
 **An accepted record is the current answer to its question.** It MAY be amended in place, including
 to reverse its decision. It is superseded only when its question splits in two, merges with another,

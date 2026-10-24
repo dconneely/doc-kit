@@ -29,15 +29,28 @@ not tidy them, fill them in, or lint them into shape.
 reaches an adopter. See
 [ADR-0007](docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md).
 
+## Decision records - absolute rules
+
+1. **Ask the owner before creating a decision record.** Say which question it would answer. Create
+   it only if they agree.
+2. **Ask the owner before changing, deleting or obsoleting a decision record** - any record, any
+   status. Superseding or deprecating one is a change. Say what you would do. Do it only if they
+   agree.
+
+The owner's explicit agreement is required for each. Nothing else - "looks good", approval of other
+work, an earlier session's say-so - substitutes for it.
+
+To create one, copy `templates/docs/adr/0000-template.md` - never an existing record - to the next
+free number, with `status: "proposed"`.
+
+To get one accepted, ask the owner "Accept ADR-NNNN?". If they agree, set `status: "accepted"`,
+`decision-makers` to their name, `approval` to their words, and `date` to today.
+
+A change includes fixing, in the same commit, the citations it makes untrue. Formatting applied by a
+tool is not a change. `SPECIFICATION.md` §3.1 has the rest.
+
 ## Before you edit
 
-- **Change an ADR's `status`, or an `accepted` one's content, only when the owner explicitly asks,
-  naming the record.** "Looks good" or approval of other work is not that. Copy their words into
-  `approval`, and fix every citation the change makes untrue in the same commit. Otherwise drafting
-  is yours and deciding is not: write the record `proposed`, and leave `decision-makers` and
-  `approval` as the template's placeholders - filling them in early presumes the outcome.
-  `SPECIFICATION.md` §3.1 has the rest - read it before touching `docs/adr/`. Copy
-  `templates/docs/adr/0000-template.md` for the shape, and fill in `Considered Options` honestly.
 - **Delete completed `PLAN.md` entries.** Do not annotate, strike through, or move them to a done
   section - that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are

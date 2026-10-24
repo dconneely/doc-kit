@@ -22,16 +22,17 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
-- Decision records change only on the owner's explicit instruction, naming the record, and record
-  the owner's words in a new `approval` field (ADR-0021, ADR-0022). The pull-request guidance is
-  gone.
+- Agents ask the owner before creating, changing, deleting or obsoleting a decision record, and act
+  only with the owner's explicit agreement. Acceptance records the owner's words in a new `approval`
+  field (ADR-0021, ADR-0022). The pull-request guidance is gone.
 - An accepted decision record is the current answer to its question: it is amended in place, even to
   reverse it, and superseded only when its question splits, merges, or is cited from outside the
   repository (ADR-0022). Its mutability is the new value `amendable`, and its title names the
   question.
 - Decision records are cited as `ADR-NNNN`, and another repository's record by a link. A change to a
   record fixes the citations it makes untrue in the same commit (ADR-0022).
-- `templates/docs/adr/0000-template.md` carries a checklist for changing a record.
+- `templates/docs/adr/0000-template.md` states those rules, and how to create a record and get it
+  accepted.
 - The kit is positioned for a repository one owner directs and many agent sessions write: the owner
   decides, and every other contributor, agent or human, proposes (ADR-0021). `SPECIFICATION.md`'s
   purpose says so, and `ADOPTING.md` Step 0's signal to adopt is repeated agent sessions rather than
