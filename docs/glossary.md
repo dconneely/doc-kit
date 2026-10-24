@@ -5,8 +5,8 @@ Terms that mean something specific in this project, and ordinary words used prec
 **Adopter** - a person applying the kit to a repository. The audience for `ADOPTING.md`, and
 distinct from a maintainer of the kit itself.
 
-**Adopting repository** - the repository the kit is being applied to. Almost always one that already
-exists and already has documentation; the greenfield case is the easy one and is not the target.
+**Adopting repository** - the repository the kit is being applied to: one that a single owner
+directs and agent sessions write. It may be new, or already carry documentation to migrate.
 
 **Accepted-wrong** - behaviour known to be incorrect and deliberately left in place, usually with a
 test asserting today's incorrect output. A quirk with an expiry condition, recorded so the next
@@ -38,6 +38,9 @@ thing to look for when adopting.
 
 **Mutability** - how a document changes over its life, from the closed set in `SPECIFICATION.md`
 §2.7. One of the three properties.
+
+**Owner** - the one person who makes a repository's decisions: accepts records, sets its purpose,
+ranks its plan. Every other contributor, agent or human, proposes. See ADR-0021.
 
 **Provenance header** - the block at the top of an archived file stating that it is not
 authoritative, when it was last known accurate, and why it was not migrated.

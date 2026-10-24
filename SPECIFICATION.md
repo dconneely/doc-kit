@@ -15,7 +15,16 @@ No repository is obliged to run one. Verifying by hand is fully conformant.
 
 ## Purpose and scope
 
-A repository adopting this kit gains one property: **every fact about the project has exactly one
+A repository adopting this kit is one that a single owner directs and many agent sessions write
+(ADR-0021). The kit has two jobs there: to communicate the owner's purpose to every session, and to
+stop what sessions write from accumulating into contradictory, stale text that misleads the next
+one.
+
+**The owner decides; everyone else proposes.** One person - the owner - makes the project's
+decisions. Every other contributor, agent or human, may draft and argue; nothing they write binds
+until the owner accepts it (§3.1).
+
+It does both by giving the repository one property: **every fact about the project has exactly one
 place it belongs, and the tense of the sentence tells you which.** Everything below is machinery for
 holding that property.
 
@@ -28,7 +37,7 @@ source of truth that cannot go stale, and loses.
 
 **It is a write discipline before it is a reference.** Its most-asked question is "where does this
 go?", at the moment something is written down. That is when sprawl is cheapest to prevent, and it is
-the question a growing share of documentation authors - human and otherwise - get wrong by default.
+the question agent sessions get wrong by default.
 
 **Volume is a cost, not a measure of success.** An artifact nobody has a reason to write is one the
 map should not name. A repository whose constraints fit on one page does not need this structure and
@@ -39,8 +48,10 @@ should not adopt it.
 This specification governs where facts live, how documents relate, and the tense and volume of what
 is written. Code comments it governs for tense and routing only (ADR-0019). It says nothing about
 house style or what a project ought to document. It does not cover generated API reference or
-documentation sites, except to say where their outputs sit (§4). Adopting it is not a claim that a
-repository is well documented - only that what is documented is findable and in one place.
+documentation sites, except to say where their outputs sit (§4). It gives no guidance to several
+people deciding together: such a repository can use it, but how they agree is its own business.
+Adopting it is not a claim that a repository is well documented - only that what is documented is
+findable and in one place.
 
 **It does not make documentation true.** Nothing here prevents a clause from going stale, and a
 checker cannot tell. Only two things resist rot: a claim derived from something else (§4.3), and a

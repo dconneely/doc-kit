@@ -225,8 +225,8 @@ is the order to do it in.
    above assumes it is not.
 
 Skip until earned: `CONTRIBUTING.md` / `CODE_OF_CONDUCT.md` / `SECURITY.md` (these earn their place
-when outside contributions start), `RELEASING.md` (waits on releases), runbooks (services, not
-libraries or tools), and `docs/tasks/` (overhead exceeds value below ~20 open items).
+when people other than the owner contribute regularly), `RELEASING.md` (waits on releases), runbooks
+(services, not libraries or tools), and `docs/tasks/` (overhead exceeds value below ~20 open items).
 
 ## Troubleshooting
 

@@ -42,10 +42,11 @@ Two outputs: a decision, and `PLAN.md`.
 **Decide.** This structure costs more than it returns below a certain size. A single-purpose script,
 a repository one person will maintain for a month, or anything whose entire documentation genuinely
 fits in one honest `README.md` - or one tight `AGENTS.md` - should stop here. The signal to proceed
-is not size in lines but **more than one reader**: someone who has to obey the behaviour, or someone
-who will inherit the reasoning. Record the outcome either way - a rejection that is written down is
-a decision, and one that is not gets re-litigated every six months. An adoption is recorded in the
-adoption record Step 3 creates.
+is not size in lines but **repeated agent sessions**: agents work in the repository again and again,
+and what each needs to know no longer fits in one `AGENTS.md`. Each session is a new reader that
+inherits the reasoning without having seen it made. Record the outcome either way - a rejection that
+is written down is a decision, and one that is not gets re-litigated every six months. An adoption
+is recorded in the adoption record Step 3 creates.
 
 **Then write `PLAN.md` before anything else.** It is the one artifact you can create knowing nothing
 about the repository yet, and the adoption work itself is its first content: one entry per artifact

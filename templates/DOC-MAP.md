@@ -66,7 +66,7 @@ gets its own row below.
 | `SPECIFICATION.md`   | The behaviour contract. Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength        | present | rewritten in place | users + implementers                                                                            |
 | `docs/adr/*.md`      | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past    | immutable          | future maintainers                                                                              |
 | `CHANGELOG.md`       | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past    | append-only        | users                                                                                           |
-| `PLAN.md`            | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future  | volatile           | the team                                                                                        |
+| `PLAN.md`            | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future  | volatile           | the owner and contributors                                                                      |
 | `docs/quirks.md`     | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present | rewritten in place | users comparing against a reference, and anyone - human or agent - about to "fix" something odd |
 | `docs/research/*.md` | Sourced findings with explicit confidence levels; shape and confidence levels in `0000-template.md`                      | past    | append-only        | implementers                                                                                    |
 | `docs/glossary.md`   | Domain vocabulary                                                                                                        | present | rewritten in place | readers of every other document                                                                 |
@@ -122,8 +122,8 @@ Absent on purpose, so that adding any of them later is a decision rather than a 
 
 - **A separate technical-debt file** - debt is a `debt` tag in the plan.
 - **An issue tracker**, until the backlog outgrows a file - roughly 20-30 open items.
-- **Community health files** - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` - until
-  outside contributions begin.
+- **Community health files** - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` - until people
+  other than the owner contribute regularly.
 - **`RELEASING.md`**, until there are releases, and **runbooks**, unless this is a deployed service.
 
 ## Adding a new kind of document

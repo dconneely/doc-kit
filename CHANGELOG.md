@@ -22,6 +22,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
+- The kit is positioned for a repository one owner directs and many agent sessions write: the owner
+  decides, and every other contributor, agent or human, proposes (ADR-0021). `SPECIFICATION.md`'s
+  purpose says so, and `ADOPTING.md` Step 0's signal to adopt is repeated agent sessions rather than
+  more than one reader.
 - `SPECIFICATION.md`'s scope covers the tense and volume of what is written, code comments included,
   and excludes only style and what a project ought to document (ADR-0019).
 - `templates/DOC-MAP.md` routes, and each artifact owns its rules (ADR-0020). Its "Prescribed

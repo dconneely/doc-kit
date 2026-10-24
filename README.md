@@ -1,13 +1,16 @@
 # doc-kit
 
-A documentation structure you can add to a project that already exists.
+A documentation structure for a repository that one person directs and many agent sessions write.
 
-Most documentation advice assumes a blank repository. This assumes the opposite: a codebase with a
-decade of history, a `docs/` folder nobody trusts, three files that are part changelog and part
-backlog, and decisions that survive only as comments above the code they explain.
+Each agent session starts with no memory of the last. It learns what the owner wants from what is
+written down, and it writes more. Left alone, that text accumulates: documents restating each other,
+contradicting each other, describing code that has since changed. A new session cannot tell the
+current text from the stale, so it trusts all of it.
 
 The kit is a small set of documents organised by three properties - **tense**, **mutability** and
-**audience** - plus the procedure for migrating existing material into them.
+**audience** - with rules for where each fact goes, when it is deleted, and who may change what.
+**The owner decides; every other contributor, agent or human, proposes.** It also carries a
+procedure for migrating documentation that has already accumulated.
 
 ## What it is for
 
@@ -19,12 +22,11 @@ It is a write discipline more than a reference. The question it answers most oft
 this go?", asked while something is being written down - which is when sprawl is cheapest to
 prevent.
 
-That question is increasingly asked by coding agents, which produce documentation readily and sprawl
-by default: three files restating one thing, nothing ever deleted. A structure that says where a
-fact belongs, and when it is deleted, constrains generation in a way that "write good docs" does
-not. What it will not do is make a repository legible to an agent through sheer volume - an agent
-reads code faster than prose, and a stale document is more dangerous to one than to a sceptical
-human.
+That question is mostly asked by coding agents, which produce documentation readily and sprawl by
+default: three files restating one thing, nothing ever deleted. A structure that says where a fact
+belongs, and when it is deleted, constrains generation in a way that "write good docs" does not.
+What it will not do is make a repository legible to an agent through sheer volume - an agent reads
+code faster than prose, and a stale document is more dangerous to one than to a sceptical human.
 
 **If your project's constraints fit on one page, write that page instead.** A tight `AGENTS.md` or
 an honest `README.md` beats this structure until there is more to say than fits in it.
@@ -87,7 +89,6 @@ to edit should not follow you home.
 
 ## Status
 
-Released, and still early. The structure, the procedure and the checker are settled and in use here
-and in two other repositories, one a migration into an existing multi-module codebase. Both are
-controlled by the same person, so the procedure has yet to meet an adopter who disagrees with it.
-See `CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.
+Released, and still early. In use here and in two other repositories, one a migration into an
+existing multi-module codebase, all owned by the same person - the situation the kit is designed for
+(ADR-0021). See `CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.
