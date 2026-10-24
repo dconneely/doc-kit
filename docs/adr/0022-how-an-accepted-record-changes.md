@@ -19,8 +19,9 @@ What immutability protects is a citation. A commit message, a code comment or an
 says ADR-0012 relies on the record meaning what it meant when cited. A typo fix does not disturb
 that; reversing the decision does. But a citation inside the repository can be found and changed,
 provided every citation uses one exact form. In this repository 107 citations already use the form
-`ADR-NNNN`, and the one that names a record that does not exist - ADR-0036, in ADR-0017, which means
-a record in another repository - could not be corrected, because ADR-0017 is accepted.
+`ADR-NNNN`. One does not mean a record here: ADR-0017 cites `identigon/identigon`'s ADR-0036, naming
+the repository in the prose. A reader understands it; a search for the ID cannot tell it from a
+citation of this repository's own records.
 
 Under ADR-0021 the owner is the only person who decides. The question left is what may change in an
 accepted record, and what a change has to bring with it.
@@ -92,5 +93,5 @@ citation fixes, a citation could come to mean anything.
   template, the `AGENTS.md` stanza, this repository's `AGENTS.md`, the checker and the hooks change
   to match, and the `PLAN.md` entry on append-only revisions is deleted.
 - Neutral: the `refined by` pointers on ADR-0004, ADR-0007 and ADR-0014 become links, ADR-0008 and
-  ADR-0016 gain links to this record, and ADR-0017's citation of ADR-0036 becomes a link to the
-  record it means.
+  ADR-0016 gain links to this record, and ADR-0017's citation of `identigon/identigon`'s ADR-0036
+  becomes a link to that record.
