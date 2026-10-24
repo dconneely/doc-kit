@@ -1,8 +1,8 @@
 ---
-status: "accepted"
+status: "proposed"
 date: 2026-10-24
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: 'Yes to all of these (asked: "Do you accept ADR-0014 as drafted? And for ADR-0015: do you accept it, and may I reopen ADR-0002 to match it?") - reopened'
 ---
 
 # 2. How documentation is divided into artifacts
@@ -26,10 +26,11 @@ Chosen option: **tense, mutability and audience**, because those are the propert
 causes the rot, and organising by anything else leaves them free to mix.
 
 Does it describe what is, what was, or what is intended? How does it change over its life? Who reads
-it, and at what moment? A candidate document sharing all three with an existing artifact is a
-section or a tag within that artifact, not a new file. This test applies to every proposed addition.
-Two obvious candidates for new categories, technical debt and machine-readable contracts, both
-turned out to belong in artifacts that already existed (ADR-0003, ADR-0004).
+it? A candidate document sharing all three with an existing artifact is a section or a tag within
+that artifact, unless it holds different facts - so a shared triple is a prompt to check, not a
+verdict (ADR-0015). This test applies to every proposed addition. Two obvious candidates for new
+categories, technical debt and machine-readable contracts, both turned out to belong in artifacts
+that already existed (ADR-0003, ADR-0004).
 
 Subject-based organisation was rejected because subjects overlap, and a fact about a subject still
 has to be filed somewhere within it, so the problem reappears one level down. No principle at all
@@ -42,6 +43,8 @@ was rejected because review cannot hold a line nobody has drawn.
 - Good, because splitting a mixed-tense file becomes mechanical too - a migration is a sort, not a
   rewrite.
 - Good, because the structure stays small. Most proposed additions fail the test.
+- Bad, because the test is a prompt, not a proof: with closed sets, artifacts holding different
+  facts can share all three properties, and telling them apart is a judgement.
 - Bad, because a genuinely new category feels harder to add than it is, and the test has to be
   applied honestly rather than as a formality.
 - Neutral: the three properties are a heuristic with no external authority behind them. They are

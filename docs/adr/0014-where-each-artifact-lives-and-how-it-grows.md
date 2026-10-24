@@ -1,8 +1,8 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-10-24
-decision-makers: {the owner - required once the status is not "proposed"}
-approval: {the owner's words, verbatim - required once the status is not "proposed"}
+decision-makers: David Conneely
+approval: 'Yes to all of these (asked: "Do you accept ADR-0014 as drafted? And for ADR-0015: do you accept it, and may I reopen ADR-0002 to match it?")'
 ---
 
 # 14. Where each artifact lives, and how it grows
