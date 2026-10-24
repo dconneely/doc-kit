@@ -24,6 +24,7 @@ set -eu
 MAP=DOC-MAP.md
 NL='
 '
+TAB='	'
 
 failures=0
 warnings=0
@@ -43,8 +44,19 @@ warn() {
 	return 0
 }
 
-has_git() {
-	command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1
+# Asked once: on Windows each process costs tens of milliseconds, and the checks run in loops.
+if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+	git_ok=0
+else
+	git_ok=1
+fi
+has_git() { return "$git_ok"; }
+
+# within LIST ITEM - true when ITEM is a whole line of the newline-separated LIST. A case
+# pattern, not grep, so a loop over files starts no process.
+within() {
+	case "$NL$1$NL" in *"$NL$2$NL"*) return 0 ;; esac
+	return 1
 }
 
 # Filter stdin (one path per line) to the gitignored ones. Prints nothing when
@@ -139,13 +151,13 @@ check_map() {
 	# unquoted loop would expand them into the files they match.
 	set -f
 	for a in $arts; do
-		printf '%s\n' "$lifes" | grep -qxF "$a" ||
+		within "$lifes" "$a" ||
 			fail "$a is in the artifacts table but not the lifecycle table" "§2.2"
-		printf '%s\n' "$lays" | grep -qxF "$a" ||
+		within "$lays" "$a" ||
 			fail "$a is in the artifacts table but not the layout block" "§2.2"
 	done
 	for l in $lifes; do
-		printf '%s\n' "$arts" | grep -qxF "$l" ||
+		within "$arts" "$l" ||
 			fail "$l is in the lifecycle table but not the artifacts table" "§2.2 - the table is authoritative"
 	done
 
@@ -178,14 +190,13 @@ check_map() {
 	if [ -n "$vendored" ]; then
 		rest=''
 		for f in $unmapped; do
-			printf '%s
-' "$vendored" | grep -qxF "$f" || rest="$rest$f$NL"
+			within "$vendored" "$f" || rest="$rest$f$NL"
 		done
 		unmapped=$rest
 	fi
 	ignored=$(printf '%s' "$unmapped" | ignored_of)
 	for f in $unmapped; do
-		printf '%s\n' "$ignored" | grep -qxF "$f" ||
+		within "$ignored" "$f" ||
 			fail "$f is not named in the map" "§2.4 - add a row, or move it under an archive"
 	done
 	for g in $(printf '%s\n' "$ignored" | awk -F/ '
@@ -211,9 +222,13 @@ check_map() {
 	IFS=$NL
 	for row in $rows; do
 		IFS=$oldifs
-		tense=$(printf '%s' "$row" | cut -d'~' -f2)
-		mut=$(printf '%s' "$row" | cut -d'~' -f3)
-		art=$(printf '%s' "$row" | cut -d'~' -f1 | tr -d '`')
+		art=${row%%~*}
+		art=${art#\`}
+		art=${art%\`}
+		rest=${row#*~}
+		tense=${rest%%~*}
+		rest=${rest#*~}
+		mut=${rest%%~*}
 		case "$tense" in
 			present|past|future|imperative|explanatory) ;;
 			*) fail "$art has tense '$tense'" "§2.7 - present, past, future, imperative, explanatory" ;;
@@ -245,42 +260,80 @@ check_adr() {
 	check_citations
 	[ -d "$dir" ] || return 0
 
-	for f in "$dir"/*.md; do
-		[ -e "$f" ] || continue
-		base=$(basename "$f")
-		case "$base" in 0000-*) continue ;; esac
+	pattern_exists "$dir/*.md" || return 0
 
-		echo "$base" | grep -qE '^[0-9]{4}-[a-z0-9]+(-[a-z0-9]+)*\.md$' ||
-			fail "$f is misnamed" "§3.1 - NNNN-kebab-case-title.md"
+	# One awk pass over every record, printing one tab-separated line per failure: a kind, the
+	# file, and the status where the message needs it. A placeholder - the template's {...} -
+	# counts as missing. The template itself (0000-*) is skipped, but its number still counts.
+	hits=$(awk '
+		function flush() {
+			if (f == "" || skip) return
+			if (base !~ /^[0-9][0-9][0-9][0-9]-[a-z0-9]+(-[a-z0-9]+)*\.md$/) print "misnamed\t" f
+			if (status == "") print "nostatus\t" f
+			else if (status !~ /^(proposed|accepted|rejected|deprecated)$/) print "status\t" f "\t" status
+			if (!date) print "nodate\t" f
+			if (status != "" && status != "proposed") {
+				if (!dm) print "nodm\t" f "\t" status
+				if (!appr) print "noappr\t" f "\t" status
+			}
+			if (!h1) print "heading\t" f "\t## Context and Problem Statement"
+			if (!h2) print "heading\t" f "\t## Considered Options"
+			if (!h3) print "heading\t" f "\t## Decision Outcome"
+		}
+		function start(name) {
+			f = name
+			done[f] = 1
+			base = f
+			sub(/.*\//, "", base)
+			skip = base ~ /^0000-/
+			if (base ~ /^[0-9][0-9][0-9][0-9]-/) seen[substr(base, 1, 4)]++
+			status = ""; date = dm = appr = h1 = h2 = h3 = 0
+		}
+		FNR == 1 { flush(); start(FILENAME) }
+		status == "" && /^status: *"?[^"]*"? *$/ {
+			s = $0
+			sub(/^status: */, "", s)
+			sub(/ *$/, "", s)
+			gsub(/"/, "", s)
+			status = s
+		}
+		/^date:/ { date = 1 }
+		/^decision-makers: *[^ {]/ { dm = 1 }
+		/^approval: *[^ {]/ { appr = 1 }
+		index($0, "## Context and Problem Statement") { h1 = 1 }
+		index($0, "## Considered Options") { h2 = 1 }
+		index($0, "## Decision Outcome") { h3 = 1 }
+		END {
+			flush()
+			# An empty file has no first line, so it is visited here.
+			for (i = 1; i < ARGC; i++) if (!(ARGV[i] in done)) { start(ARGV[i]); flush() }
+			for (k in seen) if (seen[k] > 1) print "dupe\t" k
+		}
+	' "$dir"/*.md)
 
-		status=$(sed -n 's/^status: *"\{0,1\}\([^"]*\)"\{0,1\} *$/\1/p' "$f" | head -n 1)
-		[ -n "$status" ] || fail "$f has no status" "§3.1 - MADR front-matter"
-
-		case "$status" in
-			proposed|accepted|rejected|deprecated) ;;
-			'') ;;
-			*) fail "$f has status '$status'" "§3.1 - proposed, accepted, rejected or deprecated" ;;
+	set -f
+	oldifs=$IFS
+	IFS=$NL
+	for hit in $hits; do
+		IFS=$oldifs
+		kind=${hit%%"$TAB"*}
+		f=${hit#*"$TAB"}
+		arg=${f#*"$TAB"}
+		f=${f%%"$TAB"*}
+		case "$kind" in
+			misnamed) fail "$f is misnamed" "§3.1 - NNNN-kebab-case-title.md" ;;
+			nostatus) fail "$f has no status" "§3.1 - MADR front-matter" ;;
+			status) fail "$f has status '$arg'" "§3.1 - proposed, accepted, rejected or deprecated" ;;
+			nodate) fail "$f has no date" "§3.1" ;;
+			nodm) fail "$f is '$arg' but names no decision-makers" "§3.1 - who decided?" ;;
+			noappr) fail "$f is '$arg' but has no approval" "§3.1 - the owner's words, verbatim" ;;
+			heading) fail "$f has no '$arg'" "§3.1 - MADR minimal template" ;;
+			dupe) fail "ADR number $f is used more than once" "§3.1 - numbers are unique" ;;
 		esac
-
-		# A placeholder - the template's {...} - counts as missing.
-		grep -q '^date:' "$f" || fail "$f has no date" "§3.1"
-		if [ -n "$status" ] && [ "$status" != proposed ]; then
-			grep -q '^decision-makers: *[^ {]' "$f" ||
-				fail "$f is '$status' but names no decision-makers" "§3.1 - who decided?"
-			grep -q '^approval: *[^ {]' "$f" ||
-				fail "$f is '$status' but has no approval" "§3.1 - the owner's words, verbatim"
-		fi
-
-		for heading in '## Context and Problem Statement' '## Considered Options' '## Decision Outcome'; do
-			grep -qF "$heading" "$f" || fail "$f has no '$heading'" "§3.1 - MADR minimal template"
-		done
+		IFS=$NL
 	done
-
-	dupes=$(for f in "$dir"/*.md; do
-		[ -e "$f" ] || continue
-		basename "$f" | sed -n 's/^\([0-9]\{4\}\)-.*/\1/p'
-	done | sort | uniq -d)
-	for d in $dupes; do fail "ADR number $d is used more than once" "§3.1 - numbers are unique"; done
+	IFS=$oldifs
+	set +f
 	return 0
 }
 
@@ -292,44 +345,60 @@ check_citations() {
 	docs=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' | sort)
 	set -f
 	skip=$(printf '%s\n' "$docs" | vendored_of; printf '%s\n' "$docs" | ignored_of)
+	scan=''
 	oldifs=$IFS
 	IFS=$NL
 	for f in $docs; do
-		printf '%s\n' "$skip" | grep -qxF "$f" && continue
-		hits=$(awk '
-			/^[ \t]*(```|~~~)/ { fence = !fence; next }
-			fence { next }
-			/^\[[^]]*\]: / { next }
-			{
-				line = $0
+		within "$skip" "$f" || scan="$scan$f$NL"
+	done
+	IFS=$oldifs
+
+	# The file names arrive on stdin, one per line, so a name may contain spaces. Each hit is
+	# a kind, the file, the line number and the token, separated by tabs.
+	hits=$(printf '%s' "$scan" | awk '
+		{
+			name = $0
+			fence = 0
+			no = 0
+			while ((getline raw < name) > 0) {
+				no++
+				if (raw ~ /^[ \t]*(```|~~~)/) { fence = !fence; continue }
+				if (fence || raw ~ /^\[[^]]*\]: /) continue
+				line = raw
 				gsub(/`[^`]*`/, "", line)
 				gsub(/\[[^]]*\]\(https?:[^)]*\)/, "", line)
 				gsub(/\]\[[^]]*\]/, "]", line)
 				while (match(line, /(^|[^A-Za-z0-9])[Aa][Dd][Rr][- ]?[0-9]+/)) {
 					tok = substr(line, RSTART, RLENGTH)
 					if (tok !~ /^[Aa]/) tok = substr(tok, 2)
-					print (tok ~ /^ADR-[0-9][0-9][0-9][0-9]$/ ? "cite " : "form ") NR " " tok
+					kind = tok ~ /^ADR-[0-9][0-9][0-9][0-9]$/ ? "cite" : "form"
+					print kind "\t" name "\t" no "\t" tok
 					line = substr(line, RSTART + RLENGTH)
 				}
 			}
-		' "$f")
-		for hit in $hits; do
-			IFS=$oldifs
-			kind=${hit%% *}
-			rest=${hit#* }
-			no=${rest%% *}
-			tok=${rest#* }
-			case "$kind" in
-				cite)
-					set +f
-					pattern_exists "$dir/${tok#ADR-}-*.md" ||
-						fail "$f:$no cites $tok, which does not exist" "§3.1 - a bare ID names a record here; link to another repository's"
-					set -f
-					;;
-				form) fail "$f:$no cites '$tok'" "§3.1 - cite a record as ADR-NNNN" ;;
-			esac
-			IFS=$NL
-		done
+			close(name)
+		}
+	')
+
+	IFS=$NL
+	for hit in $hits; do
+		IFS=$oldifs
+		kind=${hit%%"$TAB"*}
+		rest=${hit#*"$TAB"}
+		f=${rest%%"$TAB"*}
+		rest=${rest#*"$TAB"}
+		no=${rest%%"$TAB"*}
+		tok=${rest#*"$TAB"}
+		case "$kind" in
+			cite)
+				set +f
+				pattern_exists "$dir/${tok#ADR-}-*.md" ||
+					fail "$f:$no cites $tok, which does not exist" "§3.1 - a bare ID names a record here; link to another repository's"
+				set -f
+				;;
+			form) fail "$f:$no cites '$tok'" "§3.1 - cite a record as ADR-NNNN" ;;
+		esac
+		IFS=$NL
 	done
 	IFS=$oldifs
 	set +f

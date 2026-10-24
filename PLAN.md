@@ -15,14 +15,6 @@ The owner reviews them and gives permission to accept them; each then gets `stat
 `decision-makers`, the owner's words in `approval`, and the date. Until then nothing in `docs/adr/`
 binds, and the rules they record are carried by `SPECIFICATION.md` §3.1 and `AGENTS.md`.
 
-## Speed up the checker's test suite
-
-**Type:** debt - **Importance:** low - **Effort:** low
-
-The suite takes nearly two minutes on Windows, mostly in process start-up for each fixture, and
-outruns a two-minute tool timeout. Share fixtures between cases that only read them, or batch the
-checks run per fixture.
-
 ## Restructure the paths and close the audience set
 
 **Type:** feature - **Importance:** medium - **Effort:** high

@@ -50,6 +50,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   accept it once experience stops changing it.
 - Decision records no longer name the code they constrain; the comment beside the code names the
   record (ADR-0006).
+- `tools/doc-kit-check.sh` runs about ten times faster on Windows: it checks membership and splits
+  fields in the shell, and reads all records, and all files for citations, in one `awk` pass each,
+  rather than starting processes for every file.
 
 ### Removed
 

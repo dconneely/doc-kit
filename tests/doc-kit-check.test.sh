@@ -257,6 +257,21 @@ sed -i.bak '/^## Considered Options/d' docs/adr/0001-a-record.md
 rm docs/adr/0001-a-record.md.bak
 expect "record missing a MADR heading fails" 1 "has no '## Considered Options'" adr
 
+fixture
+adr 0002 accepted 'decision-makers: someone
+approval: "accept ADR-0002"'
+sed -i.bak '/^status:/d' docs/adr/0002-a-record.md
+rm docs/adr/0002-a-record.md.bak
+expect "record with no status fails" 1 "docs/adr/0002-a-record.md has no status" adr
+
+fixture
+: >docs/adr/0002-empty.md
+expect "empty record fails" 1 "docs/adr/0002-empty.md has no status" adr
+
+fixture
+printf 'See ADR-0099.\n' >"loose notes.md"
+expect "citation in a path with spaces names the whole path" 1 "loose notes.md:1 cites ADR-0099" adr
+
 # ---------------------------------------------------------------- plan
 
 fixture
