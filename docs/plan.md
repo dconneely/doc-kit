@@ -6,6 +6,16 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR. `docs/spec.md` §3.3 defines the scales.
 
+## Stop shared-triple warnings repeating on every run
+
+**Type:** debt - **Importance:** medium - **Effort:** low
+
+Needs an ADR. With closed audiences, artifacts holding different facts share all three properties -
+three pairs in this map and three in the template's - and nothing records that a pair was checked,
+so the warnings recur until they are ignored, along with the gitignored ones. Options: accept the
+noise; let the map mark a checked pair, silencing its warning; or report shared triples only on
+request.
+
 ## Add how-to guides and external sources
 
 **Type:** feature - **Importance:** medium - **Effort:** medium
