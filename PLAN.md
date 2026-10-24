@@ -10,11 +10,9 @@ needs more, it needs an ADR. `SPECIFICATION.md` §3.3 defines the scales.
 
 **Type:** feature - **Importance:** medium - **Effort:** high
 
-Needs an ADR. Audience becomes a closed set of roles - owner, contributor, consumer, end-user,
-operator - with human or agent assumed both unless noted. `docs/adr/` becomes `docs/decisions/`,
-`SPECIFICATION.md` and `PLAN.md` move to `docs/spec.md` and `docs/plan.md`, and any single-file
-artifact overflows into a sibling directory of the same name. `docs/plan/` replaces `docs/tasks/`.
-Closing the set will expose artifacts that share all three properties.
+Implement ADR-0014 and ADR-0015 once the owner accepts them; ADR-0015 also needs ADR-0002 reopened.
+Move the paths, rewrite every link and the checker's paths, close the audience column in both maps,
+make a shared triple a warning, and tell adopters how to move in `ADOPTING.md` and the changelog.
 
 ## Add how-to guides and external sources
 
