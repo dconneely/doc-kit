@@ -13,7 +13,7 @@ test asserting today's incorrect output. A quirk with an expiry condition, recor
 reader does not "fix" the test.
 
 **Archive** - a quarantine directory for documentation whose currency cannot be established. Exempt
-from the map's completeness check; every file in it carries a provenance header. See ADR-0005.
+from the map's completeness check; every file in it carries a provenance header. See ADR-0009.
 
 **Artifact** - one document, or one directory of documents, named in the map and given a tense, a
 mutability and an audience. The unit the structure is built from.
@@ -40,13 +40,13 @@ thing to look for when adopting.
 §2.7. One of the three properties.
 
 **Owner** - the one person who makes a repository's decisions: accepts records, sets its purpose,
-ranks its plan. Every other contributor, agent or human, proposes. See ADR-0021.
+ranks its plan. Every other contributor, agent or human, proposes. See ADR-0001.
 
 **Provenance header** - the block at the top of an archived file stating that it is not
 authoritative, when it was last known accurate, and why it was not migrated.
 
 **Specification** - a set, not a file. Members may be prose or machine-readable; both are
-specification. See ADR-0003.
+specification. See ADR-0004.
 
 **Structural conformance** - satisfying the mechanically checkable requirements. Contrast
 **substantive conformance**, which adds the single-source-of-truth rules and needs a reviewer.
@@ -55,4 +55,4 @@ specification. See ADR-0003.
 the three properties, because the tense of the sentence being written usually settles where it goes.
 
 **Three properties** - tense, mutability and audience. The axis the structure divides on, and the
-test every proposed new document must pass. See ADR-0001.
+test every proposed new document must pass. See ADR-0002.

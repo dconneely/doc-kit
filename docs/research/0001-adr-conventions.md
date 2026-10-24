@@ -29,12 +29,12 @@ informed: {list everyone who is kept up-to-date on progress}
 
 Three things matter and were not obvious:
 
-- **The ellipsis is in the template.** The permitted status set is explicitly not closed, so
-  extending it - as ADR-0009 does with `accepted (refined by ADR-NNNN)` - is sanctioned by the
-  convention rather than a deviation from it.
+- **The ellipsis is in the template.** The permitted status set is explicitly not closed, so a
+  project choosing a subset of the values, or adding one, follows the convention rather than
+  deviating from it.
 - **`rejected` is standard.** This kit had omitted it.
 - **`decision-makers`, `consulted` and `informed` are RACI fields.** `decision-makers` records who
-  decided, which is the signal ADR-0008 wanted and had to leave to review.
+  decided, which is the signal ADR-0007 relies on.
 
 ### Y-statements - the same record, compressed to a sentence
 
@@ -70,7 +70,7 @@ What differs is where it lives and whether it changes:
   the three-property test that makes an in-code Y-statement a different artifact from an ADR, not a
   shorter spelling of one.
 
-ADR-0010 did not consider Y-statements, and nothing here argues it should have chosen them: the
+ADR-0008 did not consider Y-statements, and nothing here argues it should have chosen them: the
 minimal template already carries every clause.
 
 ## Evidence
@@ -109,10 +109,10 @@ convention this kit cites - see "Open questions".
 Closed by [`0002-conventions-this-kit-cites.md`](0002-conventions-this-kit-cites.md): Nygard's
 original post, `adr-tools` numbering, and Keep a Changelog's categories were all checked and all
 proved accurate. Nygard's statuses turned out to be lowercase in the original, which supports
-ADR-0010 on a ground it had not claimed.
+ADR-0008 on a ground it had not claimed.
 
 - Whether MADR's front-matter should be adopted beyond `status`, `date` and `decision-makers`
   remains open; `consulted` and `informed` were judged overhead for a small project rather than
   wrong.
 - Whether the map should route anything to code comments, in-code Y-statements included: see
-  ADR-0019, proposed.
+  ADR-0012.

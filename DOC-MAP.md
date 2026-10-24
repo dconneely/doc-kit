@@ -9,10 +9,10 @@ Start here when you have something to write down and are not sure which file it 
 > The test is what a file is **about**: product describes the adopter's repository, documentation
 > describes this one. The artifacts table marks which is which. `SPECIFICATION.md` is documentation
 > despite concerning adopters, because it describes the product rather than being it
-> ([ADR-0006][adr6]).
+> ([ADR-0005][adr5]).
 >
 > A third category is not mapped at all: **infrastructure** - `.gitattributes`, the hook config -
-> which configures this repository and never reaches an adopter ([ADR-0007][adr7]).
+> which configures this repository and never reaches an adopter ([ADR-0005][adr5]).
 >
 > `templates/DOC-MAP.md` and this file share a name and nothing else: that one is the template, this
 > one an instance.
@@ -122,7 +122,7 @@ Most changes skip the ADR. Nothing skips the deletion.
 Each artifact holds its own format and rules - the ADR shape and status rules in
 [`templates/docs/adr/0000-template.md`](templates/docs/adr/0000-template.md) and `SPECIFICATION.md`
 §3.1, the plan entry in `PLAN.md`'s preamble - and this map does not restate them
-([ADR-0020][adr20]). What each rule prevents is in `ADOPTING-NOTES.md`.
+([ADR-0006][adr6]). What each rule prevents is in `ADOPTING-NOTES.md`.
 
 1. **Each fact lives in exactly one place**, and the tense of the sentence tells you which:
    rationale -> ADR, behaviour -> specification, history -> changelog or commit message, intent ->
@@ -131,7 +131,7 @@ Each artifact holds its own format and rules - the ADR shape and status rules in
    here is generated: `ADOPTING.md` and `templates/` are source of truth, and everything in `docs/`
    is prose that cannot be derived. `SPECIFICATION.md` §4 has the rules for when that changes.
 3. **Write the least that is true.** No history or account of how you got there, in documents or
-   code comments ([ADR-0019][adr19]).
+   code comments ([ADR-0012][adr12]).
 4. **Code names the record, not the reverse.** A comment beside constrained code names the ADR that
    governs it.
 5. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
@@ -142,7 +142,7 @@ Each artifact holds its own format and rules - the ADR shape and status rules in
 
 Absent on purpose, so that adding any of them later is a decision rather than a drift:
 
-- **A separate technical-debt file** - see [ADR-0002][adr2].
+- **A separate technical-debt file** - see [ADR-0003][adr3].
 - **`docs/quirks.md` and `docs/tasks/`** - both in `templates/`, neither earned here yet.
 - **An issue tracker**, until the backlog outgrows a file - roughly 20-30 open items.
 - **Community health files** - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` - which earn
@@ -158,8 +158,7 @@ that document, not a new file. Most proposed additions fail this test - which is
 If it passes, add it to the layout, artifacts and lifecycle tables in the same commit. A map that
 omits an artifact is worse than no map, because it is believed.
 
-[adr2]: docs/adr/0002-keep-technical-debt-in-the-plan.md
-[adr6]: docs/adr/0006-treat-the-adoption-procedure-as-product.md
-[adr7]: docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md
-[adr19]: docs/adr/0019-govern-the-tense-and-volume-of-what-is-written-not-its-style.md
-[adr20]: docs/adr/0020-the-map-routes-each-artifact-owns-its-rules.md
+[adr3]: docs/adr/0003-where-technical-debt-goes.md
+[adr5]: docs/adr/0005-what-is-product-documentation-or-infrastructure.md
+[adr12]: docs/adr/0012-what-tense-and-how-much-is-written.md
+[adr6]: docs/adr/0006-where-rules-and-their-reasons-live.md

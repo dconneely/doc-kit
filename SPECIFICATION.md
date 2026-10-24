@@ -16,7 +16,7 @@ No repository is obliged to run one. Verifying by hand is fully conformant.
 ## Purpose and scope
 
 A repository adopting this kit is one that a single owner directs and many agent sessions write
-(ADR-0021). The kit has two jobs there: to communicate the owner's purpose to every session, and to
+(ADR-0001). The kit has two jobs there: to communicate the owner's purpose to every session, and to
 stop what sessions write from accumulating into contradictory, stale text that misleads the next
 one.
 
@@ -46,7 +46,7 @@ should not adopt it.
 ### Not in scope
 
 This specification governs where facts live, how documents relate, and the tense and volume of what
-is written. Code comments it governs for tense and routing only (ADR-0019). It says nothing about
+is written. Code comments it governs for tense and routing only (ADR-0012). It says nothing about
 house style or what a project ought to document. It does not cover generated API reference or
 documentation sites, except to say where their outputs sit (§4). It gives no guidance to several
 people deciding together: such a repository can use it, but how they agree is its own business.
@@ -66,7 +66,7 @@ Defined in `docs/glossary.md`. The ones this document leans on hardest are **map
 A **documentation file** is any Markdown file in the repository that is not below an archive (§5)
 and not vendored. A file is **vendored** when its `linguist-vendored` git attribute is set - the
 attribute GitHub Linguist defines for third-party code, conventionally set in `.gitattributes`
-(ADR-0018). This definition is what makes the map's completeness check decidable, so a checker MUST
+(ADR-0011). This definition is what makes the map's completeness check decidable, so a checker MUST
 implement exactly it. A file being gitignored does not remove it from this definition - see §2.9 for
 how a checker MUST treat one.
 
@@ -93,7 +93,7 @@ than left to memory.
 pattern the map names. This is the check that rots second.
 
 2.5 The map MUST NOT retain placeholder content from the template - an example artifact row, an
-unreplaced heading. Templates carry an example rather than instructions (ADR-0011), so a surviving
+unreplaced heading. Templates carry an example rather than instructions (ADR-0006), so a surviving
 example is the signal that customisation was never finished.
 
 2.6 Paths in the map MUST be the repository's real paths. In a monorepo the per-module artifacts
@@ -125,7 +125,7 @@ kit fails §2.5 on its own templates, which is the check reporting the opposite 
 it against the map. But a checker MUST report a hit in one as advisory, and MUST NOT let it affect
 exit status: gitignored documentation (a repository's own working-notes convention, say) is a real,
 recurring category this specification does not get to assume away, and it deserves checking without
-ever blocking on content the map was never meant to describe (ADR-0014). A reviewer verifying by
+ever blocking on content the map was never meant to describe (ADR-0011). A reviewer verifying by
 hand applies the same judgement: check it, don't block on it.
 
 ## 3. Artifacts
@@ -154,7 +154,7 @@ can lose it; the tree keeps it.
 Records follow the [MADR](https://adr.github.io/madr/) minimal template. Filenames MUST match
 `NNNN-kebab-case-title.md` with a four-digit zero-padded number, and numbers MUST be unique and
 never reused. The heading MUST repeat the number. The title SHOULD name the question the record
-answers rather than the answer, so that a changed answer leaves it true. See ADR-0010 and ADR-0022.
+answers rather than the answer, so that a changed answer leaves it true. See ADR-0008 and ADR-0007.
 
 Each record MUST carry YAML front-matter with `status` and `date`. A record whose status is not
 `proposed` MUST also carry `decision-makers`, naming the owner, and `approval`: the owner's words,
@@ -190,14 +190,14 @@ It MUST have the owner's explicit permission, asked for first, to accept a recor
 approval - "looks good", "go ahead", approval of other work - is not permission. When the owner
 rejects a change to a reopened record, its last accepted version is restored, rather than the record
 being marked `rejected`. A record is normally accepted before it is committed, so history holds its
-accepted versions. Formatting applied by a tool, which alters no word, is not a change (ADR-0016).
-See ADR-0008 and ADR-0021.
+accepted versions. Formatting applied by a tool, which alters no word, is not a change. See ADR-0007
+and ADR-0001.
 
 **An accepted record is the current answer to its question.** It is reopened and amended in place,
 including to reverse its decision. When its question splits or merges with another, or it no longer
 applies, it is deprecated or - more simply - deleted, and links to any record that replaces it. A
 later choice between real options is its own record, linked from the earlier one. A record carries
-no revision log; git holds what it said when. See ADR-0022.
+no revision log; git holds what it said when. See ADR-0007.
 
 **Citations take one form.** A record is cited as `ADR-NNNN` - upper case, a hyphen, four digits -
 and a bare ID MUST name a record in this repository. A record in another repository is cited by a

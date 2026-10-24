@@ -141,10 +141,10 @@ read it before you run it. On Windows invoke it with `sh`, not `bash`.
 
 Copy everything by hand, or fetch the subtree if you would rather - `npx degit`, a sparse checkout,
 or clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the
-supported path and running anything is optional (ADR-0007).
+supported path and running anything is optional (ADR-0005).
 
 **What you copy is yours.** There is no upgrade path and nothing to track: no version stamp, no
-migration tooling, no obligation to follow this repository (ADR-0013). Most of it diverges within
+migration tooling, no obligation to follow this repository (ADR-0010). Most of it diverges within
 the hour anyway - your specification describes your system. If you ever want to know what has
 changed here since, the kit's `CHANGELOG.md` is the whole mechanism, and applying any of it is your
 choice by hand.
@@ -180,7 +180,7 @@ a meaningful share of review is prose. `linguist-vendored` marks third-party sou
 in - use your real path - so its Markdown is not documentation the map has to name. The kit does not
 ship a `.gitattributes` - your repository probably already has one, and a documentation kit has no
 business holding opinions about your batch files. Nor does it require you to run anything: verifying
-this structure by hand is fully conformant. See ADR-0007.
+this structure by hand is fully conformant. See ADR-0005.
 
 ### If coding agents work in this repository
 
@@ -242,7 +242,7 @@ the path an agent already reads, not in restating the map.
 The same logic outlives the stanza - cut derivable content first, then reword what's left tighter,
 never the reverse. A shorter missing warning is still missing.
 
-The kit ships this as text rather than a file for the reason in ADR-0007: your repository probably
+The kit ships this as text rather than a file for the reason in ADR-0005: your repository probably
 already has an `AGENTS.md`, and a file that collides has to be merged rather than copied.
 
 ## Step 4 - Migrate what already exists

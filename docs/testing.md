@@ -14,7 +14,7 @@ than to the tool's opinion.
 | Group  | Verified                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `map`  | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `docs/archive/` and not marked `linguist-vendored` is named by some artifact pattern (§1, §2.4, §5.1), a gitignored one only warning (§2.9). No template placeholder text survives (§2.5). Tense and mutability come from the closed sets, and no two non-alias artifacts share all three properties (§2.7) |
-| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` from the permitted set, a `date`, and `decision-makers` on anything past `proposed`. Forward pointers name a record that exists. The three MADR minimal headings are present (§3.1)                                                                                                                                                                                                                                            |
+| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` of `proposed`, `accepted`, `rejected` or `deprecated`, a `date`, and - on anything not `proposed` - `decision-makers` and `approval` that are not the template's placeholders. The three MADR minimal headings are present. Every bare `ADR-NNNN` in a documentation file, outside code and the text of links to other sites, names a record in `docs/adr/`, and no citation takes another form (§3.1)                         |
 | `plan` | No entry heading is annotated done, struck through or marked completed. Every `##` entry carries a valid type tag (§3.3)                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
@@ -30,7 +30,7 @@ standards body can reorganise a document without changing its URL.
 
 **Commit types.** The commit-msg hook checks a subject's _shape_, not whether the type is the right
 one - `docs:` on a change to `templates/` passes and is still wrong, and that is the half of
-ADR-0006's mapping worth catching. It also accepts `Feat:`, since the hook has no case-sensitivity
+ADR-0005's mapping worth catching. It also accepts `Feat:`, since the hook has no case-sensitivity
 option and `--strict` only blocks fixup and merge commits.
 
 **Line length.** `MD013` is not a strict character count. It applies wrap-feasibility heuristics and
@@ -46,10 +46,14 @@ a file nobody intended to map.
 
 ## What is deliberately not covered
 
-**Record immutability.** `SPECIFICATION.md` §3.1 forbids editing an `accepted` record, and says a
-checker SHOULD verify this from history rather than from a working tree. The checker does not: it
-sees only the current files. This is the largest gap, and it guards a rule the repository has leaned
-on repeatedly.
+**The owner's permission.** `SPECIFICATION.md` §3.1 requires the owner's explicit permission for
+every change of status and every deletion. The checker sees only that `approval` is filled in, not
+that the words are the owner's, and it cannot see a status changed or a record deleted without
+asking. The rule is held by instruction, which is the largest gap.
+
+**Citations made untrue.** The checker finds citations that name no record. It cannot tell whether a
+citation of a record that exists still says something true of it after a change. Citations in code
+comments, gitignored files and vendored files are not read at all.
 
 **Substantive conformance (§4).** No fact in two places; prose never restating a machine-readable
 contract. §6 assigns this to review because it is not mechanically decidable, and the deduplication
@@ -73,7 +77,7 @@ for both.
 
 `tests/doc-kit-check.test.sh` builds a small conformant repository per case in a temporary
 directory, breaks one thing, and asserts the exit code and the message - a case for most rules in
-the table above, plus the clean fixture. It is infrastructure (ADR-0007): it tests the vendored
+the table above, plus the clean fixture. It is infrastructure (ADR-0005): it tests the vendored
 checker and is not vendored with it.
 
 CI (`.github/workflows/ci.yml`) runs the checker and its tests on Linux and macOS, and the hooks on

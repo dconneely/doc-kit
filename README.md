@@ -91,4 +91,4 @@ to edit should not follow you home.
 
 Released, and still early. In use here and in two other repositories, one a migration into an
 existing multi-module codebase, all owned by the same person - the situation the kit is designed for
-(ADR-0021). See `CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.
+(ADR-0001). See `CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.

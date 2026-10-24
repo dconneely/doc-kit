@@ -60,7 +60,8 @@ EOF
 
 One paragraph.
 EOF
-	adr 0001 accepted 'decision-makers: someone'
+	adr 0001 accepted 'decision-makers: someone
+approval: "accept ADR-0001"'
 }
 
 # adr NUMBER STATUS [EXTRA-FRONT-MATTER]
@@ -206,6 +207,38 @@ expect "accepted record without decision-makers fails" 1 "names no decision-make
 fixture
 adr 0002 proposed
 expect "proposed record needs no decision-makers" 0 "conformant" adr
+
+fixture
+adr 0002 accepted 'decision-makers: someone'
+expect "accepted record without approval fails" 1 "is 'accepted' but has no approval" adr
+
+fixture
+adr 0002 accepted 'decision-makers: {the owner}
+approval: "accept ADR-0002"'
+expect "placeholder decision-makers fails" 1 "names no decision-makers" adr
+
+fixture
+adr 0002 'accepted (refined by ADR-0001)' 'decision-makers: someone
+approval: "accept ADR-0002"'
+expect "refined-by status fails" 1 "has status 'accepted (refined by ADR-0001)'" adr
+
+fixture
+printf '
+See ADR-0099.
+' >>PLAN.md
+expect "citation of a missing record fails" 1 "PLAN.md:9 cites ADR-0099, which does not exist" adr
+
+fixture
+printf '
+See ADR-0001, or `ADR-0099`, or [ADR-0099](https://example.com/0099).
+' >>PLAN.md
+expect "citations in code and in links to other sites pass" 0 "conformant" adr
+
+fixture
+printf '
+See ADR 12.
+' >>PLAN.md
+expect "citation in another form fails" 1 "PLAN.md:9 cites 'ADR 12'" adr
 
 fixture
 adr 0002 'superseded by ADR-0001' 'decision-makers: someone'

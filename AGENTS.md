@@ -27,7 +27,7 @@ not tidy them, fill them in, or lint them into shape.
 
 `.gitattributes` and anything like it is infrastructure - it configures this repository and never
 reaches an adopter. See
-[ADR-0007](docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md).
+[ADR-0005](docs/adr/0005-what-is-product-documentation-or-infrastructure.md).
 
 ## Decision records - absolute rules
 
@@ -66,7 +66,7 @@ tool is not a change. `SPECIFICATION.md` §3.1 has the rest.
   must exist, and every Markdown file must appear in the map. `tools/doc-kit-check.sh` will tell
   you, but only if you run it.
 - **Write the least that is true.** No history or account of how you got there, in documents or code
-  comments - `DOC-MAP.md` says where those go (ADR-0019).
+  comments - `DOC-MAP.md` says where those go (ADR-0012).
 
 ## Changing the specification
 

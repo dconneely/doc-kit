@@ -242,6 +242,7 @@ check_map() {
 check_adr() {
 	group adr
 	dir=docs/adr
+	check_citations
 	[ -d "$dir" ] || return 0
 
 	for f in "$dir"/*.md; do
@@ -256,21 +257,19 @@ check_adr() {
 		[ -n "$status" ] || fail "$f has no status" "§3.1 - MADR front-matter"
 
 		case "$status" in
-			proposed|rejected|accepted|deprecated) ;;
-			"accepted (refined by ADR-"[0-9][0-9][0-9][0-9]")") ;;
+			proposed|accepted|rejected|deprecated) ;;
 			'') ;;
-			*) fail "$f has status '$status'" "§3.1 - see the table of permitted values" ;;
+			*) fail "$f has status '$status'" "§3.1 - proposed, accepted, rejected or deprecated" ;;
 		esac
 
-		# A forward pointer must name a record that exists.
-		target=$(printf '%s' "$status" | sed -n 's/.*ADR-\([0-9]\{4\}\).*/\1/p')
-		if [ -n "$target" ] && ! ls "$dir/$target"-*.md >/dev/null 2>&1; then
-			fail "$f points at ADR-$target, which does not exist" "§3.1"
-		fi
-
+		# A placeholder - the template's {...} - counts as missing.
 		grep -q '^date:' "$f" || fail "$f has no date" "§3.1"
-		[ "$status" = proposed ] || grep -q '^decision-makers: *[^ ]' "$f" ||
-			fail "$f is '$status' but names no decision-makers" "§3.1 - who decided?"
+		if [ -n "$status" ] && [ "$status" != proposed ]; then
+			grep -q '^decision-makers: *[^ {]' "$f" ||
+				fail "$f is '$status' but names no decision-makers" "§3.1 - who decided?"
+			grep -q '^approval: *[^ {]' "$f" ||
+				fail "$f is '$status' but has no approval" "§3.1 - the owner's words, verbatim"
+		fi
 
 		for heading in '## Context and Problem Statement' '## Considered Options' '## Decision Outcome'; do
 			grep -qF "$heading" "$f" || fail "$f has no '$heading'" "§3.1 - MADR minimal template"
@@ -283,6 +282,57 @@ check_adr() {
 	done | sort | uniq -d)
 	for d in $dupes; do fail "ADR number $d is used more than once" "§3.1 - numbers are unique"; done
 	return 0
+}
+
+# §3.1 - every bare ADR-NNNN names a record in docs/adr/, and no citation takes another form.
+# Code - fenced blocks and inline spans - and the text of links to other sites are not citations.
+# Vendored and gitignored files are not read.
+check_citations() {
+	set +f
+	docs=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' | sort)
+	set -f
+	skip=$(printf '%s\n' "$docs" | vendored_of; printf '%s\n' "$docs" | ignored_of)
+	oldifs=$IFS
+	IFS=$NL
+	for f in $docs; do
+		printf '%s\n' "$skip" | grep -qxF "$f" && continue
+		hits=$(awk '
+			/^[ \t]*(```|~~~)/ { fence = !fence; next }
+			fence { next }
+			/^\[[^]]*\]: / { next }
+			{
+				line = $0
+				gsub(/`[^`]*`/, "", line)
+				gsub(/\[[^]]*\]\(https?:[^)]*\)/, "", line)
+				gsub(/\]\[[^]]*\]/, "]", line)
+				while (match(line, /(^|[^A-Za-z0-9])[Aa][Dd][Rr][- ]?[0-9]+/)) {
+					tok = substr(line, RSTART, RLENGTH)
+					if (tok !~ /^[Aa]/) tok = substr(tok, 2)
+					print (tok ~ /^ADR-[0-9][0-9][0-9][0-9]$/ ? "cite " : "form ") NR " " tok
+					line = substr(line, RSTART + RLENGTH)
+				}
+			}
+		' "$f")
+		for hit in $hits; do
+			IFS=$oldifs
+			kind=${hit%% *}
+			rest=${hit#* }
+			no=${rest%% *}
+			tok=${rest#* }
+			case "$kind" in
+				cite)
+					set +f
+					pattern_exists "$dir/${tok#ADR-}-*.md" ||
+						fail "$f:$no cites $tok, which does not exist" "§3.1 - a bare ID names a record here; link to another repository's"
+					set -f
+					;;
+				form) fail "$f:$no cites '$tok'" "§3.1 - cite a record as ADR-NNNN" ;;
+			esac
+			IFS=$NL
+		done
+	done
+	IFS=$oldifs
+	set +f
 }
 
 # ---------------------------------------------------------------- plan

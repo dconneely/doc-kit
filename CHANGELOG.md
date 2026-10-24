@@ -8,37 +8,40 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Added
 
+- `tools/doc-kit-check.sh` requires `approval` on any record that is not `proposed`, treats the
+  template's placeholders as missing, reports a bare `ADR-NNNN` that names no record, and reports a
+  citation in any other form (ADR-0007).
 - `templates/DOC-MAP.md`'s "Where does it go?" table has an "If you are asking..." column, and rows
   for what is absent on purpose: out of scope, decided against, knowingly unhandled, untested, or
   deferred until a trigger.
 - `templates/DOC-MAP.md` routes code comments by tense: a present-tense reason beside the code, an
   ADR the comment names when the reason spans more than one site, a `TODO` that names its plan entry
   rather than replacing it, and history to the commit message. A new failure mode, "Text narrates",
-  generalises the specification's and research note's (ADR-0019).
-- The `AGENTS.md` stanza in `ADOPTING.md` tells agents to write the least that is true (ADR-0019).
+  generalises the specification's and research note's (ADR-0012).
+- The `AGENTS.md` stanza in `ADOPTING.md` tells agents to write the least that is true (ADR-0012).
 - `templates/docs/adr/0001-how-the-documentation-is-organised.md`, an adoption decision record that
   cites the kit at a pinned commit and holds the adopter's reasons and deviations. `ADOPTING.md`
-  Step 3 always copies it (ADR-0020).
+  Step 3 always copies it (ADR-0006).
 
 ### Changed
 
 - An agent may create a decision record as `proposed` and revise it freely. Accepting, rejecting,
   reopening, deprecating or deleting a record needs the owner's explicit permission, and the owner's
-  words are kept in a new `approval` field (ADR-0021, ADR-0022). The pull-request guidance is gone.
+  words are kept in a new `approval` field (ADR-0001, ADR-0007). The pull-request guidance is gone.
 - An accepted decision record is the current answer to its question: it is reopened and amended in
-  place, even to reverse it, and deprecated or deleted when it no longer applies (ADR-0022). Its
+  place, even to reverse it, and deprecated or deleted when it no longer applies (ADR-0007). Its
   mutability is the new value `amendable`, and its title names the question.
 - Decision records are cited as `ADR-NNNN`, and another repository's record by a link. A change to a
-  record fixes the citations it makes untrue in the same commit (ADR-0022).
+  record fixes the citations it makes untrue in the same commit (ADR-0007).
 - `templates/docs/adr/0000-template.md` states those rules, and how to create a record and get it
   accepted.
 - The kit is positioned for a repository one owner directs and many agent sessions write: the owner
-  decides, and every other contributor, agent or human, proposes (ADR-0021). `SPECIFICATION.md`'s
+  decides, and every other contributor, agent or human, proposes (ADR-0001). `SPECIFICATION.md`'s
   purpose says so, and `ADOPTING.md` Step 0's signal to adopt is repeated agent sessions rather than
   more than one reader.
 - `SPECIFICATION.md`'s scope covers the tense and volume of what is written, code comments included,
-  and excludes only style and what a project ought to document (ADR-0019).
-- `templates/DOC-MAP.md` routes, and each artifact owns its rules (ADR-0020). Its "Prescribed
+  and excludes only style and what a project ought to document (ADR-0012).
+- `templates/DOC-MAP.md` routes, and each artifact owns its rules (ADR-0006). Its "Prescribed
   formats", "Machine-readable and generated parts", "Three rules" and "Failure modes" sections are
   replaced by one "Rules" section. Formats move to `templates/PLAN.md`, `templates/CHANGELOG.md` and
   the research template, and decision-record rules to `templates/docs/adr/0000-template.md`. The
@@ -46,20 +49,20 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - `templates/docs/adr/0000-template.md` says to iterate on a decision while it is `proposed`, and
   accept it once experience stops changing it.
 - Decision records no longer name the code they constrain; the comment beside the code names the
-  record (ADR-0020).
+  record (ADR-0006).
 
 ### Removed
 
-- The `refined by` status pointer. A later record is linked from the earlier one instead (ADR-0022).
+- The `refined by` status pointer. A later record is linked from the earlier one instead (ADR-0007).
 - The `superseded by ADR-NNNN` status. A replaced record is deprecated or deleted, and links to its
-  replacement (ADR-0022).
+  replacement (ADR-0007).
 
 ## [0.4.0] - 2026-09-26
 
 ### Added
 
 - A file marked `linguist-vendored` in `.gitattributes` is not a documentation file, so vendored
-  third-party Markdown needs no map row (ADR-0018). `tools/doc-kit-check.sh` skips it silently;
+  third-party Markdown needs no map row (ADR-0011). `tools/doc-kit-check.sh` skips it silently;
   `ADOPTING.md` Step 3 shows the line.
 - `templates/DOC-MAP.md` has an optional `docs/archive/` row, the single map entry §5.1 requires of
   an archive.
@@ -71,8 +74,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - `DOC-MAP.md`, `templates/DOC-MAP.md` and `templates/docs/research/0000-template.md` say a research
   note's Finding, Evidence and Dead ends state the current answer, not how it was reached.
 - Emphasis in `templates/` is written `_like this_` rather than `*like this*`, the form Prettier
-  produces (ADR-0017). No wording changed.
-- The third property is called **mutability** everywhere, matching ADR-0001. The artifacts table's
+  produces (ADR-0013). No wording changed.
+- The third property is called **mutability** everywhere, matching ADR-0002. The artifacts table's
   `Durability` column in `templates/DOC-MAP.md` is now `Mutability`, as is `SPECIFICATION.md` §2.7;
   the permitted values are unchanged.
 - `tools/doc-kit-check.sh` groups gitignored warnings by top-level directory, so a vendored tree
@@ -126,7 +129,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 ### Added
 
 - A gitignored documentation file is still checked against the map, but a hit in one is reported as
-  advisory and never blocks the checker's exit status (ADR-0014).
+  advisory and never blocks the checker's exit status (ADR-0011).
 - `ADOPTING-NOTES.md` now has a judgement call for a documentation file found already gitignored
   during inventory: ask before changing its status, rather than silently tracking or silently
   leaving it be - both defaults are wrong often enough to matter.
@@ -155,7 +158,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 - The `doc-kit-adopt` skill moved from `.claude/skills/` to `.agents/skills/` - recognised by Claude
   Code exactly as before, and consistent with treating root `AGENTS.md` as the canonical, cross-tool
-  agent-instructions surface rather than a Claude-specific one (ADR-0015).
+  agent-instructions surface rather than a Claude-specific one (ADR-0010).
 - `templates/DOC-MAP.md` now documents the **Alias** shape directly - a file whose entire content
   points at another artifact (a second `README.md`, a spec member repeated per module) - and points
   to it from "Adding a new kind of document", instead of only being implemented in the checker with
@@ -173,7 +176,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   sits on disk, rather than as a workaround second top-level block.
 - `SPECIFICATION.md` §3.1 now permits formatting-only edits to an `accepted` record - whitespace,
   list markers, other rendering-only tokens that change no word - alongside `status`, `date` and
-  `decision-makers` (ADR-0016). Immutability protects a record's substance, not its bullet
+  `decision-makers` (ADR-0007). Immutability protects a record's substance, not its bullet
   character.
 
 ### Fixed
@@ -189,7 +192,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   an unlabelled fenced code block in `README.md`, and inconsistent Markdown table pipe spacing
   across several files.
 - Four already-accepted ADRs (0003, 0006, 0008, 0011) mixed `-` and `*` list markers within a single
-  file; normalised to `*` throughout, matching the ADR template (ADR-0016 permits this as a
+  file; normalised to `*` throughout, matching the ADR template (ADR-0007 permits this as a
   formatting-only edit).
 
 ## [0.1.0] - 2026-08-22
@@ -200,10 +203,10 @@ things that replaced an earlier shape, which are recorded here as the shape that
 ### Added
 
 - A licence: [MIT No Attribution](LICENCE). Copy anything here and own it - no notice to preserve,
-  nothing to attribute, and no upgrade path to track (ADR-0013).
+  nothing to attribute, and no upgrade path to track (ADR-0010).
 - `templates/`, holding a starter for every artifact the map promises, so Step 3 is a copy rather
   than a writing exercise. It is the product and source of truth; the root `DOC-MAP.md` is this
-  repository's own map, produced by applying the kit to itself (ADR-0004, ADR-0006).
+  repository's own map, produced by applying the kit to itself (ADR-0005).
 - `SPECIFICATION.md`, defining what a conformant repository looks like, and stating the conventions
   the kit had relied on without writing down: research confidence levels, plan scales, quirk shape.
 - `ADOPTING.md`, the procedure - decide, inventory, customise, create, migrate, verify - with
@@ -212,17 +215,17 @@ things that replaced an earlier shape, which are recorded here as the shape that
 - A Step 4 inventory phase with six dispositions - move, split, absorb, archive, delete, leave - and
   a worksheet that makes an interrupted migration resumable.
 - `tools/doc-kit-check.sh`, an optional conformance checker, vendored rather than referenced so an
-  adopter's copy matches the structure they adopted (ADR-0012).
+  adopter's copy matches the structure they adopted (ADR-0010).
 - A `doc-kit-adopt` skill that drives an adoption from this repository into a target, stopping for
   approval before anything is modified.
 - A paste-in `AGENTS.md` stanza giving a coding agent the trust ordering between documents and the
   constraints on changing them.
-- An archive convention for documentation whose currency cannot be established (ADR-0005).
+- An archive convention for documentation whose currency cannot be established (ADR-0009).
 - Decision records following the [MADR](https://adr.github.io/madr/) minimal template, with
   `Considered Options` required. Statuses are lowercase and may carry a forward pointer -
-  `accepted (refined by ADR-NNNN)` (ADR-0009, ADR-0010).
+  `accepted (refined by ADR-NNNN)` (ADR-0007, ADR-0008).
 - Rules for those records: immutability attaches to `accepted` and begins at publication, only
-  `accepted` binds, and changing a status is a human action (ADR-0008).
-- `infrastructure` as a third category alongside product and documentation (ADR-0007).
+  `accepted` binds, and changing a status is a human action (ADR-0007).
+- `infrastructure` as a third category alongside product and documentation (ADR-0005).
 - A ranking of the optional artifacts by payoff per line: quirks, glossary, testing, then research.
 - `docs/testing.md`, stating what is verified exactly, what only approximately, and what not at all.

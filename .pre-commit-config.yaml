@@ -1,7 +1,7 @@
 # Hygiene hooks for a repository that is entirely prose. Run with `prek` (no Python needed) or
 # `pre-commit`. The conformance checker, tools/doc-kit-check.sh, is product and runs separately.
 #
-# Infrastructure, not product (ADR-0007): never copied into an adopting repository. Revisions are
+# Infrastructure, not product (ADR-0005): never copied into an adopting repository. Revisions are
 # pinned to versions known to work on Windows.
 #
 # Without this, `install` wires only the pre-commit stage and the commit-msg hook never runs.
@@ -37,7 +37,7 @@ repos:
         args: [--fix=lf]
 
   # Formatter; markdownlint-cli2 below is the linter. Wrapping is set in .prettierrc.json, not by
-  # CLI flags (ADR-0017). `local` because pre-commit/mirrors-prettier is stale.
+  # CLI flags (ADR-0013). `local` because pre-commit/mirrors-prettier is stale.
   # Rewrites `*emphasis*` to `_emphasis_`, with no option to avoid it.
   - repo: local
     hooks:
@@ -103,7 +103,7 @@ repos:
         files: ^docs/adr/
 
       - id: no-template-banner
-        name: "Templates carry no instructional banner (ADR-0011)"
+        name: "Templates carry no instructional banner (ADR-0006)"
         language: pygrep
         entry: 'This file is a template'
         types: [markdown]

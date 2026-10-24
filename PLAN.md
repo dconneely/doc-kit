@@ -6,24 +6,22 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR. `SPECIFICATION.md` §3.3 defines the scales.
 
-## Migrate the existing decision records
+## Accept the migrated decision records
 
-**Type:** docs - **Importance:** high - **Effort:** medium
+**Type:** docs - **Importance:** high - **Effort:** low
 
-Merge the records into one per question, simplify each to the current answer, and renumber them -
-reusing numbers is allowed for this one migration. ADR-0020 to ADR-0022 join the set. The migration
-converts the `refined by` pointers to links, merges ADR-0009 and ADR-0011 away, links ADR-0017's
-citation of `identigon/identigon`'s ADR-0036, fixes every citation, and fills in `approval`. The
-owner agrees to the inventory first, then accepts the migrated set; until then ADR-0020 to ADR-0022
-stay `proposed`.
+ADR-0001 to ADR-0013 replace the earlier 22 records, merged one per question, and are `proposed`.
+The owner reviews them and gives permission to accept them; each then gets `status: "accepted"`,
+`decision-makers`, the owner's words in `approval`, and the date. Until then nothing in `docs/adr/`
+binds, and the rules they record are carried by `SPECIFICATION.md` §3.1 and `AGENTS.md`.
 
-## Check approvals and citations in the checker
+## Speed up the checker's test suite
 
-**Type:** feature - **Importance:** high - **Effort:** medium
+**Type:** debt - **Importance:** low - **Effort:** low
 
-Lands with the migration, which it would otherwise fail on. Require `approval` on any record past
-`proposed`; report any bare `ADR-NNNN` outside code that names no record here, and any citation not
-in that form; stop accepting `refined by`. Add tests, and update `docs/testing.md`.
+The suite takes nearly two minutes on Windows, mostly in process start-up for each fixture, and
+outruns a two-minute tool timeout. Share fixtures between cases that only read them, or batch the
+checks run per fixture.
 
 ## Restructure the paths and close the audience set
 
@@ -50,8 +48,9 @@ their PDFs, as generated artifacts.
 **Type:** feature - **Importance:** medium - **Effort:** medium
 
 Needs an ADR. A generated index of the decision records in force, so a session reads what binds
-without opening deprecated ones; the owner's purpose as an accepted record the specification links
-to; and MADR's optional `Confirmation` section, naming the test that confirms a decision.
+without opening deprecated ones; `SPECIFICATION.md`'s purpose section linking to ADR-0001, which
+records the owner's purpose, rather than restating it; and MADR's optional `Confirmation` section,
+naming the test that confirms a decision.
 
 ## Remove duplication between the specification and the templates
 

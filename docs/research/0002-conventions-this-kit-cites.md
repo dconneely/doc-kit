@@ -27,12 +27,12 @@ noise."
 ### Nygard 2011 - accurate, and his statuses were lowercase
 
 Sections: Title, Context, Decision, Status, Consequences. Statuses: **proposed**, **accepted**,
-**deprecated**, **superseded** - written lowercase in the original. ADR-0010 adopted MADR's
+**deprecated**, **superseded** - written lowercase in the original. ADR-0008 adopted MADR's
 lowercase spelling on MADR's authority; it matches Nygard too.
 
 ### adr-tools - accurate
 
-Its template heading is `# NUMBER. TITLE`, confirming ADR-0010's basis for keeping numbered
+Its template heading is `# NUMBER. TITLE`, confirming ADR-0008's basis for keeping numbered
 headings. The template carries a `Date:` line and the sections Status, Context, Decision,
 Consequences.
 
