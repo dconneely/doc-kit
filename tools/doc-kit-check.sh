@@ -1,5 +1,5 @@
 #!/bin/sh
-# doc-kit-check - verify a repository against SPECIFICATION.md.
+# doc-kit-check - verify a repository against the doc-kit specification (docs/spec.md in the kit).
 #
 # Usage:  sh tools/doc-kit-check.sh [check ...]
 #         with no arguments, runs every check
@@ -10,7 +10,7 @@
 #
 # Exits 0 if clean, 1 if anything failed. Run it by hand: nothing in this kit
 # requires it, and a repository that holds these properties without ever
-# running it is conformant (SPECIFICATION.md §6).
+# running it is conformant (docs/spec.md §6).
 #
 # On Windows use `sh`, not `bash` - the `bash` on PATH is usually WSL's, which
 # sees a different filesystem and will report every file missing.
@@ -147,7 +147,7 @@ check_map() {
 	[ -n "$arts" ] || fail "the artifacts table names nothing" "§2.2 - is the heading exactly '## Artifacts'?"
 
 	# §2.2 - all three lists name the same set, artifacts table authoritative.
-	# Globbing off: these lists contain patterns like docs/adr/*.md, and an
+	# Globbing off: these lists contain patterns like docs/decisions/*.md, and an
 	# unquoted loop would expand them into the files they match.
 	set -f
 	for a in $arts; do
@@ -256,7 +256,7 @@ check_map() {
 
 check_adr() {
 	group adr
-	dir=docs/adr
+	dir=docs/decisions
 	check_citations
 	[ -d "$dir" ] || return 0
 
@@ -337,7 +337,7 @@ check_adr() {
 	return 0
 }
 
-# §3.1 - every bare ADR-NNNN names a record in docs/adr/, and no citation takes another form.
+# §3.1 - every bare ADR-NNNN names a record in docs/decisions/, and no citation takes another form.
 # Code - fenced blocks and inline spans - and the text of links to other sites are not citations.
 # Vendored and gitignored files are not read.
 check_citations() {
@@ -408,7 +408,7 @@ check_citations() {
 
 check_plan() {
 	group plan
-	[ -f PLAN.md ] || return 0
+	[ -f docs/plan.md ] || return 0
 
 	# One awk pass: `done N` for a heading marked complete, `type N` for an entry (a `##` heading)
 	# with no valid type tag beneath it. Lowercase "done" counts only when set off as a marker -
@@ -423,7 +423,7 @@ check_plan() {
 		/^## / { flush(); h = NR; t = 0; next }
 		/^\*\*Type:\*\* (bug|debt|feature|docs)([ -]|$)/ { t = 1 }
 		END { flush() }
-	' PLAN.md)
+	' docs/plan.md)
 
 	# Fed from a variable, not a pipe: a piped `while` runs in a subshell, and increments to
 	# `failures` would be lost.
@@ -434,8 +434,8 @@ check_plan() {
 		IFS=$oldifs
 		no=${hit#* }
 		case "$hit" in
-			done*) fail "PLAN.md:$no looks like a completed entry" "§3.3 - delete entries when done, do not annotate" ;;
-			type*) fail "PLAN.md:$no has no valid type tag" "§3.3 - bug, debt, feature or docs" ;;
+			done*) fail "docs/plan.md:$no looks like a completed entry" "§3.3 - delete entries when done, do not annotate" ;;
+			type*) fail "docs/plan.md:$no has no valid type tag" "§3.3 - bug, debt, feature or docs" ;;
 		esac
 	done
 	IFS=$oldifs

@@ -8,13 +8,13 @@ a reader.
 ## What is verified exactly
 
 `tools/doc-kit-check.sh`, run as `sh tools/doc-kit-check.sh [map|adr|plan]`. Every rule it enforces
-cites the `SPECIFICATION.md` clause it comes from, so a failure is traceable to the contract rather
-than to the tool's opinion.
+cites the `docs/spec.md` clause it comes from, so a failure is traceable to the contract rather than
+to the tool's opinion.
 
 | Group  | Verified                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `map`  | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `docs/archive/` and not marked `linguist-vendored` is named by some artifact pattern (§1, §2.4, §5.1), a gitignored one only warning (§2.9). No template placeholder text survives (§2.5). Tense and mutability come from the closed sets, and no two non-alias artifacts share all three properties (§2.7) |
-| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` of `proposed`, `accepted`, `rejected` or `deprecated`, a `date`, and - on anything not `proposed` - `decision-makers` and `approval` that are not the template's placeholders. The three MADR minimal headings are present. Every bare `ADR-NNNN` in a documentation file, outside code and the text of links to other sites, names a record in `docs/adr/`, and no citation takes another form (§3.1)                         |
+| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` of `proposed`, `accepted`, `rejected` or `deprecated`, a `date`, and - on anything not `proposed` - `decision-makers` and `approval` that are not the template's placeholders. The three MADR minimal headings are present. Every bare `ADR-NNNN` in a documentation file, outside code and the text of links to other sites, names a record in `docs/decisions/`, and no citation takes another form (§3.1)                   |
 | `plan` | No entry heading is annotated done, struck through or marked completed. Every `##` entry carries a valid type tag (§3.3)                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
@@ -46,10 +46,10 @@ a file nobody intended to map.
 
 ## What is deliberately not covered
 
-**The owner's permission.** `SPECIFICATION.md` §3.1 requires the owner's explicit permission for
-every change of status and every deletion. The checker sees only that `approval` is filled in, not
-that the words are the owner's, and it cannot see a status changed or a record deleted without
-asking. The rule is held by instruction, which is the largest gap.
+**The owner's permission.** `docs/spec.md` §3.1 requires the owner's explicit permission for every
+change of status and every deletion. The checker sees only that `approval` is filled in, not that
+the words are the owner's, and it cannot see a status changed or a record deleted without asking.
+The rule is held by instruction, which is the largest gap.
 
 **Citations made untrue.** The checker finds citations that name no record. It cannot tell whether a
 citation of a record that exists still says something true of it after a change. Citations in code
@@ -86,7 +86,7 @@ the staged diff, which CI does not have.
 
 The tests exist because this checker's characteristic failure is silence. Every bug found in it so
 far reported conformance while checking nothing: glob expansion, regex-unsafe paths, a no-op `sed`,
-and a type-tag pattern no real `PLAN.md` matched.
+and a type-tag pattern no real `docs/plan.md` matched.
 
 ## Running everything
 
@@ -97,5 +97,5 @@ prek run --all-files               # hygiene, line length, drift guards
 prek run --hook-stage manual lychee-system --all-files
 ```
 
-Nothing here is required. `SPECIFICATION.md` §6 makes a repository that holds these properties
-without ever running a check fully conformant.
+Nothing here is required. `docs/spec.md` §6 makes a repository that holds these properties without
+ever running a check fully conformant.

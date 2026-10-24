@@ -9,10 +9,10 @@ approval: 'Yes to all of these (asked: "Do you accept ADR-0014 as drafted? And f
 
 ## Context and Problem Statement
 
-Tense and mutability are closed sets; audience is free text (`SPECIFICATION.md` §2.7). Free text
-lets two maps - or two rows of one map - describe the same reader differently: "adopters",
-"consumers", "anyone relying on a cited convention". It also lets a row escape the test that two
-artifacts sharing all three properties are one, by phrasing.
+Tense and mutability are closed sets; audience is free text (`docs/spec.md` §2.7). Free text lets
+two maps - or two rows of one map - describe the same reader differently: "adopters", "consumers",
+"anyone relying on a cited convention". It also lets a row escape the test that two artifacts
+sharing all three properties are one, by phrasing.
 
 The kit is for one owner directing many agent sessions (ADR-0001), so whether a reader is human or
 agent rarely separates two documents: both read the same English. It does separate a few, such as

@@ -42,7 +42,7 @@ A hard stop, not a checkpoint to mention in passing.
 ## Resuming
 
 Real adoptions span weeks and get interrupted. Before starting, check whether
-`<target>/docs/tasks/adopt-doc-kit.md` already exists:
+`<target>/docs/plan/adopt-doc-kit.md` already exists:
 
 - **It exists** - under way. Read it, work the unfinished rows, keep it current. Don't restart from
   Step 0.
@@ -65,5 +65,5 @@ Tell the user the adoption is complete, and that **further work belongs in the t
 not here. The `AGENTS.md` stanza installed in Step 3 carries the ongoing rules; this skill doesn't,
 and is now finished.
 
-Delete `docs/tasks/adopt-doc-kit.md` from the target once its contents are emptied into their proper
+Delete `docs/plan/adopt-doc-kit.md` from the target once its contents are emptied into their proper
 homes - check first that nothing in it is the last surviving record of a decision or a finding.

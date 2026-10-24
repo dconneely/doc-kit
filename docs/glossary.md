@@ -19,12 +19,11 @@ from the map's completeness check; every file in it carries a provenance header.
 mutability and an audience. The unit the structure is built from.
 
 **Confidence level** - `high`, `medium` or `low`, attached to a research note. Defined in
-`SPECIFICATION.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence,
-only consequences.
+`docs/spec.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence, only
+consequences.
 
-**Documentation file** - a file the map's completeness check runs over. Defined in
-`SPECIFICATION.md` §1 and not restated here, because the check is undecidable without the exact
-wording.
+**Documentation file** - a file the map's completeness check runs over. Defined in `docs/spec.md` §1
+and not restated here, because the check is undecidable without the exact wording.
 
 **Instance** - a customised copy of a template, living in an adopting repository. The root
 `DOC-MAP.md` here is an instance; `templates/DOC-MAP.md` is the template.
@@ -36,8 +35,8 @@ entry point, and the thing that must never promise a file that does not exist.
 backlog, part assessment. The characteristic failure the structure exists to prevent, and the first
 thing to look for when adopting.
 
-**Mutability** - how a document changes over its life, from the closed set in `SPECIFICATION.md`
-§2.7. One of the three properties.
+**Mutability** - how a document changes over its life, from the closed set in `docs/spec.md` §2.7.
+One of the three properties.
 
 **Owner** - the one person who makes a repository's decisions: accepts records, sets its purpose,
 ranks its plan. Every other contributor, agent or human, proposes. See ADR-0001.

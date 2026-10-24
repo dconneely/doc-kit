@@ -38,9 +38,9 @@ an honest `README.md` beats this structure until there is more to say than fits 
 | `ADOPTING.md`       | Product - the procedure: decide, inventory, customise, create, migrate, verify |
 | `ADOPTING-NOTES.md` | Product - the reasoning, for when the procedure will not settle a case         |
 | `templates/`        | Product - copy into the target repository and customise by deletion            |
-| `SPECIFICATION.md`  | What a conformant repository looks like - the contract a checker enforces      |
+| `docs/spec.md`      | What a conformant repository looks like - the contract a checker enforces      |
 | `DOC-MAP.md`        | This repository's own map, produced by applying the kit to itself              |
-| `docs/adr/`         | Why the kit is shaped this way                                                 |
+| `docs/decisions/`   | Why the kit is shaped this way                                                 |
 | `tools/`            | An optional conformance checker                                                |
 
 **This repository is an adopted instance of itself.** Its map, specification, plan, records and
@@ -49,9 +49,9 @@ template - browse them before deciding whether you want it.
 
 ## Using it
 
-Read [`ADOPTING.md`](ADOPTING.md) and start at Step 0. It ends with a `PLAN.md` containing the rest
-of the work, which is deliberate: adoption on a mature repository is not an afternoon, and the plan
-is what lets you stop and resume.
+Read [`ADOPTING.md`](ADOPTING.md) and start at Step 0. It ends with a `docs/plan.md` containing the
+rest of the work, which is deliberate: adoption on a mature repository is not an afternoon, and the
+plan is what lets you stop and resume.
 
 Copying is manual - take the members of `templates/` you need to your repository root, following the
 table in Step 3, then work Steps 1-5. There is no installer, because the kit ships text.
@@ -67,7 +67,7 @@ apply this kit to ../my-cool-repo/
 
 The `doc-kit-adopt` skill takes it from there: it follows `ADOPTING.md`, writes only into the
 target, stops for approval once the Step 4 inventory exists, and resumes from
-`../my-cool-repo/docs/tasks/adopt-doc-kit.md` if a previous session left one.
+`../my-cool-repo/docs/plan/adopt-doc-kit.md` if a previous session left one.
 
 End the session when adoption completes. Further work on that repository belongs in that
 repository - the `AGENTS.md` stanza installed during Step 3 carries the ongoing rules, and this kit
@@ -91,4 +91,4 @@ to edit should not follow you home.
 
 Released, and still early. In use here and in two other repositories, one a migration into an
 existing multi-module codebase, all owned by the same person - the situation the kit is designed for
-(ADR-0001). See `CHANGELOG.md` for what shipped and `PLAN.md` for what is still open.
+(ADR-0001). See `CHANGELOG.md` for what shipped and `docs/plan.md` for what is still open.

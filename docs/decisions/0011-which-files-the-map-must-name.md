@@ -9,8 +9,8 @@ approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
 
 ## Context and Problem Statement
 
-`SPECIFICATION.md` §2.4 requires every documentation file to appear in the map. Two kinds of
-Markdown file strain that rule from opposite directions.
+`docs/spec.md` §2.4 requires every documentation file to appear in the map. Two kinds of Markdown
+file strain that rule from opposite directions.
 
 - **Gitignored files.** A repository's own gitignored working notes are worth checking against the
   map while they exist - they are often exactly the material a migration needs to place - but they

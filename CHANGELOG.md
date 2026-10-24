@@ -19,12 +19,20 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   rather than replacing it, and history to the commit message. A new failure mode, "Text narrates",
   generalises the specification's and research note's (ADR-0012).
 - The `AGENTS.md` stanza in `ADOPTING.md` tells agents to write the least that is true (ADR-0012).
-- `templates/docs/adr/0001-how-the-documentation-is-organised.md`, an adoption decision record that
-  cites the kit at a pinned commit and holds the adopter's reasons and deviations. `ADOPTING.md`
-  Step 3 always copies it (ADR-0006).
+- `templates/docs/decisions/0001-how-the-documentation-is-organised.md`, an adoption decision record
+  that cites the kit at a pinned commit and holds the adopter's reasons and deviations.
+  `ADOPTING.md` Step 3 always copies it (ADR-0006).
 
 ### Changed
 
+- **Paths move (ADR-0014).** `SPECIFICATION.md` is now `docs/spec.md`, `PLAN.md` is `docs/plan.md`,
+  `docs/adr/` is `docs/decisions/`, and `docs/tasks/` is `docs/plan/`; the templates move to match.
+  The root keeps only the map, `README.md`, `AGENTS.md` and its aliases, and `CHANGELOG.md`. Any
+  `docs/name.md` that outgrows one file gains a sibling directory `docs/name/` and stays as its
+  index (`docs/spec.md` §2.6). To follow: move the files, rewrite the paths in the map and every
+  link, and take the new `tools/doc-kit-check.sh` only after moving - it reads `docs/decisions/` and
+  `docs/plan.md`, so with the old paths it reports every `ADR-NNNN` citation as naming no record and
+  skips the plan check.
 - An agent may create a decision record as `proposed` and revise it freely. Accepting, rejecting,
   reopening, deprecating or deleting a record needs the owner's explicit permission, and the owner's
   words are kept in a new `approval` field (ADR-0001, ADR-0007). The pull-request guidance is gone.
@@ -33,21 +41,21 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   mutability is the new value `amendable`, and its title names the question.
 - Decision records are cited as `ADR-NNNN`, and another repository's record by a link. A change to a
   record fixes the citations it makes untrue in the same commit (ADR-0007).
-- `templates/docs/adr/0000-template.md` states those rules, and how to create a record and get it
-  accepted.
+- `templates/docs/decisions/0000-template.md` states those rules, and how to create a record and get
+  it accepted.
 - The kit is positioned for a repository one owner directs and many agent sessions write: the owner
-  decides, and every other contributor, agent or human, proposes (ADR-0001). `SPECIFICATION.md`'s
+  decides, and every other contributor, agent or human, proposes (ADR-0001). `docs/spec.md`'s
   purpose says so, and `ADOPTING.md` Step 0's signal to adopt is repeated agent sessions rather than
   more than one reader.
-- `SPECIFICATION.md`'s scope covers the tense and volume of what is written, code comments included,
-  and excludes only style and what a project ought to document (ADR-0012).
+- `docs/spec.md`'s scope covers the tense and volume of what is written, code comments included, and
+  excludes only style and what a project ought to document (ADR-0012).
 - `templates/DOC-MAP.md` routes, and each artifact owns its rules (ADR-0006). Its "Prescribed
   formats", "Machine-readable and generated parts", "Three rules" and "Failure modes" sections are
-  replaced by one "Rules" section. Formats move to `templates/PLAN.md`, `templates/CHANGELOG.md` and
-  the research template, and decision-record rules to `templates/docs/adr/0000-template.md`. The
-  failure modes move to `ADOPTING-NOTES.md`.
-- `templates/docs/adr/0000-template.md` says to iterate on a decision while it is `proposed`, and
-  accept it once experience stops changing it.
+  replaced by one "Rules" section. Formats move to `templates/docs/plan.md`,
+  `templates/CHANGELOG.md` and the research template, and decision-record rules to
+  `templates/docs/decisions/0000-template.md`. The failure modes move to `ADOPTING-NOTES.md`.
+- `templates/docs/decisions/0000-template.md` says to iterate on a decision while it is `proposed`,
+  and accept it once experience stops changing it.
 - Decision records no longer name the code they constrain; the comment beside the code names the
   record (ADR-0006).
 - `tools/doc-kit-check.sh` runs about ten times faster on Windows: it checks membership and splits

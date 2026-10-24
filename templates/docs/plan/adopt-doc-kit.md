@@ -1,7 +1,7 @@
 # Adopt the documentation kit
 
-Worksheet for Step 4 of `ADOPTING.md`. **Disposable** - delete it, and its `PLAN.md` entry, when the
-migration lands.
+Worksheet for Step 4 of `ADOPTING.md`. **Disposable** - delete it, and its `docs/plan.md` entry,
+when the migration lands.
 
 Fill the inventory completely before moving any file. Deciding everything first is what keeps the
 repository consistent at every point rather than only at the end, which matters because this work

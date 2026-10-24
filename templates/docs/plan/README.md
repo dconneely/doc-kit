@@ -22,7 +22,7 @@ something worth keeping, that thing is in the wrong file:
 - a choice made along the way -> an ADR
 - a fact discovered along the way -> a research note
 - behaviour that changed -> the specification
-- work that is not happening after all -> back to `PLAN.md`
+- work that is not happening after all -> back to `docs/plan.md`
 
 Emptying a task note into its proper homes before deleting it is the last step of the work, not an
 optional tidy-up.

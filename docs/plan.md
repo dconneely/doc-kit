@@ -4,7 +4,7 @@ Single ranked backlog. Entries are deleted when done, never annotated.
 
 Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `docs`, then
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
-needs more, it needs an ADR. `SPECIFICATION.md` §3.3 defines the scales.
+needs more, it needs an ADR. `docs/spec.md` §3.3 defines the scales.
 
 ## Restructure the paths and close the audience set
 
@@ -29,9 +29,9 @@ their PDFs, as generated artifacts.
 **Type:** feature - **Importance:** medium - **Effort:** medium
 
 Needs an ADR. A generated index of the decision records in force, so a session reads what binds
-without opening deprecated ones; `SPECIFICATION.md`'s purpose section linking to ADR-0001, which
-records the owner's purpose, rather than restating it; and MADR's optional `Confirmation` section,
-naming the test that confirms a decision.
+without opening deprecated ones; `docs/spec.md`'s purpose section linking to ADR-0001, which records
+the owner's purpose, rather than restating it; and MADR's optional `Confirmation` section, naming
+the test that confirms a decision.
 
 ## Remove duplication between the specification and the templates
 

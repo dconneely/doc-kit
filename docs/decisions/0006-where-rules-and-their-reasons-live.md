@@ -15,7 +15,7 @@ not copied, so guidance needed after adoption cannot live only there.
 
 The map is the file the `AGENTS.md` stanza tells every agent session to read before writing
 anything. Each word in it is paid for by every session, and anything it shares with the files it
-describes is stated twice in every adopting repository, against `SPECIFICATION.md` §4.1.
+describes is stated twice in every adopting repository, against `docs/spec.md` §4.1.
 
 ## Considered Options
 

@@ -37,7 +37,7 @@ yours to change. `ADOPTING-NOTES.md` says why, and how far to trust each convent
 
 ## Step 0 - Decide whether to adopt, and write the plan
 
-Two outputs: a decision, and `PLAN.md`.
+Two outputs: a decision, and `docs/plan.md`.
 
 **Decide.** This structure costs more than it returns below a certain size. A single-purpose script,
 a repository one person will maintain for a month, or anything whose entire documentation genuinely
@@ -48,10 +48,10 @@ inherits the reasoning without having seen it made. Record the outcome either wa
 is written down is a decision, and one that is not gets re-litigated every six months. An adoption
 is recorded in the adoption record Step 3 creates.
 
-**Then write `PLAN.md` before anything else.** It is the one artifact you can create knowing nothing
-about the repository yet, and the adoption work itself is its first content: one entry per artifact
-to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those entries in
-the ordinary way.
+**Then write `docs/plan.md` before anything else.** It is the one artifact you can create knowing
+nothing about the repository yet, and the adoption work itself is its first content: one entry per
+artifact to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those
+entries in the ordinary way.
 
 This is not ceremony. It is what makes adoption survive being interrupted, which - on any repository
 old enough to need it - it will be. It also means the structure is doing real work from the first
@@ -64,8 +64,8 @@ it. Nothing here has to be right first time; the plan is the volatile artifact b
 ## Step 1 - Inventory what this repository actually has
 
 Every project takes the core five: `DOC-MAP.md`, `README.md`, the specification, `CHANGELOG.md` and
-`PLAN.md`. ADRs are strongly recommended from day one, because their value is almost entirely in
-being written contemporaneously.
+`docs/plan.md`. ADRs are strongly recommended from day one, because their value is almost entirely
+in being written contemporaneously.
 
 Then work through the table below and note which apply. Be strict: an artifact you will not maintain
 is worse than its absence, because the map promises it.
@@ -91,9 +91,8 @@ different medium.
 Two questions decide most of the rest:
 
 - **Is the specification one file or a tree?** One file until it stops being comfortable to read end
-  to end. Once it's a tree, members go under `docs/spec/` and `SPECIFICATION.md` becomes their
-  index - full shape, the routing-table point, and the layout-block gotcha are all in
-  `ADOPTING-NOTES.md`.
+  to end. Once it's a tree, members go under `docs/spec/` and `docs/spec.md` becomes their index -
+  full shape, the routing-table point, and the layout-block gotcha are all in `ADOPTING-NOTES.md`.
 - **Does the specification include machine-readable members** - schemas, interface definitions? If
   so, they are specification, not a separate category, and the link-never-restate rule applies.
 
@@ -122,20 +121,20 @@ rather than leaving them undocumented.
 Everything in `templates/` maps onto your repository root at the same relative path, so copying is a
 matter of taking the ones Step 1 said you had earned:
 
-| From `templates/`                                                        | Take it when                                                                                                                         |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always - the core five                                                                                                               |
-| `docs/adr/0000-template.md`                                              | always; records are worth having from day one, since their value is being written contemporaneously                                  |
-| `docs/adr/0001-how-the-documentation-is-organised.md`                    | always - renumber it if records exist, and leave it `proposed` for the owner to accept                                               |
-| `docs/quirks.md`                                                         | you deviate from a reference, or carry behaviour you know is wrong                                                                   |
-| `docs/glossary.md`                                                       | your domain has terms, or ordinary words used precisely                                                                              |
-| `docs/testing.md`                                                        | you have more than one test approach                                                                                                 |
-| `docs/research/0000-template.md`                                         | you reverse-engineer, or reconcile sources that disagree                                                                             |
-| `docs/tasks/`                                                            | your backlog is past roughly 20 items - plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
-| `docs/archive/README.md`                                                 | Step 4 turned up documentation whose currency you cannot establish                                                                   |
+| From `templates/`                                                         | Take it when                                                                                                                         |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan.md` | always - the core five                                                                                                               |
+| `docs/decisions/0000-template.md`                                         | always; records are worth having from day one, since their value is being written contemporaneously                                  |
+| `docs/decisions/0001-how-the-documentation-is-organised.md`               | always - renumber it if records exist, and leave it `proposed` for the owner to accept                                               |
+| `docs/quirks.md`                                                          | you deviate from a reference, or carry behaviour you know is wrong                                                                   |
+| `docs/glossary.md`                                                        | your domain has terms, or ordinary words used precisely                                                                              |
+| `docs/testing.md`                                                         | you have more than one test approach                                                                                                 |
+| `docs/research/0000-template.md`                                          | you reverse-engineer, or reconcile sources that disagree                                                                             |
+| `docs/plan/`                                                              | your backlog is past roughly 20 items - plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
+| `docs/archive/README.md`                                                  | Step 4 turned up documentation whose currency you cannot establish                                                                   |
 
 One file sits outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
-against `SPECIFICATION.md`. Copy it too if you want the check; skip it if you would rather verify by
+against `docs/spec.md`. Copy it too if you want the check; skip it if you would rather verify by
 review. It is a single POSIX shell script depending on nothing but `awk`, `sed`, `grep` and `find` -
 read it before you run it. On Windows invoke it with `sh`, not `bash`.
 
@@ -161,9 +160,9 @@ artifact you kept:
   instructions; a `README.md` with unfilled headings is worse than a short one.
 
 The templates deliberately contain no advice about the kit - that is this file's job, and it is not
-copied into your repository. The exceptions are `docs/adr/0000-template.md` and its counterpart in
-`docs/research/`, which stay as templates to copy from and keep a short comment for that reason, and
-the adoption record, whose comment is deleted once it is filled in.
+copied into your repository. The exceptions are `docs/decisions/0000-template.md` and its
+counterpart in `docs/research/`, which stay as templates to copy from and keep a short comment for
+that reason, and the adoption record, whose comment is deleted once it is filled in.
 
 For an empty repository this step is quick and you are finished. For an existing codebase, the
 material for those first entries is already scattered through it - that is Step 4.
@@ -212,10 +211,10 @@ create:
 
 Tense settles disagreements:
 
-- `SPECIFICATION.md` - present tense: what the system does now.
+- `docs/spec.md` - present tense: what the system does now.
 - `CHANGELOG.md` - past tense: what changed, never what's true today.
-- `PLAN.md` - intent: nothing in it exists yet.
-- `docs/adr/` - why: only `accepted` records bind; check status first.
+- `docs/plan.md` - intent: nothing in it exists yet.
+- `docs/decisions/` - why: only `accepted` records bind; check status first.
 - `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
 - `docs/archive/` - undated, not authoritative. Never cite it.
 
@@ -223,14 +222,14 @@ Before you edit:
 
 - Change the specification because behaviour changed, never because it'd read better. Purpose and
   scope aren't yours to revise.
-- You may create a decision record as `proposed`, copying `docs/adr/0000-template.md` rather than
+- You may create a decision record as `proposed`, copying `docs/decisions/0000-template.md` rather than
   an existing record, and change a `proposed` one. **Accepting, rejecting, reopening (`accepted` to
   `proposed`), deprecating and deleting a record each need the owner's explicit permission, asked
   for first.** This is absolute.
 - On accepting, set `decision-makers`, `approval` (the owner's words) and `date`, then commit. A
   rejected change to a reopened record is undone by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
-- Delete finished `PLAN.md` entries; don't mark them done.
+- Delete finished `docs/plan.md` entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or
   code comments - the map says where those go.
 - Adding a document means updating `DOC-MAP.md` in the same commit.
@@ -255,7 +254,7 @@ every point rather than only at the end.
 ### 4a - Build the inventory
 
 List every documentation file before touching any of them, in a worksheet:
-`docs/tasks/adopt-doc-kit.md`. This is the one case where `docs/tasks/` earns its place below the
+`docs/plan/adopt-doc-kit.md`. This is the one case where `docs/plan/` earns its place below the
 usual threshold, because migration is exactly the work that spans weeks and gets interrupted.
 
 | File                   | Tense   | Destination      | Disposition | Status |

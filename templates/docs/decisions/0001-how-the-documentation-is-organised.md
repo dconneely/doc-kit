@@ -23,7 +23,7 @@ Delete this comment in the copy.
 {What is wrong with this repository's documentation today, and who it affects.}
 
 The structure comes from doc-kit at commit {commit}. Its decision records, which give the reasons
-for each rule, are at `https://github.com/dconneely/doc-kit/tree/{commit}/docs/adr`.
+for each rule, are at `https://github.com/dconneely/doc-kit/tree/{commit}/docs/decisions`.
 
 ## Considered Options
 

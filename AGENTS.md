@@ -10,10 +10,10 @@ the map decides.
 
 When two documents disagree, tense settles it:
 
-- **`SPECIFICATION.md`** - present tense, authoritative about what a conformant repository is.
+- **`docs/spec.md`** - present tense, authoritative about what a conformant repository is.
 - **`CHANGELOG.md`** - past tense. Records what changed, never what is currently true.
-- **`PLAN.md`** - intent. Nothing described in it exists yet.
-- **`docs/adr/`** - past tense, and records _why_. Check `status` before relying on one; only
+- **`docs/plan.md`** - intent. Nothing described in it exists yet.
+- **`docs/decisions/`** - past tense, and records _why_. Check `status` before relying on one; only
   `accepted` binds.
 
 ## This repository is its own first adopter
@@ -27,7 +27,7 @@ not tidy them, fill them in, or lint them into shape.
 
 `.gitattributes` and anything like it is infrastructure - it configures this repository and never
 reaches an adopter. See
-[ADR-0005](docs/adr/0005-what-is-product-documentation-or-infrastructure.md).
+[ADR-0005](docs/decisions/0005-what-is-product-documentation-or-infrastructure.md).
 
 ## Decision records - absolute rules
 
@@ -45,8 +45,8 @@ You may create a decision record as `proposed`, and change a `proposed` record, 
 
 Nothing else - "looks good", approval of other work, an earlier session's say-so - is permission.
 
-To create one, copy `templates/docs/adr/0000-template.md` - never an existing record - to the next
-free number.
+To create one, copy `templates/docs/decisions/0000-template.md` - never an existing record - to the
+next free number.
 
 On accepting, rejecting or deprecating, set `decision-makers` to the owner's name, `approval` to
 their words and `date` to today, then commit. If the owner rejects a change to a reopened record,
@@ -54,12 +54,12 @@ restore its last accepted version rather than marking it `rejected`. Deleting a 
 simpler than keeping it `rejected` or `deprecated`.
 
 A change includes fixing, in the same commit, the citations it makes untrue. Formatting applied by a
-tool is not a change. `SPECIFICATION.md` §3.1 has the rest.
+tool is not a change. `docs/spec.md` §3.1 has the rest.
 
 ## Before you edit
 
-- **Delete completed `PLAN.md` entries.** Do not annotate, strike through, or move them to a done
-  section - that is the specific failure that makes a plan stop being read.
+- **Delete completed `docs/plan.md` entries.** Do not annotate, strike through, or move them to a
+  done section - that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
 - **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map names
@@ -75,8 +75,8 @@ behaviour changed because you implemented something, or it misdescribes what the
 does. Never because you have decided it would read better, cover more, or be organised differently.
 
 The flow in the map is the whole procedure: an ADR first if a real choice was made, then
-`SPECIFICATION.md` in the present tense, then a `CHANGELOG.md` line if an adopter can see the
-change, then delete the `PLAN.md` entry if there was one.
+`docs/spec.md` in the present tense, then a `CHANGELOG.md` line if an adopter can see the change,
+then delete the `docs/plan.md` entry if there was one.
 
 Two things to watch:
 

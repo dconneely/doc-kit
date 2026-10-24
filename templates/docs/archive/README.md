@@ -18,9 +18,9 @@ verifiable should be migrated. A document that is easy to read but undatable bel
 
 ## Why not just migrate it
 
-Because migrating an unverified claim into `SPECIFICATION.md` **launders** it. The whole point of
-the specification is that readers trust it, so a stale sentence promoted into it is more dangerous
-than the same sentence sitting in a folder marked untrusted. A confident migration is worse than no
+Because migrating an unverified claim into `docs/spec.md` **launders** it. The whole point of the
+specification is that readers trust it, so a stale sentence promoted into it is more dangerous than
+the same sentence sitting in a folder marked untrusted. A confident migration is worse than no
 migration.
 
 ## Why not just delete it

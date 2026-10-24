@@ -91,16 +91,16 @@ repos:
       - id: lowercase-adr-status
         name: "ADR statuses are lowercase (MADR spelling)"
         language: pygrep
-        # No `Deprecated`: it is also a Keep a Changelog category. Scoped to docs/adr/ so prose
+        # No `Deprecated`: it is also a Keep a Changelog category. Scoped to docs/decisions/ so prose
         # discussing the convention elsewhere is not flagged.
         entry: 'Superseded by ADR-|`(Accepted|Proposed|Rejected)`'
-        files: ^docs/adr/
+        files: ^docs/decisions/
 
       - id: no-nygard-status-section
         name: "Records use MADR front-matter, not a Status section"
         language: pygrep
         entry: '^## Status$'
-        files: ^docs/adr/
+        files: ^docs/decisions/
 
       - id: no-template-banner
         name: "Templates carry no instructional banner (ADR-0006)"

@@ -15,9 +15,9 @@ worry behind the request is real - that debt items are drowned by feature items 
 
 ## Considered Options
 
-- A separate `DEBT.md` or `docs/debt.md` alongside `PLAN.md`
+- A separate `DEBT.md` or `docs/debt.md` alongside `docs/plan.md`
 - A type tag within the single ranked plan
-- A separate section within `PLAN.md`, ranked independently
+- A separate section within `docs/plan.md`, ranked independently
 
 ## Decision Outcome
 

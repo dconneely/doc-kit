@@ -26,4 +26,4 @@ project does. **Why:** the reason, in a sentence. If it is long, it is an ADR an
 to it. **Pinned by:** the test asserting current behaviour, by path and name. **Expires when:** what
 would have to change for this entry to be deleted. "Never" is a valid answer for a deliberate
 deviation; for an accepted-wrong entry it usually means the entry is really debt, and belongs in
-`PLAN.md` as well.
+`docs/plan.md` as well.

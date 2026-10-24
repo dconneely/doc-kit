@@ -5,7 +5,7 @@ belongs**. Start here when you have something to write down and are not sure whi
 
 Each artifact holds its own format and rules - in its preamble, or in its `0000-template.md` - and
 this map does not restate them. Why the structure is shaped this way is in the adoption record,
-`docs/adr/0001-how-the-documentation-is-organised.md`.
+`docs/decisions/0001-how-the-documentation-is-organised.md`.
 
 ## Where does it go?
 
@@ -37,42 +37,42 @@ If a sentence seems to fit two places, it is usually two sentences. Split it and
 ```text
 DOC-MAP.md               this file - the map
 README.md                orientation, one screen, links outward
-SPECIFICATION.md         the behaviour contract - an index once it grows
 CHANGELOG.md             what shipped
-PLAN.md                  single ranked backlog, items tagged bug/debt/feature/docs
 docs/
-  adr/*.md               decisions, numbered, accepted only by the owner
+  spec.md                the behaviour contract - an index once it grows
+  plan.md                single ranked backlog, items tagged bug/debt/feature/docs
+  plan/*.md              optional: per-entry working notes, disposable
+  decisions/*.md         decisions, numbered, accepted only by the owner
   quirks.md              deliberate deviations and accepted-wrong behaviour
   research/*.md          sourced findings with confidence levels
   glossary.md            domain vocabulary
   testing.md             test strategy, and what is deliberately not covered
-  tasks/*.md             optional: per-item working notes, disposable
   archive/               optional: undatable documents kept, not authoritative
 ```
 
-In a monorepo, everything below `docs/` moves under the module it describes, and only `DOC-MAP.md`,
-`README.md`, `CHANGELOG.md` and `PLAN.md` stay at the root.
+In a monorepo, everything below `docs/` except `docs/plan.md` moves under the module it describes;
+`DOC-MAP.md`, `README.md`, `CHANGELOG.md` and `docs/plan.md` stay at the repository root.
 
-The specification is a set, not a file. Once it outgrows one document it becomes an index plus a
-tree, and members of that tree can be machine-readable - schemas, interface definitions. Each member
-gets its own row below.
+Any `docs/name.md` that outgrows one file gains a sibling directory `docs/name/` for its parts, and
+stays as their index. The specification is the usual case: its members can be machine-readable -
+schemas, interface definitions - and each gets its own row below.
 
 ## Artifacts
 
-| Artifact             | Purpose                                                                                                                  | Tense   | Mutability         | Audience                                                                                        |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------------ | ----------------------------------------------------------------------------------------------- |
-| `DOC-MAP.md`         | This map: what each document is for, and where a fact belongs                                                            | present | rewritten in place | anyone adding documentation                                                                     |
-| `README.md`          | Orients a newcomer in one screen, and links outward                                                                      | present | rewritten in place | anyone                                                                                          |
-| `SPECIFICATION.md`   | The behaviour contract. Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength        | present | rewritten in place | users + implementers                                                                            |
-| `docs/adr/*.md`      | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past    | amendable          | future maintainers                                                                              |
-| `CHANGELOG.md`       | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past    | append-only        | users                                                                                           |
-| `PLAN.md`            | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future  | volatile           | the owner and contributors                                                                      |
-| `docs/quirks.md`     | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present | rewritten in place | users comparing against a reference, and anyone - human or agent - about to "fix" something odd |
-| `docs/research/*.md` | Sourced findings with explicit confidence levels; shape and confidence levels in `0000-template.md`                      | past    | append-only        | implementers                                                                                    |
-| `docs/glossary.md`   | Domain vocabulary                                                                                                        | present | rewritten in place | readers of every other document                                                                 |
-| `docs/testing.md`    | Test strategy, and what is deliberately _not_ covered                                                                    | present | rewritten in place | contributors                                                                                    |
-| `docs/tasks/*.md`    | Working notes for one backlog item. Optional                                                                             | future  | disposable         | whoever picks it up                                                                             |
-| `docs/archive/`      | Documentation whose currency cannot be established, kept rather than discarded; rules in its `README.md`. Optional       | past    | immutable          | nobody - kept for history                                                                       |
+| Artifact              | Purpose                                                                                                                  | Tense   | Mutability         | Audience                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------------ | ----------------------------------------------------------------------------------------------- |
+| `DOC-MAP.md`          | This map: what each document is for, and where a fact belongs                                                            | present | rewritten in place | anyone adding documentation                                                                     |
+| `README.md`           | Orients a newcomer in one screen, and links outward                                                                      | present | rewritten in place | anyone                                                                                          |
+| `docs/spec.md`        | The behaviour contract. Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength        | present | rewritten in place | users + implementers                                                                            |
+| `docs/decisions/*.md` | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past    | amendable          | future maintainers                                                                              |
+| `CHANGELOG.md`        | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past    | append-only        | users                                                                                           |
+| `docs/plan.md`        | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future  | volatile           | the owner and contributors                                                                      |
+| `docs/quirks.md`      | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present | rewritten in place | users comparing against a reference, and anyone - human or agent - about to "fix" something odd |
+| `docs/research/*.md`  | Sourced findings with explicit confidence levels; shape and confidence levels in `0000-template.md`                      | past    | append-only        | implementers                                                                                    |
+| `docs/glossary.md`    | Domain vocabulary                                                                                                        | present | rewritten in place | readers of every other document                                                                 |
+| `docs/testing.md`     | Test strategy, and what is deliberately _not_ covered                                                                    | present | rewritten in place | contributors                                                                                    |
+| `docs/plan/*.md`      | Working notes for one backlog item. Optional                                                                             | future  | disposable         | whoever picks it up                                                                             |
+| `docs/archive/`       | Documentation whose currency cannot be established, kept rather than discarded; rules in its `README.md`. Optional       | past    | immutable          | nobody - kept for history                                                                       |
 
 ## Lifecycle
 
@@ -80,24 +80,24 @@ gets its own row below.
 | ------------------------ | ------------------------------------------ | ---------------------------------------------------------------- |
 | `DOC-MAP.md`             | the structure is first agreed              | never - revised when an artifact is added, removed or repurposed |
 | `README.md`              | project starts                             | never                                                            |
-| `SPECIFICATION.md`       | behaviour is decided                       | never - edited forever                                           |
-| `docs/adr/*.md`          | a choice a newcomer would question         | deprecated or deleted, with the owner's permission               |
+| `docs/spec.md`           | behaviour is decided                       | never - edited forever                                           |
+| `docs/decisions/*.md`    | a choice a newcomer would question         | deprecated or deleted, with the owner's permission               |
 | `CHANGELOG.md` entry     | at release, if user-visible                | never                                                            |
-| `PLAN.md` entry          | idea occurs - one paragraph, no design     | **deleted** when done, not struck through                        |
+| `docs/plan.md` entry     | idea occurs - one paragraph, no design     | **deleted** when done, not struck through                        |
 | `docs/quirks.md` entry   | a deviation is chosen, or a bug accepted   | when the deviation ends                                          |
 | `docs/research/*.md`     | a question is investigated                 | never - confidence gets revised                                  |
 | `docs/glossary.md` entry | a term acquires a project-specific meaning | when the term leaves the codebase                                |
 | `docs/testing.md`        | the second test approach appears           | never                                                            |
-| `docs/tasks/*.md`        | work begins on an item                     | work completes                                                   |
+| `docs/plan/*.md`         | work begins on an item                     | work completes                                                   |
 | `docs/archive/`          | migration finds a document nobody can date | when nothing in it is worth keeping                              |
 
 ## Flow
 
 A change moves through the documents in this order:
 
-`PLAN.md` entry -> (optional `docs/tasks/` note) -> **ADR** if a real choice was made ->
-**`SPECIFICATION.md`** updated in present tense -> **`CHANGELOG.md`** line if user-visible ->
-`PLAN.md` entry **deleted**.
+`docs/plan.md` entry -> (optional `docs/plan/` note) -> **ADR** if a real choice was made ->
+**`docs/spec.md`** updated in present tense -> **`CHANGELOG.md`** line if user-visible ->
+`docs/plan.md` entry **deleted**.
 
 Most changes skip the ADR and the task note. Nothing skips the deletion.
 

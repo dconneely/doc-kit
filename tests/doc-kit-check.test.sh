@@ -21,7 +21,7 @@ n=0
 fixture() {
 	n=$((n + 1))
 	dir="$TMP/$n"
-	mkdir -p "$dir/docs/adr"
+	mkdir -p "$dir/docs/decisions"
 	cd "$dir"
 	cat >DOC-MAP.md <<'EOF'
 # Documentation map
@@ -30,9 +30,9 @@ fixture() {
 
 ```text
 DOC-MAP.md     the map
-PLAN.md        the plan
 docs/
-  adr/*.md     decisions
+  plan.md      the plan
+  decisions/*.md  decisions
 ```
 
 ## Artifacts
@@ -40,18 +40,18 @@ docs/
 | Artifact        | Purpose   | Tense   | Mutability         | Audience    |
 | --------------- | --------- | ------- | ------------------ | ----------- |
 | `DOC-MAP.md`    | the map   | present | rewritten in place | anyone      |
-| `PLAN.md`       | backlog   | future  | volatile           | the team    |
-| `docs/adr/*.md` | decisions | past    | immutable          | maintainers |
+| `docs/plan.md`       | backlog   | future  | volatile           | the team    |
+| `docs/decisions/*.md` | decisions | past    | immutable          | maintainers |
 
 ## Lifecycle
 
 | Artifact        | Created when | Removed when |
 | --------------- | ------------ | ------------ |
 | `DOC-MAP.md`    | start        | never        |
-| `PLAN.md`       | start        | never        |
-| `docs/adr/*.md` | a choice     | never        |
+| `docs/plan.md`       | start        | never        |
+| `docs/decisions/*.md` | a choice     | never        |
 EOF
-	cat >PLAN.md <<'EOF'
+	cat >docs/plan.md <<'EOF'
 # Plan
 
 ## Do a thing
@@ -66,7 +66,7 @@ approval: "accept ADR-0001"'
 
 # adr NUMBER STATUS [EXTRA-FRONT-MATTER]
 adr() {
-	cat >"docs/adr/$1-a-record.md" <<EOF
+	cat >"docs/decisions/$1-a-record.md" <<EOF
 ---
 status: $2
 date: 2026-01-01
@@ -125,9 +125,9 @@ expect "templates/ is not exempt by name" 1 "templates/notes.md is not named in 
 fixture
 mkdir -p old
 echo x >old/stale.md
-after '^PLAN.md ' 'old/           archive, not authoritative'
-after '^[|] `PLAN.md` +[|] backlog' '| `old/` | archive | past | immutable | nobody |'
-after '^[|] `PLAN.md` +[|] start' '| `old/` | archived | never |'
+after '^DOC-MAP.md ' 'old/           archive, not authoritative'
+after '^[|] `docs/plan.md` +[|] backlog' '| `old/` | archive | past | immutable | nobody |'
+after '^[|] `docs/plan.md` +[|] start' '| `old/` | archived | never |'
 expect "an archive at any mapped path covers its files" 0 "conformant" map
 
 fixture
@@ -136,7 +136,7 @@ echo x >docs/archive/stale.md
 expect "docs/archive/ is exempt without a row" 0 "conformant" map
 
 fixture
-echo x >"docs/adr/0002 old notes.md"
+echo x >"docs/decisions/0002 old notes.md"
 echo x >"loose notes.md"
 expect "a mapped path with spaces passes" 1 "FAIL [map] loose notes.md is not named in the map" map
 expect "a path with spaces is not split" 1 "doc-kit: 1 failure(s)" map
@@ -171,20 +171,20 @@ expect "gitignored directory warns once, grouped" 0 "WARN [map] node_modules/ (2
 expect "gitignored file warns by name" 0 "WARN [map] scratch.md is not named" map
 
 fixture
-sed -i.bak '/^| `PLAN.md`       | start/d' DOC-MAP.md
-expect "artifact missing from lifecycle fails" 1 "PLAN.md is in the artifacts table but not the lifecycle table" map
+sed -i.bak '\#^| `docs/plan.md` *| start#d' DOC-MAP.md
+expect "artifact missing from lifecycle fails" 1 "docs/plan.md is in the artifacts table but not the lifecycle table" map
 
 fixture
-sed -i.bak '/^PLAN.md /d' DOC-MAP.md
-expect "artifact missing from layout fails" 1 "PLAN.md is in the artifacts table but not the layout block" map
+sed -i.bak '/^  plan.md /d' DOC-MAP.md
+expect "artifact missing from layout fails" 1 "docs/plan.md is in the artifacts table but not the layout block" map
 
 fixture
-rm PLAN.md
-expect "named artifact missing on disk fails" 1 "the map names PLAN.md but nothing matches it" map
+rm docs/plan.md
+expect "named artifact missing on disk fails" 1 "the map names docs/plan.md but nothing matches it" map
 
 fixture
 sed -i.bak 's/| future  | volatile /| later   | volatile /' DOC-MAP.md
-expect "tense outside the closed set fails" 1 "PLAN.md has tense 'later'" map
+expect "tense outside the closed set fails" 1 "docs/plan.md has tense 'later'" map
 
 fixture
 sed -i.bak 's/| future  | volatile           | the team /| past    | immutable          | maintainers /' DOC-MAP.md
@@ -225,48 +225,48 @@ expect "refined-by status fails" 1 "has status 'accepted (refined by ADR-0001)'"
 fixture
 printf '
 See ADR-0099.
-' >>PLAN.md
-expect "citation of a missing record fails" 1 "PLAN.md:9 cites ADR-0099, which does not exist" adr
+' >>docs/plan.md
+expect "citation of a missing record fails" 1 "docs/plan.md:9 cites ADR-0099, which does not exist" adr
 
 fixture
 printf '
 See ADR-0001, or `ADR-0099`, or [ADR-0099](https://example.com/0099).
-' >>PLAN.md
+' >>docs/plan.md
 expect "citations in code and in links to other sites pass" 0 "conformant" adr
 
 fixture
 printf '
 See ADR 12.
-' >>PLAN.md
-expect "citation in another form fails" 1 "PLAN.md:9 cites 'ADR 12'" adr
+' >>docs/plan.md
+expect "citation in another form fails" 1 "docs/plan.md:9 cites 'ADR 12'" adr
 
 fixture
 adr 0002 'superseded by ADR-0001' 'decision-makers: someone'
 expect "superseded status fails" 1 "has status 'superseded by ADR-0001'" adr
 
 fixture
-cp docs/adr/0001-a-record.md docs/adr/0001-another.md
+cp docs/decisions/0001-a-record.md docs/decisions/0001-another.md
 expect "reused number fails" 1 "ADR number 0001 is used more than once" adr
 
 fixture
-cp docs/adr/0001-a-record.md docs/adr/0002-Bad_Name.md
+cp docs/decisions/0001-a-record.md docs/decisions/0002-Bad_Name.md
 expect "misnamed record fails" 1 "is misnamed" adr
 
 fixture
-sed -i.bak '/^## Considered Options/d' docs/adr/0001-a-record.md
-rm docs/adr/0001-a-record.md.bak
+sed -i.bak '/^## Considered Options/d' docs/decisions/0001-a-record.md
+rm docs/decisions/0001-a-record.md.bak
 expect "record missing a MADR heading fails" 1 "has no '## Considered Options'" adr
 
 fixture
 adr 0002 accepted 'decision-makers: someone
 approval: "accept ADR-0002"'
-sed -i.bak '/^status:/d' docs/adr/0002-a-record.md
-rm docs/adr/0002-a-record.md.bak
-expect "record with no status fails" 1 "docs/adr/0002-a-record.md has no status" adr
+sed -i.bak '/^status:/d' docs/decisions/0002-a-record.md
+rm docs/decisions/0002-a-record.md.bak
+expect "record with no status fails" 1 "docs/decisions/0002-a-record.md has no status" adr
 
 fixture
-: >docs/adr/0002-empty.md
-expect "empty record fails" 1 "docs/adr/0002-empty.md has no status" adr
+: >docs/decisions/0002-empty.md
+expect "empty record fails" 1 "docs/decisions/0002-empty.md has no status" adr
 
 fixture
 printf 'See ADR-0099.\n' >"loose notes.md"
@@ -275,31 +275,31 @@ expect "citation in a path with spaces names the whole path" 1 "loose notes.md:1
 # ---------------------------------------------------------------- plan
 
 fixture
-printf '\n## Old thing DONE\n\n**Type:** bug\n\nDone.\n' >>PLAN.md
-expect "heading marked DONE fails" 1 "PLAN.md:9 looks like a completed entry" plan
+printf '\n## Old thing DONE\n\n**Type:** bug\n\nDone.\n' >>docs/plan.md
+expect "heading marked DONE fails" 1 "docs/plan.md:9 looks like a completed entry" plan
 
 fixture
-printf '\n## Old thing (done)\n\n**Type:** bug\n\nDone.\n' >>PLAN.md
+printf '\n## Old thing (done)\n\n**Type:** bug\n\nDone.\n' >>docs/plan.md
 expect "heading marked (done) fails" 1 "looks like a completed entry" plan
 
 fixture
-printf '\n## ~~Old thing~~\n\n**Type:** bug\n\nDone.\n' >>PLAN.md
+printf '\n## ~~Old thing~~\n\n**Type:** bug\n\nDone.\n' >>docs/plan.md
 expect "struck-through heading fails" 1 "looks like a completed entry" plan
 
 fixture
-printf '\n## Define what done means\n\n**Type:** docs\n\nOne paragraph.\n' >>PLAN.md
+printf '\n## Define what done means\n\n**Type:** docs\n\nOne paragraph.\n' >>docs/plan.md
 expect "the word done in a title passes" 0 "conformant" plan
 
 fixture
-printf '\n## Untagged\n\nOne paragraph.\n' >>PLAN.md
-expect "entry with no type tag fails" 1 "PLAN.md:9 has no valid type tag" plan
+printf '\n## Untagged\n\nOne paragraph.\n' >>docs/plan.md
+expect "entry with no type tag fails" 1 "docs/plan.md:9 has no valid type tag" plan
 
 fixture
-printf '\n## Wrong tag\n\n**Type:** chore\n\nOne paragraph.\n' >>PLAN.md
-expect "entry with an invalid type tag fails" 1 "PLAN.md:9 has no valid type tag" plan
+printf '\n## Wrong tag\n\n**Type:** chore\n\nOne paragraph.\n' >>docs/plan.md
+expect "entry with an invalid type tag fails" 1 "docs/plan.md:9 has no valid type tag" plan
 
 fixture
-printf '\n## Bare tag\n\n**Type:** bug\n\nOne paragraph.\n' >>PLAN.md
+printf '\n## Bare tag\n\n**Type:** bug\n\nOne paragraph.\n' >>docs/plan.md
 expect "type tag alone on its line passes" 0 "conformant" plan
 
 # ---------------------------------------------------------------- cli

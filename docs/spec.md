@@ -96,9 +96,15 @@ pattern the map names. This is the check that rots second.
 unreplaced heading. Templates carry an example rather than instructions (ADR-0006), so a surviving
 example is the signal that customisation was never finished.
 
-2.6 Paths in the map MUST be the repository's real paths. In a monorepo the per-module artifacts
-MUST sit under the module they describe, and only the map, `README.md`, `CHANGELOG.md` and `PLAN.md`
-remain at the root.
+2.6 Paths in the map MUST be the repository's real paths. Only files a tool or a convention looks
+for at the root - the map, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` - SHOULD sit
+there; every other artifact SHOULD sit under `docs/` (ADR-0014). In a monorepo the per-module
+artifacts MUST sit under the module they describe, and only the map, `README.md`, `CHANGELOG.md` and
+`docs/plan.md` stay at the repository root.
+
+An artifact `name.md` that outgrows one file MAY gain a sibling directory `name/` holding its parts.
+The file stays as the entry point - an index or summary linking into the directory - so links to it
+stay true, and each part the map distinguishes gets its own row (ADR-0014).
 
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
 mutability and an audience, drawn from these sets:
