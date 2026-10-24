@@ -62,13 +62,6 @@ Give agent sessions facts to file - a choice and its reason, a known defect pinn
 finding with a source - and score where each lands. The agent is the reader whose behaviour the kit
 exists to shape, and nothing yet measures whether the map shapes it.
 
-## Check which instruction file Antigravity reads
-
-**Type:** docs - **Importance:** low - **Effort:** low
-
-If it reads something other than `AGENTS.md`, that file should be an alias of `AGENTS.md`, so that
-the absolute rules on decision records reach it.
-
 ## Build a worked example
 
 **Type:** docs - **Importance:** low - **Effort:** high
