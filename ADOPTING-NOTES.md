@@ -16,12 +16,39 @@ pruned with confidence. `ADOPTING.md`'s four numbered consequences all follow fr
    any given repository needs a subset. Almost nothing has to be invented.
 2. **What you keep is decided by capabilities, not taste.** A data store earns a data dictionary; a
    network API earns an interface definition; a deployed service earns a runbook.
-3. **The rules are not the customisable part.** The three rules, the failure modes and the test for
-   adding a new document survive customisation verbatim. They are what stops the structure decaying
-   back into the mixed-tense file it replaced.
+3. **The rules are not the customisable part.** The map's rules and its test for adding a new
+   document survive customisation verbatim. They are what stops the structure decaying back into the
+   mixed-tense file it replaced.
 4. **Resist growth.** Most proposed additions share all three properties with something that already
    exists, which makes them a section or a tag rather than a file. The structure works because it is
    small enough to hold in your head.
+
+## What the rules prevent
+
+Each rule in the map, and in each artifact's own preamble or template, guards against one of these.
+The adoption record names them as consequences, so an adopter's repository holds the reason without
+this file.
+
+- **The plan becomes a graveyard** - entries annotated "DONE" rather than deleted, until nobody can
+  see what is actually open.
+- **The changelog becomes a commit log** - every internal refactor listed, so users cannot find what
+  affects them.
+- **ADRs get edited** - destroying their value as a record of what was known at the time.
+- **The specification accumulates history** - "previously X, now Y", turning reference material into
+  narrative.
+- **Findings evaporate** - an investigation's sources and dead ends survive only in a commit message
+  or a code comment, and the next person repeats the work.
+- **A research note becomes a research diary** - "found in a second pass", "this note originally
+  claimed X, now corrected" - narrating how a finding was reached instead of stating what is
+  currently true.
+- **Text narrates** - comments and documents recount how they came to be ("previously", "after
+  investigating", "fixed the bug where") instead of stating what is true, and every reader pays to
+  skip it. The two failures above are this one in particular files; agents commit it everywhere by
+  default.
+- **Prose restates a contract** - the moment prose repeats a field list, there are two sources of
+  truth and one of them is already wrong.
+- **A generated view gets hand-edited** - "generated" becomes "generated once, then hand-edited",
+  and a partly-stale generated artifact is worse than none because it is believed.
 
 ## Judgement calls
 
@@ -137,9 +164,10 @@ document"), but a module `README.md` exists so a newcomer working there finds or
 first navigating to the root. Mark it `**Alias**` in the artifacts table, give it no content of its
 own, and let it inherit the properties of what it points to - the same applies to a specification
 member repeated per module, or any file some tool looks for by exact name (`CLAUDE.md` pointing at
-`AGENTS.md` is the case this kit's own map uses). See `templates/DOC-MAP.md`'s "Prescribed formats"
-for the shape, and resist the temptation to word the audience column differently just to dodge the
-duplicate-properties check - that hides the fact that the file has nothing of its own to say.
+`AGENTS.md` is the case this kit's own map uses). See `templates/DOC-MAP.md`'s "Adding a new kind of
+document" for the shape, and resist the temptation to word the audience column differently just to
+dodge the duplicate-properties check - that hides the fact that the file has nothing of its own to
+say.
 
 ### How far do I trust each convention?
 

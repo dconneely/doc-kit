@@ -2,6 +2,10 @@
 
 Single ranked backlog. Entries are deleted when done, never annotated.
 
+Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `docs`, then
+**Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
+needs more, it needs an ADR. `SPECIFICATION.md` §3.3 defines the scales.
+
 ## Build a worked example
 
 **Type:** docs - **Importance:** low - **Effort:** high

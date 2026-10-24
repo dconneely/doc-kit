@@ -1,8 +1,14 @@
 # Plan
 
 Single ranked backlog, most important first. Entries are **deleted** when done, never annotated - a
-plan that accumulates completed items stops being read. **One paragraph each** - see
-[DOC-MAP.md](DOC-MAP.md).
+plan that accumulates completed items stops being read.
+
+Each entry is a heading, a tag line, then **one paragraph**. No design; anything longer needs a task
+note or an ADR.
+
+- **Type** - `bug`, `debt`, `feature` or `docs`.
+- **Importance** - `low`, `medium`, `high`: what it costs to keep not doing this.
+- **Effort** - `low` under a day, `medium` under a week, `high` larger or not yet known.
 
 ## Short title, imperative
 

@@ -67,24 +67,24 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 
 ## Artifacts
 
-| Artifact                    | Purpose - and the standard it follows, if any                                                                                                                                                                                                                                                                                                  | Tense       | Mutability         | Audience                                                          |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------ | ----------------------------------------------------------------- |
-| `DOC-MAP.md`                | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all                                                                                                                           | present     | rewritten in place | anyone adding documentation                                       |
-| `README.md`                 | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec                                                                                                                                                                                                        | present     | rewritten in place | anyone                                                            |
-| `AGENTS.md`                 | Routes a coding agent to this map, and names the hazards specific to working here. Routes rather than restates. Convention: [agents.md](https://agents.md)                                                                                                                                                                                     | present     | rewritten in place | coding agents                                                     |
-| `CLAUDE.md`                 | **Alias** (§2.7) for `AGENTS.md`, existing only because some tools look for that filename. Holds no content of its own, so it shares that file's properties rather than having any                                                                                                                                                             | present     | rewritten in place | coding agents                                                     |
-| `SPECIFICATION.md`          | What a conformant repository looks like - the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength                                                                                                                                             | present     | rewritten in place | adopters + tool authors                                           |
-| `ADOPTING.md`               | **Product. Source of truth, not description** - the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms                                                                                                                                                                                                    | imperative  | rewritten in place | adopters                                                          |
-| `ADOPTING-NOTES.md`         | **Product.** The reasoning behind the procedure - judgement calls, how far to trust each convention cited, what the sticking points mean. Split out so that `ADOPTING.md` stays a credible front door - neither file is copied to an adopter, so the gain is approachability, not weight. Explanation in [Diátaxis](https://diataxis.fr) terms | explanatory | rewritten in place | adopters who are stuck or deciding                                |
-| `templates/*`               | **Product. Source of truth, not description** - the artifact half. Copied into the adopter's repository and customised there                                                                                                                                                                                                                   | present     | rewritten in place | adopters, via their own repositories                              |
-| `.agents/skills/*/SKILL.md` | **Product**, and the only artifact that runs _here_ while writing _there_: it drives an adoption into another repository. Routes to `ADOPTING.md` rather than restating it, and holds the approval gate prose cannot enforce. Never copied to an adopter - adoption is one-time per repository                                                 | imperative  | rewritten in place | whoever performs an adoption                                      |
-| `tools/*`                   | **Product.** The conformance checker - what `SPECIFICATION.md` says, made executable. Vendored into adopting repositories and optional there. **Source of truth, not description**                                                                                                                                                             | present     | rewritten in place | adopters who want the check, and anyone editing the specification |
-| `docs/adr/*.md`             | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools)                                                                                                                          | past        | immutable          | future maintainers                                                |
-| `CHANGELOG.md`              | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org)                                                                                                                                                                                                            | past        | append-only        | adopters                                                          |
-| `PLAN.md`                   | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard**                                                                                                                                                                                                                                                                     | future      | volatile           | the team                                                          |
-| `docs/research/*.md`        | Sourced findings about the conventions this kit cites, with explicit confidence levels. **No standard.** Orthodox home is a record's _Context_; split out here because these findings are cited by several records and decay independently of them                                                                                             | past        | append-only        | anyone relying on a cited convention                              |
-| `docs/testing.md`           | What `tools/doc-kit-check.sh` and the hooks verify exactly, approximately, and deliberately not at all. ISO/IEC/IEEE 29119-3 exists but is enterprise-heavy for a repository this size                                                                                                                                                         | present     | rewritten in place | contributors, and anyone reading a green check                    |
-| `docs/glossary.md`          | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html)                                                                                                                                                                                                                            | present     | rewritten in place | readers of every other document                                   |
+| Artifact                    | Purpose - and the standard it follows, if any                                                                                                                                                                         | Tense       | Mutability         | Audience                                                          |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------ | ----------------------------------------------------------------- |
+| `DOC-MAP.md`                | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all  | present     | rewritten in place | anyone adding documentation                                       |
+| `README.md`                 | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec                                                                               | present     | rewritten in place | anyone                                                            |
+| `AGENTS.md`                 | Routes a coding agent to this map, and names the hazards specific to working here. Routes rather than restates. Convention: [agents.md](https://agents.md)                                                            | present     | rewritten in place | coding agents                                                     |
+| `CLAUDE.md`                 | **Alias** (§2.7) for `AGENTS.md`, existing only because some tools look for that filename                                                                                                                             | present     | rewritten in place | coding agents                                                     |
+| `SPECIFICATION.md`          | What a conformant repository looks like - the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength                    | present     | rewritten in place | adopters + tool authors                                           |
+| `ADOPTING.md`               | **Product. Source of truth, not description** - the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms                                                                           | imperative  | rewritten in place | adopters                                                          |
+| `ADOPTING-NOTES.md`         | **Product.** The reasoning behind the procedure - judgement calls, how far to trust each convention cited, what the rules prevent                                                                                     | explanatory | rewritten in place | adopters who are stuck or deciding                                |
+| `templates/*`               | **Product. Source of truth, not description** - the artifact half. Copied into the adopter's repository and customised there                                                                                          | present     | rewritten in place | adopters, via their own repositories                              |
+| `.agents/skills/*/SKILL.md` | **Product**. Drives an adoption from here into another repository, routing to `ADOPTING.md` and holding the approval gate. Never copied to an adopter                                                                 | imperative  | rewritten in place | whoever performs an adoption                                      |
+| `tools/*`                   | **Product.** The conformance checker - what `SPECIFICATION.md` says, made executable. Vendored into adopting repositories and optional there. **Source of truth, not description**                                    | present     | rewritten in place | adopters who want the check, and anyone editing the specification |
+| `docs/adr/*.md`             | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past        | immutable          | future maintainers                                                |
+| `CHANGELOG.md`              | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org)                                                                                   | past        | append-only        | adopters                                                          |
+| `PLAN.md`                   | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard**                                                                                                                                            | future      | volatile           | the team                                                          |
+| `docs/research/*.md`        | Sourced findings about the conventions this kit cites, with explicit confidence levels. **No standard**                                                                                                               | past        | append-only        | anyone relying on a cited convention                              |
+| `docs/testing.md`           | What `tools/doc-kit-check.sh` and the hooks verify exactly, approximately, and deliberately not at all                                                                                                                | present     | rewritten in place | contributors, and anyone reading a green check                    |
+| `docs/glossary.md`          | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html)                                                                                                   | present     | rewritten in place | readers of every other document                                   |
 
 ## Lifecycle
 
@@ -117,63 +117,23 @@ it -> `PLAN.md` entry **deleted**.
 
 Most changes skip the ADR. Nothing skips the deletion.
 
-## Prescribed formats
+## Rules
 
-**ADR** - one file per decision, numbered `0001-short-title.md`, following the
-[MADR](https://adr.github.io/madr/) minimal template. The shape lives in
-[`templates/docs/adr/0000-template.md`](templates/docs/adr/0000-template.md) and is not restated
-here; `SPECIFICATION.md` §3.1 carries the rules that file cannot express - status meanings,
-immutability, and who may change a status.
-
-**Changelog** - reverse-chronological, an `Unreleased` section at the top, six fixed categories:
-`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`. Entries describe effects an
-adopter can see, not internal refactors.
-
-**Plan entry** - a heading, a type tag and a rough size, then one paragraph. No design:
-
-```markdown
-## Short title
-
-**Type:** bug - **Importance:** high - **Effort:** medium
-
-One paragraph on what and why. If it needs more than that, it needs an ADR.
-```
-
-## Machine-readable and generated parts
-
-Nothing here is generated. `ADOPTING.md` and `templates/` are source of truth - versioned and
-reviewed like code, not a description of something else. Everything in `docs/` is prose that cannot
-be derived. `SPECIFICATION.md` §4 has the rules for when that changes.
-
-## Three rules that hold it together
+Each artifact holds its own format and rules - the ADR shape and status rules in
+[`templates/docs/adr/0000-template.md`](templates/docs/adr/0000-template.md) and `SPECIFICATION.md`
+§3.1, the plan entry in `PLAN.md`'s preamble - and this map does not restate them
+([ADR-0020][adr20]). What each rule prevents is in `ADOPTING-NOTES.md`.
 
 1. **Each fact lives in exactly one place**, and the tense of the sentence tells you which:
-   rationale -> ADR, behaviour -> specification, history -> changelog, intent -> plan.
-2. **Never edit an accepted ADR** - supersede it, and set the old status to
-   `superseded by ADR-NNNN`. Its whole value is being faithful to what was known at the time.
-3. **The specification may link to a machine-readable contract; it must never restate it.** The
-   moment prose repeats a field list, there are two sources of truth and one of them is already
-   wrong. Link to the artifact, then cover only what the artifact cannot express.
-
-## Failure modes this guards against
-
-- **The plan becomes a graveyard** - entries annotated "DONE" rather than deleted, until nobody can
-  see what is actually open.
-- **The changelog becomes a commit log** - every internal refactor listed, so users cannot find what
-  affects them.
-- **ADRs get edited** - destroying their value as a record of what was known at the time.
-- **The specification accumulates history** - "previously X, now Y", turning reference material into
-  narrative.
-- **Findings evaporate** - an investigation's sources and dead ends survive only in a commit message
-  or a code comment, and the next person repeats the work.
-- **A research note becomes a research diary** - "found in a second pass", "this note originally
-  claimed X, now corrected" - narrating how a finding was reached instead of stating what is
-  currently true. The same "previously X, now Y" failure as the specification, just as easy to fall
-  into here: revise the finding and its confidence in place instead.
-- **Text narrates** - comments and documents recount how they came to be ("previously", "after
-  investigating", "fixed the bug where") instead of stating what is true, and every reader pays to
-  skip it. The two failures above are this one in particular files; agents commit it everywhere by
-  default.
+   rationale -> ADR, behaviour -> specification, history -> changelog or commit message, intent ->
+   plan.
+2. **The specification may link to a machine-readable contract; it must never restate it.** Nothing
+   here is generated: `ADOPTING.md` and `templates/` are source of truth, and everything in `docs/`
+   is prose that cannot be derived. `SPECIFICATION.md` §4 has the rules for when that changes.
+3. **Write the least that is true.** No history or account of how you got there, in documents or
+   code comments ([ADR-0019][adr19]).
+4. **Code names the record, not the reverse.** A comment beside constrained code names the ADR that
+   governs it.
 
 ## Deliberately not here
 
@@ -192,9 +152,11 @@ Before adding one, check it has a **distinct tense, mutability and audience** fr
 artifacts table. If it shares all three with an existing document, it is a section or a tag within
 that document, not a new file. Most proposed additions fail this test - which is the point.
 
-If it passes, add it to both tables here in the same commit. A map that omits an artifact is worse
-than no map, because it is believed.
+If it passes, add it to the layout, artifacts and lifecycle tables in the same commit. A map that
+omits an artifact is worse than no map, because it is believed.
 
 [adr2]: docs/adr/0002-keep-technical-debt-in-the-plan.md
 [adr6]: docs/adr/0006-treat-the-adoption-procedure-as-product.md
 [adr7]: docs/adr/0007-keep-repository-infrastructure-out-of-the-product.md
+[adr19]: docs/adr/0019-govern-the-tense-and-volume-of-what-is-written-not-its-style.md
+[adr20]: docs/adr/0020-the-map-routes-each-artifact-owns-its-rules.md

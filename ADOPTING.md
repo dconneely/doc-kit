@@ -24,8 +24,8 @@ file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoning
    exercise.
 2. **What you keep is decided by capabilities, not taste.** Step 1 is an inventory, not a
    preference.
-3. **The rules are not customisable.** The three rules, the failure modes, and the test for adding a
-   document survive verbatim - not repeated here.
+3. **The rules are not customisable.** The map's rules and its test for adding a document survive
+   verbatim - not repeated here.
 4. **Resist growth.** Most proposed additions are a section or tag in something that already exists,
    not a new file.
 
@@ -44,7 +44,8 @@ a repository one person will maintain for a month, or anything whose entire docu
 fits in one honest `README.md` - or one tight `AGENTS.md` - should stop here. The signal to proceed
 is not size in lines but **more than one reader**: someone who has to obey the behaviour, or someone
 who will inherit the reasoning. Record the outcome either way - a rejection that is written down is
-a decision, and one that is not gets re-litigated every six months.
+a decision, and one that is not gets re-litigated every six months. An adoption is recorded in the
+adoption record Step 3 creates.
 
 **Then write `PLAN.md` before anything else.** It is the one artifact you can create knowing nothing
 about the repository yet, and the adoption work itself is its first content: one entry per artifact
@@ -99,19 +100,17 @@ Two questions decide most of the rest:
 
 Work top to bottom. Every edit is a deletion or a substitution; nothing needs to be invented.
 
-| In `DOC-MAP.md`                                             | Do this                                                                                                                                                                                                                                                                                                                                                                      |
-| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Filenames                                                   | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md`                                                                                                                                                                                                                                                               |
-| "Where does it go?" table                                   | Delete rows for artifacts this repo does not have                                                                                                                                                                                                                                                                                                                            |
-| Layout block                                                | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either - see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare - nothing else on it - or the checker reads it as one leaf artifact instead of a container |
-| Specification line                                          | State whether it is one file or an index, and name its machine-readable members if any                                                                                                                                                                                                                                                                                       |
-| Artifacts table                                             | Delete unused rows. Keep the standard links - they tell a future maintainer how much to trust each convention                                                                                                                                                                                                                                                                |
-| Lifecycle table                                             | Delete the same rows, so the two tables stay aligned                                                                                                                                                                                                                                                                                                                         |
-| Flow                                                        | Keep, deleting any step that names an artifact you removed - most projects drop the optional task-note step                                                                                                                                                                                                                                                                  |
-| Prescribed formats                                          | Keep the formats for artifacts you kept; delete the rest                                                                                                                                                                                                                                                                                                                     |
-| "Machine-readable and generated parts"                      | Keep if anything here is generated or machine-readable; delete outright if the documentation is entirely hand-written prose                                                                                                                                                                                                                                                  |
-| Three rules, failure modes, "adding a new kind of document" | **Keep verbatim.** These are the parts that do the work, and they are the same in every repository                                                                                                                                                                                                                                                                           |
-| "Deliberately not here"                                     | Keep, and add anything else you consciously rejected for this repo                                                                                                                                                                                                                                                                                                           |
+| In `DOC-MAP.md`                        | Do this                                                                                                                                                                                                                                                                                                                                                                      |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Filenames                              | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md`                                                                                                                                                                                                                                                               |
+| "Where does it go?" table              | Delete rows for artifacts this repo does not have                                                                                                                                                                                                                                                                                                                            |
+| Layout block                           | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either - see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare - nothing else on it - or the checker reads it as one leaf artifact instead of a container |
+| Specification line                     | State whether it is one file or an index, and name its machine-readable members if any                                                                                                                                                                                                                                                                                       |
+| Artifacts table                        | Delete unused rows                                                                                                                                                                                                                                                                                                                                                           |
+| Lifecycle table                        | Delete the same rows, so the two tables stay aligned                                                                                                                                                                                                                                                                                                                         |
+| Flow                                   | Keep, deleting any step that names an artifact you removed - most projects drop the optional task-note step                                                                                                                                                                                                                                                                  |
+| Rules, "Adding a new kind of document" | **Keep verbatim.** These are the parts that do the work, and they are the same in every repository                                                                                                                                                                                                                                                                           |
+| "Deliberately not here"                | Keep, and add anything else you consciously rejected for this repo                                                                                                                                                                                                                                                                                                           |
 
 If the repository has house conventions the template does not mention - a naming scheme, a
 gitignored prefix for working documents, a docs directory that is generated - add a row for each
@@ -126,6 +125,7 @@ matter of taking the ones Step 1 said you had earned:
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always - the core five                                                                                                               |
 | `docs/adr/0000-template.md`                                              | always; records are worth having from day one, since their value is being written contemporaneously                                  |
+| `docs/adr/0001-adopt-doc-kit.md`                                         | always - renumber it if records exist, fill it in, and leave it `proposed` for a person to accept                                    |
 | `docs/quirks.md`                                                         | you deviate from a reference, or carry behaviour you know is wrong                                                                   |
 | `docs/glossary.md`                                                       | your domain has terms, or ordinary words used precisely                                                                              |
 | `docs/testing.md`                                                        | you have more than one test approach                                                                                                 |
@@ -160,8 +160,9 @@ artifact you kept:
   instructions; a `README.md` with unfilled headings is worse than a short one.
 
 The templates deliberately contain no advice about the kit - that is this file's job, and it is not
-copied into your repository. The one exception is `docs/adr/0000-template.md` and its counterpart in
-`docs/research/`, which stay as templates to copy from and keep a short comment for that reason.
+copied into your repository. The exceptions are `docs/adr/0000-template.md` and its counterpart in
+`docs/research/`, which stay as templates to copy from and keep a short comment for that reason, and
+the adoption record, whose comment is deleted once it is filled in.
 
 For an empty repository this step is quick and you are finished. For an existing codebase, the
 material for those first entries is already scattered through it - that is Step 4.

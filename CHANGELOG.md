@@ -2,6 +2,7 @@
 
 All notable changes to this project are documented here, following
 [Keep a Changelog](https://keepachangelog.com) and [Semantic Versioning](https://semver.org).
+Entries describe effects an adopter can see, not internal refactors or plan edits.
 
 ## Unreleased
 
@@ -15,13 +16,23 @@ All notable changes to this project are documented here, following
   rather than replacing it, and history to the commit message. A new failure mode, "Text narrates",
   generalises the specification's and research note's (ADR-0019).
 - The `AGENTS.md` stanza in `ADOPTING.md` tells agents to write the least that is true (ADR-0019).
+- `templates/docs/adr/0001-adopt-doc-kit.md`, an adoption decision record that cites the kit at a
+  pinned commit and holds the adopter's reasons and deviations. `ADOPTING.md` Step 3 always copies
+  it (ADR-0020).
 
 ### Changed
 
 - `SPECIFICATION.md`'s scope covers the tense and volume of what is written, code comments included,
   and excludes only style and what a project ought to document (ADR-0019).
-- `templates/DOC-MAP.md` says to iterate on a decision while it is `proposed`, and accept it once
-  experience stops changing it.
+- `templates/DOC-MAP.md` routes, and each artifact owns its rules (ADR-0020). Its "Prescribed
+  formats", "Machine-readable and generated parts", "Three rules" and "Failure modes" sections are
+  replaced by one "Rules" section. Formats move to `templates/PLAN.md`, `templates/CHANGELOG.md` and
+  the research template, and decision-record rules to `templates/docs/adr/0000-template.md`. The
+  failure modes move to `ADOPTING-NOTES.md`.
+- `templates/docs/adr/0000-template.md` says to iterate on a decision while it is `proposed`, and
+  accept it once experience stops changing it.
+- Decision records no longer name the code they constrain; the comment beside the code names the
+  record (ADR-0020).
 
 ## [0.4.0] - 2026-09-26
 
