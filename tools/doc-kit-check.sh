@@ -219,7 +219,7 @@ check_map() {
 			*) fail "$art has tense '$tense'" "§2.7 - present, past, future, imperative, explanatory" ;;
 		esac
 		case "$mut" in
-			"rewritten in place"|append-only|immutable|volatile|disposable) ;;
+			"rewritten in place"|amendable|append-only|immutable|volatile|disposable) ;;
 			*) fail "$art has mutability '$mut'" "§2.7 - see the permitted set" ;;
 		esac
 		IFS=$NL

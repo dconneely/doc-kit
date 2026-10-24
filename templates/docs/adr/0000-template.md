@@ -1,33 +1,40 @@
 ---
 status: "proposed"
 # proposed | rejected | accepted | deprecated | superseded by ADR-NNNN
-# may carry a pointer, e.g. accepted (refined by ADR-0006) - see the rules below
-date: {YYYY-MM-DD, when the status last changed}
-decision-makers: {who decided - required once the status is not "proposed"}
-# consulted / informed: optional, and overhead on a small team
+date: {YYYY-MM-DD, of the latest change of status or content}
+decision-makers: {the owner - required once the status is not "proposed"}
+approval: {the owner's words, verbatim - required once the status is not "proposed"}
 ---
 
-# 0. Short title, imperative, naming the problem and the answer
+# 0. The question this record answers
 
 <!--
 Copy to NNNN-kebab-case-title.md, four-digit zero-padded, unique and never reused. The heading
-number matches the filename. Keep this file as 0000; it is the template, and the rules for every
-record live here.
+number matches the filename, and the title names the question, not the answer, so that a changed
+answer leaves it true. Keep this file as 0000; it is the template, and the rules for every record
+live here.
 
 Follows the MADR minimal template (https://adr.github.io/madr/).
 
 Rules:
 
-- Only `accepted` binds. A `proposed` record is a suggestion; merge it undecided if you like.
-  Iterate while `proposed`, and accept once experience stops changing the record - accepting early
-  is what makes records proliferate.
-- Once accepted, a record is immutable except for its status, date and decision-makers, or a
-  formatting fix that changes no word. Correct it by writing a successor.
-- `superseded by ADR-NNNN` when the Decision Outcome stopped being true; `accepted (refined by
-  ADR-NNNN)` when it stands and a later record revised something following from it.
-- Changing a status is a human action. A tool may draft and argue a record; only a person decides
-  it, and names themselves in decision-makers. Make the flip its own pull request - a separate
-  commit does not survive a squash merge.
+- Only `accepted` binds. A `proposed` record is a suggestion: commit it undecided, and iterate on it
+  freely until the owner decides.
+- An accepted record is the current answer to its question. Amend it in place, even to reverse it;
+  supersede it only when its question splits, merges with another, or is cited from outside the
+  repository. A later choice between real options is its own record, linked from this one.
+- Cite records as ADR-NNNN. Another repository's record is cited by a link.
+
+Change a status, or an accepted record's content, only when all of these hold:
+
+- [ ] The owner asked, in this session, for this record - by number - to take this status or this
+      change. "Looks good", "go ahead", or approval of other work is not that.
+- [ ] Their words are copied verbatim into `approval`, `decision-makers` names them, and `date` is
+      today.
+- [ ] Every citation of this record that the change makes untrue is fixed in the same commit.
+      Search for its ID; leave commit messages alone.
+
+A formatting-only change, which alters no word, needs none of this.
 
 Write it when the decision is made, not later. A record reconstructed years afterwards is usually an
 argument for what you already do, and it dilutes the ones written contemporaneously.

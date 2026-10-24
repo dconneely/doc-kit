@@ -16,12 +16,22 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   rather than replacing it, and history to the commit message. A new failure mode, "Text narrates",
   generalises the specification's and research note's (ADR-0019).
 - The `AGENTS.md` stanza in `ADOPTING.md` tells agents to write the least that is true (ADR-0019).
-- `templates/docs/adr/0001-adopt-doc-kit.md`, an adoption decision record that cites the kit at a
-  pinned commit and holds the adopter's reasons and deviations. `ADOPTING.md` Step 3 always copies
-  it (ADR-0020).
+- `templates/docs/adr/0001-how-the-documentation-is-organised.md`, an adoption decision record that
+  cites the kit at a pinned commit and holds the adopter's reasons and deviations. `ADOPTING.md`
+  Step 3 always copies it (ADR-0020).
 
 ### Changed
 
+- Decision records change only on the owner's explicit instruction, naming the record, and record
+  the owner's words in a new `approval` field (ADR-0021, ADR-0022). The pull-request guidance is
+  gone.
+- An accepted decision record is the current answer to its question: it is amended in place, even to
+  reverse it, and superseded only when its question splits, merges, or is cited from outside the
+  repository (ADR-0022). Its mutability is the new value `amendable`, and its title names the
+  question.
+- Decision records are cited as `ADR-NNNN`, and another repository's record by a link. A change to a
+  record fixes the citations it makes untrue in the same commit (ADR-0022).
+- `templates/docs/adr/0000-template.md` carries a checklist for changing a record.
 - The kit is positioned for a repository one owner directs and many agent sessions write: the owner
   decides, and every other contributor, agent or human, proposes (ADR-0021). `SPECIFICATION.md`'s
   purpose says so, and `ADOPTING.md` Step 0's signal to adopt is repeated agent sessions rather than
@@ -37,6 +47,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   accept it once experience stops changing it.
 - Decision records no longer name the code they constrain; the comment beside the code names the
   record (ADR-0020).
+
+### Removed
+
+- The `refined by` status pointer. A later record is linked from the earlier one instead (ADR-0022).
 
 ## [0.4.0] - 2026-09-26
 

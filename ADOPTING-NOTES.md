@@ -7,10 +7,10 @@ decision resists, or when something is not working.
 ## Why the procedure is shaped the way it is
 
 Three properties define every artifact: **tense** (does it describe what is, what was, or what is
-intended?), **mutability** (rewritten in place, append-only, immutable, or disposable?) and
-**audience**. Documentation rots when one file mixes them - the classic case being a document that
-is part record of work done, part backlog, part assessment, so that no part of it can be trusted or
-pruned with confidence. `ADOPTING.md`'s four numbered consequences all follow from that:
+intended?), **mutability** (rewritten in place, amendable, append-only, immutable, or disposable?)
+and **audience**. Documentation rots when one file mixes them - the classic case being a document
+that is part record of work done, part backlog, part assessment, so that no part of it can be
+trusted or pruned with confidence. `ADOPTING.md`'s four numbered consequences all follow from that:
 
 1. **You customise mostly by deleting.** The template is roughly the union of what projects need;
    any given repository needs a subset. Almost nothing has to be invented.
@@ -33,7 +33,8 @@ this file.
   see what is actually open.
 - **The changelog becomes a commit log** - every internal refactor listed, so users cannot find what
   affects them.
-- **ADRs get edited** - destroying their value as a record of what was known at the time.
+- **A decision changes behind its citations** - a record is amended, and the text citing it still
+  says what it used to.
 - **The specification accumulates history** - "previously X, now Y", turning reference material into
   narrative.
 - **Findings evaporate** - an investigation's sources and dead ends survive only in a commit message
@@ -280,18 +281,17 @@ honestly, and note that it failed twice during this template's own development -
 machine-readable contracts both looked like obvious new categories and both turned out to belong
 somewhere that already existed. If it passes, add it to both tables in the map in the same commit.
 
-**"Do documentation changes need approving?"** One does. Accepting an ADR is the only moment this
-structure asks for agreement, because it is the only artifact that cannot be corrected afterwards.
-Everything else is rewritten in place or deleted freely, and ordinary review covers it. If you
-already have pull requests you already have the gate: leave a record `proposed` while it is being
-argued - merging it undecided is fine and makes the open question visible - and merge the flip to
-`accepted` once it is settled. Resist adding ceremony to the plan in particular; friction at capture
-is what empties a backlog.
+**"Do documentation changes need approving?"** One kind does. Changing a decision record's status,
+or an accepted record's content, needs the owner's explicit instruction, because a record is the one
+artifact whose content binds every session. Everything else is rewritten in place or deleted freely.
+Leave a record `proposed` while it is being argued - committing it undecided is fine and makes the
+open question visible. Resist adding ceremony to the plan in particular; friction at capture is what
+empties a backlog.
 
-**"There is an ADR I now think was wrong."** Leave it alone and write the replacement, marking the
-old one superseded. A wrong decision plus its supersession tells a future reader far more than a
-tidy history in which nobody was ever mistaken - including _why_ the reasoning looked sound at the
-time, which is what stops it being repeated.
+**"There is an ADR I now think was wrong."** Amend it: a record is the current answer to its
+question. Keep the option it used to choose under `Considered Options`, with the reason it lost, so
+that nobody proposes it again, and fix the citations the change makes untrue. Supersede it only if
+its question has split or merged, or it is cited from outside where citations cannot be fixed.
 
 **"This feels like a large migration and I keep not starting it."** It is not all-or-nothing. Steps
 1-3 - write the map, create the files it promises - are worth doing on their own and take an

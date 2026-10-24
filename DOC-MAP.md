@@ -56,7 +56,7 @@ templates/               product - the documents an adopter copies and customise
 tools/                   product - the conformance checker, optional and vendored
 .agents/skills/*/SKILL.md  product - drives an adoption from here into another repository
 docs/
-  adr/*.md               decisions, numbered, immutable once accepted
+  adr/*.md               decisions, numbered, changed only by the owner
   research/*.md          sourced findings, with confidence levels
   glossary.md            project vocabulary
   testing.md             what the checker verifies, and what it does not
@@ -79,7 +79,7 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `templates/*`               | **Product. Source of truth, not description** - the artifact half. Copied into the adopter's repository and customised there                                                                                          | present     | rewritten in place | adopters, via their own repositories                              |
 | `.agents/skills/*/SKILL.md` | **Product**. Drives an adoption from here into another repository, routing to `ADOPTING.md` and holding the approval gate. Never copied to an adopter                                                                 | imperative  | rewritten in place | whoever performs an adoption                                      |
 | `tools/*`                   | **Product.** The conformance checker - what `SPECIFICATION.md` says, made executable. Vendored into adopting repositories and optional there. **Source of truth, not description**                                    | present     | rewritten in place | adopters who want the check, and anyone editing the specification |
-| `docs/adr/*.md`             | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past        | immutable          | future maintainers                                                |
+| `docs/adr/*.md`             | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past        | amendable          | future maintainers                                                |
 | `CHANGELOG.md`              | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org)                                                                                   | past        | append-only        | adopters                                                          |
 | `PLAN.md`                   | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard**                                                                                                                                            | future      | volatile           | the owner and contributors                                        |
 | `docs/research/*.md`        | Sourced findings about the conventions this kit cites, with explicit confidence levels. **No standard**                                                                                                               | past        | append-only        | anyone relying on a cited convention                              |
@@ -100,7 +100,7 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `templates/*`               | an artifact earns a place in the product                     | when the artifact leaves the product                             |
 | `tools/*`                   | a specification rule becomes worth checking mechanically     | when the rule it checks is removed                               |
 | `.agents/skills/*/SKILL.md` | adoptions began being driven by an agent                     | when the procedure it drives no longer exists                    |
-| `docs/adr/*.md`             | a choice a newcomer would question                           | never - status flips to `superseded by ADR-NNNN`                 |
+| `docs/adr/*.md`             | a choice a newcomer would question                           | never - amended on the owner's instruction                       |
 | `CHANGELOG.md` entry        | at release, if visible to adopters                           | never                                                            |
 | `PLAN.md` entry             | idea occurs - one paragraph, no design                       | **deleted** when done, not struck through                        |
 | `docs/research/*.md`        | a cited convention is checked against its source             | never - confidence gets revised                                  |
@@ -134,6 +134,9 @@ Each artifact holds its own format and rules - the ADR shape and status rules in
    code comments ([ADR-0019][adr19]).
 4. **Code names the record, not the reverse.** A comment beside constrained code names the ADR that
    governs it.
+5. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
+   says as little about the record as it can, and is fixed in the same commit as a change to the
+   record that makes it untrue.
 
 ## Deliberately not here
 

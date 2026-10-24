@@ -5,7 +5,7 @@ belongs**. Start here when you have something to write down and are not sure whi
 
 Each artifact holds its own format and rules - in its preamble, or in its `0000-template.md` - and
 this map does not restate them. Why the structure is shaped this way is in the adoption record,
-`docs/adr/0001-adopt-doc-kit.md`.
+`docs/adr/0001-how-the-documentation-is-organised.md`.
 
 ## Where does it go?
 
@@ -41,7 +41,7 @@ SPECIFICATION.md         the behaviour contract - an index once it grows
 CHANGELOG.md             what shipped
 PLAN.md                  single ranked backlog, items tagged bug/debt/feature/docs
 docs/
-  adr/*.md               decisions, numbered, immutable once accepted
+  adr/*.md               decisions, numbered, changed only by the owner
   quirks.md              deliberate deviations and accepted-wrong behaviour
   research/*.md          sourced findings with confidence levels
   glossary.md            domain vocabulary
@@ -64,7 +64,7 @@ gets its own row below.
 | `DOC-MAP.md`         | This map: what each document is for, and where a fact belongs                                                            | present | rewritten in place | anyone adding documentation                                                                     |
 | `README.md`          | Orients a newcomer in one screen, and links outward                                                                      | present | rewritten in place | anyone                                                                                          |
 | `SPECIFICATION.md`   | The behaviour contract. Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength        | present | rewritten in place | users + implementers                                                                            |
-| `docs/adr/*.md`      | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past    | immutable          | future maintainers                                                                              |
+| `docs/adr/*.md`      | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past    | amendable          | future maintainers                                                                              |
 | `CHANGELOG.md`       | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past    | append-only        | users                                                                                           |
 | `PLAN.md`            | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future  | volatile           | the owner and contributors                                                                      |
 | `docs/quirks.md`     | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present | rewritten in place | users comparing against a reference, and anyone - human or agent - about to "fix" something odd |
@@ -81,7 +81,7 @@ gets its own row below.
 | `DOC-MAP.md`             | the structure is first agreed              | never - revised when an artifact is added, removed or repurposed |
 | `README.md`              | project starts                             | never                                                            |
 | `SPECIFICATION.md`       | behaviour is decided                       | never - edited forever                                           |
-| `docs/adr/*.md`          | a choice a newcomer would question         | never - status flips to `superseded by ADR-NNNN`                 |
+| `docs/adr/*.md`          | a choice a newcomer would question         | never - amended on the owner's instruction                       |
 | `CHANGELOG.md` entry     | at release, if user-visible                | never                                                            |
 | `PLAN.md` entry          | idea occurs - one paragraph, no design     | **deleted** when done, not struck through                        |
 | `docs/quirks.md` entry   | a deviation is chosen, or a bug accepted   | when the deviation ends                                          |
@@ -115,6 +115,9 @@ Most changes skip the ADR and the task note. Nothing skips the deletion.
    code comments.
 6. **Code names the record, not the reverse.** A comment beside constrained code names the ADR or
    quirk that governs it. Only quirk entries name code, in their `Where:` field.
+7. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
+   says as little about the record as it can, and is fixed in the same commit as a change to the
+   record that makes it untrue.
 
 ## Deliberately not here
 

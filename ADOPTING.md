@@ -126,7 +126,7 @@ matter of taking the ones Step 1 said you had earned:
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `DOC-MAP.md`, `README.md`, `SPECIFICATION.md`, `CHANGELOG.md`, `PLAN.md` | always - the core five                                                                                                               |
 | `docs/adr/0000-template.md`                                              | always; records are worth having from day one, since their value is being written contemporaneously                                  |
-| `docs/adr/0001-adopt-doc-kit.md`                                         | always - renumber it if records exist, fill it in, and leave it `proposed` for a person to accept                                    |
+| `docs/adr/0001-how-the-documentation-is-organised.md`                    | always - renumber it if records exist, fill it in, and leave it `proposed` for a person to accept                                    |
 | `docs/quirks.md`                                                         | you deviate from a reference, or carry behaviour you know is wrong                                                                   |
 | `docs/glossary.md`                                                       | your domain has terms, or ordinary words used precisely                                                                              |
 | `docs/testing.md`                                                        | you have more than one test approach                                                                                                 |
@@ -223,8 +223,10 @@ Before you edit:
 
 - Change the specification because behaviour changed, never because it'd read better. Purpose and
   scope aren't yours to revise.
-- Never change an ADR's `status`, or edit an `accepted` one. Draft, don't decide - leave
-  `decision-makers` as the placeholder too.
+- Change an ADR's `status`, or an `accepted` one's content, only when the owner explicitly asks,
+  naming the record. Copy their words into `approval`. Otherwise draft it `proposed`, leaving
+  `decision-makers` as the placeholder.
+- Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
 - Delete finished `PLAN.md` entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or
   code comments - the map says where those go.
@@ -287,8 +289,8 @@ finding that a claim cannot be dated, and promoting an undatable claim into the 
 worse than leaving it untrusted. And **anything moving out of a directory people navigate leaves a
 one-line pointer behind**, because links from issues, wikis and bookmarks do not follow renames.
 
-Get the dispositions reviewed before acting on them. It is the cheapest point at which someone who
-remembers why a document exists can say so.
+Get the owner to review the dispositions before acting on them. It is the cheapest point at which
+someone who remembers why a document exists can say so.
 
 ### 4c - Work the sweeps
 

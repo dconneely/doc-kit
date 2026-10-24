@@ -103,10 +103,10 @@ remain at the root.
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
 mutability and an audience, drawn from these sets:
 
-| Property   | Values                                                                     |
-| ---------- | -------------------------------------------------------------------------- |
-| Tense      | `present`, `past`, `future`, `imperative`, `explanatory`                   |
-| Mutability | `rewritten in place`, `append-only`, `immutable`, `volatile`, `disposable` |
+| Property   | Values                                                                                  |
+| ---------- | --------------------------------------------------------------------------------------- |
+| Tense      | `present`, `past`, `future`, `imperative`, `explanatory`                                |
+| Mutability | `rewritten in place`, `amendable`, `append-only`, `immutable`, `volatile`, `disposable` |
 
 Audience is free text. Two artifacts sharing all three are one artifact: merge them, or make one a
 section of the other. Free-text tense and mutability defeat that test - near-duplicates escape on
@@ -132,44 +132,40 @@ hand applies the same judgement: check it, don't block on it.
 
 **How much ceremony an artifact needs follows from its mutability, not from its importance.**
 
-- **Immutable** artifacts need a freeze point, because after it nothing can be corrected in place.
-  That is what `proposed` -> `accepted` is for, and it is the only place this specification requires
-  a moment of agreement.
+- **Amendable** artifacts - decision records - need the owner. A change of status, and a change to
+  an accepted record, is made on the owner's explicit instruction (§3.1). It is the only place this
+  specification requires a decision by a person.
 - **Rewritten-in-place** artifacts - the specification, the map, quirks, the glossary - need no
   freeze point. A wrong statement is corrected, not superseded. Where such a change encodes a real
-  choice, the choice belongs in a record and is gated there; restating the gate would gate one
-  decision twice.
+  choice, the choice belongs in a record and is decided there; deciding it again here would decide
+  one choice twice.
 - **Volatile** artifacts - the plan, task notes - should be gated as little as possible. Friction at
   capture is what empties a backlog. The decision point is ranking an entry and picking it up, not
   filing it.
 - **Append-only** artifacts - the changelog - are gated by release, not by review.
+- **Immutable** artifacts - the archive - are not changed at all.
 
-**Use the gate you already have.** For most projects that is the pull request, and the flip to
-`accepted` then costs nothing extra: merging it _is_ the approval. Projects without pull requests
-are not excluded - a meeting, a mailing list, or one person deciding all satisfy this specification,
-which requires that agreement be recorded, not that it be reached any particular way.
+The status and `approval` are the durable record of the owner's decision. A conversation or a forge
+can lose it; the tree keeps it.
 
-The status is the durable half of that record. A pull request lives in a forge that can be migrated,
-archived, or quietly lose its history; the record stays in the tree. The flip is the in-repository
-trace of an out-of-repository event - the same reason this structure keeps facts in the repository
-rather than in a tracker.
-
-### 3.1 Architecture decision records
+### 3.1 Decision records
 
 Records follow the [MADR](https://adr.github.io/madr/) minimal template. Filenames MUST match
 `NNNN-kebab-case-title.md` with a four-digit zero-padded number, and numbers MUST be unique and
-never reused. The heading MUST repeat the number. See ADR-0010.
+never reused. The heading MUST repeat the number. The title SHOULD name the question the record
+answers rather than the answer, so that a changed answer leaves it true. See ADR-0010 and ADR-0022.
 
-Each record MUST carry YAML front-matter with `status` and `date`, and SHOULD carry
-`decision-makers`. MADR's `consulted` and `informed` are permitted and not required - RACI fields
-are overhead below a certain team size.
+Each record MUST carry YAML front-matter with `status` and `date`. A record past `proposed` MUST
+also carry `decision-makers`, naming the owner, and `approval`: the owner's words, verbatim, that
+instructed its latest change of status or content. `date` is the date of that change. MADR's
+`consulted` and `informed` are permitted and not required.
 
 Each record MUST carry `Context and Problem Statement`, `Considered Options` and `Decision Outcome`
 sections, and SHOULD carry `Consequences` as a subsection of the last. **`Considered Options` is
 what makes a record a decision rather than a statement**; a record with only one option to consider
 is usually a specification entry that has been misfiled.
 
-`status` MUST begin with exactly one of these, lowercase:
+`status` MUST be exactly one of these, lowercase:
 
 | Value                    | Meaning                                                           |
 | ------------------------ | ----------------------------------------------------------------- |
@@ -177,57 +173,33 @@ is usually a specification entry that has been misfiled.
 | `rejected`               | Considered and turned down. Kept so the option is not re-proposed |
 | `accepted`               | Decided and in effect                                             |
 | `deprecated`             | No longer applies, and nothing replaced it                        |
-| `superseded by ADR-NNNN` | Replaced by a later record, which MUST exist                      |
-
-A status MAY carry a parenthesised forward pointer naming a record that exists:
-
-```text
-accepted (refined by ADR-0006)
-```
-
-`refined by` means the decision stands, and a later record has revised something that follows from
-it. It is set on the earlier record when the later one is accepted. It MUST NOT be used where the
-`Decision Outcome` itself stopped being true - that is supersession, and the heavier form is
-correct. Choosing between them is a judgement, which is why it is a human action like any other
-status change. See ADR-0009.
-
-**Immutability attaches to the status, not to the commit.** A record whose status is `proposed` MAY
-be edited freely, and MAY be merged while still undecided - a pending decision in the tree is more
-discoverable than one living in an unmerged branch, which is the point of having the status at all.
-A record whose status is `accepted` MUST NOT be edited except to change its `status`, `date` and
-`decision-makers`, or to correct formatting that changes no word - whitespace, list markers, or
-other rendering-only tokens (ADR-0016). The first three change together at acceptance, which is the
-moment `decision-makers` becomes required - a rule permitting only the first two would make it
-impossible to comply with the second.
-
-**Immutability begins at publication.** A record nobody outside its author could have read has no
-reader who relied on it, so correcting a drafting error in one is not rewriting history. In practice
-the line is the first push to a shared remote. This matters during adoption, where records are often
-drafted in a batch before anything is shared. The exception MUST NOT be stretched past that line:
-once a record is visible to others, it is fixed, and the remedy for a mistake is a successor.
+| `superseded by ADR-NNNN` | Replaced by another record, which MUST exist                      |
 
 **Only `accepted` records bind.** A `proposed` record is a suggestion, and no reader - human or
 automated - may treat it as a constraint.
 
-**Changing a record's status is a human action.** A tool MAY draft, argue and merge a record as
-`proposed`; any other status MUST be set by a person, who is thereby asserting that a decision was
-actually made, and who SHOULD name themselves in `decision-makers`. The assertion is not
-mechanically verifiable, but the _presence_ of `decision-makers` on a record is. See ADR-0008.
+**The owner changes records.** Any contributor MAY draft, argue and commit a record as `proposed`,
+and edit it freely while it is. A record's status, and an accepted record's content, change only on
+the owner's explicit instruction, given in the session making the change and naming the record.
+General approval - "looks good", "go ahead", approval of other work - is not that instruction. A
+formatting-only change, which alters no word, needs none (ADR-0016). Until the owner instructs it, a
+change to an accepted record is not committed. See ADR-0008 and ADR-0021.
 
-Projects using pull requests SHOULD make the status change **its own pull request**, separate from
-the one that introduced the record. Not merely a separate commit: a squash merge collapses the
-branch into one commit on the trunk, taking the separation with it. A dedicated pull request keeps
-the moment of acceptance visible whatever the merge strategy, and reduces it to a one-line diff
-whose entire content is "we have decided this" - the easiest thing in a repository to review, and
-the hardest to slip past a reviewer.
+**An accepted record is the current answer to its question.** It MAY be amended in place, including
+to reverse its decision. It is superseded only when its question splits in two, merges with another,
+or is cited from outside the repository where its citations cannot be fixed. A later choice between
+real options is its own record, linked from the earlier one. A record carries no revision log; git
+holds what it said when. See ADR-0022.
 
-Approval beyond that is the adopting project's business. Review on a pull request satisfies this
-specification; so does a meeting, or one person deciding. What matters is that the flip from
-`proposed` to `accepted` records that the decision was made, and that nothing is edited afterwards.
+**Citations take one form.** A record is cited as `ADR-NNNN` - upper case, a hyphen, four digits -
+and a bare ID MUST name a record in this repository. A record in another repository is cited by a
+link to it. A citation SHOULD claim as little about the record as it can. A change to an accepted
+record MUST be committed together with every citation in the repository that it makes untrue, found
+by searching for the record's ID. Commit messages are history, and are not changed.
 
-A checker cannot verify immutability from a working tree and SHOULD verify it from history instead,
-treating any content diff to a record that was already `accepted` as a violation - a formatting-only
-diff (ADR-0016) is not one.
+A checker MUST report a record past `proposed` that lacks `decision-makers` or `approval`, and a
+bare `ADR-NNNN` outside code that names no record in this repository. It cannot verify that
+`approval` holds the owner's words, nor that an amendment fixed its citations.
 
 ### 3.2 Changelog
 
