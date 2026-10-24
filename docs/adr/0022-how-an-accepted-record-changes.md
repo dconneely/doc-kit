@@ -30,27 +30,27 @@ accepted record, and what a change has to bring with it.
 
 - Keep immutability, with the `refined by` pointer and the formatting exemption
 - Amend an accepted record only where nothing citing it would be misled; supersede it otherwise
-- Amend an accepted record in place, and fix every citation in the repository in the same commit;
-  supersede only where citations cannot be fixed
+- Amend an accepted record in place, and fix every citation in the repository in the same commit
 - Rewrite accepted records in place, like the specification
 
 ## Decision Outcome
 
 Chosen option: **amend in place and fix the citations**, because it keeps the property immutability
-protected - a citation means what the record says - without a successor for each change of mind.
+protected - a citation means what the record says - without a new record for each change of mind.
 
 A record is **the current answer to one question**. Its filename and title name the question, not
 the answer, so that a changed answer does not make them false. The number of records grows with the
 number of questions, not with the number of changes.
 
-**Every change takes two agreements from the owner.** Changing a record - its content or its status,
-deleting it or obsoleting it - needs the owner's explicit agreement, asked for first. Once the
-change is made, the record is `proposed` again until the owner accepts the change, which is the
-second agreement; it then returns to `accepted`. "Looks good", "go ahead", or approval of other work
-is neither. The owner's words of acceptance are copied verbatim into an `approval` front-matter
-field, and `date` becomes the date of the change. A formatting change applied by a tool, which
-alters no word, needs neither (ADR-0016). A change is normally accepted before it is committed, so
-history holds the accepted versions, and the accepted text binds until then.
+**Changing an accepted record takes two permissions from the owner.** The owner first reopens it -
+its status goes from `accepted` to `proposed` - and a contributor then amends it freely. The owner
+then accepts the change, and it returns to `accepted`; if the owner rejects the change, the last
+accepted version is restored. Deprecating or deleting a record also needs the owner's permission.
+"Looks good", "go ahead", or approval of other work is not permission. The owner's words are copied
+verbatim into an `approval` front-matter field, and `date` becomes the date of the change. A
+formatting change applied by a tool, which alters no word, needs no permission (ADR-0016). A change
+is normally accepted before it is committed, so history holds the accepted versions, and the
+accepted text binds until then.
 
 **The change and its citations go in one commit.** Search the repository for the record's ID, read
 each citation, and correct it or confirm it still holds.
@@ -62,13 +62,14 @@ change that "Postgres, per ADR-0012" does not.
 
 **What cannot be fixed is left alone.** Commit messages are history; `git show` at that commit gives
 the record they cited. Citations outside the repository - issues, other repositories, agent memory
-files - cannot be found by a search here. Supersede a record when its question splits in two, when
-two records merge, or when it is cited from outside in a way that matters, such as by the consumers
-of a published library.
+files - cannot be found by a search here. When a record's question splits in two or merges with
+another, or the record no longer applies, it is deprecated or deleted, and links to whatever
+replaces it. A record cited from outside in a way that matters - by the consumers of a published
+library, say - is better deprecated than deleted.
 
 A later choice between real options is its own record, linked from the earlier one. This replaces
-the `refined by` pointer, and supersedes ADR-0009. The record carries no revision log: git holds
-what it said when, and the record says what is true now.
+the `refined by` pointer, and replaces ADR-0009. The record carries no revision log: git holds what
+it said when, and the record says what is true now.
 
 Keeping immutability was rejected because every correction becomes a successor, and readers assemble
 chains to learn what one decision is. Amending only where nothing would be misled was rejected
@@ -78,7 +79,7 @@ citation fixes, a citation could come to mean anything.
 
 ### Consequences
 
-- Good, because corrections and reversals land in the record a reader opens, and supersession chains
+- Good, because corrections and reversals land in the record a reader opens, and deprecated records
   exist only where a question split, merged, or is cited from outside.
 - Good, because the `refined by` pointer, its status syntax and its checker rule go.
 - Good, because a checker can find every citation and report any that names a record that does not

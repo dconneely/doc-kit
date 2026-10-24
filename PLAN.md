@@ -12,7 +12,7 @@ needs more, it needs an ADR. `SPECIFICATION.md` §3.3 defines the scales.
 
 Merge the records into one per question, simplify each to the current answer, and renumber them -
 reusing numbers is allowed for this one migration. ADR-0020 to ADR-0022 join the set. The migration
-converts the `refined by` pointers to links, obsoletes ADR-0009 and ADR-0011, links ADR-0017's
+converts the `refined by` pointers to links, merges ADR-0009 and ADR-0011 away, links ADR-0017's
 citation of `identigon/identigon`'s ADR-0036, fixes every citation, and fills in `approval`. The
 owner agrees to the inventory first, then accepts the migrated set; until then ADR-0020 to ADR-0022
 stay `proposed`.
@@ -50,7 +50,7 @@ their PDFs, as generated artifacts.
 **Type:** feature - **Importance:** medium - **Effort:** medium
 
 Needs an ADR. A generated index of the decision records in force, so a session reads what binds
-without opening superseded ones; the owner's purpose as an accepted record the specification links
+without opening deprecated ones; the owner's purpose as an accepted record the specification links
 to; and MADR's optional `Confirmation` section, naming the test that confirms a decision.
 
 ## Remove duplication between the specification and the templates

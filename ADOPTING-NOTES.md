@@ -236,8 +236,8 @@ Where people actually get stuck, and what the difficulty usually means.
 **"I cannot decide which file this belongs in."** Usually the sentence contains two facts. Split it
 and file each half; that resolves most cases. If one fragment still resists, ask what would make it
 _wrong_: a wrong statement about behaviour is a specification defect, a wrong statement about
-reasoning is an ADR to supersede, a wrong statement about what happened is a changelog error.
-Whichever question stings, that is the home.
+reasoning is an ADR to reopen, a wrong statement about what happened is a changelog error. Whichever
+question stings, that is the home.
 
 **"This looks like both an ADR and a research note."** Did you _choose_ something, or _learn_
 something? A choice has alternatives that were rejected - an ADR. A finding is a fact about the
@@ -281,17 +281,17 @@ honestly, and note that it failed twice during this template's own development -
 machine-readable contracts both looked like obvious new categories and both turned out to belong
 somewhere that already existed. If it passes, add it to both tables in the map in the same commit.
 
-**"Do documentation changes need approving?"** One kind does. Creating, changing, deleting or
-obsoleting a decision record needs the owner's explicit agreement, asked for first, because a record
-is the one artifact whose content binds every session. Everything else is rewritten in place or
-deleted freely. A record can stay `proposed` while it is being argued - committed undecided, the
-open question is visible. Resist adding ceremony to the plan in particular; friction at capture is
-what empties a backlog.
+**"Do documentation changes need approving?"** One kind does. A decision record is drafted and
+revised freely while `proposed`; accepting, rejecting, reopening, deprecating or deleting one needs
+the owner's explicit permission, because a record is the one artifact whose content binds every
+session. Everything else is rewritten in place or deleted freely. Resist adding ceremony to the plan
+in particular; friction at capture is what empties a backlog.
 
-**"There is an ADR I now think was wrong."** Amend it: a record is the current answer to its
-question. Keep the option it used to choose under `Considered Options`, with the reason it lost, so
-that nobody proposes it again, and fix the citations the change makes untrue. Supersede it only if
-its question has split or merged, or it is cited from outside where citations cannot be fixed.
+**"There is an ADR I now think was wrong."** Ask the owner to reopen it, amend it - a record is the
+current answer to its question - and ask them to accept the change. Keep the option it used to
+choose under `Considered Options`, with the reason it lost, so that nobody proposes it again, and
+fix the citations the change makes untrue. If the decision simply no longer applies, deprecate or
+delete it, with the owner's permission.
 
 **"This feels like a large migration and I keep not starting it."** It is not all-or-nothing. Steps
 1-3 - write the map, create the files it promises - are worth doing on their own and take an

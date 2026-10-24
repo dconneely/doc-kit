@@ -22,13 +22,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
-- Agents ask the owner before creating, changing, deleting or obsoleting a decision record, and act
-  only with the owner's explicit agreement. Acceptance records the owner's words in a new `approval`
-  field (ADR-0021, ADR-0022). The pull-request guidance is gone.
-- An accepted decision record is the current answer to its question: it is amended in place, even to
-  reverse it, and superseded only when its question splits, merges, or is cited from outside the
-  repository (ADR-0022). Its mutability is the new value `amendable`, and its title names the
-  question.
+- An agent may create a decision record as `proposed` and revise it freely. Accepting, rejecting,
+  reopening, deprecating or deleting a record needs the owner's explicit permission, and the owner's
+  words are kept in a new `approval` field (ADR-0021, ADR-0022). The pull-request guidance is gone.
+- An accepted decision record is the current answer to its question: it is reopened and amended in
+  place, even to reverse it, and deprecated or deleted when it no longer applies (ADR-0022). Its
+  mutability is the new value `amendable`, and its title names the question.
 - Decision records are cited as `ADR-NNNN`, and another repository's record by a link. A change to a
   record fixes the citations it makes untrue in the same commit (ADR-0022).
 - `templates/docs/adr/0000-template.md` states those rules, and how to create a record and get it
@@ -52,6 +51,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 ### Removed
 
 - The `refined by` status pointer. A later record is linked from the earlier one instead (ADR-0022).
+- The `superseded by ADR-NNNN` status. A replaced record is deprecated or deleted, and links to its
+  replacement (ADR-0022).
 
 ## [0.4.0] - 2026-09-26
 

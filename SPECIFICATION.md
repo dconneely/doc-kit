@@ -132,9 +132,10 @@ hand applies the same judgement: check it, don't block on it.
 
 **How much ceremony an artifact needs follows from its mutability, not from its importance.**
 
-- **Amendable** artifacts - decision records - need the owner. Every record, and every change to
-  one - deletion and obsoletion included - is made with the owner's explicit agreement, asked for
-  first (§3.1). It is the only place this specification requires a decision by a person.
+- **Amendable** artifacts - decision records - need the owner. A contributor creates and changes
+  `proposed` records freely; accepting, rejecting, reopening, deprecating and deleting a record each
+  need the owner's explicit permission (§3.1). It is the only place this specification requires a
+  decision by a person.
 - **Rewritten-in-place** artifacts - the specification, the map, quirks, the glossary - need no
   freeze point. A wrong statement is corrected, not superseded. Where such a change encodes a real
   choice, the choice belongs in a record and is decided there; deciding it again here would decide
@@ -155,10 +156,10 @@ Records follow the [MADR](https://adr.github.io/madr/) minimal template. Filenam
 never reused. The heading MUST repeat the number. The title SHOULD name the question the record
 answers rather than the answer, so that a changed answer leaves it true. See ADR-0010 and ADR-0022.
 
-Each record MUST carry YAML front-matter with `status` and `date`. A record past `proposed` MUST
-also carry `decision-makers`, naming the owner, and `approval`: the owner's words, verbatim,
-agreeing to its latest change of status or content. `date` is the date of that change. MADR's
-`consulted` and `informed` are permitted and not required.
+Each record MUST carry YAML front-matter with `status` and `date`. A record whose status is not
+`proposed` MUST also carry `decision-makers`, naming the owner, and `approval`: the owner's words,
+verbatim, giving permission for its latest change of status. `date` is the date of that change.
+MADR's `consulted` and `informed` are permitted and not required.
 
 Each record MUST carry `Context and Problem Statement`, `Considered Options` and `Decision Outcome`
 sections, and SHOULD carry `Consequences` as a subsection of the last. **`Considered Options` is
@@ -167,42 +168,46 @@ is usually a specification entry that has been misfiled.
 
 `status` MUST be exactly one of these, lowercase:
 
-| Value                    | Meaning                                                           |
-| ------------------------ | ----------------------------------------------------------------- |
-| `proposed`               | Put to the owner, not yet decided. Binds nothing                  |
-| `rejected`               | Considered and turned down. Kept so the option is not re-proposed |
-| `accepted`               | Decided by the owner, and in effect                               |
-| `deprecated`             | No longer applies, and nothing replaced it                        |
-| `superseded by ADR-NNNN` | Replaced by another record, which MUST exist                      |
+| Value        | Meaning                                                             |
+| ------------ | ------------------------------------------------------------------- |
+| `proposed`   | Put to the owner, not yet decided. Binds nothing                    |
+| `accepted`   | Decided by the owner, and in effect                                 |
+| `rejected`   | Turned down by the owner, and kept so that it is not proposed again |
+| `deprecated` | No longer applies. Links to any record that replaced it             |
+
+These are MADR's own values. MADR's `superseded by` is not used: a replaced record is deprecated or
+deleted, and links to its replacement.
 
 **Only `accepted` records bind.** `proposed` exists so that an agent can put a decision in front of
 the owner before it is decided. No reader - human or automated - may treat a `proposed` record as a
 constraint.
 
-**The owner agrees to every record and every change.** A contributor MUST ask the owner before
-creating, changing, deleting, superseding or deprecating a record - any record, of any status - and
-MUST do it only with the owner's explicit agreement. General approval - "looks good", "go ahead",
-approval of other work - is not agreement to a record. A record starts `proposed`, copied from the
-template rather than from another record. A record being changed returns to `proposed` until the
-owner accepts the change. A record is normally accepted before it is committed, so history holds its
+**The owner decides every change of status.** A contributor MAY create a record as `proposed`,
+copied from the template rather than from another record, and MAY change a `proposed` record freely.
+It MUST have the owner's explicit permission, asked for first, to accept a record (`proposed` to
+`accepted`), reject one (`proposed` to `rejected`), reopen one to change it (`accepted` to
+`proposed`), deprecate one (`accepted` to `deprecated`), or delete one of any status. General
+approval - "looks good", "go ahead", approval of other work - is not permission. When the owner
+rejects a change to a reopened record, its last accepted version is restored, rather than the record
+being marked `rejected`. A record is normally accepted before it is committed, so history holds its
 accepted versions. Formatting applied by a tool, which alters no word, is not a change (ADR-0016).
 See ADR-0008 and ADR-0021.
 
-**An accepted record is the current answer to its question.** It MAY be amended in place, including
-to reverse its decision. It is superseded only when its question splits in two, merges with another,
-or is cited from outside the repository where its citations cannot be fixed. A later choice between
-real options is its own record, linked from the earlier one. A record carries no revision log; git
-holds what it said when. See ADR-0022.
+**An accepted record is the current answer to its question.** It is reopened and amended in place,
+including to reverse its decision. When its question splits or merges with another, or it no longer
+applies, it is deprecated or - more simply - deleted, and links to any record that replaces it. A
+later choice between real options is its own record, linked from the earlier one. A record carries
+no revision log; git holds what it said when. See ADR-0022.
 
 **Citations take one form.** A record is cited as `ADR-NNNN` - upper case, a hyphen, four digits -
 and a bare ID MUST name a record in this repository. A record in another repository is cited by a
-link to it. A citation SHOULD claim as little about the record as it can. A change to an accepted
-record MUST be committed together with every citation in the repository that it makes untrue, found
-by searching for the record's ID. Commit messages are history, and are not changed.
+link to it. A citation SHOULD claim as little about the record as it can. A change to a record, its
+deletion included, MUST be committed together with every citation in the repository that it makes
+untrue, found by searching for the record's ID. Commit messages are history, and are not changed.
 
-A checker MUST report a record past `proposed` that lacks `decision-makers` or `approval`, and a
-bare `ADR-NNNN` outside code that names no record in this repository. It cannot verify that
-`approval` holds the owner's words, nor that an amendment fixed its citations.
+A checker MUST report a record whose status is not `proposed` that lacks `decision-makers` or
+`approval`, and a bare `ADR-NNNN` outside code that names no record in this repository. It cannot
+verify that `approval` holds the owner's words, nor that an amendment fixed its citations.
 
 ### 3.2 Changelog
 

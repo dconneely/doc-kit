@@ -56,7 +56,7 @@ templates/               product - the documents an adopter copies and customise
 tools/                   product - the conformance checker, optional and vendored
 .agents/skills/*/SKILL.md  product - drives an adoption from here into another repository
 docs/
-  adr/*.md               decisions, numbered, changed only by the owner
+  adr/*.md               decisions, numbered, accepted only by the owner
   research/*.md          sourced findings, with confidence levels
   glossary.md            project vocabulary
   testing.md             what the checker verifies, and what it does not
@@ -100,7 +100,7 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `templates/*`               | an artifact earns a place in the product                     | when the artifact leaves the product                             |
 | `tools/*`                   | a specification rule becomes worth checking mechanically     | when the rule it checks is removed                               |
 | `.agents/skills/*/SKILL.md` | adoptions began being driven by an agent                     | when the procedure it drives no longer exists                    |
-| `docs/adr/*.md`             | a choice a newcomer would question                           | never - amended on the owner's instruction                       |
+| `docs/adr/*.md`             | a choice a newcomer would question                           | deprecated or deleted, with the owner's permission               |
 | `CHANGELOG.md` entry        | at release, if visible to adopters                           | never                                                            |
 | `PLAN.md` entry             | idea occurs - one paragraph, no design                       | **deleted** when done, not struck through                        |
 | `docs/research/*.md`        | a cited convention is checked against its source             | never - confidence gets revised                                  |

@@ -1,6 +1,6 @@
 ---
 status: "proposed"
-# proposed | rejected | accepted | deprecated | superseded by ADR-NNNN
+# proposed | accepted | rejected | deprecated
 date: {YYYY-MM-DD, of the latest change of status or content}
 decision-makers: {the owner - required once the status is not "proposed"}
 approval: {the owner's words, verbatim - required once the status is not "proposed"}
@@ -18,22 +18,24 @@ Follows the MADR minimal template (https://adr.github.io/madr/).
 
 Rules - absolute:
 
-- Ask the owner before creating, changing, deleting or obsoleting a record - any record, any
-  status. Do it only with their explicit agreement.
-- Create one by copying this file, never an existing record, to the next free number. It starts
-  "proposed".
-- Get one accepted by asking the owner "Accept ADR-NNNN?". If they agree, set status,
-  decision-makers (their name), approval (their words) and date (today), then commit.
-- A record being changed goes back to "proposed" until the owner accepts the change.
+- An agent may create a record as "proposed", by copying this file - never an existing record - to
+  the next free number, and may change a "proposed" record.
+- Every other change needs the owner's explicit permission, asked for first: proposed -> accepted
+  (accepting), proposed -> rejected (rejecting), accepted -> proposed (reopening to change it),
+  accepted -> deprecated (deprecating), and deleting a record of any status.
+- On accepting, rejecting or deprecating, set decision-makers (their name), approval (their words)
+  and date (today), then commit.
+- If the owner rejects a change to a reopened record, restore its last accepted version instead of
+  marking it rejected.
 
 How records work:
 
-- Only `accepted` binds. An accepted record is the current answer to its question: amend it, even to
-  reverse it, and supersede it only when its question splits, merges with another, or is cited from
-  outside the repository. A later choice between real options is its own record, linked from this
-  one.
-- Cite records as ADR-NNNN, and another repository's record by a link. A change fixes, in the same
-  commit, every citation it makes untrue; commit messages are left alone.
+- Only `accepted` binds. An accepted record is the current answer to its question: reopen and amend
+  it, even to reverse it. When it no longer applies, deprecate or delete it - deleting is usually
+  simpler - and link from it to any record that replaces it. A later choice between real options is
+  its own record, linked from this one.
+- Cite records as ADR-NNNN, and another repository's record by a link. A change, deletion included,
+  fixes in the same commit every citation it makes untrue; commit messages are left alone.
 - Formatting applied by a tool is not a change.
 
 Write it when the decision is made, not later. A record reconstructed years afterwards is usually an

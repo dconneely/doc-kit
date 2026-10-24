@@ -41,7 +41,7 @@ SPECIFICATION.md         the behaviour contract - an index once it grows
 CHANGELOG.md             what shipped
 PLAN.md                  single ranked backlog, items tagged bug/debt/feature/docs
 docs/
-  adr/*.md               decisions, numbered, changed only by the owner
+  adr/*.md               decisions, numbered, accepted only by the owner
   quirks.md              deliberate deviations and accepted-wrong behaviour
   research/*.md          sourced findings with confidence levels
   glossary.md            domain vocabulary
@@ -81,7 +81,7 @@ gets its own row below.
 | `DOC-MAP.md`             | the structure is first agreed              | never - revised when an artifact is added, removed or repurposed |
 | `README.md`              | project starts                             | never                                                            |
 | `SPECIFICATION.md`       | behaviour is decided                       | never - edited forever                                           |
-| `docs/adr/*.md`          | a choice a newcomer would question         | never - amended on the owner's instruction                       |
+| `docs/adr/*.md`          | a choice a newcomer would question         | deprecated or deleted, with the owner's permission               |
 | `CHANGELOG.md` entry     | at release, if user-visible                | never                                                            |
 | `PLAN.md` entry          | idea occurs - one paragraph, no design     | **deleted** when done, not struck through                        |
 | `docs/quirks.md` entry   | a deviation is chosen, or a bug accepted   | when the deviation ends                                          |

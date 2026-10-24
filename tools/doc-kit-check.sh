@@ -257,7 +257,6 @@ check_adr() {
 
 		case "$status" in
 			proposed|rejected|accepted|deprecated) ;;
-			"superseded by ADR-"[0-9][0-9][0-9][0-9]) ;;
 			"accepted (refined by ADR-"[0-9][0-9][0-9][0-9]")") ;;
 			'') ;;
 			*) fail "$f has status '$status'" "§3.1 - see the table of permitted values" ;;

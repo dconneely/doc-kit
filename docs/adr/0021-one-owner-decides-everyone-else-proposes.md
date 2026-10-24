@@ -43,7 +43,7 @@ documentation they write accumulating into contradictory, stale text that mislea
 Its rules serve that purpose:
 
 - **A new session can tell what binds.** Every document is current, or visibly marked as not
-  binding: `proposed`, superseded, planned or archived.
+  binding: `proposed`, deprecated, planned or archived.
 - **The owner's purpose has one home**, and only the owner changes it.
 - **Text is written to be deleted.** Every artifact has a point at which its content is removed or
   replaced, and the structure says where that is.
@@ -51,15 +51,14 @@ Its rules serve that purpose:
 The owner decides; everyone else proposes:
 
 - `docs/decisions/` is where the owner records decisions about the project. A contributor - human or
-  agent - creates, changes, deletes or obsoletes a record only with the owner's explicit agreement,
-  asked for first.
+  agent - may create a record as `proposed` and revise it freely. Accepting, rejecting, reopening,
+  deprecating or deleting a record needs the owner's explicit permission, asked for first.
 - `proposed` exists so that an agent can put a decision in front of the owner before it is decided.
   It no longer marks a record waiting for several people to meet and agree. `accepted` records that
   the owner decided it; `decision-makers` names the owner, and is how a reader tells that a person,
   not an agent session, made the decision.
-- Gates spend the owner's attention, so there are as few as possible: agreeing to a record or a
-  change to one, accepting it, and reviewing the Step 4 inventory. Everything else proceeds without
-  asking.
+- Gates spend the owner's attention, so there are as few as possible: those changes of status and
+  deletions, and reviewing the Step 4 inventory. Everything else proceeds without asking.
 
 Migrating an existing repository stays in the procedure, as the way to clean up documentation that
 has already accumulated. It is no longer the kit's main purpose.
@@ -73,8 +72,8 @@ This refines ADR-0008: a status change is still a human action, and the human is
 
 ### Consequences
 
-- Good, because the rule protecting decisions becomes simple: one person agrees to every record and
-  accepts it, and nothing an agent writes binds until they do.
+- Good, because the rule protecting decisions becomes simple: one person accepts every record, and
+  nothing an agent writes binds until they do.
 - Good, because every rule can be tested against one question: does it help a new session tell what
   the owner wants from what an earlier session wrote?
 - Good, because guidance about pull requests, consultation and team size can leave the specification

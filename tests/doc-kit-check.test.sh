@@ -208,8 +208,8 @@ adr 0002 proposed
 expect "proposed record needs no decision-makers" 0 "conformant" adr
 
 fixture
-adr 0002 'superseded by ADR-0009' 'decision-makers: someone'
-expect "forward pointer to a missing record fails" 1 "points at ADR-0009, which does not exist" adr
+adr 0002 'superseded by ADR-0001' 'decision-makers: someone'
+expect "superseded status fails" 1 "has status 'superseded by ADR-0001'" adr
 
 fixture
 cp docs/adr/0001-a-record.md docs/adr/0001-another.md
