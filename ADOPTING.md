@@ -227,7 +227,8 @@ Before you edit:
   record, any change. Do it only with their explicit agreement. This is absolute.
 - Create one by copying `docs/adr/0000-template.md`, never an existing record, as `proposed`. Get
   one accepted by asking "Accept ADR-NNNN?"; if the owner agrees, set `status`, `decision-makers`,
-  `approval` (their words) and `date`.
+  `approval` (their words) and `date`, then commit. A record being changed is `proposed` again until
+  the owner accepts the change.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
 - Delete finished `PLAN.md` entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or

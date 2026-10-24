@@ -183,8 +183,10 @@ constraint.
 creating, changing, deleting, superseding or deprecating a record - any record, of any status - and
 MUST do it only with the owner's explicit agreement. General approval - "looks good", "go ahead",
 approval of other work - is not agreement to a record. A record starts `proposed`, copied from the
-template rather than from another record. Formatting applied by a tool, which alters no word, is not
-a change (ADR-0016). See ADR-0008 and ADR-0021.
+template rather than from another record. A record being changed returns to `proposed` until the
+owner accepts the change. A record is normally accepted before it is committed, so history holds its
+accepted versions. Formatting applied by a tool, which alters no word, is not a change (ADR-0016).
+See ADR-0008 and ADR-0021.
 
 **An accepted record is the current answer to its question.** It MAY be amended in place, including
 to reverse its decision. It is superseded only when its question splits in two, merges with another,

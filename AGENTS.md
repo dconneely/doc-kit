@@ -44,7 +44,9 @@ To create one, copy `templates/docs/adr/0000-template.md` - never an existing re
 free number, with `status: "proposed"`.
 
 To get one accepted, ask the owner "Accept ADR-NNNN?". If they agree, set `status: "accepted"`,
-`decision-makers` to their name, `approval` to their words, and `date` to today.
+`decision-makers` to their name, `approval` to their words, and `date` to today. Commit it then.
+
+A record being changed goes back to `proposed` until the owner accepts the change, the same way.
 
 A change includes fixing, in the same commit, the citations it makes untrue. Formatting applied by a
 tool is not a change. `SPECIFICATION.md` §3.1 has the rest.

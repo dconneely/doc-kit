@@ -23,7 +23,8 @@ Rules - absolute:
 - Create one by copying this file, never an existing record, to the next free number. It starts
   "proposed".
 - Get one accepted by asking the owner "Accept ADR-NNNN?". If they agree, set status,
-  decision-makers (their name), approval (their words) and date (today).
+  decision-makers (their name), approval (their words) and date (today), then commit.
+- A record being changed goes back to "proposed" until the owner accepts the change.
 
 How records work:
 
