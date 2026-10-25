@@ -85,6 +85,4 @@ and generated decision indexing.
 
 ## Confirmation
 
-- `tools/doc-kit-check.sh` verifies map completeness, generated decision index currency (§4.3), and
-  archive exemption (§5.1).
-- `tests/doc-kit-check.test.sh` asserts these checks pass when compliant and fail when violated.
+`tools/doc-kit-check.sh` and `tests/doc-kit-check.test.sh`
