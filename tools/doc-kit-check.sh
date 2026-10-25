@@ -215,7 +215,7 @@ check_map() {
 
 	# §2.7 - tense, mutability and audience come from closed sets: free text lets near-duplicates
 	# escape on phrasing. Artifacts sharing all three are reported as a prompt to check, not a
-	# failure (ADR-0015). Aliases, which hold no content of their own, are exempt. One awk pass
+	# failure (ADR-0002). Aliases, which hold no content of their own, are exempt. One awk pass
 	# prints a tab-separated line per finding: a kind, the artifact, and the value.
 	hits=$(section "$MAP" '## Artifacts' | grep '^| `' | grep -v '\*\*Alias\*\*' | awk -F' *[|] *' '
 		BEGIN {

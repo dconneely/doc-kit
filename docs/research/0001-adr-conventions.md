@@ -70,7 +70,7 @@ What differs is where it lives and whether it changes:
   the three-property test that makes an in-code Y-statement a different artifact from an ADR, not a
   shorter spelling of one.
 
-ADR-0008 did not consider Y-statements, and nothing here argues it should have chosen them: the
+ADR-0007 did not consider Y-statements, and nothing here argues it should have chosen them: the
 minimal template already carries every clause.
 
 ## Evidence
@@ -109,7 +109,7 @@ convention this kit cites - see "Open questions".
 Closed by [`0002-conventions-this-kit-cites.md`](0002-conventions-this-kit-cites.md): Nygard's
 original post, `adr-tools` numbering, and Keep a Changelog's categories were all checked and all
 proved accurate. Nygard's statuses turned out to be lowercase in the original, which supports
-ADR-0008 on a ground it had not claimed.
+ADR-0007 on a ground it had not claimed.
 
 - Whether MADR's front-matter should be adopted beyond `status`, `date` and `decision-makers`
   remains open; `consulted` and `informed` were judged overhead for a small project rather than

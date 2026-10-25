@@ -37,7 +37,7 @@ repos:
         args: [--fix=lf]
 
   # Formatter; markdownlint-cli2 below is the linter. Wrapping is set in .prettierrc.json, not by
-  # CLI flags (ADR-0013). `local` because pre-commit/mirrors-prettier is stale.
+  # CLI flags. `local` because pre-commit/mirrors-prettier is stale.
   # Rewrites `*emphasis*` to `_emphasis_`, with no option to avoid it.
   - repo: local
     hooks:

@@ -112,8 +112,8 @@ No. Debt is a **type tag within the single ranked plan**, alongside `bug`, `feat
 The worry behind the request - that features drown debt - is real, and the answer is ranking it
 higher, not filing it elsewhere. Splitting by _category_ where the structure splits on tense,
 mutability and audience is what makes such files drift apart and go stale; the argument is
-[ADR-0003](docs/decisions/0003-where-technical-debt-goes.md), and it generalises to most proposed
-additions.
+[ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-artifacts.md), and it generalises
+to most proposed additions.
 
 ### Where do schemas, API definitions and other formal contracts go?
 
@@ -124,7 +124,7 @@ _better_ specification, not something lesser.
 Applying those tests reclassifies more than it adds: a conformance target is specification while its
 known gaps are quirks; a runbook is a procedure for a different audience at a different moment; a
 threat model is an assessment whose conclusions become records and whose findings become plan
-entries. See [ADR-0004](docs/decisions/0004-where-machine-readable-contracts-go.md).
+entries. See [ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-artifacts.md).
 
 ### The specification is a tree now - where exactly?
 
@@ -181,7 +181,7 @@ Only two entries deserve the word "standard":
 - **ADRs** - Nygard 2011, with [adr.github.io](https://adr.github.io), the
   [MADR](https://adr.github.io/madr/) template and [adr-tools](https://github.com/npryce/adr-tools).
   This kit follows MADR's **minimal** template; see
-  [ADR-0008](docs/decisions/0008-which-template-decision-records-follow.md) for why that one.
+  [ADR-0007](docs/decisions/0007-how-a-decision-record-is-decided-and-changed.md) for why that one.
 
 Both have been checked against their sources. Leave them alone: their value is that other people and
 tools already recognise them.

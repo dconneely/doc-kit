@@ -38,7 +38,7 @@ Chosen option: **classify by what a file is about, and whether the kit can own w
 - **Documentation** describes this repository: everything at the root besides the product, and
   `docs/`. It is produced by applying the kit to itself, so the root `DOC-MAP.md` is an instance of
   `templates/DOC-MAP.md`. `docs/spec.md` is documentation although it concerns adopters, because it
-  describes the product rather than being it (ADR-0004).
+  describes the product rather than being it (ADR-0002).
 - **Infrastructure** configures this repository and is never applied elsewhere. It fails the second
   half of the test: an adopter already has a `.gitattributes`, so the file could only be merged, and
   most of its content - line endings, secret scanning - is outside the kit's authority.

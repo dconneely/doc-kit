@@ -19,7 +19,7 @@ from the map's completeness check; every file in it carries a provenance header.
 mutability and an audience. The unit the structure is built from.
 
 **Audience** - who an artifact is written for: one or more of the roles `owner`, `contributor`,
-`consumer`, `end-user` and `operator`, defined in ADR-0015 and listed in `docs/spec.md` §2.7.
+`consumer`, `end-user` and `operator`, defined in ADR-0002 and listed in `docs/spec.md` §2.7.
 
 **Confidence level** - `high`, `medium` or `low`, attached to a research note. Defined in
 `docs/spec.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence, only
@@ -48,7 +48,7 @@ ranks its plan. Every other contributor, agent or human, proposes. See ADR-0001.
 authoritative, when it was last known accurate, and why it was not migrated.
 
 **Specification** - a set, not a file. Members may be prose or machine-readable; both are
-specification. See ADR-0004.
+specification. See ADR-0002.
 
 **Structural conformance** - satisfying the mechanically checkable requirements. Contrast
 **substantive conformance**, which adds the single-source-of-truth rules and needs a reviewer.

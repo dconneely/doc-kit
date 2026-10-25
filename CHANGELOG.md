@@ -31,7 +31,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
-- **Audience is a closed set (ADR-0015).** An artifact's audience names one or more of `owner`,
+- **Audience is a closed set (ADR-0002).** An artifact's audience names one or more of `owner`,
   `contributor`, `consumer`, `end-user` and `operator`, marked `(agents)` or `(humans)` when only
   one kind of reader reads it. `tools/doc-kit-check.sh` fails any other value. Two artifacts sharing
   all three properties are now a warning, not a failure, and are merged only when they hold the same
@@ -96,7 +96,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - `DOC-MAP.md`, `templates/DOC-MAP.md` and `templates/docs/research/0000-template.md` say a research
   note's Finding, Evidence and Dead ends state the current answer, not how it was reached.
 - Emphasis in `templates/` is written `_like this_` rather than `*like this*`, the form Prettier
-  produces (ADR-0013). No wording changed.
+  produces. No wording changed.
 - The third property is called **mutability** everywhere, matching ADR-0002. The artifacts table's
   `Durability` column in `templates/DOC-MAP.md` is now `Mutability`, as is `SPECIFICATION.md` §2.7;
   the permitted values are unchanged.
@@ -245,7 +245,7 @@ things that replaced an earlier shape, which are recorded here as the shape that
 - An archive convention for documentation whose currency cannot be established (ADR-0009).
 - Decision records following the [MADR](https://adr.github.io/madr/) minimal template, with
   `Considered Options` required. Statuses are lowercase and may carry a forward pointer -
-  `accepted (refined by ADR-NNNN)` (ADR-0007, ADR-0008).
+  `accepted (refined by ADR-NNNN)` (ADR-0007).
 - Rules for those records: immutability attaches to `accepted` and begins at publication, only
   `accepted` binds, and changing a status is a human action (ADR-0007).
 - `infrastructure` as a third category alongside product and documentation (ADR-0005).

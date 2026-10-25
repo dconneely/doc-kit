@@ -159,7 +159,7 @@ them ([ADR-0006][adr6]). What each rule prevents is in `ADOPTING-NOTES.md`.
 
 Absent on purpose, so that adding any of them later is a decision rather than a drift:
 
-- **A separate technical-debt file** - see [ADR-0003][adr3].
+- **A separate technical-debt file** - see [ADR-0002][adr2].
 - **`docs/quirks.md` and `docs/plan/`** - both in `templates/`, neither earned here yet.
 - **An issue tracker**, until the backlog outgrows a file - roughly 20-30 open items.
 - **Community health files** - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` - which earn
@@ -170,13 +170,13 @@ Absent on purpose, so that adding any of them later is a decision rather than a 
 
 Before adding one, check it has a **distinct tense, mutability and audience** from everything in the
 artifacts table. If it shares all three with an existing document, it is a section or a tag within
-that document unless it holds different facts (ADR-0015). Most proposed additions fail this test -
+that document unless it holds different facts (ADR-0002). Most proposed additions fail this test -
 which is the point.
 
 If it passes, add it to the layout, artifacts and lifecycle tables in the same commit. A map that
 omits an artifact is worse than no map, because it is believed.
 
-[adr3]: docs/decisions/0003-where-technical-debt-goes.md
+[adr2]: docs/decisions/0002-how-documentation-is-divided-into-artifacts.md
 [adr5]: docs/decisions/0005-what-is-product-documentation-or-infrastructure.md
 [adr12]: docs/decisions/0012-what-tense-and-how-much-is-written.md
 [adr6]: docs/decisions/0006-where-rules-and-their-reasons-live.md

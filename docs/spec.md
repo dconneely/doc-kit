@@ -110,7 +110,7 @@ mutability and an audience, drawn from these sets:
 | Mutability | `rewritten in place`, `amendable`, `append-only`, `immutable`, `volatile`, `disposable` |
 | Audience   | one or more of `owner`, `contributor`, `consumer`, `end-user`, `operator`               |
 
-The roles are defined in ADR-0015: the owner decides; a contributor changes the repository; a
+The roles are defined in ADR-0002: the owner decides; a contributor changes the repository; a
 consumer builds on what it publishes; an end-user uses the running product; an operator deploys and
 runs it. A role covers human and agent readers both, and one read by only one kind says so after the
 role - `contributor (agents)` or `contributor (humans)`. Roles are separated by commas, in any
@@ -118,7 +118,7 @@ order.
 
 Two artifacts sharing all three are usually one artifact: merge them, or make one a section of the
 other, unless they hold different facts. A checker MUST report a shared triple as advisory, and MUST
-NOT let it affect the exit status (ADR-0015). Free-text properties defeat that test -
+NOT let it affect the exit status (ADR-0002). Free-text properties defeat that test -
 near-duplicates escape on phrasing rather than substance - which is why all three are closed sets.
 
 An **alias** is exempt: a file whose entire content points at another artifact, existing only
@@ -163,7 +163,7 @@ can lose it; the tree keeps it.
 Records follow the [MADR](https://adr.github.io/madr/) minimal template. Filenames MUST match
 `NNNN-kebab-case-title.md` with a four-digit zero-padded number, and numbers MUST be unique and
 never reused. The heading MUST repeat the number. The title SHOULD name the question the record
-answers rather than the answer, so that a changed answer leaves it true. See ADR-0008 and ADR-0007.
+answers rather than the answer, so that a changed answer leaves it true. See ADR-0007.
 
 Each record MUST carry YAML front-matter with `status` and `date`. A record whose status is not
 `proposed` MUST also carry `decision-makers`, naming the owner, and `approval`: the owner's words,
