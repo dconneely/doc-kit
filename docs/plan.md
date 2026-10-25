@@ -11,10 +11,10 @@ needs more, it needs an ADR. `docs/spec.md` §3.3 defines the scales.
 **Type:** debt - **Importance:** medium - **Effort:** low
 
 Needs an ADR. With closed audiences, artifacts holding different facts share all three properties -
-three pairs in this map and three in the template's - and nothing records that a pair was checked,
-so the warnings recur until they are ignored, along with the gitignored ones. Options: accept the
-noise; let the map mark a checked pair, silencing its warning; or report shared triples only on
-request.
+three pairs in this map and three in the template's - and recurring warnings train readers to ignore
+the checker. Solution: exempt standard specification artifacts in the checker because their fact
+separation is ratified in §3, and allow an `Allowed overlaps` map section for non-standard
+artifacts, requiring the owner's explicit approval so agents cannot bypass the check autonomously.
 
 ## Add how-to guides and external sources
 
