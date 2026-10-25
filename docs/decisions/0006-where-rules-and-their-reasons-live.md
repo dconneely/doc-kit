@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 6. Where rules and their reasons live
@@ -56,3 +56,7 @@ questioning a rule, and the adoption record already serves that reader.
 - Bad, because a reader who wants all the rules in one place opens several files.
 - Bad, because the provenance of the loose conventions, such as Diátaxis and Standard Readme, is
   found only in the kit.
+
+## Confirmation
+
+`prek run template-no-banner`

@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 9. What happens to documentation that cannot be dated
@@ -51,3 +51,7 @@ launders undatable claims.
   first day, and the likely outcome is a disabled check rather than an emptied archive.
 - Neutral: the archive may never be emptied. An archive with honest headers is a known-untrusted
   region, which is a stable state; the failure it prevents is a contaminated specification.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`

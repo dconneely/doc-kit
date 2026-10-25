@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'I accept ADR-0002.'
+approval: "yes"
 ---
 
 # 2. How documentation is divided into artifacts
@@ -49,3 +49,7 @@ was rejected because review cannot hold a line nobody has drawn.
   applied honestly rather than as a formality.
 - Neutral: the three properties are a heuristic with no external authority behind them. They are
   justified by what they prevent, not by a standard.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`

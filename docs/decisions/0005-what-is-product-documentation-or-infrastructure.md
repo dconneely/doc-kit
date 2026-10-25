@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 5. What is product, what is documentation, and what is infrastructure
@@ -64,3 +64,7 @@ for files the kit has no authority over.
   from `ADOPTING.md`'s path that it is product; the map says so.
 - Bad, because generic hygiene stays the adopter's business: the kit gives no help with secret
   scanning or line endings.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`

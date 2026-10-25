@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 13. How Markdown is formatted here
@@ -44,3 +44,7 @@ available.
 - Bad, because emphasis is written `_word_` throughout, with no way to configure otherwise.
 - Bad, because `embeddedLanguageFormatting: "off"` is essential, not cosmetic: without it, the
   fenced YAML in `docs/research/0001-adr-conventions.md` would be rewritten.
+
+## Confirmation
+
+`prek run prettier-markdown markdownlint`

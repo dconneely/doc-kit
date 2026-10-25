@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 11. Which files the map must name
@@ -53,3 +53,7 @@ exists for exactly this, and repositories already set it for their language stat
   attributes, and every unmapped file fails - the stricter direction, never silence.
 - Bad, because the vendored exemption is silent by design, so marking a tree the repository actually
   maintains hides it from the check. That is visible in `.gitattributes`, and a matter for review.
+
+## Confirmation
+
+`tools/doc-kit-check.sh` and `tests/doc-kit-check.test.sh`

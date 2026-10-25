@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes to all of these (asked: "Do you accept ADR-0014 as drafted? And for ADR-0015: do you accept it, and may I reopen ADR-0002 to match it?")'
+approval: "yes"
 ---
 
 # 15. Which audiences an artifact may name
@@ -62,3 +62,7 @@ here - human or agent - is an exception, not a dimension.
   the moment of reading moves to the purpose column.
 - Neutral: the roles name relationships to the repository, not people. The owner is also a
   contributor and a consumer; an artifact names the role it is written for.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`

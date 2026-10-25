@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 3. Where technical debt goes
@@ -36,3 +36,7 @@ prevents the comparison that matters.
   specification gap is genuinely fuzzy, and with one list the answer changes a tag, not a location.
 - Bad, because the worry behind the request remains. If debt items are drowned, that is a ranking
   problem, and the answer is to rank them higher - which one list at least makes possible.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`

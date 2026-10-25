@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 8. Which template decision records follow
@@ -45,3 +45,7 @@ non-standard.
 - Good, because `Considered Options` forces the alternatives into the open.
 - Bad, because front matter is machinery the structure otherwise avoids, and `approval` is a field
   MADR does not define.
+
+## Confirmation
+
+`tools/doc-kit-check.sh` and `prek run adr-status-case`

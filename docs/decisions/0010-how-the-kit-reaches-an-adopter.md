@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 10. How the kit reaches an adopter
@@ -58,3 +58,7 @@ whole content, with nothing for a second copy to point at.
   requires.
 - Neutral: a tool that reads `.agents/skills/` but expects a different skill format still needs its
   own adapter.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`

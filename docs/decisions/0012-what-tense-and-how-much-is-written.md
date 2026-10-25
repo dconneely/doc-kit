@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 12. What tense, and how much, is written
@@ -56,3 +56,7 @@ are about where facts live and what tense they take.
 - Bad, because a `TODO` that only points at the plan departs from the common practice of describing
   the work in place. The trade is that the work competes in one ranked list (ADR-0003).
 - Bad, because nothing mechanical checks it: a comment is not an artifact in the map.
+
+## Confirmation
+
+`review`

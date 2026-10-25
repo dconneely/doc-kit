@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 4. Where machine-readable contracts go
@@ -48,3 +48,7 @@ Prose may link to a machine-readable contract. It never restates one.
   them.
 - Bad, because the rule against restating a contract is expensive to hold. Restating is what feels
   helpful to a reader, so the rule has to be held in review rather than trusted to instinct.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`

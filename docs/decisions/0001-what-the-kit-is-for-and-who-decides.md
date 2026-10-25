@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 1. What the kit is for, and who decides
@@ -64,3 +64,7 @@ rule unchanged: they propose, like an agent.
 - Bad, because a team that adopts the kit gets no guidance on how its members agree.
 - Bad, because nothing in the repository stops an agent session that runs with the owner's
   credentials from changing a status. The rule is held by instruction, not by mechanism.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`

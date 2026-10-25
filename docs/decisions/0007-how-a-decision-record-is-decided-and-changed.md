@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes (asked: "Do you accept ADR-0001 to ADR-0013?")'
+approval: "yes"
 ---
 
 # 7. How a decision record is decided and changed
@@ -75,3 +75,7 @@ was rejected because a citation could then come to mean anything.
   `git show` at that commit is the only way to read what it cited.
 - Bad, because reading each citation after a change is a judgement, and a search finds nothing
   outside the repository.
+
+## Confirmation
+
+`tools/doc-kit-check.sh`
