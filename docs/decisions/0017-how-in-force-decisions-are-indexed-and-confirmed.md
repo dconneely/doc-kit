@@ -1,8 +1,8 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-10-25
 decision-makers: David Conneely
-approval: "Proposed"
+approval: "Yes"
 ---
 
 # 17. How in-force decisions are indexed and confirmed

@@ -24,9 +24,10 @@ Index of decision records. Only **accepted** records bind.
 | [ADR-0014](0014-where-each-artifact-lives-and-how-it-grows.md)         | 2026-10-24 | David Conneely | Where each artifact lives, and how it grows                        | -            |
 | [ADR-0015](0015-which-audiences-an-artifact-may-name.md)               | 2026-10-24 | David Conneely | Which audiences an artifact may name                               | -            |
 | [ADR-0016](0016-where-how-to-guides-and-external-sources-live.md)      | 2026-10-25 | David Conneely | Where how-to guides and external sources live                      | -            |
+| [ADR-0017](0017-how-in-force-decisions-are-indexed-and-confirmed.md)   | 2026-10-25 | David Conneely | How in-force decisions are indexed and confirmed                   | -            |
 
 ## Non-binding
 
-| Record                                                               | Status     | Date       | Question                                         |
-| -------------------------------------------------------------------- | ---------- | ---------- | ------------------------------------------------ |
-| [ADR-0017](0017-how-in-force-decisions-are-indexed-and-confirmed.md) | `proposed` | 2026-10-25 | How in-force decisions are indexed and confirmed |
+| Record | Status | Date | Question |
+| ------ | ------ | ---- | -------- |
+| _none_ | -      | -    | -        |
