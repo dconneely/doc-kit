@@ -30,7 +30,7 @@ cost of losing that is invisible until years later.
 
 ## Rules
 
-1. **Every file carries a provenance header.** This one is not optional and this README does not
+1. **Every file carries a provenance header.** This one is not optional and this page does not
    substitute for it - readers and tools arrive at these files directly, by search, and never see
    this page.
 2. **Every entry states why it was not migrated.** Without a stated reason the archive becomes a

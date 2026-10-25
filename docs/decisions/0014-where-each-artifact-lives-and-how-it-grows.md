@@ -1,77 +1,90 @@
 ---
 status: "accepted"
-date: 2026-10-24
+date: 2026-10-25
 decision-makers: David Conneely
-approval: 'Yes to all of these (asked: "Do you accept ADR-0014 as drafted? And for ADR-0015: do you accept it, and may I reopen ADR-0002 to match it?")'
+approval: "Commit as you go"
 ---
 
 # 14. Where each artifact lives, and how it grows
 
 ## Context and Problem Statement
 
-Three problems with the current paths:
+Four problems with documentation layout, growth, and discoverability:
 
-- **No artifact can grow.** `docs/quirks.md`, `docs/glossary.md` and the plan are one file each,
-  with no rule for what happens when one becomes too long. The plan's working notes went to
-  `docs/tasks/`, a name that does not say whether a task is done or still to do; a plan entry is
-  only ever future.
-- **Names are inconsistent.** `SPECIFICATION.md` is long where `PLAN.md` is short, and neither
-  matches the directory a long one would overflow into.
-- **`docs/adr/` names the record by "architectural"**, and most decisions here are not
-  architectural. [MADR](https://adr.github.io/madr/) 3.0.0 renamed itself "Markdown Any Decision
-  Records" and moved its default directory to `docs/decisions/` for this reason; 4.0.0 restored
-  "Architectural" to its name but kept that directory.
-
-Moving `SPECIFICATION.md` and `PLAN.md` off the root costs discoverability. No tool looks for either
-filename - unlike `README.md`, `AGENTS.md`, `CLAUDE.md` and `CHANGELOG.md` - so the cost falls on a
-session that skips `AGENTS.md`, lists the root, finds no plan, and starts a `TODO.md`. Not known:
-how often agents do that.
+1. **Artifacts cannot grow without breaking links:** `docs/quirks.md`, `docs/glossary.md`, the plan,
+   and the specification were single files with no rule for overflow. Moving an artifact into a
+   directory later would change its path, breaking existing links, commit references, and external
+   citations.
+2. **Scattered task procedures and external sources:** Task-oriented procedures (releases,
+   rotations, bootstrapping) lacked a clear home distinct from normative behaviour specifications or
+   ranked intent. Simultaneously, external RFCs and standards cited normatively risked link rot and
+   licensing ambiguity without pinned checksums, gitignoring, and offline retrieval scripts.
+3. **Context and search ambiguity across subdirectories:** Using `README.md` inside subdirectories
+   burdens editor tab bars, fuzzy finders, and coding agent context windows with identical filenames
+   requiring path disambiguation. In `docs/decisions/`, an internal `README.md` polluted the ADR
+   glob, forcing check scripts to special-case it. In `docs/archive/`, an internal `README.md`
+   created an exemption paradox under §5.1.
+4. **Opaque decision status and unconfirmed decisions:** As decision records accumulate across
+   multiple statuses (`accepted`, `deprecated`, `rejected`, `proposed`), discovering which records
+   currently bind required parsing every file's front-matter. Furthermore, decisions specifying
+   verifiable constraints lacked a place to name the test that confirms compliance.
 
 ## Considered Options
 
-- Keep `SPECIFICATION.md` and `PLAN.md` at the root, and let each overflow into `docs/spec/` and
-  `docs/plan/`
-- Rename them `SPEC.md` and `PLAN.md` at the root, overflowing the same way
-- Move them to `docs/spec.md` and `docs/plan.md`, each overflowing into a sibling directory of the
-  same name
-- Keep every path as it is
+- **Retain root paths and inline material:** Keep `SPECIFICATION.md` and `PLAN.md` at root, inline
+  external extracts into research notes, scatter procedures into task notes, and inspect ADRs
+  manually.
+- **Subdirectory `README.md` everywhere:** Convert every domain under `docs/` into a directory
+  holding a `README.md` (`docs/spec/README.md`, `docs/plan/README.md`, `docs/decisions/README.md`,
+  etc.).
+- **Uniform sibling entry points (`docs/{name}.md` with optional `docs/{name}/`):** Standardise on
+  `docs/{name}.md` as the entry point / index for every directory artifact `docs/{name}/`.
 
 ## Decision Outcome
 
-Chosen option: **move them to `docs/spec.md` and `docs/plan.md`**, because then one rule covers
-every artifact: a file `docs/name.md` that outgrows one file gains a sibling directory `docs/name/`,
-and stays as its entry point - an index or summary that links into the directory - so links to it
-stay true.
+Chosen option: **uniform sibling entry points (`docs/{name}.md` with optional `docs/{name}/`)**,
+because one rule covers every artifact: a file `docs/name.md` that outgrows one file gains a sibling
+directory `docs/name/`, and stays as its entry point - an index or summary linking into the
+directory - so links to it stay true.
 
-- The root holds only the files a tool or a convention looks for there: `README.md`, `AGENTS.md`,
-  its aliases, `CHANGELOG.md` and the map.
-- `docs/adr/` becomes `docs/decisions/`. Records keep their numbers, and are still cited as
-  `ADR-NNNN`.
-- `docs/plan/` replaces `docs/tasks/`. The ranked list stays in `docs/plan.md`; a note in
-  `docs/plan/` belongs to one entry and goes when the entry does.
-- A monorepo module's artifacts sit under the module, and only the map, `README.md`, `CHANGELOG.md`
-  and `docs/plan.md` stay at the repository root.
+- **Root:** Holds only files a tool or convention looks for there: `README.md`, `AGENTS.md`, its
+  aliases, `CHANGELOG.md`, and `DOC-MAP.md`.
+- **Specification:** `docs/spec.md`, overflowing into `docs/spec/` for contracts and schemas. §1
+  links directly to ADR-0001 for project purpose and operating model (satisfying §4.1).
+- **Plan:** `docs/plan.md`, replacing `docs/tasks/`. Disposable working notes sit in `docs/plan/`.
+- **Decision records:** `docs/decisions/*.md`, replacing `docs/adr/`. Records keep numbers, follow
+  the MADR minimal template, and may carry an optional `## Confirmation` section naming the test
+  asserting compliance. Indexed by `docs/decisions.md`, generated deterministically by
+  `tools/doc-kit-index-decisions.sh` and enforced by `tools/doc-kit-check.sh` (§4.3).
+- **How-to guides:** `docs/howto/*.md` holds task-oriented recurring procedures in the imperative
+  mood, optionally indexed by `docs/howto.md`.
+- **External sources:** `docs/sources.md` manifest pins URLs, retrieval dates, licences, and SHA-256
+  checksums. Cached originals, `.gitignore`, and `fetch.sh` sit in `docs/sources/`.
+- **Archive:** `docs/archive.md` quarantine index records why retained legacy documents were not
+  migrated. Non-authoritative, exempt files sit in `docs/archive/` (§5.1).
+- **Monorepos:** Per-module artifacts sit under the module; only `DOC-MAP.md`, `README.md`,
+  `CHANGELOG.md`, and `docs/plan.md` stay at the repository root.
 
-The discoverability cost is met by the map check: a `TODO.md` the map does not name fails it.
-
-Keeping both at the root was rejected because `PLAN.md` and `docs/plan/` are not siblings, so the
-overflow rule needs an exception for exactly the two artifacts most likely to overflow. Renaming at
-the root fixes the names but not the exception. Keeping every path leaves all three problems.
-
-This record does not settle how an adopting repository moves from the old paths; the changelog and
-`ADOPTING.md` carry that when the move is made.
-
-Accepting this record permits the path edits it requires in accepted records - ADR-0003, ADR-0005,
-ADR-0006 and ADR-0011 name `PLAN.md` or `SPECIFICATION.md` - without reopening them, since a moved
-path changes no decision.
+This combines and supersedes the decisions originally explored for how-to guides, external sources,
+and generated decision indexing.
 
 ### Consequences
 
-- Good, because any artifact can grow without a new decision.
-- Good, because the root shows only what tools look for.
-- Good, because the directory name no longer says "architectural".
-- Bad, because every adopting repository moves files and rewrites links when it takes the version
-  that makes this change.
-- Bad, because links to the kit's `SPECIFICATION.md` that do not pin a commit stop working.
-- Bad, because a session that ignores `AGENTS.md` sees no plan at the root, and the map check
-  catches the result only after the session has made it.
+- Good, because any artifact can grow into a directory without changing its entry-point path or
+  breaking existing links.
+- Good, because filenames in `docs/` are descriptive and distinct in editor tabs and agent tool
+  calls.
+- Good, because `docs/decisions/*.md` holds only decision records, simplifying globbing and checks.
+- Good, because `docs/archive.md` is an authoritative, checked document, while everything inside
+  `docs/archive/` remains exempt.
+- Good, because active decisions are discovered in a single read of `docs/decisions.md`.
+- Good, because external source material is verified with pinned checksums and licence tracking.
+- Bad, because GitHub's web UI does not automatically render `docs/{name}.md` when navigating
+  directly into `docs/{name}/`.
+- Bad, because maintaining generated indexes requires generator tooling and checker validation.
+
+## Confirmation
+
+- `tools/doc-kit-check.sh` verifies map completeness, generated decision index currency (§4.3), and
+  archive exemption (§5.1).
+- `tests/doc-kit-check.test.sh` asserts these checks pass when compliant and fail when violated.

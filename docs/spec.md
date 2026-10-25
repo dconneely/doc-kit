@@ -219,9 +219,9 @@ A checker MUST report a record whose status is not `proposed` that lacks `decisi
 `approval`, and a bare `ADR-NNNN` outside code that names no record in this repository. It cannot
 verify that `approval` holds the owner's words, nor that an amendment fixed its citations.
 
-A repository MAY maintain a generated index of decision records at `docs/decisions/README.md`. If
-present, it MUST carry a generated header naming what generates it, and regenerating it MUST produce
-no diff (§4.3).
+A repository MAY maintain a generated index of decision records at `docs/decisions.md` (or
+`docs/decisions/README.md`). If present, it MUST carry a generated header naming what generates it,
+and regenerating it MUST produce no diff (§4.3).
 
 ### 3.2 Changelog
 
@@ -275,7 +275,8 @@ entry to be removed.
 
 ### 3.6 How-to guides
 
-A repository MAY hold recurring task-oriented procedures under `docs/howto/`.
+A repository MAY hold recurring task-oriented procedures under `docs/howto/`, optionally indexed at
+`docs/howto.md`.
 
 Each guide MUST be written in the imperative mood, SHOULD state its goal, prerequisites, sequential
 steps, and verification criteria, and SHOULD cite conventions and exemplars rather than duplicating
@@ -285,10 +286,11 @@ their text.
 
 A repository MAY maintain external standards, whitepapers and specifications under `docs/sources/`.
 
-The directory MUST contain a `README.md` indexing each source with its URL, retrieval date, licence,
-redistributability status, and SHA-256 checksum. A source that is not explicitly redistributable
-under its licence MUST NOT be committed to git and MUST be gitignored. Generated text or Markdown
-extracts derived from cached sources MUST carry a provenance header per §4.3 naming the generator.
+The manifest at `docs/sources.md` (or `docs/sources/README.md`) indexes each source with its URL,
+retrieval date, licence, redistributability status, and SHA-256 checksum. A source that is not
+explicitly redistributable under its licence MUST NOT be committed to git and MUST be gitignored.
+Generated text or Markdown extracts derived from cached sources MUST carry a provenance header per
+§4.3 naming the generator.
 
 ## 4. Single source of truth
 
@@ -309,10 +311,11 @@ is the current shape.
 ## 5. The archive
 
 An adopting repository MAY quarantine documentation it cannot verify in an archive directory,
-conventionally `docs/archive/`.
+conventionally `docs/archive/`, optionally indexed at `docs/archive.md`.
 
 5.1 Files below an archive are **not** documentation files for the purposes of §2.4, and a checker
-MUST exempt them. The archive itself MUST appear in the map as a single entry.
+MUST exempt them. The archive itself (or its index `docs/archive.md`) MUST appear in the map as a
+single entry.
 
 5.2 Every file in the archive MUST begin with a provenance header stating that it is not
 authoritative, when it was last known to be accurate, and why it was not migrated. A folder-level

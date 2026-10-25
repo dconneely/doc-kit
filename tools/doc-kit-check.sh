@@ -361,13 +361,19 @@ check_adr() {
 	set +f
 
 	# §4.3 - the generated decisions index is up to date.
-	if [ -f "$dir/README.md" ] && [ -f tools/doc-kit-index-decisions.sh ]; then
-		tmp_idx=$(mktemp)
-		sh tools/doc-kit-index-decisions.sh "$tmp_idx" "$dir"
-		if ! cmp -s "$dir/README.md" "$tmp_idx"; then
-			fail "$dir/README.md is out of date" "run 'sh tools/doc-kit-index-decisions.sh' to regenerate (§4.3)"
+	idx="${dir}.md"
+	if [ -f "$idx" ] && [ -f tools/doc-kit-index-decisions.sh ]; then
+		sh tools/doc-kit-index-decisions.sh "${idx}.tmp" "$dir"
+		if ! cmp -s "$idx" "${idx}.tmp"; then
+			fail "$idx is out of date" "run 'sh tools/doc-kit-index-decisions.sh' to regenerate (§4.3)"
 		fi
-		rm -f "$tmp_idx"
+		rm -f "${idx}.tmp"
+	elif [ -f "$dir/README.md" ] && [ -f tools/doc-kit-index-decisions.sh ]; then
+		sh tools/doc-kit-index-decisions.sh "$dir/README.md.tmp" "$dir"
+		if ! cmp -s "$dir/README.md" "$dir/README.md.tmp"; then
+			fail "$dir/README.md is out of date" "run 'sh tools/doc-kit-index-decisions.sh $dir/README.md' to regenerate (§4.3)"
+		fi
+		rm -f "$dir/README.md.tmp"
 	fi
 
 	return 0

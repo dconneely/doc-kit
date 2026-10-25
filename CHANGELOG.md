@@ -8,14 +8,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Added
 
-- **Generated decisions index and confirmation section (ADR-0017).**
-  `tools/doc-kit-index-decisions.sh` generates `docs/decisions/README.md` to list in-force and
-  non-binding decision records, verified by `tools/doc-kit-check.sh` (§4.3). The decision template
-  gains MADR's optional `## Confirmation` section, and `docs/spec.md` links its purpose to ADR-0001
-  rather than restating it (§4.1).
-- **How-to guides and external sources (ADR-0016).** `docs/howto/` holds step-by-step procedures
-  that recur across several places; `docs/sources/` indexes external reference materials with URLs,
-  checksums, licences and a fetch script. Templates are provided under `templates/docs/`.
+- **Uniform sibling entry points and multi-file artifacts (ADR-0014).** Standardised all
+  documentation domains under `docs/` on `docs/{name}.md` entry points with optional `docs/{name}/`
+  sibling directories. Adds `docs/howto/` for task-oriented guides (indexed at `docs/howto.md`),
+  `docs/sources.md` manifest and `docs/sources/` for external reference caching with `fetch.sh`,
+  deterministic `docs/decisions.md` index generation (`tools/doc-kit-index-decisions.sh`), and
+  MADR's optional `## Confirmation` section.
 - `tools/doc-kit-check.sh` requires `approval` on any record that is not `proposed`, treats the
   template's placeholders as missing, reports a bare `ADR-NNNN` that names no record, and reports a
   citation in any other form (ADR-0007).

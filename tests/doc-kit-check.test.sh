@@ -283,14 +283,20 @@ expect "citation in a path with spaces names the whole path" 1 "loose notes.md:1
 fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
-sh tools/doc-kit-index-decisions.sh docs/decisions/README.md docs/decisions
+sh tools/doc-kit-index-decisions.sh docs/decisions.md docs/decisions
 expect "valid generated decisions index passes" 0 "conformant" adr
 
 fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
-echo "stale" >docs/decisions/README.md
-expect "out-of-date generated decisions index fails" 1 "docs/decisions/README.md is out of date" adr
+echo "stale" >docs/decisions.md
+expect "out-of-date generated decisions index fails" 1 "docs/decisions.md is out of date" adr
+
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+sh tools/doc-kit-index-decisions.sh docs/decisions/README.md docs/decisions
+expect "valid legacy decisions/README.md passes" 0 "conformant" adr
 
 # ---------------------------------------------------------------- plan
 

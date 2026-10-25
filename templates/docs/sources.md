@@ -22,8 +22,8 @@ provenance, licence and integrity are pinned.
 2. **Redistributability:** Only files whose licence permits public redistribution
    (`Redistributable: yes`) may be committed to git. Files that cannot be redistributed remain
    gitignored.
-3. **Retrieval:** Run `./fetch.sh` to download missing sources and verify them against their
-   recorded checksums.
+3. **Retrieval:** Run `sh docs/sources/fetch.sh` (or `cd docs/sources && ./fetch.sh`) to download
+   missing sources and verify them against their recorded checksums.
 4. **Generated extracts:** Markdown or text extracts derived from PDFs or HTML sit beside the
    downloaded source, carrying a generated-file header per `docs/spec.md` §4.3 naming the tool used
    to extract them.

@@ -1,25 +1,30 @@
 #!/bin/sh
-# doc-kit-index-decisions - generate README.md index for docs/decisions.
+# doc-kit-index-decisions - generate decisions.md index for docs/decisions.
 #
 # Usage: sh tools/doc-kit-index-decisions.sh [output-file] [decisions-dir]
 #
-# Defaults: output-file   docs/decisions/README.md
+# Defaults: output-file   <decisions-dir>.md
 #           decisions-dir docs/decisions
 
 set -eu
 
 DIR=${2:-docs/decisions}
-OUT=${1:-$DIR/README.md}
+OUT=${1:-${DIR}.md}
 
 if [ ! -d "$DIR" ]; then
 	echo "doc-kit-index-decisions: directory not found: $DIR" >&2
 	exit 1
 fi
 
+rel_prefix="$(basename "$DIR")/"
+case "$OUT" in
+	*/README.md|"$DIR"/*) rel_prefix="" ;;
+esac
+
 tmp=$(mktemp)
 trap 'rm -f "$tmp"' EXIT HUP INT TERM
 
-awk '
+awk -v rel_prefix="$rel_prefix" '
 	function rep(char, count) {
 		s = ""
 		for (c = 0; c < count; c++) s = s char
@@ -84,7 +89,7 @@ awk '
 			f = order[i]
 			if (file_status[f] == "accepted") {
 				in_force++
-				l = length("[ADR-" file_num[f] "](" file_base[f] ")")
+				l = length("[ADR-" file_num[f] "](" rel_prefix file_base[f] ")")
 				if (l > w_rec) w_rec = l
 				if (length(file_date[f]) > w_date) w_date = length(file_date[f])
 				if (length(file_deciders[f]) > w_dec) w_dec = length(file_deciders[f])
@@ -100,7 +105,7 @@ awk '
 			f = order[i]
 			if (file_status[f] != "accepted") {
 				non_binding++
-				l = length("[ADR-" file_num[f] "](" file_base[f] ")")
+				l = length("[ADR-" file_num[f] "](" rel_prefix file_base[f] ")")
 				if (l > w_nb_rec) w_nb_rec = l
 				l_stat = length("`" file_status[f] "`")
 				if (l_stat > w_nb_stat) w_nb_stat = l_stat
@@ -125,7 +130,7 @@ awk '
 			for (i = 1; i <= total; i++) {
 				f = order[i]
 				if (file_status[f] == "accepted") {
-					rec = "[ADR-" file_num[f] "](" file_base[f] ")"
+					rec = "[ADR-" file_num[f] "](" rel_prefix file_base[f] ")"
 					printf "| %-*s | %-*s | %-*s | %-*s | %-*s |\n", w_rec, rec, w_date, file_date[f], w_dec, file_deciders[f], w_title, file_title[f], w_conf, file_confirm[f]
 				}
 			}
@@ -141,7 +146,7 @@ awk '
 			for (i = 1; i <= total; i++) {
 				f = order[i]
 				if (file_status[f] != "accepted") {
-					rec = "[ADR-" file_num[f] "](" file_base[f] ")"
+					rec = "[ADR-" file_num[f] "](" rel_prefix file_base[f] ")"
 					stat = "`" file_status[f] "`"
 					printf "| %-*s | %-*s | %-*s | %-*s |\n", w_nb_rec, rec, w_nb_stat, stat, w_nb_date, file_date[f], w_nb_title, file_title[f]
 				}
