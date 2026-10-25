@@ -16,15 +16,6 @@ the checker. Solution: exempt standard specification artifacts in the checker be
 separation is ratified in §3, and allow an `Allowed overlaps` map section for non-standard
 artifacts, requiring the owner's explicit approval so agents cannot bypass the check autonomously.
 
-## Keep decisions readable for a new session
-
-**Type:** feature - **Importance:** medium - **Effort:** medium
-
-Needs an ADR. A generated index of the decision records in force, so a session reads what binds
-without opening deprecated ones; `docs/spec.md`'s purpose section linking to ADR-0001, which records
-the owner's purpose, rather than restating it; and MADR's optional `Confirmation` section, naming
-the test that confirms a decision.
-
 ## Remove duplication between the specification and the templates
 
 **Type:** debt - **Importance:** medium - **Effort:** medium

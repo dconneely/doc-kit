@@ -280,6 +280,18 @@ fixture
 printf 'See ADR-0099.\n' >"loose notes.md"
 expect "citation in a path with spaces names the whole path" 1 "loose notes.md:1 cites ADR-0099" adr
 
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+sh tools/doc-kit-index-decisions.sh docs/decisions/README.md docs/decisions
+expect "valid generated decisions index passes" 0 "conformant" adr
+
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+echo "stale" >docs/decisions/README.md
+expect "out-of-date generated decisions index fails" 1 "docs/decisions/README.md is out of date" adr
+
 # ---------------------------------------------------------------- plan
 
 fixture

@@ -15,18 +15,13 @@ No repository is obliged to run one. Verifying by hand is fully conformant.
 
 ## Purpose and scope
 
-A repository adopting this kit is one that a single owner directs and many agent sessions write
-(ADR-0001). The kit has two jobs there: to communicate the owner's purpose to every session, and to
-stop what sessions write from accumulating into contradictory, stale text that misleads the next
-one.
+The kit's purpose, governing model (one owner directing many agent sessions), and decision
+boundaries are recorded in [ADR-0001](decisions/0001-what-the-kit-is-for-and-who-decides.md). This
+specification does not restate them (§4.1).
 
-**The owner decides; everyone else proposes.** One person - the owner - makes the project's
-decisions. Every other contributor, agent or human, may draft and argue; nothing they write binds
-until the owner accepts it (§3.1).
-
-It does both by giving the repository one property: **every fact about the project has exactly one
-place it belongs, and the tense of the sentence tells you which.** Everything below is machinery for
-holding that property.
+It achieves that purpose by giving the repository one property: **every fact about the project has
+exactly one place it belongs, and the tense of the sentence tells you which.** Everything below is
+machinery for holding that property.
 
 Three things follow, and they bound what the rest of this document is trying to achieve.
 
@@ -176,9 +171,10 @@ verbatim, giving permission for its latest change of status. `date` is the date 
 MADR's `consulted` and `informed` are permitted and not required.
 
 Each record MUST carry `Context and Problem Statement`, `Considered Options` and `Decision Outcome`
-sections, and SHOULD carry `Consequences` as a subsection of the last. **`Considered Options` is
-what makes a record a decision rather than a statement**; a record with only one option to consider
-is usually a specification entry that has been misfiled.
+sections, and SHOULD carry `Consequences` as a subsection of the last. A record MAY carry a
+`Confirmation` section naming the test, check or assertion that confirms compliance with the
+decision. **`Considered Options` is what makes a record a decision rather than a statement**; a
+record with only one option to consider is usually a specification entry that has been misfiled.
 
 `status` MUST be exactly one of these, lowercase:
 
@@ -222,6 +218,10 @@ untrue, found by searching for the record's ID. Commit messages are history, and
 A checker MUST report a record whose status is not `proposed` that lacks `decision-makers` or
 `approval`, and a bare `ADR-NNNN` outside code that names no record in this repository. It cannot
 verify that `approval` holds the owner's words, nor that an amendment fixed its citations.
+
+A repository MAY maintain a generated index of decision records at `docs/decisions/README.md`. If
+present, it MUST carry a generated header naming what generates it, and regenerating it MUST produce
+no diff (§4.3).
 
 ### 3.2 Changelog
 

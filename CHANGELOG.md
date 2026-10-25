@@ -8,6 +8,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Added
 
+- **Generated decisions index and confirmation section (ADR-0017).**
+  `tools/doc-kit-index-decisions.sh` generates `docs/decisions/README.md` to list in-force and
+  non-binding decision records, verified by `tools/doc-kit-check.sh` (§4.3). The decision template
+  gains MADR's optional `## Confirmation` section, and `docs/spec.md` links its purpose to ADR-0001
+  rather than restating it (§4.1).
 - **How-to guides and external sources (ADR-0016).** `docs/howto/` holds step-by-step procedures
   that recur across several places; `docs/sources/` indexes external reference materials with URLs,
   checksums, licences and a fetch script. Templates are provided under `templates/docs/`.

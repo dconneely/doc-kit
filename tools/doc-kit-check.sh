@@ -310,7 +310,7 @@ check_adr() {
 			done[f] = 1
 			base = f
 			sub(/.*\//, "", base)
-			skip = base ~ /^0000-/
+			skip = (base ~ /^0000-/ || base == "README.md")
 			if (base ~ /^[0-9][0-9][0-9][0-9]-/) seen[substr(base, 1, 4)]++
 			status = ""; date = dm = appr = h1 = h2 = h3 = 0
 		}
@@ -359,6 +359,17 @@ check_adr() {
 	done
 	IFS=$oldifs
 	set +f
+
+	# §4.3 - the generated decisions index is up to date.
+	if [ -f "$dir/README.md" ] && [ -f tools/doc-kit-index-decisions.sh ]; then
+		tmp_idx=$(mktemp)
+		sh tools/doc-kit-index-decisions.sh "$tmp_idx" "$dir"
+		if ! cmp -s "$dir/README.md" "$tmp_idx"; then
+			fail "$dir/README.md is out of date" "run 'sh tools/doc-kit-index-decisions.sh' to regenerate (§4.3)"
+		fi
+		rm -f "$tmp_idx"
+	fi
+
 	return 0
 }
 

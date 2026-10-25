@@ -85,3 +85,14 @@ about whether the trade-off still holds - which is the question they came here t
 
 Delete this comment in the copy.
 -->
+
+## Confirmation
+
+<!--
+Optional. Describe how compliance with this decision is confirmed or tested.
+For example: a test case, architectural fitness function, or automated checker rule.
+
+Delete this comment in the copy.
+-->
+
+{How compliance is confirmed, e.g. a test or checker command.}
