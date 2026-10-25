@@ -1,8 +1,8 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-10-25
 decision-makers: David Conneely
-approval: "Proposed"
+approval: "yes"
 ---
 
 # 16. Where how-to guides and external sources live
