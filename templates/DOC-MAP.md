@@ -11,24 +11,26 @@ this map does not restate them. Why the structure is shaped this way is in the a
 
 The tense of the sentence you are writing usually settles it:
 
-| If you are asking...                  | If you are writing...                                    | It belongs in                                                                             |
-| ------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| "what does it do? can I rely on X?"   | "the system does X"                                      | the specification                                                                         |
-| "should it do X at all?"              | "X is out of scope" or "callers must not rely on X"      | the specification's scope, or what it leaves unspecified                                  |
-| "why is it like this? was X tried?"   | "we chose X because Y", or "we chose not to do X"        | an ADR                                                                                    |
-| "when did this change?"               | "X used to be Y, now it is Z"                            | the changelog                                                                             |
-| "is this known? is anyone fixing it?" | "we should do X"                                         | the plan                                                                                  |
-| "could this be faster, or smarter?"   | "X is worth doing once Y is true"                        | the plan, with Y named as the trigger                                                     |
-| "is this a bug, or a decision?"       | "we knowingly differ from the reference/spec here"       | `docs/quirks.md`                                                                          |
-| "why does it fail on X?"              | "X is unhandled, and we know it"                         | `docs/quirks.md` as accepted-wrong, pinned by a test or assert                            |
-| "is X tested?"                        | "X is deliberately not tested"                           | `docs/testing.md`                                                                         |
-| "how do we know that?"                | "source A says X, source B says Y, and A won because..." | a research note                                                                           |
-| "why is this code like this?"         | "this code is like this because..."                      | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
-| "what did this code do before?"       | "this code used to..." or "fixed the bug where..."       | the commit message - never a comment                                                      |
-| "is anything left to do here?"        | "this code should also..."                               | the plan - a `TODO` beside the code names the entry, never replaces it                    |
-| "what does this word mean here?"      | "X means Y in this codebase"                             | the glossary                                                                              |
-| "exactly what does the API accept?"   | "the schema / wire format / API accepts X"               | the machine-readable contract, linked from the specification - never restated in prose    |
-| "where does this go?"                 | "this is how each document is used"                      | this file                                                                                 |
+| If you are asking...                        | If you are writing...                                    | It belongs in                                                                             |
+| ------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| "what does it do? can I rely on X?"         | "the system does X"                                      | the specification                                                                         |
+| "should it do X at all?"                    | "X is out of scope" or "callers must not rely on X"      | the specification's scope, or what it leaves unspecified                                  |
+| "why is it like this? was X tried?"         | "we chose X because Y", or "we chose not to do X"        | an ADR                                                                                    |
+| "when did this change?"                     | "X used to be Y, now it is Z"                            | the changelog                                                                             |
+| "is this known? is anyone fixing it?"       | "we should do X"                                         | the plan                                                                                  |
+| "could this be faster, or smarter?"         | "X is worth doing once Y is true"                        | the plan, with Y named as the trigger                                                     |
+| "is this a bug, or a decision?"             | "we knowingly differ from the reference/spec here"       | `docs/quirks.md`                                                                          |
+| "why does it fail on X?"                    | "X is unhandled, and we know it"                         | `docs/quirks.md` as accepted-wrong, pinned by a test or assert                            |
+| "is X tested?"                              | "X is deliberately not tested"                           | `docs/testing.md`                                                                         |
+| "how do we know that?"                      | "source A says X, source B says Y, and A won because..." | a research note                                                                           |
+| "why is this code like this?"               | "this code is like this because..."                      | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
+| "what did this code do before?"             | "this code used to..." or "fixed the bug where..."       | the commit message - never a comment                                                      |
+| "is anything left to do here?"              | "this code should also..."                               | the plan - a `TODO` beside the code names the entry, never replaces it                    |
+| "what does this word mean here?"            | "X means Y in this codebase"                             | the glossary                                                                              |
+| "exactly what does the API accept?"         | "the schema / wire format / API accepts X"               | the machine-readable contract, linked from the specification - never restated in prose    |
+| "how do I perform this procedure?"          | "run step 1, then step 2"                                | a how-to guide (`docs/howto/`)                                                            |
+| "where did this external source come from?" | "source A was retrieved from URL B"                      | `docs/sources/`                                                                           |
+| "where does this go?"                       | "this is how each document is used"                      | this file                                                                                 |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
 
@@ -47,6 +49,8 @@ docs/
   research/*.md          sourced findings with confidence levels
   glossary.md            domain vocabulary
   testing.md             test strategy, and what is deliberately not covered
+  howto/*.md             optional: step-by-step procedures that recur across several places
+  sources/               optional: external material: index, fetch script, cached originals
   archive/               optional: undatable documents kept, not authoritative
 ```
 
@@ -59,20 +63,22 @@ schemas, interface definitions - and each gets its own row below.
 
 ## Artifacts
 
-| Artifact              | Purpose                                                                                                                  | Tense   | Mutability         | Audience                     |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- | ------------------ | ---------------------------- |
-| `DOC-MAP.md`          | This map: what each document is for, and where a fact belongs                                                            | present | rewritten in place | contributor                  |
-| `README.md`           | Orients a newcomer in one screen, and links outward                                                                      | present | rewritten in place | owner, contributor, consumer |
-| `docs/spec.md`        | The behaviour contract. Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength        | present | rewritten in place | consumer, contributor        |
-| `docs/decisions/*.md` | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past    | amendable          | owner, contributor           |
-| `CHANGELOG.md`        | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past    | append-only        | consumer                     |
-| `docs/plan.md`        | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future  | volatile           | owner, contributor           |
-| `docs/quirks.md`      | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present | rewritten in place | consumer, contributor        |
-| `docs/research/*.md`  | Sourced findings with explicit confidence levels; shape and confidence levels in `0000-template.md`                      | past    | append-only        | contributor                  |
-| `docs/glossary.md`    | Domain vocabulary                                                                                                        | present | rewritten in place | owner, contributor, consumer |
-| `docs/testing.md`     | Test strategy, and what is deliberately _not_ covered                                                                    | present | rewritten in place | contributor                  |
-| `docs/plan/*.md`      | Working notes for one backlog item. Optional                                                                             | future  | disposable         | contributor                  |
-| `docs/archive/`       | Documentation whose currency cannot be established, kept rather than discarded; rules in its `README.md`. Optional       | past    | immutable          | contributor                  |
+| Artifact              | Purpose                                                                                                                  | Tense      | Mutability         | Audience                     |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------ | ---------------------------- |
+| `DOC-MAP.md`          | This map: what each document is for, and where a fact belongs                                                            | present    | rewritten in place | contributor                  |
+| `README.md`           | Orients a newcomer in one screen, and links outward                                                                      | present    | rewritten in place | owner, contributor, consumer |
+| `docs/spec.md`        | The behaviour contract. Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength        | present    | rewritten in place | consumer, contributor        |
+| `docs/decisions/*.md` | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past       | amendable          | owner, contributor           |
+| `CHANGELOG.md`        | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past       | append-only        | consumer                     |
+| `docs/plan.md`        | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future     | volatile           | owner, contributor           |
+| `docs/quirks.md`      | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present    | rewritten in place | consumer, contributor        |
+| `docs/research/*.md`  | Sourced findings with explicit confidence levels; shape and confidence levels in `0000-template.md`                      | past       | append-only        | contributor                  |
+| `docs/glossary.md`    | Domain vocabulary                                                                                                        | present    | rewritten in place | owner, contributor, consumer |
+| `docs/testing.md`     | Test strategy, and what is deliberately _not_ covered                                                                    | present    | rewritten in place | contributor                  |
+| `docs/plan/*.md`      | Working notes for one backlog item. Optional                                                                             | future     | disposable         | contributor                  |
+| `docs/howto/*.md`     | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms. Optional      | imperative | rewritten in place | contributor, operator        |
+| `docs/sources/`       | External reference material: index, fetch script, cached originals. Rules in its `README.md`. Optional                   | present    | append-only        | contributor, consumer        |
+| `docs/archive/`       | Documentation whose currency cannot be established, kept rather than discarded; rules in its `README.md`. Optional       | past       | immutable          | contributor                  |
 
 ## Lifecycle
 
@@ -89,6 +95,8 @@ schemas, interface definitions - and each gets its own row below.
 | `docs/glossary.md` entry | a term acquires a project-specific meaning | when the term leaves the codebase                                |
 | `docs/testing.md`        | the second test approach appears           | never                                                            |
 | `docs/plan/*.md`         | work begins on an item                     | work completes                                                   |
+| `docs/howto/*.md`        | a procedure recurs across several places   | when automated away or obsolete                                  |
+| `docs/sources/`          | an external standard is cited              | when no artifact cites it                                        |
 | `docs/archive/`          | migration finds a document nobody can date | when nothing in it is worth keeping                              |
 
 ## Flow

@@ -8,6 +8,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Added
 
+- **How-to guides and external sources (ADR-0016).** `docs/howto/` holds step-by-step procedures
+  that recur across several places; `docs/sources/` indexes external reference materials with URLs,
+  checksums, licences and a fetch script. Templates are provided under `templates/docs/`.
 - `tools/doc-kit-check.sh` requires `approval` on any record that is not `proposed`, treats the
   template's placeholders as missing, reports a bare `ADR-NNNN` that names no record, and reports a
   citation in any other form (ADR-0007).

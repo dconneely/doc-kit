@@ -1,0 +1,7 @@
+# External sources are not committed unless explicitly redistributable
+# (licence permits redistribution and the owner agrees).
+*
+!.gitignore
+!README.md
+!fetch.sh
+!*.extract.md

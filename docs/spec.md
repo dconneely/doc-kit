@@ -273,6 +273,23 @@ An accepted-wrong entry SHOULD name the test that asserts today's incorrect outp
 reader does not "fix" it, and SHOULD carry an expiry condition - what would have to change for the
 entry to be removed.
 
+### 3.6 How-to guides
+
+A repository MAY hold recurring task-oriented procedures under `docs/howto/`.
+
+Each guide MUST be written in the imperative mood, SHOULD state its goal, prerequisites, sequential
+steps, and verification criteria, and SHOULD cite conventions and exemplars rather than duplicating
+their text.
+
+### 3.7 External sources
+
+A repository MAY maintain external standards, whitepapers and specifications under `docs/sources/`.
+
+The directory MUST contain a `README.md` indexing each source with its URL, retrieval date, licence,
+redistributability status, and SHA-256 checksum. A source that is not explicitly redistributable
+under its licence MUST NOT be committed to git and MUST be gitignored. Generated text or Markdown
+extracts derived from cached sources MUST carry a provenance header per §4.3 naming the generator.
+
 ## 4. Single source of truth
 
 4.1 No fact may appear in two artifacts. Where a fact is genuinely needed in two places, one of them

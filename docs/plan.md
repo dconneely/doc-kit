@@ -16,16 +16,6 @@ the checker. Solution: exempt standard specification artifacts in the checker be
 separation is ratified in §3, and allow an `Allowed overlaps` map section for non-standard
 artifacts, requiring the owner's explicit approval so agents cannot bypass the check autonomously.
 
-## Add how-to guides and external sources
-
-**Type:** feature - **Importance:** medium - **Effort:** medium
-
-Needs an ADR. `docs/howto/` holds procedures that recur across several places, citing conventions
-and exemplars rather than copying them. `docs/sources/` holds external material: an index of URL,
-retrieval date, licence, redistributability and checksum; a `.gitignore` that ignores everything not
-explicitly redistributable; a fetch script; and Markdown extracts beside their PDFs, as generated
-artifacts.
-
 ## Keep decisions readable for a new session
 
 **Type:** feature - **Importance:** medium - **Effort:** medium

@@ -21,22 +21,24 @@ Start here when you have something to write down and are not sure which file it 
 
 The tense of the sentence you are writing usually settles it:
 
-| If you are asking...                    | If you are writing...                              | It belongs in                                                                             |
-| --------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| "what makes a repository conformant?"   | "a conformant repository does X"                   | `docs/spec.md`                                                                            |
-| "why is the kit shaped like this?"      | "we chose X because Y"                             | an ADR                                                                                    |
-| "has anyone checked that?"              | "source A says X, and I checked"                   | a research note                                                                           |
-| "what changed in this release?"         | "X used to be Y, now it is Z"                      | the changelog                                                                             |
-| "is this known? is it planned?"         | "we should do X"                                   | the plan                                                                                  |
-| "how do I adopt this?"                  | "here is how you adopt this"                       | `ADOPTING.md`                                                                             |
-| "why does the procedure say that?"      | "here is why the procedure is shaped this way"     | `ADOPTING-NOTES.md`                                                                       |
-| "what does an adopter start from?"      | "here is the text an adopter starts from"          | `templates/` - never restated in prose                                                    |
-| "why is this code like this?"           | "this code is like this because..."                | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
-| "what did this code do before?"         | "this code used to..." or "fixed the bug where..." | the commit message - never a comment                                                      |
-| "is anything left to do here?"          | "this code should also..."                         | the plan - a `TODO` beside the code names the entry, never replaces it                    |
-| "what does this word mean here?"        | "X means Y in this project"                        | the glossary                                                                              |
-| "what must an agent know to work here?" | "an agent working here needs to know X"            | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact     |
-| "where does this go?"                   | "this is how each document is used"                | this file                                                                                 |
+| If you are asking...                        | If you are writing...                              | It belongs in                                                                             |
+| ------------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| "what makes a repository conformant?"       | "a conformant repository does X"                   | `docs/spec.md`                                                                            |
+| "why is the kit shaped like this?"          | "we chose X because Y"                             | an ADR                                                                                    |
+| "has anyone checked that?"                  | "source A says X, and I checked"                   | a research note                                                                           |
+| "what changed in this release?"             | "X used to be Y, now it is Z"                      | the changelog                                                                             |
+| "is this known? is it planned?"             | "we should do X"                                   | the plan                                                                                  |
+| "how do I adopt this?"                      | "here is how you adopt this"                       | `ADOPTING.md`                                                                             |
+| "why does the procedure say that?"          | "here is why the procedure is shaped this way"     | `ADOPTING-NOTES.md`                                                                       |
+| "what does an adopter start from?"          | "here is the text an adopter starts from"          | `templates/` - never restated in prose                                                    |
+| "why is this code like this?"               | "this code is like this because..."                | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
+| "what did this code do before?"             | "this code used to..." or "fixed the bug where..." | the commit message - never a comment                                                      |
+| "is anything left to do here?"              | "this code should also..."                         | the plan - a `TODO` beside the code names the entry, never replaces it                    |
+| "what does this word mean here?"            | "X means Y in this project"                        | the glossary                                                                              |
+| "what must an agent know to work here?"     | "an agent working here needs to know X"            | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact     |
+| "how do I perform this procedure?"          | "run step 1, then step 2"                          | a how-to guide (`docs/howto/`)                                                            |
+| "where does this cited document come from?" | "source A was retrieved from URL B"                | `docs/sources/`                                                                           |
+| "where does this go?"                       | "this is how each document is used"                | this file                                                                                 |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
 
@@ -60,6 +62,8 @@ docs/
   research/*.md          sourced findings, with confidence levels
   glossary.md            project vocabulary
   testing.md             what the checker verifies, and what it does not
+  howto/*.md             recurring procedures citing conventions and exemplars
+  sources/               external material: index, fetch script, cached originals
 ```
 
 The specification is one file. It will stay one file for as long as it is comfortable to read end to
@@ -85,6 +89,8 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `docs/research/*.md`        | Sourced findings about the conventions this kit cites, with explicit confidence levels. **No standard**                                                                                                               | past        | append-only        | contributor, consumer        |
 | `docs/testing.md`           | What `tools/doc-kit-check.sh` and the hooks verify exactly, approximately, and deliberately not at all                                                                                                                | present     | rewritten in place | contributor                  |
 | `docs/glossary.md`          | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html)                                                                                                   | present     | rewritten in place | owner, contributor, consumer |
+| `docs/howto/*.md`           | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms                                                                                                             | imperative  | rewritten in place | contributor, operator        |
+| `docs/sources/`             | External reference material: index, fetch script, cached originals. Rules in its `README.md`                                                                                                                          | present     | append-only        | contributor, consumer        |
 
 ## Lifecycle
 
@@ -106,6 +112,8 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `docs/research/*.md`        | a cited convention is checked against its source             | never - confidence gets revised                                  |
 | `docs/testing.md`           | something started verifying the documentation mechanically   | never                                                            |
 | `docs/glossary.md` entry    | a term acquires a project-specific meaning                   | when the term leaves the project                                 |
+| `docs/howto/*.md`           | a procedure recurs across several places                     | when automated away or obsolete                                  |
+| `docs/sources/`             | an external standard is cited                                | when no artifact cites it                                        |
 
 ## Flow
 
