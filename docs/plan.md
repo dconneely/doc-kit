@@ -10,11 +10,12 @@ needs more, it needs an ADR. `docs/spec.md` §3.3 defines the scales.
 
 **Type:** debt - **Importance:** medium - **Effort:** low
 
-Needs an ADR. With closed audiences, artifacts holding different facts share all three properties -
-three pairs in this map and three in the template's - and recurring warnings train readers to ignore
-the checker. Solution: exempt standard specification artifacts in the checker because their fact
-separation is ratified in §3, and allow an `Allowed overlaps` map section for non-standard
-artifacts, requiring the owner's explicit approval so agents cannot bypass the check autonomously.
+Needs an ADR. With closed audiences, standard artifacts holding different facts share all three
+properties, training readers to ignore recurring checker warnings. Solution: hardcode exemptions in
+the checker for pairwise overlaps between standard specification artifacts defined in §2 and §3,
+including sibling members within multi-file containers (`docs/spec/*`, `docs/howto/*`,
+`docs/plan/*`), and exclude `templates/**` from documentation checks just like `docs/archive/**` per
+§2.8. Custom artifacts continue to report advisory warnings; `Allowed overlaps` is dropped.
 
 ## Remove duplication between the specification and the templates
 
