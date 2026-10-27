@@ -35,7 +35,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   `contributor`, `consumer`, `end-user` and `operator`, marked `(agents)` or `(humans)` when only
   one kind of reader reads it. `tools/doc-kit-check.sh` fails any other value. Two artifacts sharing
   all three properties are now a warning, not a failure, and are merged only when they hold the same
-  facts (ADR-0002). To follow: replace each audience in your map with roles.
+  facts (ADR-0002). Pairwise overlaps between standard specification artifacts, sibling members of
+  multi-file containers, and product artifacts (§2.8) are exempt from warnings.
+- **Templates excluded from documentation checks (§2.8).** Files under `templates/**` are excluded
+  from documentation file (§2.4) and citation checks (§3.1), matching the exemption for
+  `docs/archive/**`.
 - **Paths move (ADR-0014).** `SPECIFICATION.md` is now `docs/spec.md`, `PLAN.md` is `docs/plan.md`,
   `docs/adr/` is `docs/decisions/`, and `docs/tasks/` is `docs/plan/`; the templates move to match.
   The root keeps only the map, `README.md`, `AGENTS.md` and its aliases, and `CHANGELOG.md`. Any

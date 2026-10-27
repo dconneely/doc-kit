@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-10-25
+date: 2026-10-27
 decision-makers: David Conneely
 approval: "yes"
 ---
@@ -58,6 +58,16 @@ A candidate document sharing all three properties with an existing artifact is r
 to check, not an automatic failure: two artifacts sharing all three are merged unless they hold
 different facts.
 
+Because the closed sets are small, standard specification artifacts ratified in `docs/spec.md` §2
+and §3 legitimately share property triples (such as `DOC-MAP.md` and `docs/testing.md`, `README.md`
+and `docs/glossary.md`, or `docs/spec.md` and `docs/quirks.md`), as do sibling members within
+multi-file containers (`docs/spec/*`, `docs/howto/*`, `docs/plan/*`). Their fact separation is
+established by the specification itself, so pairwise overlaps between standard artifacts are exempt
+from warnings in the checker. Custom artifacts that share a triple continue to report an advisory
+warning, prompting review without blocking CI; an `Allowed overlaps` configuration is rejected as
+unneeded ceremony and an agent escape hatch. Product artifacts (`templates/*`, `tools/*`, etc.) are
+also exempt from duplicate-property checks per `docs/spec.md` §2.8.
+
 ### Applications: technical debt and machine-readable contracts
 
 This test resolves commonly requested categories without inventing new artifacts:
@@ -90,6 +100,11 @@ Prose may link to a machine-readable contract; it never restates one.
   Filing changes a tag, not a location.
 - Good, because schemas and prose live under one specification umbrella without duplicating facts.
 - Good, because audience roles are uniform across maps and checkable by tooling.
+- Good, because standard runs emit zero duplicate-property warnings, eliminating warning fatigue.
+- Good, because new custom artifacts that overlap produce a high-contrast single warning.
+- Good, because an `Allowed overlaps` table is omitted, avoiding map schema churn and agent misuse.
+- Bad, because custom artifacts that genuinely share a triple will always report an advisory
+  warning.
 - Bad, because the duplicate test is a prompt, not a proof: artifacts holding different facts can
   share all three properties, requiring human review to evaluate the warning.
 - Bad, because the rule against restating a contract is expensive to hold in review.

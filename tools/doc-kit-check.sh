@@ -170,10 +170,11 @@ check_map() {
 	done
 
 	# §2.4 - every documentation file appears in the map. Files below the conventional
-	# archive (§5.1) and vendored files (§1) are not documentation files; an archive elsewhere
-	# is covered by its map entry. Split on newlines only, so a path may contain spaces.
+	# archive (§5.1), templates (§2.8), and vendored files (§1) are not documentation files;
+	# an archive elsewhere is covered by its map entry. Split on newlines only, so a path may
+	# contain spaces.
 	set +f
-	files=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' | sort)
+	files=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' ! -path './templates/*' | sed 's:^\./::' | sort)
 	set -f
 	unmapped=''
 	oldifs=$IFS
@@ -225,6 +226,31 @@ check_map() {
 			for (i = 1; i <= n; i++) muts[m[i]] = 1
 			split("owner contributor consumer end-user operator", r, " ")
 			for (i in r) roles[r[i]] = 1
+
+			exempt_pairs["DOC-MAP.md + docs/testing.md"] = 1
+			exempt_pairs["README.md + docs/glossary.md"] = 1
+			exempt_pairs["docs/quirks.md + docs/spec.md"] = 1
+		}
+		function norm_pair(a, b) {
+			return (a < b) ? (a " + " b) : (b " + " a)
+		}
+		function is_parent_child(p, c,  q) {
+			if (p ~ /\.md$/) {
+				q = p
+				sub(/\.md$/, "", q)
+				if (c ~ ("^" q "/")) return 1
+			}
+			return 0
+		}
+		function is_exempt_pair(a, b,  pa, pb) {
+			if (norm_pair(a, b) in exempt_pairs) return 1
+			if (is_parent_child(a, b) || is_parent_child(b, a)) return 1
+			# Sibling members in the same docs/ container
+			if (a ~ /^docs\/[^\/]+\// && b ~ /^docs\/[^\/]+\//) {
+				split(a, pa, "/"); split(b, pb, "/");
+				if (pa[2] == pb[2]) return 1
+			}
+			return 0
 		}
 		{
 			art = $2
@@ -243,13 +269,40 @@ check_map() {
 					x = items[j]; items[j] = items[j - 1]; items[j - 1] = x
 				}
 			}
+			# §2.8 - Product artifacts are exempt from instance duplicate-property checks.
+			if ($3 ~ /^\*\*Product/) next
+
 			aud = ""
 			for (i = 1; i <= k; i++) aud = aud (i > 1 ? ", " : "") items[i]
 			key = $4 " | " $5 " | " aud
-			if (key in first) shared[key] = shared[key] ", " art
-			else { first[key] = art; order[++c] = key }
+
+			if (!(key in count)) {
+				order[++c] = key
+				count[key] = 0
+			}
+			idx = ++count[key]
+			arts_by_key[key, idx] = art
 		}
-		END { for (i = 1; i <= c; i++) if (order[i] in shared) print "share\t" first[order[i]] shared[order[i]] "\t" order[i] }
+		END {
+			for (i = 1; i <= c; i++) {
+				key = order[i]
+				narts = count[key]
+				if (narts < 2) continue
+				for (j = 1; j <= narts; j++) {
+					for (k = j + 1; k <= narts; k++) {
+						a1 = arts_by_key[key, j]
+						a2 = arts_by_key[key, k]
+						if (!is_exempt_pair(a1, a2)) {
+							pair_key = norm_pair(a1, a2)
+							if (!(pair_key in reported)) {
+								reported[pair_key] = 1
+								print "share\t" a1 ", " a2 "\t" key
+							}
+						}
+					}
+				}
+			}
+		}
 	')
 	set -f
 	oldifs=$IFS
@@ -384,7 +437,7 @@ check_adr() {
 # Vendored and gitignored files are not read.
 check_citations() {
 	set +f
-	docs=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' | sort)
+	docs=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' ! -path './templates/*' | sed 's:^\./::' | sort)
 	set -f
 	skip=$(printf '%s\n' "$docs" | vendored_of; printf '%s\n' "$docs" | ignored_of)
 	scan=''

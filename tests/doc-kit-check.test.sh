@@ -118,9 +118,9 @@ echo x >notes.md
 expect "unmapped file fails" 1 "FAIL [map] notes.md is not named in the map" map
 
 fixture
-mkdir templates
+mkdir -p templates
 echo x >templates/notes.md
-expect "templates/ is not exempt by name" 1 "templates/notes.md is not named in the map" map
+expect "templates/ is exempt without a row" 0 "conformant" map
 
 fixture
 mkdir -p old
@@ -189,6 +189,13 @@ expect "tense outside the closed set fails" 1 "docs/plan.md has tense 'later'" m
 fixture
 sed -i.bak 's/| future  | volatile           | owner /| past | immutable | contributor, owner /' DOC-MAP.md
 expect "artifacts sharing all properties warn, in any role order" 0 	"WARN [map] docs/plan.md, docs/decisions/*.md share [past | immutable | contributor, owner]" map
+
+fixture
+echo x >docs/testing.md
+after '^DOC-MAP.md ' 'docs/testing.md test'
+after '^[|] `DOC-MAP.md` ' '| `docs/testing.md` | test | present | rewritten in place | contributor |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/testing.md` | start | never |'
+expect "standard ratified pair does not warn" 0 "doc-kit: conformant (map)" map
 
 fixture
 sed -i.bak 's/| volatile           | owner /| volatile | the team /' DOC-MAP.md

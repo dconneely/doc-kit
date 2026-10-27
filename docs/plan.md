@@ -6,17 +6,6 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR. `docs/spec.md` §3.3 defines the scales.
 
-## Stop shared-triple warnings repeating on every run
-
-**Type:** debt - **Importance:** medium - **Effort:** low
-
-Needs an ADR. With closed audiences, standard artifacts holding different facts share all three
-properties, training readers to ignore recurring checker warnings. Solution: hardcode exemptions in
-the checker for pairwise overlaps between standard specification artifacts defined in §2 and §3,
-including sibling members within multi-file containers (`docs/spec/*`, `docs/howto/*`,
-`docs/plan/*`), and exclude `templates/**` from documentation checks just like `docs/archive/**` per
-§2.8. Custom artifacts continue to report advisory warnings; `Allowed overlaps` is dropped.
-
 ## Remove duplication between the specification and the templates
 
 **Type:** debt - **Importance:** medium - **Effort:** medium
