@@ -11,11 +11,11 @@ a reader.
 cites the `docs/spec.md` clause it comes from, so a failure is traceable to the contract rather than
 to the tool's opinion.
 
-| Group  | Verified                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `map`  | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `docs/archive/` and `templates/` and not marked `linguist-vendored` is named by some artifact pattern (§1, §2.4, §2.8, §5.1), a gitignored one only warning (§2.9). No template placeholder text survives (§2.5). Tense, mutability and audience come from the closed sets; two non-alias artifacts sharing all three are reported as a warning only, except standard-artifact pairs and pairs among a multi-file container's entry point and its parts (§2.6, §2.7) |
-| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` of `proposed`, `accepted`, `rejected` or `deprecated`, a `date`, and - on anything not `proposed` - `decision-makers` and `approval` that are not the template's placeholders. The three MADR minimal headings are present. Every bare `ADR-NNNN` in a documentation file excluding `templates/`, outside code and the text of links to other sites, names a record in `docs/decisions/`, and no citation takes another form (§3.1)                                                                                                                                                     |
-| `plan` | No entry heading is annotated done, struck through or marked completed. Every `##` entry carries a valid type tag (§3.3)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Group  | Verified                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `map`  | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `docs/archive/` and `templates/` and not marked `linguist-vendored` is named by some artifact pattern (§1, §2.4, §2.8, §5.1), a gitignored one only warning (§2.9). The root map carries no template banner (§2.5). Tense, mutability and audience come from the closed sets; two non-alias artifacts sharing all three are reported as a warning only, except standard-artifact pairs, pairs among a multi-file container's entry point and its parts, and artifacts the map marks as product (§2.6, §2.7) |
+| `adr`  | Filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` of `proposed`, `accepted`, `rejected` or `deprecated`, a `date`, and - on anything not `proposed` - `decision-makers` and `approval` that are not the template's placeholders. The three MADR minimal headings are present. Every bare `ADR-NNNN` in a documentation file excluding `templates/`, outside code and the text of links to other sites, names a record in `docs/decisions/`, and no citation takes another form (§3.1)                                                                                                                                                                                            |
+| `plan` | No entry heading is annotated done, struck through or marked completed. Every `##` entry carries a valid type tag (§3.3)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
 (`.markdownlint-cli2.jsonc`), secrets, file hygiene, `pygrep` drift guards for the failure this
@@ -40,9 +40,9 @@ or a skill's single-line `description` in front matter. Measured directly, the b
 rather than a precise gate.
 
 **Glob matching in §2.4.** A file is considered mapped if any artifact pattern matches it under
-shell `case` semantics, where `*` crosses `/`. So `templates/*` matches arbitrarily deep paths. That
-is deliberate - it is what makes a directory artifact work - but it means a coarse pattern can cover
-a file nobody intended to map.
+shell `case` semantics, where `*` crosses `/`. So `docs/decisions/*` matches arbitrarily deep paths.
+That is deliberate - it is what makes a directory artifact work - but it means a coarse pattern can
+cover a file nobody intended to map.
 
 ## What is deliberately not covered
 
@@ -51,19 +51,22 @@ change of status and every deletion. The checker sees only that `approval` is fi
 the words are the owner's, and it cannot see a status changed or a record deleted without asking.
 The rule is held by instruction, which is the largest gap.
 
+**Placeholder content beyond the template banner (§2.5).** The checker detects only the banner
+phrase. An example artifact row or an unreplaced heading is left to review.
+
 **Citations made untrue.** The checker finds citations that name no record. It cannot tell whether a
 citation of a record that exists still says something true of it after a change. Citations in code
-comments, gitignored files and vendored files are not read at all.
+comments, gitignored files, vendored files and `templates/` are not read at all.
 
 **Substantive conformance (§4).** No fact in two places; prose never restating a machine-readable
 contract. §6 assigns this to review because it is not mechanically decidable, and the deduplication
 passes this repository has needed were all found by reading, not by tooling.
 
-**Specification clauses with no instance here.** §3.2 changelog categories, §3.4 research confidence
-levels, §3.5 quirk entry shape, and §5's archive rules - provenance headers, and the archive's
-single map entry - are unimplemented. Three of the four have nothing to check against - this
-repository has no quirks file and no archive - but the changelog and research notes do exist, so
-those two are intentional omissions rather than vacuous ones.
+**No instance here.** §3.2 changelog rules, §3.4 research confidence levels, §3.5 quirk entry shape,
+and §5's archive rules - provenance headers, and the archive's single map entry - are unimplemented.
+Two of the four have nothing to check against - this repository has no quirks file and no archive -
+but the changelog and research notes do exist, so those two are intentional omissions rather than
+vacuous ones.
 
 **Prose quality of any kind.** A repository can pass every check and be badly written. Structural
 conformance is a floor.
