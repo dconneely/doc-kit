@@ -132,10 +132,11 @@ points at, and adds nothing of its own.
 necessarily does. Files below `templates/` are product, not documentation files (§1), and a checker
 MUST exempt them from documentation and citation checks, in the same manner as §5.1. A checker MUST
 evaluate only the root map as an instance. It MUST NOT apply the duplicate-property test (§2.7) to
-an artifact the map identifies as a template or product, and MUST NOT treat the content of such an
-artifact as an instance for §2.4, §2.5 or §3.1; its row in the map is still checked for §2.2 and
-§2.3. Without this, a repository shipping the kit fails §2.5 on its own templates, which is the
-check reporting the opposite of the truth.
+an artifact the map identifies as a template or product; its row in the map is still checked for
+§2.2, §2.3 and the property sets in §2.7. Product artifacts that are part of this repository's own
+documentation, such as `ADOPTING.md`, remain documentation files for §2.4 and §3.1; §2.5 applies
+only to the root map. Without this, a repository shipping the kit fails §2.5 on its own templates,
+which is the check reporting the opposite of the truth.
 
 2.9 A documentation file that is gitignored is not exempt from §2.4 - a checker MUST still evaluate
 it against the map. But a checker MUST report a hit in one as advisory, and MUST NOT let it affect
