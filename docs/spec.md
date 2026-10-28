@@ -85,9 +85,9 @@ rots first, and it SHOULD be given a mechanism - a checker, a review step, a rel
 than left to memory.
 
 2.4 Every documentation file MUST appear in the map, either individually or under a directory
-pattern the map names. Files below an archive (§5), files below a template directory (§2.8), and
-vendored documentation (§1) are not documentation files for the purpose of this rule. This is the
-check that rots second.
+pattern the map names. Files below an archive (§5), files below `templates/` (§2.8), and vendored
+documentation (§1) are not documentation files for the purpose of this rule. This is the check that
+rots second.
 
 2.5 The map MUST NOT retain placeholder content from the template - an example artifact row, an
 unreplaced heading. Templates carry an example rather than instructions (ADR-0006), so a surviving
@@ -131,12 +131,11 @@ because a tool looks for that filename. It appears in the map, carries the prope
 points at, and adds nothing of its own.
 
 2.8 A repository MAY contain uncustomised template artifacts - a repository distributing this kit
-necessarily does. Files below a template directory (conventionally `templates/`) are product, not
-documentation files for the purposes of §2.4, and a checker MUST exempt them from documentation and
-citation checks, in the same manner as §5.1. A checker MUST evaluate only the root map as an
-instance, and MUST NOT evaluate any artifact the map identifies as a template or as product. Without
-this, a repository shipping the kit fails §2.5 on its own templates, which is the check reporting
-the opposite of the truth.
+necessarily does. Files below `templates/` are product, not documentation files for the purposes of
+§2.4, and a checker MUST exempt them from documentation and citation checks, in the same manner as
+§5.1. A checker MUST evaluate only the root map as an instance, and MUST NOT evaluate any artifact
+the map identifies as a template or as product. Without this, a repository shipping the kit fails
+§2.5 on its own templates, which is the check reporting the opposite of the truth.
 
 2.9 A documentation file that is gitignored is not exempt from §2.4 - a checker MUST still evaluate
 it against the map. But a checker MUST report a hit in one as advisory, and MUST NOT let it affect
