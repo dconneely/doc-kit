@@ -59,19 +59,28 @@ text.
 
 ### Driving it with an agent
 
-Clone this repository alongside the one you are adopting into, start the agent **here**, and point
-it at the target:
+Clone this repository alongside the one you are adopting into.
+
+If the target has no agent instructions of its own, start the agent **here** and point it at the
+target:
 
 ```text
 apply this kit to ../my-cool-repo/
 ```
 
-The `doc-kit-adopt` skill takes it from there: it follows `ADOPTING.md`, writes only into the
-target, stops for approval once the Step 4 inventory exists, and resumes from
-`../my-cool-repo/docs/plan/adopt-doc-kit.md` if a previous session left one.
+The `doc-kit-adopt` skill reads the target's instruction files first, follows `ADOPTING.md`, writes
+only into the target, and stops for approval once the Step 4 inventory exists.
 
-If your tool does not list `doc-kit-adopt`, read `.agents/skills/doc-kit-adopt/SKILL.md` and follow
-it directly; the procedure is the same.
+If the target has its own `AGENTS.md`, `CLAUDE.md` or other agent instructions, adopt in two parts:
+
+1. **Plan here.** Start the agent in this repository and point it at the target. It reads the
+   target's instruction files, follows `ADOPTING.md` Steps 0-4a, and stops at the inventory.
+2. **Execute there.** Review the dispositions, then start the agent in the target repository. Its
+   instructions load automatically. Point it at this kit's `ADOPTING.md` and
+   `.agents/skills/doc-kit-adopt/SKILL.md`, and tell it to finish Steps 4b-5.
+
+If your tool does not list `doc-kit-adopt`, read `.agents/skills/doc-kit-adopt/SKILL.md` directly;
+the procedure is the same.
 
 End the session when adoption completes. Further work on that repository belongs in that
 repository - the `AGENTS.md` stanza installed during Step 3 carries the ongoing rules, and this kit

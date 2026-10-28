@@ -15,6 +15,11 @@ the kit's own decision records would not resolve in your repository. Come back h
 **Done means:** every artifact named in that repository's map exists, every documentation file in
 that repository appears in its map, and each fact in them sits in exactly one place.
 
+**The target's own rules come first.** Before editing the target, read its `AGENTS.md` (including
+nested ones), `CLAUDE.md` and any tool-specific instruction files; they are binding, and this kit's
+`AGENTS.md` is not. If they conflict with this procedure, ask the owner rather than choosing
+silently.
+
 ## The idea, and why it shapes the procedure
 
 Three properties define every artifact - tense, mutability, audience - and documentation rots when a
@@ -191,7 +196,8 @@ this structure by hand is fully conformant. See ADR-0005.
 ### If coding agents work in this repository
 
 Agents read `AGENTS.md` or `CLAUDE.md`, and nothing there points at the map - so the structure you
-have just built is unreachable to the reader most able to damage it.
+have just built is unreachable to the reader most able to damage it. Before editing either, read it
+and follow it as the target's rules; this kit's `AGENTS.md` does not apply there.
 
 The rule is simple even though the states it applies to aren't: **never throw away user-generated
 content in an `AGENTS.md` or `CLAUDE.md` you didn't write.** Create one if neither exists. If one
@@ -259,6 +265,10 @@ Only relevant when adopting into an existing codebase - and on any repository ol
 this, it is the part that does not fit in an afternoon. Work it in three phases: enumerate, decide,
 then act. Deciding everything before moving anything is what keeps the repository consistent at
 every point rather than only at the end.
+
+**Split the session when the target has its own agent instructions.** Steps 0-4a can run from the
+kit; start a session rooted in the target for 4b-5, so its `AGENTS.md` or `CLAUDE.md` loads
+automatically. The inventory is the handoff.
 
 ### 4a - Build the inventory
 

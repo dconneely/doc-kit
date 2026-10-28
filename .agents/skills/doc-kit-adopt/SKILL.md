@@ -5,8 +5,9 @@ description: Apply doc-kit's documentation structure to another repository, or r
 
 # Applying doc-kit to another repository
 
-You're running inside **doc-kit**. The target repository is elsewhere, given as a path -
-`../my-cool-repo/` or similar. Ask for it if not supplied.
+Find both repositories before anything else: this kit's path, and the target's. The skill may run
+from either. The target is elsewhere, given as a path - `../my-cool-repo/` or similar. Ask for it if
+not supplied.
 
 ## Before anything else
 
@@ -14,7 +15,11 @@ You're running inside **doc-kit**. The target repository is elsewhere, given as 
 an adoption - not its map, plan, or changelog. Editing a path outside the target means you're
 damaging the kit, not adopting it.
 
-doc-kit's own `AGENTS.md` describes _this_ repository, not the target - it doesn't apply there.
+**Read the target's instruction files before any edit.** That means `AGENTS.md`, `CLAUDE.md`,
+`.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, and any similar file,
+including nested `AGENTS.md` files. They are binding for the target. doc-kit's own `AGENTS.md`
+describes _this_ repository, not the target - it doesn't apply there. If the target's rules conflict
+with `ADOPTING.md`, ask the owner; do not choose silently.
 
 Check the target's `git status` first. Anything already uncommitted there isn't yours - note it and
 keep it separate from what you touch, so it isn't swept into a summary or a blanket `git add -A`. A
@@ -29,6 +34,18 @@ calls for cases that won't settle.
 Template content comes from `templates/`, which maps onto the target's root at the same relative
 path; Step 3 says what to take and when.
 
+### Two parts when the target has its own instructions
+
+1. **Part 1, in doc-kit.** Steps 0-4a. Read the target's instruction files first and follow them for
+   every write. Produce the plan, the customised map, the documents it promises, and the migration
+   inventory with proposed dispositions. Present the inventory and stop.
+2. **Part 2, in the target.** Start a session rooted in the target, so its `AGENTS.md`/`CLAUDE.md`
+   load automatically. Read the kit's `ADOPTING.md` and this skill from the kit path. Execute the
+   approved dispositions, finish Step 4 and run Step 5.
+
+If the target has no instruction files of its own, one session may do both. The rule is the same:
+read what exists, and follow it.
+
 ## The gate
 
 **Step 4a produces an inventory. Present it and stop.**
@@ -37,7 +54,8 @@ Don't move, split, absorb, archive, or delete anything until the owner has revie
 dispositions. On a mature repository this is the only point where a mistake is cheap - after this,
 it's a commit to undo and the reasoning behind it is gone.
 
-A hard stop, not a checkpoint to mention in passing.
+A hard stop, not a checkpoint to mention in passing. It is also the handoff between Part 1 and Part
+2 when the target has its own instructions.
 
 ## Resuming
 
