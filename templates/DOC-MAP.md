@@ -90,26 +90,26 @@ schemas, interface definitions - and each gets its own row below.
 
 ## Lifecycle
 
-| Artifact                 | Created when                               | Removed / closed when                                            |
-| ------------------------ | ------------------------------------------ | ---------------------------------------------------------------- |
-| `DOC-MAP.md`             | the structure is first agreed              | never - revised when an artifact is added, removed or repurposed |
-| `README.md`              | project starts                             | never                                                            |
-| `docs/spec.md`           | behaviour is decided                       | never - edited forever                                           |
-| `docs/decisions.md`      | first decision is recorded                 | never                                                            |
-| `docs/decisions/*.md`    | a choice a newcomer would question         | deprecated or deleted, with the owner's permission               |
-| `CHANGELOG.md` entry     | at release, if user-visible                | never                                                            |
-| `docs/plan.md` entry     | idea occurs - one paragraph, no design     | **deleted** when done, not struck through                        |
-| `docs/quirks.md` entry   | a deviation is chosen, or a bug accepted   | when the deviation ends                                          |
-| `docs/research/*.md`     | a question is investigated                 | never - confidence gets revised                                  |
-| `docs/glossary.md` entry | a term acquires a project-specific meaning | when the term leaves the codebase                                |
-| `docs/testing.md`        | the second test approach appears           | never                                                            |
-| `docs/plan/*.md`         | work begins on an item                     | work completes                                                   |
-| `docs/howto.md`          | the second how-to guide appears            | when no how-to guides remain                                     |
-| `docs/howto/*.md`        | a procedure recurs across several places   | when automated away or obsolete                                  |
-| `docs/sources.md`        | an external standard is cited              | when no artifact cites it                                        |
-| `docs/sources/`          | an external standard is cached             | when no artifact cites it                                        |
-| `docs/archive.md`        | migration finds a document nobody can date | when nothing in it is worth keeping                              |
-| `docs/archive/`          | migration finds a document nobody can date | when nothing in it is worth keeping                              |
+| Artifact                 | Created when                                       | Removed / closed when                                            |
+| ------------------------ | -------------------------------------------------- | ---------------------------------------------------------------- |
+| `DOC-MAP.md`             | the structure is first agreed                      | never - revised when an artifact is added, removed or repurposed |
+| `README.md`              | project starts                                     | never                                                            |
+| `docs/spec.md`           | behaviour is decided                               | never - edited forever                                           |
+| `docs/decisions.md`      | first decision is recorded                         | never                                                            |
+| `docs/decisions/*.md`    | a choice a newcomer would question                 | deprecated or deleted, with the owner's permission               |
+| `CHANGELOG.md` entry     | at release, if user-visible                        | never                                                            |
+| `docs/plan.md` entry     | idea occurs - one paragraph, no design             | **deleted** when done, not struck through                        |
+| `docs/quirks.md` entry   | a deviation is chosen, or a bug accepted           | when the deviation ends                                          |
+| `docs/research/*.md`     | a question is investigated                         | never - confidence gets revised                                  |
+| `docs/glossary.md` entry | a term acquires a project-specific meaning         | when the term leaves the codebase                                |
+| `docs/testing.md`        | the second test approach appears                   | never                                                            |
+| `docs/plan/*.md`         | work begins on an item                             | work completes                                                   |
+| `docs/howto.md`          | the first how-to guide appears                     | when no how-to guides remain                                     |
+| `docs/howto/*.md`        | a procedure recurs across several places           | when automated away or obsolete                                  |
+| `docs/sources.md`        | an external standard is cited                      | when no artifact cites it                                        |
+| `docs/sources/`          | the fetch script is adopted, or a source is cached | when no artifact cites it                                        |
+| `docs/archive.md`        | migration finds a document nobody can date         | when nothing in it is worth keeping                              |
+| `docs/archive/`          | migration finds a document nobody can date         | when nothing in it is worth keeping                              |
 
 ## Flow
 

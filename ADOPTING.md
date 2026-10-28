@@ -141,8 +141,9 @@ Two files sit outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies
 against `docs/spec.md`, and **`tools/doc-kit-index-decisions.sh`**, which generates
 `docs/decisions.md` from decision record front-matter (§3.1, §4.3). Copy them too if you want
 automated checks and index generation; skip them if you would rather verify and index by hand. Both
-are single POSIX shell scripts depending on nothing but `awk`, `sed`, `grep` and `find` - read them
-before you run them. On Windows invoke them with `sh`, not `bash`.
+are single POSIX shell scripts using standard utilities; the checker uses `git` when available for
+ignore and vendored-file checks - read them before you run them. On Windows invoke them with `sh`,
+not `bash`.
 
 Copy everything by hand, or fetch the subtree if you would rather - `npx degit`, a sparse checkout,
 or clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the

@@ -8,9 +8,8 @@ approval: {the owner's words, verbatim - required once the status is not "propos
 # 1. How the documentation is organised
 
 <!--
-Renumber to the next free number if this repository already has records, and update the path in
-DOC-MAP.md to match. Leave the status "proposed": the owner accepts it, following the checklist in
-0000-template.md.
+Renumber to the next free number if this repository already has records. Leave the status
+"proposed": the owner accepts it, following the checklist in 0000-template.md.
 
 Fill in the Context, the justification and the deviations. The consequences say what the structure's
 rules prevent; delete any whose rule you did not adopt, and add one for each deviation.

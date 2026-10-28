@@ -281,7 +281,8 @@ enough to look after itself.
 **"I want to add a new file and it genuinely seems necessary."** Apply the three-property test
 honestly, and note that it failed twice during this template's own development - technical debt and
 machine-readable contracts both looked like obvious new categories and both turned out to belong
-somewhere that already existed. If it passes, add it to both tables in the map in the same commit.
+somewhere that already existed. If it passes, add it to the layout block and both tables in the map
+in the same commit.
 
 **"Do documentation changes need approving?"** One kind does. A decision record is drafted and
 revised freely while `proposed`; accepting, rejecting, reopening, deprecating or deleting one needs
