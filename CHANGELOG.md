@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.5.0] - 2026-10-28
+
 ### Added
 
 - **Uniform sibling entry points and multi-file artifacts (ADR-0014).** Standardised all
@@ -35,11 +37,18 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   `contributor`, `consumer`, `end-user` and `operator`, marked `(agents)` or `(humans)` when only
   one kind of reader reads it. `tools/doc-kit-check.sh` fails any other value. Two artifacts sharing
   all three properties are now a warning, not a failure, and are merged only when they hold the same
-  facts (ADR-0002). Pairwise overlaps between standard specification artifacts, sibling members of
-  multi-file containers, and product artifacts (§2.8) are exempt from warnings.
+  facts (ADR-0002). Pairwise overlaps between standard specification artifacts, a multi-file
+  container's entry point and its parts, and product artifacts (§2.8) are exempt from warnings.
 - **Templates excluded from documentation checks (§2.8).** Files below `templates/` are excluded
-  from documentation file (§2.4) and citation checks (§3.1), matching the exemption for
-  `docs/archive/**`.
+  from the documentation-file check (§2.4) and citation checks (§3.1), matching the exemption for
+  `docs/archive/`. Product files that stay with the kit, such as `ADOPTING.md`, remain documentation
+  files for those checks.
+- **Two-part adoption when the target has agent instructions.** The applying agent reads the
+  target's `AGENTS.md`, `CLAUDE.md` and other instruction files before editing, and follows them;
+  this kit's `AGENTS.md` does not apply there. With a target that has its own instructions, adoption
+  runs in two sessions: plan in the kit through the Step 4 inventory, then execute Steps 4b-5 from a
+  session rooted in the target. Targets without their own instructions can still be adopted in one
+  session. The README documents the manual fallback when the skill is not listed.
 - **Paths move (ADR-0014).** `SPECIFICATION.md` is now `docs/spec.md`, `PLAN.md` is `docs/plan.md`,
   `docs/adr/` is `docs/decisions/`, and `docs/tasks/` is `docs/plan/`; the templates move to match.
   The root keeps only the map, `README.md`, `AGENTS.md` and its aliases, and `CHANGELOG.md`. Any
@@ -48,12 +57,18 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   link, and take the new `tools/doc-kit-check.sh` only after moving - it reads `docs/decisions/` and
   `docs/plan.md`, so with the old paths it reports every `ADR-NNNN` citation as naming no record and
   skips the plan check.
+- Archived files that cannot carry a text header may use a sibling `<filename>.provenance.md`;
+  `docs/spec.md` §5.2 and the glossary now say so.
 - An agent may create a decision record as `proposed` and revise it freely. Accepting, rejecting,
   reopening, deprecating or deleting a record needs the owner's explicit permission, and the owner's
-  words are kept in a new `approval` field (ADR-0001, ADR-0007). The pull-request guidance is gone.
+  words are kept in a new `approval` field (ADR-0001, ADR-0007). The pull-request guidance is
+  removed; the owner-decides model replaces it.
 - An accepted decision record is the current answer to its question: it is reopened and amended in
   place, even to reverse it, and deprecated or deleted when it no longer applies (ADR-0007). Its
   mutability is the new value `amendable`, and its title names the question.
+- A correction that makes a record say what it always meant - a wrong path, command or citation - no
+  longer needs a status change, `date` or `approval` update. A change to the decision, or to what
+  confirms it, is an amendment.
 - Decision records are cited as `ADR-NNNN`, and another repository's record by a link. A change to a
   record fixes the citations it makes untrue in the same commit (ADR-0007).
 - `templates/docs/decisions/0000-template.md` states those rules, and how to create a record and get
@@ -73,7 +88,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   and accept it once experience stops changing it.
 - Decision records no longer name the code they constrain; the comment beside the code names the
   record (ADR-0006).
-- `tools/doc-kit-check.sh` runs about ten times faster on Windows: it checks membership and splits
+- `tools/doc-kit-check.sh` runs substantially faster on Windows: it checks membership and splits
   fields in the shell, and reads all records, and all files for citations, in one `awk` pass each,
   rather than starting processes for every file.
 
@@ -82,6 +97,16 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - The `refined by` status pointer. A later record is linked from the earlier one instead (ADR-0007).
 - The `superseded by ADR-NNNN` status. A replaced record is deprecated or deleted, and links to its
   replacement (ADR-0007).
+
+### Fixed
+
+- `templates/DOC-MAP.md`'s lifecycle triggers now match the artifacts: `docs/howto.md` appears with
+  the first how-to guide, and `docs/sources/` with the fetch script or a cached source.
+- `ADOPTING.md` no longer claims the tools depend only on `awk`, `sed`, `grep` and `find`; the
+  checker uses `git` when available.
+- The decision-record template's `date` placeholder names the latest change of status, matching
+  `docs/spec.md` §3.1.
+- The adoption record template no longer asks the adopter to update a map path that is a glob.
 
 ## [0.4.0] - 2026-09-26
 
