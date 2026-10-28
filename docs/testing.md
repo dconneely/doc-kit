@@ -58,6 +58,14 @@ phrase. An example artifact row or an unreplaced heading is left to review.
 citation of a record that exists still says something true of it after a change. Citations in code
 comments, gitignored files, vendored files and `templates/` are not read at all.
 
+**Paths containing spaces.** The unmapped-file scan handles them, but the map's layout block and
+artifact patterns split on whitespace. Keep artifact paths free of spaces, or map the file through a
+glob.
+
+**Generated artifacts other than the decisions index (§4.3).** The checker regenerates
+`docs/decisions.md` when `tools/doc-kit-index-decisions.sh` is present. It cannot regenerate a
+schema snapshot, a rendered reference or another generated artifact, so those are review.
+
 **Substantive conformance (§4).** No fact in two places; prose never restating a machine-readable
 contract. §6 assigns this to review because it is not mechanically decidable, and the deduplication
 passes this repository has needed were all found by reading, not by tooling.
