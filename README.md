@@ -70,6 +70,9 @@ The `doc-kit-adopt` skill takes it from there: it follows `ADOPTING.md`, writes 
 target, stops for approval once the Step 4 inventory exists, and resumes from
 `../my-cool-repo/docs/plan/adopt-doc-kit.md` if a previous session left one.
 
+If your tool does not list `doc-kit-adopt`, read `.agents/skills/doc-kit-adopt/SKILL.md` and follow
+it directly; the procedure is the same.
+
 End the session when adoption completes. Further work on that repository belongs in that
 repository - the `AGENTS.md` stanza installed during Step 3 carries the ongoing rules, and this kit
 is not needed again.
