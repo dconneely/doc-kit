@@ -230,6 +230,7 @@ check_map() {
 			exempt_pairs["DOC-MAP.md + docs/testing.md"] = 1
 			exempt_pairs["README.md + docs/glossary.md"] = 1
 			exempt_pairs["docs/quirks.md + docs/spec.md"] = 1
+			exempt_pairs["docs/archive.md + docs/decisions.md"] = 1
 		}
 		function norm_pair(a, b) {
 			return (a < b) ? (a " + " b) : (b " + " a)

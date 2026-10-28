@@ -108,6 +108,24 @@ expect() {
 	fi
 }
 
+# refute NAME PATTERN [CHECK ...] - run the checker and assert exit 0 and that its output does not
+# contain PATTERN (a fixed string).
+refute() {
+	name=$1 pattern=$2
+	shift 2
+	set +e
+	out=$(sh "$CHECK" "$@" 2>&1)
+	got=$?
+	set -e
+	if [ "$got" -eq 0 ] && ! printf '%s\n' "$out" | grep -qF -- "$pattern"; then
+		passed=$((passed + 1))
+	else
+		failed=$((failed + 1))
+		printf 'not ok - %s (exit %s, wanted 0, or output contains "%s")\n%s\n\n' \
+			"$name" "$got" "$pattern" "$out"
+	fi
+}
+
 # ---------------------------------------------------------------- map
 
 fixture
@@ -195,7 +213,18 @@ echo x >docs/testing.md
 after '^DOC-MAP.md ' 'docs/testing.md test'
 after '^[|] `DOC-MAP.md` ' '| `docs/testing.md` | test | present | rewritten in place | contributor |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/testing.md` | start | never |'
-expect "standard ratified pair does not warn" 0 "doc-kit: conformant (map)" map
+refute "standard ratified pair does not warn" "WARN [map]" map
+
+fixture
+echo x >docs/archive.md
+echo x >docs/decisions.md
+after '^DOC-MAP.md ' 'docs/archive.md archive'
+after '^DOC-MAP.md ' 'docs/decisions.md index'
+after '^[|] `DOC-MAP.md` ' '| `docs/archive.md` | archive | present | rewritten in place | owner, contributor |'
+after '^[|] `DOC-MAP.md` ' '| `docs/decisions.md` | index | present | rewritten in place | owner, contributor |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/archive.md` | start | never |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/decisions.md` | start | never |'
+refute "standard archive and index pair does not warn" "WARN [map]" map
 
 fixture
 sed -i.bak 's/| volatile           | owner /| volatile | the team /' DOC-MAP.md
