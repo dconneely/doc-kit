@@ -53,8 +53,9 @@ Read [`ADOPTING.md`](ADOPTING.md) and start at Step 0. It ends with a `docs/plan
 rest of the work, which is deliberate: adoption on a mature repository is not an afternoon, and the
 plan is what lets you stop and resume.
 
-Copying is manual - take the members of `templates/` you need to your repository root, following the
-table in Step 3, then work Steps 1-5. There is no installer, because the kit ships text.
+Copying is manual - take the members of `templates/` you need to your repository root, using the
+table in Step 3, and work through Steps 0-5 in order. There is no installer, because the kit ships
+text.
 
 ### Driving it with an agent
 
