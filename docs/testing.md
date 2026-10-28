@@ -44,6 +44,10 @@ shell `case` semantics, where `*` crosses `/`. So `docs/decisions/*` matches arb
 That is deliberate - it is what makes a directory artifact work - but it means a coarse pattern can
 cover a file nobody intended to map.
 
+**Duplication.** `tests/doc-kit-duplicate-check.sh` reports repeated table headers, value lists and
+numbered step sequences as advisories. It compares structure, not meaning; a report is a prompt, not
+a failure.
+
 ## What is deliberately not covered
 
 **The owner's permission.** `docs/spec.md` §3.1 requires the owner's explicit permission for every
@@ -66,9 +70,10 @@ glob.
 `docs/decisions.md` when `tools/doc-kit-index-decisions.sh` is present. It cannot regenerate a
 schema snapshot, a rendered reference or another generated artifact, so those are review.
 
-**Substantive conformance (§4).** No fact in two places; prose never restating a machine-readable
-contract. §6 assigns this to review because it is not mechanically decidable, and the deduplication
-passes this repository has needed were all found by reading, not by tooling.
+**Substantive conformance (§4).** Tables, lists of more than three values and multi-step processes
+are single-sourced; prose never restates a machine-readable contract. §6 assigns this to review
+because it is not mechanically decidable, and the deduplication passes this repository has needed
+were all found by reading, not by tooling.
 
 **No instance here.** §3.2 changelog rules, §3.4 research confidence levels, §3.5 quirk entry shape,
 and §5's archive rules - provenance headers, and the archive's single map entry - are unimplemented.
@@ -102,9 +107,10 @@ and a type-tag pattern no real `docs/plan.md` matched.
 ## Running everything
 
 ```sh
-sh tools/doc-kit-check.sh          # conformance
-sh tests/doc-kit-check.test.sh     # the checker's own tests
-prek run --all-files               # hygiene, line length, drift guards
+sh tools/doc-kit-check.sh              # conformance
+sh tests/doc-kit-check.test.sh         # the checker's own tests
+sh tests/doc-kit-duplicate-check.sh    # advisory duplication report
+prek run --all-files                   # hygiene, line length, drift guards
 prek run --hook-stage manual lychee-system --all-files
 ```
 

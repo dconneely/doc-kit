@@ -88,6 +88,16 @@ schemas, interface definitions - and each gets its own row below.
 | `docs/archive.md`     | Quarantine index of undatable documents kept rather than discarded (§5). Optional                                        | present    | rewritten in place | owner, contributor           |
 | `docs/archive/`       | Documentation whose currency cannot be established, kept rather than discarded; non-authoritative (§5). Optional         | past       | immutable          | contributor                  |
 
+## Property values
+
+The closed sets used in the artifacts table (ADR-0002):
+
+| Property   | Values                                                                                  |
+| ---------- | --------------------------------------------------------------------------------------- |
+| Tense      | `present`, `past`, `future`, `imperative`, `explanatory`                                |
+| Mutability | `rewritten in place`, `amendable`, `append-only`, `immutable`, `volatile`, `disposable` |
+| Audience   | one or more of `owner`, `contributor`, `consumer`, `end-user`, `operator`               |
+
 ## Lifecycle
 
 | Artifact                 | Created when                                       | Removed / closed when                                            |
@@ -123,7 +133,8 @@ Most changes skip the ADR and the task note. Nothing skips the deletion.
 
 ## Rules
 
-1. **Each fact lives in exactly one place.** Where it is needed in two, one links to the other.
+1. **Facts have one home.** A table, a list of more than three values, or a process of three or more
+   steps should appear once; short instructional copies and template/instance pairs may repeat.
 2. **Tense routes it:** rationale -> ADR, behaviour -> specification, history -> changelog or commit
    message, intent -> plan.
 3. **Prose links to a machine-readable contract and never restates it.** It covers only what the

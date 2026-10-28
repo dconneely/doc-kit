@@ -17,7 +17,7 @@ The map is the file the `AGENTS.md` stanza tells every agent session to read bef
 anything. Each word in it is paid for by every session, and anything it shares with the files it
 describes is stated twice in every adopting repository, against `docs/spec.md` §4.1.
 
-`docs/spec.md` §4.1 is written as an absolute - no fact in two artifacts - but prose cannot be
+`docs/spec.md` §4.1 was written as an absolute - no fact in two artifacts - but prose cannot be
 symlinked, and the kit's own specification, templates, map and notes repeat tables, value lists and
 multi-step processes. Those repeats drift. A template and the kit's own instance are different
 artifacts, so they may repeat their own content; a short instruction may be repeated where the

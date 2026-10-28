@@ -390,5 +390,32 @@ expect "type tag alone on its line passes" 0 "conformant" plan
 fixture
 expect "unknown check exits 2" 2 "unknown check: nope" nope
 
+# ---------------------------------------------------------------- value sets
+
+# The checker's closed sets must match the template map's Property values table.
+template_values=$(awk -F'|' '
+	/^\| (Tense|Mutability|Audience) / {
+		v = $3
+		while (match(v, /`[^`]*`/)) {
+			print substr(v, RSTART + 1, RLENGTH - 2)
+			v = substr(v, RSTART + RLENGTH)
+		}
+	}
+' "$ROOT/templates/DOC-MAP.md" | sort)
+checker_values=$(
+	{
+		grep -F 'split("present ' "$CHECK" | sed -E 's/.*split\("([^"]*)".*/\1/' | tr ' ' '\n'
+		grep -F 'split("rewritten in place|' "$CHECK" | sed -E 's/.*split\("([^"]*)".*/\1/' | tr '|' '\n'
+		grep -F 'split("owner ' "$CHECK" | sed -E 's/.*split\("([^"]*)".*/\1/' | tr ' ' '\n'
+	} | sed '/^$/d' | sort
+)
+if [ "$template_values" = "$checker_values" ]; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	printf 'not ok - checker value sets differ from the template\n--- template ---\n%s\n--- checker ---\n%s\n\n' \
+		"$template_values" "$checker_values"
+fi
+
 printf '%s passed, %s failed\n' "$passed" "$failed"
 [ "$failed" -eq 0 ]

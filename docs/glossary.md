@@ -20,7 +20,8 @@ sibling `<filename>.provenance.md` for non-text formats. See ADR-0009.
 mutability and an audience. The unit the structure is built from.
 
 **Audience** - who an artifact is written for: one or more of the roles `owner`, `contributor`,
-`consumer`, `end-user` and `operator`, defined in ADR-0002 and listed in `docs/spec.md` §2.7.
+`consumer`, `end-user` and `operator`, defined in ADR-0002 and listed in the `Property values` table
+in `templates/DOC-MAP.md`.
 
 **Confidence level** - `high`, `medium` or `low`, attached to a research note. Defined in
 `docs/spec.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence, only
@@ -39,8 +40,8 @@ entry point, and the thing that must never promise a file that does not exist.
 backlog, part assessment. The characteristic failure the structure exists to prevent, and the first
 thing to look for when adopting.
 
-**Mutability** - how a document changes over its life, from the closed set in `docs/spec.md` §2.7.
-One of the three properties.
+**Mutability** - how a document changes over its life, from the closed set in the `Property values`
+table in `templates/DOC-MAP.md`. One of the three properties.
 
 **Owner** - the one person who makes a repository's decisions: accepts records, sets its purpose,
 ranks its plan. Every other contributor, agent or human, proposes. See ADR-0001.
@@ -52,7 +53,7 @@ authoritative, when it was last known accurate, and why it was not migrated.
 specification. See ADR-0002.
 
 **Structural conformance** - satisfying the mechanically checkable requirements. Contrast
-**substantive conformance**, which adds the single-source-of-truth rules and needs a reviewer.
+**substantive conformance**, which adds the single-source-of-truth guideline and needs a reviewer.
 
 **Tense** - whether a document describes what is, what was, or what is intended. The most useful of
 the three properties, because the tense of the sentence being written usually settles where it goes.

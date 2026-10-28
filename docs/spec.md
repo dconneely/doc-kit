@@ -102,13 +102,8 @@ The file stays as the entry point - an index or summary linking into the directo
 stay true, and each part the map distinguishes gets its own row (ADR-0014).
 
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
-mutability and an audience, drawn from these sets:
-
-| Property   | Values                                                                                  |
-| ---------- | --------------------------------------------------------------------------------------- |
-| Tense      | `present`, `past`, `future`, `imperative`, `explanatory`                                |
-| Mutability | `rewritten in place`, `amendable`, `append-only`, `immutable`, `volatile`, `disposable` |
-| Audience   | one or more of `owner`, `contributor`, `consumer`, `end-user`, `operator`               |
+mutability and an audience, drawn from the sets in the `Property values` table in
+`templates/DOC-MAP.md`.
 
 The roles are defined in ADR-0002: the owner decides; a contributor changes the repository; a
 consumer builds on what it publishes; an end-user uses the running product; an operator deploys and
@@ -302,8 +297,10 @@ Generated text or Markdown extracts derived from cached sources MUST carry a pro
 
 ## 4. Single source of truth
 
-4.1 No fact may appear in two artifacts. Where a fact is genuinely needed in two places, one of them
-MUST link rather than restate.
+4.1 Facts SHOULD have one home. A table, a list of more than three values, or a process of three or
+more steps SHOULD appear once; where it must appear in more than one place, one copy is normative
+and the others link to it. Short instructional copies and template/instance pairs MAY repeat
+content; they name the source and are kept in step by review or test.
 
 4.2 Prose MUST NOT restate a machine-readable contract. It MUST link to the contract and cover only
 what the contract cannot express: rationale, invariants, units, ownership, policy.
@@ -345,8 +342,9 @@ A repository is **structurally conformant** if it satisfies every MUST in §2 an
 mechanically checkable, and is what a checker reports on - but it is checkable, not checked-by-
 obligation. A repository that never runs one and holds the properties anyway is conformant.
 
-A repository is **substantively conformant** if it also satisfies §4 - no duplicated facts, no prose
-restating a contract. This is not mechanically checkable in general and is a review responsibility.
+A repository is **substantively conformant** if it also follows §4's guideline - tables, value lists
+and multi-step processes are single-sourced, and prose does not restate a contract. This is not
+mechanically checkable in general and is a review responsibility.
 
 Partial adoption is expected and is not a failure. A repository mid-migration SHOULD be structurally
 conformant at every point, because the map promising only what exists is the property that makes an

@@ -6,6 +6,14 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- **Single-source guideline (§4.1).** `docs/spec.md` §4.1 is now a guideline: a table, a list of
+  more than three values, or a process of three or more steps should have one home; short
+  instructional copies and template/instance pairs may repeat. The tense, mutability and audience
+  value sets live in `templates/DOC-MAP.md`'s `Property values` table; the specification cites it,
+  and the checker's sets are tested against it.
+
 ## [0.5.0] - 2026-10-28
 
 ### Added

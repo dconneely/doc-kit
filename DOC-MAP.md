@@ -141,9 +141,10 @@ Each artifact holds its own format and rules - the ADR shape and status rules in
 `docs/spec.md` §3.1, the plan entry in `docs/plan.md`'s preamble - and this map does not restate
 them ([ADR-0006][adr6]). What each rule prevents is in `ADOPTING-NOTES.md`.
 
-1. **Each fact lives in exactly one place**, and the tense of the sentence tells you which:
-   rationale -> ADR, behaviour -> specification, history -> changelog or commit message, intent ->
-   plan.
+1. **Facts have one home**, and the tense of the sentence tells you which: rationale -> ADR,
+   behaviour -> specification, history -> changelog or commit message, intent -> plan. A table, a
+   list of more than three values, or a process of three or more steps should appear once; short
+   instructional copies and template/instance pairs may repeat.
 2. **The specification may link to a machine-readable contract; it must never restate it.** Nothing
    here is generated: `ADOPTING.md` and `templates/` are source of truth, and everything in `docs/`
    is prose that cannot be derived. `docs/spec.md` §4 has the rules for when that changes.
