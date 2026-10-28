@@ -80,7 +80,7 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `README.md`                 | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec                                                                               | present     | rewritten in place | owner, contributor, consumer |
 | `AGENTS.md`                 | Routes a coding agent to this map, and names the hazards specific to working here. Routes rather than restates. Convention: [agents.md](https://agents.md)                                                            | present     | rewritten in place | contributor (agents)         |
 | `CLAUDE.md`                 | **Alias** (§2.7) for `AGENTS.md`, existing only because some tools look for that filename                                                                                                                             | present     | rewritten in place | contributor (agents)         |
-| `docs/spec.md`              | What a conformant repository looks like - the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength                    | present     | rewritten in place | consumer                     |
+| `docs/spec.md`              | What a conformant repository looks like - the contract a checker enforces. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength                    | present     | rewritten in place | consumer, contributor        |
 | `ADOPTING.md`               | **Product. Source of truth, not description** - the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms                                                                           | imperative  | rewritten in place | consumer                     |
 | `ADOPTING-NOTES.md`         | **Product.** The reasoning behind the procedure - judgement calls, how far to trust each convention cited, what the rules prevent                                                                                     | explanatory | rewritten in place | consumer                     |
 | `templates/*`               | **Product. Source of truth, not description** - the artifact half. Copied into the adopter's repository and customised there                                                                                          | present     | rewritten in place | consumer                     |
@@ -119,10 +119,10 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `docs/research/*.md`        | a cited convention is checked against its source             | never - confidence gets revised                                  |
 | `docs/testing.md`           | something started verifying the documentation mechanically   | never                                                            |
 | `docs/glossary.md` entry    | a term acquires a project-specific meaning                   | when the term leaves the project                                 |
-| `docs/howto.md`             | the second how-to guide appears                              | when no how-to guides remain                                     |
+| `docs/howto.md`             | the first how-to guide appears                               | when no how-to guides remain                                     |
 | `docs/howto/*.md`           | a procedure recurs across several places                     | when automated away or obsolete                                  |
 | `docs/sources.md`           | an external standard is cited                                | when no artifact cites it                                        |
-| `docs/sources/`             | an external standard is cached                               | when no artifact cites it                                        |
+| `docs/sources/`             | the fetch script is adopted, or a source is cached           | when no artifact cites it                                        |
 
 ## Flow
 
