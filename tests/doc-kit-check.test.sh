@@ -227,6 +227,27 @@ after '^[|] `DOC-MAP.md` +[|] start' '| `docs/decisions.md` | start | never |'
 refute "standard archive and index pair does not warn" "WARN [map]" map
 
 fixture
+cp "$ROOT/templates/DOC-MAP.md" DOC-MAP.md
+rm -rf docs
+mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/archive
+: >README.md
+: >CHANGELOG.md
+: >docs/spec.md
+: >docs/decisions.md
+: >docs/decisions/0001-a-record.md
+: >docs/plan.md
+: >docs/quirks.md
+: >docs/research/0001-a-note.md
+: >docs/glossary.md
+: >docs/testing.md
+: >docs/plan/a-note.md
+: >docs/howto.md
+: >docs/howto/a-guide.md
+: >docs/sources.md
+: >docs/archive.md
+refute "the template map is conformant as an instance" "WARN [map]" map
+
+fixture
 sed -i.bak 's/| volatile           | owner /| volatile | the team /' DOC-MAP.md
 expect "audience outside the closed set fails" 1 "docs/plan.md has audience 'the team'" map
 
