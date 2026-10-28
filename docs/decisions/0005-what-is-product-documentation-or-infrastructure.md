@@ -2,7 +2,7 @@
 status: "accepted"
 date: 2026-10-28
 decision-makers: David Conneely
-approval: "Use review where unverified"
+approval: "ADOPTING.md and ADOPTING-NOTES.md are part of this repository - they are not transferred to adopting repositories."
 ---
 
 # 5. What is product, what is documentation, and what is infrastructure
@@ -32,9 +32,10 @@ workflows, which an adopter has too, so they look like product.
 
 Chosen option: **classify by what a file is about, and whether the kit can own where it lands**.
 
-- **Product** describes the adopter's repository, and is shipped for use there: `templates/`,
-  `ADOPTING.md`, `ADOPTING-NOTES.md`, `tools/` and the adoption skill. It is source of truth,
-  versioned and reviewed like code, and its changes appear in the changelog.
+- **Product** describes the adopter's repository. Some product is copied into that repository -
+  `templates/` and `tools/`; some stays with the kit and is used while adopting - `ADOPTING.md`,
+  `ADOPTING-NOTES.md` and the adoption skill. It is source of truth, versioned and reviewed like
+  code, and its changes appear in the changelog.
 - **Documentation** describes this repository: everything at the root besides the product, and
   `docs/`. It is produced by applying the kit to itself, so the root `DOC-MAP.md` is an instance of
   `templates/DOC-MAP.md`. `docs/spec.md` is documentation although it concerns adopters, because it
