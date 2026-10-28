@@ -267,8 +267,8 @@ then act. Deciding everything before moving anything is what keeps the repositor
 every point rather than only at the end.
 
 **Split the session when the target has its own agent instructions.** Steps 0-4a can run from the
-kit; start a session rooted in the target for 4b-5, so its `AGENTS.md` or `CLAUDE.md` loads
-automatically. The inventory is the handoff.
+kit; write the plan and worksheet into the target, because they are the handoff. Start a session
+rooted in the target for 4b-5, so its `AGENTS.md` or `CLAUDE.md` loads automatically.
 
 ### 4a - Build the inventory
 

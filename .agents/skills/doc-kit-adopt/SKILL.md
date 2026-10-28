@@ -38,7 +38,8 @@ path; Step 3 says what to take and when.
 
 1. **Part 1, in doc-kit.** Steps 0-4a. Read the target's instruction files first and follow them for
    every write. Produce the plan, the customised map, the documents it promises, and the migration
-   inventory with proposed dispositions. Present the inventory and stop.
+   inventory with proposed dispositions. The plan and worksheet are the handoff, so write them into
+   the target. Present the inventory and stop.
 2. **Part 2, in the target.** Start a session rooted in the target, so its `AGENTS.md`/`CLAUDE.md`
    load automatically. Read the kit's `ADOPTING.md` and this skill from the kit path. Execute the
    approved dispositions, finish Step 4 and run Step 5.
@@ -64,7 +65,8 @@ Real adoptions span weeks and get interrupted. Before starting, check whether
 
 - **It exists** - under way. Read it, work the unfinished rows, keep it current. Don't restart from
   Step 0.
-- **It doesn't** - a fresh adoption. Start at Step 0.
+- **It doesn't** - in Part 1, a fresh adoption: start at Step 0. In Part 2, the handoff failed: stop
+  and return to Part 1; do not start over.
 
 The worksheet _is_ the state. Keeping it accurate matters more than speed - the next session has
 nothing else to go on.
