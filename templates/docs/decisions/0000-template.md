@@ -1,7 +1,7 @@
 ---
 status: "proposed"
 # proposed | accepted | rejected | deprecated
-date: {YYYY-MM-DD, of the latest change of status or content}
+date: {YYYY-MM-DD, of the latest change of status}
 decision-makers: {the owner - required once the status is not "proposed"}
 approval: {the owner's words, verbatim - required once the status is not "proposed"}
 ---

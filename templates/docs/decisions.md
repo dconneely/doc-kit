@@ -12,6 +12,6 @@ Index of decision records. Only **accepted** records bind.
 
 ## Non-binding
 
-| Record                                                           | Status     | Date                                                    | Question                           |
-| ---------------------------------------------------------------- | ---------- | ------------------------------------------------------- | ---------------------------------- |
-| [ADR-0001](decisions/0001-how-the-documentation-is-organised.md) | `proposed` | {YYYY-MM-DD, of the latest change of status or content} | How the documentation is organised |
+| Record                                                           | Status     | Date                                         | Question                           |
+| ---------------------------------------------------------------- | ---------- | -------------------------------------------- | ---------------------------------- |
+| [ADR-0001](decisions/0001-how-the-documentation-is-organised.md) | `proposed` | {YYYY-MM-DD, of the latest change of status} | How the documentation is organised |
