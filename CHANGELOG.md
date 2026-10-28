@@ -6,20 +6,6 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
-### Changed
-
-- **Single-source guideline (§4.1).** `docs/spec.md` §4.1 is now a guideline: a table, a list of
-  more than three values, or a process of three or more steps should have one home; short
-  instructional copies and template/instance pairs may repeat. The tense, mutability and audience
-  value sets live in `templates/DOC-MAP.md`'s `Property values` table; the specification cites it,
-  and the checker's sets are tested against it.
-
-### Fixed
-
-- `tools/doc-kit-check.sh`'s shared-triple exemptions are locale-independent, so `README.md` and
-  `docs/glossary.md` are exempt on macOS as on Linux. The index generator and duplication advisory
-  also sort under the C locale.
-
 ## [0.5.0] - 2026-10-28
 
 ### Added
@@ -47,6 +33,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
+- **Single-source guideline (§4.1).** `docs/spec.md` §4.1 is now a guideline: a table, a list of
+  more than three values, or a process of three or more steps should have one home; short
+  instructional copies and template/instance pairs may repeat. The tense, mutability and audience
+  value sets live in `templates/DOC-MAP.md`'s `Property values` table; the specification cites it,
+  and the checker's sets are tested against it.
 - **Audience is a closed set (ADR-0002).** An artifact's audience names one or more of `owner`,
   `contributor`, `consumer`, `end-user` and `operator`, marked `(agents)` or `(humans)` when only
   one kind of reader reads it. `tools/doc-kit-check.sh` fails any other value. Two artifacts sharing
@@ -121,6 +112,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - The decision-record template's `date` placeholder names the latest change of status, matching
   `docs/spec.md` §3.1.
 - The adoption record template no longer asks the adopter to update a map path that is a glob.
+- `tools/doc-kit-check.sh`'s shared-triple exemptions are locale-independent, so `README.md` and
+  `docs/glossary.md` are exempt on macOS as on Linux. The index generator and duplication advisory
+  also sort under the C locale.
 
 ## [0.4.0] - 2026-09-26
 
