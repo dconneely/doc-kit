@@ -326,9 +326,10 @@ MUST exempt them. The archive itself (or its index `docs/archive.md`) MUST appea
 single entry.
 
 5.2 Every file in the archive MUST begin with a provenance header stating that it is not
-authoritative, when it was last known to be accurate, and why it was not migrated. A folder-level
-warning is not sufficient: readers and tools arrive at these files directly, by search, and never
-see the folder.
+authoritative, when it was last known to be accurate, and why it was not migrated. A file that
+cannot carry text at its head satisfies this with a sibling `<filename>.provenance.md` carrying the
+same header. A folder-level warning is not sufficient: readers and tools arrive at these files
+directly, by search, and never see the folder.
 
 5.3 An archived file MUST NOT be cited as a source by any artifact outside the archive. Anything in
 it worth relying on MUST be migrated first, at which point it acquires a confidence level (§3.4).
