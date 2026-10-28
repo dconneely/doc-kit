@@ -101,4 +101,4 @@ could drift into meaning anything.
 
 ## Confirmation
 
-`tools/doc-kit-check.sh` and `prek run adr-status-case`
+`tools/doc-kit-check.sh` and `prek run lowercase-adr-status`

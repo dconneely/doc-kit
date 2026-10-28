@@ -59,4 +59,4 @@ questioning a rule, and the adoption record already serves that reader.
 
 ## Confirmation
 
-`prek run template-no-banner`
+`prek run no-template-banner`
