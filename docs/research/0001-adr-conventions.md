@@ -66,8 +66,9 @@ What differs is where it lives and whether it changes:
   from the code ("more likely that they are seen, read, and updated") for discoverability from
   outside ("harder to spot").
 - **That use is mutable.** `yadr` records carry an optional changelog and are meant to be revised in
-  place, where this kit's records are immutable once accepted and are corrected by a successor. By
-  the three-property test that makes an in-code Y-statement a different artifact from an ADR, not a
+  place. This kit's records are now amended in place with the owner's approval (ADR-0007), though at
+  the time of writing they were immutable and corrected by a successor. By the three-property test
+  the tense and location still make an in-code Y-statement a different artifact from an ADR, not a
   shorter spelling of one.
 
 ADR-0007 did not consider Y-statements, and nothing here argues it should have chosen them: the

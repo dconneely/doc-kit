@@ -10,6 +10,10 @@ MADR, which [`0001-adr-conventions.md`](0001-adr-conventions.md) covers.
 Keep a Changelog, Nygard, adr-tools and agents.md say what the kit cites them for. **GitHub Spec Kit
 produces no root-level `SPECIFICATION.md` or `PLAN.md`**, and no convention prescribes those names.
 
+**Correction (2026-10-28):** the kit now uses `docs/spec.md` and `docs/plan.md` (ADR-0014). The
+analysis below was written when the root names were `SPECIFICATION.md` and `PLAN.md`; its
+conclusion, that the names are the kit's own, is unchanged.
+
 ### Keep a Changelog - accurate
 
 Six categories, exactly as `SPECIFICATION.md` §3.2 prescribes: `Added` for new features, `Changed`
