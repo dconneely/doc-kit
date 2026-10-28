@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-25
+date: 2026-10-28
 decision-makers: David Conneely
-approval: "yes"
+approval: "Use review where unverified"
 ---
 
 # 9. What happens to documentation that cannot be dated
@@ -54,4 +54,4 @@ launders undatable claims.
 
 ## Confirmation
 
-`tools/doc-kit-check.sh`
+`review`

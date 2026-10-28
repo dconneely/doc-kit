@@ -1,24 +1,26 @@
 ---
 status: "accepted"
-date: 2026-10-25
+date: 2026-10-28
 decision-makers: David Conneely
-approval: "yes"
+approval: "Amend in place"
 ---
 
 # 10. How the kit reaches an adopter
 
 ## Context and Problem Statement
 
-The kit ships text - templates and a procedure - and one executable file, `tools/doc-kit-check.sh`,
-a POSIX shell script depending on nothing beyond `awk`, `sed`, `grep` and `find`. Adoption never
-requires running anything, and any infrastructure the kit offers is optional (ADR-0005).
+The kit ships text - templates and a procedure - and two executable files: `tools/doc-kit-check.sh`,
+the conformance checker, and `tools/doc-kit-index-decisions.sh`, which generates
+`docs/decisions.md`. Both are POSIX shell scripts using standard utilities; the checker uses `git`
+when available for ignore and vendored-file checks. Adoption never requires running anything, and
+any infrastructure the kit offers is optional (ADR-0005).
 
-Three questions follow: how the checker is distributed, whether anything connects an adopter's copy
+Three questions follow: how the tools are distributed, whether anything connects an adopter's copy
 to this repository afterwards, and where the skill that drives an adoption lives.
 
 ## Considered Options
 
-- Checker: a pre-commit hook provider, a CI action, a packaged CLI on npm or PyPI, vendoring, or
+- Tools: a pre-commit hook provider, a CI action, a packaged CLI on npm or PyPI, vendoring, or
   nothing
 - Afterwards: version-stamp the copied artifacts and ship migration notes; publish the shared rules
   as a referenced file; or fork-and-forget, with the changelog as the upgrade path
@@ -26,9 +28,9 @@ to this repository afterwards, and where the skill that drives an adoption lives
 
 ## Decision Outcome
 
-Chosen option: **vendor the checker, fork-and-forget, and keep the skill under `.agents/skills/`**.
+Chosen option: **vendor the tools, fork-and-forget, and keep the skill under `.agents/skills/`**.
 
-- **The checker is vendored.** It is copied into the adopting repository like the templates, under
+- **The tools are vendored.** They are copied into the adopting repository like the templates, under
   the same MIT-0 licence, and kept at `tools/` beside `templates/`. A vendored checker versions with
   the structure it checks: an adopter's map is frozen at adoption, and a referenced hook would keep
   moving and could start failing a repository that never changed.
@@ -50,15 +52,15 @@ whole content, with nothing for a second copy to point at.
 
 ### Consequences
 
-- Good, because the checker inherits the kit's distribution model: no runtime, no registry, no
-  network, auditable before use, and optional.
+- Good, because the tools inherit the kit's distribution model: no runtime, no registry, no network,
+  auditable before use, and optional.
 - Good, because there is no machinery to build, version or maintain.
-- Bad, because improvements do not propagate. Adopters keep what they took, mistakes included, and a
-  vendored checker ages silently, passing while no longer testing what the current specification
+- Bad, because improvements do not propagate. Adopters keep what they took, mistakes included, and
+  vendored tools age silently, passing while no longer testing what the current specification
   requires.
 - Neutral: a tool that reads `.agents/skills/` but expects a different skill format still needs its
   own adapter.
 
 ## Confirmation
 
-`tools/doc-kit-check.sh`
+`review`

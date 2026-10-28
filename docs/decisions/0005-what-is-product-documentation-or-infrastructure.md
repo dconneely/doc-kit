@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-25
+date: 2026-10-28
 decision-makers: David Conneely
-approval: "yes"
+approval: "Use review where unverified"
 ---
 
 # 5. What is product, what is documentation, and what is infrastructure
@@ -67,4 +67,4 @@ for files the kit has no authority over.
 
 ## Confirmation
 
-`tools/doc-kit-check.sh`
+`review`

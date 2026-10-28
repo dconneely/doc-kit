@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-25
+date: 2026-10-28
 decision-makers: David Conneely
-approval: "yes"
+approval: "Use review where unverified"
 ---
 
 # 6. Where rules and their reasons live
@@ -59,4 +59,4 @@ questioning a rule, and the adoption record already serves that reader.
 
 ## Confirmation
 
-`prek run no-template-banner`
+`review`

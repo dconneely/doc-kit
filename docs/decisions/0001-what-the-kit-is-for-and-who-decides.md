@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-25
+date: 2026-10-28
 decision-makers: David Conneely
-approval: "yes"
+approval: "Use review where unverified"
 ---
 
 # 1. What the kit is for, and who decides
@@ -67,4 +67,4 @@ rule unchanged: they propose, like an agent.
 
 ## Confirmation
 
-`tools/doc-kit-check.sh`
+`review`
