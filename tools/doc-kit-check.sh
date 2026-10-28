@@ -21,6 +21,10 @@
 
 set -eu
 
+# Locale-independent collation: string comparison and sort order must not vary by runner.
+LC_ALL=C
+export LC_ALL
+
 MAP=DOC-MAP.md
 NL='
 '

@@ -8,6 +8,10 @@
 
 set -eu
 
+# Keep the index order and table comparison identical on every runner.
+LC_ALL=C
+export LC_ALL
+
 DIR=${2:-docs/decisions}
 OUT=${1:-${DIR}.md}
 

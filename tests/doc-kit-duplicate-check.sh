@@ -9,6 +9,10 @@
 
 set -eu
 
+# Keep the report order identical on every runner.
+LC_ALL=C
+export LC_ALL
+
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 

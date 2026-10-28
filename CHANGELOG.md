@@ -14,6 +14,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   value sets live in `templates/DOC-MAP.md`'s `Property values` table; the specification cites it,
   and the checker's sets are tested against it.
 
+### Fixed
+
+- `tools/doc-kit-check.sh`'s shared-triple exemptions are locale-independent, so `README.md` and
+  `docs/glossary.md` are exempt on macOS as on Linux. The index generator and duplication advisory
+  also sort under the C locale.
+
 ## [0.5.0] - 2026-10-28
 
 ### Added
