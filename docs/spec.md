@@ -58,12 +58,12 @@ neither is a claim nobody checks.
 Defined in `docs/glossary.md`. The ones this document leans on hardest are **map**, **artifact**,
 **adopting repository** and **documentation file**.
 
-A **documentation file** is any Markdown file in the repository that is not below an archive (§5)
-and not vendored. A file is **vendored** when its `linguist-vendored` git attribute is set - the
-attribute GitHub Linguist defines for third-party code, conventionally set in `.gitattributes`
-(ADR-0011). This definition is what makes the map's completeness check decidable, so a checker MUST
-implement exactly it. A file being gitignored does not remove it from this definition - see §2.9 for
-how a checker MUST treat one.
+A **documentation file** is any Markdown file in the repository that is not below an archive (§5),
+not below `templates/` (§2.8), and not vendored. A file is **vendored** when its `linguist-vendored`
+git attribute is set - the attribute GitHub Linguist defines for third-party code, conventionally
+set in `.gitattributes` (ADR-0011). This definition is what makes the map's completeness check
+decidable, so a checker MUST implement exactly it. A file being gitignored does not remove it from
+this definition - see §2.9 for how a checker MUST treat one.
 
 ## 2. The map
 
@@ -85,9 +85,7 @@ rots first, and it SHOULD be given a mechanism - a checker, a review step, a rel
 than left to memory.
 
 2.4 Every documentation file MUST appear in the map, either individually or under a directory
-pattern the map names. Files below an archive (§5), files below `templates/` (§2.8), and vendored
-documentation (§1) are not documentation files for the purpose of this rule. This is the check that
-rots second.
+pattern the map names. This is the check that rots second.
 
 2.5 The map MUST NOT retain placeholder content from the template - an example artifact row, an
 unreplaced heading. Templates carry an example rather than instructions (ADR-0006), so a surviving
@@ -121,21 +119,23 @@ order.
 Two artifacts sharing all three are usually one artifact: merge them, or make one a section of the
 other, unless they hold different facts. A checker MUST report a shared triple as advisory, and MUST
 NOT let it affect the exit status (ADR-0002). Pairs where both artifacts are standard artifacts
-defined in §2 and §3 are exempt, as are pairs among a multi-file container's entry point and its
-parts, because their fact separation is ratified by this specification. Free-text properties defeat
-that test - near-duplicates escape on phrasing rather than substance - which is why all three are
-closed sets.
+defined in this specification are exempt, as are pairs among a multi-file container's entry point
+and its parts, because their fact separation is ratified here. Free-text properties defeat that
+test - near-duplicates escape on phrasing rather than substance - which is why all three are closed
+sets.
 
 An **alias** is exempt: a file whose entire content points at another artifact, existing only
 because a tool looks for that filename. It appears in the map, carries the properties of what it
 points at, and adds nothing of its own.
 
 2.8 A repository MAY contain uncustomised template artifacts - a repository distributing this kit
-necessarily does. Files below `templates/` are product, not documentation files for the purposes of
-§2.4, and a checker MUST exempt them from documentation and citation checks, in the same manner as
-§5.1. A checker MUST evaluate only the root map as an instance, and MUST NOT evaluate any artifact
-the map identifies as a template or as product. Without this, a repository shipping the kit fails
-§2.5 on its own templates, which is the check reporting the opposite of the truth.
+necessarily does. Files below `templates/` are product, not documentation files (§1), and a checker
+MUST exempt them from documentation and citation checks, in the same manner as §5.1. A checker MUST
+evaluate only the root map as an instance. It MUST NOT apply the duplicate-property test (§2.7) to
+an artifact the map identifies as a template or product, and MUST NOT treat the content of such an
+artifact as an instance for §2.4, §2.5 or §3.1; its row in the map is still checked for §2.2 and
+§2.3. Without this, a repository shipping the kit fails §2.5 on its own templates, which is the
+check reporting the opposite of the truth.
 
 2.9 A documentation file that is gitignored is not exempt from §2.4 - a checker MUST still evaluate
 it against the map. But a checker MUST report a hit in one as advisory, and MUST NOT let it affect
