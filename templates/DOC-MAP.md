@@ -58,7 +58,6 @@ docs/
   sources.md             optional: external material manifest: URLs, retrieval dates, checksums
   sources/               optional: external material: fetch script and cached originals
   archive.md             optional: quarantine index of undatable documents kept
-  archive/               optional: undatable documents kept, not authoritative
 ```
 
 In a monorepo, everything below `docs/` except `docs/plan.md` moves under the module it describes;
@@ -92,10 +91,6 @@ schemas, interface definitions - and each gets its own row below.
 | `docs/sources.md`     | External reference manifest: URLs, retrieval dates, licences, checksums. Optional                                        | present    | append-only        | contributor, consumer        |
 | `docs/sources/`       | External reference material: fetch script and cached originals. Optional                                                 | present    | append-only        | contributor                  |
 | `docs/archive.md`     | Quarantine index of undatable documents kept rather than discarded. Optional                                             | present    | rewritten in place | owner, contributor           |
-| `docs/archive/`       | Documentation whose currency cannot be established, kept rather than discarded; non-authoritative. Optional              | past       | immutable          | contributor                  |
-
-The archive is one artifact. Keep either the `docs/archive.md` row or the `docs/archive/` row, not
-both, and delete the other from the layout and lifecycle tables too.
 
 ## Property values
 
@@ -130,7 +125,6 @@ The closed sets used in the artifacts table (ADR-0002):
 | `docs/sources.md`        | an external standard is cited                      | when no artifact cites it                                        |
 | `docs/sources/`          | the fetch script is adopted, or a source is cached | when no artifact cites it                                        |
 | `docs/archive.md`        | migration finds a document nobody can date         | when nothing in it is worth keeping                              |
-| `docs/archive/`          | migration finds a document nobody can date         | when nothing in it is worth keeping                              |
 
 ## Flow
 

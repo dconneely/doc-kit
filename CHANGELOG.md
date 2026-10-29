@@ -8,7 +8,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
-- The template map names `AGENTS.md` and its alias, tells adopters to keep one archive row, and no
+- The template map names `AGENTS.md` and its alias, keeps the archive to one map entry, and no
   longer cites section numbers that exist only in this kit's specification.
 - Structural conformance includes the generated-artifact rule; substantive conformance covers
   sections 4.1, 4.2, 4.4 and 5. The root rule exempts product artifacts.
