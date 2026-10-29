@@ -49,7 +49,9 @@ treat it as a pointer to this procedure and `ADOPTING.md`, not as a separate spe
 
 If the target has no instruction files of its own, one session may do both. The rule is the same:
 read what exists, and follow it. If the session is already rooted in the target, its instruction
-files are already loaded; it may do both parts in one session, with the same gate.
+files are already loaded; it may do both parts in one session, with the same gate. A target-rooted
+session may start without a worksheet; use the re-adoption or fresh Step 0 branch rather than
+treating the missing worksheet as a failed Part 2 handoff.
 
 ## The gate
 
@@ -70,8 +72,8 @@ Real adoptions span weeks and get interrupted. Before starting, check whether
 - **It exists** - under way. Read it, work the unfinished rows, keep it current. Don't restart from
   Step 0.
 - **It doesn't** - if the target has an older doc-kit shape, use the re-adoption note below;
-  otherwise a fresh adoption starts at Step 0. In Part 2, the handoff failed: stop and return to
-  Part 1; do not start over.
+  otherwise a fresh adoption starts at Step 0. In a Part 2-only session, the handoff failed: stop
+  and return to Part 1; do not start over.
 
 ### Re-adopting an earlier version
 

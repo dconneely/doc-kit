@@ -79,6 +79,9 @@ If the target has its own `AGENTS.md`, `CLAUDE.md` or other agent instructions, 
    instructions load automatically. Point it at this kit's `ADOPTING.md` and
    `.agents/skills/doc-kit-adopt/SKILL.md`, and tell it to finish Steps 4b-5.
 
+If you start the session in the target instead, its instructions are already loaded; it may do both
+parts in one session, with the same inventory gate.
+
 When the target-side session starts, this prompt is enough:
 
 ```text
