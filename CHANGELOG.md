@@ -12,6 +12,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   longer cites section numbers that exist only in this kit's specification.
 - Structural conformance includes the generated-artifact rule; substantive conformance covers
   sections 4.1, 4.2, 4.4 and 5. The root rule exempts product artifacts.
+- `Consequences` is SHOULD in the decision-record rules, and a proposed record may be committed
+  while it is discussed (ADR-0007).
+- A monorepo keeps `AGENTS.md` and its aliases at the root; task-note guidance is
+  `docs/plan/0000-template.md`, not a subdirectory README (ADR-0014).
 
 ### Fixed
 

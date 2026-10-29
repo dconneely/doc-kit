@@ -95,8 +95,8 @@ example is the signal that customisation was never finished.
 for at the root - the map, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` - SHOULD sit
 there; every other artifact SHOULD sit under `docs/` (ADR-0014). Product artifacts (ADR-0005) are
 exempt: they sit at the root because an adopter must find them. In a monorepo the per-module
-artifacts MUST sit under the module they describe, and only the map, `README.md`, `CHANGELOG.md` and
-`docs/plan.md` stay at the repository root.
+artifacts MUST sit under the module they describe, and only the map, `README.md`, `AGENTS.md` and
+its aliases, `CHANGELOG.md` and `docs/plan.md` stay at the repository root.
 
 An artifact `name.md` that outgrows one file MAY gain a sibling directory `name/` holding its parts.
 The file stays as the entry point - an index or summary linking into the directory - so links to it

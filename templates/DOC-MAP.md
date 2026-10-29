@@ -62,7 +62,8 @@ docs/
 ```
 
 In a monorepo, everything below `docs/` except `docs/plan.md` moves under the module it describes;
-`DOC-MAP.md`, `README.md`, `CHANGELOG.md` and `docs/plan.md` stay at the repository root.
+`DOC-MAP.md`, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` and `docs/plan.md` stay at
+the repository root.
 
 Any `docs/name.md` that outgrows one file gains a sibling directory `docs/name/` for its parts, and
 stays as their index. The specification is the usual case: its members can be machine-readable -
