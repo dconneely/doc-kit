@@ -6,6 +6,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- The README and `doc-kit-adopt` skill now provide a short entry prompt and treat a target that
+  already adopted an earlier doc-kit as a re-adoption.
+
 ## [0.6.0] - 2026-10-29
 
 ### Changed

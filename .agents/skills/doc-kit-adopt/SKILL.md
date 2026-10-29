@@ -34,6 +34,9 @@ calls for cases that won't settle.
 Template content comes from `templates/`, which maps onto the target's root at the same relative
 path; Step 3 says what to take and when.
 
+The README's "Driving it with an agent" section has a short entry prompt. If a user gives it to you,
+treat it as a pointer to this procedure and `ADOPTING.md`, not as a separate specification.
+
 ### Two parts when the target has its own instructions
 
 1. **Part 1, in doc-kit.** Steps 0-4a. Read the target's instruction files first and follow them for
@@ -45,7 +48,8 @@ path; Step 3 says what to take and when.
    approved dispositions, finish Step 4 and run Step 5.
 
 If the target has no instruction files of its own, one session may do both. The rule is the same:
-read what exists, and follow it.
+read what exists, and follow it. If the session is already rooted in the target, its instruction
+files are already loaded; it may do both parts in one session, with the same gate.
 
 ## The gate
 
@@ -65,8 +69,18 @@ Real adoptions span weeks and get interrupted. Before starting, check whether
 
 - **It exists** - under way. Read it, work the unfinished rows, keep it current. Don't restart from
   Step 0.
-- **It doesn't** - in Part 1, a fresh adoption: start at Step 0. In Part 2, the handoff failed: stop
-  and return to Part 1; do not start over.
+- **It doesn't** - if the target has an older doc-kit shape, use the re-adoption note below;
+  otherwise a fresh adoption starts at Step 0. In Part 2, the handoff failed: stop and return to
+  Part 1; do not start over.
+
+### Re-adopting an earlier version
+
+A missing worksheet does not prove the target is empty. If it has a root `SPECIFICATION.md` or
+`PLAN.md`, `docs/adr/` or `docs/tasks/`, or a `DOC-MAP.md` written before the current version, treat
+it as a re-adoption, not a fresh Step 0. Inventory the existing documents; treat the old map, plan,
+specification, ADRs and instruction files as inputs to move and merge; read the kit's `CHANGELOG.md`
+from the target's adopted version through the current one; write the worksheet; stop at the
+inventory. Do not copy templates over the custom map or recreate the plan or specification.
 
 The worksheet _is_ the state. Keeping it accurate matters more than speed - the next session has
 nothing else to go on.

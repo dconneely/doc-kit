@@ -79,6 +79,19 @@ If the target has its own `AGENTS.md`, `CLAUDE.md` or other agent instructions, 
    instructions load automatically. Point it at this kit's `ADOPTING.md` and
    `.agents/skills/doc-kit-adopt/SKILL.md`, and tell it to finish Steps 4b-5.
 
+When the target-side session starts, this prompt is enough:
+
+```text
+This repository is a doc-kit target: apply doc-kit from <kit-path>, reading
+<kit-path>/ADOPTING.md, <kit-path>/.agents/skills/doc-kit-adopt/SKILL.md, and the kit's CHANGELOG.
+If docs/plan/adopt-doc-kit.md exists, continue from it; if not, inventory the existing documents,
+treat any old map, plan, specification, ADRs and instruction files as inputs to move and merge
+rather than templates to overwrite, and write the worksheet. Stop for review before editing
+anything else unless the worksheet already exists and its dispositions have been approved.
+```
+
+Replace `<kit-path>` with the path to this repository, for example `../doc-kit`.
+
 If your tool does not list `doc-kit-adopt`, read `.agents/skills/doc-kit-adopt/SKILL.md` directly;
 the procedure is the same.
 
