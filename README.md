@@ -102,6 +102,6 @@ to edit should not follow you home.
 
 ## Status
 
-Released, and still early. In use here and in two other repositories, one a migration into an
-existing multi-module codebase, all owned by the same person - the situation the kit is designed for
-(ADR-0001). See `CHANGELOG.md` for what shipped and `docs/plan.md` for what is still open.
+Released, and still early. In use here and in some other repositories owned by the author - the
+situation the kit is designed for (ADR-0001). See `CHANGELOG.md` for what shipped and `docs/plan.md`
+for what is still open.
