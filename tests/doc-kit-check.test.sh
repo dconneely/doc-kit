@@ -1,5 +1,5 @@
 #!/bin/sh
-# Tests for tools/doc-kit-check.sh. Each case builds a small conformant repository in a temporary
+# Tests for tools/doc-kit-check.sh. Each case builds a small passing repository in a temporary
 # directory, breaks one thing, and asserts the exit code and a line of output.
 #
 # Usage:  sh tests/doc-kit-check.test.sh
@@ -17,7 +17,7 @@ passed=0
 failed=0
 n=0
 
-# fixture - a fresh conformant repository in $dir, and cd into it.
+# fixture - a fresh passing repository in $dir, and cd into it.
 fixture() {
 	n=$((n + 1))
 	dir="$TMP/$n"
@@ -129,7 +129,7 @@ refute() {
 # ---------------------------------------------------------------- map
 
 fixture
-expect "clean fixture is conformant" 0 "doc-kit: conformant (map adr plan)"
+expect "clean fixture passes" 0 "doc-kit: checks passed (map adr plan)"
 
 fixture
 echo x >notes.md
@@ -138,7 +138,7 @@ expect "unmapped file fails" 1 "FAIL [map] notes.md is not named in the map" map
 fixture
 mkdir -p templates
 echo x >templates/notes.md
-expect "templates/ is exempt without a row" 0 "conformant" map
+expect "templates/ is exempt without a row" 0 "checks passed" map
 
 fixture
 mkdir -p old
@@ -146,12 +146,12 @@ echo x >old/stale.md
 after '^DOC-MAP.md ' 'old/           archive, not authoritative'
 after '^[|] `docs/plan.md` +[|] backlog' '| `old/` | archive | past | immutable | contributor |'
 after '^[|] `docs/plan.md` +[|] start' '| `old/` | archived | never |'
-expect "an archive at any mapped path covers its files" 0 "conformant" map
+expect "an archive at any mapped path covers its files" 0 "checks passed" map
 
 fixture
 mkdir -p docs/archive
 echo x >docs/archive/stale.md
-expect "docs/archive/ is exempt without a row" 0 "conformant" map
+expect "docs/archive/ is exempt without a row" 0 "checks passed" map
 
 fixture
 echo x >"docs/decisions/0002 old notes.md"
@@ -176,7 +176,7 @@ printf 'vendor/\n' >.gitignore
 printf 'vendor/** linguist-vendored\n' >.gitattributes
 mkdir -p vendor/lib
 echo x >vendor/lib/README.md
-expect "gitignored and vendored is skipped silently" 0 "doc-kit: conformant (map)" map
+expect "gitignored and vendored is skipped silently" 0 "doc-kit: checks passed (map)" map
 
 fixture
 git init -q .
@@ -247,7 +247,7 @@ mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/arc
 : >docs/howto/a-guide.md
 : >docs/sources.md
 : >docs/archive.md
-refute "the template map is conformant as an instance" "WARN [map]" map
+refute "the template map passes as an instance" "WARN [map]" map
 
 fixture
 sed -i.bak 's/| volatile           | owner /| volatile | the team /' DOC-MAP.md
@@ -255,7 +255,7 @@ expect "audience outside the closed set fails" 1 "docs/plan.md has audience 'the
 
 fixture
 sed -i.bak 's/| rewritten in place | contributor /| rewritten in place | contributor (agents) /' DOC-MAP.md
-expect "a role marked for agents only passes" 0 "doc-kit: conformant (map)" map
+expect "a role marked for agents only passes" 0 "doc-kit: checks passed (map)" map
 
 fixture
 echo 'This file is a template.' >>DOC-MAP.md
@@ -273,7 +273,7 @@ expect "accepted record without decision-makers fails" 1 "names no decision-make
 
 fixture
 adr 0002 proposed
-expect "proposed record needs no decision-makers" 0 "conformant" adr
+expect "proposed record needs no decision-makers" 0 "checks passed" adr
 
 fixture
 adr 0002 accepted 'decision-makers: someone'
@@ -299,7 +299,7 @@ fixture
 printf '
 See ADR-0001, or `ADR-0099`, or [ADR-0099](https://example.com/0099).
 ' >>docs/plan.md
-expect "citations in code and in links to other sites pass" 0 "conformant" adr
+expect "citations in code and in links to other sites pass" 0 "checks passed" adr
 
 fixture
 printf '
@@ -343,7 +343,7 @@ fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 sh tools/doc-kit-index-decisions.sh docs/decisions.md docs/decisions
-expect "valid generated decisions index passes" 0 "conformant" adr
+expect "valid generated decisions index passes" 0 "checks passed" adr
 
 fixture
 mkdir -p tools
@@ -355,7 +355,7 @@ fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 sh tools/doc-kit-index-decisions.sh docs/decisions/README.md docs/decisions
-expect "valid legacy decisions/README.md passes" 0 "conformant" adr
+expect "valid legacy decisions/README.md passes" 0 "checks passed" adr
 
 # ---------------------------------------------------------------- plan
 
@@ -373,7 +373,7 @@ expect "struck-through heading fails" 1 "looks like a completed entry" plan
 
 fixture
 printf '\n## Define what done means\n\n**Type:** docs\n\nOne paragraph.\n' >>docs/plan.md
-expect "the word done in a title passes" 0 "conformant" plan
+expect "the word done in a title passes" 0 "checks passed" plan
 
 fixture
 printf '\n## Untagged\n\nOne paragraph.\n' >>docs/plan.md
@@ -385,7 +385,7 @@ expect "entry with an invalid type tag fails" 1 "docs/plan.md:9 has no valid typ
 
 fixture
 printf '\n## Bare tag\n\n**Type:** bug\n\nOne paragraph.\n' >>docs/plan.md
-expect "type tag alone on its line passes" 0 "conformant" plan
+expect "type tag alone on its line passes" 0 "checks passed" plan
 
 # ---------------------------------------------------------------- cli
 

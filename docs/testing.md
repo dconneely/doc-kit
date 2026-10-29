@@ -9,7 +9,8 @@ a reader.
 
 `tools/doc-kit-check.sh`, run as `sh tools/doc-kit-check.sh [map|adr|plan]`. Every rule it enforces
 cites the `docs/spec.md` clause it comes from, so a failure is traceable to the contract rather than
-to the tool's opinion.
+to the tool's opinion. A pass means the checks it implements passed; the rules it does not implement
+are listed below.
 
 | Group  | Verified                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -97,9 +98,9 @@ directory, breaks one thing, and asserts the exit code and the message - a case 
 the table above, plus the clean fixture. It is infrastructure (ADR-0005): it tests the vendored
 checker and is not vendored with it.
 
-CI (`.github/workflows/ci.yml`) runs the checker and its tests on Linux and macOS, and the hooks on
-Linux, on every push to `main` and every pull request. `gitleaks` is skipped there: it scans only
-the staged diff, which CI does not have.
+CI (`.github/workflows/ci.yml`) runs the checker, its tests and the duplication advisory on Linux
+and macOS, and the hooks on Linux, on every push to `main` and every pull request. `gitleaks` is
+skipped there: it scans only the staged diff, which CI does not have.
 
 The tests exist because this checker's characteristic failure is silence. Every bug found in it so
 far reported conformance while checking nothing: glob expansion, regex-unsafe paths, a no-op `sed`,

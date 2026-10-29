@@ -557,9 +557,9 @@ done
 
 if [ "$failures" -eq 0 ]; then
 	if [ "$warnings" -eq 0 ]; then
-		printf 'doc-kit: conformant (%s)\n' "$*"
+		printf 'doc-kit: checks passed (%s)\n' "$*"
 	else
-		printf 'doc-kit: conformant (%s) - %s warning(s), see above\n' "$*" "$warnings"
+		printf 'doc-kit: checks passed (%s) - %s warning(s), see above\n' "$*" "$warnings"
 	fi
 else
 	printf '\ndoc-kit: %s failure(s)' "$failures" >&2
