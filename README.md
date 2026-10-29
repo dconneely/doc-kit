@@ -41,7 +41,7 @@ an honest `README.md` beats this structure until there is more to say than fits 
 | `docs/spec.md`      | What a conformant repository looks like - the contract a checker enforces      |
 | `DOC-MAP.md`        | This repository's own map, produced by applying the kit to itself              |
 | `docs/decisions/`   | Why the kit is shaped this way                                                 |
-| `tools/`            | An optional conformance checker                                                |
+| `tools/`            | An optional conformance checker and decision-index generator                   |
 
 **This repository is an adopted instance of itself.** Its map, specification, plan, records and
 research notes are what the structure looks like in use, rather than what it looks like on a
@@ -49,9 +49,9 @@ template - browse them before deciding whether you want it.
 
 ## Using it
 
-Read [`ADOPTING.md`](ADOPTING.md) and start at Step 0. It ends with a `docs/plan.md` containing the
-rest of the work, which is deliberate: adoption on a mature repository is not an afternoon, and the
-plan is what lets you stop and resume.
+Read [`ADOPTING.md`](ADOPTING.md) and start at Step 0. Step 0 ends by writing a `docs/plan.md`
+containing the rest of the work, which is deliberate: adoption on a mature repository is not an
+afternoon, and the plan is what lets you stop and resume.
 
 Copying is manual - take the members of `templates/` you need to your repository root, using the
 table in Step 3, and work through Steps 0-5 in order. There is no installer, because the kit ships
