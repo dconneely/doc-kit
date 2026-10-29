@@ -128,9 +128,10 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 
 A change moves through the documents in this order:
 
-`docs/plan.md` entry -> **ADR** if a real choice was made -> **`docs/spec.md`** updated in present
-tense -> `templates/` updated if the product changed -> **`CHANGELOG.md`** line if adopters can see
-it -> `docs/plan.md` entry **deleted**.
+`docs/plan.md` entry -> **ADR** if a real choice was made -> regenerate **`docs/decisions.md`** ->
+**`docs/spec.md`** updated in present tense -> `templates/`, `tools/` or the skill updated if the
+product changed -> **`CHANGELOG.md`** line if adopters can see it -> `docs/plan.md` entry
+**deleted**.
 
 Most changes skip the ADR. Nothing skips the deletion.
 
@@ -145,14 +146,16 @@ them ([ADR-0006][adr6]). What each rule prevents is in `ADOPTING-NOTES.md`.
    behaviour -> specification, history -> changelog or commit message, intent -> plan. A table, a
    list of more than three values, or a process of three or more steps should appear once; short
    instructional copies and template/instance pairs may repeat.
-2. **The specification may link to a machine-readable contract; it must never restate it.** Nothing
-   here is generated: `ADOPTING.md` and `templates/` are source of truth, and everything in `docs/`
-   is prose that cannot be derived. `docs/spec.md` §4 has the rules for when that changes.
-3. **Write the least that is true.** No history or account of how you got there, in documents or
+2. **The specification may link to a machine-readable contract; it must never restate it.** It
+   covers only what the contract cannot express: rationale, invariants, units, ownership, policy.
+3. **A generated view is never hand-edited.** It carries a header naming what generates it, and
+   regenerating it produces no diff. An ordered, immutable-once-applied sequence is
+   changelog-shaped; the specification is the current shape.
+4. **Write the least that is true.** No history or account of how you got there, in documents or
    code comments ([ADR-0012][adr12]).
-4. **Code names the record, not the reverse.** A comment beside constrained code names the ADR that
+5. **Code names the record, not the reverse.** A comment beside constrained code names the ADR that
    governs it.
-5. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
+6. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
    says as little about the record as it can, and is fixed in the same commit as a change to the
    record that makes it untrue.
 

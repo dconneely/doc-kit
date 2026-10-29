@@ -126,8 +126,8 @@ The closed sets used in the artifacts table (ADR-0002):
 A change moves through the documents in this order:
 
 `docs/plan.md` entry -> (optional `docs/plan/` note) -> **ADR** if a real choice was made ->
-**`docs/spec.md`** updated in present tense -> **`CHANGELOG.md`** line if user-visible ->
-`docs/plan.md` entry **deleted**.
+regenerate **`docs/decisions.md`** if kept -> **`docs/spec.md`** updated in present tense ->
+**`CHANGELOG.md`** line if user-visible -> `docs/plan.md` entry **deleted**.
 
 Most changes skip the ADR and the task note. Nothing skips the deletion.
 
