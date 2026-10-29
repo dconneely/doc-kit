@@ -46,7 +46,7 @@ CHANGELOG.md             what shipped
 docs/
   spec.md                the behaviour contract - an index once it grows
   plan.md                single ranked backlog, items tagged bug/debt/feature/docs
-  plan/*.md              optional: per-entry working notes, disposable
+  plan/*.md              optional: per-entry working notes and their template
   decisions.md           optional: index of decision records, generated
   decisions/*.md         decisions, numbered, accepted only by the owner
   quirks.md              deliberate deviations and accepted-wrong behaviour
@@ -85,7 +85,7 @@ schemas, interface definitions - and each gets its own row below.
 | `docs/research/*.md`  | Sourced findings with explicit confidence levels; shape and confidence levels in `0000-template.md`                      | past       | append-only        | contributor                  |
 | `docs/glossary.md`    | Domain vocabulary                                                                                                        | present    | rewritten in place | owner, contributor, consumer |
 | `docs/testing.md`     | Test strategy, and what is deliberately _not_ covered                                                                    | present    | rewritten in place | contributor                  |
-| `docs/plan/*.md`      | Working notes for one backlog item. Optional                                                                             | future     | disposable         | contributor                  |
+| `docs/plan/*.md`      | Working notes for one backlog item, and their template. Optional                                                         | future     | disposable         | contributor                  |
 | `docs/howto.md`       | Index of step-by-step procedures. Optional                                                                               | present    | rewritten in place | contributor, operator        |
 | `docs/howto/*.md`     | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms. Optional      | imperative | rewritten in place | contributor, operator        |
 | `docs/sources.md`     | External reference manifest: URLs, retrieval dates, licences, checksums. Optional                                        | present    | append-only        | contributor, consumer        |

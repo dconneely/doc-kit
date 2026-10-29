@@ -128,20 +128,20 @@ rather than leaving them undocumented.
 Everything in `templates/` maps onto your repository root at the same relative path, so copying is a
 matter of taking the ones Step 1 said you had earned:
 
-| From `templates/`                                                         | Take it when                                                                                                                         |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan.md` | always - the core five                                                                                                               |
-| `docs/decisions/0000-template.md`                                         | always; records are worth having from day one, since their value is being written contemporaneously                                  |
-| `docs/decisions/0001-how-the-documentation-is-organised.md`               | always - renumber it if records exist, and leave it `proposed` for the owner to accept                                               |
-| `docs/decisions.md`                                                       | generate with `tools/doc-kit-index-decisions.sh` once decisions exist                                                                |
-| `docs/quirks.md`                                                          | you deviate from a reference, or carry behaviour you know is wrong                                                                   |
-| `docs/glossary.md`                                                        | your domain has terms, or ordinary words used precisely                                                                              |
-| `docs/testing.md`                                                         | you have more than one test approach                                                                                                 |
-| `docs/research/0000-template.md`                                          | you reverse-engineer, or reconcile sources that disagree                                                                             |
-| `docs/howto.md` and `docs/howto/0000-template.md`                         | you have recurring operational procedures (deployments, rotations, migrations)                                                       |
-| `docs/sources.md` and `docs/sources/`                                     | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                   |
-| `docs/plan/`                                                              | your backlog is past roughly 20 items - plus `adopt-doc-kit.md`, which is the worksheet for this migration whatever the backlog size |
-| `docs/archive.md` (and `docs/archive/`)                                   | Step 4 turned up documentation whose currency you cannot establish                                                                   |
+| From `templates/`                                                         | Take it when                                                                                                                              |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan.md` | always - the core five                                                                                                                    |
+| `docs/decisions/0000-template.md`                                         | always; records are worth having from day one, since their value is being written contemporaneously                                       |
+| `docs/decisions/0001-how-the-documentation-is-organised.md`               | always - renumber it if records exist, and leave it `proposed` for the owner to accept                                                    |
+| `docs/decisions.md`                                                       | generate with `tools/doc-kit-index-decisions.sh` once decisions exist                                                                     |
+| `docs/quirks.md`                                                          | you deviate from a reference, or carry behaviour you know is wrong                                                                        |
+| `docs/glossary.md`                                                        | your domain has terms, or ordinary words used precisely                                                                                   |
+| `docs/testing.md`                                                         | you have more than one test approach                                                                                                      |
+| `docs/research/0000-template.md`                                          | you reverse-engineer, or reconcile sources that disagree                                                                                  |
+| `docs/howto.md` and `docs/howto/0000-template.md`                         | you have recurring operational procedures (deployments, rotations, migrations)                                                            |
+| `docs/sources.md` and `docs/sources/`                                     | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                        |
+| `docs/plan/`                                                              | your backlog is past roughly 20 items - plus `adopt-doc-kit.md` (the migration worksheet) and `0000-template.md` (the task-note template) |
+| `docs/archive.md` (and `docs/archive/`)                                   | Step 4 turned up documentation whose currency you cannot establish                                                                        |
 
 Two files sit outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `docs/spec.md`, and **`tools/doc-kit-index-decisions.sh`**, which generates

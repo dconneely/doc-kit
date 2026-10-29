@@ -17,7 +17,7 @@ Index of decision records. Only **accepted** records bind.
 | [ADR-0010](decisions/0010-how-the-kit-reaches-an-adopter.md)                     | 2026-10-28 | David Conneely | How the kit reaches an adopter                                     | `review`                                                   |
 | [ADR-0011](decisions/0011-which-files-the-map-must-name.md)                      | 2026-10-25 | David Conneely | Which files the map must name                                      | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`   |
 | [ADR-0012](decisions/0012-what-tense-and-how-much-is-written.md)                 | 2026-10-25 | David Conneely | What tense, and how much, is written                               | `review`                                                   |
-| [ADR-0014](decisions/0014-where-each-artifact-lives-and-how-it-grows.md)         | 2026-10-25 | David Conneely | Where each artifact lives, and how it grows                        | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`   |
+| [ADR-0014](decisions/0014-where-each-artifact-lives-and-how-it-grows.md)         | 2026-10-29 | David Conneely | Where each artifact lives, and how it grows                        | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`   |
 
 ## Non-binding
 

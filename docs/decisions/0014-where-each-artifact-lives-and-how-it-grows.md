@@ -1,8 +1,8 @@
 ---
 status: "accepted"
-date: 2026-10-25
+date: 2026-10-29
 decision-makers: David Conneely
-approval: "Yes"
+approval: "yes"
 ---
 
 # 14. Where each artifact lives, and how it grows
@@ -63,7 +63,7 @@ directory - so links to it stay true.
 - **Archive:** `docs/archive.md` quarantine index records why retained legacy documents were not
   migrated. Non-authoritative, exempt files sit in `docs/archive/` (§5.1).
 - **Monorepos:** Per-module artifacts sit under the module; only `DOC-MAP.md`, `README.md`,
-  `CHANGELOG.md`, and `docs/plan.md` stay at the repository root.
+  `AGENTS.md` and its aliases, `CHANGELOG.md`, and `docs/plan.md` stay at the repository root.
 
 This combines and supersedes the decisions originally explored for how-to guides, external sources,
 and generated decision indexing.
