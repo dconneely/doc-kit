@@ -21,7 +21,7 @@ mutability and an audience. The unit the structure is built from.
 
 **Audience** - who an artifact is written for: one or more of the roles `owner`, `contributor`,
 `consumer`, `end-user` and `operator`, defined in ADR-0002 and listed in the `Property values` table
-in `templates/DOC-MAP.md`.
+in `templates/DOC-MAP.md` (or the copy in an adopting repository's map).
 
 **Confidence level** - `high`, `medium` or `low`, attached to a research note. Defined in
 `docs/spec.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence, only
@@ -41,7 +41,8 @@ backlog, part assessment. The characteristic failure the structure exists to pre
 thing to look for when adopting.
 
 **Mutability** - how a document changes over its life, from the closed set in the `Property values`
-table in `templates/DOC-MAP.md`. One of the three properties.
+table in `templates/DOC-MAP.md` (or the copy in an adopting repository's map). One of the three
+properties.
 
 **Owner** - the one person who makes a repository's decisions: accepts records, sets its purpose,
 ranks its plan. Every other contributor, agent or human, proposes. See ADR-0001.
@@ -58,8 +59,8 @@ generated-artifact rule in §4.3. Contrast **substantive conformance**, which ad
 
 **Tense** - whether a document describes what is, what was, what is intended, what to do, or why;
 the values are `present`, `past`, `future`, `imperative` and `explanatory`, in the `Property values`
-table in `templates/DOC-MAP.md`. The most useful of the three properties, because the tense of the
-sentence being written usually settles where it goes.
+table in `templates/DOC-MAP.md` (or the copy in an adopting repository's map). The most useful of
+the three properties, because the tense of the sentence being written usually settles where it goes.
 
 **Three properties** - tense, mutability and audience. The axis the structure divides on, and the
 test every proposed new document must pass. See ADR-0002.

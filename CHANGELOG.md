@@ -17,11 +17,16 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   while it is discussed (ADR-0007).
 - A monorepo keeps `AGENTS.md` and its aliases at the root; task-note guidance is
   `docs/plan/0000-template.md`, not a subdirectory README (ADR-0014).
+- `tools/doc-kit-check.sh` reports `checks passed` rather than `conformant`, because it implements
+  only part of the structural rules.
+- The template map gives the task-note template its own row; only the notes are disposable.
 
 ### Fixed
 
 - The map flow regenerates the decisions index and names the tools accurately; `ADOPTING.md` gives a
   rejection a home.
+- `tools/doc-kit-check.sh` exempts `**Template**` rows from duplicate-property warnings, as section
+  2.8 requires.
 
 ## [0.5.0] - 2026-10-28
 
