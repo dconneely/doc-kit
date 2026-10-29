@@ -2,9 +2,8 @@
 
 **Confidence:** high
 
-Verified directly against the MADR repository on 2026-08-20. Prompted by the kit claiming to follow
-"a recognised convention" while using section names none of the conventions use. Y-statements were
-checked on 2026-09-27, prompted by an adopter pointing at them as a leaner alternative.
+Verified directly against the MADR repository on 2026-08-20. Y-statements were checked on
+2026-09-27.
 
 ## Finding
 

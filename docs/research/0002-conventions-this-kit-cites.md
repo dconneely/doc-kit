@@ -2,23 +2,23 @@
 
 **Confidence:** high
 
-Checked directly against primary sources on 2026-08-20. Covers every convention the kit cites except
-MADR, which [`0001-adr-conventions.md`](0001-adr-conventions.md) covers.
+Checked directly against primary sources on 2026-08-20. Covers the file-and-record conventions the
+kit relies on - Keep a Changelog, Nygard, adr-tools and agents.md - and the spec-driven tools
+sometimes mistaken for its source. MADR is covered in
+[`0001-adr-conventions.md`](0001-adr-conventions.md); Diátaxis and Standard Readme are loose
+practices, not standards, and are not assessed here.
 
 ## Finding
 
 Keep a Changelog, Nygard, adr-tools and agents.md say what the kit cites them for. **GitHub Spec Kit
-produces no root-level `SPECIFICATION.md` or `PLAN.md`**, and no convention prescribes those names.
-
-**Correction (2026-10-28):** the kit now uses `docs/spec.md` and `docs/plan.md` (ADR-0014). The
-analysis below was written when the root names were `SPECIFICATION.md` and `PLAN.md`; its
-conclusion, that the names are the kit's own, is unchanged.
+produces no root-level `SPECIFICATION.md` or `PLAN.md`, and no convention prescribes the kit's
+`docs/spec.md` or `docs/plan.md`.**
 
 ### Keep a Changelog - accurate
 
-Six categories, exactly as `SPECIFICATION.md` §3.2 prescribes: `Added` for new features, `Changed`
-for changes in existing functionality, `Deprecated` for soon-to-be removed features, `Removed` for
-now removed features, `Fixed` for any bug fixes, `Security` in case of vulnerabilities.
+Six categories, exactly as `docs/spec.md` §3.2 prescribes: `Added` for new features, `Changed` for
+changes in existing functionality, `Deprecated` for soon-to-be removed features, `Removed` for now
+removed features, `Fixed` for any bug fixes, `Security` in case of vulnerabilities.
 
 It does prescribe an `Unreleased` section - "Keep an `Unreleased` section at the top to track
 upcoming changes" - and reverse-chronological order: "The latest version comes first."
@@ -57,7 +57,7 @@ produces no root-level file of either name.
 
 Its `specify -> plan -> tasks` flow resembles this kit's; the filenames it produces do not.
 
-### Where the `SPECIFICATION.md` / `PLAN.md` naming actually comes from - nowhere
+### Where the `docs/spec.md` / `docs/plan.md` naming actually comes from - nowhere
 
 Neither leading spec-driven toolchain produces those filenames. Spec Kit's own `spec-driven.md`
 gives the structure directly:
@@ -89,22 +89,22 @@ Kiro is the same shape, one level more hidden:
 
 **Neither tool is proposing a documentation convention at all.** Both keep per-feature state in a
 tool-owned directory - `.specify/`, `.kiro/` - that a tool reads and writes. Their `spec.md`
-describes one feature and is spent when it ships; this kit's `SPECIFICATION.md` describes the
-repository and outlives every feature. Different artifacts sharing a word, so there was never a
-naming convention here to inherit.
+describes one feature and is spent when it ships; this kit's `docs/spec.md` describes the repository
+and outlives every feature. Different artifacts sharing a word, so there was never a naming
+convention here to inherit.
 
 The genre converged during 2025 - Spec Kit, Kiro and BMAD-METHOD its flagship implementations, Sean
 Grove's "The New Code" (AI Engineer World's Fair, 2025) commonly cited as its founding statement.
 That timeline is the one claim here from a secondary source.
 
-Searching more widely for any standard prescribing either filename at a repository root found none.
-What exists instead:
+Searching more widely for any standard prescribing either filename at a fixed repository path found
+none. What exists instead:
 
 - **GitHub community health files** - the one formal root-file convention, covering
   `CODE_OF_CONDUCT`, `CONTRIBUTING`, `FUNDING`, `SECURITY`, `SUPPORT` and the issue/PR templates,
-  alongside `README` and `LICENSE`. Neither `SPECIFICATION.md` nor `PLAN.md` appears in it.
+  alongside `README` and `LICENSE`. Neither `docs/spec.md` nor `docs/plan.md` appears in it.
 - **`AGENTS.md`** - de-facto rather than formal, but widely adopted.
-- **`ROADMAP.md`** - the nearest analogue to `PLAN.md`, and project-specific rather than
+- **`ROADMAP.md`** - the nearest analogue to `docs/plan.md`, and project-specific rather than
   standardised.
 - Individual projects using a `specification.md` (OpenTracing, for one), which is one project's
   choice rather than a convention.
@@ -113,7 +113,7 @@ What exists instead:
   IEEE 830 is still widely referenced by name despite the supersession. Both are enterprise-scale,
   for the same reason the kit already sets aside ISO/IEC/IEEE 29119-3 for testing.
 
-**Conclusion: this kit's `SPECIFICATION.md` and `PLAN.md` are its own naming, not inherited.** The
+**Conclusion: this kit's `docs/spec.md` and `docs/plan.md` are its own naming, not inherited.** The
 familiarity is genre resemblance, not convention.
 
 This is a negative result from search, which is weaker than a positive one: absence of evidence
