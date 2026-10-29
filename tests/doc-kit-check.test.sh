@@ -231,6 +231,8 @@ cp "$ROOT/templates/DOC-MAP.md" DOC-MAP.md
 rm -rf docs
 mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/archive
 : >README.md
+: >AGENTS.md
+: >CLAUDE.md
 : >CHANGELOG.md
 : >docs/spec.md
 : >docs/decisions.md
