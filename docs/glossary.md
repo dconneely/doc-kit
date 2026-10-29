@@ -52,8 +52,9 @@ authoritative, when it was last known accurate, and why it was not migrated.
 **Specification** - a set, not a file. Members may be prose or machine-readable; both are
 specification. See ADR-0002.
 
-**Structural conformance** - satisfying the mechanically checkable requirements. Contrast
-**substantive conformance**, which adds the single-source-of-truth guideline and needs a reviewer.
+**Structural conformance** - satisfying the mechanically checkable requirements: §2, §3 and the
+generated-artifact rule in §4.3. Contrast **substantive conformance**, which adds §4.1's guideline,
+§4.2, §4.4 and §5's MUSTs, and needs a reviewer.
 
 **Tense** - whether a document describes what is, what was, or what is intended. The most useful of
 the three properties, because the tense of the sentence being written usually settles where it goes.

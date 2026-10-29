@@ -338,13 +338,13 @@ structure instructs everyone to trust it.
 
 ## 6. Conformance
 
-A repository is **structurally conformant** if it satisfies every MUST in §2 and §3. This is
-mechanically checkable, and is what a checker reports on - but it is checkable, not checked-by-
-obligation. A repository that never runs one and holds the properties anyway is conformant.
+A repository is **structurally conformant** if it satisfies every MUST in §2 and §3 and the
+generated-artifact rule in §4.3. This is the set a checker reports against; a checker may implement
+only part of it, and `docs/testing.md` says what it does not check. Checking is not an obligation: a
+repository that never runs one and holds the properties anyway is conformant.
 
-A repository is **substantively conformant** if it also follows §4's guideline - tables, value lists
-and multi-step processes are single-sourced, and prose does not restate a contract. This is not
-mechanically checkable in general and is a review responsibility.
+A repository is **substantively conformant** if it also satisfies the remaining requirements: §4.1's
+guideline, §4.2, §4.4 and §5's MUSTs. This is a review responsibility, not a mechanical check.
 
 Partial adoption is expected and is not a failure. A repository mid-migration SHOULD be structurally
 conformant at every point, because the map promising only what exists is the property that makes an

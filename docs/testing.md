@@ -70,10 +70,11 @@ glob.
 `docs/decisions.md` when `tools/doc-kit-index-decisions.sh` is present. It cannot regenerate a
 schema snapshot, a rendered reference or another generated artifact, so those are review.
 
-**Substantive conformance (§4).** Tables, lists of more than three values and multi-step processes
-are single-sourced; prose never restates a machine-readable contract. §6 assigns this to review
-because it is not mechanically decidable, and the deduplication passes this repository has needed
-were all found by reading, not by tooling.
+**Substantive conformance (§4.1, §4.2, §4.4 and §5).** Tables, lists of more than three values and
+multi-step processes are single-sourced; prose never restates a machine-readable contract;
+migrations are changelog-shaped; archived files carry provenance, are not cited, and the archive
+appears in the map. §6 assigns these to review; the checker implements only part of the structural
+rules and none of these.
 
 **No instance here.** §3.2 changelog rules, §3.4 research confidence levels, §3.5 quirk entry shape,
 and §5's archive rules - provenance headers, and the archive's single map entry - are unimplemented.
