@@ -51,7 +51,8 @@ is not size in lines but **repeated agent sessions**: agents work in the reposit
 and what each needs to know no longer fits in one `AGENTS.md`. Each session is a new reader that
 inherits the reasoning without having seen it made. Record the outcome either way - a rejection that
 is written down is a decision, and one that is not gets re-litigated every six months. An adoption
-is recorded in the adoption record Step 3 creates.
+is recorded in the adoption record Step 3 creates; a rejection belongs wherever the repository keeps
+its decisions, or in its plan if it has one.
 
 **Then write `docs/plan.md` before anything else.** It is the one artifact you can create knowing
 nothing about the repository yet, and the adoption work itself is its first content: one entry per
