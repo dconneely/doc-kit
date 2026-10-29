@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-10-25
+date: 2026-10-29
 decision-makers: David Conneely
 approval: "yes"
 ---
@@ -50,8 +50,8 @@ Records follow the MADR minimal template copied from `templates/docs/decisions/0
   `informed` are permitted, not required.
 - **Headings** keep their `NNNN.` numbers (`# NNNN. Question`), which `adr-tools` uses and MADR
   permits.
-- **Sections** require `## Context and Problem Statement`, `## Considered Options`,
-  `## Decision Outcome`, `### Consequences`, and optionally `## Confirmation`.
+- **Sections** MUST carry `## Context and Problem Statement`, `## Considered Options` and
+  `## Decision Outcome`, and SHOULD carry `### Consequences`; `## Confirmation` is optional.
 
 The full MADR template was rejected as padding: Pros and Cons tables and Decision Drivers earn their
 place when weighing multiple complex options, whereas most records here evaluate one real
@@ -73,9 +73,10 @@ the owner (ADR-0001).
 
 A record is the current answer to one question. Changing an accepted record takes two permissions:
 reopening it, and accepting the change. If the owner rejects the change, the last accepted version
-is restored. A record is normally accepted before it is committed, so git history holds its accepted
-versions without needing an internal revision log. When a question splits, merges, or no longer
-applies, the record is deprecated or deleted, and links to whatever replaces it.
+is restored. A proposed record may be committed while it is discussed; once accepted, the accepted
+version is committed, so git history holds that version without needing an internal revision log.
+When a question splits, merges, or no longer applies, the record is deprecated or deleted, and links
+to whatever replaces it.
 
 Citations take one exact form, `ADR-NNNN`. A bare ID names a record in this repository; another
 repository's record is cited by a full link. A change, deletion included, fixes in the same commit

@@ -203,9 +203,9 @@ It MUST have the owner's explicit permission, asked for first, to accept a recor
 `proposed`), deprecate one (`accepted` to `deprecated`), or delete one of any status. General
 approval - "looks good", "go ahead", approval of other work - is not permission. When the owner
 rejects a change to a reopened record, its last accepted version is restored, rather than the record
-being marked `rejected`. A record is normally accepted before it is committed, so history holds its
-accepted versions. Formatting applied by a tool, which alters no word, is not a change. See ADR-0007
-and ADR-0001.
+being marked `rejected`. A proposed record may be committed while it is discussed; once accepted,
+the accepted version is committed, so history holds that version. Formatting applied by a tool,
+which alters no word, is not a change. See ADR-0007 and ADR-0001.
 
 **An accepted record is the current answer to its question.** It is reopened and amended in place,
 including to reverse its decision. When its question splits or merges with another, or it no longer
