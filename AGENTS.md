@@ -18,8 +18,10 @@ When two documents disagree, tense settles it:
 
 ## This repository is its own first adopter
 
-`ADOPTING.md` and `templates/` are **product** - source, not documentation. Everything else at the
-root is this repository's own documentation, produced by applying the kit to itself.
+`ADOPTING.md` and `ADOPTING-NOTES.md` are **product**, as are `templates/`, `tools/` and
+`.agents/skills/`. `tests/` and the hook and formatting configuration are **infrastructure**. The
+documentation files at the root and in `docs/` are this repository's own documentation, produced by
+applying the kit to itself.
 
 The consequence that catches agents: **files under `templates/` are meant to stay uncustomised.**
 Their banners, placeholder headings and unfilled sections are the deliverable, not an oversight. Do
@@ -63,8 +65,8 @@ tool is not a change. `docs/spec.md` §3.1 has the rest.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
 - **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map names
-  must exist, and every Markdown file must appear in the map. `tools/doc-kit-check.sh` will tell
-  you, but only if you run it.
+  must exist, and every documentation file (§1) must appear in the map; templates, the archive and
+  vendored files are exempt. `tools/doc-kit-check.sh` will tell you, but only if you run it.
 - **Write the least that is true.** No history or account of how you got there, in documents or code
   comments - `DOC-MAP.md` says where those go (ADR-0012).
 
