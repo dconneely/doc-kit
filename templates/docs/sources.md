@@ -25,5 +25,4 @@ provenance, licence and integrity are pinned.
 3. **Retrieval:** Run `sh docs/sources/fetch.sh` (or `cd docs/sources && ./fetch.sh`) to download
    missing sources and verify them against their recorded checksums.
 4. **Generated extracts:** Markdown or text extracts derived from PDFs or HTML sit beside the
-   downloaded source, carrying a generated-file header per `docs/spec.md` §4.3 naming the tool used
-   to extract them.
+   downloaded source, carrying a generated-file header naming the tool used to extract them.

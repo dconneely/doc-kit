@@ -103,7 +103,7 @@ stay true, and each part the map distinguishes gets its own row (ADR-0014).
 
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
 mutability and an audience, drawn from the sets in the `Property values` table in
-`templates/DOC-MAP.md`.
+`templates/DOC-MAP.md` - in an adopting repository, the table copied into its map.
 
 The roles are defined in ADR-0002: the owner decides; a contributor changes the repository; a
 consumer builds on what it publishes; an end-user uses the running product; an operator deploys and
