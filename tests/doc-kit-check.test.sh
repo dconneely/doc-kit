@@ -243,6 +243,7 @@ mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/arc
 : >docs/glossary.md
 : >docs/testing.md
 : >docs/plan/a-note.md
+: >docs/plan/0000-template.md
 : >docs/howto.md
 : >docs/howto/a-guide.md
 : >docs/sources.md

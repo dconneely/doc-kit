@@ -274,8 +274,9 @@ check_map() {
 					x = items[j]; items[j] = items[j - 1]; items[j - 1] = x
 				}
 			}
-			# §2.8 - Product artifacts are exempt from instance duplicate-property checks.
-			if ($3 ~ /^\*\*Product/) next
+			# §2.8 - Product and template artifacts are exempt from instance duplicate-property
+			# checks.
+			if ($3 ~ /^\*\*(Product|Template)/) next
 
 			aud = ""
 			for (i = 1; i <= k; i++) aud = aud (i > 1 ? ", " : "") items[i]
