@@ -205,7 +205,8 @@ does, ask before editing it rather than pasting over it. If both exist and disag
 either is a stale duplicate of the other - ask how the user wants them reconciled; if it turns out
 they genuinely serve different audiences (`CLAUDE.md` for Claude Code specifically, `AGENTS.md` for
 other agents), the right answer may be that both stay content-bearing, both get their own row in the
-map, and the stanza below goes into both files rather than one. And flag it if any of these turn out
+map, and the stanza below goes into both files rather than one. Whichever you keep, keep its row in
+`DOC-MAP.md`; the stanza is not a substitute for the map entry. And flag it if any of these turn out
 to be untracked by git - an unusual state for a file whose whole purpose is being read by tooling.
 
 The same rule extends to any other per-tool instruction file the repository might already have -
