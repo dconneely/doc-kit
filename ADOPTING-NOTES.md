@@ -7,10 +7,11 @@ decision resists, or when something is not working.
 ## Why the procedure is shaped the way it is
 
 Three properties define every artifact: **tense** (does it describe what is, what was, or what is
-intended?), **mutability** (rewritten in place, amendable, append-only, immutable, or disposable?)
-and **audience**. Documentation rots when one file mixes them - the classic case being a document
-that is part record of work done, part backlog, part assessment, so that no part of it can be
-trusted or pruned with confidence. `ADOPTING.md`'s four numbered consequences all follow from that:
+intended?), **mutability** (rewritten in place, amendable, append-only, immutable, volatile, or
+disposable?) and **audience**. Documentation rots when one file mixes them - the classic case being
+a document that is part record of work done, part backlog, part assessment, so that no part of it
+can be trusted or pruned with confidence. `ADOPTING.md`'s four numbered consequences all follow from
+that:
 
 1. **You customise mostly by deleting.** The template is roughly the union of what projects need;
    any given repository needs a subset. Almost nothing has to be invented.

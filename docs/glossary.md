@@ -56,8 +56,10 @@ specification. See ADR-0002.
 generated-artifact rule in §4.3. Contrast **substantive conformance**, which adds §4.1's guideline,
 §4.2, §4.4 and §5's MUSTs, and needs a reviewer.
 
-**Tense** - whether a document describes what is, what was, or what is intended. The most useful of
-the three properties, because the tense of the sentence being written usually settles where it goes.
+**Tense** - whether a document describes what is, what was, what is intended, what to do, or why;
+the values are `present`, `past`, `future`, `imperative` and `explanatory`, in the `Property values`
+table in `templates/DOC-MAP.md`. The most useful of the three properties, because the tense of the
+sentence being written usually settles where it goes.
 
 **Three properties** - tense, mutability and audience. The axis the structure divides on, and the
 test every proposed new document must pass. See ADR-0002.
