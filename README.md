@@ -85,13 +85,12 @@ parts in one session, with the same inventory gate.
 When the target-side session starts, this prompt is enough:
 
 ```text
-This repository is a doc-kit target: apply doc-kit from <kit-path>, reading
-<kit-path>/ADOPTING.md, <kit-path>/.agents/skills/doc-kit-adopt/SKILL.md, and the kit's CHANGELOG.
-If docs/plan/adopt-doc-kit.md exists, continue from it; if not, inventory the existing documents,
-treat any old map, plan, specification, ADRs and instruction files as inputs to move and merge
-rather than templates to overwrite, and write the worksheet. Stop for review before editing
-anything else unless the worksheet already exists and its dispositions have been approved.
+Apply doc-kit from <kit-path> to this repository by following
+<kit-path>/.agents/skills/doc-kit-adopt/SKILL.md. Continue from docs/plan/adopt-doc-kit.md if it
+exists; otherwise write it and stop for review.
 ```
+
+The skill covers the rest, including a target that adopted an earlier version.
 
 Replace `<kit-path>` with the path to this repository, for example `../doc-kit`.
 
