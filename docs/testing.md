@@ -106,12 +106,26 @@ The tests exist because this checker's characteristic failure is silence. Every 
 far reported conformance while checking nothing: glob expansion, regex-unsafe paths, a no-op `sed`,
 and a type-tag pattern no real `docs/plan.md` matched.
 
+## Agent evals
+
+`tests/doc-kit-eval.sh` measures what the checker cannot: whether an agent, given a fact, files it
+where the map says it belongs. Each scenario builds a repository from `templates/` with the
+`AGENTS.md` stanza from `ADOPTING.md`, asks the agent to record one fact - a choice and its reason,
+a defect kept on purpose, a finding with a source, future work, a term, a shipped change, a
+behaviour rule, a procedure - and reports every file the fact's unique token lands in.
+
+It is run by hand, never in CI: each scenario is a real agent session that costs money, and its
+result varies between runs and between models, so one run is a sample, not a verdict. A miss is a
+prompt to read the agent's reasoning and the map together; the fix may belong in either. The
+scenarios test only the template map, not a customised one.
+
 ## Running everything
 
 ```sh
 sh tools/doc-kit-check.sh              # conformance
 sh tests/doc-kit-check.test.sh         # the checker's own tests
 sh tests/doc-kit-duplicate-check.sh    # advisory duplication report
+DOC_KIT_AGENT='claude -p --permission-mode acceptEdits' sh tests/doc-kit-eval.sh   # agent evals, by hand
 prek run --all-files                   # hygiene, line length, drift guards
 prek run --hook-stage manual lychee-system --all-files
 ```

@@ -6,14 +6,6 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR. `docs/spec.md` §3.3 defines the scales.
 
-## Test the map with agent evals
-
-**Type:** feature - **Importance:** medium - **Effort:** medium
-
-Give agent sessions facts to file - a choice and its reason, a known defect pinned by a test, a
-finding with a source - and score where each lands. The agent is the reader whose behaviour the kit
-exists to shape, and nothing yet measures whether the map shapes it.
-
 ## Build a worked example
 
 **Type:** docs - **Importance:** low - **Effort:** high
