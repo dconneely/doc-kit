@@ -160,7 +160,8 @@ Most changes skip the ADR and the task note. Nothing skips the deletion.
 
 ## Deliberately not here
 
-Absent on purpose, so that adding any of them later is a decision rather than a drift:
+Absent on purpose, so that adding any of them later is a decision rather than a drift. Each entry
+says where its facts go meanwhile, so that an agent holding one does not invent a home for it:
 
 - **A separate technical-debt file** - debt is a `debt` tag in the plan.
 - **An issue tracker**, until the backlog outgrows a file - roughly 20-30 open items.

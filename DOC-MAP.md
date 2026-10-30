@@ -164,7 +164,8 @@ them ([ADR-0006][adr6]). What each rule prevents is in `ADOPTING-NOTES.md`.
 Absent on purpose, so that adding any of them later is a decision rather than a drift:
 
 - **A separate technical-debt file** - see [ADR-0002][adr2].
-- **`docs/quirks.md` and `docs/plan/`** - both in `templates/`, neither earned here yet.
+- **`docs/quirks.md` and `docs/plan/`** - both in `templates/`, neither earned here yet. A task's
+  detail stays in its `docs/plan.md` entry.
 - **An issue tracker**, until the backlog outgrows a file - roughly 20-30 open items.
 - **Community health files** - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` - which earn
   their place when outside contributions begin, not before.
