@@ -29,6 +29,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   with no records, and no longer leaves the index readable only by its owner.
 - `tools/doc-kit-check.sh` regenerates the decisions index outside the working tree, and reports a
   failure to regenerate instead of stopping before its summary.
+- `tools/doc-kit-index-decisions.sh` pads its tables without printf's `*` width, which POSIX awk
+  does not require.
 
 ## [0.6.0] - 2026-10-29
 

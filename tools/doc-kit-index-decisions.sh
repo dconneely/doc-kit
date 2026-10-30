@@ -40,11 +40,13 @@ set -- "$DIR"/*.md
 [ -e "$1" ] || set -- /dev/null
 
 awk -v rel_prefix="$rel_prefix" '
-	function rep(char, count) {
+	function rep(char, count,  s, c) {
 		s = ""
 		for (c = 0; c < count; c++) s = s char
 		return s
 	}
+	# Pad by hand: POSIX awk need not support a "*" width in printf.
+	function pad(v, w) { return v rep(" ", w - length(v)) }
 	function flush() {
 		if (f == "" || skip) return
 		total++
@@ -137,33 +139,33 @@ awk -v rel_prefix="$rel_prefix" '
 		print ""
 		print "## In force"
 		print ""
-		printf "| %-*s | %-*s | %-*s | %-*s | %-*s |\n", w_rec, "Record", w_date, "Date", w_dec, "Deciders", w_title, "Question", w_conf, "Confirmation"
+		print "| " pad("Record", w_rec) " | " pad("Date", w_date) " | " pad("Deciders", w_dec) " | " pad("Question", w_title) " | " pad("Confirmation", w_conf) " |"
 		printf "| %s | %s | %s | %s | %s |\n", rep("-", w_rec), rep("-", w_date), rep("-", w_dec), rep("-", w_title), rep("-", w_conf)
 		if (in_force == 0) {
-			printf "| %-*s | %-*s | %-*s | %-*s | %-*s |\n", w_rec, "_none_", w_date, "-", w_dec, "-", w_title, "-", w_conf, "-"
+			print "| " pad("_none_", w_rec) " | " pad("-", w_date) " | " pad("-", w_dec) " | " pad("-", w_title) " | " pad("-", w_conf) " |"
 		} else {
 			for (i = 1; i <= total; i++) {
 				f = order[i]
 				if (file_status[f] == "accepted") {
 					rec = "[ADR-" file_num[f] "](" rel_prefix file_base[f] ")"
-					printf "| %-*s | %-*s | %-*s | %-*s | %-*s |\n", w_rec, rec, w_date, file_date[f], w_dec, file_deciders[f], w_title, file_title[f], w_conf, file_confirm[f]
+					print "| " pad(rec, w_rec) " | " pad(file_date[f], w_date) " | " pad(file_deciders[f], w_dec) " | " pad(file_title[f], w_title) " | " pad(file_confirm[f], w_conf) " |"
 				}
 			}
 		}
 		print ""
 		print "## Non-binding"
 		print ""
-		printf "| %-*s | %-*s | %-*s | %-*s |\n", w_nb_rec, "Record", w_nb_stat, "Status", w_nb_date, "Date", w_nb_title, "Question"
+		print "| " pad("Record", w_nb_rec) " | " pad("Status", w_nb_stat) " | " pad("Date", w_nb_date) " | " pad("Question", w_nb_title) " |"
 		printf "| %s | %s | %s | %s |\n", rep("-", w_nb_rec), rep("-", w_nb_stat), rep("-", w_nb_date), rep("-", w_nb_title)
 		if (non_binding == 0) {
-			printf "| %-*s | %-*s | %-*s | %-*s |\n", w_nb_rec, "_none_", w_nb_stat, "-", w_nb_date, "-", w_nb_title, "-"
+			print "| " pad("_none_", w_nb_rec) " | " pad("-", w_nb_stat) " | " pad("-", w_nb_date) " | " pad("-", w_nb_title) " |"
 		} else {
 			for (i = 1; i <= total; i++) {
 				f = order[i]
 				if (file_status[f] != "accepted") {
 					rec = "[ADR-" file_num[f] "](" rel_prefix file_base[f] ")"
 					stat = "`" file_status[f] "`"
-					printf "| %-*s | %-*s | %-*s | %-*s |\n", w_nb_rec, rec, w_nb_stat, stat, w_nb_date, file_date[f], w_nb_title, file_title[f]
+					print "| " pad(rec, w_nb_rec) " | " pad(stat, w_nb_stat) " | " pad(file_date[f], w_nb_date) " | " pad(file_title[f], w_nb_title) " |"
 				}
 			}
 		}
