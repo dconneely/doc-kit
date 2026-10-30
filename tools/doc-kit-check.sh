@@ -5,7 +5,7 @@
 #         with no arguments, runs every check
 #
 # Checks: map    §2.2-2.7  the map is complete, consistent and customised
-#         adr    §3.1      records are numbered, statused and structured
+#         adr    §3.1-3.4  records are numbered, statused and structured; notes are numbered
 #         plan   §3.3      the plan has not become a graveyard
 #
 # Exits 0 if clean, 1 if anything failed. Run it by hand: nothing in this kit
@@ -345,10 +345,34 @@ check_map() {
 
 # ---------------------------------------------------------------- adr
 
+# §3.4 - research notes are named and numbered as decision records are. The template is skipped.
+check_research() {
+	[ -d docs/research ] || return 0
+	set +f
+	hits=$(find docs/research -maxdepth 1 -name '*.md' | sed 's:.*/::' | sort | awk '
+		$0 == "0000-template.md" { next }
+		!/^[0-9][0-9][0-9][0-9]-[a-z0-9]+(-[a-z0-9]+)*\.md$/ { print "misnamed " $0; next }
+		{ n = substr($0, 1, 4); if (seen[n]++ == 1) print "dupe " n }')
+	set -f
+	oldifs=$IFS
+	IFS=$NL
+	for hit in $hits; do
+		IFS=$oldifs
+		case "$hit" in
+			misnamed*) fail "docs/research/${hit#* } is misnamed" "§3.4 - NNNN-kebab-case-title.md" ;;
+			dupe*) fail "research note number ${hit#* } is used more than once" "§3.4 - numbers are unique" ;;
+		esac
+		IFS=$NL
+	done
+	IFS=$oldifs
+	set +f
+}
+
 check_adr() {
 	group adr
 	dir=docs/decisions
 	check_citations
+	check_research
 	[ -d "$dir" ] || return 0
 
 	pattern_exists "$dir/*.md" || return 0

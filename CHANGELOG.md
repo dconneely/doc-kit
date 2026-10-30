@@ -6,6 +6,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- Research notes are named and numbered as decision records are, `NNNN-kebab-case-title.md` (section
+  3.4), and `tools/doc-kit-check.sh adr` reports one that is not. Rename any unnumbered note, and
+  fix its links.
+
 ## [0.7.0] - 2026-10-30
 
 ### Changed

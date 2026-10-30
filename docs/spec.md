@@ -254,6 +254,9 @@ that makes a plan stop being read.
 
 ### 3.4 Research notes
 
+Notes MUST be named and numbered as decision records are (§3.1): `NNNN-kebab-case-title.md`, with a
+four-digit zero-padded number that is unique and never reused. The template is `0000-template.md`.
+
 Each note MUST state its sources and MUST carry a confidence level of `high`, `medium` or `low`,
 meaning:
 

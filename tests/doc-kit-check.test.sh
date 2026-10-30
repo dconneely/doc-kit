@@ -343,6 +343,26 @@ printf 'See ADR-0099.\n' >"loose notes.md"
 expect "citation in a path with spaces names the whole path" 1 "loose notes.md:1 cites ADR-0099" adr
 
 fixture
+mkdir -p docs/research
+echo x >docs/research/0000-template.md
+echo x >docs/research/0001-a-finding.md
+after '^[|] `DOC-MAP.md` ' '| `docs/research/*.md` | findings | past | append-only | contributor |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/research/*.md` | a question | never |'
+after '^DOC-MAP.md ' 'docs/research/*.md  findings'
+expect "numbered research notes pass" 0 "checks passed"
+
+fixture
+mkdir -p docs/research
+echo x >docs/research/vendor-limits.md
+expect "unnumbered research note fails" 1 "docs/research/vendor-limits.md is misnamed" adr
+
+fixture
+mkdir -p docs/research
+echo x >docs/research/0001-one.md
+echo x >docs/research/0001-two.md
+expect "reused research note number fails" 1 "research note number 0001 is used more than once" adr
+
+fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 sh tools/doc-kit-index-decisions.sh docs/decisions.md docs/decisions
