@@ -243,8 +243,8 @@ Before you edit:
   an existing record, and change a `proposed` one. **Accepting, rejecting, reopening (`accepted` to
   `proposed`), deprecating and deleting a record each need the owner's explicit permission, asked
   for first.** This is absolute.
-- On accepting, set `decision-makers` and `date`, then commit. A
-  rejected change to a reopened record is undone by restoring its accepted version.
+- On accepting, set `decision-makers` and `date`, then commit. A rejected change to a reopened
+  record is undone by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
 - Delete finished `docs/plan.md` entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or
