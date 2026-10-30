@@ -464,5 +464,21 @@ else
 		"$template_values" "$checker_values"
 fi
 
+# The checker's exempt shared-triple pairs are exactly the pairs ADR-0002 lists. Each pair is
+# normalised to "A + B" in byte order, so neither side's ordering matters.
+pairs() { awk '{ if ($1 > $2) { t = $1; $1 = $2; $2 = t } print $1 " + " $2 }' | LC_ALL=C sort; }
+record_pairs=$(grep -E '^\| `[^`]+` and `[^`]+` +\|' \
+	"$ROOT/docs/decisions/0002-how-documentation-is-divided-into-artifacts.md" |
+	sed -E 's/^\| `([^`]+)` and `([^`]+)`.*/\1 \2/' | pairs)
+checker_pairs=$(grep -F 'exempt_pairs["' "$CHECK" |
+	sed -E 's/.*exempt_pairs\["([^ ]+) \+ ([^"]+)"\].*/\1 \2/' | pairs)
+if [ -n "$record_pairs" ] && [ "$record_pairs" = "$checker_pairs" ]; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	printf 'not ok - exempt pairs differ from ADR-0002\n--- record ---\n%s\n--- checker ---\n%s\n\n' \
+		"$record_pairs" "$checker_pairs"
+fi
+
 printf '%s passed, %s failed\n' "$passed" "$failed"
 [ "$failed" -eq 0 ]

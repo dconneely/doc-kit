@@ -19,6 +19,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - Decision records no longer carry `approval`. MADR 4.0.0 defines no such field, and the owner's
   words copied without the question did not show what was approved. Delete the field from existing
   records; the checker no longer requires it (ADR-0007).
+- Section 2.7 names the shared-triple exemptions exactly: the four pairs ADR-0002 lists, an entry
+  point and its parts, and the parts of one container. It no longer describes them as pairs of
+  "standard artifacts", which did not match what the checker exempts.
 
 ### Fixed
 
