@@ -135,7 +135,8 @@ none.
 
 [sdd]: https://raw.githubusercontent.com/github/spec-kit/main/spec-driven.md
 [nygard]: https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions
-[adrtools]: https://raw.githubusercontent.com/npryce/adr-tools/master/src/template.md
+[adrtools]:
+  https://raw.githubusercontent.com/npryce/adr-tools/b3279baf9be2207d1a4f4bbd608fd0b591c72aee/src/template.md
 
 ## Dead ends
 
