@@ -35,7 +35,7 @@ plan|^docs/plan\.md$|Later, the uploader needs retry with backoff. Nobody has st
 glossary|^docs/glossary\.md$|In this project, a batch means one upload of up to 500 records sent in a single request.
 changelog|^CHANGELOG\.md$|We have just shipped this: the exporter now writes a header row, which users will see in the next release.
 spec|^docs/spec(/[a-z0-9/-]+)?\.md$|The system rejects an upload larger than 10 MB with HTTP 413.
-howto|^docs/howto/[a-z0-9-]+\.md$|To rotate the API key: generate a new key in the vendor console, update the KEY secret in CI, redeploy, then revoke the old key.'
+howto|^docs/howto(/[a-z0-9-]+)?\.md$|To rotate the API key: generate a new key in the vendor console, update the KEY secret in CI, redeploy, then revoke the old key.'
 
 # stanza - the AGENTS.md stanza: the first markdown block after "Paste the stanza" in ADOPTING.md
 stanza() {
