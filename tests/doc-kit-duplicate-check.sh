@@ -19,8 +19,9 @@ cd "$ROOT"
 files=$(find . -name '*.md' ! -path './.git/*' ! -path './templates/*' ! -path './docs/archive/*' |
 	sed 's:^\./::' | sort)
 
+# Read the paths a line at a time, so a path may contain spaces.
 hits=$(
-	for f in $files; do
+	printf '%s\n' "$files" | while IFS= read -r f; do
 		awk -v file="$f" '
 			function norm(s) { gsub(/`/, "", s); gsub(/[ \t|]/, "", s); return s }
 			FNR == 1 { prev = ""; heading = ""; steps = 0; sig = "" }
