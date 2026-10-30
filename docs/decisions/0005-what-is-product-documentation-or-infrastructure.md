@@ -2,7 +2,6 @@
 status: "accepted"
 date: 2026-10-28
 decision-makers: David Conneely
-approval: "ADOPTING.md and ADOPTING-NOTES.md are part of this repository - they are not transferred to adopting repositories."
 ---
 
 # 5. What is product, what is documentation, and what is infrastructure

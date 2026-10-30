@@ -2,7 +2,6 @@
 status: "accepted"
 date: 2026-10-28
 decision-makers: David Conneely
-approval: "Do it"
 ---
 
 # 6. Where rules and their reasons live

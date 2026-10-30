@@ -160,8 +160,8 @@ hand applies the same judgement: check it, don't block on it.
 - **Append-only** artifacts - the changelog - are gated by release, not by review.
 - **Immutable** artifacts - the archive - are not changed at all.
 
-The status and `approval` are the durable record of the owner's decision. A conversation or a forge
-can lose it; the tree keeps it.
+The status, `decision-makers` and the commit that changed them are the durable record of the owner's
+decision. A conversation or a forge can lose it; the tree keeps it.
 
 ### 3.1 Decision records
 
@@ -171,9 +171,9 @@ never reused. The heading MUST repeat the number. The title SHOULD name the ques
 answers rather than the answer, so that a changed answer leaves it true. See ADR-0007.
 
 Each record MUST carry YAML front-matter with `status` and `date`. A record whose status is not
-`proposed` MUST also carry `decision-makers`, naming the owner, and `approval`: the owner's words,
-verbatim, giving permission for its latest change of status. `date` is the date of that change.
-MADR's `consulted` and `informed` are permitted and not required.
+`proposed` MUST also carry `decision-makers`, naming the owner. `date` is the date of its latest
+change of status. A record carries no field MADR does not define. MADR's `consulted` and `informed`
+are permitted and not required.
 
 Each record MUST carry `Context and Problem Statement`, `Considered Options` and `Decision Outcome`
 sections, and SHOULD carry `Consequences` as a subsection of the last. A record MAY carry a
@@ -220,9 +220,9 @@ link to it. A citation SHOULD claim as little about the record as it can. A chan
 deletion included, MUST be committed together with every citation in the repository that it makes
 untrue, found by searching for the record's ID. Commit messages are history, and are not changed.
 
-A checker MUST report a record whose status is not `proposed` that lacks `decision-makers` or
-`approval`, and a bare `ADR-NNNN` outside code that names no record in this repository. It cannot
-verify that `approval` holds the owner's words, nor that an amendment fixed its citations.
+A checker MUST report a record whose status is not `proposed` that lacks `decision-makers`, and a
+bare `ADR-NNNN` outside code that names no record in this repository. It cannot verify that the
+owner gave permission, nor that an amendment fixed its citations.
 
 A repository MAY maintain a generated index of decision records at `docs/decisions.md` (or
 `docs/decisions/README.md`). If present, it MUST carry a generated header naming what generates it,

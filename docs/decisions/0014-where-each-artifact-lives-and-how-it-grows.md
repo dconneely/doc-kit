@@ -2,7 +2,6 @@
 status: "accepted"
 date: 2026-10-29
 decision-makers: David Conneely
-approval: "yes"
 ---
 
 # 14. Where each artifact lives, and how it grows

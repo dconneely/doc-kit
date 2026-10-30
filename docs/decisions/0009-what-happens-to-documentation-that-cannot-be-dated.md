@@ -2,7 +2,6 @@
 status: "accepted"
 date: 2026-10-28
 decision-makers: David Conneely
-approval: "Use review where unverified"
 ---
 
 # 9. What happens to documentation that cannot be dated

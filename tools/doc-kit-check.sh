@@ -365,7 +365,6 @@ check_adr() {
 			if (!date) print "nodate\t" f
 			if (status != "" && status != "proposed") {
 				if (!dm) print "nodm\t" f "\t" status
-				if (!appr) print "noappr\t" f "\t" status
 			}
 			if (!h1) print "heading\t" f "\t## Context and Problem Statement"
 			if (!h2) print "heading\t" f "\t## Considered Options"
@@ -378,7 +377,7 @@ check_adr() {
 			sub(/.*\//, "", base)
 			skip = (base ~ /^0000-/ || base == "README.md")
 			if (base ~ /^[0-9][0-9][0-9][0-9]-/) seen[substr(base, 1, 4)]++
-			status = ""; date = dm = appr = h1 = h2 = h3 = 0
+			status = ""; date = dm = h1 = h2 = h3 = 0
 		}
 		FNR == 1 { flush(); start(FILENAME) }
 		status == "" && /^status: *"?[^"]*"? *$/ {
@@ -390,7 +389,6 @@ check_adr() {
 		}
 		/^date:/ { date = 1 }
 		/^decision-makers: *[^ {]/ { dm = 1 }
-		/^approval: *[^ {]/ { appr = 1 }
 		index($0, "## Context and Problem Statement") { h1 = 1 }
 		index($0, "## Considered Options") { h2 = 1 }
 		index($0, "## Decision Outcome") { h3 = 1 }
@@ -417,7 +415,6 @@ check_adr() {
 			status) fail "$f has status '$arg'" "§3.1 - proposed, accepted, rejected or deprecated" ;;
 			nodate) fail "$f has no date" "§3.1" ;;
 			nodm) fail "$f is '$arg' but names no decision-makers" "§3.1 - who decided?" ;;
-			noappr) fail "$f is '$arg' but has no approval" "§3.1 - the owner's words, verbatim" ;;
 			heading) fail "$f has no '$arg'" "§3.1 - MADR minimal template" ;;
 			dupe) fail "ADR number $f is used more than once" "§3.1 - numbers are unique" ;;
 		esac

@@ -1,12 +1,11 @@
 # How to manage decision records
 
-This procedure explains how to propose, record owner approval for, and amend decision records in
-this repository.
+This procedure explains how to propose, decide and amend decision records in this repository.
 
 ## Goal
 
-Propose a new decision record, obtain owner approval, record acceptance or rejection, and amend an
-accepted record safely without leaving stale citations.
+Propose a new decision record, obtain the owner's decision, record acceptance or rejection, and
+amend an accepted record safely without leaving stale citations.
 
 ## Prerequisites
 
@@ -51,7 +50,6 @@ commit below, run `sh tools/doc-kit-index-decisions.sh` and commit the index wit
    On approval:
    - Set `status` to `accepted` or `rejected`.
    - Set `decision-makers` to the owner's name.
-   - Set `approval` to the owner's words verbatim.
    - Set `date` to today's date (`YYYY-MM-DD`).
 
 3. **Commit the decision**
@@ -77,8 +75,7 @@ commit below, run `sh tools/doc-kit-index-decisions.sh` and commit the index wit
 
 3. **Re-accept with owner approval**
 
-   Set `status: "accepted"`, update `date` and `approval` to the owner's latest approval, and
-   commit.
+   With the owner's permission, set `status: "accepted"`, update `date`, and commit.
 
 A wrong path, command or citation in an accepted record is still a change to its words: follow these
 steps for it too. Only formatting applied by a tool, which alters no word, is not a change

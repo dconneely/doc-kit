@@ -2,7 +2,6 @@
 status: "accepted"
 date: 2026-10-28
 decision-makers: David Conneely
-approval: "Amend in place"
 ---
 
 # 10. How the kit reaches an adopter

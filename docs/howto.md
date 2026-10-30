@@ -5,6 +5,6 @@ instructions to achieve a specific operational goal.
 
 ## Procedures
 
-| Guide                                                       | Goal                                                                       | Audience    |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------- | ----------- |
-| [Manage decision records](howto/manage-decision-records.md) | Propose, record owner approval for, and amend decision records without rot | contributor |
+| Guide                                                       | Goal                                                   | Audience    |
+| ----------------------------------------------------------- | ------------------------------------------------------ | ----------- |
+| [Manage decision records](howto/manage-decision-records.md) | Propose, decide and amend decision records without rot | contributor |

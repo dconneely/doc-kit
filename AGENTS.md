@@ -50,10 +50,10 @@ Nothing else - "looks good", approval of other work, an earlier session's say-so
 To create one, copy `templates/docs/decisions/0000-template.md` - never an existing record - to the
 next free number.
 
-On accepting, rejecting or deprecating, set `decision-makers` to the owner's name, `approval` to
-their words and `date` to today, then commit. If the owner rejects a change to a reopened record,
-restore its last accepted version rather than marking it `rejected`. Deleting a record is usually
-simpler than keeping it `rejected` or `deprecated`.
+On accepting, rejecting or deprecating, set `decision-makers` to the owner's name and `date` to
+today, then commit. If the owner rejects a change to a reopened record, restore its last accepted
+version rather than marking it `rejected`. Deleting a record is usually simpler than keeping it
+`rejected` or `deprecated`.
 
 A change includes fixing, in the same commit, the citations it makes untrue. Formatting applied by a
 tool is not a change. `docs/spec.md` §3.1 has the rest.

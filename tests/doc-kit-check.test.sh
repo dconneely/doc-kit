@@ -60,8 +60,7 @@ EOF
 
 One paragraph.
 EOF
-	adr 0001 accepted 'decision-makers: someone
-approval: "accept ADR-0001"'
+	adr 0001 accepted 'decision-makers: someone'
 }
 
 # adr NUMBER STATUS [EXTRA-FRONT-MATTER]
@@ -284,16 +283,14 @@ expect "proposed record needs no decision-makers" 0 "checks passed" adr
 
 fixture
 adr 0002 accepted 'decision-makers: someone'
-expect "accepted record without approval fails" 1 "is 'accepted' but has no approval" adr
+expect "accepted record needs no field beyond decision-makers" 0 "checks passed" adr
 
 fixture
-adr 0002 accepted 'decision-makers: {the owner}
-approval: "accept ADR-0002"'
+adr 0002 accepted 'decision-makers: {the owner}'
 expect "placeholder decision-makers fails" 1 "names no decision-makers" adr
 
 fixture
-adr 0002 'accepted (refined by ADR-0001)' 'decision-makers: someone
-approval: "accept ADR-0002"'
+adr 0002 'accepted (refined by ADR-0001)' 'decision-makers: someone'
 expect "refined-by status fails" 1 "has status 'accepted (refined by ADR-0001)'" adr
 
 fixture
@@ -332,8 +329,7 @@ rm docs/decisions/0001-a-record.md.bak
 expect "record missing a MADR heading fails" 1 "has no '## Considered Options'" adr
 
 fixture
-adr 0002 accepted 'decision-makers: someone
-approval: "accept ADR-0002"'
+adr 0002 accepted 'decision-makers: someone'
 sed -i.bak '/^status:/d' docs/decisions/0002-a-record.md
 rm docs/decisions/0002-a-record.md.bak
 expect "record with no status fails" 1 "docs/decisions/0002-a-record.md has no status" adr

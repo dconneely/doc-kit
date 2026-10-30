@@ -2,7 +2,6 @@
 status: "accepted"
 date: 2026-10-25
 decision-makers: David Conneely
-approval: "yes"
 ---
 
 # 11. Which files the map must name

@@ -16,6 +16,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - `templates/` is exempt from the map and citation checks only in a repository that distributes the
   kit, one with `templates/DOC-MAP.md` (section 2.8). In an adopting repository, a `templates/`
   directory of its own is now checked: map its files.
+- Decision records no longer carry `approval`. MADR 4.0.0 defines no such field, and the owner's
+  words copied without the question did not show what was approved. Delete the field from existing
+  records; the checker no longer requires it (ADR-0007).
 
 ### Fixed
 
