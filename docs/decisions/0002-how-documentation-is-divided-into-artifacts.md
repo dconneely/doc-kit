@@ -1,8 +1,7 @@
 ---
-status: "accepted"
-date: 2026-10-27
+status: "proposed"
+date: 2026-10-30
 decision-makers: David Conneely
-approval: "yes"
 ---
 
 # 2. How documentation is divided into artifacts
@@ -58,15 +57,27 @@ A candidate document sharing all three properties with an existing artifact is r
 to check, not an automatic failure: two artifacts sharing all three are merged unless they hold
 different facts.
 
-Because the closed sets are small, standard specification artifacts ratified in `docs/spec.md` §2
-and §3 legitimately share property triples (such as `DOC-MAP.md` and `docs/testing.md`, `README.md`
-and `docs/glossary.md`, or `docs/spec.md` and `docs/quirks.md`), as do sibling members within
-multi-file containers (`docs/spec/*`, `docs/howto/*`, `docs/plan/*`). Their fact separation is
-established by the specification itself, so pairwise overlaps between standard artifacts are exempt
-from warnings in the checker. Custom artifacts that share a triple continue to report an advisory
-warning, prompting review without blocking CI; an `Allowed overlaps` configuration is rejected as
-unneeded ceremony and an agent escape hatch. Product artifacts (`templates/*`, `tools/*`, etc.) are
-also exempt from duplicate-property checks per `docs/spec.md` §2.8.
+Because the closed sets are small, some artifacts the template map defines share a triple while
+holding different facts. The checker exempts exactly these pairs, and a test fails if its list and
+this table differ:
+
+| Pair                                      | Why the facts differ                                                 |
+| ----------------------------------------- | -------------------------------------------------------------------- |
+| `DOC-MAP.md` and `docs/testing.md`        | the map says where each fact belongs; testing says what checks cover |
+| `README.md` and `docs/glossary.md`        | the README orients a newcomer; the glossary defines the vocabulary   |
+| `docs/quirks.md` and `docs/spec.md`       | the specification is the contract; quirks are deliberate deviations  |
+| `docs/archive.md` and `docs/decisions.md` | one indexes undatable documents; the other indexes decision records  |
+
+Two structural cases are exempt as well: an entry point and its parts (`docs/spec.md` and
+`docs/spec/*`, say), and the parts of one container (two files in `docs/howto/`, say), because the
+growth rule (ADR-0014) splits one artifact into them. Product and template rows are exempt by
+`docs/spec.md` §2.8. Every other shared triple is reported.
+
+The list is held here and in the checker, not in the map, so that changing it needs the owner's
+permission and a release. A warning for every pair on every run was rejected because a warning that
+never changes stops being read. An `Allowed overlaps` table in the map was rejected because an agent
+could add a row to silence any warning. Reporting only triples that a change newly creates was
+rejected because it never prompts a check of what is already there.
 
 ### Applications: technical debt and machine-readable contracts
 
@@ -103,6 +114,8 @@ Prose may link to a machine-readable contract; it never restates one.
 - Good, because standard runs emit zero duplicate-property warnings, eliminating warning fatigue.
 - Good, because new custom artifacts that overlap produce a high-contrast single warning.
 - Good, because an `Allowed overlaps` table is omitted, avoiding map schema churn and agent misuse.
+- Bad, because a new artifact the template map defines that shares a triple needs this record
+  reopened before its pair stops warning.
 - Bad, because custom artifacts that genuinely share a triple will always report an advisory
   warning.
 - Bad, because the duplicate test is a prompt, not a proof: artifacts holding different facts can
