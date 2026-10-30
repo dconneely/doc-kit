@@ -9,7 +9,8 @@
 #         DOC_KIT_EVAL_OUT   a directory to keep each scenario's agent log and diff in
 #
 # Not run in CI: each scenario starts a real agent session, which costs money and whose result
-# varies between runs. Exits 0 when every scenario lands where expected, 1 otherwise.
+# varies between runs. Exits 0 when every scenario lands where expected, 1 when one is missed or
+# declined, and 2 when an agent session fails, which stops the run.
 #
 # Each scenario starts from a fresh copy of the repository, adopted from templates/ with the
 # AGENTS.md stanza from ADOPTING.md unless it already has a map, asks the agent to record one fact
@@ -97,7 +98,7 @@ for line in $scenarios; do
 	start=$(git -C "$dir" rev-parse HEAD)
 	token="EVAL-$id-$(od -An -N4 -tx4 /dev/urandom | tr -d ' ')"
 	# shellcheck disable=SC2034  # read by the eval below
-	prompt="The owner states this as true of this repository; record it in the documentation, wherever it belongs: $fact Include the token $token once, verbatim, in what you write. Do not commit."
+	prompt="This is an evaluation of where documentation is filed. The fact below is invented and need not match the code; do not check it against the code or ask for details - where a document wants a path or a test name it lacks, write unknown. Record it in the documentation, wherever it belongs: $fact Include the token $token once, verbatim, in what you write. Do not commit."
 
 	set +e
 	(cd "$dir" && eval "$DOC_KIT_AGENT" '"$prompt"') >"$TMP/$id.log" 2>&1
@@ -112,17 +113,25 @@ for line in $scenarios; do
 		cp "$TMP/$id.log" "$DOC_KIT_EVAL_OUT/$id.log"
 		(cd "$dir" && git add -A && git diff --cached "$start") >"$DOC_KIT_EVAL_OUT/$id.diff"
 	fi
-	if [ -n "$landed" ] && [ -z "$stray" ]; then
+	if [ "$code" -ne 0 ]; then
+		# A failed session says nothing about the map. Stop rather than spend more on a run that is
+		# failing - on a usage limit, say.
+		printf 'ERROR %-9s agent exit %s: %s\n' "$id" "$code" "$(tail -n 1 "$TMP/$id.log")"
+		exit 2
+	elif [ -z "$landed" ]; then
+		failed=$((failed + 1))
+		printf 'DECLINED %-6s wrote nothing; see the agent log\n' "$id"
+	elif [ -z "$stray" ]; then
 		passed=$((passed + 1))
 		printf 'ok   %-10s %s\n' "$id" "$shown"
 	else
 		failed=$((failed + 1))
-		printf 'MISS %-10s landed in [%s], wanted %s (agent exit %s)\n' "$id" "${shown% }" "$want" "$code"
+		printf 'MISS %-10s landed in [%s], wanted %s\n' "$id" "${shown% }" "$want"
 	fi
 	IFS='
 '
 done
 IFS=$oldifs
 
-printf '%s passed, %s missed\n' "$passed" "$failed"
+printf '%s passed, %s missed or declined\n' "$passed" "$failed"
 [ "$failed" -eq 0 ]
