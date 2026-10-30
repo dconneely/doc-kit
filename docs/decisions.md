@@ -6,20 +6,20 @@ Index of decision records. Only **accepted** records bind.
 
 ## In force
 
-| Record                                                                           | Date       | Deciders       | Question                                                           | Confirmation                                               |
-| -------------------------------------------------------------------------------- | ---------- | -------------- | ------------------------------------------------------------------ | ---------------------------------------------------------- |
-| [ADR-0001](decisions/0001-what-the-kit-is-for-and-who-decides.md)                | 2026-10-28 | David Conneely | What the kit is for, and who decides                               | `review`                                                   |
-| [ADR-0005](decisions/0005-what-is-product-documentation-or-infrastructure.md)    | 2026-10-28 | David Conneely | What is product, what is documentation, and what is infrastructure | `review`                                                   |
-| [ADR-0006](decisions/0006-where-rules-and-their-reasons-live.md)                 | 2026-10-28 | David Conneely | Where rules and their reasons live                                 | `review`                                                   |
-| [ADR-0007](decisions/0007-how-a-decision-record-is-decided-and-changed.md)       | 2026-10-29 | David Conneely | How a decision record is decided and changed                       | `tools/doc-kit-check.sh and prek run lowercase-adr-status` |
-| [ADR-0009](decisions/0009-what-happens-to-documentation-that-cannot-be-dated.md) | 2026-10-28 | David Conneely | What happens to documentation that cannot be dated                 | `review`                                                   |
-| [ADR-0010](decisions/0010-how-the-kit-reaches-an-adopter.md)                     | 2026-10-28 | David Conneely | How the kit reaches an adopter                                     | `review`                                                   |
-| [ADR-0011](decisions/0011-which-files-the-map-must-name.md)                      | 2026-10-25 | David Conneely | Which files the map must name                                      | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`   |
-| [ADR-0012](decisions/0012-what-tense-and-how-much-is-written.md)                 | 2026-10-25 | David Conneely | What tense, and how much, is written                               | `review`                                                   |
-| [ADR-0014](decisions/0014-where-each-artifact-lives-and-how-it-grows.md)         | 2026-10-29 | David Conneely | Where each artifact lives, and how it grows                        | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`   |
+| Record                                                                           | Date       | Deciders       | Question                                                           | Confirmation                                             |
+| -------------------------------------------------------------------------------- | ---------- | -------------- | ------------------------------------------------------------------ | -------------------------------------------------------- |
+| [ADR-0001](decisions/0001-what-the-kit-is-for-and-who-decides.md)                | 2026-10-28 | David Conneely | What the kit is for, and who decides                               | `review`                                                 |
+| [ADR-0005](decisions/0005-what-is-product-documentation-or-infrastructure.md)    | 2026-10-28 | David Conneely | What is product, what is documentation, and what is infrastructure | `review`                                                 |
+| [ADR-0006](decisions/0006-where-rules-and-their-reasons-live.md)                 | 2026-10-28 | David Conneely | Where rules and their reasons live                                 | `review`                                                 |
+| [ADR-0009](decisions/0009-what-happens-to-documentation-that-cannot-be-dated.md) | 2026-10-28 | David Conneely | What happens to documentation that cannot be dated                 | `review`                                                 |
+| [ADR-0010](decisions/0010-how-the-kit-reaches-an-adopter.md)                     | 2026-10-28 | David Conneely | How the kit reaches an adopter                                     | `review`                                                 |
+| [ADR-0011](decisions/0011-which-files-the-map-must-name.md)                      | 2026-10-25 | David Conneely | Which files the map must name                                      | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh` |
+| [ADR-0012](decisions/0012-what-tense-and-how-much-is-written.md)                 | 2026-10-25 | David Conneely | What tense, and how much, is written                               | `review`                                                 |
+| [ADR-0014](decisions/0014-where-each-artifact-lives-and-how-it-grows.md)         | 2026-10-29 | David Conneely | Where each artifact lives, and how it grows                        | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh` |
 
 ## Non-binding
 
-| Record                                                                    | Status     | Date       | Question                                    |
-| ------------------------------------------------------------------------- | ---------- | ---------- | ------------------------------------------- |
-| [ADR-0002](decisions/0002-how-documentation-is-divided-into-artifacts.md) | `proposed` | 2026-10-30 | How documentation is divided into artifacts |
+| Record                                                                     | Status     | Date       | Question                                     |
+| -------------------------------------------------------------------------- | ---------- | ---------- | -------------------------------------------- |
+| [ADR-0002](decisions/0002-how-documentation-is-divided-into-artifacts.md)  | `proposed` | 2026-10-30 | How documentation is divided into artifacts  |
+| [ADR-0007](decisions/0007-how-a-decision-record-is-decided-and-changed.md) | `proposed` | 2026-10-30 | How a decision record is decided and changed |

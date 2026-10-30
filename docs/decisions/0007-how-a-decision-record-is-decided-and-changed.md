@@ -1,8 +1,7 @@
 ---
-status: "accepted"
-date: 2026-10-29
+status: "proposed"
+date: 2026-10-30
 decision-makers: David Conneely
-approval: "yes"
 ---
 
 # 7. How a decision record is decided and changed
@@ -45,11 +44,11 @@ deciding, aligns with recognised tooling, and avoids successor chains for every 
 
 Records follow the MADR minimal template copied from `templates/docs/decisions/0000-template.md`:
 
-- **Front matter** carries `status`, `date`, `decision-makers`, and `approval`. The status takes
-  MADR's lowercase values: `proposed`, `accepted`, `rejected`, and `deprecated`. `consulted` and
-  `informed` are permitted, not required.
-- **Headings** keep their `NNNN.` numbers (`# NNNN. Question`), which `adr-tools` uses and MADR
-  permits.
+- **Front matter** carries MADR 4.0.0's `status`, `date` and `decision-makers`, and no field MADR
+  does not define. The status takes MADR's lowercase values: `proposed`, `accepted`, `rejected`, and
+  `deprecated`. `consulted` and `informed` are permitted, not required.
+- **Headings** keep their `NNNN.` numbers (`# NNNN. Question`), which `adr-tools` and its maintained
+  fork use and MADR permits.
 - **Sections** MUST carry `## Context and Problem Statement`, `## Considered Options` and
   `## Decision Outcome`, and SHOULD carry `### Consequences`; `## Confirmation` is optional.
 
@@ -66,8 +65,10 @@ needed to accept a record, reject one, reopen an accepted one to change it, depr
 one.
 
 Only `accepted` binds; `proposed` exists so an agent can put a decision in front of the owner before
-it is decided. The owner's words are recorded verbatim in `approval`, and `decision-makers` names
-the owner (ADR-0001).
+it is decided. `decision-makers` names the owner (ADR-0001), and the commit that changes a status is
+the record of the change. Copying the owner's words into a custom `approval` field was rejected: an
+agent that would skip asking could write any words there, and the words without the question did not
+show what was approved.
 
 ### In-place amendment and citations
 
@@ -75,8 +76,8 @@ A record is the current answer to one question. Changing an accepted record take
 reopening it, and accepting the change. If the owner rejects the change, the last accepted version
 is restored. A proposed record may be committed while it is discussed; once accepted, the accepted
 version is committed, so git history holds that version without needing an internal revision log.
-When a question splits, merges, or no longer applies, the record is deprecated or deleted, and links
-to whatever replaces it.
+When a question splits, merges, or no longer applies, the record is deprecated, with a link to
+whatever replaces it, or deleted.
 
 Citations take one exact form, `ADR-NNNN`. A bare ID names a record in this repository; another
 repository's record is cited by a full link. A change, deletion included, fixes in the same commit
@@ -95,9 +96,9 @@ could drift into meaning anything.
 - Good, because an over-productive agent can generate drafts, but not unearned authority.
 - Good, because corrections land in the record a reader opens, without supersession chains.
 - Good, because a checker can find every citation and report broken or malformed references.
-- Bad, because front matter is machinery the structure otherwise avoids, and `approval` is a custom
-  field MADR does not define.
-- Bad, because the authority gate is held by instruction: an agent could omit it or invent words.
+- Bad, because front matter is machinery the structure otherwise avoids.
+- Bad, because the authority gate is held by instruction: an agent could change a status without
+  asking, and the record would not show it.
 - Bad, because a commit message citing a record may describe what the record no longer says.
 
 ## Confirmation
