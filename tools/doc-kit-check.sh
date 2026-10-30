@@ -84,6 +84,12 @@ vendored_of() {
 	fi
 }
 
+# not_templates - drop templates/ paths from stdin, but only in a repository distributing the kit,
+# which has templates/DOC-MAP.md (§2.8). Elsewhere a templates/ directory is documentation.
+not_templates() {
+	if [ -f templates/DOC-MAP.md ]; then grep -v '^templates/' || true; else cat; fi
+}
+
 # section FILE HEADING - the lines under a "## Heading" up to the next "## "
 section() {
 	awk -v h="$2" '$0 == h { f = 1; next } /^## / && f { exit } f' "$1"
@@ -174,11 +180,12 @@ check_map() {
 	done
 
 	# §2.4 - every documentation file appears in the map. Files below the conventional
-	# archive (§5.1), templates (§2.8), and vendored files (§1) are not documentation files;
-	# an archive elsewhere is covered by its map entry. Split on newlines only, so a path may
-	# contain spaces.
+	# archive (§5.1), the kit's templates (§2.8), and vendored files (§1) are not documentation
+	# files; an archive elsewhere is covered by its map entry. Split on newlines only, so a path
+	# may contain spaces.
 	set +f
-	files=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' ! -path './templates/*' | sed 's:^\./::' | sort)
+	files=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' |
+		not_templates | sort)
 	set -f
 	unmapped=''
 	oldifs=$IFS
@@ -442,7 +449,8 @@ check_adr() {
 # Vendored and gitignored files are not read.
 check_citations() {
 	set +f
-	docs=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' ! -path './templates/*' | sed 's:^\./::' | sort)
+	docs=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' |
+		not_templates | sort)
 	set -f
 	skip=$(printf '%s\n' "$docs" | vendored_of; printf '%s\n' "$docs" | ignored_of)
 	scan=''

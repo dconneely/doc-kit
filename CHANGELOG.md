@@ -13,6 +13,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - A wrong path, command or citation in an accepted decision record is a change like any other: it
   needs the owner's permission to reopen and to accept. The template no longer exempts it
   (ADR-0007).
+- `templates/` is exempt from the map and citation checks only in a repository that distributes the
+  kit, one with `templates/DOC-MAP.md` (section 2.8). In an adopting repository, a `templates/`
+  directory of its own is now checked: map its files.
 
 ### Fixed
 

@@ -138,7 +138,13 @@ expect "unmapped file fails" 1 "FAIL [map] notes.md is not named in the map" map
 fixture
 mkdir -p templates
 echo x >templates/notes.md
-expect "templates/ is exempt without a row" 0 "checks passed" map
+expect "templates/ is checked in a repository that does not distribute the kit" 1 "templates/notes.md is not named in the map" map
+
+fixture
+mkdir -p templates
+echo x >templates/DOC-MAP.md
+printf 'See ADR-0099.\n' >templates/notes.md
+expect "templates/ is exempt in a repository that distributes the kit" 0 "checks passed"
 
 fixture
 mkdir -p old
