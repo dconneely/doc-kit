@@ -19,6 +19,8 @@ Rules - absolute:
 
 - An agent may create a record as "proposed", by copying this file - never an existing record - to
   the next free number, and may change a "proposed" record.
+- After creating or changing a record, run "sh tools/doc-kit-index-decisions.sh" to regenerate the
+  index, docs/decisions.md, if the repository has it.
 - Every other change needs the owner's explicit permission, asked for first: proposed -> accepted
   (accepting), proposed -> rejected (rejecting), accepted -> proposed (reopening to change it),
   accepted -> deprecated (deprecating), and deleting a record of any status.

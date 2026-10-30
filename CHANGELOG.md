@@ -6,6 +6,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- The `AGENTS.md` stanza and the decision-record template tell an agent to regenerate
+  `docs/decisions.md` after creating or changing a record. In agent evals, no session did so
+  unprompted, and the checker then failed on a stale index.
+
 ## [0.7.0] - 2026-10-30
 
 ### Changed

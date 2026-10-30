@@ -246,6 +246,8 @@ Before you edit:
 - On accepting, set `decision-makers` and `date`, then commit. A rejected change to a reopened
   record is undone by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
+- After creating or changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
+  `docs/decisions.md`.
 - Delete finished `docs/plan.md` entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or
   code comments - the map says where those go.

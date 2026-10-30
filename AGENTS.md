@@ -48,7 +48,8 @@ You may create a decision record as `proposed`, and change a `proposed` record, 
 Nothing else - "looks good", approval of other work, an earlier session's say-so - is permission.
 
 To create one, copy `templates/docs/decisions/0000-template.md` - never an existing record - to the
-next free number.
+next free number. After creating or changing a record, run `sh tools/doc-kit-index-decisions.sh` to
+regenerate `docs/decisions.md`.
 
 On accepting, rejecting or deprecating, set `decision-makers` to the owner's name and `date` to
 today, then commit. If the owner rejects a change to a reopened record, restore its last accepted
