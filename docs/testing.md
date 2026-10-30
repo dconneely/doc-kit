@@ -109,10 +109,17 @@ and a type-tag pattern no real `docs/plan.md` matched.
 ## Agent evals
 
 `tests/doc-kit-eval.sh` measures what the checker cannot: whether an agent, given a fact, files it
-where the map says it belongs. Each scenario builds a repository from `templates/` with the
-`AGENTS.md` stanza from `ADOPTING.md`, asks the agent to record one fact - a choice and its reason,
-a defect kept on purpose, a finding with a source, future work, a term, a shipped change, a
-behaviour rule, a procedure - and reports every file the fact's unique token lands in.
+where the map says it belongs. Each scenario builds a repository from `templates/` and `tools/` with
+the `AGENTS.md` stanza from `ADOPTING.md`, asks the agent to record one fact, and reports every file
+the fact's unique token lands in. Most facts have one home - a choice and its reason, a defect kept
+on purpose, a finding with a source, future work, a term, a shipped change, a behaviour rule, a
+procedure. Four are harder: a rule with its reason, which belongs in both the specification and a
+decision record; a correction, which rewrites the specification in place and is logged in the
+changelog; history, which never belongs in the specification; and a preference with no home, which
+should be written nowhere.
+
+Each scenario is also scored on the rules: the session must add no checker failure, and must leave
+every decision record it touches `proposed`, since only the owner accepts one.
 
 It is run by hand, never in CI: each scenario is a real agent session that costs money, and its
 result varies between runs and between models, so one run is a sample, not a verdict. A miss is a
