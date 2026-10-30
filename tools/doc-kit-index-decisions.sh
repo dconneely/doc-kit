@@ -12,6 +12,13 @@ set -eu
 LC_ALL=C
 export LC_ALL
 
+usage='usage: sh tools/doc-kit-index-decisions.sh [output-file] [decisions-dir]'
+case ${1-} in
+	-h | --help) echo "$usage"; exit 0 ;;
+	-*) echo "$usage" >&2; exit 2 ;;
+esac
+[ $# -le 2 ] || { echo "$usage" >&2; exit 2; }
+
 DIR=${2:-docs/decisions}
 OUT=${1:-${DIR}.md}
 
@@ -27,6 +34,10 @@ esac
 
 tmp=$(mktemp)
 trap 'rm -f "$tmp"' EXIT HUP INT TERM
+
+# With no records, read nothing rather than a literal glob; both tables then say _none_.
+set -- "$DIR"/*.md
+[ -e "$1" ] || set -- /dev/null
 
 awk -v rel_prefix="$rel_prefix" '
 	function rep(char, count) {
@@ -157,6 +168,7 @@ awk -v rel_prefix="$rel_prefix" '
 			}
 		}
 	}
-' "$DIR"/*.md > "$tmp"
+' "$@" > "$tmp"
 
-mv "$tmp" "$OUT"
+# Copy rather than move: a moved mktemp file keeps its owner-only mode.
+cat "$tmp" > "$OUT"

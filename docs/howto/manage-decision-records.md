@@ -15,6 +15,9 @@ accepted record safely without leaving stale citations.
 
 ## Steps
 
+A record's title, status and date appear in the generated index, `docs/decisions.md`. Before each
+commit below, run `sh tools/doc-kit-index-decisions.sh` and commit the index with the record.
+
 ### Propose a new record
 
 1. **Copy the template**
@@ -32,7 +35,8 @@ accepted record safely without leaving stale citations.
    Commit the proposed record:
 
    ```sh
-   git add docs/decisions/NNNN-*.md
+   sh tools/doc-kit-index-decisions.sh
+   git add docs/decisions.md docs/decisions/NNNN-*.md
    git commit -m "docs: Propose ADR-NNNN on {topic}"
    ```
 
@@ -55,7 +59,8 @@ accepted record safely without leaving stale citations.
    Commit the accepted record:
 
    ```sh
-   git add docs/decisions/NNNN-*.md
+   sh tools/doc-kit-index-decisions.sh
+   git add docs/decisions.md docs/decisions/NNNN-*.md
    git commit -m "docs: Accept ADR-NNNN on {topic}"
    ```
 

@@ -358,6 +358,48 @@ cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 sh tools/doc-kit-index-decisions.sh docs/decisions/README.md docs/decisions
 expect "valid legacy decisions/README.md passes" 0 "checks passed" adr
 
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+echo "stale" >docs/decisions/README.md
+expect "out-of-date decisions/README.md fails" 1 "docs/decisions/README.md is out of date" adr
+
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+sh tools/doc-kit-index-decisions.sh docs/decisions.md docs/decisions
+expect "regenerating leaves no file in the tree" 0 "checks passed" adr
+if [ -n "$(find docs -name '*.tmp')" ]; then
+	failed=$((failed + 1))
+	echo "not ok - regenerating leaves no file in the tree"
+fi
+
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+set +e
+sh tools/doc-kit-index-decisions.sh --help >/dev/null 2>&1
+help=$?
+sh tools/doc-kit-index-decisions.sh --bogus >/dev/null 2>&1
+bogus=$?
+set -e
+if [ "$help" -eq 0 ] && [ "$bogus" -eq 2 ] && [ ! -e ./--help ] && [ ! -e ./--bogus ]; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	echo "not ok - index generator treats options as options (help $help, bogus $bogus)"
+fi
+
+fixture
+mkdir -p tools empty
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+if sh tools/doc-kit-index-decisions.sh empty.md empty && grep -qF '_none_' empty.md; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	echo "not ok - index generator handles a directory with no records"
+fi
+
 # ---------------------------------------------------------------- plan
 
 fixture

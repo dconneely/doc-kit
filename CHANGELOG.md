@@ -14,6 +14,13 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   needs the owner's permission to reopen and to accept. The template no longer exempts it
   (ADR-0007).
 
+### Fixed
+
+- `tools/doc-kit-index-decisions.sh` rejects unknown options, accepts `--help`, handles a directory
+  with no records, and no longer leaves the index readable only by its owner.
+- `tools/doc-kit-check.sh` regenerates the decisions index outside the working tree, and reports a
+  failure to regenerate instead of stopping before its summary.
+
 ## [0.6.0] - 2026-10-29
 
 ### Changed

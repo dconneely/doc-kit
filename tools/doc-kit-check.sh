@@ -419,20 +419,19 @@ check_adr() {
 	IFS=$oldifs
 	set +f
 
-	# §4.3 - the generated decisions index is up to date.
+	# §4.3 - the generated decisions index is up to date. It is regenerated outside the tree, under
+	# the same file name, because the name decides how the index links to the records.
 	idx="${dir}.md"
+	[ -f "$idx" ] || idx="$dir/README.md"
 	if [ -f "$idx" ] && [ -f tools/doc-kit-index-decisions.sh ]; then
-		sh tools/doc-kit-index-decisions.sh "${idx}.tmp" "$dir"
-		if ! cmp -s "$idx" "${idx}.tmp"; then
-			fail "$idx is out of date" "run 'sh tools/doc-kit-index-decisions.sh' to regenerate (§4.3)"
+		gen=$(mktemp -d)
+		out="$gen/${idx##*/}"
+		if ! sh tools/doc-kit-index-decisions.sh "$out" "$dir"; then
+			fail "$idx could not be regenerated" "see the error above (§4.3)"
+		elif ! cmp -s "$idx" "$out"; then
+			fail "$idx is out of date" "run 'sh tools/doc-kit-index-decisions.sh $idx $dir' to regenerate (§4.3)"
 		fi
-		rm -f "${idx}.tmp"
-	elif [ -f "$dir/README.md" ] && [ -f tools/doc-kit-index-decisions.sh ]; then
-		sh tools/doc-kit-index-decisions.sh "$dir/README.md.tmp" "$dir"
-		if ! cmp -s "$dir/README.md" "$dir/README.md.tmp"; then
-			fail "$dir/README.md is out of date" "run 'sh tools/doc-kit-index-decisions.sh $dir/README.md' to regenerate (§4.3)"
-		fi
-		rm -f "$dir/README.md.tmp"
+		rm -rf "$gen"
 	fi
 
 	return 0
