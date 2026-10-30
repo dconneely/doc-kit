@@ -6,15 +6,6 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
-### Changed
-
-- Research notes are named and numbered as decision records are, `NNNN-kebab-case-title.md` (section
-  3.4), and `tools/doc-kit-check.sh adr` reports one that is not. Rename any unnumbered note, and
-  fix its links.
-- The template map's "Deliberately not here" entries say where each absent artifact's facts go
-  meanwhile, and `ADOPTING.md` asks for an entry for each template artifact left out, so that an
-  agent holding such a fact does not invent a home for it.
-
 ## [0.7.0] - 2026-10-30
 
 ### Changed
@@ -33,6 +24,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - Section 2.7 names the shared-triple exemptions exactly: the four pairs ADR-0002 lists, an entry
   point and its parts, and the parts of one container. It no longer describes them as pairs of
   "standard artifacts", which did not match what the checker exempts.
+- Research notes are named and numbered as decision records are, `NNNN-kebab-case-title.md` (section
+  3.4), and `tools/doc-kit-check.sh adr` reports one that is not. Rename any unnumbered note, and
+  fix its links.
+- The template map's "Deliberately not here" entries say where each absent artifact's facts go
+  meanwhile, and `ADOPTING.md` asks for an entry for each template artifact left out, so that an
+  agent holding such a fact does not invent a home for it.
 
 ### Fixed
 
