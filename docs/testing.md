@@ -134,7 +134,7 @@ the fact; `DOC_KIT_EVAL_OUT` keeps each session's log and diff.
 sh tools/doc-kit-check.sh              # conformance
 sh tests/doc-kit-check.test.sh         # the checker's own tests
 sh tests/doc-kit-duplicate-check.sh    # advisory duplication report
-DOC_KIT_AGENT='claude -p --permission-mode acceptEdits' sh tests/doc-kit-eval.sh   # agent evals, by hand
+sh tests/doc-kit-eval.sh                # agent evals, by hand; see its header for DOC_KIT_AGENT
 prek run --all-files                   # hygiene, line length, drift guards
 prek run --hook-stage manual lychee-system --all-files
 ```

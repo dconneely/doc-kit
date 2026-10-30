@@ -3,8 +3,13 @@
 # lands and whether what it wrote keeps the kit's rules. The agent is the reader the map exists to
 # shape; this measures whether it does.
 #
-# Usage:  DOC_KIT_AGENT='claude -p --permission-mode acceptEdits' sh tests/doc-kit-eval.sh [id ...]
-#         with no ids, runs every scenario
+# Usage:  DOC_KIT_AGENT="claude -p --permission-mode acceptEdits '--allowedTools=$INDEX'" \
+#             sh tests/doc-kit-eval.sh [id ...]
+#         with no ids, runs every scenario, where
+#         INDEX='Bash(sh tools/doc-kit-index-decisions.sh),PowerShell(sh tools/doc-kit-index-decisions.sh)'
+#
+#         The agent must be allowed to run the index generator, or every new decision record fails
+#         the rules on a stale index; on Windows, Claude runs it through its PowerShell tool.
 #
 #         DOC_KIT_EVAL_BASE  a repository to start from, by path or URL (default: an empty one)
 #         DOC_KIT_EVAL_OUT   a directory to keep each scenario's agent log and diff in
