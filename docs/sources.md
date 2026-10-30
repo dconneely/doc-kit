@@ -5,11 +5,11 @@ provenance, licence and integrity are pinned.
 
 ## Source index
 
-| Document                 | URL                                                                                                           | Retrieved  | Licence    | Redistributable | SHA-256                                                            |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------- | ---------- | ---------- | --------------- | ------------------------------------------------------------------ |
-| `rfc2119.txt`            | `https://www.rfc-editor.org/rfc/rfc2119.txt`                                                                  | 2026-10-25 | IETF Trust | `yes`           | `3c2ceb7bfc84cd34720f4a5271338ab9d8280d34bdd1eb250c64306202f2ed8b` |
-| `madr-4.0.0-template.md` | `https://raw.githubusercontent.com/adr/madr/4.0.0/template/adr-template.md`                                   | 2026-10-30 | CC0-1.0    | `yes`           | `4903614bbae9aeb2aa811caeb9e156677ef1a993872af6ff8dcfb67b2266cae1` |
-| `adr-tools-template.md`  | `https://raw.githubusercontent.com/npryce/adr-tools/b3279baf9be2207d1a4f4bbd608fd0b591c72aee/src/template.md` | 2026-10-25 | Apache-2.0 | `yes`           | `68c7c24a9bb73419f823c818d7c08f888063eca9d0cdb80e96625b9faa088286` |
+| Document                 | URL                                                                                                                   | Retrieved  | Licence    | Redistributable | SHA-256                                                            |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------- | ---------- | ---------- | --------------- | ------------------------------------------------------------------ |
+| `rfc2119.txt`            | `https://www.rfc-editor.org/rfc/rfc2119.txt`                                                                          | 2026-10-25 | IETF Trust | `yes`           | `3c2ceb7bfc84cd34720f4a5271338ab9d8280d34bdd1eb250c64306202f2ed8b` |
+| `madr-4.0.0-template.md` | `https://raw.githubusercontent.com/adr/madr/4.0.0/template/adr-template.md`                                           | 2026-10-30 | CC0-1.0    | `yes`           | `4903614bbae9aeb2aa811caeb9e156677ef1a993872af6ff8dcfb67b2266cae1` |
+| `adr-tools-template.md`  | `https://raw.githubusercontent.com/meza/adr-tools/1908f7b23a3d78974e3ef9a52c63617cb1dbde30/src/templates/template.md` | 2026-10-30 | GPL-3.0    | `yes`           | `68c7c24a9bb73419f823c818d7c08f888063eca9d0cdb80e96625b9faa088286` |
 
 ## Rules
 
