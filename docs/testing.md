@@ -116,8 +116,10 @@ behaviour rule, a procedure - and reports every file the fact's unique token lan
 
 It is run by hand, never in CI: each scenario is a real agent session that costs money, and its
 result varies between runs and between models, so one run is a sample, not a verdict. A miss is a
-prompt to read the agent's reasoning and the map together; the fix may belong in either. The
-scenarios test only the template map, not a customised one.
+prompt to read the agent's reasoning and the map together; the fix may belong in either. By default
+a scenario starts from an empty repository. `DOC_KIT_EVAL_BASE` starts it from a real one instead,
+adopted minimally if it has no map, so that a customised map and existing documentation compete for
+the fact; `DOC_KIT_EVAL_OUT` keeps each session's log and diff.
 
 ## Running everything
 
