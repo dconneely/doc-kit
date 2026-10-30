@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.7.0] - 2026-10-30
+
 ### Changed
 
 - The README and `doc-kit-adopt` skill now provide a short entry prompt and treat a target that
