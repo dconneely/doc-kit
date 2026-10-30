@@ -10,6 +10,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 - The README and `doc-kit-adopt` skill now provide a short entry prompt and treat a target that
   already adopted an earlier doc-kit as a re-adoption.
+- A wrong path, command or citation in an accepted decision record is a change like any other: it
+  needs the owner's permission to reopen and to accept. The template no longer exempts it
+  (ADR-0007).
 
 ## [0.6.0] - 2026-10-29
 

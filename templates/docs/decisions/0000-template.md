@@ -25,9 +25,9 @@ Rules - absolute:
   accepted -> deprecated (deprecating), and deleting a record of any status.
 - On accepting, rejecting or deprecating, set decision-makers (their name), approval (their words)
   and date (today), then commit.
-- A correction that makes a record say what it always meant - a wrong path, command or citation -
-  fixes the text without a status change, `date` or `approval`. A change to the decision, or to what
-  confirms it, is an amendment.
+- Any change to the words of an accepted record, however small - a wrong path, command or citation
+  included - needs reopening and accepting. Only formatting applied by a tool, which alters no word,
+  is not a change.
 - If the owner rejects a change to a reopened record, restore its last accepted version instead of
   marking it rejected.
 

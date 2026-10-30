@@ -75,9 +75,9 @@ accepted record safely without leaving stale citations.
    Set `status: "accepted"`, update `date` and `approval` to the owner's latest approval, and
    commit.
 
-**Corrections.** A wrong path, command or citation that makes a record say what it always meant is a
-correction, not an amendment: fix it in place and leave `date` and `approval` alone. If the
-decision, or what confirms it, changes, follow the amendment steps.
+A wrong path, command or citation in an accepted record is still a change to its words: follow these
+steps for it too. Only formatting applied by a tool, which alters no word, is not a change
+(ADR-0007).
 
 ## Verification
 
