@@ -42,7 +42,7 @@ quirk|^docs/quirks\.md$|-|-|-|The CSV exporter writes dates as DD/MM/YYYY, not I
 research|^docs/research/[0-9]{4}-[a-z0-9-]+\.md$|-|-|-|Finding: the vendor API allows 100 requests per minute per key, according to its published documentation at https://example.com/api/limits, read today.
 plan|^docs/plan\.md$|-|-|-|Later, the uploader needs retry with backoff. Nobody has started it.
 glossary|^docs/glossary\.md$|-|-|-|In this project, a batch means one upload of up to 500 records sent in a single request.
-changelog|^CHANGELOG\.md$|-|-|-|We have just shipped this: the exporter now writes a header row, which users will see in the next release.
+changelog|^CHANGELOG\.md$ $SPEC|^CHANGELOG\.md$|-|-|We have just shipped this: the exporter now writes a header row, which users will see in the next release.
 spec|$SPEC|-|-|-|The system rejects an upload larger than 10 MB with HTTP 413.
 howto|^docs/howto(/[a-z0-9-]+)?\.md$|-|-|-|To rotate the API key: generate a new key in the vendor console, update the KEY secret in CI, redeploy, then revoke the old key.
 rule-and-why|$SPEC $ADR|$SPEC $ADR|-|-|Uploads are capped at 25 MB, because the reverse proxy in front of the service rejects larger request bodies.
@@ -147,7 +147,7 @@ for line in $scenarios; do
 	before=$(failures "$dir")
 	token="EVAL-$id-$(od -An -N4 -tx4 /dev/urandom | tr -d ' ')"
 	# shellcheck disable=SC2034  # read by the eval below
-	prompt="This is an evaluation of where documentation is filed. The fact below is invented and need not match the code; do not check it against the code or ask for details - where a document wants a path or a test name it lacks, write unknown. Record it in the documentation, wherever it belongs, or if it belongs nowhere in the documentation, say so and write nothing: $fact Include the token $token, verbatim, in each place you write it. Do not commit."
+	prompt="This is an evaluation of where documentation is filed. The fact below is invented: treat it as true of this repository even where the code has no such feature, and do not check it against the code or ask for details - where a document wants a path or a test name it lacks, write unknown. Record it in the documentation, wherever it belongs. Only if information of its kind has no place in this repository's documentation at all, say so and write nothing: $fact Include the token $token, verbatim, in each place you write it. Do not commit."
 
 	set +e
 	(cd "$dir" && eval "$DOC_KIT_AGENT" '"$prompt"') >"$TMP/$id.log" 2>&1
