@@ -19,8 +19,12 @@ In play-bazlang, which records that it has no glossary and that terms are define
 introduced, both models defined a new term in `docs/spec/mcp.md`; where its map records no how-to
 guides, both created a single `docs/howto.md` and mapped it, as the growth rule (ADR-0014) allows.
 
-These scenarios measure placement only, and each has one obvious home, so near-perfect scores are a
-ceiling of the test rather than a measure of the map.
+Those eight scenarios each have one obvious home, so near-perfect scores there are a ceiling of the
+test. Four harder ones hold up too. A rule with its reason is split into the specification and a
+`proposed` decision record; a correction rewrites the specification in place and is logged in the
+changelog; history goes to a decision record; and a fact with no documentation value is left
+unwritten. Agents keep the decision-record rules: no session accepted a record, and once told to,
+every session that added one regenerated `docs/decisions.md`. Before the stanza said so, none did.
 
 Asked to record an invented fact about code a repository lacks, Opus declines unless told the fact
 is invented: it names the right destination but will not fill a quirk's `Where:` or test fields, or
@@ -52,22 +56,43 @@ decision record took the next free number, in every repository.
 Sonnet (`--model sonnet`) on the templates alone placed 7 of 8. The miss was a research note named
 `vendor-api-rate-limit.md`, which no rule then forbade; `docs/spec.md` §3.4 now requires the number.
 
+Twelve scenarios - the eight plus a rule with its reason, a correction to seeded specification text,
+history, and a fact with no home - scored also on the rules (no new checker failure, every touched
+record `proposed`), harness as of commit `40f97e1`, with the agent allowed to run the index
+generator:
+
+| Repository                | Haiku placed | Haiku rules | Opus placed | Opus rules |
+| ------------------------- | ------------ | ----------- | ----------- | ---------- |
+| `dconneely/play-bazlang`  | 10 / 12      | 11 / 12     | 10 / 12     | 12 / 12    |
+| `dconneely/play-eightbit` | 11 / 12      | 12 / 12     | -           | -          |
+| `BurntSushi/ripgrep`      | 8 / 12       | 12 / 12     | -           | -          |
+| `tj/commander.js`         | 11 / 12      | 12 / 12     | -           | -          |
+| `encode/httpx`            | -            | -           | 11 / 12     | 12 / 12    |
+
+The rule-and-reason, correction and history scenarios placed correctly in every run but two history
+runs, which also stated the current database in the specification; that is present-tense behaviour,
+and the scenario now forbids only the history there. The one broken rule was a stale index in
+play-bazlang, whose own stanza did not yet say to regenerate it. The other misses were the
+scenarios' own: a research note's source also indexed in `docs/sources.md`, as §3.7 provides; the
+no-home fact, a review-day preference, put in `CONTRIBUTING.md`, where for an open-source project it
+belongs; play-bazlang's term again; and one decline in ripgrep by Haiku on the grounds that the
+repository has no upload feature. Commit `7e49188` corrects the first three scenarios.
+
 ## Dead ends
 
 Running five repositories in parallel exhausted the account's usage limit mid-run, and every session
 after that exited with an error the harness first scored as a miss. The harness now reports a failed
 session as `ERROR` and stops.
 
+Under `--permission-mode acceptEdits`, an agent told to regenerate the decisions index tried and was
+refused, so the session failed the rules for the harness's reason. On Windows, Claude runs the
+generator through its PowerShell tool, so a `Bash(...)` permission alone does not match; the harness
+documents both.
+
 ## Open questions
 
 - Whether placement holds across runs: each scenario here ran once. Repeating each several times
   would give a rate rather than a sample.
 - Whether it holds for agents other than Claude, which read `AGENTS.md` without a `CLAUDE.md` alias.
-- Whether a fact that fits two artifacts - a behaviour rule that is also a decision - is split
-  correctly, a correction is made in place, or a fact with no home prompts a question. Every
-  scenario here has one obvious home.
-- Whether what is written follows the kit's rules, not only where it lands: a new record left
-  `proposed`, a new file given a map row, the decisions index regenerated. The harness scores only
-  the file a fact's token lands in.
 - How placement compares when scored against each repository's own map rather than the template's;
   every miss here was a repository-specific choice the template expectations did not know.
