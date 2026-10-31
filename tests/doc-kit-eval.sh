@@ -38,13 +38,13 @@ trap 'rm -rf "$TMP"' EXIT HUP INT TERM
 # id|allowed|required|stale|seed|fact
 #   allowed   space-separated EREs; every file the token lands in must match one, or - for none
 #   required  space-separated EREs; each must match a file the token lands in, or -
-#   stale     text that must no longer appear in the specification, or -
+#   stale     text that must not be in the specification afterwards, or -
 #   seed      a seed_* function run before the session, or -
 SPEC='^docs/spec(/[a-z0-9/-]+)?\.md$'
 ADR='^docs/decisions/[0-9]{4}-[a-z0-9-]+\.md$'
 scenarios="decision|$ADR|-|-|-|We chose SQLite over PostgreSQL for the local cache, because the cache must work offline with no server to install.
 quirk|^docs/quirks\.md$|-|-|-|The CSV exporter writes dates as DD/MM/YYYY, not ISO 8601. This is a known defect we are keeping because a customer import depends on it, and the test test_export_dates pins it.
-research|^docs/research/[0-9]{4}-[a-z0-9-]+\.md$|-|-|-|Finding: the vendor API allows 100 requests per minute per key, according to its published documentation at https://example.com/api/limits, read today.
+research|^docs/research/[0-9]{4}-[a-z0-9-]+\.md$ ^docs/sources\.md$|^docs/research/[0-9]{4}-[a-z0-9-]+\.md$|-|-|Finding: the vendor API allows 100 requests per minute per key, according to its published documentation at https://example.com/api/limits, read today.
 plan|^docs/plan\.md$|-|-|-|Later, the uploader needs retry with backoff. Nobody has started it.
 glossary|^docs/glossary\.md$|-|-|-|In this project, a batch means one upload of up to 500 records sent in a single request.
 changelog|^CHANGELOG\.md$ $SPEC|^CHANGELOG\.md$|-|-|We have just shipped this: the exporter now writes a header row, which users will see in the next release.
@@ -52,8 +52,8 @@ spec|$SPEC|-|-|-|The system rejects an upload larger than 10 MB with HTTP 413.
 howto|^docs/howto(/[a-z0-9-]+)?\.md$|-|-|-|To rotate the API key: generate a new key in the vendor console, update the KEY secret in CI, redeploy, then revoke the old key.
 rule-and-why|$SPEC $ADR|$SPEC $ADR|-|-|Uploads are capped at 25 MB, because the reverse proxy in front of the service rejects larger request bodies.
 correction|$SPEC ^CHANGELOG\.md$|$SPEC ^CHANGELOG\.md$|larger than 5 MB|limit|The upload limit has just changed from 5 MB to 20 MB: the system now rejects an upload larger than 20 MB with HTTP 413.
-history|$ADR ^CHANGELOG\.md$|-|-|-|The project used MySQL until 2023, then moved to SQLite because the hosted database cost more than the product earned.
-no-home|-|-|-|-|The owner prefers to review pull requests on Friday afternoons."
+history|$ADR ^CHANGELOG\.md$ $SPEC|$ADR|MySQL|-|The project used MySQL until 2023, then moved to SQLite because the hosted database cost more than the product earned.
+no-home|-|-|-|-|The owner's favourite programming font is Iosevka."
 
 # stanza - the AGENTS.md stanza: the first markdown block after "Paste the stanza" in ADOPTING.md
 stanza() {
@@ -185,7 +185,7 @@ for line in $scenarios; do
 		fi
 		if [ -z "$verdict" ] && [ "$stale" != - ] &&
 			(cd "$dir" && find docs -path 'docs/spec*' -name '*.md' -exec grep -lF -- "$stale" {} +) >/dev/null 2>&1; then
-			verdict="MISS     left '$stale' in the specification"
+			verdict="MISS     the specification still holds '$stale'"
 		fi
 	fi
 	[ -n "$verdict" ] || { placed=$((placed + 1)); verdict="ok       ${shown:-nothing written}"; }
