@@ -78,6 +78,16 @@ no-home fact, a review-day preference, put in `CONTRIBUTING.md`, where for an op
 belongs; play-bazlang's term again; and one decline in ripgrep by Haiku on the grounds that the
 repository has no upload feature. Commit `7e49188` corrects the first three scenarios.
 
+`identigon/identigon`, a second customised map, at `8321b29` with its stanza given the index line,
+harness as of `7e49188`, Haiku: 8 of 12 placed, 11 of 12 rules kept. Its map leaves out quirks, a
+glossary and how-tos, and says known limitations are stated inline in each specification member.
+Every miss but one followed that: the kept defect went to a specification member with a decision
+record, the term to a specification member, and the how-to was declined as an artifact the map says
+is the owner's to add. The other was a decline of the upload cap, as in ripgrep. The broken rule was
+a plan entry typed `unknown`, because the prompt allowed "unknown" for a missing path or test name
+and Haiku extended it to the type; the prompt now limits it to those, and the entry then passed
+both.
+
 ## Dead ends
 
 Running five repositories in parallel exhausted the account's usage limit mid-run, and every session
