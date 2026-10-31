@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.7.1] - 2026-10-31
+
 ### Changed
 
 - The `AGENTS.md` stanza and the decision-record template tell an agent to regenerate
