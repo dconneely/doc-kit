@@ -6,6 +6,16 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- A directory artifact may use `name/README.md` as its index instead of a sibling `name.md`, chosen
+  when the directory is created. Never both: the checker fails when both exist (section 2.6,
+  ADR-0014). An index at `docs/archive/README.md` is not an archived file and needs no provenance
+  header (section 5.5).
+- The archive holds documentation kept but not migrated: undatable, or fitting no artifact and not
+  worth rewriting now. A provenance header may give "unknown" for when the file was last accurate,
+  and the archive is no longer described as immutable (ADR-0009).
+
 ## [0.7.1] - 2026-10-31
 
 ### Changed

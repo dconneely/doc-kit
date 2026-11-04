@@ -159,6 +159,15 @@ echo x >docs/archive/stale.md
 expect "docs/archive/ is exempt without a row" 0 "checks passed" map
 
 fixture
+echo x >docs/decisions/README.md
+expect "a README.md entry point alone passes" 0 "checks passed" map
+
+fixture
+echo x >docs/decisions/README.md
+echo x >docs/decisions.md
+expect "both entry points fail" 1 "FAIL [map] docs/decisions.md and docs/decisions/README.md are both entry points" map
+
+fixture
 echo x >"docs/decisions/0002 old notes.md"
 echo x >"loose notes.md"
 expect "a mapped path with spaces passes" 1 "FAIL [map] loose notes.md is not named in the map" map

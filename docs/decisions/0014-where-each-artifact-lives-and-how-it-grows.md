@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-10-29
+date: 2026-11-04
 decision-makers: David Conneely
 ---
 
@@ -21,8 +21,11 @@ Four problems with documentation layout, growth, and discoverability:
 3. **Context and search ambiguity across subdirectories:** Using `README.md` inside subdirectories
    burdens editor tab bars, fuzzy finders, and coding agent context windows with identical filenames
    requiring path disambiguation. In `docs/decisions/`, an internal `README.md` polluted the ADR
-   glob, forcing check scripts to special-case it. In `docs/archive/`, an internal `README.md`
-   created an exemption paradox under §5.1.
+   glob, forcing check scripts to special-case it. In `docs/archive/`, an internal `README.md` fell
+   under the rules for archived files: a "not authoritative" header and no citations from outside.
+   Against that, a `README.md` is what GitHub shows when a reader opens the directory, and it keeps
+   an index beside the files it lists - which suits a directory that exists from the start, such as
+   a generated sources manifest.
 4. **Opaque decision status and unconfirmed decisions:** As decision records accumulate across
    multiple statuses (`accepted`, `deprecated`, `rejected`, `proposed`), discovering which records
    currently bind required parsing every file's front-matter. Furthermore, decisions specifying
@@ -38,13 +41,24 @@ Four problems with documentation layout, growth, and discoverability:
   etc.).
 - **Uniform sibling entry points (`docs/{name}.md` with optional `docs/{name}/`):** Standardise on
   `docs/{name}.md` as the entry point / index for every directory artifact `docs/{name}/`.
+- **Sibling entry points by default, `docs/{name}/README.md` by choice:** As above, but a repository
+  may make `docs/{name}/README.md` the entry point of a directory artifact instead, chosen once.
 
 ## Decision Outcome
 
-Chosen option: **uniform sibling entry points (`docs/{name}.md` with optional `docs/{name}/`)**,
-because one rule covers every artifact: a file `docs/name.md` that outgrows one file gains a sibling
-directory `docs/name/`, and stays as its entry point - an index or summary linking into the
-directory - so links to it stay true.
+Chosen option: **sibling entry points by default, `docs/{name}/README.md` by choice**, because one
+rule covers every artifact: a file `docs/name.md` that outgrows one file gains a sibling directory
+`docs/name/`, and stays as its entry point - an index or summary linking into the directory - so
+links to it stay true.
+
+A repository may instead make `docs/name/README.md` the entry point, under three limits:
+
+1. **Chosen when the directory is created.** A directory that exists from the start - sources,
+   decisions, the archive - can take either form. A `docs/name.md` that later grows a directory
+   keeps the sibling form; switching is a rename that breaks every link to it.
+2. **Never both.** `docs/name.md` and `docs/name/README.md` do not exist side by side.
+3. **The map names the one in use.** An index inside the archive is not an archived file, so the
+   archive's header and citation rules do not apply to it.
 
 - **Root:** Holds only files a tool or convention looks for there: `README.md`, `AGENTS.md`, its
   aliases, `CHANGELOG.md`, and `DOC-MAP.md`.
@@ -79,7 +93,9 @@ and generated decision indexing.
 - Good, because active decisions are discovered in a single read of `docs/decisions.md`.
 - Good, because external source material is verified with pinned checksums and licence tracking.
 - Bad, because GitHub's web UI does not automatically render `docs/{name}.md` when navigating
-  directly into `docs/{name}/`.
+  directly into `docs/{name}/`. A repository that minds can choose `docs/{name}/README.md` for a new
+  directory.
+- Bad, because two forms mean a reader checks the map for which one a repository uses.
 - Bad, because maintaining generated indexes requires generator tooling and checker validation.
 
 ## Confirmation

@@ -225,6 +225,20 @@ check_map() {
 	IFS=$oldifs
 	set +f
 
+	# §2.6 - a directory artifact has one entry point: name.md or name/README.md, never both.
+	set +f
+	readmes=$(find . -name README.md ! -path './README.md' ! -path './.git/*' | sed 's:^\./::' |
+		not_templates | sort)
+	set -f
+	IFS=$NL
+	for r in $readmes; do
+		if [ -f "${r%/README.md}.md" ]; then
+			fail "${r%/README.md}.md and $r are both entry points" "§2.6 - keep one"
+		fi
+	done
+	IFS=$oldifs
+	set +f
+
 	# §2.7 - tense, mutability and audience come from closed sets: free text lets near-duplicates
 	# escape on phrasing. Artifacts sharing all three are reported as a prompt to check, not a
 	# failure (ADR-0002). Aliases, which hold no content of their own, are exempt. One awk pass

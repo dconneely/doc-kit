@@ -102,6 +102,10 @@ An artifact `name.md` that outgrows one file MAY gain a sibling directory `name/
 The file stays as the entry point - an index or summary linking into the directory - so links to it
 stay true, and each part the map distinguishes gets its own row (ADR-0014).
 
+A directory artifact MAY instead have `name/README.md` as its entry point, chosen when the directory
+is created; an existing `name.md` that grows a directory keeps the sibling form. `name.md` and
+`name/README.md` MUST NOT both exist, and the map names the one in use.
+
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
 mutability and an audience, drawn from the sets in the `Property values` table in
 `templates/DOC-MAP.md` - in an adopting repository, the table copied into its map.
@@ -157,7 +161,9 @@ hand applies the same judgement: check it, don't block on it.
   capture is what empties a backlog. The decision point is ranking an entry and picking it up, not
   filing it.
 - **Append-only** artifacts - the changelog - are gated by release, not by review.
-- **Immutable** artifacts - the archive - are not changed at all.
+
+The archive needs no ceremony: files enter and leave it freely, each under its provenance header
+(§5).
 
 The status, `decision-makers` and the commit that changed them are the durable record of the owner's
 decision. A conversation or a forge can lose it; the tree keeps it.
@@ -223,9 +229,9 @@ A checker MUST report a record whose status is not `proposed` that lacks `decisi
 bare `ADR-NNNN` outside code that names no record in this repository. It cannot verify that the
 owner gave permission, nor that an amendment fixed its citations.
 
-A repository MAY maintain a generated index of decision records at `docs/decisions.md` (or
-`docs/decisions/README.md`). If present, it MUST carry a generated header naming what generates it,
-and regenerating it MUST produce no diff (§4.3).
+A repository MAY maintain a generated index of decision records at `docs/decisions.md`. If present,
+it MUST carry a generated header naming what generates it, and regenerating it MUST produce no diff
+(§4.3).
 
 ### 3.2 Changelog
 
@@ -293,11 +299,10 @@ their text.
 
 A repository MAY maintain external standards, whitepapers and specifications under `docs/sources/`.
 
-The manifest at `docs/sources.md` (or `docs/sources/README.md`) indexes each source with its URL,
-retrieval date, licence, redistributability status, and SHA-256 checksum. A source that is not
-explicitly redistributable under its licence MUST NOT be committed to git and MUST be gitignored.
-Generated text or Markdown extracts derived from cached sources MUST carry a provenance header per
-§4.3 naming the generator.
+The manifest at `docs/sources.md` indexes each source with its URL, retrieval date, licence,
+redistributability status, and SHA-256 checksum. A source that is not explicitly redistributable
+under its licence MUST NOT be committed to git and MUST be gitignored. Generated text or Markdown
+extracts derived from cached sources MUST carry a provenance header per §4.3 naming the generator.
 
 ## 4. Single source of truth
 
@@ -319,7 +324,7 @@ is the current shape.
 
 ## 5. The archive
 
-An adopting repository MAY quarantine documentation it cannot verify in an archive directory,
+An adopting repository MAY keep documentation it does not migrate in an archive directory,
 conventionally `docs/archive/`, optionally indexed at `docs/archive.md`.
 
 5.1 Files below an archive are **not** documentation files for the purposes of §2.4, and a checker
@@ -327,18 +332,21 @@ MUST exempt them. The archive itself (or its index `docs/archive.md`) MUST appea
 single entry.
 
 5.2 Every file in the archive MUST begin with a provenance header stating that it is not
-authoritative, when it was last known to be accurate, and why it was not migrated. A file that
-cannot carry text at its head satisfies this with a sibling `<filename>.provenance.md` carrying the
-same header. A folder-level warning is not sufficient: readers and tools arrive at these files
-directly, by search, and never see the folder.
+authoritative, when it was last known to be accurate (or that this is unknown), and why it was not
+migrated. A file that cannot carry text at its head satisfies this with a sibling
+`<filename>.provenance.md` carrying the same header. A folder-level warning is not sufficient:
+readers and tools arrive at these files directly, by search, and never see the folder.
 
 5.3 An archived file MUST NOT be cited as a source by any artifact outside the archive. Anything in
 it worth relying on MUST be migrated first, at which point it acquires a confidence level (§3.4).
 
-5.4 The archive is for material whose **currency cannot be established**, not merely material that
-is hard to read. Text that a reader can parse but cannot date belongs here; the failure this guards
-against is a plausible-looking stale claim being promoted into the specification, where the
-structure instructs everyone to trust it.
+5.4 The archive is for documentation kept but **not migrated**: material whose currency cannot be
+established, and material that fits no artifact and is not worth rewriting now. Material that is
+merely hard to read is migrated. The failure this guards against is a plausible-looking stale claim
+being promoted into the specification, where the structure instructs everyone to trust it.
+
+5.5 An index inside the archive (`docs/archive/README.md`, §2.6) is not an archived file: §5.2 and
+§5.3 do not apply to it.
 
 ## 6. Conformance
 

@@ -22,7 +22,7 @@ classify - it is the finding, and it always means `split`.
 | `move`    | one tense, wrong place                                      | relocate as-is, with `git mv` so history and blame survive |
 | `split`   | mixed tense                                                 | divide by tense, file each part separately                 |
 | `absorb`  | belongs inside something that already exists                | merge in, delete the original                              |
-| `archive` | currency cannot be established                              | `docs/archive/` with a provenance header                   |
+| `archive` | undatable, or fits nothing and not worth rewriting now      | `docs/archive/` with a provenance header                   |
 | `delete`  | superseded, duplicated, or wrong with nothing worth keeping | git still has it                                           |
 | `leave`   | already correct where it is                                 | must still appear in the map                               |
 

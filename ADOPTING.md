@@ -141,7 +141,7 @@ matter of taking the ones Step 1 said you had earned:
 | `docs/howto.md` and `docs/howto/0000-template.md`                         | you have recurring operational procedures (deployments, rotations, migrations)                                                                                                                                                  |
 | `docs/sources.md` and `docs/sources/`                                     | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                                                                                                              |
 | `docs/plan/`                                                              | your backlog is past roughly 20 items, or you are migrating an existing repository - take `adopt-doc-kit.md` (the migration worksheet) whenever you migrate, and `0000-template.md` (the task-note template) with the directory |
-| `docs/archive.md` (and `docs/archive/`)                                   | Step 4 turned up documentation whose currency you cannot establish                                                                                                                                                              |
+| `docs/archive.md` (and `docs/archive/`)                                   | Step 4 turned up documentation you keep but do not migrate                                                                                                                                                                      |
 
 Two files sit outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `docs/spec.md`, and **`tools/doc-kit-index-decisions.sh`**, which generates
@@ -305,14 +305,15 @@ Six, and every file gets exactly one:
 | **move**    | one tense, wrong place                                      | relocate as-is. Use `git mv` so history and blame survive                              |
 | **split**   | mixed tense                                                 | divide by tense and file each part. The most common outcome, and the highest-value one |
 | **absorb**  | belongs inside something that already exists                | merge the content in, delete the original                                              |
-| **archive** | currency cannot be established                              | to `docs/archive/` with a provenance header, never into the specification              |
+| **archive** | undatable, or fits nothing and not worth rewriting now      | to `docs/archive/` with a provenance header, never into the specification              |
 | **delete**  | superseded, duplicated, or wrong with nothing worth keeping | git still has it                                                                       |
 | **leave**   | already correct where it is                                 | still has to appear in the map                                                         |
 
 Two rules stop this going wrong. **Archive is not a synonym for "not sure yet"** - it is a positive
-finding that a claim cannot be dated, and promoting an undatable claim into the specification is
-worse than leaving it untrusted. And **anything moving out of a directory people navigate leaves a
-one-line pointer behind**, because links from issues, wikis and bookmarks do not follow renames.
+decision not to migrate, for a stated reason, and promoting an undatable claim into the
+specification is worse than leaving it in the archive. And **anything moving out of a directory
+people navigate leaves a one-line pointer behind**, because links from issues, wikis and bookmarks
+do not follow renames.
 
 Get the owner to review the dispositions before acting on them. It is the cheapest point at which
 someone who remembers why a document exists can say so.

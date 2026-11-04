@@ -1,7 +1,7 @@
 # Archive - not authoritative
 
-Documentation kept for its historical value, whose **currency cannot be established**. Nothing here
-is maintained. Nothing here may be relied on.
+Documentation kept but **not migrated**: its currency cannot be established, or it fits no artifact
+and is not worth rewriting now. Nothing here may be relied on.
 
 The archive is exempt from the map's completeness check, and appears in `DOC-MAP.md` as a single
 entry rather than file by file.
@@ -13,15 +13,17 @@ nothing to say whether that is current behaviour or a description of five years 
 citing decisions, people, tickets or systems that no longer exist. Material in formats nobody can
 check any more.
 
-The distinction that matters is currency, not readability. A document that is hard to read but
-verifiable should be migrated. A document that is easy to read but undatable belongs here.
+Material that fits no artifact and costs more to rewrite than you can spend now, but might be useful
+one day. It may stay a long time, often with no provenance at all.
+
+Readability is not a reason. A document that is hard to read but verifiable should be migrated.
 
 ## Why not just migrate it
 
 Because migrating an unverified claim into `docs/spec.md` **launders** it. The whole point of the
 specification is that readers trust it, so a stale sentence promoted into it is more dangerous than
-the same sentence sitting in a folder marked untrusted. A confident migration is worse than no
-migration.
+the same sentence sitting in a folder marked not authoritative. A confident migration is worse than
+no migration.
 
 ## Why not just delete it
 

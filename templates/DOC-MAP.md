@@ -58,7 +58,7 @@ docs/
   howto/*.md             optional: step-by-step procedures that recur across several places
   sources.md             optional: external material manifest: URLs, retrieval dates, checksums
   sources/               optional: external material: fetch script and cached originals
-  archive.md             optional: quarantine index of undatable documents kept
+  archive.md             optional: index of documents kept but not migrated
 ```
 
 In a monorepo, everything below `docs/` except `docs/plan.md` moves under the module it describes;
@@ -67,7 +67,8 @@ the repository root.
 
 Any `docs/name.md` that outgrows one file gains a sibling directory `docs/name/` for its parts, and
 stays as their index. The specification is the usual case: its members can be machine-readable -
-schemas, interface definitions - and each gets its own row below.
+schemas, interface definitions - and each gets its own row below. A directory created as one -
+sources, decisions, the archive - may use `docs/name/README.md` as its index instead; never both.
 
 ## Artifacts
 
@@ -92,7 +93,7 @@ schemas, interface definitions - and each gets its own row below.
 | `docs/howto/*.md`            | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms. Optional      | imperative | rewritten in place | contributor, operator        |
 | `docs/sources.md`            | External reference manifest: URLs, retrieval dates, licences, checksums. Optional                                        | present    | append-only        | contributor, consumer        |
 | `docs/sources/`              | External reference material: fetch script and cached originals. Optional                                                 | present    | append-only        | contributor                  |
-| `docs/archive.md`            | Quarantine index of undatable documents kept rather than discarded. Optional                                             | present    | rewritten in place | owner, contributor           |
+| `docs/archive.md`            | Index of documents kept but not migrated. Optional                                                                       | present    | rewritten in place | owner, contributor           |
 
 ## Property values
 
@@ -127,7 +128,7 @@ The closed sets used in the artifacts table (ADR-0002):
 | `docs/howto/*.md`            | a procedure recurs across several places           | when automated away or obsolete                                  |
 | `docs/sources.md`            | an external standard is cited                      | when no artifact cites it                                        |
 | `docs/sources/`              | the fetch script is adopted, or a source is cached | when no artifact cites it                                        |
-| `docs/archive.md`            | migration finds a document nobody can date         | when nothing in it is worth keeping                              |
+| `docs/archive.md`            | migration keeps a document it does not migrate     | when nothing in it is worth keeping                              |
 
 ## Flow
 
