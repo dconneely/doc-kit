@@ -496,14 +496,14 @@ check_adr() {
 	idx="${dir}.md"
 	[ -f "$idx" ] || idx="$dir/README.md"
 	# The generator is looked for beside this script, wherever both were copied.
-	index=$(dirname "$0")/doc-kit-index-decisions.sh
-	if [ -f "$idx" ] && [ -f "$index" ]; then
+	generator=$(dirname "$0")/doc-kit-index-decisions.sh
+	if [ -f "$idx" ] && [ -f "$generator" ]; then
 		gen=$(mktemp -d)
 		out="$gen/${idx##*/}"
-		if ! sh "$index" "$out" "$dir"; then
+		if ! sh "$generator" "$out" "$dir"; then
 			fail "$idx could not be regenerated" "see the error above (§4.3)"
 		elif ! cmp -s "$idx" "$out"; then
-			fail "$idx is out of date" "run 'sh $index $idx $dir' to regenerate (§4.3)"
+			fail "$idx is out of date" "run 'sh $generator $idx $dir' to regenerate (§4.3)"
 		fi
 		rm -rf "$gen"
 	fi

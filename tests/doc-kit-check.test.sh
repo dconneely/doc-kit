@@ -149,7 +149,7 @@ fixture
 mkdir -p old
 echo x >old/stale.md
 after '^DOC-MAP.md ' 'old/           archive, not authoritative'
-after '^[|] `docs/plan.md` +[|] backlog' '| `old/` | archive | past | immutable | contributor |'
+after '^[|] `docs/plan.md` +[|] backlog' '| `old/` | archive | past | volatile | contributor |'
 after '^[|] `docs/plan.md` +[|] start' '| `old/` | archived | never |'
 expect "an archive at any mapped path covers its files" 0 "checks passed" map
 
@@ -476,6 +476,7 @@ mkdir -p scripts
 cp "$ROOT/tools/doc-kit-check.sh" "$ROOT/tools/doc-kit-index-decisions.sh" scripts/
 echo stale >docs/decisions/README.md
 set +e
+out=
 sh scripts/doc-kit-index-decisions.sh && out=$(sh scripts/doc-kit-check.sh adr 2>&1)
 got=$?
 set -e
