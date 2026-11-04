@@ -58,8 +58,10 @@ A repository may instead make `docs/name/README.md` the entry point, under three
    repository fixed in the same change. Switching back and forth is discouraged: each switch breaks
    links from outside the repository, which cannot be fixed.
 2. **Never both.** `docs/name.md` and `docs/name/README.md` do not exist side by side.
-3. **The map names the one in use.** An index inside the archive is not an archived file, so the
-   archive's header and citation rules do not apply to it.
+3. **The map names the one in use.**
+
+An index inside the archive, `docs/archive/README.md`, is not an archived file: it is checked like
+any other documentation file, and the archive's header and citation rules do not apply to it.
 
 - **Root:** Holds only files a tool or convention looks for there: `README.md`, `AGENTS.md`, its
   aliases, `CHANGELOG.md`, and `DOC-MAP.md`.
@@ -86,16 +88,17 @@ and generated decision indexing.
 
 - Good, because any artifact can grow into a directory without changing its entry-point path or
   breaking existing links.
-- Good, because filenames in `docs/` are descriptive and distinct in editor tabs and agent tool
-  calls.
-- Good, because `docs/decisions/*.md` holds only decision records, simplifying globbing and checks.
-- Good, because `docs/archive.md` is an authoritative, checked document, while everything inside
+- Good, because by default filenames in `docs/` are descriptive and distinct in editor tabs and
+  agent tool calls.
+- Good, because `docs/decisions/*.md` holds only decision records, simplifying globbing and checks;
+  a `README.md` index is the one exception, and the tools skip it.
+- Good, because the archive's index is an authoritative, checked document, while everything else in
   `docs/archive/` remains exempt.
-- Good, because active decisions are discovered in a single read of `docs/decisions.md`.
+- Good, because active decisions are discovered in a single read of the decisions index.
 - Good, because external source material is verified with pinned checksums and licence tracking.
 - Bad, because GitHub's web UI does not automatically render `docs/{name}.md` when navigating
-  directly into `docs/{name}/`. A repository that minds can choose `docs/{name}/README.md` for a new
-  directory.
+  directly into `docs/{name}/`. A repository that minds can choose `docs/{name}/README.md` when the
+  directory is introduced.
 - Bad, because two forms mean a reader checks the map for which one a repository uses.
 - Bad, because maintaining generated indexes requires generator tooling and checker validation.
 
