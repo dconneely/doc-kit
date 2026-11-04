@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.8.0] - 2026-11-04
+
 ### Added
 
 - A directory artifact may use `name/README.md` as its entry point instead of a sibling `name.md`
