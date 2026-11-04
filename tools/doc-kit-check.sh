@@ -247,7 +247,7 @@ check_map() {
 		elif within "$ignored" "$r" || within "$ignored" "$m"; then
 			warn "$m and $r are both entry points (gitignored)" "§2.9 - advisory; keep one"
 		else
-			fail "$m and $r are both entry points" "§2.6 - keep one"
+			fail "$m and $r are both entry points" "§2.6 - keep one; a file that is not the index takes another name"
 		fi
 	done
 	IFS=$oldifs

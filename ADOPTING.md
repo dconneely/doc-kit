@@ -57,7 +57,8 @@ its decisions, or in its plan if it has one.
 **Then write `docs/plan.md` before anything else.** It is the one artifact you can create knowing
 nothing about the repository yet, and the adoption work itself is its first content: one entry per
 artifact to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those
-entries in the ordinary way.
+entries in the ordinary way. If the repository already has a `docs/plan.md` of its own, rename it
+first and migrate it in Step 4 (4b).
 
 This is not ceremony. It is what makes adoption survive being interrupted, which - on any repository
 old enough to need it - it will be. It also means the structure is doing real work from the first
@@ -314,6 +315,11 @@ decision not to migrate, for a stated reason, and promoting an undatable claim i
 specification is worse than leaving it in the archive. And **anything moving out of a directory
 people navigate leaves a one-line pointer behind**, because links from issues, wikis and bookmarks
 do not follow renames.
+
+**A file never keeps a name the kit gives a meaning to.** An existing `docs/plan.md` that is not a
+doc-kit plan is renamed (`docs/tasks.md`, say) before Step 0 writes the new one, and a `README.md`
+archived into the top of `docs/archive/` is renamed (`old-readme.md`), because that name is the
+archive's index (`docs/spec.md` §2.6). Renaming is simpler than any rule for telling the two apart.
 
 Get the owner to review the dispositions before acting on them. It is the cheapest point at which
 someone who remembers why a document exists can say so.

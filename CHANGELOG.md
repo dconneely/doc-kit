@@ -10,13 +10,17 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 - A directory artifact may use `name/README.md` as its index instead of a sibling `name.md`. Moving
   an existing `name.md` there when the directory is introduced is a one-off migration; switching
-  back and forth is discouraged. Never both: the checker fails when both exist (section 2.6,
-  ADR-0014). The plan check reads `docs/plan/README.md` when there is no `docs/plan.md`, and the
-  map's ratified pairs accept either form. A directory's member files share the pairs of its entry
-  point, so `docs/spec/*.md` and `docs/quirks.md` no longer warn. An index at
-  `docs/archive/README.md` is not an archived file: it needs no provenance header, and it is checked
-  like any other documentation file (sections 1 and 5.5). A gitignored pair of entry points is
-  advisory and a vendored one is skipped.
+  back and forth is discouraged (section 2.6, ADR-0014).
+- The checker fails when both `name.md` and `name/README.md` exist. A gitignored pair is advisory,
+  and a vendored one is skipped.
+- The plan check reads `docs/plan/README.md` when there is no `docs/plan.md`.
+- The map's ratified pairs accept either form of entry point, and a directory's member files share
+  the pairs of its entry point, so `docs/spec/*.md` and `docs/quirks.md` no longer warn.
+- An index at `docs/archive/README.md` is not an archived file: it needs no provenance header, and
+  it is checked like any other documentation file (sections 1 and 5.5). An archived file is never
+  named `README.md` at the top of the archive.
+- During adoption, a file that would take a name the kit gives a meaning to - an existing
+  `docs/plan.md`, an archived `README.md` - is renamed first.
 - The archive holds documentation kept but not migrated: undatable, or fitting no artifact and not
   worth rewriting now. A provenance header may give "unknown" for when the file was last accurate,
   and the archive is no longer described as immutable (ADR-0009).

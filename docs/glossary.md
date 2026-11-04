@@ -13,9 +13,9 @@ test asserting today's incorrect output. A quirk with an expiry condition, recor
 reader does not "fix" the test.
 
 **Archive** - a directory for documentation kept but not migrated: undatable, or fitting no artifact
-and not worth rewriting now. Exempt from the map's completeness check; every file in it carries a
-provenance header, or has one in a sibling `<filename>.provenance.md` for non-text formats. See
-ADR-0009.
+and not worth rewriting now. Exempt from the map's completeness check; every file in it except a
+`README.md` index carries a provenance header, or has one in a sibling `<filename>.provenance.md`
+for non-text formats. See ADR-0009.
 
 **Artifact** - one document, or one directory of documents, named in the map and given a tense, a
 mutability and an audience. The unit the structure is built from.

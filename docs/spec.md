@@ -349,7 +349,8 @@ merely hard to read is migrated. The failure this guards against is a plausible-
 being promoted into the specification, where the structure instructs everyone to trust it.
 
 5.5 An index inside the archive (`docs/archive/README.md`, §2.6) is not an archived file. It is a
-documentation file like any other, and §5.2 and §5.3 do not apply to it.
+documentation file like any other, and §5.2 and §5.3 do not apply to it. An archived file MUST NOT
+take that name.
 
 ## 6. Conformance
 

@@ -1,7 +1,7 @@
 # Archive - not authoritative
 
 Documentation kept but **not migrated**: its currency cannot be established, or it fits no artifact
-and is not worth rewriting now. Nothing here may be relied on.
+and is not worth rewriting now. Nothing archived here may be relied on.
 
 The archive is exempt from the map's completeness check, and appears in `DOC-MAP.md` as a single
 entry rather than file by file.
@@ -32,9 +32,10 @@ cost of losing that is invisible until years later.
 
 ## Rules
 
-1. **Every file carries a provenance header.** This one is not optional and this page does not
-   substitute for it - readers and tools arrive at these files directly, by search, and never see
-   this page.
+1. **Every file carries a provenance header**, except a `README.md` index. This one is not optional
+   and this page does not substitute for it - readers and tools arrive at these files directly, by
+   search, and never see this page. A file archived as `README.md` at the top of the archive is
+   renamed, because that name is the index.
 2. **Every entry states why it was not migrated.** Without a stated reason the archive becomes a
    landfill, which is the plan-graveyard failure in a new location.
 3. **Nothing outside the archive cites anything inside it.** Material worth relying on gets migrated
