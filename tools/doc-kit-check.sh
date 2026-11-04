@@ -268,8 +268,24 @@ check_map() {
 			}
 			return 0
 		}
+		# An entry point name/README.md stands for name.md (§2.6).
+		function entry(p,  q) {
+			q = p
+			sub(/\/README\.md$/, ".md", q)
+			return q
+		}
+		# The entry point of the directory holding p, as name.md, or "" at the top.
+		function owner(p,  q) {
+			q = p
+			if (!sub(/\/[^\/]+$/, ".md", q)) return ""
+			return q
+		}
+		function ratified(a, b) {
+			return (norm_pair(a, b) in exempt_pairs)
+		}
 		function is_exempt_pair(a, b,  pa, pb) {
-			if (norm_pair(a, b) in exempt_pairs) return 1
+			if (ratified(entry(a), entry(b))) return 1
+			if (ratified(owner(a), entry(b)) || ratified(entry(a), owner(b))) return 1
 			if (is_parent_child(a, b) || is_parent_child(b, a)) return 1
 			# Sibling members in the same docs/ container
 			if (a ~ /^docs\/[^\/]+\// && b ~ /^docs\/[^\/]+\//) {
@@ -551,7 +567,9 @@ check_citations() {
 
 check_plan() {
 	group plan
-	[ -f docs/plan.md ] || return 0
+	plan=docs/plan.md
+	[ -f "$plan" ] || plan=docs/plan/README.md
+	[ -f "$plan" ] || return 0
 
 	# One awk pass: `done N` for a heading marked complete, `type N` for an entry (a `##` heading)
 	# with no valid type tag beneath it. Lowercase "done" counts only when set off as a marker -
@@ -566,7 +584,7 @@ check_plan() {
 		/^## / { flush(); h = NR; t = 0; next }
 		/^\*\*Type:\*\* (bug|debt|feature|docs)([ -]|$)/ { t = 1 }
 		END { flush() }
-	' docs/plan.md)
+	' "$plan")
 
 	# Fed from a variable, not a pipe: a piped `while` runs in a subshell, and increments to
 	# `failures` would be lost.
@@ -577,8 +595,8 @@ check_plan() {
 		IFS=$oldifs
 		no=${hit#* }
 		case "$hit" in
-			done*) fail "docs/plan.md:$no looks like a completed entry" "§3.3 - delete entries when done, do not annotate" ;;
-			type*) fail "docs/plan.md:$no has no valid type tag" "§3.3 - bug, debt, feature or docs" ;;
+			done*) fail "$plan:$no looks like a completed entry" "§3.3 - delete entries when done, do not annotate" ;;
+			type*) fail "$plan:$no has no valid type tag" "§3.3 - bug, debt, feature or docs" ;;
 		esac
 	done
 	IFS=$oldifs

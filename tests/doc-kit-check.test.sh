@@ -230,6 +230,22 @@ after '^[|] `DOC-MAP.md` +[|] start' '| `docs/testing.md` | start | never |'
 refute "standard ratified pair does not warn" "WARN [map]" map
 
 fixture
+mkdir -p docs/spec
+echo x >docs/quirks.md
+echo x >docs/spec/README.md
+echo x >docs/spec/cli.md
+after '^DOC-MAP.md ' 'docs/quirks.md quirks'
+after '^DOC-MAP.md ' 'docs/spec/README.md spec'
+after '^DOC-MAP.md ' 'docs/spec/*.md members'
+after '^[|] `DOC-MAP.md` ' '| `docs/quirks.md` | quirks | present | rewritten in place | end-user |'
+after '^[|] `DOC-MAP.md` ' '| `docs/spec/README.md` | spec | present | rewritten in place | end-user |'
+after '^[|] `DOC-MAP.md` ' '| `docs/spec/*.md` | members | present | rewritten in place | end-user |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/quirks.md` | start | never |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/spec/README.md` | start | never |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/spec/*.md` | start | never |'
+refute "ratified pair with a README.md entry point and its members does not warn" "WARN [map]" map
+
+fixture
 echo x >docs/archive.md
 echo x >docs/decisions.md
 after '^DOC-MAP.md ' 'docs/archive.md archive'
@@ -440,6 +456,12 @@ expect "heading marked DONE fails" 1 "docs/plan.md:9 looks like a completed entr
 fixture
 printf '\n## Old thing (done)\n\n**Type:** bug\n\nDone.\n' >>docs/plan.md
 expect "heading marked (done) fails" 1 "looks like a completed entry" plan
+
+fixture
+mkdir -p docs/plan
+mv docs/plan.md docs/plan/README.md
+printf '\n## Old thing DONE\n\n**Type:** bug\n\nDone.\n' >>docs/plan/README.md
+expect "the plan at docs/plan/README.md is checked" 1 "docs/plan/README.md:9 looks like a completed entry" plan
 
 fixture
 printf '\n## ~~Old thing~~\n\n**Type:** bug\n\nDone.\n' >>docs/plan.md

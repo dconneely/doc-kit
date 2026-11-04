@@ -96,15 +96,17 @@ for at the root - the map, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.
 there; every other artifact SHOULD sit under `docs/` (ADR-0014). Product artifacts (ADR-0005) are
 exempt: they sit at the root because an adopter must find them. In a monorepo the per-module
 artifacts MUST sit under the module they describe, and only the map, `README.md`, `AGENTS.md` and
-its aliases, `CHANGELOG.md` and `docs/plan.md` stay at the repository root.
+its aliases, `CHANGELOG.md` and the plan stay at the repository root.
 
 An artifact `name.md` that outgrows one file MAY gain a sibling directory `name/` holding its parts.
 The file stays as the entry point - an index or summary linking into the directory - so links to it
 stay true, and each part the map distinguishes gets its own row (ADR-0014).
 
-A directory artifact MAY instead have `name/README.md` as its entry point, chosen when the directory
-is created; an existing `name.md` that grows a directory keeps the sibling form. `name.md` and
-`name/README.md` MUST NOT both exist, and the map names the one in use.
+A directory artifact MAY instead have `name/README.md` as its entry point. Moving an existing
+`name.md` there when the directory is introduced is a one-off migration that fixes every link to it
+in the same change; a repository SHOULD NOT switch between the forms after that, because links from
+outside it break. `name.md` and `name/README.md` MUST NOT both exist, and the map names the one in
+use.
 
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
 mutability and an audience, drawn from the sets in the `Property values` table in

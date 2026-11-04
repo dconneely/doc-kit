@@ -42,7 +42,7 @@ Four problems with documentation layout, growth, and discoverability:
 - **Uniform sibling entry points (`docs/{name}.md` with optional `docs/{name}/`):** Standardise on
   `docs/{name}.md` as the entry point / index for every directory artifact `docs/{name}/`.
 - **Sibling entry points by default, `docs/{name}/README.md` by choice:** As above, but a repository
-  may make `docs/{name}/README.md` the entry point of a directory artifact instead, chosen once.
+  may make `docs/{name}/README.md` the entry point of a directory artifact instead.
 
 ## Decision Outcome
 
@@ -53,9 +53,10 @@ links to it stay true.
 
 A repository may instead make `docs/name/README.md` the entry point, under three limits:
 
-1. **Chosen when the directory is created.** A directory that exists from the start - sources,
-   decisions, the archive - can take either form. A `docs/name.md` that later grows a directory
-   keeps the sibling form; switching is a rename that breaks every link to it.
+1. **Chosen when the directory is introduced.** Moving an existing `docs/name.md` to
+   `docs/name/README.md` then is a one-off migration, made deliberately, with every link in the
+   repository fixed in the same change. Switching back and forth is discouraged: each switch breaks
+   links from outside the repository, which cannot be fixed.
 2. **Never both.** `docs/name.md` and `docs/name/README.md` do not exist side by side.
 3. **The map names the one in use.** An index inside the archive is not an archived file, so the
    archive's header and citation rules do not apply to it.
@@ -76,7 +77,7 @@ A repository may instead make `docs/name/README.md` the entry point, under three
 - **Archive:** `docs/archive.md` quarantine index records why retained legacy documents were not
   migrated. Non-authoritative, exempt files sit in `docs/archive/` (§5.1).
 - **Monorepos:** Per-module artifacts sit under the module; only `DOC-MAP.md`, `README.md`,
-  `AGENTS.md` and its aliases, `CHANGELOG.md`, and `docs/plan.md` stay at the repository root.
+  `AGENTS.md` and its aliases, `CHANGELOG.md`, and the plan stay at the repository root.
 
 This combines and supersedes the decisions originally explored for how-to guides, external sources,
 and generated decision indexing.

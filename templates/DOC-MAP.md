@@ -61,14 +61,15 @@ docs/
   archive.md             optional: index of documents kept but not migrated
 ```
 
-In a monorepo, everything below `docs/` except `docs/plan.md` moves under the module it describes;
-`DOC-MAP.md`, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` and `docs/plan.md` stay at
-the repository root.
+In a monorepo, everything below `docs/` except the plan moves under the module it describes;
+`DOC-MAP.md`, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` and the plan stay at the
+repository root.
 
 Any `docs/name.md` that outgrows one file gains a sibling directory `docs/name/` for its parts, and
 stays as their index. The specification is the usual case: its members can be machine-readable -
-schemas, interface definitions - and each gets its own row below. A directory created as one -
-sources, decisions, the archive - may use `docs/name/README.md` as its index instead; never both.
+schemas, interface definitions - and each gets its own row below. A directory may use
+`docs/name/README.md` as its index instead: choose when the directory is introduced, fix the links
+then, and never keep both.
 
 ## Artifacts
 
