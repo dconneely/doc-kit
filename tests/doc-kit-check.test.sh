@@ -168,6 +168,30 @@ echo x >docs/decisions.md
 expect "both entry points fail" 1 "FAIL [map] docs/decisions.md and docs/decisions/README.md are both entry points" map
 
 fixture
+mkdir -p docs/archive
+printf 'See ADR-0099.\n' >docs/archive/stale.md
+printf 'See ADR-0099.\n' >docs/archive/README.md
+expect "the archive's README.md index is a documentation file" 1 "FAIL [map] docs/archive/README.md is not named in the map" map
+expect "the archive's README.md index is checked for citations" 1 "docs/archive/README.md:1 cites ADR-0099, which does not exist" adr
+expect "an archived file is not checked for citations" 1 "doc-kit: 1 failure(s)" adr
+
+fixture
+git init -q .
+printf 'gen.md\ngen/\n' >.gitignore
+mkdir -p gen
+echo x >gen.md
+echo x >gen/README.md
+expect "a gitignored pair of entry points is advisory" 0 "WARN [map] gen.md and gen/README.md are both entry points (gitignored)" map
+
+fixture
+git init -q .
+printf 'lib.md linguist-vendored\nlib/** linguist-vendored\n' >.gitattributes
+mkdir -p lib
+echo x >lib.md
+echo x >lib/README.md
+refute "a vendored pair of entry points is skipped" "both entry points" map
+
+fixture
 echo x >"docs/decisions/0002 old notes.md"
 echo x >"loose notes.md"
 expect "a mapped path with spaces passes" 1 "FAIL [map] loose notes.md is not named in the map" map

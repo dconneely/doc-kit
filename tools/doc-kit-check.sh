@@ -179,12 +179,13 @@ check_map() {
 		set -f
 	done
 
-	# §2.4 - every documentation file appears in the map. Files below the conventional
-	# archive (§5.1), the kit's templates (§2.8), and vendored files (§1) are not documentation
-	# files; an archive elsewhere is covered by its map entry. Split on newlines only, so a path
-	# may contain spaces.
+	# §2.4 - every documentation file appears in the map. Files below the conventional archive
+	# other than its index (§5.1), the kit's templates (§2.8), and vendored files (§1) are not
+	# documentation files; an archive elsewhere is covered by its map entry. Split on newlines
+	# only, so a path may contain spaces.
 	set +f
-	files=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' |
+	files=$(find . -name '*.md' ! -path './.git/*' \
+		\( ! -path './docs/archive/*' -o -path './docs/archive/README.md' \) | sed 's:^\./::' |
 		not_templates | sort)
 	set -f
 	unmapped=''
@@ -225,15 +226,28 @@ check_map() {
 	IFS=$oldifs
 	set +f
 
-	# §2.6 - a directory artifact has one entry point: name.md or name/README.md, never both.
+	# §2.6 - a directory artifact has one entry point: name.md or name/README.md, never both. A
+	# vendored pair is not documentation (§1); a gitignored one is advisory (§2.9).
 	set +f
 	readmes=$(find . -name README.md ! -path './README.md' ! -path './.git/*' | sed 's:^\./::' |
 		not_templates | sort)
 	set -f
+	pairs=''
 	IFS=$NL
 	for r in $readmes; do
-		if [ -f "${r%/README.md}.md" ]; then
-			fail "${r%/README.md}.md and $r are both entry points" "§2.6 - keep one"
+		[ ! -f "${r%/README.md}.md" ] || pairs="$pairs$r$NL${r%/README.md}.md$NL"
+	done
+	vendored=$(printf '%s' "$pairs" | vendored_of)
+	ignored=$(printf '%s' "$pairs" | ignored_of)
+	for r in $pairs; do
+		case "$r" in */README.md) ;; *) continue ;; esac
+		m=${r%/README.md}.md
+		if within "$vendored" "$r" || within "$vendored" "$m"; then
+			continue
+		elif within "$ignored" "$r" || within "$ignored" "$m"; then
+			warn "$m and $r are both entry points (gitignored)" "§2.9 - advisory; keep one"
+		else
+			fail "$m and $r are both entry points" "§2.6 - keep one"
 		fi
 	done
 	IFS=$oldifs
@@ -499,10 +513,11 @@ check_adr() {
 
 # §3.1 - every bare ADR-NNNN names a record in docs/decisions/, and no citation takes another form.
 # Code - fenced blocks and inline spans - and the text of links to other sites are not citations.
-# Vendored and gitignored files are not read.
+# Vendored and gitignored files are not read, nor archived files other than the index (§5.5).
 check_citations() {
 	set +f
-	docs=$(find . -name '*.md' ! -path './.git/*' ! -path './docs/archive/*' | sed 's:^\./::' |
+	docs=$(find . -name '*.md' ! -path './.git/*' \
+		\( ! -path './docs/archive/*' -o -path './docs/archive/README.md' \) | sed 's:^\./::' |
 		not_templates | sort)
 	set -f
 	skip=$(printf '%s\n' "$docs" | vendored_of; printf '%s\n' "$docs" | ignored_of)

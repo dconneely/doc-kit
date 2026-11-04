@@ -12,8 +12,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   an existing `name.md` there when the directory is introduced is a one-off migration; switching
   back and forth is discouraged. Never both: the checker fails when both exist (section 2.6,
   ADR-0014). The plan check reads `docs/plan/README.md` when there is no `docs/plan.md`, and the
-  map's ratified pairs accept either form. An index at `docs/archive/README.md` is not an archived
-  file and needs no provenance header (section 5.5).
+  map's ratified pairs accept either form. A directory's member files share the pairs of its entry
+  point, so `docs/spec/*.md` and `docs/quirks.md` no longer warn. An index at
+  `docs/archive/README.md` is not an archived file: it needs no provenance header, and it is checked
+  like any other documentation file (sections 1 and 5.5). A gitignored pair of entry points is
+  advisory and a vendored one is skipped.
 - The archive holds documentation kept but not migrated: undatable, or fitting no artifact and not
   worth rewriting now. A provenance header may give "unknown" for when the file was last accurate,
   and the archive is no longer described as immutable (ADR-0009).

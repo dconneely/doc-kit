@@ -4,7 +4,7 @@ date: 2026-11-04
 decision-makers: David Conneely
 ---
 
-# 9. What happens to documentation that cannot be dated
+# 9. What happens to documentation that is kept but not migrated
 
 ## Context and Problem Statement
 
