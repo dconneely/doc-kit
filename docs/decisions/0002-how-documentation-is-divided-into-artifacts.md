@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-10-30
+date: 2026-11-04
 decision-makers: David Conneely
 ---
 
@@ -61,16 +61,18 @@ Because the closed sets are small, some artifacts the template map defines share
 holding different facts. The checker exempts exactly these pairs, and a test fails if its list and
 this table differ:
 
-| Pair                                      | Why the facts differ                                                 |
-| ----------------------------------------- | -------------------------------------------------------------------- |
-| `DOC-MAP.md` and `docs/testing.md`        | the map says where each fact belongs; testing says what checks cover |
-| `README.md` and `docs/glossary.md`        | the README orients a newcomer; the glossary defines the vocabulary   |
-| `docs/quirks.md` and `docs/spec.md`       | the specification is the contract; quirks are deliberate deviations  |
-| `docs/archive.md` and `docs/decisions.md` | one indexes undatable documents; the other indexes decision records  |
+| Pair                                      | Why the facts differ                                                    |
+| ----------------------------------------- | ----------------------------------------------------------------------- |
+| `DOC-MAP.md` and `docs/testing.md`        | the map says where each fact belongs; testing says what checks cover    |
+| `README.md` and `docs/glossary.md`        | the README orients a newcomer; the glossary defines the vocabulary      |
+| `docs/quirks.md` and `docs/spec.md`       | the specification is the contract; quirks are deliberate deviations     |
+| `docs/archive.md` and `docs/decisions.md` | one indexes documents kept but not migrated; the other decision records |
 
-Two structural cases are exempt as well: an entry point and its parts (`docs/spec.md` and
-`docs/spec/*`, say), and the parts of one container (two files in `docs/howto/`, say), because the
-growth rule (ADR-0014) splits one artifact into them. Product and template rows are exempt by
+Three structural cases are exempt as well, because the growth rule (ADR-0014) splits one artifact
+into them: an entry point and its parts (`docs/spec.md` and `docs/spec/*`, say); the parts of one
+container (two files in `docs/howto/`, say); and the parts of a container paired with whatever its
+entry point is paired with (`docs/spec/*` and `docs/quirks.md`, say). An entry point counts the same
+in either form, `docs/name.md` or `docs/name/README.md`. Product and template rows are exempt by
 `docs/spec.md` §2.8. Every other shared triple is reported.
 
 The list is held here and in the checker, not in the map, so that changing it needs the owner's
