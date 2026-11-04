@@ -147,8 +147,10 @@ matter of taking the ones Step 1 said you had earned:
 Two files sit outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `docs/spec.md`, and **`tools/doc-kit-index-decisions.sh`**, which generates
 `docs/decisions.md` from decision record front-matter (§3.1, §4.3). Copy them too if you want
-automated checks and index generation; skip them if you would rather verify and index by hand. Both
-are single POSIX shell scripts using standard utilities; the checker uses `git` when available for
+automated checks and index generation; skip them if you would rather verify and index by hand. As
+with filenames, keep `tools/` unless the repository already keeps its scripts elsewhere; if it does,
+copy them there and use that path wherever this guide and the templates say `tools/`. Both are
+single POSIX shell scripts using standard utilities; the checker uses `git` when available for
 ignore and vendored-file checks - read them before you run them. On Windows invoke them with `sh`,
 not `bash`.
 
