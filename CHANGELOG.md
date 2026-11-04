@@ -6,28 +6,29 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Added
+
+- A directory artifact may use `name/README.md` as its entry point instead of a sibling `name.md`
+  (section 2.6, ADR-0014). Moving to it when the directory is introduced is a one-off migration;
+  switching back and forth is discouraged. The checker fails when both forms exist, warns when the
+  pair is gitignored, and skips a vendored pair. The plan check and the map's ratified pairs
+  (ADR-0002) accept either form.
+- An archive's `README.md` is its index: a documentation file like any other, with no provenance
+  header (sections 1 and 5.5).
+- During adoption, a file that would take a name the kit gives a meaning to - an existing
+  `docs/plan.md`, a `README.md` going into the archive - is renamed first.
+
 ### Changed
 
-- A directory artifact may use `name/README.md` as its index instead of a sibling `name.md`. Moving
-  an existing `name.md` there when the directory is introduced is a one-off migration; switching
-  back and forth is discouraged (section 2.6, ADR-0014).
-- The checker fails when both `name.md` and `name/README.md` exist. A gitignored pair is advisory,
-  and a vendored one is skipped.
-- The plan check reads `docs/plan/README.md` when there is no `docs/plan.md`.
-- The map's ratified pairs accept either form of entry point, and a directory's member files share
-  the pairs of its entry point, so `docs/spec/*.md` and `docs/quirks.md` no longer warn.
-- An index at `docs/archive/README.md` is not an archived file: it needs no provenance header, and
-  it is checked like any other documentation file (sections 1 and 5.5). An archived file is never
-  named `README.md` at the top of the archive.
-- During adoption, a file that would take a name the kit gives a meaning to - an existing
-  `docs/plan.md`, an archived `README.md` - is renamed first.
 - The archive holds documentation kept but not migrated: undatable, or fitting no artifact and not
-  worth rewriting now. A provenance header may give "unknown" for when the file was last accurate,
-  and the archive is no longer described as immutable (ADR-0009).
-- `tools/doc-kit-check.sh` and `tools/doc-kit-index-decisions.sh` work unchanged from any directory
-  they are copied to: the checker runs the generator beside itself, and neither names its own path.
-  The generator writes `<dir>/README.md` by default when that file exists. The generated header no
-  longer names `tools/`, so an existing index is reported out of date until it is regenerated once.
+  worth rewriting now (ADR-0009). A provenance header may give "unknown" for when the file was last
+  accurate, and the archive is no longer described as immutable.
+- A directory's member files share their entry point's ratified pairs, so `docs/spec/*.md` and
+  `docs/quirks.md` no longer warn (ADR-0002).
+- `tools/doc-kit-check.sh` and `tools/doc-kit-index-decisions.sh` run unchanged from any directory,
+  so they can go where the repository already keeps its scripts. The generator writes
+  `<dir>/README.md` when that file exists. Its header no longer names `tools/`: regenerate an
+  existing index once.
 
 ## [0.7.1] - 2026-10-31
 
