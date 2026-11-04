@@ -447,6 +447,36 @@ else
 	echo "not ok - index generator handles a directory with no records"
 fi
 
+fixture
+mkdir -p scripts
+cp "$ROOT/tools/doc-kit-check.sh" "$ROOT/tools/doc-kit-index-decisions.sh" scripts/
+echo stale >docs/decisions/README.md
+set +e
+sh scripts/doc-kit-index-decisions.sh && out=$(sh scripts/doc-kit-check.sh adr 2>&1)
+got=$?
+set -e
+if [ "$got" -eq 0 ] && [ ! -e docs/decisions.md ] && grep -qF 'ADR-0001' docs/decisions/README.md; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	printf 'not ok - scripts copied elsewhere regenerate and check an existing README.md index (exit %s)\n%s\n\n' "$got" "$out"
+fi
+
+fixture
+mkdir -p scripts
+cp "$ROOT/tools/doc-kit-check.sh" "$ROOT/tools/doc-kit-index-decisions.sh" scripts/
+echo stale >docs/decisions.md
+set +e
+out=$(sh scripts/doc-kit-check.sh adr 2>&1)
+got=$?
+set -e
+if [ "$got" -eq 1 ] && printf '%s\n' "$out" | grep -qF "run 'sh scripts/doc-kit-index-decisions.sh docs/decisions.md docs/decisions'"; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	printf 'not ok - the checker names the generator beside it (exit %s)\n%s\n\n' "$got" "$out"
+fi
+
 # ---------------------------------------------------------------- plan
 
 fixture

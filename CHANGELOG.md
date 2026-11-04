@@ -17,6 +17,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - The archive holds documentation kept but not migrated: undatable, or fitting no artifact and not
   worth rewriting now. A provenance header may give "unknown" for when the file was last accurate,
   and the archive is no longer described as immutable (ADR-0009).
+- `tools/doc-kit-check.sh` and `tools/doc-kit-index-decisions.sh` work unchanged from any directory
+  they are copied to: the checker runs the generator beside itself, and neither names its own path.
+  The generator writes `<dir>/README.md` by default when that file exists. The generated header no
+  longer names `tools/`, so an existing index is reported out of date until it is regenerated once.
 
 ## [0.7.1] - 2026-10-31
 

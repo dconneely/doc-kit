@@ -1,7 +1,7 @@
 #!/bin/sh
 # doc-kit-check - verify a repository against the doc-kit specification (docs/spec.md in the kit).
 #
-# Usage:  sh tools/doc-kit-check.sh [check ...]
+# Usage:  sh path/to/doc-kit-check.sh [check ...]
 #         with no arguments, runs every check
 #
 # Checks: map    §2.2-2.7  the map is complete, consistent and customised
@@ -481,13 +481,15 @@ check_adr() {
 	# the same file name, because the name decides how the index links to the records.
 	idx="${dir}.md"
 	[ -f "$idx" ] || idx="$dir/README.md"
-	if [ -f "$idx" ] && [ -f tools/doc-kit-index-decisions.sh ]; then
+	# The generator is looked for beside this script, wherever both were copied.
+	index=$(dirname "$0")/doc-kit-index-decisions.sh
+	if [ -f "$idx" ] && [ -f "$index" ]; then
 		gen=$(mktemp -d)
 		out="$gen/${idx##*/}"
-		if ! sh tools/doc-kit-index-decisions.sh "$out" "$dir"; then
+		if ! sh "$index" "$out" "$dir"; then
 			fail "$idx could not be regenerated" "see the error above (§4.3)"
 		elif ! cmp -s "$idx" "$out"; then
-			fail "$idx is out of date" "run 'sh tools/doc-kit-index-decisions.sh $idx $dir' to regenerate (§4.3)"
+			fail "$idx is out of date" "run 'sh $index $idx $dir' to regenerate (§4.3)"
 		fi
 		rm -rf "$gen"
 	fi
