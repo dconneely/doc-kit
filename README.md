@@ -118,5 +118,5 @@ to edit should not follow you home.
 ## Status
 
 Released, and still early. In use here and in some other repositories owned by the author - the
-situation the kit is designed for (ADR-0001). See `CHANGELOG.md` for what shipped and `docs/plan.md`
-for what is still open.
+situation the kit is designed for (ADR-0001). See `CHANGELOG.md` for what shipped and
+`docs/plan/README.md` for what is still open.

@@ -12,7 +12,7 @@ When two documents disagree, tense settles it:
 
 - **`docs/spec.md`** - present tense, authoritative about what a conformant repository is.
 - **`CHANGELOG.md`** - past tense. Records what changed, never what is currently true.
-- **`docs/plan.md`** - intent. Nothing described in it exists yet.
+- **`docs/plan/README.md`** - intent. Nothing described in it exists yet.
 - **`docs/decisions/`** - past tense, and records _why_. Check `status` before relying on one; only
   `accepted` binds.
 
@@ -61,8 +61,8 @@ tool is not a change. `docs/spec.md` §3.1 has the rest.
 
 ## Before you edit
 
-- **Delete completed `docs/plan.md` entries.** Do not annotate, strike through, or move them to a
-  done section - that is the specific failure that makes a plan stop being read.
+- **Delete completed `docs/plan/README.md` entries.** Do not annotate, strike through, or move them
+  to a done section - that is the specific failure that makes a plan stop being read.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
 - **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map names
@@ -80,7 +80,7 @@ does. Never because you have decided it would read better, cover more, or be org
 
 The flow in the map is the whole procedure: an ADR first if a real choice was made, then
 `docs/spec.md` in the present tense, then a `CHANGELOG.md` line if an adopter can see the change,
-then delete the `docs/plan.md` entry if there was one.
+then delete the `docs/plan/README.md` entry, and its task note, if there was one.
 
 Two things to watch:
 
