@@ -86,7 +86,7 @@ present tense, always current, and a contract someone relies on.
 |                         | ordered migrations                                                                                                                                                                                                                               | changelog-shaped: an ordered, immutable-once-applied sequence is a changelog whatever it describes |
 | a network API           | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth                                                                                             | specification                                                                                      |
 |                         | cross-cutting conventions: pagination, versioning, idempotency, error shape ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457); crib [Google AIP](https://google.aip.dev) or [Zalando](https://opensource.zalando.com/restful-api-guidelines/)) | specification                                                                                      |
-| deployment as a service | a **runbook** - deploy, roll back, common failures                                                                                                                                                                                               | how-to: step-by-step procedures under `docs/howto/` (indexed at `docs/howto/README.md`)            |
+| deployment as a service | a **runbook** - deploy, roll back, common failures                                                                                                                                                                                               | how-to: step-by-step procedures under `docs/howto/`                                                |
 |                         | environment and configuration reference ([12-Factor](https://12factor.net) conventions)                                                                                                                                                          | specification                                                                                      |
 |                         | a **threat model** ([OWASP ASVS](https://owasp.org/projects/asvs) as the checklist)                                                                                                                                                              | neither: an assessment - its conclusions become records, its findings become plan entries          |
 | external standards      | cited RFCs, whitepapers, or third-party specifications                                                                                                                                                                                           | manifest at `docs/sources/README.md`, with cached originals and `fetch.sh` beside it               |
@@ -139,7 +139,7 @@ matter of taking the ones Step 1 said you had earned:
 | `docs/glossary.md`                                                        | your domain has terms, or ordinary words used precisely                                                                                                                                                                         |
 | `docs/testing.md`                                                         | you have more than one test approach                                                                                                                                                                                            |
 | `docs/research/0000-template.md`                                          | you reverse-engineer, or reconcile sources that disagree                                                                                                                                                                        |
-| `docs/howto/README.md` and `docs/howto/0000-template.md`                  | you have recurring operational procedures (deployments, rotations, migrations)                                                                                                                                                  |
+| `docs/howto/0000-template.md`                                             | you have recurring operational procedures (deployments, rotations, migrations)                                                                                                                                                  |
 | `docs/sources/README.md` and `docs/sources/fetch.sh`                      | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                                                                                                              |
 | `docs/plan/`                                                              | your backlog is past roughly 20 items, or you are migrating an existing repository - take `adopt-doc-kit.md` (the migration worksheet) whenever you migrate, and `0000-template.md` (the task-note template) with the directory |
 | `docs/archive/README.md`                                                  | Step 4 turned up documentation you keep but do not migrate                                                                                                                                                                      |
@@ -234,7 +234,7 @@ Tense settles disagreements:
 - `docs/plan.md` - intent: nothing in it exists yet.
 - `docs/decisions/README.md` - why: index of decision records; only `accepted` records bind.
 - `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
-- `docs/howto/README.md` - step-by-step recurring operational procedures.
+- `docs/howto/` - step-by-step recurring operational procedures.
 - `docs/sources/README.md` - pinned external specifications and standards.
 - `docs/archive/README.md` - kept but not migrated; not authoritative. Never cite what it holds.
 
@@ -319,7 +319,7 @@ people navigate leaves a one-line pointer behind**, because links from issues, w
 do not follow renames.
 
 **A file never keeps a name the kit gives a meaning to.** A `README.md` archived into the top of
-`docs/archive/` is renamed (`old-readme.md`, say), because that name is the archive's index
+`docs/archive/` is renamed (`old-readme.md`, say), because that name is the archive's own page
 (`docs/spec.md` §2.6), as Step 0 renames an existing `docs/plan.md`. Renaming is simpler than any
 rule for telling the two apart.
 
@@ -356,8 +356,7 @@ disagree, or carrying a confidence level is research and needs a home before the
 is the artifact most often missing entirely.
 
 **4. Look for recurring procedures.** Deployment runbooks, release steps, key rotations, and
-environment bootstrapping become how-to guides under `docs/howto/` (indexed at
-`docs/howto/README.md`).
+environment bootstrapping become how-to guides under `docs/howto/`.
 
 **5. Look for external standards and specifications.** Cited RFCs, whitepapers, or third-party
 specifications become entries in `docs/sources/README.md`, with cached originals and licences

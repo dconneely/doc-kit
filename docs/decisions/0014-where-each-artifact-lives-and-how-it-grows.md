@@ -61,12 +61,12 @@ who opens the directory. The form follows from the artifact, so it is not a choi
    with every link in the repository fixed in the same change. Switching back and forth is
    discouraged: each switch breaks links from outside the repository, which cannot be fixed.
 2. **An artifact that starts as a directory** - decision records, how-to guides, external sources,
-   the archive - has its index, if it keeps one, at `docs/name/README.md`.
+   the archive - has its entry point, if it keeps one, at `docs/name/README.md`.
 3. **Never both, and the map names the one in use.** `docs/name.md` and `docs/name/README.md` do not
    exist side by side. A repository already using the other form keeps it.
 
-An index inside the archive, `docs/archive/README.md`, is not an archived file: it is checked like
-any other documentation file, and the archive's header and citation rules do not apply to it.
+The archive's own `docs/archive/README.md` is not an archived file: it is checked like any other
+documentation file, and the archive's header and citation rules do not apply to it.
 
 - **Root:** Holds only files a tool or convention looks for there: `README.md`, `AGENTS.md`, its
   aliases, `CHANGELOG.md`, and `DOC-MAP.md`.
@@ -81,8 +81,9 @@ any other documentation file, and the archive's header and citation rules do not
   mood, optionally indexed by `docs/howto/README.md`.
 - **External sources:** The `docs/sources/README.md` manifest pins URLs, retrieval dates, licences,
   and SHA-256 checksums. Cached originals, `.gitignore`, and `fetch.sh` sit beside it.
-- **Archive:** The `docs/archive/README.md` index records why retained documents were not migrated.
-  Non-authoritative, exempt files sit beside it (§5.1).
+- **Archive:** `docs/archive/README.md` says what the archive holds and the header each file in it
+  carries; each file's header says why it was not migrated. Non-authoritative, exempt files sit
+  beside it (§5.1).
 - **Monorepos:** Per-module artifacts sit under the module; only `DOC-MAP.md`, `README.md`,
   `AGENTS.md` and its aliases, `CHANGELOG.md`, and the plan stay at the repository root.
 
@@ -97,8 +98,8 @@ and generated decision indexing.
   reader who opens the directory.
 - Good, because `docs/decisions/*.md` holds only decision records, simplifying globbing and checks;
   a `README.md` index is the one exception, and the tools skip it.
-- Good, because the archive's index is an authoritative, checked document, while everything else in
-  `docs/archive/` remains exempt.
+- Good, because the archive's `README.md` is an authoritative, checked document, while everything
+  else in `docs/archive/` remains exempt.
 - Good, because active decisions are discovered in a single read of the decisions index.
 - Good, because external source material is verified with pinned checksums and licence tracking.
 - Bad, because every directory index is named `README.md`, so editor tabs, fuzzy finders and agent

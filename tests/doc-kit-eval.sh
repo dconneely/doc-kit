@@ -49,7 +49,7 @@ plan|^docs/plan\.md$|-|-|-|Later, the uploader needs retry with backoff. Nobody 
 glossary|^docs/glossary\.md$|-|-|-|In this project, a batch means one upload of up to 500 records sent in a single request.
 changelog|^CHANGELOG\.md$ $SPEC|^CHANGELOG\.md$|-|-|We have just shipped this: the exporter now writes a header row, which users will see in the next release.
 spec|$SPEC|-|-|-|The system rejects an upload larger than 10 MB with HTTP 413.
-howto|^docs/howto/([a-z0-9-]+|README)\.md$|-|-|-|To rotate the API key: generate a new key in the vendor console, update the KEY secret in CI, redeploy, then revoke the old key.
+howto|^docs/howto/[a-z0-9-]+\.md$|-|-|-|To rotate the API key: generate a new key in the vendor console, update the KEY secret in CI, redeploy, then revoke the old key.
 rule-and-why|$SPEC $ADR|$SPEC $ADR|-|-|Uploads are capped at 25 MB, because the reverse proxy in front of the service rejects larger request bodies.
 correction|$SPEC ^CHANGELOG\.md$|$SPEC ^CHANGELOG\.md$|larger than 5 MB|limit|The upload limit has just changed from 5 MB to 20 MB: the system now rejects an upload larger than 20 MB with HTTP 413.
 history|$ADR ^CHANGELOG\.md$ $SPEC|$ADR|MySQL|-|The project used MySQL until 2023, then moved to SQLite because the hosted database cost more than the product earned.

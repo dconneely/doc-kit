@@ -54,11 +54,10 @@ docs/
   research/*.md          sourced findings with confidence levels
   glossary.md            domain vocabulary
   testing.md             test strategy, and what is deliberately not covered
-  howto/README.md        optional: index of step-by-step procedures
   howto/*.md             optional: step-by-step procedures that recur across several places
   sources/README.md      optional: external material manifest: URLs, retrieval dates, checksums
   sources/               optional: external material: fetch script and cached originals
-  archive/README.md      optional: index of documents kept but not migrated
+  archive/README.md      optional: what the archive holds, and the header each file in it carries
 ```
 
 In a monorepo, everything below `docs/` except the plan moves under the module it describes;
@@ -90,11 +89,10 @@ interface definitions - and each gets its own row below.
 | `docs/testing.md`            | Test strategy, and what is deliberately _not_ covered                                                                    | present    | rewritten in place | contributor                  |
 | `docs/plan/*.md`             | Working notes for one backlog item. Optional                                                                             | future     | disposable         | contributor                  |
 | `docs/plan/0000-template.md` | **Template.** Task-note template. Optional                                                                               | present    | rewritten in place | contributor                  |
-| `docs/howto/README.md`       | Index of step-by-step procedures. Optional                                                                               | present    | rewritten in place | contributor, operator        |
 | `docs/howto/*.md`            | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms. Optional      | imperative | rewritten in place | contributor, operator        |
 | `docs/sources/README.md`     | External reference manifest: URLs, retrieval dates, licences, checksums. Optional                                        | present    | append-only        | contributor, consumer        |
 | `docs/sources/`              | External reference material: fetch script and cached originals. Optional                                                 | present    | append-only        | contributor                  |
-| `docs/archive/README.md`     | Index of documents kept but not migrated. Optional                                                                       | present    | rewritten in place | owner, contributor           |
+| `docs/archive/README.md`     | What the archive of documents kept but not migrated holds, and the header each file in it carries. Optional              | present    | rewritten in place | owner, contributor           |
 
 ## Property values
 
@@ -125,7 +123,6 @@ The closed sets used in the artifacts table (ADR-0002):
 | `docs/testing.md`            | the second test approach appears                   | never                                                            |
 | `docs/plan/*.md`             | work begins on an item                             | work completes                                                   |
 | `docs/plan/0000-template.md` | the directory is adopted                           | when the directory is removed                                    |
-| `docs/howto/README.md`       | the first how-to guide appears                     | when no how-to guides remain                                     |
 | `docs/howto/*.md`            | a procedure recurs across several places           | when automated away or obsolete                                  |
 | `docs/sources/README.md`     | an external standard is cited                      | when no artifact cites it                                        |
 | `docs/sources/`              | the fetch script is adopted, or a source is cached | when no artifact cites it                                        |

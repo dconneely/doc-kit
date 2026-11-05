@@ -8,11 +8,16 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
-- An artifact that starts as a directory - decision records, how-to guides, external sources, the
-  archive - has its index at `docs/name/README.md`, not a sibling `docs/name.md` (ADR-0014). The
+- An artifact that starts as a directory - decision records, external sources, the archive - has its
+  index or entry point at `docs/name/README.md`, not a sibling `docs/name.md` (ADR-0014). The
   templates, the template map, `ADOPTING.md` and the `AGENTS.md` stanza use the new paths. A
   repository already using the sibling form keeps it (section 2.6). An artifact that starts as a
   file, such as the specification or the plan, still grows a sibling directory.
+- The templates no longer include a how-to index. It repeated each guide's filename and the map's
+  audience, and the directory lists the guides. An existing index may stay, named in the map.
+- The archive's `README.md` is described as what it is - what the archive holds and the header each
+  file carries - rather than as an index of documents. Each file's header says why it was not
+  migrated.
 - `tools/doc-kit-index-decisions.sh` writes `docs/decisions/README.md` unless `docs/decisions.md`
   exists, and `fetch.sh` looks for `docs/sources/README.md` before `docs/sources.md`.
 

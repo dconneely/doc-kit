@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-10-28
+date: 2026-11-05
 decision-makers: David Conneely
 ---
 
@@ -9,10 +9,10 @@ decision-makers: David Conneely
 ## Context and Problem Statement
 
 The kit ships text - templates and a procedure - and two executable files: `tools/doc-kit-check.sh`,
-the conformance checker, and `tools/doc-kit-index-decisions.sh`, which generates
-`docs/decisions.md`. Both are POSIX shell scripts using standard utilities; the checker uses `git`
-when available for ignore and vendored-file checks. Adoption never requires running anything, and
-any infrastructure the kit offers is optional (ADR-0005).
+the conformance checker, and `tools/doc-kit-index-decisions.sh`, which generates the decisions
+index. Both are POSIX shell scripts using standard utilities; the checker uses `git` when available
+for ignore and vendored-file checks. Adoption never requires running anything, and any
+infrastructure the kit offers is optional (ADR-0005).
 
 Three questions follow: how the tools are distributed, whether anything connects an adopter's copy
 to this repository afterwards, and where the skill that drives an adoption lives.

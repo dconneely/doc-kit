@@ -171,8 +171,8 @@ fixture
 mkdir -p docs/archive
 printf 'See ADR-0099.\n' >docs/archive/stale.md
 printf 'See ADR-0099.\n' >docs/archive/README.md
-expect "the archive's README.md index is a documentation file" 1 "FAIL [map] docs/archive/README.md is not named in the map" map
-expect "the archive's README.md index is checked for citations" 1 "docs/archive/README.md:1 cites ADR-0099, which does not exist" adr
+expect "the archive's README.md is a documentation file" 1 "FAIL [map] docs/archive/README.md is not named in the map" map
+expect "the archive's README.md is checked for citations" 1 "docs/archive/README.md:1 cites ADR-0099, which does not exist" adr
 expect "an archived file is not checked for citations" 1 "doc-kit: 1 failure(s)" adr
 
 fixture
@@ -298,7 +298,6 @@ mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/arc
 : >docs/testing.md
 : >docs/plan/a-note.md
 : >docs/plan/0000-template.md
-: >docs/howto/README.md
 : >docs/howto/a-guide.md
 : >docs/sources/README.md
 : >docs/archive/README.md

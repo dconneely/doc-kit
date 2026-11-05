@@ -59,12 +59,12 @@ Defined in `docs/glossary.md`. The ones this document leans on hardest are **map
 **adopting repository** and **documentation file**.
 
 A **documentation file** is any Markdown file in the repository that is not below an archive (§5)
-unless it is the archive's index (§5.5), not below the kit's `templates/` (§2.8), and not vendored.
-A file is **vendored** when its `linguist-vendored` git attribute is set - the attribute GitHub
-Linguist defines for third-party code, conventionally set in `.gitattributes` (ADR-0011). This
-definition is what makes the map's completeness check decidable, so a checker MUST implement exactly
-it. A file being gitignored does not remove it from this definition - see §2.9 for how a checker
-MUST treat one.
+unless it is the archive's own `README.md` (§5.5), not below the kit's `templates/` (§2.8), and not
+vendored. A file is **vendored** when its `linguist-vendored` git attribute is set - the attribute
+GitHub Linguist defines for third-party code, conventionally set in `.gitattributes` (ADR-0011).
+This definition is what makes the map's completeness check decidable, so a checker MUST implement
+exactly it. A file being gitignored does not remove it from this definition - see §2.9 for how a
+checker MUST treat one.
 
 ## 2. The map
 
@@ -291,8 +291,7 @@ entry to be removed.
 
 ### 3.6 How-to guides
 
-A repository MAY hold recurring task-oriented procedures under `docs/howto/`, optionally indexed at
-`docs/howto/README.md`.
+A repository MAY hold recurring task-oriented procedures under `docs/howto/`.
 
 Each guide MUST be written in the imperative mood, SHOULD state its goal, prerequisites, sequential
 steps, and verification criteria, and SHOULD cite conventions and exemplars rather than duplicating
@@ -328,10 +327,10 @@ is the current shape.
 ## 5. The archive
 
 An adopting repository MAY keep documentation it does not migrate in an archive directory,
-conventionally `docs/archive/`, optionally indexed at `docs/archive/README.md`.
+conventionally `docs/archive/`, optionally with a `docs/archive/README.md` saying what it holds.
 
-5.1 Files below an archive, other than its index (§5.5), are **not** documentation files for the
-purposes of §2.4, and a checker MUST exempt them. The archive itself (or its index,
+5.1 Files below an archive, other than its own `README.md` (§5.5), are **not** documentation files
+for the purposes of §2.4, and a checker MUST exempt them. The archive itself (or its entry point,
 `docs/archive/README.md` or `docs/archive.md`) MUST appear in the map as a single entry.
 
 5.2 Every file in the archive MUST begin with a provenance header stating that it is not
@@ -348,9 +347,8 @@ established, and material that fits no artifact and is not worth rewriting now. 
 merely hard to read is migrated. The failure this guards against is a plausible-looking stale claim
 being promoted into the specification, where the structure instructs everyone to trust it.
 
-5.5 An index inside the archive (`docs/archive/README.md`, §2.6) is not an archived file. It is a
-documentation file like any other, and §5.2 and §5.3 do not apply to it. An archived file MUST NOT
-take that name.
+5.5 The archive's own `docs/archive/README.md` (§2.6) is not an archived file. It is a documentation
+file like any other, and §5.2 and §5.3 do not apply to it. An archived file MUST NOT take that name.
 
 ## 6. Conformance
 

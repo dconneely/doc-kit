@@ -513,7 +513,7 @@ check_adr() {
 
 # §3.1 - every bare ADR-NNNN names a record in docs/decisions/, and no citation takes another form.
 # Code - fenced blocks and inline spans - and the text of links to other sites are not citations.
-# Vendored and gitignored files are not read, nor archived files other than the index (§5.5).
+# Vendored and gitignored files are not read, nor archived files other than the archive's README.md (§5.5).
 check_citations() {
 	set +f
 	docs=$(find . -name '*.md' ! -path './.git/*' \
