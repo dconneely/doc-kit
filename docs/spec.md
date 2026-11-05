@@ -121,9 +121,9 @@ order.
 
 Two artifacts sharing all three are usually one artifact: merge them, or make one a section of the
 other, unless they hold different facts. A checker MUST report a shared triple as advisory, and MUST
-NOT let it affect the exit status. It MUST exempt exactly the pairs ADR-0002 lists, an entry point
-and its parts, and the parts of one container, and no others; ADR-0002 says why each holds different
-facts. Free-text properties defeat that test - near-duplicates escape on phrasing rather than
+NOT let it affect the exit status. It MUST exempt exactly the pairs and structural cases ADR-0002
+lists, and no others; ADR-0002 says why each holds different facts, and is the one place they are
+listed. Free-text properties defeat that test - near-duplicates escape on phrasing rather than
 substance - which is why all three are closed sets.
 
 An **alias** is exempt: a file whose entire content points at another artifact, existing only

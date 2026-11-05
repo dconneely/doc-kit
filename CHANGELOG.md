@@ -6,6 +6,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Fixed
+
+- Section 2.7 refers to ADR-0002 for the shared-triple exemptions instead of listing them. Its list
+  had missed the member-file case 0.8.0 added, which the checker already exempts.
+
 ## [0.8.0] - 2026-11-04
 
 ### Added

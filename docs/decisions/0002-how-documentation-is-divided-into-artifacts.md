@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-11-04
+date: 2026-11-05
 decision-makers: David Conneely
 ---
 
@@ -76,10 +76,11 @@ in either form, `docs/name.md` or `docs/name/README.md`. Product and template ro
 `docs/spec.md` §2.8. Every other shared triple is reported.
 
 The list is held here and in the checker, not in the map, so that changing it needs the owner's
-permission and a release. A warning for every pair on every run was rejected because a warning that
-never changes stops being read. An `Allowed overlaps` table in the map was rejected because an agent
-could add a row to silence any warning. Reporting only triples that a change newly creates was
-rejected because it never prompts a check of what is already there.
+permission and a release. The specification refers to it rather than restating it, so that a change
+here cannot leave a second copy behind. A warning for every pair on every run was rejected because a
+warning that never changes stops being read. An `Allowed overlaps` table in the map was rejected
+because an agent could add a row to silence any warning. Reporting only triples that a change newly
+creates was rejected because it never prompts a check of what is already there.
 
 ### Applications: technical debt and machine-readable contracts
 
