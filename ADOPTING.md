@@ -236,7 +236,7 @@ Tense settles disagreements:
 - `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
 - `docs/howto.md` - step-by-step recurring operational procedures.
 - `docs/sources.md` - pinned external specifications and standards.
-- `docs/archive.md` - undated, not authoritative. Never cite it.
+- `docs/archive.md` - kept but not migrated; not authoritative. Never cite what it holds.
 
 Before you edit:
 

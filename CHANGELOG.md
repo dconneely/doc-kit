@@ -12,6 +12,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   had missed the member-file case 0.8.0 added, which the checker already exempts.
 - The `doc-kit-adopt` skill no longer gives two answers for a session that finds no worksheet: asked
   to continue an adoption, it stops; asked to adopt, it starts or re-adopts.
+- The `AGENTS.md` stanza describes the archive as 0.8.0 widened it: kept but not migrated, rather
+  than undated.
 
 ## [0.8.0] - 2026-11-04
 
