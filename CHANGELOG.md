@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.9.0] - 2026-11-05
+
 ### Changed
 
 - An artefact that starts as a directory - decision records, external sources, the archive - has its
