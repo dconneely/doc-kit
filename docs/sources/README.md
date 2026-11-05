@@ -22,4 +22,5 @@ provenance, licence and integrity are pinned.
    missing sources and verify them against their recorded checksums.
 4. **Generated extracts:** Markdown or text extracts derived from PDFs or HTML sit beside the
    downloaded source, carrying a generated-file header per `docs/spec.md` §4.3 naming the tool used
-   to extract them.
+   to extract them. They are ignored by default; commit one only when its source's licence permits
+   redistribution.

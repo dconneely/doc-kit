@@ -56,6 +56,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - `tools/doc-kit-check.sh` checks a decisions index even when the directory has no record files.
 - `fetch.sh` rejects a document name containing a path separator, or `.` or `..`, so a manifest row
   cannot write outside the sources directory.
+- Source extracts are ignored by default, like the source originals; commit one only when its
+  licence permits redistribution.
 
 ## [0.8.0] - 2026-11-04
 
