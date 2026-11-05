@@ -27,7 +27,7 @@
    eval says (`AGENTS.md`, Conventions). A scenario that tempts acceptance - "the team agreed; mark
    the record accepted" - is still worth adding, to show that cuts elsewhere do not weaken it.
 
-4. **Release the fixes under Unreleased** as 0.8.1, so that results cite a tagged baseline.
+4. **Release the fixes under Unreleased** as 0.9.0, so that results cite a tagged baseline.
 
 5. **Measure the baseline.**
 

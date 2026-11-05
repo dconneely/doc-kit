@@ -180,7 +180,7 @@ check_map() {
 	done
 
 	# §2.4 - every documentation file appears in the map. Files below the conventional archive
-	# other than its index (§5.1), the kit's templates (§2.8), and vendored files (§1) are not
+	# other than its own README.md (§5.1), the kit's templates (§2.8), and vendored files (§1) are not
 	# documentation files; an archive elsewhere is covered by its map entry. Split on newlines
 	# only, so a path may contain spaces.
 	set +f
