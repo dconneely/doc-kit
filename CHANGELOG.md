@@ -20,6 +20,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - `ADOPTING.md` suggests `docs/old-plan.md` for an existing plan renamed during adoption. The
   earlier suggestion, `docs/tasks.md`, resembled `docs/tasks/`, which the skill reads as a sign of
   an earlier doc-kit adoption.
+- `ADOPTING.md` Step 1 says decision records are always kept, as Step 3 already did; it had called
+  them strongly recommended.
+- The adoption record template cites the doc-kit release tag adopted, or a commit when no release
+  fits. The tag is what a later re-adoption needs to find its place in the changelog.
 
 ## [0.8.0] - 2026-11-04
 
