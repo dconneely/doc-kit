@@ -66,8 +66,9 @@ tool is not a change. `docs/spec.md` §3.1 has the rest.
 - **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
   not, and do not belong there.
 - **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artifact the map names
-  must exist, and every documentation file (§1) must appear in the map; templates, the archive and
-  vendored files are exempt. `tools/doc-kit-check.sh` will tell you, but only if you run it.
+  must exist, and every documentation file (§1) must appear in the map; templates, the archive's
+  contents and vendored files are exempt. `tools/doc-kit-check.sh` will tell you, but only if you
+  run it.
 - **Write the least that is true.** No history or account of how you got there, in documents or code
   comments - `DOC-MAP.md` says where those go (ADR-0012).
 
