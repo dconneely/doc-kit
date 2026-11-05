@@ -180,7 +180,7 @@ which is the point.
 If it passes, add it to the layout, artefacts and lifecycle tables in the same commit. A map that
 omits an artefact is worse than no map, because it is believed.
 
-[adr2]: docs/decisions/0002-how-documentation-is-divided-into-artifacts.md
+[adr2]: docs/decisions/0002-how-documentation-is-divided-into-artefacts.md
 [adr5]: docs/decisions/0005-what-is-product-documentation-or-infrastructure.md
 [adr12]: docs/decisions/0012-what-tense-and-how-much-is-written.md
 [adr6]: docs/decisions/0006-where-rules-and-their-reasons-live.md

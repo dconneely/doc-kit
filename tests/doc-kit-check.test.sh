@@ -599,7 +599,7 @@ fi
 # name/README.md to name.md, as the checker reads it (§2.6).
 pairs() { awk '{ if ($1 > $2) { t = $1; $1 = $2; $2 = t } print $1 " + " $2 }' | LC_ALL=C sort; }
 record_pairs=$(grep -E '^\| `[^`]+` and `[^`]+` +\|' \
-	"$ROOT/docs/decisions/0002-how-documentation-is-divided-into-artifacts.md" |
+	"$ROOT/docs/decisions/0002-how-documentation-is-divided-into-artefacts.md" |
 	sed -E 's/^\| `([^`]+)` and `([^`]+)`.*/\1 \2/' | sed -E 's#/README\.md( |$)#.md\1#g' | pairs)
 checker_pairs=$(grep -F 'exempt_pairs["' "$CHECK" |
 	sed -E 's/.*exempt_pairs\["([^ ]+) \+ ([^"]+)"\].*/\1 \2/' | pairs)

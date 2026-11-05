@@ -113,7 +113,7 @@ No. Debt is a **type tag within the single ranked plan**, alongside `bug`, `feat
 The worry behind the request - that features drown debt - is real, and the answer is ranking it
 higher, not filing it elsewhere. Splitting by _category_ where the structure splits on tense,
 mutability and audience is what makes such files drift apart and go stale; the argument is
-[ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-artifacts.md), and it generalises
+[ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-artefacts.md), and it generalises
 to most proposed additions.
 
 ### Where do schemas, API definitions and other formal contracts go?
@@ -125,7 +125,7 @@ _better_ specification, not something lesser.
 Applying those tests reclassifies more than it adds: a conformance target is specification while its
 known gaps are quirks; a runbook is a procedure for a different audience at a different moment; a
 threat model is an assessment whose conclusions become records and whose findings become plan
-entries. See [ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-artifacts.md).
+entries. See [ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-artefacts.md).
 
 ### The specification is a tree now - where exactly?
 

@@ -21,8 +21,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - `tools/doc-kit-index-decisions.sh` writes `docs/decisions/README.md` unless `docs/decisions.md`
   exists, and `fetch.sh` looks for `docs/sources/README.md` before `docs/sources.md`.
 - The kit spells its central term `artefact` in prose, following the repository's British-English
-  convention. The map headings accept `## Artefacts` and the older `## Artifacts`; existing ADR
-  filenames keep `artifacts` so links stay stable.
+  convention. The map headings accept `## Artefacts` and the older `## Artifacts`.
+- ADR-0002 and ADR-0014 filenames now spell `artefact`, matching their titles. Every in-repository
+  link is updated; links from outside the repository to the old filenames will break.
 
 ### Fixed
 
