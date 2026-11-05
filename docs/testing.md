@@ -14,9 +14,12 @@ are listed below.
 
 | Group  | Verified                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `map`  | A map exists (§2.1). The artifacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artifact named exists, globs included (§2.3). Every Markdown file outside `docs/archive/` (its own `README.md` excepted) and - where `templates/DOC-MAP.md` exists - `templates/`, and not marked `linguist-vendored` is named by some artifact pattern (§1, §2.4, §2.8, §5.1), a gitignored one only warning (§2.9). The root map carries no template banner (§2.5). Tense, mutability and audience come from the closed sets; two non-alias artifacts sharing all three are reported as a warning only, except the pairs and structural cases ADR-0002 lists, and artifacts the map marks as product or template (§2.7, §2.8) |
+| `map`  | A map exists (§2.1). The artefacts table, lifecycle table and layout block name the same set, with the table authoritative (§2.2). Every artefact named exists, globs included (§2.3). Every Markdown file outside `docs/archive/` (its own `README.md` excepted) and - where `templates/DOC-MAP.md` exists - `templates/`, and not marked `linguist-vendored` is named by some artefact pattern (§1, §2.4, §2.8, §5.1), a gitignored one only warning (§2.9). The root map carries no template banner (§2.5). Tense, mutability and audience come from the closed sets; two non-alias artefacts sharing all three are reported as a warning only, except the pairs and structural cases ADR-0002 lists, and artefacts the map marks as product or template (§2.7, §2.8) |
 | `adr`  | Record and research-note filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` of `proposed`, `accepted`, `rejected` or `deprecated`, a `date`, and - on anything not `proposed` - a `decision-makers` that is not the template's placeholder. The three MADR minimal headings are present. Every bare `ADR-NNNN` in a documentation file excluding `templates/`, outside code and the text of links to other sites, names a record in `docs/decisions/`, and no citation takes another form (§3.1)                                                                                                                                                                                                                            |
 | `plan` | No entry heading is annotated done, struck through or marked completed. Every `##` entry carries a valid type tag (§3.3)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+
+The `map` check accepts the older `## Artifacts` table heading as well as `## Artefacts`, so a map
+copied before the spelling change keeps working.
 
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
 (`.markdownlint-cli2.jsonc`), secrets, file hygiene, `pygrep` drift guards for the failure this
@@ -40,9 +43,9 @@ or a skill's single-line `description` in front matter. Measured directly, the b
 102 and 105 characters against a configured limit of 100. Treat it as a guard against runaway lines
 rather than a precise gate.
 
-**Glob matching in §2.4.** A file is considered mapped if any artifact pattern matches it under
+**Glob matching in §2.4.** A file is considered mapped if any artefact pattern matches it under
 shell `case` semantics, where `*` crosses `/`. So `docs/decisions/*` matches arbitrarily deep paths.
-That is deliberate - it is what makes a directory artifact work - but it means a coarse pattern can
+That is deliberate - it is what makes a directory artefact work - but it means a coarse pattern can
 cover a file nobody intended to map.
 
 **Duplication.** `tests/doc-kit-duplicate-check.sh` reports repeated table headers, value lists and
@@ -57,19 +60,19 @@ cannot see a status changed or a record deleted without asking. The rule is held
 which is the largest gap.
 
 **Placeholder content beyond the template banner (§2.5).** The checker detects only the banner
-phrase. An example artifact row or an unreplaced heading is left to review.
+phrase. An example artefact row or an unreplaced heading is left to review.
 
 **Citations made untrue.** The checker finds citations that name no record. It cannot tell whether a
 citation of a record that exists still says something true of it after a change. Citations in code
 comments, gitignored files, vendored files and the kit's `templates/` are not read at all.
 
 **Paths containing spaces.** The unmapped-file scan handles them, but the map's layout block and
-artifact patterns split on whitespace. Keep artifact paths free of spaces, or map the file through a
+artefact patterns split on whitespace. Keep artefact paths free of spaces, or map the file through a
 glob.
 
-**Generated artifacts other than the decisions index (§4.3).** The checker regenerates the decisions
+**Generated artefacts other than the decisions index (§4.3).** The checker regenerates the decisions
 index when `tools/doc-kit-index-decisions.sh` is present. It cannot regenerate a schema snapshot, a
-rendered reference or another generated artifact, so those are review.
+rendered reference or another generated artefact, so those are review.
 
 **Substantive conformance (§4.1, §4.2, §4.4 and §5).** Tables, lists of more than three values and
 multi-step processes are single-sourced; prose never restates a machine-readable contract;

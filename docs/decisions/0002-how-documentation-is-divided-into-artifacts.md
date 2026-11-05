@@ -4,7 +4,7 @@ date: 2026-11-05
 decision-makers: David Conneely
 ---
 
-# 2. How documentation is divided into artifacts
+# 2. How documentation is divided into artefacts
 
 ## Context and Problem Statement
 
@@ -19,7 +19,7 @@ separate categories for technical debt, machine-readable contracts (OpenAPI, sch
 or audience variants, fragmenting the repository into unread lists.
 
 Audience also needs rigour: if audience is free text, two documents escape duplication checks by
-phrasing ("adopters" vs "consumers"), while a closed set must still distinguish artifacts that hold
+phrasing ("adopters" vs "consumers"), while a closed set must still distinguish artefacts that hold
 different facts.
 
 ## Considered Options
@@ -50,14 +50,14 @@ or more of five repository roles:
 | `end-user`    | anyone using the running product without seeing the repository                    |
 | `operator`    | anyone deploying, running or monitoring it                                        |
 
-Each role covers human and agent readers by default. An artifact read by only one marks the
+Each role covers human and agent readers by default. An artefact read by only one marks the
 exception: `contributor (agents)`.
 
-A candidate document sharing all three properties with an existing artifact is reported as a warning
-to check, not an automatic failure: two artifacts sharing all three are merged unless they hold
+A candidate document sharing all three properties with an existing artefact is reported as a warning
+to check, not an automatic failure: two artefacts sharing all three are merged unless they hold
 different facts.
 
-Because the closed sets are small, some artifacts the template map defines share a triple while
+Because the closed sets are small, some artefacts the template map defines share a triple while
 holding different facts. The checker exempts exactly these pairs, and a test fails if its list and
 this table differ:
 
@@ -68,7 +68,7 @@ this table differ:
 | `docs/quirks.md` and `docs/spec.md`                     | the specification is the contract; quirks are deliberate deviations  |
 | `docs/archive/README.md` and `docs/decisions/README.md` | one says what the archive holds; the other indexes decision records  |
 
-Three structural cases are exempt as well, because the growth rule (ADR-0014) splits one artifact
+Three structural cases are exempt as well, because the growth rule (ADR-0014) splits one artefact
 into them: an entry point and its parts (`docs/spec.md` and `docs/spec/*`, say); the parts of one
 container (two files in `docs/howto/`, say); and the parts of a container paired with whatever its
 entry point is paired with (`docs/spec/*` and `docs/quirks.md`, say). An entry point counts the same
@@ -84,7 +84,7 @@ creates was rejected because it never prompts a check of what is already there.
 
 ### Applications: technical debt and machine-readable contracts
 
-This test resolves commonly requested categories without inventing new artifacts:
+This test resolves commonly requested categories without inventing new artefacts:
 
 - **Technical debt belongs in the single ranked plan (`docs/plan.md`) as a type tag** alongside
   `bug`, `feature`, and `docs`. Debt shares its tense (future), mutability (ordered list, pruned on
@@ -115,13 +115,13 @@ Prose may link to a machine-readable contract; it never restates one.
 - Good, because schemas and prose live under one specification umbrella without duplicating facts.
 - Good, because audience roles are uniform across maps and checkable by tooling.
 - Good, because standard runs emit zero duplicate-property warnings, eliminating warning fatigue.
-- Good, because new custom artifacts that overlap produce a high-contrast single warning.
+- Good, because new custom artefacts that overlap produce a high-contrast single warning.
 - Good, because an `Allowed overlaps` table is omitted, avoiding map schema churn and agent misuse.
-- Bad, because a new artifact the template map defines that shares a triple needs this record
+- Bad, because a new artefact the template map defines that shares a triple needs this record
   reopened before its pair stops warning.
-- Bad, because custom artifacts that genuinely share a triple will always report an advisory
+- Bad, because custom artefacts that genuinely share a triple will always report an advisory
   warning.
-- Bad, because the duplicate test is a prompt, not a proof: artifacts holding different facts can
+- Bad, because the duplicate test is a prompt, not a proof: artefacts holding different facts can
   share all three properties, requiring human review to evaluate the warning.
 - Bad, because the rule against restating a contract is expensive to hold in review.
 - Neutral: the three properties are a heuristic justified by what they prevent, not by an external

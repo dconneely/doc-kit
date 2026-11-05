@@ -21,7 +21,7 @@ to this repository afterwards, and where the skill that drives an adoption lives
 
 - Tools: a pre-commit hook provider, a CI action, a packaged CLI on npm or PyPI, vendoring, or
   nothing
-- Afterwards: version-stamp the copied artifacts and ship migration notes; publish the shared rules
+- Afterwards: version-stamp the copied artefacts and ship migration notes; publish the shared rules
   as a referenced file; or fork-and-forget, with the changelog as the upgrade path
 - Skill: `.claude/skills/`, `.agents/skills/`, or both
 
@@ -42,7 +42,7 @@ Chosen option: **vendor the tools, fork-and-forget, and keep the skill under `.a
 
 A hook provider, an action or a package would each bring a runtime, a registry and a network
 dependency the rest of the kit does not have. Shipping no checker was rejected because the two
-checks that rot - every artifact the map names exists, every documentation file appears in the map -
+checks that rot - every artefact the map names exists, every documentation file appears in the map -
 are the ones a person stops making. Version stamps were rejected because they put the kit's name
 inside every adopting repository, and imply a migration a map customised by deletion cannot have.
 Referenced rules were rejected because they make an adopter's documentation depend on this

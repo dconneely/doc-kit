@@ -54,7 +54,7 @@ are about where facts live and what tense they take.
   judgement, drawn differently by different reviewers.
 - Bad, because a `TODO` that only points at the plan departs from the common practice of describing
   the work in place. The trade is that the work competes in one ranked list (ADR-0002).
-- Bad, because nothing mechanical checks it: a comment is not an artifact in the map.
+- Bad, because nothing mechanical checks it: a comment is not an artefact in the map.
 
 ## Confirmation
 

@@ -95,15 +95,29 @@ section() {
 	awk -v h="$2" '$0 == h { f = 1; next } /^## / && f { exit } f' "$1"
 }
 
-# First backticked cell of each table row: the artifact's path.
+# The map's section heading was '## Artifacts' before the spelling change. Accept the older
+# heading as well, so a map copied before the change keeps working.
+artefacts_section() {
+	if [ -n "$(section "$MAP" '## Artefacts')" ]; then
+		section "$MAP" '## Artefacts'
+	else
+		section "$MAP" '## Artifacts'
+	fi
+}
+
+# First backticked cell of each table row: the artefact's path.
 # shellcheck disable=SC2016  # the backticks are literal Markdown, not command substitution
 table_paths() {
-	section "$MAP" "$1" | sed -n 's/^| `\([^`]*\)`.*/\1/p'
+	if [ "$1" = '## Artefacts' ]; then
+		artefacts_section | sed -n 's/^| `\([^`]*\)`.*/\1/p'
+	else
+		section "$MAP" "$1" | sed -n 's/^| `\([^`]*\)`.*/\1/p'
+	fi
 }
 
 # The layout block is an indented tree; rebuild full paths with a prefix stack
 # keyed on indentation. Only a bare `name/` line is a container. A directory
-# followed by description text is a leaf: one artifact, matching a `name/*` row.
+# followed by description text is a leaf: one artefact, matching a `name/*` row.
 layout_paths() {
 	awk '/^```text/ { f = 1; next } /^```/ { if (f) exit } f' "$MAP" | awk '
 		{
@@ -132,7 +146,7 @@ layout_paths() {
 	'
 }
 
-# A trailing / and a trailing /* denote the same artifact (§2.2).
+# A trailing / and a trailing /* denote the same artefact (§2.2).
 norm() { sed 's:/\*$:/:'; }
 
 # True when PATTERN matches at least one existing path.
@@ -150,28 +164,28 @@ check_map() {
 
 	[ -f "$MAP" ] || { fail "no map at $MAP" "§2.1 requires one in the repository root"; return; }
 
-	arts=$(table_paths '## Artifacts' | norm | sort)
+	arts=$(table_paths '## Artefacts' | norm | sort)
 	lifes=$(table_paths '## Lifecycle' | norm | sort)
 	lays=$(layout_paths | norm | sort)
 
-	[ -n "$arts" ] || fail "the artifacts table names nothing" "§2.2 - is the heading exactly '## Artifacts'?"
+	[ -n "$arts" ] || fail "the artefacts table names nothing" "§2.2 - is the heading exactly '## Artefacts' or the older '## Artifacts'?"
 
-	# §2.2 - all three lists name the same set, artifacts table authoritative.
+	# §2.2 - all three lists name the same set, artefacts table authoritative.
 	# Globbing off: these lists contain patterns like docs/decisions/*.md, and an
 	# unquoted loop would expand them into the files they match.
 	set -f
 	for a in $arts; do
 		within "$lifes" "$a" ||
-			fail "$a is in the artifacts table but not the lifecycle table" "§2.2"
+			fail "$a is in the artefacts table but not the lifecycle table" "§2.2"
 		within "$lays" "$a" ||
-			fail "$a is in the artifacts table but not the layout block" "§2.2"
+			fail "$a is in the artefacts table but not the layout block" "§2.2"
 	done
 	for l in $lifes; do
 		within "$arts" "$l" ||
-			fail "$l is in the lifecycle table but not the artifacts table" "§2.2 - the table is authoritative"
+			fail "$l is in the lifecycle table but not the artefacts table" "§2.2 - the table is authoritative"
 	done
 
-	# §2.3 - every artifact the map names exists.
+	# §2.3 - every artefact the map names exists.
 	for a in $arts; do
 		set +f
 		pattern_exists "$a" ||
@@ -226,7 +240,7 @@ check_map() {
 	IFS=$oldifs
 	set +f
 
-	# §2.6 - a directory artifact has one entry point: name.md or name/README.md, never both. A
+	# §2.6 - a directory artefact has one entry point: name.md or name/README.md, never both. A
 	# vendored pair is not documentation (§1); a gitignored one is advisory (§2.9).
 	set +f
 	readmes=$(find . -name README.md ! -path './README.md' ! -path './.git/*' | sed 's:^\./::' |
@@ -254,10 +268,10 @@ check_map() {
 	set +f
 
 	# §2.7 - tense, mutability and audience come from closed sets: free text lets near-duplicates
-	# escape on phrasing. Artifacts sharing all three are reported as a prompt to check, not a
+	# escape on phrasing. Artefacts sharing all three are reported as a prompt to check, not a
 	# failure (ADR-0002). Aliases, which hold no content of their own, are exempt. One awk pass
-	# prints a tab-separated line per finding: a kind, the artifact, and the value.
-	hits=$(section "$MAP" '## Artifacts' | grep '^| `' | grep -v '\*\*Alias\*\*' | awk -F' *[|] *' '
+	# prints a tab-separated line per finding: a kind, the artefact, and the value.
+	hits=$(artefacts_section | grep '^| `' | grep -v '\*\*Alias\*\*' | awk -F' *[|] *' '
 		BEGIN {
 			split("present past future imperative explanatory", t, " ")
 			for (i in t) tenses[t[i]] = 1
@@ -325,7 +339,7 @@ check_map() {
 					x = items[j]; items[j] = items[j - 1]; items[j - 1] = x
 				}
 			}
-			# §2.8 - Product and template artifacts are exempt from instance duplicate-property
+			# §2.8 - Product and template artefacts are exempt from instance duplicate-property
 			# checks.
 			if ($3 ~ /^\*\*(Product|Template)/) next
 

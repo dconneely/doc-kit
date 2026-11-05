@@ -3,7 +3,7 @@
 What each document in this project is for, who reads it, how long it lives, and **where a given fact
 belongs**. Start here when you have something to write down and are not sure which file it goes in.
 
-Each artifact holds its own format and rules - in its preamble, or in its `0000-template.md` - and
+Each artefact holds its own format and rules - in its preamble, or in its `0000-template.md` - and
 this map does not restate them. Why the structure is shaped this way is in the adoption record,
 `docs/decisions/0001-how-the-documentation-is-organised.md`.
 
@@ -64,15 +64,15 @@ In a monorepo, everything below `docs/` except the plan moves under the module i
 `DOC-MAP.md`, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` and the plan stay at the
 repository root.
 
-An artifact that starts as a directory keeps its index inside it, as `docs/name/README.md`. Any
+An artefact that starts as a directory keeps its index inside it, as `docs/name/README.md`. Any
 `docs/name.md` that outgrows one file gains a sibling directory `docs/name/` for its parts, and
 stays as their index - or moves to `docs/name/README.md` then, once, with its links fixed. Never
 keep both. The specification is the usual case: its members can be machine-readable - schemas,
 interface definitions - and each gets its own row below.
 
-## Artifacts
+## Artefacts
 
-| Artifact                     | Purpose                                                                                                                  | Tense      | Mutability         | Audience                     |
+| Artefact                     | Purpose                                                                                                                  | Tense      | Mutability         | Audience                     |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------ | ---------------------------- |
 | `DOC-MAP.md`                 | This map: what each document is for, and where a fact belongs                                                            | present    | rewritten in place | contributor                  |
 | `README.md`                  | Orients a newcomer in one screen, and links outward                                                                      | present    | rewritten in place | owner, contributor, consumer |
@@ -83,7 +83,7 @@ interface definitions - and each gets its own row below.
 | `docs/decisions/*.md`        | Why a choice was made. Follows the [MADR](https://adr.github.io/madr/) minimal template; rules in `0000-template.md`     | past       | amendable          | owner, contributor           |
 | `CHANGELOG.md`               | What shipped that users can see. Follows [Keep a Changelog](https://keepachangelog.com) and [SemVer](https://semver.org) | past       | append-only        | consumer                     |
 | `docs/plan.md`               | Single ranked backlog, items tagged bug/debt/feature/docs                                                                | future     | volatile           | owner, contributor           |
-| `docs/quirks.md`             | Deliberate deviations, and bugs knowingly left unfixed - the one artifact that says _do not change this_                 | present    | rewritten in place | consumer, contributor        |
+| `docs/quirks.md`             | Deliberate deviations, and bugs knowingly left unfixed - the one artefact that says _do not change this_                 | present    | rewritten in place | consumer, contributor        |
 | `docs/research/*.md`         | Sourced findings with explicit confidence levels, named `NNNN-title.md`; shape in `0000-template.md`                     | past       | append-only        | contributor                  |
 | `docs/glossary.md`           | Domain vocabulary                                                                                                        | present    | rewritten in place | owner, contributor, consumer |
 | `docs/testing.md`            | Test strategy, and what is deliberately _not_ covered                                                                    | present    | rewritten in place | contributor                  |
@@ -96,7 +96,7 @@ interface definitions - and each gets its own row below.
 
 ## Property values
 
-The closed sets used in the artifacts table (ADR-0002):
+The closed sets used in the artefacts table (ADR-0002):
 
 | Property   | Values                                                                                  |
 | ---------- | --------------------------------------------------------------------------------------- |
@@ -106,9 +106,9 @@ The closed sets used in the artifacts table (ADR-0002):
 
 ## Lifecycle
 
-| Artifact                     | Created when                                       | Removed / closed when                                            |
+| Artefact                     | Created when                                       | Removed / closed when                                            |
 | ---------------------------- | -------------------------------------------------- | ---------------------------------------------------------------- |
-| `DOC-MAP.md`                 | the structure is first agreed                      | never - revised when an artifact is added, removed or repurposed |
+| `DOC-MAP.md`                 | the structure is first agreed                      | never - revised when an artefact is added, removed or repurposed |
 | `README.md`                  | project starts                                     | never                                                            |
 | `AGENTS.md`                  | agents began working in the repository             | never                                                            |
 | `CLAUDE.md`                  | a tool looks for that filename specifically        | when no tool needs the alias any more                            |
@@ -124,8 +124,8 @@ The closed sets used in the artifacts table (ADR-0002):
 | `docs/plan/*.md`             | work begins on an item                             | work completes                                                   |
 | `docs/plan/0000-template.md` | the directory is adopted                           | when the directory is removed                                    |
 | `docs/howto/*.md`            | a procedure recurs across several places           | when automated away or obsolete                                  |
-| `docs/sources/README.md`     | an external standard is cited                      | when no artifact cites it                                        |
-| `docs/sources/`              | the fetch script is adopted, or a source is cached | when no artifact cites it                                        |
+| `docs/sources/README.md`     | an external standard is cited                      | when no artefact cites it                                        |
+| `docs/sources/`              | the fetch script is adopted, or a source is cached | when no artefact cites it                                        |
 | `docs/archive/README.md`     | migration keeps a document it does not migrate     | when nothing in it is worth keeping                              |
 
 ## Flow
@@ -171,14 +171,14 @@ says where its facts go meanwhile, so that an agent holding one does not invent 
 ## Adding a new kind of document
 
 Before adding one, check it has a **distinct tense, mutability and audience** from everything in the
-artifacts table. If it shares all three with an existing document, it is a section or a tag within
+artefacts table. If it shares all three with an existing document, it is a section or a tag within
 that document, unless it holds different facts. The checker warns about a shared triple; it cannot
 tell whether the facts differ.
 
-The one exception is an **alias**: a file whose entire content points at another artifact, existing
+The one exception is an **alias**: a file whose entire content points at another artefact, existing
 only because a tool or reader looks for that exact path - a module `README.md`, a `CLAUDE.md`
 pointing at `AGENTS.md`. Mark it `**Alias**` in its purpose cell, give it the properties of what it
 points at, and give it nothing of its own to say.
 
-If it passes, add it to the layout, artifacts and lifecycle tables in the same commit. A map that
-omits an artifact is worse than no map, because it is believed.
+If it passes, add it to the layout, artefacts and lifecycle tables in the same commit. A map that
+omits an artefact is worse than no map, because it is believed.

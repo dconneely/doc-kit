@@ -8,11 +8,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
-- An artifact that starts as a directory - decision records, external sources, the archive - has its
+- An artefact that starts as a directory - decision records, external sources, the archive - has its
   index or entry point at `docs/name/README.md`, not a sibling `docs/name.md` (ADR-0014). The
   templates, the template map, `ADOPTING.md` and the `AGENTS.md` stanza use the new paths. A
-  repository already using the sibling form keeps it (section 2.6). An artifact that starts as a
-  file, such as the specification or the plan, still grows a sibling directory.
+  repository already using the sibling form keeps it (section 2.6). An artefact that starts as a
+  file, such as the specification, still grows a sibling directory.
 - The templates no longer include a how-to index. It repeated each guide's filename and the map's
   audience, and the directory lists the guides. An existing index may stay, named in the map.
 - The archive's `README.md` is described as what it is - what the archive holds and the header each
@@ -20,6 +20,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   migrated.
 - `tools/doc-kit-index-decisions.sh` writes `docs/decisions/README.md` unless `docs/decisions.md`
   exists, and `fetch.sh` looks for `docs/sources/README.md` before `docs/sources.md`.
+- The kit spells its central term `artefact` in prose, following the repository's British-English
+  convention. The map headings accept `## Artefacts` and the older `## Artifacts`; existing ADR
+  filenames keep `artifacts` so links stay stable.
 
 ### Fixed
 
@@ -48,7 +51,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Added
 
-- A directory artifact may use `name/README.md` as its entry point instead of a sibling `name.md`
+- A directory artefact may use `name/README.md` as its entry point instead of a sibling `name.md`
   (section 2.6, ADR-0014). Moving to it when the directory is introduced is a one-off migration;
   switching back and forth is discouraged. The checker fails when both forms exist, warns when the
   pair is gitignored, and skips a vendored pair. The plan check and the map's ratified pairs
@@ -60,7 +63,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
-- The archive holds documentation kept but not migrated: undatable, or fitting no artifact and not
+- The archive holds documentation kept but not migrated: undatable, or fitting no artefact and not
   worth rewriting now (ADR-0009). A provenance header may give "unknown" for when the file was last
   accurate, and the archive is no longer described as immutable.
 - A directory's member files share their entry point's ratified pairs, so `docs/spec/*.md` and
@@ -95,12 +98,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   records; the checker no longer requires it (ADR-0007).
 - Section 2.7 names the shared-triple exemptions exactly: the four pairs ADR-0002 lists, an entry
   point and its parts, and the parts of one container. It no longer describes them as pairs of
-  "standard artifacts", which did not match what the checker exempts.
+  "standard artefacts", which did not match what the checker exempts.
 - Research notes are named and numbered as decision records are, `NNNN-kebab-case-title.md` (section
   3.4), and `tools/doc-kit-check.sh adr` reports one that is not. Rename any unnumbered note, and
   fix its links.
-- The template map's "Deliberately not here" entries say where each absent artifact's facts go
-  meanwhile, and `ADOPTING.md` asks for an entry for each template artifact left out, so that an
+- The template map's "Deliberately not here" entries say where each absent artefact's facts go
+  meanwhile, and `ADOPTING.md` asks for an entry for each template artefact left out, so that an
   agent holding such a fact does not invent a home for it.
 
 ### Fixed
@@ -118,8 +121,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 - The template map names `AGENTS.md` and its alias, keeps the archive to one map entry, and no
   longer cites section numbers that exist only in this kit's specification.
-- Structural conformance includes the generated-artifact rule; substantive conformance covers
-  sections 4.1, 4.2, 4.4 and 5. The root rule corrects the 0.5.0 note: product artifacts are exempt,
+- Structural conformance includes the generated-artefact rule; substantive conformance covers
+  sections 4.1, 4.2, 4.4 and 5. The root rule corrects the 0.5.0 note: product artefacts are exempt,
   and a monorepo also keeps `docs/plan.md` at the root.
 - `Consequences` is SHOULD in the decision-record rules, and a proposed record may be committed
   while it is discussed (ADR-0007).
@@ -141,7 +144,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Added
 
-- **Uniform sibling entry points and multi-file artifacts (ADR-0014).** Standardised all
+- **Uniform sibling entry points and multi-file artefacts (ADR-0014).** Standardised all
   documentation domains under `docs/` on `docs/{name}.md` entry points with optional `docs/{name}/`
   sibling directories. Adds `docs/howto/` for task-oriented guides (indexed at `docs/howto.md`),
   `docs/sources.md` manifest and `docs/sources/` for external reference caching with `fetch.sh`,
@@ -169,12 +172,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   instructional copies and template/instance pairs may repeat. The tense, mutability and audience
   value sets live in `templates/DOC-MAP.md`'s `Property values` table; the specification cites it,
   and the checker's sets are tested against it.
-- **Audience is a closed set (ADR-0002).** An artifact's audience names one or more of `owner`,
+- **Audience is a closed set (ADR-0002).** An artefact's audience names one or more of `owner`,
   `contributor`, `consumer`, `end-user` and `operator`, marked `(agents)` or `(humans)` when only
-  one kind of reader reads it. `tools/doc-kit-check.sh` fails any other value. Two artifacts sharing
+  one kind of reader reads it. `tools/doc-kit-check.sh` fails any other value. Two artefacts sharing
   all three properties are now a warning, not a failure, and are merged only when they hold the same
-  facts (ADR-0002). Pairwise overlaps between standard specification artifacts, a multi-file
-  container's entry point and its parts, and product artifacts (§2.8) are exempt from warnings.
+  facts (ADR-0002). Pairwise overlaps between standard specification artefacts, a multi-file
+  container's entry point and its parts, and product artefacts (§2.8) are exempt from warnings.
 - **Templates excluded from documentation checks (§2.8).** Files below `templates/` are excluded
   from the documentation-file check (§2.4) and citation checks (§3.1), matching the exemption for
   `docs/archive/`. Product files that stay with the kit, such as `ADOPTING.md`, remain documentation
@@ -215,7 +218,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   more than one reader.
 - `docs/spec.md`'s scope covers the tense and volume of what is written, code comments included, and
   excludes only style and what a project ought to document (ADR-0012).
-- `templates/DOC-MAP.md` routes, and each artifact owns its rules (ADR-0006). Its "Prescribed
+- `templates/DOC-MAP.md` routes, and each artefact owns its rules (ADR-0006). Its "Prescribed
   formats", "Machine-readable and generated parts", "Three rules" and "Failure modes" sections are
   replaced by one "Rules" section. Formats move to `templates/docs/plan.md`,
   `templates/CHANGELOG.md` and the research template, and decision-record rules to
@@ -236,7 +239,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Fixed
 
-- `templates/DOC-MAP.md`'s lifecycle triggers now match the artifacts: `docs/howto.md` appears with
+- `templates/DOC-MAP.md`'s lifecycle triggers now match the artefacts: `docs/howto.md` appears with
   the first how-to guide, and `docs/sources/` with the fetch script or a cached source.
 - `ADOPTING.md` no longer claims the tools depend only on `awk`, `sed`, `grep` and `find`; the
   checker uses `git` when available.
@@ -265,7 +268,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   note's Finding, Evidence and Dead ends state the current answer, not how it was reached.
 - Emphasis in `templates/` is written `_like this_` rather than `*like this*`, the form Prettier
   produces. No wording changed.
-- The third property is called **mutability** everywhere, matching ADR-0002. The artifacts table's
+- The third property is called **mutability** everywhere, matching ADR-0002. The artefacts table's
   `Durability` column in `templates/DOC-MAP.md` is now `Mutability`, as is `SPECIFICATION.md` §2.7;
   the permitted values are unchanged.
 - `tools/doc-kit-check.sh` groups gitignored warnings by top-level directory, so a vendored tree
@@ -312,7 +315,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - The `doc-kit-adopt` skill is shorter, with no step, hazard or gate removed.
 - The rationale behind `ADOPTING.md`'s opening section and Step 1's "spec is a tree" bullet moved to
   `ADOPTING-NOTES.md`. Step 2 keeps the one hazard: a nested directory's introducing line in the
-  layout block must be bare, or the checker reads it as a single artifact.
+  layout block must be bare, or the checker reads it as a single artefact.
 
 ## [0.2.0] - 2026-08-22
 
@@ -350,12 +353,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   Code exactly as before, and consistent with treating root `AGENTS.md` as the canonical, cross-tool
   agent-instructions surface rather than a Claude-specific one (ADR-0010).
 - `templates/DOC-MAP.md` now documents the **Alias** shape directly - a file whose entire content
-  points at another artifact (a second `README.md`, a spec member repeated per module) - and points
+  points at another artefact (a second `README.md`, a spec member repeated per module) - and points
   to it from "Adding a new kind of document", instead of only being implemented in the checker with
   no explanation reachable by an adopter.
 - `ADOPTING.md`'s "Is the specification one file or a tree?" now says a grown specification tree
   needs its own `DOC-MAP.md`-style routing table, and that each member still has to clear the same
-  tense/mutability/audience test as a top-level artifact - splitting by topic or file size alone
+  tense/mutability/audience test as a top-level artefact - splitting by topic or file size alone
   isn't sufficient grounds for two members to stay separate.
 - A grown specification tree's members belong under `docs/spec/`, the same way decisions live under
   `docs/adr/` - a directory a `docs/spec/*.md` glob answers "is this the contract" from.
@@ -394,7 +397,7 @@ things that replaced an earlier shape, which are recorded here as the shape that
 
 - A licence: [MIT No Attribution](LICENCE). Copy anything here and own it - no notice to preserve,
   nothing to attribute, and no upgrade path to track (ADR-0010).
-- `templates/`, holding a starter for every artifact the map promises, so Step 3 is a copy rather
+- `templates/`, holding a starter for every artefact the map promises, so Step 3 is a copy rather
   than a writing exercise. It is the product and source of truth; the root `DOC-MAP.md` is this
   repository's own map, produced by applying the kit to itself (ADR-0005).
 - `SPECIFICATION.md`, defining what a conformant repository looks like, and stating the conventions
@@ -417,5 +420,5 @@ things that replaced an earlier shape, which are recorded here as the shape that
 - Rules for those records: immutability attaches to `accepted` and begins at publication, only
   `accepted` binds, and changing a status is a human action (ADR-0007).
 - `infrastructure` as a third category alongside product and documentation (ADR-0005).
-- A ranking of the optional artifacts by payoff per line: quirks, glossary, testing, then research.
+- A ranking of the optional artefacts by payoff per line: quirks, glossary, testing, then research.
 - `docs/testing.md`, stating what is verified exactly, what only approximately, and what not at all.

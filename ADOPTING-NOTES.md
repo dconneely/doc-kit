@@ -6,7 +6,7 @@ decision resists, or when something is not working.
 
 ## Why the procedure is shaped the way it is
 
-Three properties define every artifact: **tense** (does it describe what is, what was, or what is
+Three properties define every artefact: **tense** (does it describe what is, what was, or what is
 intended?), **mutability** (rewritten in place, amendable, append-only, immutable, volatile, or
 disposable?) and **audience**. Documentation rots when one file mixes them - the classic case being
 a document that is part record of work done, part backlog, part assessment, so that no part of it
@@ -26,7 +26,7 @@ that:
 
 ## What the rules prevent
 
-Each rule in the map, and in each artifact's own preamble or template, guards against one of these.
+Each rule in the map, and in each artefact's own preamble or template, guards against one of these.
 The adoption record names them as consequences, so an adopter's repository holds the reason without
 this file.
 
@@ -50,7 +50,7 @@ this file.
 - **Prose restates a contract** - the moment prose repeats a field list, there are two sources of
   truth and one of them is already wrong.
 - **A generated view gets hand-edited** - "generated" becomes "generated once, then hand-edited",
-  and a partly-stale generated artifact is worse than none because it is believed.
+  and a partly-stale generated artefact is worse than none because it is believed.
 
 ## Judgement calls
 
@@ -62,7 +62,7 @@ Ask; do not silently pick either default. A pre-existing gitignored documentatio
 working-notes convention, a habit inherited from a previous tool) is a real, recurring shape, and
 both silent answers are wrong often enough to matter: force-tracking it can commit something the
 author deliberately kept private or provisional, and leaving it ignored can quietly exempt a real
-artifact from ever being checked against the map. This is Step 1/4's version of a question
+artefact from ever being checked against the map. This is Step 1/4's version of a question
 `tools/doc-kit-check.sh` also has to answer once such a file is adopted - see `§2.9`, which queries
 a gitignored documentation file the same as any other but reports a hit in one as advisory rather
 than blocking. The two are related, not the same decision twice: this one is a one-time call made
@@ -98,7 +98,7 @@ record - it often will. Once made, write it up as an ADR rather than letting it 
 
 No. The rule is `docs/plan.md` entry -> optional `docs/plan/` note, but nothing enforces that order,
 and a mechanical check here would fight the same "no standard" call that keeps this directory
-otherwise unchecked - a task file is ad hoc by design, not a second artifact with its own
+otherwise unchecked - a task file is ad hoc by design, not a second artefact with its own
 conformance rules.
 
 If you find one by hand - during Step 4, or an ordinary read of the plan - there are two cases, not
@@ -132,7 +132,7 @@ entries. See [ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-ar
 `docs/spec/`, once there are **two or more members** - don't force the subdirectory on a single-file
 specification pre-emptively, there is nothing to group yet. `docs/spec.md` stays where it is
 regardless: it is a fixed element that changes role, not location, and each member still keeps its
-own row in the artifacts table (tense/mutability/audience can genuinely differ between them - that
+own row in the artefacts table (tense/mutability/audience can genuinely differ between them - that
 is the whole reason they are separate files, and grouping them by directory is a convenience on top
 of that, not a replacement for it).
 
@@ -156,7 +156,7 @@ docs/
 The checker's layout parser follows genuine nesting to any depth. The one thing it still needs: a
 line that introduces a directory _for what's indented under it_ must be bare - nothing else on that
 line. A directory named with trailing description text (`templates/   product - ...`) is read as a
-leaf representing the whole directory as one artifact instead, which is also a real, useful shape -
+leaf representing the whole directory as one artefact instead, which is also a real, useful shape -
 just a different one from a container with children.
 
 ### A second README (or spec member) shares tense, mutability and audience with one that exists?
@@ -165,7 +165,7 @@ Neither merge nor invent a fake distinction - if it has to exist at that path fo
 it, it's an **alias**. A module `README.md` and the root one are both present/rewritten-in-place/
 anyone, which would normally mean merging them (`templates/DOC-MAP.md` "Adding a new kind of
 document"), but a module `README.md` exists so a newcomer working there finds orientation without
-first navigating to the root. Mark it `**Alias**` in the artifacts table, give it no content of its
+first navigating to the root. Mark it `**Alias**` in the artefacts table, give it no content of its
 own, and let it inherit the properties of what it points to - the same applies to a specification
 member repeated per module, or any file some tool looks for by exact name (`CLAUDE.md` pointing at
 `AGENTS.md` is the case this kit's own map uses). See `templates/DOC-MAP.md`'s "Adding a new kind of
@@ -203,7 +203,7 @@ name advertises.
 
 [Research note 0002](docs/research/0002-conventions-this-kit-cites.md) has the sources.
 
-### Which optional artifacts are worth it?
+### Which optional artefacts are worth it?
 
 Ranked by payoff per line written, not by how large a gap they fill. All four stay optional - plenty
 of repositories genuinely need none of them - but if you are adopting more than the core five, this
@@ -212,7 +212,7 @@ is the order to do it in.
 1. **A deviation register (`docs/quirks.md`)** - answers "is this a bug or a decision?" for anyone
    comparing behaviour against a reference. Extend it to _accepted-wrong_ behaviour: a known defect
    with a test asserting today's incorrect output is a quirk with an expiry date, and recording it
-   stops the next person "fixing" the test. It is first because it is the only artifact here that
+   stops the next person "fixing" the test. It is first because it is the only artefact here that
    says **do not change this**, and because the reader most likely to need telling is a coding
    agent, which will otherwise read deliberate strangeness as a defect and correct it.
 2. **`docs/glossary.md`** - cheap, and worth it as soon as the domain has terms that mean something
@@ -274,7 +274,7 @@ just creates a redundant prose log that competes with git and eventually rots.
 always decays. Generate it from Conventional Commits, or write it once per release from the commit
 range. If there are no releases yet, you do not need one yet.
 
-**"The map has drifted from reality."** Only two checks actually rot: every artifact named in the
+**"The map has drifted from reality."** Only two checks actually rot: every artefact named in the
 map exists, and every documentation file appears in the map. Wire those into review, or into a CI
 check over filenames, rather than relying on anyone remembering. The rest of the map changes rarely
 enough to look after itself.
@@ -287,7 +287,7 @@ in the same commit.
 
 **"Do documentation changes need approving?"** One kind does. A decision record is drafted and
 revised freely while `proposed`; accepting, rejecting, reopening, deprecating or deleting one needs
-the owner's explicit permission, because a record is the one artifact whose content binds every
+the owner's explicit permission, because a record is the one artefact whose content binds every
 session. Everything else is rewritten in place or deleted freely. Resist adding ceremony to the plan
 in particular; friction at capture is what empties a backlog.
 
@@ -299,13 +299,13 @@ delete it, with the owner's permission.
 
 **"This feels like a large migration and I keep not starting it."** It is not all-or-nothing. Steps
 1-3 - write the map, create the files it promises - are worth doing on their own and take an
-afternoon. Step 4 can then proceed one artifact at a time, indefinitely. An honest map over a
+afternoon. Step 4 can then proceed one artefact at a time, indefinitely. An honest map over a
 partly-migrated repository is already better than no map.
 
 ## The lesson worth carrying
 
 Twice while developing this template, a new category seemed obviously necessary - first technical
-debt, then machine-readable contracts. Both times the correct answer was that an existing artifact
+debt, then machine-readable contracts. Both times the correct answer was that an existing artefact
 already covered it, and the apparent need came from splitting on the wrong axis.
 
 So: **when something new turns up, test it against the existing categories before adding one.** Does

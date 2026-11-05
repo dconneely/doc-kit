@@ -34,7 +34,7 @@ source of truth that cannot go stale, and loses.
 go?", at the moment something is written down. That is when sprawl is cheapest to prevent, and it is
 the question agent sessions get wrong by default.
 
-**Volume is a cost, not a measure of success.** An artifact nobody has a reason to write is one the
+**Volume is a cost, not a measure of success.** An artefact nobody has a reason to write is one the
 map should not name. A repository whose constraints fit on one page does not need this structure and
 should not adopt it.
 
@@ -55,7 +55,7 @@ neither is a claim nobody checks.
 
 ## 1. Terms
 
-Defined in `docs/glossary.md`. The ones this document leans on hardest are **map**, **artifact**,
+Defined in `docs/glossary.md`. The ones this document leans on hardest are **map**, **artefact**,
 **adopting repository** and **documentation file**.
 
 A **documentation file** is any Markdown file in the repository that is not below an archive (§5)
@@ -70,47 +70,47 @@ checker MUST treat one.
 
 2.1 A conformant repository MUST contain a map at `DOC-MAP.md` in its root.
 
-2.2 The map names its artifacts in three places: the layout block, the artifacts table and the
-lifecycle table. All three MUST name the same set, and a checker MUST report any artifact appearing
+2.2 The map names its artefacts in three places: the layout block, the artefacts table and the
+lifecycle table. All three MUST name the same set, and a checker MUST report any artefact appearing
 in one and not another.
 
-**The artifacts table is authoritative.** Its first cell is a backticked path, one artifact per row,
+**The artefacts table is authoritative.** Its first cell is a backticked path, one artefact per row,
 so it is the only one of the three that a checker can read without inference: the layout block is an
 indented tree whose entries are relative to their parent, and the lifecycle table omits paths where
-an entry is per-item rather than per-file. Tools MUST take the artifact set from the artifacts
+an entry is per-item rather than per-file. Tools MUST take the artefact set from the artefacts
 table, and treat the other two as views that must agree with it. When comparing, a trailing `/` and
-a trailing `/*` denote the same directory artifact.
+a trailing `/*` denote the same directory artefact.
 
-2.3 Every artifact named in the map MUST exist at the path the map gives. This is the check that
+2.3 Every artefact named in the map MUST exist at the path the map gives. This is the check that
 rots first, and it SHOULD be given a mechanism - a checker, a review step, a release ritual - rather
 than left to memory.
 
 2.4 Every documentation file MUST appear in the map, either individually or under a directory
 pattern the map names. This is the check that rots second.
 
-2.5 The map MUST NOT retain placeholder content from the template - an example artifact row, an
+2.5 The map MUST NOT retain placeholder content from the template - an example artefact row, an
 unreplaced heading. Templates carry an example rather than instructions (ADR-0006), so a surviving
 example is the signal that customisation was never finished.
 
 2.6 Paths in the map MUST be the repository's real paths. Only files a tool or a convention looks
 for at the root - the map, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` - SHOULD sit
-there; every other artifact SHOULD sit under `docs/` (ADR-0014). Product artifacts (ADR-0005) are
+there; every other artefact SHOULD sit under `docs/` (ADR-0014). Product artefacts (ADR-0005) are
 exempt: they sit at the root because an adopter must find them. In a monorepo the per-module
-artifacts MUST sit under the module they describe, and only the map, `README.md`, `AGENTS.md` and
+artefacts MUST sit under the module they describe, and only the map, `README.md`, `AGENTS.md` and
 its aliases, `CHANGELOG.md` and the plan stay at the repository root.
 
-An artifact `name.md` that outgrows one file MAY gain a sibling directory `name/` holding its parts.
+An artefact `name.md` that outgrows one file MAY gain a sibling directory `name/` holding its parts.
 The file stays as the entry point - an index or summary linking into the directory - so links to it
 stay true, and each part the map distinguishes gets its own row (ADR-0014).
 
-A directory artifact MAY instead have `name/README.md` as its entry point; ADR-0014 says which form
-an artifact starts in. Moving an existing `name.md` there when the directory is introduced is a
+A directory artefact MAY instead have `name/README.md` as its entry point; ADR-0014 says which form
+an artefact starts in. Moving an existing `name.md` there when the directory is introduced is a
 one-off migration that fixes every link to it in the same change; a repository SHOULD NOT switch
 between the forms after that, because links from outside it break. `name.md` and `name/README.md`
 MUST NOT both exist, and the map names the one in use. Where this specification names an entry point
 in one form, the other satisfies it.
 
-2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
+2.7 A map MAY name artefacts this specification does not define. It MUST give each one a tense, a
 mutability and an audience, drawn from the sets in the `Property values` table in
 `templates/DOC-MAP.md` - in an adopting repository, the table copied into its map.
 
@@ -120,24 +120,24 @@ runs it. A role covers human and agent readers both, and one read by only one ki
 role - `contributor (agents)` or `contributor (humans)`. Roles are separated by commas, in any
 order.
 
-Two artifacts sharing all three are usually one artifact: merge them, or make one a section of the
+Two artefacts sharing all three are usually one artefact: merge them, or make one a section of the
 other, unless they hold different facts. A checker MUST report a shared triple as advisory, and MUST
 NOT let it affect the exit status. It MUST exempt exactly the pairs and structural cases ADR-0002
 lists, and no others; ADR-0002 says why each holds different facts, and is the one place they are
 listed. Free-text properties defeat that test - near-duplicates escape on phrasing rather than
 substance - which is why all three are closed sets.
 
-An **alias** is exempt: a file whose entire content points at another artifact, existing only
+An **alias** is exempt: a file whose entire content points at another artefact, existing only
 because a tool looks for that filename. It appears in the map, carries the properties of what it
 points at, and adds nothing of its own.
 
-2.8 A repository MAY contain uncustomised template artifacts - a repository distributing this kit
+2.8 A repository MAY contain uncustomised template artefacts - a repository distributing this kit
 necessarily does. In a repository that has `templates/DOC-MAP.md`, files below `templates/` are
 product, not documentation files (§1), and a checker MUST exempt them from documentation and
 citation checks, in the same manner as §5.1. In any other repository, `templates/` is not special. A
 checker MUST evaluate only the root map as an instance. It MUST NOT apply the duplicate-property
-test (§2.7) to an artifact the map identifies as a template or product; its row in the map is still
-checked for §2.2, §2.3 and the property sets in §2.7. Product artifacts that are not copied into the
+test (§2.7) to an artefact the map identifies as a template or product; its row in the map is still
+checked for §2.2, §2.3 and the property sets in §2.7. Product artefacts that are not copied into the
 adopter's repository, such as `ADOPTING.md`, remain documentation files for §2.4 and §3.1; §2.5
 applies only to the root map. Without this, a repository shipping the kit fails §2.5 on its own
 templates, which is the check reporting the opposite of the truth.
@@ -149,22 +149,22 @@ recurring category this specification does not get to assume away, and it deserv
 ever blocking on content the map was never meant to describe (ADR-0011). A reviewer verifying by
 hand applies the same judgement: check it, don't block on it.
 
-## 3. Artifacts
+## 3. Artefacts
 
-**How much ceremony an artifact needs follows from its mutability, not from its importance.**
+**How much ceremony an artefact needs follows from its mutability, not from its importance.**
 
-- **Amendable** artifacts - decision records - need the owner. A contributor creates and changes
+- **Amendable** artefacts - decision records - need the owner. A contributor creates and changes
   `proposed` records freely; accepting, rejecting, reopening, deprecating and deleting a record each
   need the owner's explicit permission (§3.1). It is the only place this specification requires a
   decision by a person.
-- **Rewritten-in-place** artifacts - the specification, the map, quirks, the glossary - need no
+- **Rewritten-in-place** artefacts - the specification, the map, quirks, the glossary - need no
   freeze point. A wrong statement is corrected, not superseded. Where such a change encodes a real
   choice, the choice belongs in a record and is decided there; deciding it again here would decide
   one choice twice.
-- **Volatile** artifacts - the plan, task notes - should be gated as little as possible. Friction at
+- **Volatile** artefacts - the plan, task notes - should be gated as little as possible. Friction at
   capture is what empties a backlog. The decision point is ranking an entry and picking it up, not
   filing it.
-- **Append-only** artifacts - the changelog - are gated by release, not by review.
+- **Append-only** artefacts - the changelog - are gated by release, not by review.
 
 The archive needs no ceremony: files enter and leave it freely, each under its provenance header
 (§5).
@@ -317,9 +317,9 @@ content; they name the source and are kept in step by review or test.
 4.2 Prose MUST NOT restate a machine-readable contract. It MUST link to the contract and cover only
 what the contract cannot express: rationale, invariants, units, ownership, policy.
 
-4.3 A generated artifact MUST carry a header naming what generates it, and regenerating it MUST
+4.3 A generated artefact MUST carry a header naming what generates it, and regenerating it MUST
 produce no diff. A checker MUST fail if it does. Without this, "generated" becomes "generated once,
-then hand-edited", and a partly-stale generated artifact is worse than none because it is believed.
+then hand-edited", and a partly-stale generated artefact is worse than none because it is believed.
 
 4.4 An ordered, immutable-once-applied sequence - database migrations being the usual case - is
 changelog-shaped whatever it describes, and MUST NOT be treated as specification. The specification
@@ -340,11 +340,11 @@ migrated. A file that cannot carry text at its head satisfies this with a siblin
 `<filename>.provenance.md` carrying the same header. A folder-level warning is not sufficient:
 readers and tools arrive at these files directly, by search, and never see the folder.
 
-5.3 An archived file MUST NOT be cited as a source by any artifact outside the archive. Anything in
+5.3 An archived file MUST NOT be cited as a source by any artefact outside the archive. Anything in
 it worth relying on MUST be migrated first, at which point it acquires a confidence level (§3.4).
 
 5.4 The archive is for documentation kept but **not migrated**: material whose currency cannot be
-established, and material that fits no artifact and is not worth rewriting now. Material that is
+established, and material that fits no artefact and is not worth rewriting now. Material that is
 merely hard to read is migrated. The failure this guards against is a plausible-looking stale claim
 being promoted into the specification, where the structure instructs everyone to trust it.
 
@@ -354,7 +354,7 @@ file like any other, and §5.2 and §5.3 do not apply to it. An archived file MU
 ## 6. Conformance
 
 A repository is **structurally conformant** if it satisfies every MUST in §2 and §3 and the
-generated-artifact rule in §4.3. This is the set a checker reports against; a checker may implement
+generated-artefact rule in §4.3. This is the set a checker reports against; a checker may implement
 only part of it, and `docs/testing.md` says what it does not check. Checking is not an obligation: a
 repository that never runs one and holds the properties anyway is conformant.
 

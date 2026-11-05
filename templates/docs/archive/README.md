@@ -1,6 +1,6 @@
 # Archive - not authoritative
 
-Documentation kept but **not migrated**: its currency cannot be established, or it fits no artifact
+Documentation kept but **not migrated**: its currency cannot be established, or it fits no artefact
 and is not worth rewriting now. Nothing archived here may be relied on.
 
 The archive is exempt from the map's completeness check, and appears in `DOC-MAP.md` as a single
@@ -13,7 +13,7 @@ nothing to say whether that is current behaviour or a description of five years 
 citing decisions, people, tickets or systems that no longer exist. Material in formats nobody can
 check any more.
 
-Material that fits no artifact and costs more to rewrite than you can spend now, but might be useful
+Material that fits no artefact and costs more to rewrite than you can spend now, but might be useful
 one day. It may stay a long time, often with no provenance at all.
 
 Readability is not a reason. A document that is hard to read but verifiable should be migrated.

@@ -39,7 +39,7 @@ Its rules serve that purpose:
 - **A new session can tell what binds.** Every document is current, or visibly marked as not
   binding: `proposed`, deprecated, planned or archived.
 - **The owner's purpose has one home**, and only the owner changes it.
-- **Text is written to be deleted.** Every artifact has a point at which its content is removed or
+- **Text is written to be deleted.** Every artefact has a point at which its content is removed or
   replaced, and the structure says where that is.
 
 The owner decides; everyone else proposes. A contributor may draft a decision record and revise it

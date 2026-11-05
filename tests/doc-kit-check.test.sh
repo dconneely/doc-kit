@@ -35,9 +35,9 @@ docs/
   decisions/*.md  decisions
 ```
 
-## Artifacts
+## Artefacts
 
-| Artifact              | Purpose   | Tense   | Mutability         | Audience    |
+| Artefact              | Purpose   | Tense   | Mutability         | Audience    |
 | --------------------- | --------- | ------- | ------------------ | ----------- |
 | `DOC-MAP.md`          | the map   | present | rewritten in place | contributor |
 | `docs/plan.md`        | backlog   | future  | volatile           | owner       |
@@ -45,7 +45,7 @@ docs/
 
 ## Lifecycle
 
-| Artifact        | Created when | Removed when |
+| Artefact        | Created when | Removed when |
 | --------------- | ------------ | ------------ |
 | `DOC-MAP.md`    | start        | never        |
 | `docs/plan.md`       | start        | never        |
@@ -129,6 +129,10 @@ refute() {
 
 fixture
 expect "clean fixture passes" 0 "doc-kit: checks passed (map adr plan)"
+
+fixture
+sed -i.bak 's/^## Artefacts$/## Artifacts/' DOC-MAP.md
+expect "the older Artifacts heading still passes" 0 "doc-kit: checks passed" map
 
 fixture
 echo x >notes.md
@@ -228,15 +232,15 @@ expect "gitignored file warns by name" 0 "WARN [map] scratch.md is not named" ma
 
 fixture
 sed -i.bak '\#^| `docs/plan.md` *| start#d' DOC-MAP.md
-expect "artifact missing from lifecycle fails" 1 "docs/plan.md is in the artifacts table but not the lifecycle table" map
+expect "artefact missing from lifecycle fails" 1 "docs/plan.md is in the artefacts table but not the lifecycle table" map
 
 fixture
 sed -i.bak '/^  plan.md /d' DOC-MAP.md
-expect "artifact missing from layout fails" 1 "docs/plan.md is in the artifacts table but not the layout block" map
+expect "artefact missing from layout fails" 1 "docs/plan.md is in the artefacts table but not the layout block" map
 
 fixture
 rm docs/plan.md
-expect "named artifact missing on disk fails" 1 "the map names docs/plan.md but nothing matches it" map
+expect "named artefact missing on disk fails" 1 "the map names docs/plan.md but nothing matches it" map
 
 fixture
 sed -i.bak 's/| future  | volatile /| later   | volatile /' DOC-MAP.md
@@ -244,7 +248,7 @@ expect "tense outside the closed set fails" 1 "docs/plan.md has tense 'later'" m
 
 fixture
 sed -i.bak 's/| future  | volatile           | owner /| past | immutable | contributor, owner /' DOC-MAP.md
-expect "artifacts sharing all properties warn, in any role order" 0 	"WARN [map] docs/plan.md, docs/decisions/*.md share [past | immutable | contributor, owner]" map
+expect "artefacts sharing all properties warn, in any role order" 0 	"WARN [map] docs/plan.md, docs/decisions/*.md share [past | immutable | contributor, owner]" map
 
 fixture
 echo x >docs/testing.md

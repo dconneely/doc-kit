@@ -4,14 +4,14 @@ date: 2026-11-05
 decision-makers: David Conneely
 ---
 
-# 14. Where each artifact lives, and how it grows
+# 14. Where each artefact lives, and how it grows
 
 ## Context and Problem Statement
 
 Four problems with documentation layout, growth, and discoverability:
 
-1. **Artifacts cannot grow without breaking links:** `docs/quirks.md`, `docs/glossary.md`, the plan,
-   and the specification were single files with no rule for overflow. Moving an artifact into a
+1. **Artefacts cannot grow without breaking links:** `docs/quirks.md`, `docs/glossary.md`, the plan,
+   and the specification were single files with no rule for overflow. Moving an artefact into a
    directory later would change its path, breaking existing links, commit references, and external
    citations.
 2. **Scattered task procedures and external sources:** Task-oriented procedures (releases,
@@ -40,27 +40,27 @@ Four problems with documentation layout, growth, and discoverability:
   holding a `README.md` (`docs/spec/README.md`, `docs/plan/README.md`, `docs/decisions/README.md`,
   etc.).
 - **Uniform sibling entry points (`docs/{name}.md` with optional `docs/{name}/`):** Standardise on
-  `docs/{name}.md` as the entry point / index for every directory artifact `docs/{name}/`.
+  `docs/{name}.md` as the entry point / index for every directory artefact `docs/{name}/`.
 - **Sibling entry points by default, `docs/{name}/README.md` by choice:** As above, but a repository
-  may make `docs/{name}/README.md` the entry point of a directory artifact instead.
-- **Entry point by how the artifact starts:** An artifact that starts as a directory has its index
+  may make `docs/{name}/README.md` the entry point of a directory artefact instead.
+- **Entry point by how the artefact starts:** An artefact that starts as a directory has its index
   at `docs/{name}/README.md`; one that starts as a file keeps `docs/{name}.md`, and may move once
   when it gains a directory.
 
 ## Decision Outcome
 
-Chosen option: **entry point by how the artifact starts**, because the sibling file exists so that a
-one-file artifact can grow without breaking links, and an artifact that ships as a directory has
+Chosen option: **entry point by how the artefact starts**, because the sibling file exists so that a
+one-file artefact can grow without breaking links, and an artefact that ships as a directory has
 nothing to grow from. Its index belongs with the files it lists, where GitHub shows it to a reader
-who opens the directory. The form follows from the artifact, so it is not a choice to revisit.
+who opens the directory. The form follows from the artefact, so it is not a choice to revisit.
 
-1. **An artifact that starts as a file** - the specification, the plan, quirks, the glossary,
+1. **An artefact that starts as a file** - the specification, the plan, quirks, the glossary,
    testing - is `docs/name.md`. When it outgrows one file it gains a sibling directory `docs/name/`
    and stays as its entry point, so links to it stay true. A repository may instead move it to
    `docs/name/README.md` when the directory is introduced: a one-off migration, made deliberately,
    with every link in the repository fixed in the same change. Switching back and forth is
    discouraged: each switch breaks links from outside the repository, which cannot be fixed.
-2. **An artifact that starts as a directory** - decision records, how-to guides, external sources,
+2. **An artefact that starts as a directory** - decision records, how-to guides, external sources,
    the archive - has its entry point, if it keeps one, at `docs/name/README.md`.
 3. **Never both, and the map names the one in use.** `docs/name.md` and `docs/name/README.md` do not
    exist side by side. A repository already using the other form keeps it.
@@ -84,7 +84,7 @@ documentation file, and the archive's header and citation rules do not apply to 
 - **Archive:** `docs/archive/README.md` says what the archive holds and the header each file in it
   carries; each file's header says why it was not migrated. Non-authoritative, exempt files sit
   beside it (§5.1).
-- **Monorepos:** Per-module artifacts sit under the module; only `DOC-MAP.md`, `README.md`,
+- **Monorepos:** Per-module artefacts sit under the module; only `DOC-MAP.md`, `README.md`,
   `AGENTS.md` and its aliases, `CHANGELOG.md`, and the plan stay at the repository root.
 
 This combines and supersedes the decisions originally explored for how-to guides, external sources,
@@ -92,9 +92,9 @@ and generated decision indexing.
 
 ### Consequences
 
-- Good, because an artifact that starts as a file can grow into a directory without changing its
+- Good, because an artefact that starts as a file can grow into a directory without changing its
   entry-point path or breaking existing links.
-- Good, because a directory artifact's index sits with the files it lists, and GitHub shows it to a
+- Good, because a directory artefact's index sits with the files it lists, and GitHub shows it to a
   reader who opens the directory.
 - Good, because `docs/decisions/*.md` holds only decision records, simplifying globbing and checks;
   a `README.md` index is the one exception, and the tools skip it.
@@ -104,7 +104,7 @@ and generated decision indexing.
 - Good, because external source material is verified with pinned checksums and licence tracking.
 - Bad, because every directory index is named `README.md`, so editor tabs, fuzzy finders and agent
   tool calls need its path to tell one from another.
-- Bad, because GitHub does not show `docs/{name}.md` to a reader who opens a grown artifact's
+- Bad, because GitHub does not show `docs/{name}.md` to a reader who opens a grown artefact's
   `docs/{name}/`. A repository that minds moves it to `docs/{name}/README.md` when the directory is
   introduced.
 - Bad, because two forms mean a reader checks the map for which one a repository uses.

@@ -12,15 +12,15 @@ directs and agent sessions write. It may be new, or already carry documentation 
 test asserting today's incorrect output. A quirk with an expiry condition, recorded so the next
 reader does not "fix" the test.
 
-**Archive** - a directory for documentation kept but not migrated: undatable, or fitting no artifact
+**Archive** - a directory for documentation kept but not migrated: undatable, or fitting no artefact
 and not worth rewriting now. Exempt from the map's completeness check; every file in it except the
 archive's own `README.md` carries a provenance header, or has one in a sibling
 `<filename>.provenance.md` for non-text formats. See ADR-0009.
 
-**Artifact** - one document, or one directory of documents, named in the map and given a tense, a
+**Artefact** - one document, or one directory of documents, named in the map and given a tense, a
 mutability and an audience. The unit the structure is built from.
 
-**Audience** - who an artifact is written for: one or more of the roles `owner`, `contributor`,
+**Audience** - who an artefact is written for: one or more of the roles `owner`, `contributor`,
 `consumer`, `end-user` and `operator`, defined in ADR-0002 and listed in the `Property values` table
 in `templates/DOC-MAP.md` (or the copy in an adopting repository's map).
 
@@ -34,7 +34,7 @@ and not restated here, because the check is undecidable without the exact wordin
 **Instance** - a customised copy of a template, living in an adopting repository. The root
 `DOC-MAP.md` here is an instance; `templates/DOC-MAP.md` is the template.
 
-**Map** - `DOC-MAP.md`. Names every artifact, what each is for, and where a given fact belongs. The
+**Map** - `DOC-MAP.md`. Names every artefact, what each is for, and where a given fact belongs. The
 entry point, and the thing that must never promise a file that does not exist.
 
 **Mixed-tense file** - a document doing several jobs at once: part record of work done, part
@@ -55,7 +55,7 @@ authoritative, when it was last known accurate, and why it was not migrated.
 specification. See ADR-0002.
 
 **Structural conformance** - satisfying the mechanically checkable requirements: §2, §3 and the
-generated-artifact rule in §4.3. Contrast **substantive conformance**, which adds §4.1's guideline,
+generated-artefact rule in §4.3. Contrast **substantive conformance**, which adds §4.1's guideline,
 §4.2, §4.4 and §5's MUSTs, and needs a reviewer.
 
 **Tense** - whether a document describes what is, what was, what is intended, what to do, or why;

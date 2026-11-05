@@ -12,7 +12,7 @@ Adopting into a mature repository turns up documentation that is neither worth m
 delete. The small part of it is material a reader cannot read - scanned PDFs, binary diagrams. The
 large part reads perfectly and cannot be **dated**: a file says "the system does X", and nothing
 says whether that is current behaviour or a description of five years ago. Some of it fits no
-artifact, and rewriting it into one costs more than the adoption can spend; it might be useful one
+artefact, and rewriting it into one costs more than the adoption can spend; it might be useful one
 day.
 
 Migrating such a claim into the specification launders it. Readers are told to trust the
@@ -30,7 +30,7 @@ a folder marked not authoritative.
 Chosen option: **quarantine in an archive directory**, under four rules:
 
 1. The archive holds documentation kept but **not migrated**: material whose currency cannot be
-   established, and material that fits no artifact and is not worth rewriting now. Material that is
+   established, and material that fits no artefact and is not worth rewriting now. Material that is
    merely hard to read is migrated.
 2. Every archived file carries a **provenance header**: not authoritative, last known accurate when
    (or "unknown"), why not migrated. A folder-level warning is not enough.

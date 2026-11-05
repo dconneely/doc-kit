@@ -12,7 +12,7 @@ customise carries the rules you need afterwards. The notes answer questions that
 copying them would add a long file that goes stale the moment the kit changes, and their links into
 the kit's own decision records would not resolve in your repository. Come back here instead.
 
-**Done means:** every artifact named in that repository's map exists, every documentation file in
+**Done means:** every artefact named in that repository's map exists, every documentation file in
 that repository appears in its map, and each fact in them sits in exactly one place.
 
 **The target's own rules come first.** Before editing the target, read its `AGENTS.md` (including
@@ -22,7 +22,7 @@ silently.
 
 ## The idea, and why it shapes the procedure
 
-Three properties define every artifact - tense, mutability, audience - and documentation rots when a
+Three properties define every artefact - tense, mutability, audience - and documentation rots when a
 file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoning behind each):
 
 1. **Customise mostly by deleting.** Step 2 is a table of deletions and substitutions, not a writing
@@ -54,9 +54,9 @@ is written down is a decision, and one that is not gets re-litigated every six m
 is recorded in the adoption record Step 3 creates; a rejection belongs wherever the repository keeps
 its decisions, or in its plan if it has one.
 
-**Then write `docs/plan.md` before anything else.** It is the one artifact you can create knowing
+**Then write `docs/plan.md` before anything else.** It is the one artefact you can create knowing
 nothing about the repository yet, and the adoption work itself is its first content: one entry per
-artifact to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those
+artefact to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those
 entries in the ordinary way. If the repository already has a `docs/plan.md` that is not a doc-kit
 plan, rename it first (`docs/old-plan.md`, say) and migrate it in Step 4.
 
@@ -66,7 +66,7 @@ hour rather than after the migration completes, and it puts the first honest ent
 file, which is worth more than a tidy empty one.
 
 Adopting into an existing codebase, expect Step 1 to add entries to this plan rather than replace
-it. Nothing here has to be right first time; the plan is the volatile artifact by design.
+it. Nothing here has to be right first time; the plan is the volatile artefact by design.
 
 ## Step 1 - Inventory what this repository actually has
 
@@ -74,7 +74,7 @@ Every project takes the core five: `DOC-MAP.md`, `README.md`, the specification,
 `docs/plan.md`. Decision records come too, starting with the adoption record, because their value is
 almost entirely in being written contemporaneously.
 
-Then work through the table below and note which apply. Be strict: an artifact you will not maintain
+Then work through the table below and note which apply. Be strict: an artefact you will not maintain
 is worse than its absence, because the map promises it.
 
 Most of these join the **specification** rather than becoming new categories, because they are
@@ -92,7 +92,7 @@ present tense, always current, and a contract someone relies on.
 | external standards      | cited RFCs, whitepapers, or third-party specifications                                                                                                                                                                                           | manifest at `docs/sources/README.md`, with cached originals and `fetch.sh` beside it               |
 | a user interface        | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/))                                                                                                                                                                      | target -> specification; gaps -> quirks                                                            |
 
-The pattern is worth internalising: **most new artifacts are specification members, not new
+The pattern is worth internalising: **most new artefacts are specification members, not new
 categories.** Before inventing a category, check whether the thing is simply the contract in a
 different medium.
 
@@ -111,14 +111,14 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 | In `DOC-MAP.md`                        | Do this                                                                                                                                                                                                                                                                                                                                                                      |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Filenames                              | Keep them. Substitute only where this repository already has an established equivalent, and never `ROADMAP.md`                                                                                                                                                                                                                                                               |
-| "Where does it go?" table              | Delete rows for artifacts this repo does not have                                                                                                                                                                                                                                                                                                                            |
-| Layout block                           | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either - see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare - nothing else on it - or the checker reads it as one leaf artifact instead of a container |
+| "Where does it go?" table              | Delete rows for artefacts this repo does not have                                                                                                                                                                                                                                                                                                                            |
+| Layout block                           | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either - see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare - nothing else on it - or the checker reads it as one leaf artefact instead of a container |
 | Specification line                     | State whether it is one file or an index, and name its machine-readable members if any                                                                                                                                                                                                                                                                                       |
-| Artifacts table                        | Delete unused rows                                                                                                                                                                                                                                                                                                                                                           |
+| Artefacts table                        | Delete unused rows                                                                                                                                                                                                                                                                                                                                                           |
 | Lifecycle table                        | Delete the same rows, so the two tables stay aligned                                                                                                                                                                                                                                                                                                                         |
-| Flow                                   | Keep, deleting any step that names an artifact you removed - most projects drop the optional task-note step                                                                                                                                                                                                                                                                  |
+| Flow                                   | Keep, deleting any step that names an artefact you removed - most projects drop the optional task-note step                                                                                                                                                                                                                                                                  |
 | Rules, "Adding a new kind of document" | **Keep verbatim.** These are the parts that do the work, and they are the same in every repository                                                                                                                                                                                                                                                                           |
-| "Deliberately not here"                | Keep, and add each template artifact you left out and anything else you consciously rejected, each saying where its facts go instead                                                                                                                                                                                                                                         |
+| "Deliberately not here"                | Keep, and add each template artefact you left out and anything else you consciously rejected, each saying where its facts go instead                                                                                                                                                                                                                                         |
 
 If the repository has house conventions the template does not mention - a naming scheme, a
 gitignored prefix for working documents, a docs directory that is generated - add a row for each
@@ -165,7 +165,7 @@ changed here since, the kit's `CHANGELOG.md` is the whole mechanism, and applyin
 choice by hand.
 
 A map that names a file which does not exist is worse than no map, because it is believed. For each
-artifact you kept:
+artefact you kept:
 
 - **Create it, even if nearly empty.** A `CHANGELOG.md` containing only `## Unreleased` is correct
   and honest; a missing one is a broken promise.
@@ -219,7 +219,7 @@ them; if you find one, ask rather than deciding on your own whether it should po
 folded into `AGENTS.md`, or stay exactly as it is. The intent is to improve the documentation, not
 to replace instructions the user already wrote for a tool of their choosing.
 
-Paste the stanza below into whichever file(s) you keep, deleting lines for artifacts you did not
+Paste the stanza below into whichever file(s) you keep, deleting lines for artefacts you did not
 create and giving the rest their real paths:
 
 ```markdown
@@ -353,7 +353,7 @@ comments.
 
 **3. Look for findings with sources.** Anything citing external references, reconciling sources that
 disagree, or carrying a confidence level is research and needs a home before the details fade. This
-is the artifact most often missing entirely.
+is the artefact most often missing entirely.
 
 **4. Look for recurring procedures.** Deployment runbooks, release steps, key rotations, and
 environment bootstrapping become how-to guides under `docs/howto/`.
@@ -362,7 +362,7 @@ environment bootstrapping become how-to guides under `docs/howto/`.
 specifications become entries in `docs/sources/README.md`, with cached originals and licences
 managed beside it via `fetch.sh`.
 
-**6. Only then consider artifacts the template does not have.** By this point most candidates will
+**6. Only then consider artefacts the template does not have.** By this point most candidates will
 have turned out to be sections of documents that already exist. Apply the test in the map's "adding
 a new kind of document" section before adding anything.
 
@@ -370,25 +370,25 @@ a new kind of document" section before adding anything.
 
 The customisation has been applied successfully when all of these hold:
 
-- [ ] Every artifact named in the map exists in the repository.
+- [ ] Every artefact named in the map exists in the repository.
 - [ ] Every documentation file in the repository appears in the map.
-- [ ] The artifacts table, the lifecycle table and the layout block list the same artifacts.
+- [ ] The artefacts table, the lifecycle table and the layout block list the same artefacts.
 - [ ] Paths in the map are the repository's real paths.
 - [ ] No file serves two tenses - nothing is part changelog and part backlog.
 - [ ] No fact appears in two places; in particular, no prose restates a machine-readable contract.
 - [ ] Generated files say so, and regenerating them produces no diff.
-- [ ] No placeholder content survives - no example artifact row, no unreplaced heading.
+- [ ] No placeholder content survives - no example artefact row, no unreplaced heading.
 
 If you copied `tools/doc-kit-check.sh`, run it from the repository root - it covers the first three
 mechanically. The rest are for review.
 
-Re-run the first two checks whenever an artifact is added or removed. They are the ones that rot.
+Re-run the first two checks whenever an artefact is added or removed. They are the ones that rot.
 
 ---
 
 ## When the procedure will not settle it
 
 [`ADOPTING-NOTES.md`](ADOPTING-NOTES.md) carries the reasoning: the judgement calls Steps 1 and 4
-tend to force, how far to trust each convention this kit cites, which optional artifacts are worth
+tend to force, how far to trust each convention this kit cites, which optional artefacts are worth
 their keep, and what the common sticking points usually mean. None of it is needed to work through
 the steps above.

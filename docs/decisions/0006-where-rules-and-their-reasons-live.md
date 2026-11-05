@@ -16,10 +16,10 @@ The map is the file the `AGENTS.md` stanza tells every agent session to read bef
 anything. Each word in it is paid for by every session, and anything it shares with the files it
 describes is stated twice in every adopting repository, against `docs/spec.md` §4.1.
 
-`docs/spec.md` §4.1 was written as an absolute - no fact in two artifacts - but prose cannot be
+`docs/spec.md` §4.1 was written as an absolute - no fact in two artefacts - but prose cannot be
 symlinked, and the kit's own specification, templates, map and notes repeat tables, value lists and
 multi-step processes. Those repeats drift. A template and the kit's own instance are different
-artifacts, so they may repeat their own content; a short instruction may be repeated where the
+artefacts, so they may repeat their own content; a short instruction may be repeated where the
 reader cannot follow a link.
 
 ## Considered Options
@@ -27,7 +27,7 @@ reader cannot follow a link.
 - Embed instructions throughout the templates, as banners, comments and placeholder entries
 - Move every instruction to `ADOPTING.md`
 - Templates carry shape, the map carries every rule, `ADOPTING.md` carries the one-time procedure
-- Route in the map, put each artifact's rules in that artifact, and keep the reasons in the kit
+- Route in the map, put each artefact's rules in that artefact, and keep the reasons in the kit
 - Put rules and reasons in a separate shipped explanation file beside the map
 - For shared content: keep §4.1 absolute and check every repeat; make the specification the
   normative source; make the templates the normative source; put the value sets in a shared
@@ -35,11 +35,11 @@ reader cannot follow a link.
 
 ## Decision Outcome
 
-Chosen option: **route in the map, and let each artifact own its rules**, because each kind of
+Chosen option: **route in the map, and let each artefact own its rules**, because each kind of
 content is then read at the moment it is needed, and stated once in the adopter's repository.
 
-- **The map** holds routing, the rules that span artifacts, and the test for adding a document.
-- **Each artifact** holds its own format and rules, in its preamble or its `0000-template.md`.
+- **The map** holds routing, the rules that span artefacts, and the test for adding a document.
+- **Each artefact** holds its own format and rules, in its preamble or its `0000-template.md`.
   Templates carry shape and an example, with no commentary about the kit.
 - **`ADOPTING.md`** holds the one-time procedure.
 - **The reasons** stay in the kit's records and `ADOPTING-NOTES.md`. An adopting repository records
@@ -49,7 +49,7 @@ content is then read at the moment it is needed, and stated once in the adopter'
 ### Shared tables, value lists and processes
 
 §4.1 is a guideline, not an absolute. A table, a list of more than three values, or a process of
-three or more steps SHOULD have one home. For an artifact's shared shape and value sets, that home
+three or more steps SHOULD have one home. For an artefact's shared shape and value sets, that home
 is its template; the specification cites the template and keeps the contract-level rules. The
 checker's value sets are tested against the templates. Short instructional copies - the `AGENTS.md`
 stanza, a gate in the skill or `ADOPTING.md` - and template/instance pairs MAY repeat; they name the
@@ -61,7 +61,7 @@ instead, because code changes more often than records do and a link from the rec
 
 Embedded instructions were rejected because every adopter pays to read and delete them, and they
 duplicate `ADOPTING.md`. Moving everything to `ADOPTING.md` was rejected because it is not copied.
-Giving the map every rule was rejected because it duplicates each artifact's format and makes every
+Giving the map every rule was rejected because it duplicates each artefact's format and makes every
 session read all of it. A separate explanation file was rejected because its only reader is someone
 questioning a rule, and the adoption record already serves that reader.
 

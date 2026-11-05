@@ -14,7 +14,7 @@ customised map rather than the template's. Existing documentation did not divert
 landed in ripgrep's `GUIDE.md` or `FAQ.md`, or in the existing `docs/` trees of httpx, commander.js
 or cobra.
 
-The "Deliberately not here" section of a customised map steers as strongly as the artifacts table.
+The "Deliberately not here" section of a customised map steers as strongly as the artefacts table.
 In play-bazlang, which records that it has no glossary and that terms are defined where each is
 introduced, both models defined a new term in `docs/spec/mcp.md`; where its map records no how-to
 guides, both created a single `docs/howto.md` and mapped it, as the growth rule (ADR-0014) allows.
@@ -82,7 +82,7 @@ repository has no upload feature. Commit `7e49188` corrects the first three scen
 harness as of `7e49188`, Haiku: 8 of 12 placed, 11 of 12 rules kept. Its map leaves out quirks, a
 glossary and how-tos, and says known limitations are stated inline in each specification member.
 Every miss but one followed that: the kept defect went to a specification member with a decision
-record, the term to a specification member, and the how-to was declined as an artifact the map says
+record, the term to a specification member, and the how-to was declined as an artefact the map says
 is the owner's to add. The other was a decline of the upload cap, as in ripgrep. The broken rule was
 a plan entry typed `unknown`, because the prompt allowed "unknown" for a missing path or test name
 and Haiku extended it to the type; the prompt now limits it to those, and the entry then passed
