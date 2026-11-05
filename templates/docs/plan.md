@@ -1,7 +1,7 @@
 # Plan
 
 Single ranked backlog, most important first. Entries are **deleted** when done, never annotated - a
-plan that accumulates completed items stops being read.
+plan that accumulates completed entries stops being read.
 
 Each entry is a heading, a tag line, then **one paragraph**. No design; anything longer needs an ADR
 or a plan note. If you keep plan notes under `docs/plan/`, copy `0000-template.md` for the optional

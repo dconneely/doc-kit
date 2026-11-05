@@ -3,7 +3,7 @@
 <!--
 Copy to a descriptive filename matching the plan entry. Keep this file as 0000; it is the template.
 
-Plan notes for one backlog item. A note is disposable - delete it when the work lands. Scratch -
+Plan notes for one entry. A note is disposable - delete it when the work lands. Scratch -
 what has been tried, what is half-done, where you left off - is its normal content. Empty it into
 its proper homes before deleting it: a choice made along the way goes to an ADR, a finding to a
 research note, changed behaviour to the specification, and work that is not happening back to

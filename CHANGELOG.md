@@ -25,7 +25,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   change.
 - ADR-0002 and ADR-0014 filenames now spell `artefact`, matching their titles. Every in-repository
   link is updated; links from outside the repository to the old filenames will break.
-- A note under `docs/plan/` is called a plan note.
+- A note under `docs/plan/` is called a plan note; each item in the plan is a plan entry.
 
 ### Fixed
 
