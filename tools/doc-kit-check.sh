@@ -433,6 +433,24 @@ check_adr() {
 	check_research
 	[ -d "$dir" ] || return 0
 
+	# §4.3 - the generated decisions index is up to date. It is regenerated outside the tree, under
+	# the same file name, because the name decides how the index links to the records. Check it
+	# before the record early return: an index may be stale while the directory holds no records.
+	idx="${dir}.md"
+	[ -f "$idx" ] || idx="$dir/README.md"
+	# The generator is looked for beside this script, wherever both were copied.
+	generator=$(dirname "$0")/doc-kit-index-decisions.sh
+	if [ -f "$idx" ] && [ -f "$generator" ]; then
+		gen=$(mktemp -d)
+		out="$gen/${idx##*/}"
+		if ! sh "$generator" "$out" "$dir"; then
+			fail "$idx could not be regenerated" "see the error above (§4.3)"
+		elif ! cmp -s "$idx" "$out"; then
+			fail "$idx is out of date" "run 'sh $generator $idx $dir' to regenerate (§4.3)"
+		fi
+		rm -rf "$gen"
+	fi
+
 	pattern_exists "$dir/*.md" || return 0
 
 	# One awk pass over every record, printing one tab-separated line per failure: a kind, the
@@ -504,23 +522,6 @@ check_adr() {
 	done
 	IFS=$oldifs
 	set +f
-
-	# §4.3 - the generated decisions index is up to date. It is regenerated outside the tree, under
-	# the same file name, because the name decides how the index links to the records.
-	idx="${dir}.md"
-	[ -f "$idx" ] || idx="$dir/README.md"
-	# The generator is looked for beside this script, wherever both were copied.
-	generator=$(dirname "$0")/doc-kit-index-decisions.sh
-	if [ -f "$idx" ] && [ -f "$generator" ]; then
-		gen=$(mktemp -d)
-		out="$gen/${idx##*/}"
-		if ! sh "$generator" "$out" "$dir"; then
-			fail "$idx could not be regenerated" "see the error above (§4.3)"
-		elif ! cmp -s "$idx" "$out"; then
-			fail "$idx is out of date" "run 'sh $generator $idx $dir' to regenerate (§4.3)"
-		fi
-		rm -rf "$gen"
-	fi
 
 	return 0
 }

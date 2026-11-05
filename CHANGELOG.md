@@ -51,6 +51,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   fits. The tag is what a later re-adoption needs to find its place in the changelog.
 - ADR-0014 states that the plan may use `docs/plan/README.md` when it starts as a directory, and
   ADR-0002 no longer names only the sibling form.
+- `ADOPTING.md` Step 0 keeps an existing plan in either entry-point form, and Step 3 says to keep
+  the form the target already uses rather than create both.
+- `tools/doc-kit-check.sh` checks a decisions index even when the directory has no record files.
+- `fetch.sh` rejects a document name containing a path separator, or `.` or `..`, so a manifest row
+  cannot write outside the sources directory.
 
 ## [0.8.0] - 2026-11-04
 

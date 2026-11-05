@@ -429,6 +429,13 @@ expect "out-of-date generated decisions index fails" 1 "docs/decisions.md is out
 fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+rm docs/decisions/*.md
+echo "stale" >docs/decisions.md
+expect "stale sibling index fails without records" 1 "docs/decisions.md is out of date" adr
+
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 sh tools/doc-kit-index-decisions.sh docs/decisions/README.md docs/decisions
 expect "valid decisions/README.md passes" 0 "checks passed" adr
 

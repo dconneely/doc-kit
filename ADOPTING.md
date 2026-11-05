@@ -42,7 +42,7 @@ yours to change. `ADOPTING-NOTES.md` says why, and how far to trust each convent
 
 ## Step 0 - Decide whether to adopt, and write the plan
 
-Two outputs: a decision, and `docs/plan.md`.
+Two outputs: a decision, and the plan.
 
 **Decide.** This structure costs more than it returns below a certain size. A single-purpose script,
 a repository one person will maintain for a month, or anything whose entire documentation genuinely
@@ -54,11 +54,12 @@ is written down is a decision, and one that is not gets re-litigated every six m
 is recorded in the adoption record Step 3 creates; a rejection belongs wherever the repository keeps
 its decisions, or in its plan if it has one.
 
-**Then write `docs/plan.md` before anything else.** It is the one artefact you can create knowing
-nothing about the repository yet, and the adoption work itself is its first content: one entry per
-artefact to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those
-entries in the ordinary way. If the repository already has a `docs/plan.md` that is not a doc-kit
-plan, rename it first (`docs/old-plan.md`, say) and migrate it in Step 4.
+**Then write the plan before anything else.** It is the one artefact you can create knowing nothing
+about the repository yet, and the adoption work itself is its first content: one entry per artefact
+to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those entries in
+the ordinary way. Write it at `docs/plan.md` or `docs/plan/README.md`. If the repository already has
+one, keep its form; if it is not a doc-kit plan, rename it first (`docs/old-plan.md` or
+`docs/plan/old-plan.md`) and migrate it in Step 4.
 
 This is not ceremony. It is what makes adoption survive being interrupted, which - on any repository
 old enough to need it - it will be. It also means the structure is doing real work from the first
@@ -71,7 +72,7 @@ it. Nothing here has to be right first time; the plan is the volatile artefact b
 ## Step 1 - Inventory what this repository actually has
 
 Every project takes the core five: `DOC-MAP.md`, `README.md`, the specification, `CHANGELOG.md` and
-`docs/plan.md`. Decision records come too, starting with the adoption record, because their value is
+the plan. Decision records come too, starting with the adoption record, because their value is
 almost entirely in being written contemporaneously.
 
 Then work through the table below and note which apply. Be strict: an artefact you will not maintain
@@ -143,6 +144,10 @@ matter of taking the ones Step 1 said you had earned:
 | `docs/sources/README.md` and `docs/sources/fetch.sh`                      | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                                                                                                              |
 | `docs/plan/`                                                              | your backlog is past roughly 20 items, or you are migrating an existing repository - take `adopt-doc-kit.md` (the migration worksheet) whenever you migrate, and `0000-template.md` (the plan-note template) with the directory |
 | `docs/archive/README.md`                                                  | Step 4 turned up documentation you keep but do not migrate                                                                                                                                                                      |
+
+If the target already uses the other entry-point form for a directory artefact - `docs/decisions.md`
+rather than `docs/decisions/README.md`, for example - keep it, put the template's content there, and
+do not create both (section 2.6).
 
 Two files sit outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `docs/spec.md`, and **`tools/doc-kit-index-decisions.sh`**, which generates
@@ -250,8 +255,8 @@ Before you edit:
   record is undone by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
 - After creating or changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
-  `docs/decisions/README.md`, if kept.
-- Delete finished `docs/plan.md` entries; don't mark them done.
+  the decisions index, if kept.
+- Delete finished plan entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or
   code comments - the map says where those go.
 - Adding a document means updating `DOC-MAP.md` in the same commit.
@@ -320,8 +325,8 @@ do not follow renames.
 
 **A file never keeps a name the kit gives a meaning to.** A `README.md` archived into the top of
 `docs/archive/` is renamed (`old-readme.md`, say), because that name is the archive's own page
-(`docs/spec.md` §2.6), as Step 0 renames an existing `docs/plan.md`. Renaming is simpler than any
-rule for telling the two apart.
+(`docs/spec.md` §2.6), as Step 0 renames an existing plan. Renaming is simpler than any rule for
+telling the two apart.
 
 Get the owner to review the dispositions before acting on them. It is the cheapest point at which
 someone who remembers why a document exists can say so.

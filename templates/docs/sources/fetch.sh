@@ -44,6 +44,14 @@ awk -F' *[|] *' '
 
 while IFS='	' read -r doc url expected_sha; do
 	[ -n "$doc" ] || continue
+	# A manifest row names a file in this directory, not a path to somewhere else.
+	case "$doc" in
+		*/* | *\\* | . | ..)
+			printf 'fetch: unsafe document name: %s\n' "$doc" >&2
+			failures=$((failures + 1))
+			continue
+			;;
+	esac
 
 	# If specific documents requested, filter
 	if [ $# -gt 0 ]; then

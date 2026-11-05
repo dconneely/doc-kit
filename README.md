@@ -49,9 +49,9 @@ template - browse them before deciding whether you want it.
 
 ## Using it
 
-Read [`ADOPTING.md`](ADOPTING.md) and start at Step 0. Step 0 ends by writing a `docs/plan.md`
-containing the rest of the work, which is deliberate: adoption on a mature repository is not an
-afternoon, and the plan is what lets you stop and resume.
+Read [`ADOPTING.md`](ADOPTING.md) and start at Step 0. Step 0 ends by writing the plan containing
+the rest of the work, which is deliberate: adoption on a mature repository is not an afternoon, and
+the plan is what lets you stop and resume.
 
 Copying is manual - take the members of `templates/` you need to your repository root, using the
 table in Step 3, and work through Steps 0-5 in order. There is no installer, because the kit ships
