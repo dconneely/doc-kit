@@ -134,7 +134,7 @@ matter of taking the ones Step 1 said you had earned:
 | `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan.md` | always - the core five                                                                                                                                                                                                          |
 | `docs/decisions/0000-template.md`                                         | always; records are worth having from day one, since their value is being written contemporaneously                                                                                                                             |
 | `docs/decisions/0001-how-the-documentation-is-organised.md`               | always - renumber it if records exist, and leave it `proposed` for the owner to accept                                                                                                                                          |
-| `docs/decisions.md`                                                       | generate with `tools/doc-kit-index-decisions.sh` once decisions exist                                                                                                                                                           |
+| `docs/decisions.md`                                                       | generate with `tools/doc-kit-index-decisions.sh` once decisions exist; pass `docs/decisions/README.md` as its argument to use that form                                                                                         |
 | `docs/quirks.md`                                                          | you deviate from a reference, or carry behaviour you know is wrong                                                                                                                                                              |
 | `docs/glossary.md`                                                        | your domain has terms, or ordinary words used precisely                                                                                                                                                                         |
 | `docs/testing.md`                                                         | you have more than one test approach                                                                                                                                                                                            |
@@ -220,7 +220,7 @@ folded into `AGENTS.md`, or stay exactly as it is. The intent is to improve the 
 to replace instructions the user already wrote for a tool of their choosing.
 
 Paste the stanza below into whichever file(s) you keep, deleting lines for artifacts you did not
-create:
+create and giving the rest their real paths:
 
 ```markdown
 ## Documentation

@@ -14,6 +14,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   to continue an adoption, it stops; asked to adopt, it starts or re-adopts.
 - The `AGENTS.md` stanza describes the archive as 0.8.0 widened it: kept but not migrated, rather
   than undated.
+- `ADOPTING.md` says to give the `AGENTS.md` stanza the repository's real paths, and how to generate
+  the decisions index as `docs/decisions/README.md`: the generator writes `docs/decisions.md` unless
+  that file exists or is named.
 
 ## [0.8.0] - 2026-11-04
 
