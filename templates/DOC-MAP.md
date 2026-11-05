@@ -91,7 +91,7 @@ interface definitions - and each gets its own row below.
 | `docs/plan/0000-template.md` | **Template.** Task-note template. Optional                                                                               | present    | rewritten in place | contributor                  |
 | `docs/howto/*.md`            | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms. Optional      | imperative | rewritten in place | contributor, operator        |
 | `docs/sources/README.md`     | External reference manifest: URLs, retrieval dates, licences, checksums. Optional                                        | present    | append-only        | contributor, consumer        |
-| `docs/sources/`              | External reference material: fetch script and cached originals. Optional                                                 | present    | append-only        | contributor                  |
+| `docs/sources/`              | External reference material beside the manifest: fetch script and cached originals. Optional                             | present    | append-only        | contributor                  |
 | `docs/archive/README.md`     | What the archive of documents kept but not migrated holds, and the header each file in it carries. Optional              | present    | rewritten in place | owner, contributor           |
 
 ## Property values

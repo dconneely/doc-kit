@@ -23,6 +23,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Fixed
 
+- Section 2.6 says that where the specification names an entry point in one form, the other
+  satisfies it, so sections 3.7 and 5 no longer read as placing `docs/sources.md` or
+  `docs/archive.md` wrongly.
 - Section 2.7 refers to ADR-0002 for the shared-triple exemptions instead of listing them. Its list
   had missed the member-file case 0.8.0 added, which the checker already exempts.
 - The `doc-kit-adopt` skill no longer gives two answers for a session that finds no worksheet: asked

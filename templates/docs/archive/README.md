@@ -36,8 +36,8 @@ cost of losing that is invisible until years later.
    page does not substitute for it - readers and tools arrive at these files directly, by search,
    and never see this page. A file archived as `README.md` at the top of the archive is renamed,
    because that name is this page's.
-2. **Every entry states why it was not migrated.** Without a stated reason the archive becomes a
-   landfill, which is the plan-graveyard failure in a new location.
+2. **Every header states why its file was not migrated.** Without a stated reason the archive
+   becomes a landfill, which is the plan-graveyard failure in a new location.
 3. **Nothing outside the archive cites anything inside it.** Material worth relying on gets migrated
    first, at which point it acquires a confidence level and a real home.
 

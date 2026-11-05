@@ -96,7 +96,7 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `docs/glossary.md`          | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html)                                                                                                   | present     | rewritten in place | owner, contributor, consumer |
 | `docs/howto/*.md`           | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms                                                                                                             | imperative  | rewritten in place | contributor, operator        |
 | `docs/sources/README.md`    | External reference manifest: URLs, retrieval dates, licences, checksums (§3.7)                                                                                                                                        | present     | append-only        | contributor, consumer        |
-| `docs/sources/`             | Cached reference originals and fetch script (§3.7)                                                                                                                                                                    | present     | append-only        | contributor                  |
+| `docs/sources/`             | Cached reference originals and fetch script, beside the manifest (§3.7)                                                                                                                                               | present     | append-only        | contributor                  |
 
 ## Lifecycle
 

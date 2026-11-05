@@ -103,11 +103,12 @@ An artifact `name.md` that outgrows one file MAY gain a sibling directory `name/
 The file stays as the entry point - an index or summary linking into the directory - so links to it
 stay true, and each part the map distinguishes gets its own row (ADR-0014).
 
-A directory artifact MAY instead have `name/README.md` as its entry point. Moving an existing
-`name.md` there when the directory is introduced is a one-off migration that fixes every link to it
-in the same change; a repository SHOULD NOT switch between the forms after that, because links from
-outside it break. `name.md` and `name/README.md` MUST NOT both exist, and the map names the one in
-use.
+A directory artifact MAY instead have `name/README.md` as its entry point; ADR-0014 says which form
+an artifact starts in. Moving an existing `name.md` there when the directory is introduced is a
+one-off migration that fixes every link to it in the same change; a repository SHOULD NOT switch
+between the forms after that, because links from outside it break. `name.md` and `name/README.md`
+MUST NOT both exist, and the map names the one in use. Where this specification names an entry point
+in one form, the other satisfies it.
 
 2.7 A map MAY name artifacts this specification does not define. It MUST give each one a tense, a
 mutability and an audience, drawn from the sets in the `Property values` table in
@@ -232,9 +233,9 @@ A checker MUST report a record whose status is not `proposed` that lacks `decisi
 bare `ADR-NNNN` outside code that names no record in this repository. It cannot verify that the
 owner gave permission, nor that an amendment fixed its citations.
 
-A repository MAY maintain a generated index of decision records at `docs/decisions/README.md`, or
-`docs/decisions.md` (§2.6). If present, it MUST carry a generated header naming what generates it,
-and regenerating it MUST produce no diff (§4.3).
+A repository MAY maintain a generated index of decision records at `docs/decisions/README.md`. If
+present, it MUST carry a generated header naming what generates it, and regenerating it MUST produce
+no diff (§4.3).
 
 ### 3.2 Changelog
 
@@ -330,8 +331,8 @@ An adopting repository MAY keep documentation it does not migrate in an archive 
 conventionally `docs/archive/`, optionally with a `docs/archive/README.md` saying what it holds.
 
 5.1 Files below an archive, other than its own `README.md` (§5.5), are **not** documentation files
-for the purposes of §2.4, and a checker MUST exempt them. The archive itself (or its entry point,
-`docs/archive/README.md` or `docs/archive.md`) MUST appear in the map as a single entry.
+for the purposes of §2.4, and a checker MUST exempt them. The archive itself (or its entry point)
+MUST appear in the map as a single entry.
 
 5.2 Every file in the archive MUST begin with a provenance header stating that it is not
 authoritative, when it was last known to be accurate (or that this is unknown), and why it was not
