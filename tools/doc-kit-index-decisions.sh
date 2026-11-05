@@ -6,6 +6,9 @@
 # Defaults: output-file   <decisions-dir>.md if it exists, else <decisions-dir>/README.md
 #           decisions-dir docs/decisions
 #
+# The output must use the decisions index name: <decisions-dir>.md or README.md. The name decides
+# how the index links to the records; other output paths are not supported.
+#
 # Run it from the repository root, from wherever it was copied: nothing in it names its own path.
 
 set -eu
