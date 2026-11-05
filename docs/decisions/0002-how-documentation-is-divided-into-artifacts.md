@@ -86,11 +86,11 @@ creates was rejected because it never prompts a check of what is already there.
 
 This test resolves commonly requested categories without inventing new artefacts:
 
-- **Technical debt belongs in the single ranked plan (`docs/plan.md`) as a type tag** alongside
-  `bug`, `feature`, and `docs`. Debt shares its tense (future), mutability (ordered list, pruned on
-  completion), and audience (`contributor`, `owner`) with the rest of the plan. A separate debt file
-  or independently ranked section prevents the comparison that matters; with two lists, debt is
-  never traded off against features, and the second list stops being read.
+- **Technical debt belongs in the single ranked plan (`docs/plan.md` or `docs/plan/README.md`) as a
+  type tag** alongside `bug`, `feature`, and `docs`. Debt shares its tense (future), mutability
+  (ordered list, pruned on completion), and audience (`contributor`, `owner`) with the rest of the
+  plan. A separate debt file or independently ranked section prevents the comparison that matters;
+  with two lists, debt is never traded off against features, and the second list stops being read.
 - **Machine-readable contracts are members of the specification (`docs/spec.md` or `docs/spec/`).**
   Schemas, OpenAPI/AsyncAPI documents, and interface definitions share the specification's tense
   (present), mutability (rewritten in place), and audience (`consumer`, `contributor`). Being

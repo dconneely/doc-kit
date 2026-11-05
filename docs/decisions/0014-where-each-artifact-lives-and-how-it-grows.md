@@ -54,16 +54,18 @@ one-file artefact can grow without breaking links, and an artefact that ships as
 nothing to grow from. Its index belongs with the files it lists, where GitHub shows it to a reader
 who opens the directory. The form follows from the artefact, so it is not a choice to revisit.
 
-1. **An artefact that starts as a file** - the specification, the plan, quirks, the glossary,
-   testing - is `docs/name.md`. When it outgrows one file it gains a sibling directory `docs/name/`
-   and stays as its entry point, so links to it stay true. A repository may instead move it to
+1. **An artefact that starts as a file** - the specification, quirks, the glossary, testing - is
+   `docs/name.md`. When it outgrows one file it gains a sibling directory `docs/name/` and stays as
+   its entry point, so links to it stay true. A repository may instead move it to
    `docs/name/README.md` when the directory is introduced: a one-off migration, made deliberately,
    with every link in the repository fixed in the same change. Switching back and forth is
    discouraged: each switch breaks links from outside the repository, which cannot be fixed.
-2. **An artefact that starts as a directory** - decision records, how-to guides, external sources,
-   the archive - has its entry point, if it keeps one, at `docs/name/README.md`.
-3. **Never both, and the map names the one in use.** `docs/name.md` and `docs/name/README.md` do not
-   exist side by side. A repository already using the other form keeps it.
+2. **An artefact that starts as a directory, or as a collection of entries** - decision records,
+   how-to guides, external sources, the archive, and the plan where it starts as a backlog - has its
+   entry point, if it keeps one, at `docs/name/README.md`.
+3. **Either form is valid, never both, and the map names the one in use.** `docs/name.md` and
+   `docs/name/README.md` do not exist side by side. A repository already using the other form keeps
+   it; a collection that starts as a directory naturally uses the README form.
 
 The archive's own `docs/archive/README.md` is not an archived file: it is checked like any other
 documentation file, and the archive's header and citation rules do not apply to it.
@@ -72,7 +74,8 @@ documentation file, and the archive's header and citation rules do not apply to 
   aliases, `CHANGELOG.md`, and `DOC-MAP.md`.
 - **Specification:** `docs/spec.md`, overflowing into `docs/spec/` for contracts and schemas. §1
   links directly to ADR-0001 for project purpose and operating model (satisfying §4.1).
-- **Plan:** `docs/plan.md`, replacing `docs/tasks/`. Disposable working notes sit in `docs/plan/`.
+- **Plan:** `docs/plan.md`, or `docs/plan/README.md` when the plan starts as a directory (as this
+  repository's does), replacing `docs/tasks/`. Disposable working notes sit in `docs/plan/`.
 - **Decision records:** `docs/decisions/*.md`, replacing `docs/adr/`. Records keep numbers, follow
   the MADR minimal template, and may carry an optional `## Confirmation` section naming the test
   asserting compliance. Indexed by `docs/decisions/README.md`, generated deterministically by

@@ -46,6 +46,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   them strongly recommended.
 - The adoption record template cites the doc-kit release tag adopted, or a commit when no release
   fits. The tag is what a later re-adoption needs to find its place in the changelog.
+- ADR-0014 states that the plan may use `docs/plan/README.md` when it starts as a directory, and
+  ADR-0002 no longer names only the sibling form.
 
 ## [0.8.0] - 2026-11-04
 
