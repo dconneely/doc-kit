@@ -289,7 +289,7 @@ mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/arc
 : >CLAUDE.md
 : >CHANGELOG.md
 : >docs/spec.md
-: >docs/decisions.md
+: >docs/decisions/README.md
 : >docs/decisions/0001-a-record.md
 : >docs/plan.md
 : >docs/quirks.md
@@ -298,10 +298,10 @@ mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/arc
 : >docs/testing.md
 : >docs/plan/a-note.md
 : >docs/plan/0000-template.md
-: >docs/howto.md
+: >docs/howto/README.md
 : >docs/howto/a-guide.md
-: >docs/sources.md
-: >docs/archive.md
+: >docs/sources/README.md
+: >docs/archive/README.md
 refute "the template map passes as an instance" "WARN [map]" map
 
 fixture
@@ -427,13 +427,34 @@ fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 sh tools/doc-kit-index-decisions.sh docs/decisions/README.md docs/decisions
-expect "valid legacy decisions/README.md passes" 0 "checks passed" adr
+expect "valid decisions/README.md passes" 0 "checks passed" adr
 
 fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 echo "stale" >docs/decisions/README.md
 expect "out-of-date decisions/README.md fails" 1 "docs/decisions/README.md is out of date" adr
+
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+if sh tools/doc-kit-index-decisions.sh && [ -f docs/decisions/README.md ] && [ ! -e docs/decisions.md ]; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	echo "not ok - index generator writes decisions/README.md by default"
+fi
+
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+echo stale >docs/decisions.md
+if sh tools/doc-kit-index-decisions.sh && grep -qF 'ADR-0001' docs/decisions.md && [ ! -e docs/decisions/README.md ]; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	echo "not ok - index generator keeps an existing decisions.md"
+fi
 
 fixture
 mkdir -p tools
@@ -571,11 +592,12 @@ else
 fi
 
 # The checker's exempt shared-triple pairs are exactly the pairs ADR-0002 lists. Each pair is
-# normalised to "A + B" in byte order, so neither side's ordering matters.
+# normalised to "A + B" in byte order, so neither side's ordering matters, and an entry point
+# name/README.md to name.md, as the checker reads it (§2.6).
 pairs() { awk '{ if ($1 > $2) { t = $1; $1 = $2; $2 = t } print $1 " + " $2 }' | LC_ALL=C sort; }
 record_pairs=$(grep -E '^\| `[^`]+` and `[^`]+` +\|' \
 	"$ROOT/docs/decisions/0002-how-documentation-is-divided-into-artifacts.md" |
-	sed -E 's/^\| `([^`]+)` and `([^`]+)`.*/\1 \2/' | pairs)
+	sed -E 's/^\| `([^`]+)` and `([^`]+)`.*/\1 \2/' | sed -E 's#/README\.md( |$)#.md\1#g' | pairs)
 checker_pairs=$(grep -F 'exempt_pairs["' "$CHECK" |
 	sed -E 's/.*exempt_pairs\["([^ ]+) \+ ([^"]+)"\].*/\1 \2/' | pairs)
 if [ -n "$record_pairs" ] && [ "$record_pairs" = "$checker_pairs" ]; then

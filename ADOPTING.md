@@ -86,10 +86,10 @@ present tense, always current, and a contract someone relies on.
 |                         | ordered migrations                                                                                                                                                                                                                               | changelog-shaped: an ordered, immutable-once-applied sequence is a changelog whatever it describes |
 | a network API           | the interface definition ([OpenAPI](https://spec.openapis.org/oas/latest.html), [AsyncAPI](https://www.asyncapi.com), or similar) as source of truth                                                                                             | specification                                                                                      |
 |                         | cross-cutting conventions: pagination, versioning, idempotency, error shape ([RFC 9457](https://www.rfc-editor.org/rfc/rfc9457); crib [Google AIP](https://google.aip.dev) or [Zalando](https://opensource.zalando.com/restful-api-guidelines/)) | specification                                                                                      |
-| deployment as a service | a **runbook** - deploy, roll back, common failures                                                                                                                                                                                               | how-to: step-by-step procedures under `docs/howto/` (indexed at `docs/howto.md`)                   |
+| deployment as a service | a **runbook** - deploy, roll back, common failures                                                                                                                                                                                               | how-to: step-by-step procedures under `docs/howto/` (indexed at `docs/howto/README.md`)            |
 |                         | environment and configuration reference ([12-Factor](https://12factor.net) conventions)                                                                                                                                                          | specification                                                                                      |
 |                         | a **threat model** ([OWASP ASVS](https://owasp.org/projects/asvs) as the checklist)                                                                                                                                                              | neither: an assessment - its conclusions become records, its findings become plan entries          |
-| external standards      | cited RFCs, whitepapers, or third-party specifications                                                                                                                                                                                           | manifest at `docs/sources.md` and cached originals in `docs/sources/` with `fetch.sh`              |
+| external standards      | cited RFCs, whitepapers, or third-party specifications                                                                                                                                                                                           | manifest at `docs/sources/README.md`, with cached originals and `fetch.sh` beside it               |
 | a user interface        | a conformance target and known gaps ([WCAG](https://www.w3.org/TR/WCAG22/))                                                                                                                                                                      | target -> specification; gaps -> quirks                                                            |
 
 The pattern is worth internalising: **most new artifacts are specification members, not new
@@ -134,19 +134,19 @@ matter of taking the ones Step 1 said you had earned:
 | `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan.md` | always - the core five                                                                                                                                                                                                          |
 | `docs/decisions/0000-template.md`                                         | always                                                                                                                                                                                                                          |
 | `docs/decisions/0001-how-the-documentation-is-organised.md`               | always - renumber it if records exist, and leave it `proposed` for the owner to accept                                                                                                                                          |
-| `docs/decisions.md`                                                       | optional; generate it with `tools/doc-kit-index-decisions.sh`, passing `docs/decisions/README.md` as its argument to use that form                                                                                              |
+| `docs/decisions/README.md`                                                | optional; generate it with `tools/doc-kit-index-decisions.sh`                                                                                                                                                                   |
 | `docs/quirks.md`                                                          | you deviate from a reference, or carry behaviour you know is wrong                                                                                                                                                              |
 | `docs/glossary.md`                                                        | your domain has terms, or ordinary words used precisely                                                                                                                                                                         |
 | `docs/testing.md`                                                         | you have more than one test approach                                                                                                                                                                                            |
 | `docs/research/0000-template.md`                                          | you reverse-engineer, or reconcile sources that disagree                                                                                                                                                                        |
-| `docs/howto.md` and `docs/howto/0000-template.md`                         | you have recurring operational procedures (deployments, rotations, migrations)                                                                                                                                                  |
-| `docs/sources.md` and `docs/sources/`                                     | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                                                                                                              |
+| `docs/howto/README.md` and `docs/howto/0000-template.md`                  | you have recurring operational procedures (deployments, rotations, migrations)                                                                                                                                                  |
+| `docs/sources/README.md` and `docs/sources/fetch.sh`                      | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                                                                                                              |
 | `docs/plan/`                                                              | your backlog is past roughly 20 items, or you are migrating an existing repository - take `adopt-doc-kit.md` (the migration worksheet) whenever you migrate, and `0000-template.md` (the task-note template) with the directory |
-| `docs/archive.md` (and `docs/archive/`)                                   | Step 4 turned up documentation you keep but do not migrate                                                                                                                                                                      |
+| `docs/archive/README.md`                                                  | Step 4 turned up documentation you keep but do not migrate                                                                                                                                                                      |
 
 Two files sit outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `docs/spec.md`, and **`tools/doc-kit-index-decisions.sh`**, which generates
-`docs/decisions.md` from decision record front-matter (§3.1, §4.3). Copy them too if you want
+`docs/decisions/README.md` from decision record front-matter (§3.1, §4.3). Copy them too if you want
 automated checks and index generation; skip them if you would rather verify and index by hand. As
 with filenames, keep `tools/` unless the repository already keeps its scripts elsewhere; if it does,
 copy them there and use that path wherever this guide and the templates say `tools/`. Both are
@@ -232,11 +232,11 @@ Tense settles disagreements:
 - `docs/spec.md` - present tense: what the system does now.
 - `CHANGELOG.md` - past tense: what changed, never what's true today.
 - `docs/plan.md` - intent: nothing in it exists yet.
-- `docs/decisions.md` - why: index of decision records; only `accepted` records bind.
+- `docs/decisions/README.md` - why: index of decision records; only `accepted` records bind.
 - `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
-- `docs/howto.md` - step-by-step recurring operational procedures.
-- `docs/sources.md` - pinned external specifications and standards.
-- `docs/archive.md` - kept but not migrated; not authoritative. Never cite what it holds.
+- `docs/howto/README.md` - step-by-step recurring operational procedures.
+- `docs/sources/README.md` - pinned external specifications and standards.
+- `docs/archive/README.md` - kept but not migrated; not authoritative. Never cite what it holds.
 
 Before you edit:
 
@@ -250,7 +250,7 @@ Before you edit:
   record is undone by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
 - After creating or changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
-  `docs/decisions.md`.
+  `docs/decisions/README.md`.
 - Delete finished `docs/plan.md` entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or
   code comments - the map says where those go.
@@ -356,11 +356,12 @@ disagree, or carrying a confidence level is research and needs a home before the
 is the artifact most often missing entirely.
 
 **4. Look for recurring procedures.** Deployment runbooks, release steps, key rotations, and
-environment bootstrapping become how-to guides under `docs/howto/` (indexed at `docs/howto.md`).
+environment bootstrapping become how-to guides under `docs/howto/` (indexed at
+`docs/howto/README.md`).
 
 **5. Look for external standards and specifications.** Cited RFCs, whitepapers, or third-party
-specifications become entries in `docs/sources.md`, with cached originals and licences managed under
-`docs/sources/` via `fetch.sh`.
+specifications become entries in `docs/sources/README.md`, with cached originals and licences
+managed beside it via `fetch.sh`.
 
 **6. Only then consider artifacts the template does not have.** By this point most candidates will
 have turned out to be sections of documents that already exist. Apply the test in the map's "adding

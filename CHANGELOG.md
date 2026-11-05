@@ -6,6 +6,16 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- An artifact that starts as a directory - decision records, how-to guides, external sources, the
+  archive - has its index at `docs/name/README.md`, not a sibling `docs/name.md` (ADR-0014). The
+  templates, the template map, `ADOPTING.md` and the `AGENTS.md` stanza use the new paths. A
+  repository already using the sibling form keeps it (section 2.6). An artifact that starts as a
+  file, such as the specification or the plan, still grows a sibling directory.
+- `tools/doc-kit-index-decisions.sh` writes `docs/decisions/README.md` unless `docs/decisions.md`
+  exists, and `fetch.sh` looks for `docs/sources/README.md` before `docs/sources.md`.
+
 ### Fixed
 
 - Section 2.7 refers to ADR-0002 for the shared-triple exemptions instead of listing them. Its list
@@ -14,9 +24,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   to continue an adoption, it stops; asked to adopt, it starts or re-adopts.
 - The `AGENTS.md` stanza describes the archive as 0.8.0 widened it: kept but not migrated, rather
   than undated.
-- `ADOPTING.md` says to give the `AGENTS.md` stanza the repository's real paths, and how to generate
-  the decisions index as `docs/decisions/README.md`: the generator writes `docs/decisions.md` unless
-  that file exists or is named.
+- `ADOPTING.md` says to give the `AGENTS.md` stanza the repository's real paths.
 - `ADOPTING.md` suggests `docs/old-plan.md` for an existing plan renamed during adoption. The
   earlier suggestion, `docs/tasks.md`, resembled `docs/tasks/`, which the skill reads as a sign of
   an earlier doc-kit adoption.

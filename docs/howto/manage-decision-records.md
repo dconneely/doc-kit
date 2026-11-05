@@ -14,8 +14,8 @@ amend an accepted record safely without leaving stale citations.
 
 ## Steps
 
-A record's title, status and date appear in the generated index, `docs/decisions.md`. Before each
-commit below, run `sh tools/doc-kit-index-decisions.sh` and commit the index with the record.
+A record's title, status and date appear in the generated index, `docs/decisions/README.md`. Before
+each commit below, run `sh tools/doc-kit-index-decisions.sh` and commit the index with the record.
 
 ### Propose a new record
 
@@ -35,7 +35,7 @@ commit below, run `sh tools/doc-kit-index-decisions.sh` and commit the index wit
 
    ```sh
    sh tools/doc-kit-index-decisions.sh
-   git add docs/decisions.md docs/decisions/NNNN-*.md
+   git add docs/decisions/README.md docs/decisions/NNNN-*.md
    git commit -m "docs: Propose ADR-NNNN on {topic}"
    ```
 
@@ -58,7 +58,7 @@ commit below, run `sh tools/doc-kit-index-decisions.sh` and commit the index wit
 
    ```sh
    sh tools/doc-kit-index-decisions.sh
-   git add docs/decisions.md docs/decisions/NNNN-*.md
+   git add docs/decisions/README.md docs/decisions/NNNN-*.md
    git commit -m "docs: Accept ADR-NNNN on {topic}"
    ```
 

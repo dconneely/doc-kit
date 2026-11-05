@@ -3,7 +3,7 @@
 #
 # Usage: sh path/to/doc-kit-index-decisions.sh [output-file] [decisions-dir]
 #
-# Defaults: output-file   <decisions-dir>/README.md if it exists, else <decisions-dir>.md
+# Defaults: output-file   <decisions-dir>.md if it exists, else <decisions-dir>/README.md
 #           decisions-dir docs/decisions
 #
 # Run it from the repository root, from wherever it was copied: nothing in it names its own path.
@@ -24,10 +24,10 @@ esac
 DIR=${2:-docs/decisions}
 if [ -n "${1-}" ]; then
 	OUT=$1
-elif [ -f "$DIR/README.md" ]; then
-	OUT=$DIR/README.md
-else
+elif [ -f "$DIR.md" ]; then
 	OUT=$DIR.md
+else
+	OUT=$DIR/README.md
 fi
 
 if [ ! -d "$DIR" ]; then

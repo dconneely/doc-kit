@@ -1,5 +1,5 @@
 #!/bin/sh
-# fetch.sh - retrieve external sources indexed in sources.md and verify their checksums.
+# fetch.sh - retrieve external sources indexed in README.md and verify their checksums.
 #
 # Usage: sh fetch.sh [document ...]
 #        with no arguments, fetches every missing document in the index table.
@@ -7,11 +7,11 @@
 set -eu
 
 DIR=$(cd "$(dirname "$0")" && pwd)
-MANIFEST="$DIR/../sources.md"
-[ -f "$MANIFEST" ] || MANIFEST="$DIR/README.md"
+MANIFEST="$DIR/README.md"
+[ -f "$MANIFEST" ] || MANIFEST="$DIR/../sources.md"
 
 if [ ! -f "$MANIFEST" ]; then
-	echo "fetch: sources manifest not found (looked for $DIR/../sources.md and $DIR/README.md)" >&2
+	echo "fetch: sources manifest not found (looked for $DIR/README.md and $DIR/../sources.md)" >&2
 	exit 1
 fi
 

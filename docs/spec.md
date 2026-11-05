@@ -232,9 +232,9 @@ A checker MUST report a record whose status is not `proposed` that lacks `decisi
 bare `ADR-NNNN` outside code that names no record in this repository. It cannot verify that the
 owner gave permission, nor that an amendment fixed its citations.
 
-A repository MAY maintain a generated index of decision records at `docs/decisions.md`. If present,
-it MUST carry a generated header naming what generates it, and regenerating it MUST produce no diff
-(§4.3).
+A repository MAY maintain a generated index of decision records at `docs/decisions/README.md`, or
+`docs/decisions.md` (§2.6). If present, it MUST carry a generated header naming what generates it,
+and regenerating it MUST produce no diff (§4.3).
 
 ### 3.2 Changelog
 
@@ -292,7 +292,7 @@ entry to be removed.
 ### 3.6 How-to guides
 
 A repository MAY hold recurring task-oriented procedures under `docs/howto/`, optionally indexed at
-`docs/howto.md`.
+`docs/howto/README.md`.
 
 Each guide MUST be written in the imperative mood, SHOULD state its goal, prerequisites, sequential
 steps, and verification criteria, and SHOULD cite conventions and exemplars rather than duplicating
@@ -302,7 +302,7 @@ their text.
 
 A repository MAY maintain external standards, whitepapers and specifications under `docs/sources/`.
 
-The manifest at `docs/sources.md` indexes each source with its URL, retrieval date, licence,
+The manifest at `docs/sources/README.md` indexes each source with its URL, retrieval date, licence,
 redistributability status, and SHA-256 checksum. A source that is not explicitly redistributable
 under its licence MUST NOT be committed to git and MUST be gitignored. Generated text or Markdown
 extracts derived from cached sources MUST carry a provenance header per §4.3 naming the generator.
@@ -328,11 +328,11 @@ is the current shape.
 ## 5. The archive
 
 An adopting repository MAY keep documentation it does not migrate in an archive directory,
-conventionally `docs/archive/`, optionally indexed at `docs/archive.md`.
+conventionally `docs/archive/`, optionally indexed at `docs/archive/README.md`.
 
 5.1 Files below an archive, other than its index (§5.5), are **not** documentation files for the
 purposes of §2.4, and a checker MUST exempt them. The archive itself (or its index,
-`docs/archive.md` or `docs/archive/README.md`) MUST appear in the map as a single entry.
+`docs/archive/README.md` or `docs/archive.md`) MUST appear in the map as a single entry.
 
 5.2 Every file in the archive MUST begin with a provenance header stating that it is not
 authoritative, when it was last known to be accurate (or that this is unknown), and why it was not

@@ -61,12 +61,12 @@ Because the closed sets are small, some artifacts the template map defines share
 holding different facts. The checker exempts exactly these pairs, and a test fails if its list and
 this table differ:
 
-| Pair                                      | Why the facts differ                                                    |
-| ----------------------------------------- | ----------------------------------------------------------------------- |
-| `DOC-MAP.md` and `docs/testing.md`        | the map says where each fact belongs; testing says what checks cover    |
-| `README.md` and `docs/glossary.md`        | the README orients a newcomer; the glossary defines the vocabulary      |
-| `docs/quirks.md` and `docs/spec.md`       | the specification is the contract; quirks are deliberate deviations     |
-| `docs/archive.md` and `docs/decisions.md` | one indexes documents kept but not migrated; the other decision records |
+| Pair                                                    | Why the facts differ                                                    |
+| ------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `DOC-MAP.md` and `docs/testing.md`                      | the map says where each fact belongs; testing says what checks cover    |
+| `README.md` and `docs/glossary.md`                      | the README orients a newcomer; the glossary defines the vocabulary      |
+| `docs/quirks.md` and `docs/spec.md`                     | the specification is the contract; quirks are deliberate deviations     |
+| `docs/archive/README.md` and `docs/decisions/README.md` | one indexes documents kept but not migrated; the other decision records |
 
 Three structural cases are exempt as well, because the growth rule (ADR-0014) splits one artifact
 into them: an entry point and its parts (`docs/spec.md` and `docs/spec/*`, say); the parts of one

@@ -67,9 +67,9 @@ comments, gitignored files, vendored files and the kit's `templates/` are not re
 artifact patterns split on whitespace. Keep artifact paths free of spaces, or map the file through a
 glob.
 
-**Generated artifacts other than the decisions index (§4.3).** The checker regenerates
-`docs/decisions.md` when `tools/doc-kit-index-decisions.sh` is present. It cannot regenerate a
-schema snapshot, a rendered reference or another generated artifact, so those are review.
+**Generated artifacts other than the decisions index (§4.3).** The checker regenerates the decisions
+index when `tools/doc-kit-index-decisions.sh` is present. It cannot regenerate a schema snapshot, a
+rendered reference or another generated artifact, so those are review.
 
 **Substantive conformance (§4.1, §4.2, §4.4 and §5).** Tables, lists of more than three values and
 multi-step processes are single-sourced; prose never restates a machine-readable contract;
