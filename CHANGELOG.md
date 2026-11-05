@@ -23,6 +23,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Fixed
 
+- The `AGENTS.md` stanza names `docs/decisions/` rather than its optional index, so a repository
+  without the index keeps the rule that only accepted records bind, and regenerates the index only
+  if it keeps one.
 - Section 2.6 says that where the specification names an entry point in one form, the other
   satisfies it, so sections 3.7 and 5 no longer read as placing `docs/sources.md` or
   `docs/archive.md` wrongly.

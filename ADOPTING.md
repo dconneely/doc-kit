@@ -232,7 +232,7 @@ Tense settles disagreements:
 - `docs/spec.md` - present tense: what the system does now.
 - `CHANGELOG.md` - past tense: what changed, never what's true today.
 - `docs/plan.md` - intent: nothing in it exists yet.
-- `docs/decisions/README.md` - why: index of decision records; only `accepted` records bind.
+- `docs/decisions/` - why: decision records; only `accepted` ones bind.
 - `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
 - `docs/howto/` - step-by-step recurring operational procedures.
 - `docs/sources/README.md` - pinned external specifications and standards.
@@ -250,7 +250,7 @@ Before you edit:
   record is undone by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
 - After creating or changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
-  `docs/decisions/README.md`.
+  `docs/decisions/README.md`, if kept.
 - Delete finished `docs/plan.md` entries; don't mark them done.
 - **Write the least that is true.** No history or account of how you got there, in documents or
   code comments - the map says where those go.
