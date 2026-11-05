@@ -17,6 +17,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - `ADOPTING.md` says to give the `AGENTS.md` stanza the repository's real paths, and how to generate
   the decisions index as `docs/decisions/README.md`: the generator writes `docs/decisions.md` unless
   that file exists or is named.
+- `ADOPTING.md` suggests `docs/old-plan.md` for an existing plan renamed during adoption. The
+  earlier suggestion, `docs/tasks.md`, resembled `docs/tasks/`, which the skill reads as a sign of
+  an earlier doc-kit adoption.
 
 ## [0.8.0] - 2026-11-04
 
