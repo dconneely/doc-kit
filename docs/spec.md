@@ -161,7 +161,7 @@ hand applies the same judgement: check it, don't block on it.
   freeze point. A wrong statement is corrected, not superseded. Where such a change encodes a real
   choice, the choice belongs in a record and is decided there; deciding it again here would decide
   one choice twice.
-- **Volatile** artefacts - the plan, task notes - should be gated as little as possible. Friction at
+- **Volatile** artefacts - the plan, plan notes - should be gated as little as possible. Friction at
   capture is what empties a backlog. The decision point is ranking an entry and picking it up, not
   filing it.
 - **Append-only** artefacts - the changelog - are gated by release, not by review.
@@ -256,7 +256,7 @@ importance and an effort. The scales are three-valued - `low`, `medium`, `high` 
 - **Effort** - `low` is under a day, `medium` is under a week, `high` is anything larger or anything
   whose size is not yet known.
 
-An entry MUST be one paragraph. Anything needing more needs an ADR or a task note instead.
+An entry MUST be one paragraph. Anything needing more needs an ADR or a plan note instead.
 
 Completed entries MUST be deleted, not annotated. A plan containing entries marked done, struck
 through, or moved to a "completed" section is non-conformant, because that is the specific failure

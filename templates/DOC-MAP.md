@@ -46,8 +46,8 @@ CHANGELOG.md             what shipped
 docs/
   spec.md                the behaviour contract - an index once it grows
   plan.md                single ranked backlog, items tagged bug/debt/feature/docs
-  plan/*.md              optional: per-entry working notes
-  plan/0000-template.md  optional: task-note template
+  plan/*.md              optional: per-entry plan notes
+  plan/0000-template.md  optional: plan-note template
   decisions/README.md    optional: index of decision records, generated
   decisions/*.md         decisions, numbered, accepted only by the owner
   quirks.md              deliberate deviations and accepted-wrong behaviour
@@ -87,8 +87,8 @@ interface definitions - and each gets its own row below.
 | `docs/research/*.md`         | Sourced findings with explicit confidence levels, named `NNNN-title.md`; shape in `0000-template.md`                     | past       | append-only        | contributor                  |
 | `docs/glossary.md`           | Domain vocabulary                                                                                                        | present    | rewritten in place | owner, contributor, consumer |
 | `docs/testing.md`            | Test strategy, and what is deliberately _not_ covered                                                                    | present    | rewritten in place | contributor                  |
-| `docs/plan/*.md`             | Working notes for one backlog item. Optional                                                                             | future     | disposable         | contributor                  |
-| `docs/plan/0000-template.md` | **Template.** Task-note template. Optional                                                                               | present    | rewritten in place | contributor                  |
+| `docs/plan/*.md`             | Plan notes for one backlog item. Optional                                                                                | future     | disposable         | contributor                  |
+| `docs/plan/0000-template.md` | **Template.** Plan-note template. Optional                                                                               | present    | rewritten in place | contributor                  |
 | `docs/howto/*.md`            | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms. Optional      | imperative | rewritten in place | contributor, operator        |
 | `docs/sources/README.md`     | External reference manifest: URLs, retrieval dates, licences, checksums. Optional                                        | present    | append-only        | contributor, consumer        |
 | `docs/sources/`              | External reference material beside the manifest: fetch script and cached originals. Optional                             | present    | append-only        | contributor                  |
@@ -136,7 +136,7 @@ A change moves through the documents in this order:
 regenerate **`docs/decisions/README.md`** if kept -> **`docs/spec.md`** updated in present tense ->
 **`CHANGELOG.md`** line if user-visible -> `docs/plan.md` entry **deleted**.
 
-Most changes skip the ADR and the task note. Nothing skips the deletion.
+Most changes skip the ADR and the plan note. Nothing skips the deletion.
 
 ## Rules
 

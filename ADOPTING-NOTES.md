@@ -98,7 +98,7 @@ record - it often will. Once made, write it up as an ADR rather than letting it 
 
 No. The rule is `docs/plan.md` entry -> optional `docs/plan/` note, but nothing enforces that order,
 and a mechanical check here would fight the same "no standard" call that keeps this directory
-otherwise unchecked - a task file is ad hoc by design, not a second artefact with its own
+otherwise unchecked - a plan note is ad hoc by design, not a second artefact with its own
 conformance rules.
 
 If you find one by hand - during Step 4, or an ordinary read of the plan - there are two cases, not
@@ -258,7 +258,7 @@ defines and constrains. A useful test: if the sentence would survive a complete 
 is probably README. If it would have to be obeyed by that reimplementation, it is specification.
 
 **"I have a document I cannot classify at all."** Two likely cases. It is a disposable working note,
-in which case it is a task file and can be deleted when the work lands. Or it is two documents
+in which case it is a plan note and can be deleted when the work lands. Or it is two documents
 sharing a filename - try splitting it by tense before trying to classify it whole.
 
 **"The plan has grown to dozens of items and ranking has stopped meaning anything."** You are past

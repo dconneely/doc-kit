@@ -34,7 +34,7 @@ Four problems with documentation layout, growth, and discoverability:
 ## Considered Options
 
 - **Retain root paths and inline material:** Keep `SPECIFICATION.md` and `PLAN.md` at root, inline
-  external extracts into research notes, scatter procedures into task notes, and inspect ADRs
+  external extracts into research notes, scatter procedures into plan notes, and inspect ADRs
   manually.
 - **Subdirectory `README.md` everywhere:** Convert every domain under `docs/` into a directory
   holding a `README.md` (`docs/spec/README.md`, `docs/plan/README.md`, `docs/decisions/README.md`,
@@ -75,7 +75,7 @@ documentation file, and the archive's header and citation rules do not apply to 
 - **Specification:** `docs/spec.md`, overflowing into `docs/spec/` for contracts and schemas. §1
   links directly to ADR-0001 for project purpose and operating model (satisfying §4.1).
 - **Plan:** `docs/plan.md`, or `docs/plan/README.md` when the plan starts as a directory (as this
-  repository's does), replacing `docs/tasks/`. Disposable working notes sit in `docs/plan/`.
+  repository's does), replacing `docs/tasks/`. Disposable plan notes sit in `docs/plan/`.
 - **Decision records:** `docs/decisions/*.md`, replacing `docs/adr/`. Records keep numbers, follow
   the MADR minimal template, and may carry an optional `## Confirmation` section naming the test
   asserting compliance. Indexed by `docs/decisions/README.md`, generated deterministically by

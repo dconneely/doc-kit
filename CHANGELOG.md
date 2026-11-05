@@ -20,10 +20,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   migrated.
 - `tools/doc-kit-index-decisions.sh` writes `docs/decisions/README.md` unless `docs/decisions.md`
   exists, and `fetch.sh` looks for `docs/sources/README.md` before `docs/sources.md`.
-- The kit spells its central term `artefact` in prose, following the repository's British-English
-  convention. The map headings accept `## Artefacts` and the older `## Artifacts`.
+- The kit's prose and headings use the British spelling `artefact`. The map heading is
+  `## Artefacts`; the checker also accepts the older `## Artifacts` for maps copied before the
+  change.
 - ADR-0002 and ADR-0014 filenames now spell `artefact`, matching their titles. Every in-repository
   link is updated; links from outside the repository to the old filenames will break.
+- A note under `docs/plan/` is called a plan note.
 
 ### Fixed
 
@@ -129,12 +131,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   and a monorepo also keeps `docs/plan.md` at the root.
 - `Consequences` is SHOULD in the decision-record rules, and a proposed record may be committed
   while it is discussed (ADR-0007).
-- A monorepo keeps `AGENTS.md` and its aliases at the root; task-note guidance is
+- A monorepo keeps `AGENTS.md` and its aliases at the root; plan-note guidance is
   `docs/plan/0000-template.md`, not a subdirectory README (ADR-0014).
 - `tools/doc-kit-check.sh` reports `checks passed` rather than `conformant`, because it implements
   only part of the structural rules. Any script matching `doc-kit: conformant` must match
   `doc-kit: checks passed`.
-- The template map gives the task-note template its own row; only the notes are disposable.
+- The template map gives the plan-note template its own row; only the notes are disposable.
 
 ### Fixed
 
@@ -307,7 +309,7 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   history: `git log` keeps it, and a hand-kept "done" log would only rot.
 - `ADOPTING-NOTES.md` answers whether a `docs/tasks/*.md` file with no matching `PLAN.md` entry
   should be flagged: no, and says how to fix either mismatch by hand.
-- `templates/docs/tasks/README.md` says what makes a task note worth keeping - a specific definition
+- `templates/docs/tasks/README.md` says what makes a plan note worth keeping - a specific definition
   of done and a line of risk - and offers an optional starting shape.
 - `ADOPTING.md` Step 3 says to tighten the wording of a repository's own `AGENTS.md` or `CLAUDE.md`
   as a second pass, after cutting anything derivable from the code.

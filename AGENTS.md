@@ -80,7 +80,7 @@ does. Never because you have decided it would read better, cover more, or be org
 
 The flow in the map is the whole procedure: an ADR first if a real choice was made, then
 `docs/spec.md` in the present tense, then a `CHANGELOG.md` line if an adopter can see the change,
-then delete the `docs/plan/README.md` entry, and its task note, if there was one.
+then delete the `docs/plan/README.md` entry, and its plan note, if there was one.
 
 Two things to watch:
 
@@ -97,11 +97,11 @@ is a finding to report, not an edit to make.
 
 ## Conventions
 
-British spelling throughout - _customise_, _behaviour_, _licence_ as the noun, _artefact_ - in prose
-we write. Never in quoted text: `LICENCE` holds verbatim MIT-0 and contains `sublicense`, which is
-correct and must stay. The same goes for anything quoted from a standard. Prose wraps at 100
-columns. Commit subjects follow Conventional Commits: product changes take `feat`/`fix`/`refactor`,
-this repository's own documentation takes `docs`.
+British spelling throughout - _customise_, _behaviour_, _licence_ as the noun - in prose we write.
+Never in quoted text: `LICENCE` holds verbatim MIT-0 and contains `sublicense`, which is correct and
+must stay. The same goes for anything quoted from a standard. Prose wraps at 100 columns. Commit
+subjects follow Conventional Commits: product changes take `feat`/`fix`/`refactor`, this
+repository's own documentation takes `docs`.
 
 Text an agent reads and acts on (`SKILL.md`, the `AGENTS.md` stanza, `ADOPTING.md`'s steps) gets cut
 hardest: shorter costs less context and is less likely to bury a rule until it's missed. Exception -

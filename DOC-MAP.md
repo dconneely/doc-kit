@@ -58,7 +58,7 @@ tools/                   product - the conformance checker and decision-index ge
 docs/
   spec.md                what a conformant repository looks like
   plan/README.md         single ranked backlog, items tagged bug/debt/feature/docs
-  plan/*.md              working notes for one backlog item
+  plan/*.md              plan notes for one backlog item
   decisions/README.md    index of decision records, generated
   decisions/*.md         decisions, numbered, accepted only by the owner
   research/*.md          sourced findings, with confidence levels
@@ -90,7 +90,7 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `docs/decisions/*.md`       | Why we chose this. **Real convention:** [MADR](https://adr.github.io/madr/) minimal template, after Nygard 2011; see also [adr.github.io](https://adr.github.io) and [adr-tools](https://github.com/npryce/adr-tools) | past        | amendable          | owner, contributor           |
 | `CHANGELOG.md`              | What shipped, visible to adopters. **Real standard:** [Keep a Changelog](https://keepachangelog.com) + [SemVer](https://semver.org)                                                                                   | past        | append-only        | consumer                     |
 | `docs/plan/README.md`       | Single ranked backlog, items tagged bug/debt/feature/docs. **No standard**                                                                                                                                            | future      | volatile           | owner, contributor           |
-| `docs/plan/*.md`            | Working notes for one backlog item, named after its entry. Disposable                                                                                                                                                 | future      | disposable         | contributor                  |
+| `docs/plan/*.md`            | Plan notes for one backlog item, named after its entry. Disposable                                                                                                                                                    | future      | disposable         | contributor                  |
 | `docs/research/*.md`        | Sourced findings about the conventions this kit cites and how agents use it, with explicit confidence levels. **No standard**                                                                                         | past        | append-only        | contributor, consumer        |
 | `docs/testing.md`           | What `tools/doc-kit-check.sh`, the hooks and the agent evals verify exactly, approximately, and deliberately not at all                                                                                               | present     | rewritten in place | contributor                  |
 | `docs/glossary.md`          | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html)                                                                                                   | present     | rewritten in place | owner, contributor, consumer |
