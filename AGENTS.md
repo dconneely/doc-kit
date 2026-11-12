@@ -48,8 +48,11 @@ changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
 
 - **Delete completed `docs/plan/README.md` entries.** Do not annotate, strike through, or move them
   to a done section - that is the specific failure that makes a plan stop being read.
-- **`CHANGELOG.md` is for changes an adopter can see.** Plan edits and repository infrastructure are
-  not, and do not belong there.
+- **`CHANGELOG.md` is for changes an adopter can see.** Plan edits, repository infrastructure and
+  rewording that changes no rule are not, and do not belong there.
+- **Two passages that disagree are a finding to report, not an edit to make**, unless a checker test
+  or an eval scenario can tell the difference. The remedy is usually to delete one copy, which is
+  the owner's call.
 - **Adding a document means updating `DOC-MAP.md` in the same commit.** Every artefact the map names
   must exist, and every documentation file (§1) must appear in the map; templates, the archive's
   contents and vendored files are exempt. `tools/doc-kit-check.sh` will tell you, but only if you
