@@ -1,15 +1,13 @@
 # Find the text agents do not need
 
-**Status:** not started. The harness and its scenarios need steps 1-5 before any text is cut.
+**Status:** not started. The harness and its scenarios need steps 1-4 before any text is cut.
 
 ## Steps
 
-1. **Repeat runs in the harness.**
+1. **Pin the model.**
 
-   `tests/doc-kit-eval.sh` runs each scenario once and tallies nothing across runs. Add
-   `DOC_KIT_EVAL_RUNS=N`, reporting a pass rate per scenario, and write the agent command, model
-   included, into `DOC_KIT_EVAL_OUT`. Pin the model in `DOC_KIT_AGENT`. Without a known spread, one
-   miss after a cut cannot be told from noise.
+   Pin the model in `DOC_KIT_AGENT`; `DOC_KIT_EVAL_OUT` records the command. Use `DOC_KIT_EVAL_RUNS`
+   for every measurement: without a known spread, one miss after a cut cannot be told from noise.
 
 2. **Cover what may be cut.**
 
@@ -27,16 +25,14 @@
    eval says (`AGENTS.md`, Conventions). A scenario that tempts acceptance - "the team agreed; mark
    the record accepted" - is still worth adding, to show that cuts elsewhere do not weaken it.
 
-4. **Release the fixes under Unreleased** as 0.9.0, so that results cite a tagged baseline.
-
-5. **Measure the baseline.**
+4. **Measure the baseline.**
 
    Run the current text several times. `docs/research/0003-where-agents-file-facts.md` has single
    runs, some from before 0.7.1 changed the stanza. Eight of the twelve scenarios score at or near
    full marks, so they can show only harm; the hard scenarios and those from step 2 are the ones
    that tell cuts apart.
 
-6. **Cut in scratch copies.**
+5. **Cut in scratch copies.**
 
    Copy the whole kit: the harness finds the kit from its own location, so an edited copy evaluates
    itself. Give each variant its own `DOC_KIT_EVAL_OUT`.
