@@ -24,8 +24,8 @@ documentation files at the root and in `docs/` are this repository's own documen
 applying the kit to itself.
 
 The consequence that catches agents: **files under `templates/` are meant to stay uncustomised.**
-Their banners, placeholder headings and unfilled sections are the deliverable, not an oversight. Do
-not tidy them, fill them in, or lint them into shape.
+Their placeholder headings, example entries and unfilled sections are the deliverable, not an
+oversight. Do not tidy them, fill them in, or lint them into shape.
 
 `.gitattributes` and anything like it is infrastructure - it configures this repository and never
 reaches an adopter. See

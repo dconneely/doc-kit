@@ -316,8 +316,20 @@ sed -i.bak 's/| rewritten in place | contributor /| rewritten in place | contrib
 expect "a role marked for agents only passes" 0 "doc-kit: checks passed (map)" map
 
 fixture
-echo 'This file is a template.' >>DOC-MAP.md
-expect "surviving template text fails" 1 "the map still carries template text" map
+after '^DOC-MAP.md ' 'ghost.md       named here only'
+expect "artefact in the layout alone fails" 1 "ghost.md is in the layout block but not the artefacts table" map
+
+# A copy of templates/ and tools/, as an adopter starts from: the only failure is the plan's
+# example entry, which Step 3 says to replace.
+fixture
+rm -rf DOC-MAP.md docs
+cp -R "$ROOT/templates/." .
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-check.sh" "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+: >AGENTS.md
+: >CLAUDE.md
+expect "an untouched copy of the templates fails only on the example plan entry" 1 "docs/plan.md:14 is the template's example entry"
+expect "an untouched copy of the templates has one failure" 1 "doc-kit: 1 failure(s)"
 
 # ---------------------------------------------------------------- adr
 
@@ -564,6 +576,10 @@ expect "entry with no type tag fails" 1 "docs/plan.md:9 has no valid type tag" p
 fixture
 printf '\n## Wrong tag\n\n**Type:** chore\n\nOne paragraph.\n' >>docs/plan.md
 expect "entry with an invalid type tag fails" 1 "docs/plan.md:9 has no valid type tag" plan
+
+fixture
+printf '\n## Short title, imperative\n\n**Type:** feature\n\nOne paragraph.\n' >>docs/plan.md
+expect "the template's example entry fails" 1 "docs/plan.md:9 is the template's example entry" plan
 
 fixture
 printf '\n## Bare tag\n\n**Type:** bug\n\nOne paragraph.\n' >>docs/plan.md

@@ -6,6 +6,15 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Fixed
+
+- The template map no longer cites `ADR-0002`, a record of the kit's own. A fresh adoption failed
+  the checker on it.
+- `tools/doc-kit-check.sh` fails when the layout block names an artefact the artefacts table does
+  not.
+- `tools/doc-kit-check.sh` fails on the plan template's example entry. Its check for a template
+  banner is removed: no released template carries the banner, so it could not fire.
+
 ## [0.9.0] - 2026-11-05
 
 ### Changed

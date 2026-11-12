@@ -96,7 +96,7 @@ interface definitions - and each gets its own row below.
 
 ## Property values
 
-The closed sets used in the artefacts table (ADR-0002):
+The closed sets used in the artefacts table:
 
 | Property   | Values                                                                                  |
 | ---------- | --------------------------------------------------------------------------------------- |

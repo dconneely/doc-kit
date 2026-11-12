@@ -4,9 +4,9 @@
 # Usage:  sh path/to/doc-kit-check.sh [check ...]
 #         with no arguments, runs every check
 #
-# Checks: map    §2.2-2.7  the map is complete, consistent and customised
+# Checks: map    §2.2-2.7  the map is complete and consistent
 #         adr    §3.1-3.4  records are numbered, statused and structured; notes are numbered
-#         plan   §3.3      the plan has not become a graveyard
+#         plan   §3.3      the plan has not become a graveyard, nor kept the template's example
 #
 # Exits 0 if clean, 1 if anything failed. Run it by hand: nothing in this kit
 # requires it, and a repository that holds these properties without ever
@@ -183,6 +183,10 @@ check_map() {
 	for l in $lifes; do
 		within "$arts" "$l" ||
 			fail "$l is in the lifecycle table but not the artefacts table" "§2.2 - the table is authoritative"
+	done
+	for l in $lays; do
+		within "$arts" "$l" ||
+			fail "$l is in the layout block but not the artefacts table" "§2.2 - the table is authoritative"
 	done
 
 	# §2.3 - every artefact the map names exists.
@@ -394,10 +398,6 @@ check_map() {
 	done
 	IFS=$oldifs
 	set +f
-
-	# §2.5 - customisation actually happened.
-	grep -q 'This file is a template' "$MAP" &&
-		fail "the map still carries template text" "§2.5"
 	return 0
 }
 
@@ -604,10 +604,12 @@ check_plan() {
 	[ -f "$plan" ] || return 0
 
 	# One awk pass: `done N` for a heading marked complete, `type N` for an entry (a `##` heading)
-	# with no valid type tag beneath it. Lowercase "done" counts only when set off as a marker -
-	# "(done)", "- done" - so a title like "Define done" passes.
+	# with no valid type tag beneath it, `example N` for the template's example entry. Lowercase
+	# "done" counts only when set off as a marker - "(done)", "- done" - so a title like "Define
+	# done" passes.
 	hits=$(awk '
 		function flush() { if (h && !t) print "type " h }
+		/^## Short title, imperative$/ { print "example " NR }
 		/^#+ / {
 			l = tolower($0)
 			if (l ~ /~~|\[x\]|[(\[](done|completed?)[)\]]|[-:] *(done|completed?) *$/ ||
@@ -629,6 +631,7 @@ check_plan() {
 		case "$hit" in
 			done*) fail "$plan:$no looks like a completed entry" "§3.3 - delete entries when done, do not annotate" ;;
 			type*) fail "$plan:$no has no valid type tag" "§3.3 - bug, debt, feature or docs" ;;
+			example*) fail "$plan:$no is the template's example entry" "§2.5 - replace it or delete it" ;;
 		esac
 	done
 	IFS=$oldifs
