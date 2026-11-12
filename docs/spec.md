@@ -82,9 +82,10 @@ than left to memory.
 2.4 Every documentation file MUST appear in the map, either individually or under a directory
 pattern the map names. This is the check that rots second.
 
-2.5 The map MUST NOT retain placeholder content from the template - an example artefact row, an
-unreplaced heading. Templates carry an example rather than instructions (ADR-0006), so a surviving
-example is the signal that customisation was never finished.
+2.5 The map, and each document copied from a template, MUST NOT retain the template's placeholder
+content - an example entry, an unreplaced heading. A `0000-template.md` kept to copy from is the
+exception. Templates carry an example rather than instructions (ADR-0006), so a surviving example is
+the signal that customisation was never finished.
 
 2.6 Paths in the map MUST be the repository's real paths. Only files a tool or a convention looks
 for at the root - the map, `README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` - SHOULD sit

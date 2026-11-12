@@ -121,7 +121,7 @@ The closed sets used in the artefacts table:
 | `docs/glossary.md` entry     | a term acquires a project-specific meaning         | when the term leaves the codebase                                |
 | `docs/testing.md`            | the second test approach appears                   | never                                                            |
 | `docs/plan/*.md`             | work begins on an entry                            | work completes                                                   |
-| `docs/plan/0000-template.md` | the directory is adopted                           | when the directory is removed                                    |
+| `docs/plan/0000-template.md` | plan notes are first kept                          | when plan notes are no longer kept                               |
 | `docs/howto/*.md`            | a procedure recurs across several places           | when automated away or obsolete                                  |
 | `docs/sources/README.md`     | an external standard is cited                      | when no artefact cites it                                        |
 | `docs/sources/`              | the fetch script is adopted, or a source is cached | when no artefact cites it                                        |
