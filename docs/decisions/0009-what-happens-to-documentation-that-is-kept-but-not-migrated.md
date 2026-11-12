@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-11-04
+date: 2026-11-12
 decision-makers: David Conneely
 ---
 
@@ -27,15 +27,14 @@ a folder marked not authoritative.
 
 ## Decision Outcome
 
-Chosen option: **quarantine in an archive directory**, under four rules:
+Chosen option: **quarantine in an archive directory**, under three rules:
 
 1. The archive holds documentation kept but **not migrated**: material whose currency cannot be
    established, and material that fits no artefact and is not worth rewriting now. Material that is
    merely hard to read is migrated.
 2. Every archived file carries a **provenance header**: not authoritative, last known accurate when
-   (or "unknown"), why not migrated. A folder-level warning is not enough.
-3. Every entry states **why it was not migrated**.
-4. Archived files are **exempt** from the map's completeness check, and the archive appears in the
+   (or "unknown"), and why it was not migrated. A folder-level warning is not enough.
+3. Archived files are **exempt** from the map's completeness check, and the archive appears in the
    map as a single entry.
 
 Nothing outside the archive cites something inside it. Material worth relying on is migrated first,
@@ -48,8 +47,8 @@ launders undatable claims.
 ### Consequences
 
 - Good, because the header protects readers who arrive by search and never see the folder.
-- Good, because a stated reason per entry stops the archive becoming a landfill.
-- Bad, because rule 4 is a concession. Without it the archive fights the completeness check on the
+- Good, because a stated reason in each header stops the archive becoming a landfill.
+- Bad, because rule 3 is a concession. Without it the archive fights the completeness check on the
   first day, and the likely outcome is a disabled check rather than an emptied archive.
 - Neutral: the archive may never be emptied. What stays longest is usually material with no
   provenance that might be useful one day. An archive with honest headers is a known

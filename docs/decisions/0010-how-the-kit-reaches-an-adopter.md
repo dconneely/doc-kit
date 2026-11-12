@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-11-05
+date: 2026-11-12
 decision-makers: David Conneely
 ---
 
@@ -33,9 +33,10 @@ Chosen option: **vendor the tools, fork-and-forget, and keep the skill under `.a
   the same MIT-0 licence, and kept at `tools/` beside `templates/`. A vendored checker versions with
   the structure it checks: an adopter's map is frozen at adoption, and a referenced hook would keep
   moving and could start failing a repository that never changed.
-- **Adoption is fork-and-forget.** What an adopter copies is theirs. There is no version stamp, no
-  migration tooling and no obligation to track this repository. `CHANGELOG.md` is the whole upgrade
-  mechanism: an adopter reads it and applies what they want by hand.
+- **Adoption is fork-and-forget.** What an adopter copies is theirs. No copied file carries a
+  version stamp, and there is no migration tooling and no obligation to track this repository.
+  `CHANGELOG.md` is the whole upgrade mechanism: an adopter reads it from the release their adoption
+  record names (ADR-0006) and applies what they want by hand.
 - **The adoption skill lives at `.agents/skills/doc-kit-adopt/`.** Claude Code discovers it there as
   it does under `.claude/skills/`, and the path says it is written for agents generally, as root
   `AGENTS.md` does.
@@ -44,10 +45,10 @@ A hook provider, an action or a package would each bring a runtime, a registry a
 dependency the rest of the kit does not have. Shipping no checker was rejected because the two
 checks that rot - every artefact the map names exists, every documentation file appears in the map -
 are the ones a person stops making. Version stamps were rejected because they put the kit's name
-inside every adopting repository, and imply a migration a map customised by deletion cannot have.
-Referenced rules were rejected because they make an adopter's documentation depend on this
-repository staying reachable. Keeping the skill in both places was rejected because a skill is its
-whole content, with nothing for a second copy to point at.
+inside every copied file, and imply a migration a map customised by deletion cannot have. Referenced
+rules were rejected because they make an adopter's documentation depend on this repository staying
+reachable. Keeping the skill in both places was rejected because a skill is its whole content, with
+nothing for a second copy to point at.
 
 ### Consequences
 
