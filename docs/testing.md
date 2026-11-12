@@ -49,6 +49,10 @@ cover a file nobody intended to map.
 numbered step sequences as advisories. It compares structure, not meaning; a report is a prompt, not
 a failure.
 
+**Volume.** `tests/doc-kit-word-budget.sh` fails when the `AGENTS.md` stanza or the template map
+grows past a word budget. It counts words, not whether each one is needed; the agent evals are the
+test of that.
+
 ## What is deliberately not covered
 
 **The owner's permission.** `docs/spec.md` §3.1 requires the owner's explicit permission for every
@@ -98,9 +102,9 @@ directory, breaks one thing, and asserts the exit code and the message - a case 
 the table above, plus the clean fixture. It is infrastructure (ADR-0005): it tests the vendored
 checker and is not vendored with it.
 
-CI (`.github/workflows/ci.yml`) runs the checker, its tests and the duplication advisory on Linux
-and macOS, and the hooks on Linux, on every push to `main` and every pull request. `gitleaks` is
-skipped there: it scans only the staged diff, which CI does not have.
+CI (`.github/workflows/ci.yml`) runs the checker, its tests, the duplication advisory and the word
+budget on Linux, macOS and Windows, and the hooks on Linux, on every push to `main` and every pull
+request. `gitleaks` is skipped there: it scans only the staged diff, which CI does not have.
 
 The tests exist because this checker's characteristic failure is silence. Every bug found in it so
 far reported conformance while checking nothing: glob expansion, regex-unsafe paths, a no-op `sed`,
@@ -134,6 +138,7 @@ the fact; `DOC_KIT_EVAL_OUT` keeps each session's log and diff.
 sh tools/doc-kit-check.sh              # conformance
 sh tests/doc-kit-check.test.sh         # the checker's own tests
 sh tests/doc-kit-duplicate-check.sh    # advisory duplication report
+sh tests/doc-kit-word-budget.sh        # the stanza and the template map stay within budget
 sh tests/doc-kit-eval.sh                # agent evals, by hand; see its header for DOC_KIT_AGENT
 prek run --all-files                   # hygiene, line length, drift guards
 prek run --hook-stage manual lychee-system --all-files
