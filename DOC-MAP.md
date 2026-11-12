@@ -36,7 +36,6 @@ The tense of the sentence you are writing usually settles it:
 | "is anything left to do here?"              | "this code should also..."                         | the plan - a `TODO` beside the code names the entry, never replaces it                    |
 | "what does this word mean here?"            | "X means Y in this project"                        | the glossary                                                                              |
 | "what must an agent know to work here?"     | "an agent working here needs to know X"            | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact     |
-| "how do I perform this procedure?"          | "run step 1, then step 2"                          | a how-to guide (`docs/howto/`)                                                            |
 | "where does this cited document come from?" | "source A was retrieved from URL B"                | `docs/sources/` (indexed in `docs/sources/README.md`)                                     |
 | "where does this go?"                       | "this is how each document is used"                | this file                                                                                 |
 
@@ -64,7 +63,6 @@ docs/
   research/*.md          sourced findings, with confidence levels
   glossary.md            project vocabulary
   testing.md             what the checker verifies, and what it does not
-  howto/*.md             recurring procedures citing conventions and exemplars
   sources/README.md      external reference manifest: URLs, retrieval dates, checksums
   sources/               external material: fetch script and cached originals
 ```
@@ -94,7 +92,6 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `docs/research/*.md`        | Sourced findings about the conventions this kit cites and how agents use it, with explicit confidence levels. **No standard**                                                                                         | past        | append-only        | contributor, consumer        |
 | `docs/testing.md`           | What `tools/doc-kit-check.sh`, the hooks and the agent evals verify exactly, approximately, and deliberately not at all                                                                                               | present     | rewritten in place | contributor                  |
 | `docs/glossary.md`          | Project vocabulary. Convention: DDD's [ubiquitous language](https://martinfowler.com/bliki/UbiquitousLanguage.html)                                                                                                   | present     | rewritten in place | owner, contributor, consumer |
-| `docs/howto/*.md`           | Step-by-step procedures that recur across several places. How-to in [Diátaxis](https://diataxis.fr) terms                                                                                                             | imperative  | rewritten in place | contributor, operator        |
 | `docs/sources/README.md`    | External reference manifest: URLs, retrieval dates, licences, checksums (§3.7)                                                                                                                                        | present     | append-only        | contributor, consumer        |
 | `docs/sources/`             | Cached reference originals and fetch script, beside the manifest (§3.7)                                                                                                                                               | present     | append-only        | contributor                  |
 
@@ -120,7 +117,6 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `docs/research/*.md`        | a cited convention is checked, or an agent eval is run       | never - confidence gets revised                                  |
 | `docs/testing.md`           | something started verifying the documentation mechanically   | never                                                            |
 | `docs/glossary.md` entry    | a term acquires a project-specific meaning                   | when the term leaves the project                                 |
-| `docs/howto/*.md`           | a procedure recurs across several places                     | when automated away or obsolete                                  |
 | `docs/sources/README.md`    | an external standard is cited                                | when no artefact cites it                                        |
 | `docs/sources/`             | the fetch script is adopted, or a source is cached           | when no artefact cites it                                        |
 
@@ -164,7 +160,7 @@ restate them ([ADR-0006][adr6]). What each rule prevents is in `ADOPTING-NOTES.m
 Absent on purpose, so that adding any of them later is a decision rather than a drift:
 
 - **A separate technical-debt file** - see [ADR-0002][adr2].
-- **`docs/quirks.md`** - in `templates/`, not earned here yet.
+- **`docs/quirks.md`** and **`docs/howto/`** - in `templates/`, not earned here yet.
 - **An issue tracker**, until the backlog outgrows a file - roughly 20-30 open items.
 - **Community health files** - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` - which earn
   their place when outside contributions begin, not before.

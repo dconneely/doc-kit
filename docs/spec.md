@@ -192,27 +192,17 @@ the owner before it is decided. No reader - human or automated - may treat a `pr
 constraint.
 
 **The owner decides every change of status.** A contributor MAY create a record as `proposed`,
-copied from the template rather than from another record, and MAY change a `proposed` record freely.
-It MUST have the owner's explicit permission, asked for first, to accept a record (`proposed` to
-`accepted`), reject one (`proposed` to `rejected`), reopen one to change it (`accepted` to
-`proposed`), deprecate one (`accepted` to `deprecated`), or delete one of any status. General
-approval - "looks good", "go ahead", approval of other work - is not permission. When the owner
-rejects a change to a reopened record, its last accepted version is restored, rather than the record
-being marked `rejected`. A proposed record may be committed while it is discussed; once accepted,
-the accepted version is committed, so history holds that version. Formatting applied by a tool,
-which alters no word, is not a change. See ADR-0007 and ADR-0001.
-
-**An accepted record is the current answer to its question.** It is reopened and amended in place,
-including to reverse its decision. When its question splits or merges with another, or it no longer
-applies, it is deprecated or - more simply - deleted, and links to any record that replaces it. A
-later choice between real options is its own record, linked from the earlier one. A record carries
-no revision log; git holds what it said when. See ADR-0007.
+copied from the template, and MAY change a `proposed` record freely. It MUST have the owner's
+explicit permission, asked for first, to accept, reject, reopen, deprecate or delete a record;
+general approval - "looks good", approval of other work - is not permission. An accepted record is
+the current answer to its question, and is amended in place by reopening it. The record template,
+`0000-template.md`, holds the rules for each of these steps and is their one home (ADR-0006);
+ADR-0007 and ADR-0001 have the reasons.
 
 **Citations take one form.** A record is cited as `ADR-NNNN` - upper case, a hyphen, four digits -
 and a bare ID MUST name a record in this repository. A record in another repository is cited by a
-link to it. A citation SHOULD claim as little about the record as it can. A change to a record, its
-deletion included, MUST be committed together with every citation in the repository that it makes
-untrue, found by searching for the record's ID. Commit messages are history, and are not changed.
+link to it. A change to a record, its deletion included, MUST be committed together with every
+citation in the repository that it makes untrue, found by searching for the record's ID.
 
 A repository MAY maintain a generated index of decision records at `docs/decisions/README.md`. If
 present, it MUST carry a generated header naming what generates it, and regenerating it MUST produce

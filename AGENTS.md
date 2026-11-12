@@ -35,29 +35,14 @@ reaches an adopter. See
 
 You may create a decision record as `proposed`, and change a `proposed` record, without asking.
 
-**Everything else needs the owner's explicit permission, asked for first:**
+**Accepting, rejecting, reopening (`accepted` to `proposed`), deprecating and deleting a record each
+need the owner's explicit permission, asked for first.** Nothing else - "looks good", approval of
+other work, an earlier session's say-so - is permission.
 
-| Change                     | Called                                                      |
-| -------------------------- | ----------------------------------------------------------- |
-| `proposed` -> `accepted`   | accepting a new record, or a change to one                  |
-| `proposed` -> `rejected`   | rejecting a new record, when the rejection is worth keeping |
-| `accepted` -> `proposed`   | reopening a record to change it                             |
-| `accepted` -> `deprecated` | deprecating a record without deleting it                    |
-| deleting a record          | of any status                                               |
-
-Nothing else - "looks good", approval of other work, an earlier session's say-so - is permission.
-
-To create one, copy `templates/docs/decisions/0000-template.md` - never an existing record - to the
-next free number. After creating or changing a record, run `sh tools/doc-kit-index-decisions.sh` to
-regenerate `docs/decisions/README.md`.
-
-On accepting, rejecting or deprecating, set `decision-makers` to the owner's name and `date` to
-today, then commit. If the owner rejects a change to a reopened record, restore its last accepted
-version rather than marking it `rejected`. Deleting a record is usually simpler than keeping it
-`rejected` or `deprecated`.
-
-A change includes fixing, in the same commit, the citations it makes untrue. Formatting applied by a
-tool is not a change. `docs/spec.md` §3.1 has the rest.
+The comment in `templates/docs/decisions/0000-template.md` holds the rest of the rules. To create a
+record, copy that file - never an existing record - to the next free number. After creating or
+changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
+`docs/decisions/README.md`.
 
 ## Before you edit
 
