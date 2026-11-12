@@ -7,11 +7,9 @@ have some of the filenames?"
 Requirement keywords - MUST, MUST NOT, SHOULD, SHOULD NOT, MAY - are used as defined in
 [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
-Requirements here fall into two kinds, and conflating them would make tooling a condition of
-adopting a documentation structure. Requirements **on a repository** describe its state, and a
-repository satisfies them however it likes - by review, by habit, or by hand. Requirements **on a
-checker** apply only to software implementing these checks, and are written as "a checker MUST ...".
-No repository is obliged to run one. Verifying by hand is fully conformant.
+Requirements describe a repository's state, and a repository satisfies them however it likes - by
+review, by habit, or by hand. No repository is obliged to run a checker. `docs/testing.md` says
+which requirements `tools/doc-kit-check.sh` checks, and how.
 
 ## Purpose and scope
 
@@ -61,25 +59,21 @@ Defined in `docs/glossary.md`. The ones this document leans on hardest are **map
 A **documentation file** is any Markdown file in the repository that is not below an archive (§5)
 unless it is the archive's own `README.md` (§5.5), not below the kit's `templates/` (§2.8), and not
 vendored. A file is **vendored** when its `linguist-vendored` git attribute is set - the attribute
-GitHub Linguist defines for third-party code, conventionally set in `.gitattributes` (ADR-0011).
-This definition is what makes the map's completeness check decidable, so a checker MUST implement
-exactly it. A file being gitignored does not remove it from this definition - see §2.9 for how a
-checker MUST treat one.
+GitHub Linguist defines for third-party code, conventionally set in `.gitattributes` (ADR-0011). A
+gitignored file is still a documentation file (§2.9).
 
 ## 2. The map
 
 2.1 A conformant repository MUST contain a map at `DOC-MAP.md` in its root.
 
 2.2 The map names its artefacts in three places: the layout block, the artefacts table and the
-lifecycle table. All three MUST name the same set, and a checker MUST report any artefact appearing
-in one and not another.
+lifecycle table. All three MUST name the same set.
 
 **The artefacts table is authoritative.** Its first cell is a backticked path, one artefact per row,
 so it is the only one of the three that a checker can read without inference: the layout block is an
 indented tree whose entries are relative to their parent, and the lifecycle table omits paths where
-an entry is per-item rather than per-file. Tools MUST take the artefact set from the artefacts
-table, and treat the other two as views that must agree with it. When comparing, a trailing `/` and
-a trailing `/*` denote the same directory artefact.
+an entry is per-item rather than per-file. The other two are views that must agree with it. A
+trailing `/` and a trailing `/*` denote the same directory artefact.
 
 2.3 Every artefact named in the map MUST exist at the path the map gives. This is the check that
 rots first, and it SHOULD be given a mechanism - a checker, a review step, a release ritual - rather
@@ -117,11 +111,10 @@ role - `contributor (agents)` or `contributor (humans)`. Roles are separated by 
 order.
 
 Two artefacts sharing all three are usually one artefact: merge them, or make one a section of the
-other, unless they hold different facts. A checker MUST report a shared triple as advisory, and MUST
-NOT let it affect the exit status. It MUST exempt exactly the pairs and structural cases ADR-0002
-lists, and no others; ADR-0002 says why each holds different facts, and is the one place they are
-listed. Free-text properties defeat that test - near-duplicates escape on phrasing rather than
-substance - which is why all three are closed sets.
+other, unless they hold different facts. A shared triple is a prompt to check, not a failure.
+ADR-0002 lists the pairs and structural cases that share one while holding different facts, and is
+the one place they are listed. Free-text properties defeat that test - near-duplicates escape on
+phrasing rather than substance - which is why all three are closed sets.
 
 An **alias** is exempt: a file whose entire content points at another artefact, existing only
 because a tool looks for that filename. It appears in the map, carries the properties of what it
@@ -129,21 +122,17 @@ points at, and adds nothing of its own.
 
 2.8 A repository MAY contain uncustomised template artefacts - a repository distributing this kit
 necessarily does. In a repository that has `templates/DOC-MAP.md`, files below `templates/` are
-product, not documentation files (§1), and a checker MUST exempt them from documentation and
-citation checks, in the same manner as §5.1. In any other repository, `templates/` is not special. A
-checker MUST evaluate only the root map as an instance. It MUST NOT apply the duplicate-property
-test (§2.7) to an artefact the map identifies as a template or product; its row in the map is still
-checked for §2.2, §2.3 and the property sets in §2.7. Product artefacts that are not copied into the
-adopter's repository, such as `ADOPTING.md`, remain documentation files for §2.4 and §3.1; §2.5
-applies only to the root map. Without this, a repository shipping the kit fails §2.5 on its own
-templates, which is the check reporting the opposite of the truth.
+product, not documentation files (§1): §2.4, §2.5 and the citation rule in §3.1 do not apply to
+them. In any other repository, `templates/` is not special. Only the root map is an instance. The
+duplicate-property test (§2.7) does not apply to an artefact the map identifies as a template or
+product; its row in the map is still subject to §2.2, §2.3 and the property sets in §2.7. Product
+artefacts that are not copied into the adopter's repository, such as `ADOPTING.md`, remain
+documentation files.
 
-2.9 A documentation file that is gitignored is not exempt from §2.4 - a checker MUST still evaluate
-it against the map. But a checker MUST report a hit in one as advisory, and MUST NOT let it affect
-exit status: gitignored documentation (a repository's own working-notes convention, say) is a real,
-recurring category this specification does not get to assume away, and it deserves checking without
-ever blocking on content the map was never meant to describe (ADR-0011). A reviewer verifying by
-hand applies the same judgement: check it, don't block on it.
+2.9 A documentation file that is gitignored is not exempt from §2.4, but one the map does not name
+is advisory and does not make the repository non-conformant. Gitignored documentation (a
+repository's own working-notes convention, say) is a real, recurring category: it deserves checking
+without ever blocking on content the map was never meant to describe (ADR-0011).
 
 ## 3. Artefacts
 
@@ -224,10 +213,6 @@ and a bare ID MUST name a record in this repository. A record in another reposit
 link to it. A citation SHOULD claim as little about the record as it can. A change to a record, its
 deletion included, MUST be committed together with every citation in the repository that it makes
 untrue, found by searching for the record's ID. Commit messages are history, and are not changed.
-
-A checker MUST report a record whose status is not `proposed` that lacks `decision-makers`, and a
-bare `ADR-NNNN` outside code that names no record in this repository. It cannot verify that the
-owner gave permission, nor that an amendment fixed its citations.
 
 A repository MAY maintain a generated index of decision records at `docs/decisions/README.md`. If
 present, it MUST carry a generated header naming what generates it, and regenerating it MUST produce
@@ -314,8 +299,8 @@ content; they name the source and are kept in step by review or test.
 what the contract cannot express: rationale, invariants, units, ownership, policy.
 
 4.3 A generated artefact MUST carry a header naming what generates it, and regenerating it MUST
-produce no diff. A checker MUST fail if it does. Without this, "generated" becomes "generated once,
-then hand-edited", and a partly-stale generated artefact is worse than none because it is believed.
+produce no diff. Without this, "generated" becomes "generated once, then hand-edited", and a
+partly-stale generated artefact is worse than none because it is believed.
 
 4.4 An ordered, immutable-once-applied sequence - database migrations being the usual case - is
 changelog-shaped whatever it describes, and MUST NOT be treated as specification. The specification
@@ -327,8 +312,8 @@ An adopting repository MAY keep documentation it does not migrate in an archive 
 conventionally `docs/archive/`, optionally with a `docs/archive/README.md` saying what it holds.
 
 5.1 Files below an archive, other than its own `README.md` (§5.5), are **not** documentation files
-for the purposes of §2.4, and a checker MUST exempt them. The archive itself (or its entry point)
-MUST appear in the map as a single entry.
+for the purposes of §2.4. The archive itself (or its entry point) MUST appear in the map as a single
+entry.
 
 5.2 Every file in the archive MUST begin with a provenance header stating that it is not
 authoritative, when it was last known to be accurate (or that this is unknown), and why it was not
