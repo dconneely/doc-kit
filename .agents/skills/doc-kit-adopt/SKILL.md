@@ -71,17 +71,12 @@ Real adoptions span weeks and get interrupted. Before starting, check whether
   Step 0.
 - **It doesn't, and you were asked to continue an adoption** - the Part 1 handoff failed. Stop and
   say so; do not start over.
-- **It doesn't, and you were asked to adopt** - if the target has an older doc-kit shape, use the
-  re-adoption note below; otherwise a fresh adoption starts at Step 0.
+- **It doesn't, and you were asked to adopt** - a fresh adoption starts at Step 0, unless the target
+  already has a `DOC-MAP.md`.
 
-### Re-adopting an earlier version
-
-A missing worksheet does not prove the target is empty. If it has a root `SPECIFICATION.md` or
-`PLAN.md`, `docs/adr/` or `docs/tasks/`, or a `DOC-MAP.md` written before the current version, treat
-it as a re-adoption, not a fresh Step 0. Inventory the existing documents; treat the old map, plan,
-specification, ADRs and instruction files as inputs to move and merge; read the kit's `CHANGELOG.md`
-from the target's adopted version through the current one; write the worksheet; stop at the
-inventory. Do not copy templates over the custom map or recreate the plan or specification.
+**A target with a `DOC-MAP.md` adopted an earlier version. Do not copy templates over its map, plan
+or specification.** Read the kit's `CHANGELOG.md` from the version its adoption record names through
+the current one, inventory what the changes touch, write the worksheet, and stop at the inventory.
 
 The worksheet _is_ the state. Keeping it accurate matters more than speed - the next session has
 nothing else to go on.

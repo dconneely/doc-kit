@@ -95,24 +95,10 @@ section() {
 	awk -v h="$2" '$0 == h { f = 1; next } /^## / && f { exit } f' "$1"
 }
 
-# The map's section heading was '## Artifacts' before the spelling change. Accept the older
-# heading as well, so a map copied before the change keeps working.
-artefacts_section() {
-	if [ -n "$(section "$MAP" '## Artefacts')" ]; then
-		section "$MAP" '## Artefacts'
-	else
-		section "$MAP" '## Artifacts'
-	fi
-}
-
 # First backticked cell of each table row: the artefact's path.
 # shellcheck disable=SC2016  # the backticks are literal Markdown, not command substitution
 table_paths() {
-	if [ "$1" = '## Artefacts' ]; then
-		artefacts_section | sed -n 's/^| `\([^`]*\)`.*/\1/p'
-	else
-		section "$MAP" "$1" | sed -n 's/^| `\([^`]*\)`.*/\1/p'
-	fi
+	section "$MAP" "$1" | sed -n 's/^| `\([^`]*\)`.*/\1/p'
 }
 
 # The layout block is an indented tree; rebuild full paths with a prefix stack
@@ -168,7 +154,7 @@ check_map() {
 	lifes=$(table_paths '## Lifecycle' | norm | sort)
 	lays=$(layout_paths | norm | sort)
 
-	[ -n "$arts" ] || fail "the artefacts table names nothing" "§2.2 - is the heading exactly '## Artefacts' or the older '## Artifacts'?"
+	[ -n "$arts" ] || fail "the artefacts table names nothing" "§2.2 - is the heading exactly '## Artefacts'?"
 
 	# §2.2 - all three lists name the same set, artefacts table authoritative.
 	# Globbing off: these lists contain patterns like docs/decisions/*.md, and an
@@ -271,7 +257,7 @@ check_map() {
 	# escape on phrasing. Artefacts sharing all three are reported as a prompt to check, not a
 	# failure (ADR-0002). Aliases, which hold no content of their own, are exempt. One awk pass
 	# prints a tab-separated line per finding: a kind, the artefact, and the value.
-	hits=$(artefacts_section | grep '^| `' | grep -v '\*\*Alias\*\*' | awk -F' *[|] *' '
+	hits=$(section "$MAP" '## Artefacts' | grep '^| `' | grep -v '\*\*Alias\*\*' | awk -F' *[|] *' '
 		BEGIN {
 			split("present past future imperative explanatory", t, " ")
 			for (i in t) tenses[t[i]] = 1

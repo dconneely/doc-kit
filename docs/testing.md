@@ -18,9 +18,6 @@ are listed below.
 | `adr`  | Record and research-note filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` of `proposed`, `accepted`, `rejected` or `deprecated`, a `date`, and - on anything not `proposed` - a `decision-makers` that is not the template's placeholder. The three MADR minimal headings are present. Every bare `ADR-NNNN` in a documentation file excluding `templates/`, outside code and the text of links to other sites, names a record in `docs/decisions/`, and no citation takes another form (§3.1)                                                                                                                                                                            |
 | `plan` | No entry heading is annotated done, struck through or marked completed. Every `##` entry carries a valid type tag (§3.3), and none is the template's example entry (§2.5)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
-The `map` check accepts the older `## Artifacts` table heading as well as `## Artefacts`, so a map
-copied before the spelling change keeps working.
-
 The pre-commit hooks cover a second, narrower band: line length at 100 columns
 (`.markdownlint-cli2.jsonc`), secrets, file hygiene, `pygrep` drift guards for the failure this
 repository actually produces - a convention changed in one file and not the others - and

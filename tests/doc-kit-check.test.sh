@@ -132,7 +132,7 @@ expect "clean fixture passes" 0 "doc-kit: checks passed (map adr plan)"
 
 fixture
 sed -i.bak 's/^## Artefacts$/## Artifacts/' DOC-MAP.md
-expect "the older Artifacts heading still passes" 0 "doc-kit: checks passed" map
+expect "another spelling of the Artefacts heading fails" 1 "the artefacts table names nothing" map
 
 fixture
 echo x >notes.md

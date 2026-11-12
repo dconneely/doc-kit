@@ -17,6 +17,13 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   worksheet beside it. The template map, `ADOPTING.md` and the `AGENTS.md` stanza use that path.
 - `tools/doc-kit-index-decisions.sh` writes `docs/decisions/README.md` and no longer looks for
   `docs/decisions.md`; `fetch.sh` no longer looks for `docs/sources.md`.
+- The `doc-kit-adopt` skill treats any target with a `DOC-MAP.md` as an earlier adoption to update,
+  and no longer lists the file names earlier versions used.
+
+### Removed
+
+- `tools/doc-kit-check.sh` no longer accepts the `## Artifacts` map heading. Rename it
+  `## Artefacts`.
 
 ### Fixed
 
