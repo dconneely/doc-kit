@@ -6,12 +6,7 @@ decision resists, or when something is not working.
 
 ## Why the procedure is shaped the way it is
 
-Three properties define every artefact: **tense** (does it describe what is, what was, or what is
-intended?), **mutability** (rewritten in place, amendable, append-only, immutable, volatile, or
-disposable?) and **audience**. Documentation rots when one file mixes them - the classic case being
-a document that is part record of work done, part backlog, part assessment, so that no part of it
-can be trusted or pruned with confidence. `ADOPTING.md`'s four numbered consequences all follow from
-that:
+The reasoning behind `ADOPTING.md`'s four numbered consequences:
 
 1. **You customise mostly by deleting.** The template is roughly the union of what projects need;
    any given repository needs a subset. Almost nothing has to be invented.
@@ -286,32 +281,16 @@ machine-readable contracts both looked like obvious new categories and both turn
 somewhere that already existed. If it passes, add it to the layout block and both tables in the map
 in the same commit.
 
-**"Do documentation changes need approving?"** One kind does. A decision record is drafted and
-revised freely while `proposed`; accepting, rejecting, reopening, deprecating or deleting one needs
-the owner's explicit permission, because a record is the one artefact whose content binds every
-session. Everything else is rewritten in place or deleted freely. Resist adding ceremony to the plan
-in particular; friction at capture is what empties a backlog.
+**"Do documentation changes need approving?"** Only a change of a decision record's status, or its
+deletion; the record template has the rules. Everything else is rewritten in place or deleted
+freely. Resist adding ceremony to the plan in particular; friction at capture is what empties a
+backlog.
 
-**"There is an ADR I now think was wrong."** Ask the owner to reopen it, amend it - a record is the
-current answer to its question - and ask them to accept the change. Keep the option it used to
-choose under `Considered Options`, with the reason it lost, so that nobody proposes it again, and
-fix the citations the change makes untrue. If the decision simply no longer applies, deprecate or
-delete it, with the owner's permission.
+**"There is an ADR I now think was wrong."** Ask the owner to reopen it, and amend it in place - a
+record is the current answer to its question. Keep the option it used to choose under
+`Considered Options`, with the reason it lost, so that nobody proposes it again.
 
 **"This feels like a large migration and I keep not starting it."** It is not all-or-nothing. Steps
 1-3 - write the map, create the files it promises - are worth doing on their own and take an
 afternoon. Step 4 can then proceed one artefact at a time, indefinitely. An honest map over a
 partly-migrated repository is already better than no map.
-
-## The lesson worth carrying
-
-Twice while developing this template, a new category seemed obviously necessary - first technical
-debt, then machine-readable contracts. Both times the correct answer was that an existing artefact
-already covered it, and the apparent need came from splitting on the wrong axis.
-
-So: **when something new turns up, test it against the existing categories before adding one.** Does
-it have a distinct tense, mutability _and_ audience? If it shares all three with an existing
-document, it is a section or a tag within that document unless it holds different facts. Most
-candidates fail this test, which is what keeps the structure small enough to survive.
-
-If you take one thing from this file into a repository that never adopts the rest, take that.
