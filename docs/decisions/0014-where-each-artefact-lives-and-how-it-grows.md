@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-11-05
+date: 2026-11-12
 decision-makers: David Conneely
 ---
 
@@ -8,110 +8,76 @@ decision-makers: David Conneely
 
 ## Context and Problem Statement
 
-Four problems with documentation layout, growth, and discoverability:
+Three problems with documentation layout and growth:
 
-1. **Artefacts cannot grow without breaking links:** `docs/quirks.md`, `docs/glossary.md`, the plan,
-   and the specification were single files with no rule for overflow. Moving an artefact into a
-   directory later would change its path, breaking existing links, commit references, and external
-   citations.
-2. **Scattered task procedures and external sources:** Task-oriented procedures (releases,
-   rotations, bootstrapping) lacked a clear home distinct from normative behaviour specifications or
-   ranked intent. Simultaneously, external RFCs and standards cited normatively risked link rot and
-   licensing ambiguity without pinned checksums, gitignoring, and offline retrieval scripts.
-3. **Context and search ambiguity across subdirectories:** Using `README.md` inside subdirectories
-   burdens editor tab bars, fuzzy finders, and coding agent context windows with identical filenames
-   requiring path disambiguation. In `docs/decisions/`, an internal `README.md` polluted the ADR
-   glob, forcing check scripts to special-case it. In `docs/archive/`, an internal `README.md` fell
-   under the rules for archived files: a "not authoritative" header and no citations from outside.
-   Against that, a `README.md` is what GitHub shows when a reader opens the directory, and it keeps
-   an index beside the files it lists - which suits a directory that exists from the start, such as
-   a generated sources manifest.
-4. **Opaque decision status and unconfirmed decisions:** As decision records accumulate across
-   multiple statuses (`accepted`, `deprecated`, `rejected`, `proposed`), discovering which records
-   currently bind required parsing every file's front-matter. Furthermore, decisions specifying
-   verifiable constraints lacked a place to name the test that confirms compliance.
+1. **A one-file artefact had no rule for overflow.** The specification, quirks, the glossary and the
+   plan were single files, and nothing said where their parts go when one file is no longer enough.
+2. **Procedures and external sources had no home.** Recurring procedures are neither behaviour nor
+   intent. External standards cited normatively need pinned checksums, licence tracking and a way to
+   fetch them again.
+3. **Nothing showed which decision records bind**, short of reading every record's front-matter, and
+   a record had no place to name the test that confirms it.
+
+The index of a directory can sit beside it, as `docs/name.md`, or inside it, as
+`docs/name/README.md`. Beside it, the path survives growth, and file names stay distinct in editor
+tabs and agent tool calls. Inside it, GitHub shows the index to a reader who opens the directory,
+and the index sits with the files it lists.
 
 ## Considered Options
 
-- **Retain root paths and inline material:** Keep `SPECIFICATION.md` and `PLAN.md` at root, inline
-  external extracts into research notes, scatter procedures into plan notes, and inspect ADRs
-  manually.
-- **Subdirectory `README.md` everywhere:** Convert every domain under `docs/` into a directory
-  holding a `README.md` (`docs/spec/README.md`, `docs/plan/README.md`, `docs/decisions/README.md`,
-  etc.).
-- **Uniform sibling entry points (`docs/{name}.md` with optional `docs/{name}/`):** Standardise on
-  `docs/{name}.md` as the entry point / index for every directory artefact `docs/{name}/`.
-- **Sibling entry points by default, `docs/{name}/README.md` by choice:** As above, but a repository
-  may make `docs/{name}/README.md` the entry point of a directory artefact instead.
-- **Entry point by how the artefact starts:** An artefact that starts as a directory has its index
-  at `docs/{name}/README.md`; one that starts as a file keeps `docs/{name}.md`, and may move once
-  when it gains a directory.
+- Keep the specification and plan at the repository root, with procedures and source extracts inline
+  in other documents
+- `docs/name/README.md` for every artefact from the start
+- `docs/name.md` for every artefact, as the index of an optional `docs/name/`
+- Either form, by the repository's choice or by how the artefact starts
+- `docs/name.md` while the artefact is one file, `docs/name/README.md` once it is a directory
 
 ## Decision Outcome
 
-Chosen option: **entry point by how the artefact starts**, because the sibling file exists so that a
-one-file artefact can grow without breaking links, and an artefact that ships as a directory has
-nothing to grow from. Its index belongs with the files it lists, where GitHub shows it to a reader
-who opens the directory. The form follows from the artefact, so it is not a choice to revisit.
+Chosen option: **`docs/name.md` while the artefact is one file, `docs/name/README.md` once it is a
+directory**, because the form then follows from the tree, and no repository, tool or reader has a
+choice to make or to look up.
 
-1. **An artefact that starts as a file** - the specification, quirks, the glossary, testing - is
-   `docs/name.md`. When it outgrows one file it gains a sibling directory `docs/name/` and stays as
-   its entry point, so links to it stay true. A repository may instead move it to
-   `docs/name/README.md` when the directory is introduced: a one-off migration, made deliberately,
-   with every link in the repository fixed in the same change. Switching back and forth is
-   discouraged: each switch breaks links from outside the repository, which cannot be fixed.
-2. **An artefact that starts as a directory, or as a collection of entries** - decision records,
-   how-to guides, external sources, the archive, and the plan where it starts as a backlog - has its
-   entry point, if it keeps one, at `docs/name/README.md`.
-3. **Either form is valid, never both, and the map names the one in use.** `docs/name.md` and
-   `docs/name/README.md` do not exist side by side. A repository already using the other form keeps
-   it; a collection that starts as a directory naturally uses the README form.
+- An artefact that is one file is `docs/name.md`.
+- A directory's entry point, if it has one, is `docs/name/README.md`. An artefact that outgrows one
+  file moves there, and every link to it in the repository is fixed in the same change.
+- `docs/name.md` never sits beside `docs/name/`.
 
-The archive's own `docs/archive/README.md` is not an archived file: it is checked like any other
-documentation file, and the archive's header and citation rules do not apply to it.
+Allowing either form was rejected because the choice had to be stated in the specification, named in
+each map and supported by every tool, and it gave a reader nothing. Keeping the path stable on
+growth was rejected because links inside the repository are found by search and fixed mechanically;
+links from outside it break once, at the move, which is accepted.
 
-- **Root:** Holds only files a tool or convention looks for there: `README.md`, `AGENTS.md`, its
-  aliases, `CHANGELOG.md`, and `DOC-MAP.md`.
-- **Specification:** `docs/spec.md`, overflowing into `docs/spec/` for contracts and schemas. §1
-  links directly to ADR-0001 for project purpose and operating model (satisfying §4.1).
-- **Plan:** `docs/plan.md`, or `docs/plan/README.md` when the plan starts as a directory (as this
-  repository's does), replacing `docs/tasks/`. Disposable plan notes sit in `docs/plan/`.
-- **Decision records:** `docs/decisions/*.md`, replacing `docs/adr/`. Records keep numbers, follow
-  the MADR minimal template, and may carry an optional `## Confirmation` section naming the test
-  asserting compliance. Indexed by `docs/decisions/README.md`, generated deterministically by
-  `tools/doc-kit-index-decisions.sh` and enforced by `tools/doc-kit-check.sh` (§4.3).
-- **How-to guides:** `docs/howto/*.md` holds task-oriented recurring procedures in the imperative
-  mood, optionally indexed by `docs/howto/README.md`.
-- **External sources:** The `docs/sources/README.md` manifest pins URLs, retrieval dates, licences,
-  and SHA-256 checksums. Cached originals, `.gitignore`, and `fetch.sh` sit beside it.
-- **Archive:** `docs/archive/README.md` says what the archive holds and the header each file in it
-  carries; each file's header says why it was not migrated. Non-authoritative, exempt files sit
-  beside it (§5.1).
-- **Monorepos:** Per-module artefacts sit under the module; only `DOC-MAP.md`, `README.md`,
-  `AGENTS.md` and its aliases, `CHANGELOG.md`, and the plan stay at the repository root.
+Where each artefact lives:
 
-This combines and supersedes the decisions originally explored for how-to guides, external sources,
-and generated decision indexing.
+- **Root:** only files a tool or convention looks for there: `README.md`, `AGENTS.md` and its
+  aliases, `CHANGELOG.md` and `DOC-MAP.md`.
+- **Specification:** `docs/spec.md`.
+- **Plan:** `docs/plan/README.md` in the templates, which ship plan notes beside it.
+- **Decision records:** `docs/decisions/*.md`, following the MADR minimal template, with an optional
+  `## Confirmation` section naming the test that confirms the decision. The optional index,
+  `docs/decisions/README.md`, is generated by `tools/doc-kit-index-decisions.sh`.
+- **How-to guides:** `docs/howto/*.md`.
+- **External sources:** the manifest `docs/sources/README.md`, with `fetch.sh` and the cached
+  originals beside it.
+- **Archive:** `docs/archive/README.md` says what the archive holds. It is not an archived file: it
+  is checked like any other documentation file.
+- **Monorepos:** per-module artefacts sit under the module; `DOC-MAP.md`, `README.md`, `AGENTS.md`
+  and its aliases, `CHANGELOG.md` and the plan stay at the repository root.
 
 ### Consequences
 
-- Good, because an artefact that starts as a file can grow into a directory without changing its
-  entry-point path or breaking existing links.
-- Good, because a directory artefact's index sits with the files it lists, and GitHub shows it to a
-  reader who opens the directory.
-- Good, because `docs/decisions/*.md` holds only decision records, simplifying globbing and checks;
-  a `README.md` index is the one exception, and the tools skip it.
-- Good, because the archive's `README.md` is an authoritative, checked document, while everything
-  else in `docs/archive/` remains exempt.
-- Good, because active decisions are discovered in a single read of the decisions index.
+- Good, because one rule gives each artefact one path, and a checker tests it by looking at the
+  tree.
+- Good, because a directory's index sits with the files it lists, and GitHub shows it to a reader
+  who opens the directory.
+- Good, because the decisions index shows which records bind in a single read.
 - Good, because external source material is verified with pinned checksums and licence tracking.
+- Bad, because an artefact's path changes when it outgrows one file: links from outside the
+  repository break, and agent instructions that name the path need updating in the same change.
 - Bad, because every directory index is named `README.md`, so editor tabs, fuzzy finders and agent
   tool calls need its path to tell one from another.
-- Bad, because GitHub does not show `docs/{name}.md` to a reader who opens a grown artefact's
-  `docs/{name}/`. A repository that minds moves it to `docs/{name}/README.md` when the directory is
-  introduced.
-- Bad, because two forms mean a reader checks the map for which one a repository uses.
-- Bad, because maintaining generated indexes requires generator tooling and checker validation.
+- Bad, because a generated index needs a generator, and a check that it is current.
 
 ## Confirmation
 

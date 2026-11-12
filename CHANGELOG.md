@@ -6,6 +6,18 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- An artefact has one entry-point form, decided by the tree (section 2.6, ADR-0014). `docs/name.md`
+  is valid only while no directory `docs/name/` exists; a directory's entry point is
+  `docs/name/README.md`. The checker fails on a `docs/name.md` beside `docs/name/`: move the file to
+  `docs/name/README.md` and fix the links to it. A specification that grows a `docs/spec/` moves to
+  `docs/spec/README.md`.
+- The template plan is `docs/plan/README.md`, with the plan-note template and the migration
+  worksheet beside it. The template map, `ADOPTING.md` and the `AGENTS.md` stanza use that path.
+- `tools/doc-kit-index-decisions.sh` writes `docs/decisions/README.md` and no longer looks for
+  `docs/decisions.md`; `fetch.sh` no longer looks for `docs/sources.md`.
+
 ### Fixed
 
 - The template map no longer cites `ADR-0002`, a record of the kit's own. A fresh adoption failed

@@ -4,7 +4,7 @@ Single ranked backlog, most important first. Entries are **deleted** when done, 
 plan that accumulates completed entries stops being read.
 
 Each entry is a heading, a tag line, then **one paragraph**. No design; anything longer needs an ADR
-or a plan note. If you keep plan notes under `docs/plan/`, copy `0000-template.md` for the optional
+or a plan note beside this file. If you keep plan notes, copy `0000-template.md` for the optional
 starting shape.
 
 - **Type** - `bug`, `debt`, `feature` or `docs`.

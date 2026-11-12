@@ -7,7 +7,7 @@ Plan notes for one entry. A note is disposable - delete it when the work lands. 
 what has been tried, what is half-done, where you left off - is its normal content. Empty it into
 its proper homes before deleting it: a choice made along the way goes to an ADR, a finding to a
 research note, changed behaviour to the specification, and work that is not happening back to
-`docs/plan.md`.
+`docs/plan/README.md`.
 
 Usually overhead below roughly 20 open items, and worth taking only when plan entries are too small
 to hold work in progress. The exception is `adopt-doc-kit.md`, the migration worksheet, whatever the

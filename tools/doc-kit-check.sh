@@ -244,28 +244,24 @@ check_map() {
 	IFS=$oldifs
 	set +f
 
-	# §2.6 - a directory artefact has one entry point: name.md or name/README.md, never both. A
-	# vendored pair is not documentation (§1); a gitignored one is advisory (§2.9).
-	set +f
-	readmes=$(find . -name README.md ! -path './README.md' ! -path './.git/*' | sed 's:^\./::' |
-		not_templates | sort)
+	# §2.6 - name.md never sits beside a directory name/: the directory's entry point is
+	# name/README.md. A vendored file is not documentation (§1); a gitignored one is advisory (§2.9).
 	set -f
-	pairs=''
+	beside=''
 	IFS=$NL
-	for r in $readmes; do
-		[ ! -f "${r%/README.md}.md" ] || pairs="$pairs$r$NL${r%/README.md}.md$NL"
+	for f in $files; do
+		[ ! -d "${f%.md}" ] || beside="$beside$f$NL"
 	done
-	vendored=$(printf '%s' "$pairs" | vendored_of)
-	ignored=$(printf '%s' "$pairs" | ignored_of)
-	for r in $pairs; do
-		case "$r" in */README.md) ;; *) continue ;; esac
-		m=${r%/README.md}.md
-		if within "$vendored" "$r" || within "$vendored" "$m"; then
+	vendored=$(printf '%s' "$beside" | vendored_of)
+	ignored=$(printf '%s' "$beside" | ignored_of)
+	for m in $beside; do
+		d=${m%.md}
+		if within "$vendored" "$m"; then
 			continue
-		elif within "$ignored" "$r" || within "$ignored" "$m"; then
-			warn "$m and $r are both entry points (gitignored)" "§2.9 - advisory; keep one"
+		elif within "$ignored" "$m"; then
+			warn "$m sits beside $d/ (gitignored)" "§2.9 - advisory; move it to $d/README.md"
 		else
-			fail "$m and $r are both entry points" "§2.6 - keep one; a file that is not the index takes another name"
+			fail "$m sits beside $d/" "§2.6 - move it to $d/README.md, or give it another name"
 		fi
 	done
 	IFS=$oldifs
@@ -292,15 +288,7 @@ check_map() {
 		function norm_pair(a, b) {
 			return (a < b) ? (a " + " b) : (b " + " a)
 		}
-		function is_parent_child(p, c,  q) {
-			if (p ~ /\.md$/) {
-				q = p
-				sub(/\.md$/, "", q)
-				if (c ~ ("^" q "/")) return 1
-			}
-			return 0
-		}
-		# An entry point name/README.md stands for name.md (§2.6).
+		# An entry point name/README.md stands for name.md, which it replaces (§2.6).
 		function entry(p,  q) {
 			q = p
 			sub(/\/README\.md$/, ".md", q)
@@ -318,7 +306,6 @@ check_map() {
 		function is_exempt_pair(a, b,  pa, pb) {
 			if (ratified(entry(a), entry(b))) return 1
 			if (ratified(owner(a), entry(b)) || ratified(entry(a), owner(b))) return 1
-			if (is_parent_child(a, b) || is_parent_child(b, a)) return 1
 			# Sibling members in the same docs/ container
 			if (a ~ /^docs\/[^\/]+\// && b ~ /^docs\/[^\/]+\//) {
 				split(a, pa, "/"); split(b, pb, "/");
@@ -433,20 +420,18 @@ check_adr() {
 	check_research
 	[ -d "$dir" ] || return 0
 
-	# §4.3 - the generated decisions index is up to date. It is regenerated outside the tree, under
-	# the same file name, because the name decides how the index links to the records. Check it
-	# before the record early return: an index may be stale while the directory holds no records.
-	idx="${dir}.md"
-	[ -f "$idx" ] || idx="$dir/README.md"
+	# §4.3 - the generated decisions index is up to date. It is regenerated outside the tree. Check
+	# it before the record early return: an index may be stale while the directory holds no records.
+	idx="$dir/README.md"
 	# The generator is looked for beside this script, wherever both were copied.
 	generator=$(dirname "$0")/doc-kit-index-decisions.sh
 	if [ -f "$idx" ] && [ -f "$generator" ]; then
 		gen=$(mktemp -d)
-		out="$gen/${idx##*/}"
+		out="$gen/README.md"
 		if ! sh "$generator" "$out" "$dir"; then
 			fail "$idx could not be regenerated" "see the error above (§4.3)"
 		elif ! cmp -s "$idx" "$out"; then
-			fail "$idx is out of date" "run 'sh $generator $idx $dir' to regenerate (§4.3)"
+			fail "$idx is out of date" "run 'sh $generator' to regenerate (§4.3)"
 		fi
 		rm -rf "$gen"
 	fi

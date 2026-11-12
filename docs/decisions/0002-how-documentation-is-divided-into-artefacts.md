@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-11-05
+date: 2026-11-12
 decision-makers: David Conneely
 ---
 
@@ -68,12 +68,12 @@ this table differ:
 | `docs/quirks.md` and `docs/spec.md`                     | the specification is the contract; quirks are deliberate deviations  |
 | `docs/archive/README.md` and `docs/decisions/README.md` | one says what the archive holds; the other indexes decision records  |
 
-Three structural cases are exempt as well, because the growth rule (ADR-0014) splits one artefact
-into them: an entry point and its parts (`docs/spec.md` and `docs/spec/*`, say); the parts of one
-container (two files in `docs/howto/`, say); and the parts of a container paired with whatever its
-entry point is paired with (`docs/spec/*` and `docs/quirks.md`, say). An entry point counts the same
-in either form, `docs/name.md` or `docs/name/README.md`. Product and template rows are exempt by
-`docs/spec.md` §2.8. Every other shared triple is reported.
+Two structural cases are exempt as well, because the growth rule (ADR-0014) splits one artefact into
+them: the parts of one container, its entry point included (two files in `docs/howto/`, or
+`docs/spec/README.md` and `docs/spec/*.md`, say); and the parts of a container paired with whatever
+its entry point is paired with (`docs/spec/*.md` and `docs/quirks.md`, say). An entry point
+`docs/name/README.md` counts as the `docs/name.md` it replaces. Product and template rows are exempt
+by `docs/spec.md` §2.8. Every other shared triple is reported.
 
 The list is held here and in the checker, not in the map, so that changing it needs the owner's
 permission and a release. The specification refers to it rather than restating it, so that a change
@@ -86,11 +86,11 @@ creates was rejected because it never prompts a check of what is already there.
 
 This test resolves commonly requested categories without inventing new artefacts:
 
-- **Technical debt belongs in the single ranked plan (`docs/plan.md` or `docs/plan/README.md`) as a
-  type tag** alongside `bug`, `feature`, and `docs`. Debt shares its tense (future), mutability
-  (ordered list, pruned on completion), and audience (`contributor`, `owner`) with the rest of the
-  plan. A separate debt file or independently ranked section prevents the comparison that matters;
-  with two lists, debt is never traded off against features, and the second list stops being read.
+- **Technical debt belongs in the single ranked plan (`docs/plan/README.md`) as a type tag**
+  alongside `bug`, `feature`, and `docs`. Debt shares its tense (future), mutability (ordered list,
+  pruned on completion), and audience (`contributor`, `owner`) with the rest of the plan. A separate
+  debt file or independently ranked section prevents the comparison that matters; with two lists,
+  debt is never traded off against features, and the second list stops being read.
 - **Machine-readable contracts are members of the specification (`docs/spec.md` or `docs/spec/`).**
   Schemas, OpenAPI/AsyncAPI documents, and interface definitions share the specification's tense
   (present), mutability (rewritten in place), and audience (`consumer`, `contributor`). Being

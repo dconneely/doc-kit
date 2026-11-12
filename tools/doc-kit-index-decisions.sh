@@ -3,11 +3,11 @@
 #
 # Usage: sh path/to/doc-kit-index-decisions.sh [output-file] [decisions-dir]
 #
-# Defaults: output-file   <decisions-dir>.md if it exists, else <decisions-dir>/README.md
+# Defaults: output-file   <decisions-dir>/README.md
 #           decisions-dir docs/decisions
 #
-# The output must use the decisions index name: <decisions-dir>.md or README.md. The name decides
-# how the index links to the records; other output paths are not supported.
+# The index links to the records by file name alone, so it belongs in the directory that holds
+# them. Another output path is for comparing a fresh index with the one in place.
 #
 # Run it from the repository root, from wherever it was copied: nothing in it names its own path.
 
@@ -25,23 +25,12 @@ esac
 [ $# -le 2 ] || { echo "$usage" >&2; exit 2; }
 
 DIR=${2:-docs/decisions}
-if [ -n "${1-}" ]; then
-	OUT=$1
-elif [ -f "$DIR.md" ]; then
-	OUT=$DIR.md
-else
-	OUT=$DIR/README.md
-fi
+OUT=${1:-$DIR/README.md}
 
 if [ ! -d "$DIR" ]; then
 	echo "doc-kit-index-decisions: directory not found: $DIR" >&2
 	exit 1
 fi
-
-rel_prefix="$(basename "$DIR")/"
-case "$OUT" in
-	*/README.md|"$DIR"/*) rel_prefix="" ;;
-esac
 
 tmp=$(mktemp)
 trap 'rm -f "$tmp"' EXIT HUP INT TERM
@@ -50,7 +39,7 @@ trap 'rm -f "$tmp"' EXIT HUP INT TERM
 set -- "$DIR"/*.md
 [ -e "$1" ] || set -- /dev/null
 
-awk -v rel_prefix="$rel_prefix" '
+awk '
 	function rep(char, count,  s, c) {
 		s = ""
 		for (c = 0; c < count; c++) s = s char
@@ -117,7 +106,7 @@ awk -v rel_prefix="$rel_prefix" '
 			f = order[i]
 			if (file_status[f] == "accepted") {
 				in_force++
-				l = length("[ADR-" file_num[f] "](" rel_prefix file_base[f] ")")
+				l = length("[ADR-" file_num[f] "](" file_base[f] ")")
 				if (l > w_rec) w_rec = l
 				if (length(file_date[f]) > w_date) w_date = length(file_date[f])
 				if (length(file_deciders[f]) > w_dec) w_dec = length(file_deciders[f])
@@ -133,7 +122,7 @@ awk -v rel_prefix="$rel_prefix" '
 			f = order[i]
 			if (file_status[f] != "accepted") {
 				non_binding++
-				l = length("[ADR-" file_num[f] "](" rel_prefix file_base[f] ")")
+				l = length("[ADR-" file_num[f] "](" file_base[f] ")")
 				if (l > w_nb_rec) w_nb_rec = l
 				l_stat = length("`" file_status[f] "`")
 				if (l_stat > w_nb_stat) w_nb_stat = l_stat
@@ -158,7 +147,7 @@ awk -v rel_prefix="$rel_prefix" '
 			for (i = 1; i <= total; i++) {
 				f = order[i]
 				if (file_status[f] == "accepted") {
-					rec = "[ADR-" file_num[f] "](" rel_prefix file_base[f] ")"
+					rec = "[ADR-" file_num[f] "](" file_base[f] ")"
 					print "| " pad(rec, w_rec) " | " pad(file_date[f], w_date) " | " pad(file_deciders[f], w_dec) " | " pad(file_title[f], w_title) " | " pad(file_confirm[f], w_conf) " |"
 				}
 			}
@@ -174,7 +163,7 @@ awk -v rel_prefix="$rel_prefix" '
 			for (i = 1; i <= total; i++) {
 				f = order[i]
 				if (file_status[f] != "accepted") {
-					rec = "[ADR-" file_num[f] "](" rel_prefix file_base[f] ")"
+					rec = "[ADR-" file_num[f] "](" file_base[f] ")"
 					stat = "`" file_status[f] "`"
 					print "| " pad(rec, w_nb_rec) " | " pad(stat, w_nb_stat) " | " pad(file_date[f], w_nb_date) " | " pad(file_title[f], w_nb_title) " |"
 				}

@@ -94,10 +94,10 @@ This is a decision a newcomer could reasonably question, which is the test for w
 record - it often will. Once made, write it up as an ADR rather than letting it live only in how
 `DOC-MAP.md` ended up shaped.
 
-### Should something flag a docs/plan/*.md file with no matching docs/plan.md entry?
+### Should something flag a docs/plan/*.md file with no matching docs/plan/README.md entry?
 
-No. The rule is `docs/plan.md` entry -> optional `docs/plan/` note, but nothing enforces that order,
-and a mechanical check here would fight the same "no standard" call that keeps this directory
+No. The rule is `docs/plan/README.md` entry -> optional `docs/plan/` note, but nothing enforces that
+order, and a mechanical check here would fight the same "no standard" call that keeps this directory
 otherwise unchecked - a plan note is ad hoc by design, not a second artefact with its own
 conformance rules.
 
@@ -130,13 +130,14 @@ entries. See [ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-ar
 ### The specification is a tree now - where exactly?
 
 `docs/spec/`, once there are **two or more members** - don't force the subdirectory on a single-file
-specification pre-emptively, there is nothing to group yet. `docs/spec.md` stays where it is
-regardless: it is a fixed element that changes role, not location, and each member still keeps its
-own row in the artefacts table (tense/mutability/audience can genuinely differ between them - that
-is the whole reason they are separate files, and grouping them by directory is a convenience on top
-of that, not a replacement for it).
+specification pre-emptively, there is nothing to group yet. `docs/spec.md` then moves to
+`docs/spec/README.md` and becomes the index; fix every link to it, the `AGENTS.md` stanza and the
+map included, in the same commit. Each member still keeps its own row in the artefacts table
+(tense/mutability/audience can genuinely differ between them - that is the whole reason they are
+separate files, and grouping them by directory is a convenience on top of that, not a replacement
+for it).
 
-Once there's more than one member, give `docs/spec.md` a routing table of its own - the same kind of
+Once there's more than one member, give the index a routing table of its own - the same kind of
 thing `DOC-MAP.md`'s "Where does it go?" is, scoped to the members and keyed on audience. "Which
 member does this fact go in" is the same problem one level down; the top-level map existing doesn't
 answer it for you.
@@ -145,8 +146,8 @@ Nest it normally in the layout diagram:
 
 ```text
 docs/
-  spec.md
   spec/
+    README.md
     language.md
     architecture.md
   quirks.md
@@ -188,10 +189,10 @@ Both have been checked against their sources. Leave them alone: their value is t
 tools already recognise them.
 
 **The rest are this kit's own names. Use them.** No standard prescribes `docs/spec.md` or
-`docs/plan.md` - the spec-driven tools that look like precedent keep per-feature files in their own
-directories instead - and the kit does not pretend otherwise. It is the opinion. Consistency across
-adopters is the same thing that makes Keep a Changelog worth deferring to, and it is worth having
-here for the same reason.
+`docs/plan/README.md` - the spec-driven tools that look like precedent keep per-feature files in
+their own directories instead - and the kit does not pretend otherwise. It is the opinion.
+Consistency across adopters is the same thing that makes Keep a Changelog worth deferring to, and it
+is worth having here for the same reason.
 
 One exception: if your repository already has an established equivalent, keep yours. Churning
 filenames breaks links from issues, wikis and bookmarks, and that cost is real where the naming
@@ -230,7 +231,7 @@ is the order to do it in.
 
 Skip until earned: `CONTRIBUTING.md` / `CODE_OF_CONDUCT.md` / `SECURITY.md` (these earn their place
 when people other than the owner contribute regularly), `RELEASING.md` (waits on releases), runbooks
-(services, not libraries or tools), and `docs/plan/` (overhead exceeds value below ~20 open items).
+(services, not libraries or tools), and plan notes (overhead exceeds value below ~20 open items).
 
 ## Troubleshooting
 
@@ -263,7 +264,7 @@ sharing a filename - try splitting it by tense before trying to classify it whol
 
 **"The plan has grown to dozens of items and ranking has stopped meaning anything."** You are past
 the ceiling a file-based backlog was ever meant to serve. Move it to an issue tracker and leave a
-pointer in `docs/plan.md`. This is a success condition, not a failure.
+pointer in `docs/plan/README.md`. This is a success condition, not a failure.
 
 **"Deleting completed plan entries feels like erasing our engineering history."** It isn't; it just
 leaves it where it belongs. Version control (`git log`) natively preserves the complete, accurate

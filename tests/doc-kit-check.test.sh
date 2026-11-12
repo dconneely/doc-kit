@@ -169,7 +169,7 @@ expect "a README.md entry point alone passes" 0 "checks passed" map
 fixture
 echo x >docs/decisions/README.md
 echo x >docs/decisions.md
-expect "both entry points fail" 1 "FAIL [map] docs/decisions.md and docs/decisions/README.md are both entry points" map
+expect "a file beside a directory of its name fails" 1 "FAIL [map] docs/decisions.md sits beside docs/decisions/" map
 
 fixture
 mkdir -p docs/archive
@@ -185,7 +185,7 @@ printf 'gen.md\ngen/\n' >.gitignore
 mkdir -p gen
 echo x >gen.md
 echo x >gen/README.md
-expect "a gitignored pair of entry points is advisory" 0 "WARN [map] gen.md and gen/README.md are both entry points (gitignored)" map
+expect "a gitignored file beside a directory of its name is advisory" 0 "WARN [map] gen.md sits beside gen/ (gitignored)" map
 
 fixture
 git init -q .
@@ -193,7 +193,7 @@ printf 'lib.md linguist-vendored\nlib/** linguist-vendored\n' >.gitattributes
 mkdir -p lib
 echo x >lib.md
 echo x >lib/README.md
-refute "a vendored pair of entry points is skipped" "both entry points" map
+refute "a vendored file beside a directory of its name is skipped" "sits beside" map
 
 fixture
 echo x >"docs/decisions/0002 old notes.md"
@@ -274,14 +274,15 @@ after '^[|] `DOC-MAP.md` +[|] start' '| `docs/spec/*.md` | start | never |'
 refute "ratified pair with a README.md entry point and its members does not warn" "WARN [map]" map
 
 fixture
-echo x >docs/archive.md
-echo x >docs/decisions.md
-after '^DOC-MAP.md ' 'docs/archive.md archive'
-after '^DOC-MAP.md ' 'docs/decisions.md index'
-after '^[|] `DOC-MAP.md` ' '| `docs/archive.md` | archive | present | rewritten in place | owner, contributor |'
-after '^[|] `DOC-MAP.md` ' '| `docs/decisions.md` | index | present | rewritten in place | owner, contributor |'
-after '^[|] `DOC-MAP.md` +[|] start' '| `docs/archive.md` | start | never |'
-after '^[|] `DOC-MAP.md` +[|] start' '| `docs/decisions.md` | start | never |'
+mkdir -p docs/archive
+echo x >docs/archive/README.md
+echo x >docs/decisions/README.md
+after '^DOC-MAP.md ' 'docs/archive/README.md archive'
+after '^DOC-MAP.md ' 'docs/decisions/README.md index'
+after '^[|] `DOC-MAP.md` ' '| `docs/archive/README.md` | archive | present | rewritten in place | owner, contributor |'
+after '^[|] `DOC-MAP.md` ' '| `docs/decisions/README.md` | index | present | rewritten in place | owner, contributor |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/archive/README.md` | start | never |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/decisions/README.md` | start | never |'
 refute "standard archive and index pair does not warn" "WARN [map]" map
 
 fixture
@@ -295,7 +296,7 @@ mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/arc
 : >docs/spec.md
 : >docs/decisions/README.md
 : >docs/decisions/0001-a-record.md
-: >docs/plan.md
+: >docs/plan/README.md
 : >docs/quirks.md
 : >docs/research/0001-a-note.md
 : >docs/glossary.md
@@ -328,7 +329,7 @@ mkdir -p tools
 cp "$ROOT/tools/doc-kit-check.sh" "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 : >AGENTS.md
 : >CLAUDE.md
-expect "an untouched copy of the templates fails only on the example plan entry" 1 "docs/plan.md:14 is the template's example entry"
+expect "an untouched copy of the templates fails only on the example plan entry" 1 "docs/plan/README.md:14 is the template's example entry"
 expect "an untouched copy of the templates has one failure" 1 "doc-kit: 1 failure(s)"
 
 # ---------------------------------------------------------------- adr
@@ -429,21 +430,9 @@ expect "reused research note number fails" 1 "research note number 0001 is used 
 fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
-sh tools/doc-kit-index-decisions.sh docs/decisions.md docs/decisions
-expect "valid generated decisions index passes" 0 "checks passed" adr
-
-fixture
-mkdir -p tools
-cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
-echo "stale" >docs/decisions.md
-expect "out-of-date generated decisions index fails" 1 "docs/decisions.md is out of date" adr
-
-fixture
-mkdir -p tools
-cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 rm docs/decisions/*.md
-echo "stale" >docs/decisions.md
-expect "stale sibling index fails without records" 1 "docs/decisions.md is out of date" adr
+echo "stale" >docs/decisions/README.md
+expect "stale index fails without records" 1 "docs/decisions/README.md is out of date" adr
 
 fixture
 mkdir -p tools
@@ -470,18 +459,7 @@ fi
 fixture
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
-echo stale >docs/decisions.md
-if sh tools/doc-kit-index-decisions.sh && grep -qF 'ADR-0001' docs/decisions.md && [ ! -e docs/decisions/README.md ]; then
-	passed=$((passed + 1))
-else
-	failed=$((failed + 1))
-	echo "not ok - index generator keeps an existing decisions.md"
-fi
-
-fixture
-mkdir -p tools
-cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
-sh tools/doc-kit-index-decisions.sh docs/decisions.md docs/decisions
+sh tools/doc-kit-index-decisions.sh
 expect "regenerating leaves no file in the tree" 0 "checks passed" adr
 if [ -n "$(find docs -name '*.tmp')" ]; then
 	failed=$((failed + 1))
@@ -533,12 +511,12 @@ fi
 fixture
 mkdir -p scripts
 cp "$ROOT/tools/doc-kit-check.sh" "$ROOT/tools/doc-kit-index-decisions.sh" scripts/
-echo stale >docs/decisions.md
+echo stale >docs/decisions/README.md
 set +e
 out=$(sh scripts/doc-kit-check.sh adr 2>&1)
 got=$?
 set -e
-if [ "$got" -eq 1 ] && printf '%s\n' "$out" | grep -qF "run 'sh scripts/doc-kit-index-decisions.sh docs/decisions.md docs/decisions'"; then
+if [ "$got" -eq 1 ] && printf '%s\n' "$out" | grep -qF "run 'sh scripts/doc-kit-index-decisions.sh'"; then
 	passed=$((passed + 1))
 else
 	failed=$((failed + 1))
@@ -619,7 +597,7 @@ fi
 
 # The checker's exempt shared-triple pairs are exactly the pairs ADR-0002 lists. Each pair is
 # normalised to "A + B" in byte order, so neither side's ordering matters, and an entry point
-# name/README.md to name.md, as the checker reads it (§2.6).
+# name/README.md to the name.md it replaces, as the checker reads it (§2.6).
 pairs() { awk '{ if ($1 > $2) { t = $1; $1 = $2; $2 = t } print $1 " + " $2 }' | LC_ALL=C sort; }
 record_pairs=$(grep -E '^\| `[^`]+` and `[^`]+` +\|' \
 	"$ROOT/docs/decisions/0002-how-documentation-is-divided-into-artefacts.md" |

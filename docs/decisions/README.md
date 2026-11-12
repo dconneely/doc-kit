@@ -9,7 +9,7 @@ Index of decision records. Only **accepted** records bind.
 | Record                                                                          | Date       | Deciders       | Question                                                           | Confirmation                                               |
 | ------------------------------------------------------------------------------- | ---------- | -------------- | ------------------------------------------------------------------ | ---------------------------------------------------------- |
 | [ADR-0001](0001-what-the-kit-is-for-and-who-decides.md)                         | 2026-10-28 | David Conneely | What the kit is for, and who decides                               | `review`                                                   |
-| [ADR-0002](0002-how-documentation-is-divided-into-artefacts.md)                 | 2026-11-05 | David Conneely | How documentation is divided into artefacts                        | `tools/doc-kit-check.sh`                                   |
+| [ADR-0002](0002-how-documentation-is-divided-into-artefacts.md)                 | 2026-11-12 | David Conneely | How documentation is divided into artefacts                        | `tools/doc-kit-check.sh`                                   |
 | [ADR-0005](0005-what-is-product-documentation-or-infrastructure.md)             | 2026-10-28 | David Conneely | What is product, what is documentation, and what is infrastructure | `review`                                                   |
 | [ADR-0006](0006-where-rules-and-their-reasons-live.md)                          | 2026-10-28 | David Conneely | Where rules and their reasons live                                 | `review`                                                   |
 | [ADR-0007](0007-how-a-decision-record-is-decided-and-changed.md)                | 2026-10-30 | David Conneely | How a decision record is decided and changed                       | `tools/doc-kit-check.sh and prek run lowercase-adr-status` |
@@ -17,7 +17,7 @@ Index of decision records. Only **accepted** records bind.
 | [ADR-0010](0010-how-the-kit-reaches-an-adopter.md)                              | 2026-11-05 | David Conneely | How the kit reaches an adopter                                     | `review`                                                   |
 | [ADR-0011](0011-which-files-the-map-must-name.md)                               | 2026-10-25 | David Conneely | Which files the map must name                                      | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`   |
 | [ADR-0012](0012-what-tense-and-how-much-is-written.md)                          | 2026-10-25 | David Conneely | What tense, and how much, is written                               | `review`                                                   |
-| [ADR-0014](0014-where-each-artefact-lives-and-how-it-grows.md)                  | 2026-11-05 | David Conneely | Where each artefact lives, and how it grows                        | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`   |
+| [ADR-0014](0014-where-each-artefact-lives-and-how-it-grows.md)                  | 2026-11-12 | David Conneely | Where each artefact lives, and how it grows                        | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`   |
 
 ## Non-binding
 

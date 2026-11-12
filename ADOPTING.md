@@ -57,9 +57,8 @@ its decisions, or in its plan if it has one.
 **Then write the plan before anything else.** It is the one artefact you can create knowing nothing
 about the repository yet, and the adoption work itself is its first content: one entry per artefact
 to create, one per document to migrate, ranked. Steps 1-4 then consume and delete those entries in
-the ordinary way. Write it at `docs/plan.md` or `docs/plan/README.md`. If the repository already has
-one, keep its form; if it is not a doc-kit plan, rename it first (`docs/old-plan.md` or
-`docs/plan/old-plan.md`) and migrate it in Step 4.
+the ordinary way. Write it at `docs/plan/README.md`. If the repository already has a plan that is
+not a doc-kit plan, rename it first (`docs/old-plan.md`, say) and migrate it in Step 4.
 
 This is not ceremony. It is what makes adoption survive being interrupted, which - on any repository
 old enough to need it - it will be. It also means the structure is doing real work from the first
@@ -100,8 +99,9 @@ different medium.
 Two questions decide most of the rest:
 
 - **Is the specification one file or a tree?** One file until it stops being comfortable to read end
-  to end. Once it's a tree, members go under `docs/spec/` and `docs/spec.md` becomes their index -
-  full shape, the routing-table point, and the layout-block gotcha are all in `ADOPTING-NOTES.md`.
+  to end. Once it's a tree, members go under `docs/spec/` and `docs/spec.md` moves to
+  `docs/spec/README.md` as their index - full shape, the routing-table point, and the layout-block
+  gotcha are all in `ADOPTING-NOTES.md`.
 - **Does the specification include machine-readable members** - schemas, interface definitions? If
   so, they are specification, not a separate category, and the link-never-restate rule applies.
 
@@ -130,24 +130,25 @@ rather than leaving them undocumented.
 Everything in `templates/` maps onto your repository root at the same relative path, so copying is a
 matter of taking the ones Step 1 said you had earned:
 
-| From `templates/`                                                         | Take it when                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan.md` | always - the core five                                                                                                                                                                                                          |
-| `docs/decisions/0000-template.md`                                         | always                                                                                                                                                                                                                          |
-| `docs/decisions/0001-how-the-documentation-is-organised.md`               | always - renumber it if records exist, and leave it `proposed` for the owner to accept                                                                                                                                          |
-| `docs/decisions/README.md`                                                | you want one place that shows which records bind; generate it with `tools/doc-kit-index-decisions.sh`                                                                                                                           |
-| `docs/quirks.md`                                                          | you deviate from a reference, or carry behaviour you know is wrong                                                                                                                                                              |
-| `docs/glossary.md`                                                        | your domain has terms, or ordinary words used precisely                                                                                                                                                                         |
-| `docs/testing.md`                                                         | you have more than one test approach                                                                                                                                                                                            |
-| `docs/research/0000-template.md`                                          | you reverse-engineer, or reconcile sources that disagree                                                                                                                                                                        |
-| `docs/howto/0000-template.md`                                             | you have recurring operational procedures (deployments, rotations, migrations)                                                                                                                                                  |
-| `docs/sources/README.md` and `docs/sources/fetch.sh`                      | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                                                                                                              |
-| `docs/plan/`                                                              | your backlog is past roughly 20 items, or you are migrating an existing repository - take `adopt-doc-kit.md` (the migration worksheet) whenever you migrate, and `0000-template.md` (the plan-note template) with the directory |
-| `docs/archive/README.md`                                                  | Step 4 turned up documentation you keep but do not migrate                                                                                                                                                                      |
+| From `templates/`                                                                | Take it when                                                                                          |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan/README.md` | always - the core five                                                                                |
+| `docs/decisions/0000-template.md`                                                | always                                                                                                |
+| `docs/decisions/0001-how-the-documentation-is-organised.md`                      | always - renumber it if records exist, and leave it `proposed` for the owner to accept                |
+| `docs/decisions/README.md`                                                       | you want one place that shows which records bind; generate it with `tools/doc-kit-index-decisions.sh` |
+| `docs/quirks.md`                                                                 | you deviate from a reference, or carry behaviour you know is wrong                                    |
+| `docs/glossary.md`                                                               | your domain has terms, or ordinary words used precisely                                               |
+| `docs/testing.md`                                                                | you have more than one test approach                                                                  |
+| `docs/research/0000-template.md`                                                 | you reverse-engineer, or reconcile sources that disagree                                              |
+| `docs/howto/0000-template.md`                                                    | you have recurring operational procedures (deployments, rotations, migrations)                        |
+| `docs/sources/README.md` and `docs/sources/fetch.sh`                             | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts    |
+| `docs/plan/adopt-doc-kit.md`                                                     | you are migrating an existing repository - it is the migration worksheet                              |
+| `docs/plan/0000-template.md`                                                     | you keep plan notes - worth it once the backlog is past roughly 20 items                              |
+| `docs/archive/README.md`                                                         | Step 4 turned up documentation you keep but do not migrate                                            |
 
-If the target already uses the other entry-point form for a directory artefact - `docs/decisions.md`
-rather than `docs/decisions/README.md`, for example - keep it, put the template's content there, and
-do not create both (section 2.6).
+If the target has a `docs/name.md` beside a directory `docs/name/` - `docs/decisions.md` beside
+`docs/decisions/`, for example - move the file to `docs/name/README.md` and fix the links to it
+(`docs/spec.md` §2.6).
 
 Two files sit outside `templates/`: **`tools/doc-kit-check.sh`**, which verifies the structure
 against `docs/spec.md`, and **`tools/doc-kit-index-decisions.sh`**, which generates
@@ -236,7 +237,7 @@ Tense settles disagreements:
 
 - `docs/spec.md` - present tense: what the system does now.
 - `CHANGELOG.md` - past tense: what changed, never what's true today.
-- `docs/plan.md` - intent: nothing in it exists yet.
+- `docs/plan/README.md` - intent: nothing in it exists yet.
 - `docs/decisions/` - why: decision records; only `accepted` ones bind.
 - `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
 - `docs/howto/` - step-by-step recurring operational procedures.
@@ -285,8 +286,8 @@ rooted in the target for 4b-5, so its `AGENTS.md` or `CLAUDE.md` loads automatic
 ### 4a - Build the inventory
 
 List every documentation file before touching any of them, in a worksheet:
-`docs/plan/adopt-doc-kit.md`. This is the one case where `docs/plan/` earns its place below the
-usual threshold, because migration is exactly the work that spans weeks and gets interrupted.
+`docs/plan/adopt-doc-kit.md`. This is the one case where a plan note earns its place below the usual
+threshold, because migration is exactly the work that spans weeks and gets interrupted.
 
 | File                   | Tense   | Destination      | Disposition | Status |
 | ---------------------- | ------- | ---------------- | ----------- | ------ |
@@ -325,7 +326,7 @@ do not follow renames.
 
 **A file never keeps a name the kit gives a meaning to.** A `README.md` archived into the top of
 `docs/archive/` is renamed (`old-readme.md`, say), because that name is the archive's own page
-(`docs/spec.md` §2.6), as Step 0 renames an existing plan. Renaming is simpler than any rule for
+(`docs/spec.md` §5.5), as Step 0 renames an existing plan. Renaming is simpler than any rule for
 telling the two apart.
 
 Get the owner to review the dispositions before acting on them. It is the cheapest point at which

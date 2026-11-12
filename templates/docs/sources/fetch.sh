@@ -8,10 +8,9 @@ set -eu
 
 DIR=$(cd "$(dirname "$0")" && pwd)
 MANIFEST="$DIR/README.md"
-[ -f "$MANIFEST" ] || MANIFEST="$DIR/../sources.md"
 
 if [ ! -f "$MANIFEST" ]; then
-	echo "fetch: sources manifest not found (looked for $DIR/README.md and $DIR/../sources.md)" >&2
+	echo "fetch: sources manifest not found (looked for $DIR/README.md)" >&2
 	exit 1
 fi
 
