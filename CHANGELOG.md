@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.10.0] - 2026-11-13
+
 ### Changed
 
 - An artefact has one entry-point form, decided by the tree (section 2.6, ADR-0014). `docs/name.md`
