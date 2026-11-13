@@ -31,7 +31,7 @@ Three things matter and were not obvious:
 - **The ellipsis is in the template.** The permitted status set is explicitly not closed, so a
   project choosing a subset of the values, or adding one, follows the convention rather than
   deviating from it.
-- **`rejected` is standard.** This kit had omitted it.
+- **`rejected` is standard.**
 - **`decision-makers`, `consulted` and `informed` are RACI fields.** `decision-makers` records who
   decided, which is the signal ADR-0007 relies on.
 
@@ -65,10 +65,9 @@ What differs is where it lives and whether it changes:
   from the code ("more likely that they are seen, read, and updated") for discoverability from
   outside ("harder to spot").
 - **That use is mutable.** `yadr` records carry an optional changelog and are meant to be revised in
-  place. This kit's records are now amended in place with the owner's approval (ADR-0007), though at
-  the time of writing they were immutable and corrected by a successor. By the three-property test
-  the tense and location still make an in-code Y-statement a different artefact from an ADR, not a
-  shorter spelling of one.
+  place. This kit's records are amended in place with the owner's permission (ADR-0007). By the
+  three-property test the tense and location still make an in-code Y-statement a different artefact
+  from an ADR, not a shorter spelling of one.
 
 ADR-0007 did not consider Y-statements, and nothing here argues it should have chosen them: the
 minimal template already carries every clause.

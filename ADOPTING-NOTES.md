@@ -276,10 +276,9 @@ check over filenames, rather than relying on anyone remembering. The rest of the
 enough to look after itself.
 
 **"I want to add a new file and it genuinely seems necessary."** Apply the three-property test
-honestly, and note that it failed twice during this template's own development - technical debt and
-machine-readable contracts both looked like obvious new categories and both turned out to belong
-somewhere that already existed. If it passes, add it to the layout block and both tables in the map
-in the same commit.
+honestly. Technical debt and machine-readable contracts both look like obvious new categories, and
+both belong somewhere that already exists (ADR-0002). If it passes, add it to the layout block and
+both tables in the map in the same commit.
 
 **"Do documentation changes need approving?"** Only a change of a decision record's status, or its
 deletion; the record template has the rules. Everything else is rewritten in place or deleted

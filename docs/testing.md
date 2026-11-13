@@ -106,9 +106,8 @@ CI (`.github/workflows/ci.yml`) runs the checker, its tests, the duplication adv
 budget on Linux, macOS and Windows, and the hooks on Linux, on every push to `main` and every pull
 request. `gitleaks` is skipped there: it scans only the staged diff, which CI does not have.
 
-The tests exist because this checker's characteristic failure is silence. Every bug found in it so
-far reported conformance while checking nothing: glob expansion, regex-unsafe paths, a no-op `sed`,
-and a type-tag pattern no real `docs/plan.md` matched.
+The tests exist because this checker's characteristic failure is silence: a check that matches
+nothing reports conformance.
 
 ## Agent evals
 
