@@ -34,8 +34,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   the checker on it.
 - `tools/doc-kit-check.sh` fails when the layout block names an artefact the artefacts table does
   not.
+- The quirks template's example entry lists its fields one per line; they ran together as one
+  paragraph.
 - `tools/doc-kit-check.sh` fails on the plan template's example entry. Its check for a template
-  banner is removed: no released template carries the banner, so it could not fire.
+  banner, which no template carries, is removed.
 
 ## [0.9.0] - 2026-11-05
 

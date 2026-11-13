@@ -1,7 +1,8 @@
 # Plan note
 
 <!--
-Copy to a descriptive filename matching the plan entry. Keep this file as 0000; it is the template.
+Copy to a filename matching the plan entry, `short-title.md`. Keep this file as 0000; it is the
+template.
 
 Plan notes for one entry. A note is disposable - delete it when the work lands. Scratch -
 what has been tried, what is half-done, where you left off - is its normal content. Empty it into
@@ -13,9 +14,9 @@ Usually overhead below roughly 20 open items, and worth taking only when plan en
 to hold work in progress. The exception is `adopt-doc-kit.md`, the migration worksheet, whatever the
 backlog size. A note worth keeping has a definition of done specific enough that "finished" is not
 a judgement call, and a line of risk saying what could quietly go wrong. The shape below is
-optional. Delete this comment in the copy.
+optional. Delete the note and its plan entry in the same commit.
 
-Match the plan entry: `short-title.md`. Delete the note and the plan entry in the same commit.
+Delete this comment in the copy.
 -->
 
 **Status:** {what is done, what is next}
