@@ -24,7 +24,7 @@ test. Four harder ones hold up too. A rule with its reason is split into the spe
 `proposed` decision record; a correction rewrites the specification in place and is logged in the
 changelog; history goes to a decision record; and a fact with no documentation value is left
 unwritten. Agents keep the decision-record rules: no session accepted a record, and once told to,
-every session that added one regenerated `docs/decisions.md`. Before the stanza said so, none did.
+every session that added one regenerated the decisions index. Before the stanza said so, none did.
 
 Asked to record an invented fact about code a repository lacks, Opus declines unless told the fact
 is invented: it names the right destination but will not fill a quirk's `Where:` or test fields, or
@@ -87,6 +87,12 @@ is the owner's to add. The other was a decline of the upload cap, as in ripgrep.
 a plan entry typed `unknown`, because the prompt allowed "unknown" for a missing path or test name
 and Haiku extended it to the type; the prompt now limits it to those, and the entry then passed
 both.
+
+The 0.10.0 templates on an empty repository, harness as of `dbe72d2`, `--model claude-haiku-5-5`,
+2026-11-16: 12 of 12 placed, 11 of 12 rules kept. The broken rule was the harness's own: the plan
+template's example entry fails the checker in every fresh adoption, and the agent's entry above it
+moved that failure to a new line number, which the harness compared. It now compares failures
+without line numbers, and the plan scenario then passed both.
 
 ## Dead ends
 
