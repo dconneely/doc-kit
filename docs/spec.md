@@ -143,10 +143,10 @@ without ever blocking on content the map was never meant to describe (ADR-0011).
   `proposed` records freely; accepting, rejecting, reopening, deprecating and deleting a record each
   need the owner's explicit permission (§3.1). It is the only place this specification requires a
   decision by a person.
-- **Rewritten-in-place** artefacts - the specification, the map, quirks, the glossary - need no
-  freeze point. A wrong statement is corrected, not superseded. Where such a change encodes a real
-  choice, the choice belongs in a record and is decided there; deciding it again here would decide
-  one choice twice.
+- **Rewritten-in-place** artefacts - the specification, the map, quirks, the glossary, research
+  notes - need no freeze point. A wrong statement is corrected, not superseded. Where such a change
+  encodes a real choice, the choice belongs in a record and is decided there; deciding it again here
+  would decide one choice twice.
 - **Volatile** artefacts - the plan, plan notes - should be gated as little as possible. Friction at
   capture is what empties a backlog. The decision point is ranking an entry and picking it up, not
   filing it.
@@ -248,7 +248,8 @@ meaning:
 - **low** - inferred, reconstructed, or resting on a single unverified source. Recorded because
   losing it costs more than the risk of relying on it, which is a risk the reader now knows about.
 
-Confidence MUST be revised in place as evidence changes; the note itself is append-mostly.
+A note MUST be rewritten in place as evidence changes, its confidence included, so that it states
+the current answer.
 
 An unsourced note is not a research note. It is either specification, if it states behaviour, or an
 ADR, if it states a choice.

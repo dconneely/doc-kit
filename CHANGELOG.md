@@ -6,6 +6,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- Research notes are `rewritten in place` in the template map, not `append-only`, matching the
+  research template and section 3.4: a note states the current answer, its confidence included. An
+  adopted map can change the row to match.
+
 ## [0.10.0] - 2026-11-13
 
 ### Changed

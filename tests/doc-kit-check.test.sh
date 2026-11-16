@@ -411,7 +411,7 @@ fixture
 mkdir -p docs/research
 echo x >docs/research/0000-template.md
 echo x >docs/research/0001-a-finding.md
-after '^[|] `DOC-MAP.md` ' '| `docs/research/*.md` | findings | past | append-only | contributor |'
+after '^[|] `DOC-MAP.md` ' '| `docs/research/*.md` | findings | past | rewritten in place | contributor |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/research/*.md` | a question | never |'
 after '^DOC-MAP.md ' 'docs/research/*.md  findings'
 expect "numbered research notes pass" 0 "checks passed"
