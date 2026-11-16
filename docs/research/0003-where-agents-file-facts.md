@@ -91,8 +91,9 @@ both.
 The 0.10.0 templates on an empty repository, harness as of `dbe72d2`, `--model claude-haiku-5-5`,
 2026-11-16: 12 of 12 placed, 11 of 12 rules kept. The broken rule was the harness's own: the plan
 template's example entry fails the checker in every fresh adoption, and the agent's entry above it
-moved that failure to a new line number, which the harness compared. It now compares failures
-without line numbers, and the plan scenario then passed both.
+moved that failure to a new line number, which the harness compared. It now normalises away line
+numbers and subtracts one occurrence per failure already present, so a moved failure is not new but
+a second copy is; the plan scenario then passed both.
 
 ## Dead ends
 
