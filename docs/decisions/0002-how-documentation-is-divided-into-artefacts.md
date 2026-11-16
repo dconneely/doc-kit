@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-11-12
+date: 2026-11-16
 decision-makers: David Conneely
 ---
 
@@ -13,14 +13,11 @@ file accumulates several jobs - part record of work done, part backlog, part ass
 part of it can be trusted or pruned with confidence. Nobody can delete a line from it, because
 deleting the stale half might delete the live half.
 
-The temptation is to divide documentation by subject or by medium. Subjects overlap, and a fact
-about a subject still has to be filed somewhere within it. Dividing by medium tempts teams to invent
-separate categories for technical debt, machine-readable contracts (OpenAPI, schemas, migrations),
-or audience variants, fragmenting the repository into unread lists.
-
-Audience also needs rigour: if audience is free text, two documents escape duplication checks by
-phrasing ("adopters" vs "consumers"), while a closed set must still distinguish artefacts that hold
-different facts.
+Dividing by subject or by medium does not prevent this. Subjects overlap, and a fact about a subject
+still has to be filed somewhere within it. Dividing by medium invents separate categories for
+technical debt, machine-readable contracts or audience variants, and fragments the repository into
+unread lists. If audience is free text, two documents escape a duplication check on phrasing
+("adopters" against "consumers").
 
 ## Considered Options
 
@@ -34,13 +31,8 @@ different facts.
 Chosen option: **tense, mutability and audience**, because those are the properties whose mixture
 causes the rot, and organising by anything else leaves them free to mix.
 
-Does it describe what is, what was, or what is intended? How does it change over its life? Who reads
-it?
-
-### Closed property sets and the duplicate test
-
-Tense, mutability, and audience are drawn from closed sets (`docs/spec.md` §2.7). Audience names one
-or more of five repository roles:
+The sets are closed (`docs/spec.md` §2.7). Audience names one or more of five roles, each covering
+human and agent readers unless the map says otherwise:
 
 | Role          | Who                                                                               |
 | ------------- | --------------------------------------------------------------------------------- |
@@ -50,16 +42,9 @@ or more of five repository roles:
 | `end-user`    | anyone using the running product without seeing the repository                    |
 | `operator`    | anyone deploying, running or monitoring it                                        |
 
-Each role covers human and agent readers by default. An artefact read by only one marks the
-exception: `contributor (agents)`.
-
-A candidate document sharing all three properties with an existing artefact is reported as a warning
-to check, not an automatic failure: two artefacts sharing all three are merged unless they hold
-different facts.
-
-Because the closed sets are small, some artefacts the template map defines share a triple while
-holding different facts. The checker exempts exactly these pairs, and a test fails if its list and
-this table differ:
+Because the sets are small, some artefacts the template map defines share a triple while holding
+different facts. The checker exempts exactly these pairs, and a test fails if its list and this
+table differ:
 
 | Pair                                                    | Why the facts differ                                                 |
 | ------------------------------------------------------- | -------------------------------------------------------------------- |
@@ -69,61 +54,35 @@ this table differ:
 | `docs/archive/README.md` and `docs/decisions/README.md` | one says what the archive holds; the other indexes decision records  |
 
 Two structural cases are exempt as well, because the growth rule (ADR-0014) splits one artefact into
-them: the parts of one container, its entry point included (two files in `docs/howto/`, or
-`docs/spec/README.md` and `docs/spec/*.md`, say); and the parts of a container paired with whatever
-its entry point is paired with (`docs/spec/*.md` and `docs/quirks.md`, say). An entry point
-`docs/name/README.md` counts as the `docs/name.md` it replaces. Product and template rows are exempt
-by `docs/spec.md` §2.8. Every other shared triple is reported.
+them: the parts of one container, its entry point included; and the parts of a container paired with
+whatever its entry point is paired with. An entry point `docs/name/README.md` counts as the
+`docs/name.md` it replaces. Every other shared triple is reported as a warning.
 
 The list is held here and in the checker, not in the map, so that changing it needs the owner's
-permission and a release. The specification refers to it rather than restating it, so that a change
-here cannot leave a second copy behind. A warning for every pair on every run was rejected because a
-warning that never changes stops being read. An `Allowed overlaps` table in the map was rejected
-because an agent could add a row to silence any warning. Reporting only triples that a change newly
-creates was rejected because it never prompts a check of what is already there.
+permission and a release. A warning for every pair on every run was rejected because a warning that
+never changes stops being read. An `Allowed overlaps` table in the map was rejected because an agent
+could add a row to silence any warning. Reporting only triples that a change newly creates was
+rejected because it never prompts a check of what is already there.
 
-### Applications: technical debt and machine-readable contracts
+The test settles two commonly requested categories without new artefacts:
 
-This test resolves commonly requested categories without inventing new artefacts:
-
-- **Technical debt belongs in the single ranked plan (`docs/plan/README.md`) as a type tag**
-  alongside `bug`, `feature`, and `docs`. Debt shares its tense (future), mutability (ordered list,
-  pruned on completion), and audience (`contributor`, `owner`) with the rest of the plan. A separate
-  debt file or independently ranked section prevents the comparison that matters; with two lists,
-  debt is never traded off against features, and the second list stops being read.
-- **Machine-readable contracts are members of the specification (`docs/spec.md` or `docs/spec/`).**
-  Schemas, OpenAPI/AsyncAPI documents, and interface definitions share the specification's tense
-  (present), mutability (rewritten in place), and audience (`consumer`, `contributor`). Being
-  checked by a machine makes a contract a stronger specification, not a different category. The
-  specification is a set, not a single file, and its members may be prose or machine-readable.
-
-Three things stay distinguished for machine-readable contracts:
-
-1. **Source of truth** - the contract itself, versioned and reviewed like code.
-2. **Generated views** - diagrams, rendered references, and client code, marked with a generated-by
-   header and producing no diff on regeneration.
-3. **Prose that cannot be derived** - rationale, invariants, units, ownership, and policy.
-
-Prose may link to a machine-readable contract; it never restates one.
+- **Technical debt is a type tag in the one ranked plan.** It shares the plan's tense, mutability
+  and audience, and a separate list would never be traded off against features.
+- **Machine-readable contracts are members of the specification.** Schemas and interface definitions
+  share its tense, mutability and audience; being checked by a machine makes a contract a stronger
+  specification, not a different category. The specification is a set, not a file.
 
 ### Consequences
 
-- Good, because filing becomes mechanical rather than a judgement call: the tense usually settles
-  it, and a sentence that resists is usually two sentences.
-- Good, because debt and features compete in one ordered list where trade-offs can actually be made.
-  Filing changes a tag, not a location.
-- Good, because schemas and prose live under one specification umbrella without duplicating facts.
-- Good, because audience roles are uniform across maps and checkable by tooling.
-- Good, because standard runs emit zero duplicate-property warnings, eliminating warning fatigue.
-- Good, because new custom artefacts that overlap produce a high-contrast single warning.
-- Good, because an `Allowed overlaps` table is omitted, avoiding map schema churn and agent misuse.
-- Bad, because a new artefact the template map defines that shares a triple needs this record
-  reopened before its pair stops warning.
-- Bad, because custom artefacts that genuinely share a triple will always report an advisory
-  warning.
-- Bad, because the duplicate test is a prompt, not a proof: artefacts holding different facts can
-  share all three properties, requiring human review to evaluate the warning.
-- Bad, because the rule against restating a contract is expensive to hold in review.
+- Good, because filing becomes mechanical: the tense usually settles it, and a sentence that resists
+  is usually two sentences.
+- Good, because debt and features compete in one ordered list. Filing changes a tag, not a location.
+- Good, because a run on the template map's artefacts emits no shared-triple warning, so a new one
+  stands out.
+- Bad, because a new template-map artefact that shares a triple needs this record reopened before
+  its pair stops warning.
+- Bad, because the duplicate test is a prompt, not a proof: custom artefacts that genuinely hold
+  different facts keep warning, and a person decides.
 - Neutral: the three properties are a heuristic justified by what they prevent, not by an external
   standard.
 

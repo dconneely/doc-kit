@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-10-30
+date: 2026-11-16
 decision-makers: David Conneely
 ---
 
@@ -18,12 +18,11 @@ dedicated section. The sources are in
 Agents draft decision records readily, with Context and Consequences sections indistinguishable in
 form from deliberated ones, and they can produce twenty in an afternoon. `AGENTS.md` and the map
 send every session to the records for the reasoning behind constraints, so a record nobody decided
-is read as settled. Drafting and deciding were once the same act; with agents they are not.
+is read as settled.
 
-A record must also stay true. What it protects is a citation: a commit message, a code comment or
-another record that says ADR-NNNN relies on the record meaning what it meant. A citation inside the
-repository can be found and fixed, provided every citation uses one exact form. One in another
-repository cannot.
+A record must also stay true. A commit message, a code comment or another record that cites ADR-NNNN
+relies on the record meaning what it meant. A citation inside the repository can be found and fixed,
+provided every citation uses one exact form. One in another repository cannot.
 
 ## Considered Options
 
@@ -40,53 +39,23 @@ Chosen option: **the MADR minimal template with front matter, where agents draft
 every change of status, and accepted records are amended in place**. This separates writing from
 deciding, aligns with recognised tooling, and avoids successor chains for every change of mind.
 
-### Template structure and front matter
+The rules are in `docs/spec.md` §3.1 and the record template. The choices within them:
 
-Records follow the MADR minimal template copied from `templates/docs/decisions/0000-template.md`:
-
-- **Front matter** carries MADR 4.0.0's `status`, `date` and `decision-makers`, and no field MADR
-  does not define. The status takes MADR's lowercase values: `proposed`, `accepted`, `rejected`, and
-  `deprecated`. `consulted` and `informed` are permitted, not required.
-- **Headings** keep their `NNNN.` numbers (`# NNNN. Question`), which `adr-tools` and its maintained
-  fork use and MADR permits.
-- **Sections** MUST carry `## Context and Problem Statement`, `## Considered Options` and
-  `## Decision Outcome`, and SHOULD carry `### Consequences`; `## Confirmation` is optional.
+- **MADR's own front matter and lowercase status values**, with no field MADR does not define, and
+  numbered headings (`# NNNN. Question`), which `adr-tools` uses and MADR permits.
+- **`decision-makers` and the commit that changes a status are the record of the owner's decision.**
+  Copying the owner's words into a custom `approval` field was rejected: an agent that would skip
+  asking could write any words there, and the words without the question did not show what was
+  approved.
+- **One citation form, `ADR-NNNN`**, so that every citation a change makes untrue can be found and
+  fixed in the same commit.
 
 The full MADR template was rejected as padding: Pros and Cons tables and Decision Drivers earn their
-place when weighing multiple complex options, whereas most records here evaluate one real
-alternative. Nygard's format was rejected because its section names stay non-standard and lack
-machine-readable front matter.
-
-### Lifecycle and authority
-
-An agent may create a record as `proposed`, copied from the template rather than from an existing
-record, and may revise a `proposed` record. The owner's explicit permission, asked for first, is
-needed to accept a record, reject one, reopen an accepted one to change it, deprecate one, or delete
-one.
-
-Only `accepted` binds; `proposed` exists so an agent can put a decision in front of the owner before
-it is decided. `decision-makers` names the owner (ADR-0001), and the commit that changes a status is
-the record of the change. Copying the owner's words into a custom `approval` field was rejected: an
-agent that would skip asking could write any words there, and the words without the question did not
-show what was approved.
-
-### In-place amendment and citations
-
-A record is the current answer to one question. Changing an accepted record takes two permissions:
-reopening it, and accepting the change. If the owner rejects the change, the last accepted version
-is restored. A proposed record may be committed while it is discussed; once accepted, the accepted
-version is committed, so git history holds that version without needing an internal revision log.
-When a question splits, merges, or no longer applies, the record is deprecated, with a link to
-whatever replaces it, or deleted.
-
-Citations take one exact form, `ADR-NNNN`. A bare ID names a record in this repository; another
-repository's record is cited by a full link. A change, deletion included, fixes in the same commit
-every citation it makes untrue. Commit messages are history and are left alone. Formatting applied
-by a tool, which alters no word, is not a change.
-
-Immutability was rejected because every correction became a successor, forcing readers to assemble
-chains of records to discover the settled decision. Rewriting freely was rejected because citations
-could drift into meaning anything.
+place when weighing several complex options, whereas most records here evaluate one real
+alternative. Nygard's format was rejected because its section names are not MADR's and it has no
+machine-readable front matter. Immutability was rejected because every correction became a
+successor, forcing readers to assemble chains of records to find the settled decision. Rewriting
+freely was rejected because citations could drift into meaning anything.
 
 ### Consequences
 

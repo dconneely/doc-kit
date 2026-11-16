@@ -1,6 +1,6 @@
 ---
 status: "accepted"
-date: 2026-10-28
+date: 2026-11-16
 decision-makers: David Conneely
 ---
 
@@ -12,15 +12,12 @@ Guidance about the structure is needed at three moments: once, while adopting; w
 writes in a file; and rarely, when someone questions a rule. `ADOPTING.md` stays with the kit and is
 not copied, so guidance needed after adoption cannot live only there.
 
-The map is the file the `AGENTS.md` stanza tells every agent session to read before writing
-anything. Each word in it is paid for by every session, and anything it shares with the files it
-describes is stated twice in every adopting repository, against `docs/spec.md` §4.1.
+The `AGENTS.md` stanza tells every agent session to read the map before writing anything. Each word
+in it is paid for by every session, and anything it shares with the files it describes is stated
+twice in every adopting repository.
 
-`docs/spec.md` §4.1 was written as an absolute - no fact in two artefacts - but prose cannot be
-symlinked, and the kit's own specification, templates, map and notes repeat tables, value lists and
-multi-step processes. Those repeats drift. A template and the kit's own instance are different
-artefacts, so they may repeat their own content; a short instruction may be repeated where the
-reader cannot follow a link.
+Prose cannot be symlinked, and the kit's specification, templates, map and notes repeat tables,
+value lists and multi-step processes. Those repeats drift.
 
 ## Considered Options
 
@@ -46,18 +43,13 @@ content is then read at the moment it is needed, and stated once in the adopter'
   its own reasons in an adoption decision record, shipped as a template, that cites the kit at a
   pinned commit.
 
-### Shared tables, value lists and processes
+For shared content, §4.1 is a guideline and the template is the home of an artefact's shape and
+value sets: the specification cites the template, and the checker's value sets are tested against
+it. Template/instance pairs and short instructional copies, such as the `AGENTS.md` stanza, may
+repeat what they name. An advisory detector reports repeated structure rather than failing on it.
 
-§4.1 is a guideline, not an absolute. A table, a list of more than three values, or a process of
-three or more steps SHOULD have one home. For an artefact's shared shape and value sets, that home
-is its template; the specification cites the template and keeps the contract-level rules. The
-checker's value sets are tested against the templates. Short instructional copies - the `AGENTS.md`
-stanza, a gate in the skill or `ADOPTING.md` - and template/instance pairs MAY repeat; they name the
-source and are kept in step by review or test. An advisory detector reports repeated tables, value
-lists and step sequences, not repeated sentences.
-
-A decision record does not name the code it constrains. The comment beside the code names the record
-instead, because code changes more often than records do and a link from the record would go stale.
+A decision record does not name the code it constrains; the comment beside the code names the
+record, because code changes more often than records do.
 
 Embedded instructions were rejected because every adopter pays to read and delete them, and they
 duplicate `ADOPTING.md`. Moving everything to `ADOPTING.md` was rejected because it is not copied.
@@ -68,19 +60,15 @@ questioning a rule, and the adoption record already serves that reader.
 ### Consequences
 
 - Good, because the map an agent reads first is routing.
-- Good, because each format is stated once in an adopter's repository, beside where it is used.
+- Good, because each format is stated once in an adopter's repository, beside where it is used, so a
+  correction lands once.
 - Good, because an adopter's reasons for adopting, and for deviating, are a record the owner
   accepts.
-- Good, because a shared table, value list or multi-step process has one home, so a correction lands
-  once.
-- Good, because the checker's value sets are tested against the templates instead of drifting.
 - Bad, because the specification is less self-contained: a reader follows links into the templates.
-- Bad, because a template change is now a contract change, needing the specification and checker to
+- Bad, because a template change is a contract change, needing the specification and checker to
   follow.
-- Bad, because a reader who wants all the rules in one place opens several files.
 - Bad, because the provenance of the loose conventions, such as Diátaxis and Standard Readme, is
   found only in the kit.
-- Neutral: template/instance repetition remains by design.
 
 ## Confirmation
 
