@@ -81,11 +81,11 @@ migrations are changelog-shaped; archived files carry provenance, are not cited,
 appears in the map. §6 assigns these to review; the checker implements only part of the structural
 rules and none of these.
 
-**No instance here.** §3.2 changelog rules, §3.4 research confidence levels, §3.5 quirk entry shape,
-and §5's archive rules - provenance headers, and the archive's single map entry - are unimplemented.
-Two of the four have nothing to check against - this repository has no quirks file and no archive -
-but the changelog and research notes do exist, so those two are intentional omissions rather than
-vacuous ones.
+**Left to review.** §3.2 changelog rules, §3.4 research confidence levels and its rewrite-in-place
+rule, §3.5 quirk entry shape, and §5's archive rules - provenance headers, and the archive's single
+map entry - are unimplemented. Two of those sections have nothing to check against - this repository
+has no quirks file and no archive - but the changelog and research notes do exist, so those two are
+intentional omissions rather than vacuous ones.
 
 **Prose quality of any kind.** A repository can pass every check and be badly written. Structural
 conformance is a floor.
