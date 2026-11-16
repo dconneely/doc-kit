@@ -56,7 +56,8 @@ table differ:
 Two structural cases are exempt as well, because the growth rule (ADR-0014) splits one artefact into
 them: the parts of one container, its entry point included; and the parts of a container paired with
 whatever its entry point is paired with. An entry point `docs/name/README.md` counts as the
-`docs/name.md` it replaces. Every other shared triple is reported as a warning.
+`docs/name.md` it replaces. Product and template rows are exempt by `docs/spec.md` §2.8. Every other
+shared triple is reported as a warning.
 
 The list is held here and in the checker, not in the map, so that changing it needs the owner's
 permission and a release. A warning for every pair on every run was rejected because a warning that
