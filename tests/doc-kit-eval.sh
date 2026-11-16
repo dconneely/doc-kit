@@ -170,7 +170,8 @@ for line in $scenarios; do
 		setup "$dir"
 		[ "$seed" = - ] || "seed_$seed" "$dir"
 		start=$(git -C "$dir" rev-parse HEAD)
-		before=$(failures "$dir")
+		before="$TMP/$name.before"
+		failures "$dir" >"$before"
 		token="EVAL-$id-$(od -An -N4 -tx4 /dev/urandom | tr -d ' ')"
 		# shellcheck disable=SC2034  # read by the eval below
 		prompt="This is an evaluation of where documentation is filed. The fact below is invented: treat it as true of this repository even where the code has no such feature, and do not check it against the code or ask for details - where a document wants a path or a test name it lacks, write unknown, but choose every other field, such as a type or a priority, yourself. Record it in the documentation, wherever it belongs. Only if information of its kind has no place in this repository's documentation at all, say so and write nothing: $fact Include the token $token, verbatim, in each place you write it. Do not commit."
@@ -214,7 +215,13 @@ for line in $scenarios; do
 		# Rules: no new checker failure, and every record the session touched still proposed.
 		git -C "$dir" add -A
 		rule=''
-		new=$(failures "$dir" | grep -v -x -F -- "$before" | sed '/^$/d' | head -n 1 || true)
+		# Subtract one occurrence per failure already present: a failure the session only moved is
+		# not new, but a second copy of one that was already there is.
+		after="$TMP/$name.after"
+		failures "$dir" >"$after"
+		new=$(awk 'FILENAME == ARGV[1] { seen[$0]++; next }
+			seen[$0] > 0 { seen[$0]--; next }
+			{ print }' "$before" "$after" | head -n 1 || true)
 		[ -z "$new" ] || rule="rules broken: $new"
 		if [ -z "$rule" ]; then
 			for f in $(git -C "$dir" diff --cached --name-only "$start" -- docs/decisions | grep -E "$ADR" | grep -v '/0000-' || true); do
