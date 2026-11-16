@@ -71,7 +71,7 @@ The test settles two commonly requested categories without new artefacts:
   and audience, and a separate list would never be traded off against features.
 - **Machine-readable contracts are members of the specification.** Schemas and interface definitions
   share its tense, mutability and audience; being checked by a machine makes a contract a stronger
-  specification, not a different category. The specification is a set, not a file.
+  specification, not a different category. The specification is a set, not a single file.
 
 ### Consequences
 
