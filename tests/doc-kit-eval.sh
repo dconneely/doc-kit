@@ -112,11 +112,13 @@ seed_limit() {
 	commit "$1" 'Specify the upload limit'
 }
 
-# failures DIR - the checker's failure lines for DIR, sorted, without line numbers, so that a
-# failure the session only moved, such as the plan's example entry, is not counted as new
+# failures DIR - the checker's failure lines for DIR, sorted, without line numbers and with each
+# entry point named as the file it replaced, so that a failure the session only moved, such as the
+# plan's example entry, is not counted as new
 failures() {
 	(cd "$1" && sh "$ROOT/tools/doc-kit-check.sh" 2>&1 | grep '^FAIL' |
-		sed -E 's/^(FAIL \[[a-z]+\] [^ :]+):[0-9]+ /\1 /' | sort || true)
+		sed -E -e 's/^(FAIL \[[a-z]+\] [^ :]+):[0-9]+ /\1 /' \
+			-e 's#^(FAIL \[[a-z]+\] [^ :]*/)([^/ :]+)/README\.md#\1\2.md#' | sort || true)
 }
 
 # matches FILES PATTERNS - the FILES (one per line) matching any of the space-separated PATTERNS
