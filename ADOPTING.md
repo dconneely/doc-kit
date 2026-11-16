@@ -182,9 +182,9 @@ artefact you kept:
   instructions; a `README.md` with unfilled headings is worse than a short one.
 
 The templates deliberately contain no advice about the kit - that is this file's job, and it is not
-copied into your repository. The exceptions are `docs/decisions/0000-template.md` and its
-counterpart in `docs/research/`, which stay as templates to copy from and keep a short comment for
-that reason, and the adoption record, whose comment is deleted once it is filled in.
+copied into your repository. The exceptions are the `0000-template.md` files, which stay as
+templates to copy from and keep a short comment for that reason, and the adoption record, whose
+comment is deleted once it is filled in.
 
 For an empty repository this step is quick and you are finished. For an existing codebase, the
 material for those first entries is already scattered through it - that is Step 4.
@@ -248,10 +248,10 @@ Before you edit:
 
 - Change the specification because behaviour changed, never because it'd read better. Purpose and
   scope aren't yours to revise.
-- You may create a decision record as `proposed`, copying `docs/decisions/0000-template.md` rather than
-  an existing record, and change a `proposed` one. **Accepting, rejecting, reopening (`accepted` to
-  `proposed`), deprecating and deleting a record each need the owner's explicit permission, asked
-  for first.** This is absolute.
+- You may create a decision record as `proposed`, copying `docs/decisions/0000-template.md` rather
+  than an existing record, and change a `proposed` one. **Accepting, rejecting, reopening
+  (`accepted` to `proposed`), deprecating and deleting a record each need the owner's explicit
+  permission, asked for first.** This is absolute.
 - On accepting, set `decision-makers` and `date`, then commit. A rejected change to a reopened
   record is undone by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
