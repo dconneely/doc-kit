@@ -2,8 +2,9 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-17, but each scenario
-ran once per repository and model, so a single run is a sample of agent behaviour, not a rate.
+Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-17. Most scenarios ran
+once per repository and model, a sample rather than a rate; on the templates alone, two models ran
+each scenario three times.
 
 ## Finding
 
@@ -30,18 +31,21 @@ Asked to record an invented fact about code a repository lacks, Opus declines un
 is invented: it names the right destination but will not fill a quirk's `Where:` or test fields, or
 a changelog entry, with things that do not exist. The harness therefore says so in its prompt.
 
-Neither the model nor the agent changes this much. On the templates alone, Gemini 3.8 Flash under
-`agy`, which reads `AGENTS.md` itself with no `CLAUDE.md` alias to follow, and DeepSeek Flash under
-Claude Code each kept every rule, and placed 11 of 12 as the scenarios then stood and 12 of 12 as
-they stand now. Each miss followed a passage of the kit that the scenario did not allow for.
-DeepSeek put the 25 MB cap and its reason in the specification alone, citing the record template's
-note that a record with only one option is usually a misfiled specification entry. Gemini declined
-the MySQL history, citing the map's rule 5 ("No history or account of how you got there, in
-documents") and the template's warning against a record reconstructed years afterwards. The map's
-row for "was X tried?" and `ADOPTING.md` Step 2, which converts old reasoning into records, support
-a decision record instead. Since the kit's text supports both readings in each case, the scenarios
-now accept both: the rule-and-reason scenario requires only the specification, and the history may
-be left unwritten.
+The agent matters less than the model. On the templates alone, Gemini 3.8 Flash under `agy`, which
+reads `AGENTS.md` itself with no `CLAUDE.md` alias to follow, and DeepSeek Flash under Claude Code
+placed 71 of 72 sessions across three runs each and kept the rules in 71. GPT-OSS 120B under `agy`
+did not: it placed no research finding where the map says, and broke the rules in every decision
+session, twice leaving the index stale and once numbering a record `0000`.
+
+In single runs before the scenarios changed, Gemini and DeepSeek each placed 11 of 12. Each miss
+followed a passage of the kit that the scenario did not allow for. DeepSeek put the 25 MB cap and
+its reason in the specification alone, citing the record template's note that a record with only one
+option is usually a misfiled specification entry. Gemini declined the MySQL history, citing the
+map's rule 5 ("No history or account of how you got there, in documents") and the template's warning
+against a record reconstructed years afterwards. The map's row for "was X tried?" and `ADOPTING.md`
+Step 2, which converts old reasoning into records, support a decision record instead. Since the
+kit's text supports both readings in each case, the scenarios now accept both: the rule-and-reason
+scenario requires only the specification, and the history may be left unwritten.
 
 ## Evidence
 
@@ -116,6 +120,16 @@ low effort, with the index generator allowed: 11 of 12 placed, 12 of 12 rules ke
 rule and its reason with no decision record. Every decision record either wrote was `proposed`, and
 every one was followed by a regenerated index.
 
+The same templates, harness as of `93ab7a4`, 2026-11-17, `DOC_KIT_EVAL_RUNS=3`. DeepSeek Flash as
+above: 35 of 36 sessions placed, 36 of 36 rules kept. The miss filed the kept CSV-date defect in
+`docs/quirks.md` and also as a plan entry to restore ISO dates once the customer import no longer
+needs them; the quirk's "Expires when" already holds that trigger, so the fact had two homes. Gemini
+3.8 Flash as above: 36 of 36 placed, 35 of 36 rules kept; the break was a decision record whose
+index was not regenerated. `agy --model gpt-oss-120b-medium`: ten sessions before the server
+reported no capacity for the model (HTTP 503) and the harness stopped. Decisions placed 3 of 3 but
+kept the rules 0 of 3; quirks 3 of 3 on both; research placed 0 of 3, in a new
+`docs/sources/api-limits.md` twice and in the specification once; the one plan session declined.
+
 ## Dead ends
 
 Running five repositories in parallel exhausted the account's usage limit mid-run, and every session
@@ -129,8 +143,9 @@ documents both.
 
 ## Open questions
 
-- Whether placement holds across runs: each scenario here ran once. Repeating each several times
-  would give a rate rather than a sample.
+- Whether placement holds across runs for Claude models and in customised repositories: only Gemini
+  Flash and DeepSeek Flash, on the templates alone, ran each scenario three times.
+- How GPT-OSS 120B scores over a full run: its run stopped after ten of the 36 sessions.
 - Whether it holds for other agents: `agy` is the only one tried that reads `AGENTS.md` without a
   `CLAUDE.md` alias, with one model, once.- How placement compares when scored against each
   repository's own map rather than the template's; every miss here was a repository-specific choice
