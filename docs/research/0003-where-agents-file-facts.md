@@ -2,8 +2,8 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` on 2026-10-30, but each scenario ran once per
-repository and model, so a single run is a sample of agent behaviour, not a rate.
+Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-17, but each scenario
+ran once per repository and model, so a single run is a sample of agent behaviour, not a rate.
 
 ## Finding
 
@@ -29,6 +29,17 @@ every session that added one regenerated the decisions index. Before the stanza 
 Asked to record an invented fact about code a repository lacks, Opus declines unless told the fact
 is invented: it names the right destination but will not fill a quirk's `Where:` or test fields, or
 a changelog entry, with things that do not exist. The harness therefore says so in its prompt.
+
+Neither the model nor the agent changes this much. On the templates alone, Gemini 3.8 Flash under
+`agy`, which reads `AGENTS.md` itself with no `CLAUDE.md` alias to follow, and DeepSeek Flash under
+Claude Code each placed 11 of 12 and kept every rule. Each miss followed a passage of the kit that
+the scenario does not allow for. DeepSeek put the 25 MB cap and its reason in the specification
+alone, citing the record template's note that a record with only one option is usually a misfiled
+specification entry. Gemini declined the MySQL history, citing the map's rule 5 ("No history or
+account of how you got there, in documents") and the template's warning against a record
+reconstructed years afterwards. The map's row for "was X tried?" and `ADOPTING.md` Step 2, which
+converts old reasoning into records, support the scenarios' answers instead; the kit does not say
+which reading wins.
 
 ## Evidence
 
@@ -93,7 +104,15 @@ The 0.10.0 templates on an empty repository, harness as of `dbe72d2`, `--model c
 template's example entry fails the checker in every fresh adoption, and the agent's entry above it
 moved that failure to a new line number, which the harness compared. It now normalises away line
 numbers and subtracts one occurrence per failure already present, so a moved failure is not new but
-a second copy is; the plan scenario then passed both.
+a second copy is. The plan scenario passed both under that comparison in each of the two runs below.
+
+The same templates, harness as of `d08084f`, 2026-11-17, with two models other than Claude's. `agy`
+1.5.2 with `--model gemini-3.8-flash-low --sandbox`, in its default mode, which ran the index
+generator without a permission rule: 11 of 12 placed, 12 of 12 rules kept; the miss was the history
+declined. Claude Code pointed at DeepSeek's Anthropic-compatible endpoint, model `deepseek-flash` at
+low effort, with the index generator allowed: 11 of 12 placed, 12 of 12 rules kept; the miss was the
+rule and its reason with no decision record. Every decision record either wrote was `proposed`, and
+every one was followed by a regenerated index.
 
 ## Dead ends
 
@@ -110,6 +129,9 @@ documents both.
 
 - Whether placement holds across runs: each scenario here ran once. Repeating each several times
   would give a rate rather than a sample.
-- Whether it holds for agents other than Claude, which read `AGENTS.md` without a `CLAUDE.md` alias.
+- Whether it holds for other agents: `agy` is the only one tried that reads `AGENTS.md` without a
+  `CLAUDE.md` alias, with one model, once.
+- Which reading of the rule-and-reason and history scenarios the kit intends. Both misses on
+  2026-11-17 follow passages of the kit, and settling them means changing a scenario or a passage.
 - How placement compares when scored against each repository's own map rather than the template's;
   every miss here was a repository-specific choice the template expectations did not know.
