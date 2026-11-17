@@ -26,7 +26,8 @@
 # the AGENTS.md stanza from ADOPTING.md unless it already has a map, asks the agent to record one
 # fact carrying a unique token, and reports every file the token lands in. Placement passes when
 # every such file matches an allowed pattern, each required pattern is matched, and no stale text is
-# left in the specification; a scenario allowing nothing passes when nothing is written. The rules
+# left in the specification; a scenario allowing nothing passes when nothing is written. Where the
+# kit's text supports two placements, a scenario accepts both rather than choosing one. The rules
 # pass when the session adds no checker failure and leaves every record it touches "proposed".
 
 set -eu
@@ -40,7 +41,8 @@ TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT HUP INT TERM
 
 # id|allowed|required|stale|seed|fact
-#   allowed   space-separated EREs; every file the token lands in must match one, or - for none
+#   allowed   space-separated EREs; every file the token lands in must match one. A - among them
+#             means writing nothing also passes, and - alone that nothing must be written
 #   required  space-separated EREs; each must match a file the token lands in, or -
 #   stale     text that must not be in the specification afterwards, or -
 #   seed      a seed_* function run before the session, or -
@@ -55,9 +57,9 @@ glossary|^docs/glossary\.md$|-|-|-|In this project, a batch means one upload of 
 changelog|^CHANGELOG\.md$ $SPEC|^CHANGELOG\.md$|-|-|We have just shipped this: the exporter now writes a header row, which users will see in the next release.
 spec|$SPEC|-|-|-|The system rejects an upload larger than 10 MB with HTTP 413.
 howto|^docs/howto/[a-z0-9-]+\.md$|-|-|-|To rotate the API key: generate a new key in the vendor console, update the KEY secret in CI, redeploy, then revoke the old key.
-rule-and-why|$SPEC $ADR|$SPEC $ADR|-|-|Uploads are capped at 25 MB, because the reverse proxy in front of the service rejects larger request bodies.
+rule-and-why|$SPEC $ADR|$SPEC|-|-|Uploads are capped at 25 MB, because the reverse proxy in front of the service rejects larger request bodies.
 correction|$SPEC ^CHANGELOG\.md$|$SPEC ^CHANGELOG\.md$|larger than 5 MB|limit|The upload limit has just changed from 5 MB to 20 MB: the system now rejects an upload larger than 20 MB with HTTP 413.
-history|$ADR ^CHANGELOG\.md$ $SPEC|$ADR|MySQL|-|The project used MySQL until 2023, then moved to SQLite because the hosted database cost more than the product earned.
+history|- $ADR ^CHANGELOG\.md$ $SPEC|$ADR|MySQL|-|The project used MySQL until 2023, then moved to SQLite because the hosted database cost more than the product earned.
 no-home|-|-|-|-|The owner's favourite programming font is Iosevka."
 
 # stanza - the AGENTS.md stanza: the first markdown block after "Paste the stanza" in ADOPTING.md
@@ -195,12 +197,13 @@ for line in $scenarios; do
 
 		# Placement
 		verdict=''
-		if [ "$allowed" = - ]; then
-			[ -z "$landed" ] || verdict="MISS     wrote to [$shown], wanted nothing"
-		elif [ -z "$landed" ]; then
-			verdict='DECLINED wrote nothing; see the agent log'
+		patterns=$(printf ' %s ' "$allowed" | sed 's/ - / /g')
+		if [ -z "$landed" ]; then
+			case " $allowed " in *" - "*) ;; *) verdict='DECLINED wrote nothing; see the agent log' ;; esac
+		elif [ "$allowed" = - ]; then
+			verdict="MISS     wrote to [$shown], wanted nothing"
 		else
-			stray=$(printf '%s\n' "$landed" | grep -v -x -F -- "$(matches "$landed" "$allowed")" | sed '/^$/d' || true)
+			stray=$(printf '%s\n' "$landed" | grep -v -x -F -- "$(matches "$landed" "$patterns")" | sed '/^$/d' || true)
 			[ -z "$stray" ] || verdict="MISS     landed in [$shown], allowed $allowed"
 			if [ -z "$verdict" ] && [ "$required" != - ]; then
 				for p in $required; do

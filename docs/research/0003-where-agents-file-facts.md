@@ -32,14 +32,16 @@ a changelog entry, with things that do not exist. The harness therefore says so 
 
 Neither the model nor the agent changes this much. On the templates alone, Gemini 3.8 Flash under
 `agy`, which reads `AGENTS.md` itself with no `CLAUDE.md` alias to follow, and DeepSeek Flash under
-Claude Code each placed 11 of 12 and kept every rule. Each miss followed a passage of the kit that
-the scenario does not allow for. DeepSeek put the 25 MB cap and its reason in the specification
-alone, citing the record template's note that a record with only one option is usually a misfiled
-specification entry. Gemini declined the MySQL history, citing the map's rule 5 ("No history or
-account of how you got there, in documents") and the template's warning against a record
-reconstructed years afterwards. The map's row for "was X tried?" and `ADOPTING.md` Step 2, which
-converts old reasoning into records, support the scenarios' answers instead; the kit does not say
-which reading wins.
+Claude Code each kept every rule, and placed 11 of 12 as the scenarios then stood and 12 of 12 as
+they stand now. Each miss followed a passage of the kit that the scenario did not allow for.
+DeepSeek put the 25 MB cap and its reason in the specification alone, citing the record template's
+note that a record with only one option is usually a misfiled specification entry. Gemini declined
+the MySQL history, citing the map's rule 5 ("No history or account of how you got there, in
+documents") and the template's warning against a record reconstructed years afterwards. The map's
+row for "was X tried?" and `ADOPTING.md` Step 2, which converts old reasoning into records, support
+a decision record instead. Since the kit's text supports both readings in each case, the scenarios
+now accept both: the rule-and-reason scenario requires only the specification, and the history may
+be left unwritten.
 
 ## Evidence
 
@@ -130,8 +132,6 @@ documents both.
 - Whether placement holds across runs: each scenario here ran once. Repeating each several times
   would give a rate rather than a sample.
 - Whether it holds for other agents: `agy` is the only one tried that reads `AGENTS.md` without a
-  `CLAUDE.md` alias, with one model, once.
-- Which reading of the rule-and-reason and history scenarios the kit intends. Both misses on
-  2026-11-17 follow passages of the kit, and settling them means changing a scenario or a passage.
-- How placement compares when scored against each repository's own map rather than the template's;
-  every miss here was a repository-specific choice the template expectations did not know.
+  `CLAUDE.md` alias, with one model, once.- How placement compares when scored against each
+  repository's own map rather than the template's; every miss here was a repository-specific choice
+  the template expectations did not know.
