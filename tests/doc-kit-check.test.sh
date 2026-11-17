@@ -483,6 +483,20 @@ else
 fi
 
 fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+printf '\n## Confirmation\n\nA test pins `a|b`,\n  and its wrapped line.\n\nA second paragraph.\n' \
+	>>docs/decisions/0001-a-record.md
+if sh tools/doc-kit-index-decisions.sh &&
+	grep -qF '`A test pins a\|b, and its wrapped line.`' docs/decisions/README.md &&
+	! grep -qF 'second paragraph' docs/decisions/README.md; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	echo "not ok - index generator joins a Confirmation's wrapped lines"
+fi
+
+fixture
 mkdir -p tools empty
 cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 if sh tools/doc-kit-index-decisions.sh empty.md empty && grep -qF '_none_' empty.md; then

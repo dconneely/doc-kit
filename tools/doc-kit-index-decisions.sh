@@ -66,6 +66,7 @@ awk '
 		if (base ~ /^0000-/ || base == "README.md") { skip = 1; next }
 		skip = 0
 		status = ""; date = ""; deciders = ""; title = ""; num = ""; confirm = ""
+		confirm_text = ""; confirm_done = 0
 		in_yaml = 0; in_confirm = 0
 	}
 	skip { next }
@@ -92,9 +93,14 @@ awk '
 	in_confirm && /^## / {
 		in_confirm = 0
 	}
-	in_confirm && confirm == "" && $0 !~ /^[ \t]*$/ && $0 !~ /^<!--/ && $0 !~ /^{/ {
-		c = $0; gsub(/`/, "", c)
-		confirm = "`" c "`"
+	# The first paragraph of the Confirmation, its wrapped lines joined.
+	in_confirm && confirm_text != "" && $0 ~ /^[ \t]*$/ {
+		confirm_done = 1
+	}
+	in_confirm && !confirm_done && $0 !~ /^[ \t]*$/ && $0 !~ /^<!--/ && $0 !~ /^{/ {
+		c = $0; gsub(/`/, "", c); gsub(/\|/, "\\|", c); sub(/^[ \t]+/, "", c)
+		confirm_text = (confirm_text == "" ? c : confirm_text " " c)
+		confirm = "`" confirm_text "`"
 	}
 	END {
 		flush()
