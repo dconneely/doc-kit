@@ -577,9 +577,11 @@ check_plan() {
 	# One awk pass: `done N` for a heading marked complete, `type N` for an entry (a `##` heading)
 	# with no valid type tag beneath it, `example N` for the template's example entry. Lowercase
 	# "done" counts only when set off as a marker - "(done)", "- done" - so a title like "Define
-	# done" passes.
+	# done" passes. A fenced block, such as the entry format shown in a preamble, holds no entries.
 	hits=$(awk '
 		function flush() { if (h && !t) print "type " h }
+		/^ ? ? ?(```|~~~)/ { fenced = !fenced; next }
+		fenced { next }
 		/^## Short title, imperative$/ { print "example " NR }
 		/^#+ / {
 			l = tolower($0)

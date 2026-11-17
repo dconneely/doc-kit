@@ -16,6 +16,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 - `ADOPTING.md` says every `0000-template.md` keeps its comment, including the plan and how-to
   templates. A copied template that lost its comment can be restored from the kit.
+- `tools/doc-kit-check.sh plan` skips fenced code blocks. An entry format shown in a fenced block in
+  the plan's preamble was reported as the template's example entry, or as an entry with no type tag.
 
 ## [0.10.0] - 2026-11-13
 

@@ -560,6 +560,10 @@ printf '\n## Short title, imperative\n\n**Type:** feature\n\nOne paragraph.\n' >
 expect "the template's example entry fails" 1 "docs/plan.md:9 is the template's example entry" plan
 
 fixture
+printf '\n```markdown\n## Short title, imperative\n\nOne paragraph, untagged.\n```\n' >>docs/plan.md
+expect "an entry shown in a fenced block is not an entry" 0 "checks passed" plan
+
+fixture
 printf '\n## Bare tag\n\n**Type:** bug\n\nOne paragraph.\n' >>docs/plan.md
 expect "type tag alone on its line passes" 0 "checks passed" plan
 
