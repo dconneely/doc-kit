@@ -12,6 +12,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   research template and section 3.4: a note states the current answer, its confidence included. An
   adopted map can change the row to match.
 
+### Fixed
+
+- `ADOPTING.md` says every `0000-template.md` keeps its comment, including the plan and how-to
+  templates. A copied template that lost its comment can be restored from the kit.
+
 ## [0.10.0] - 2026-11-13
 
 ### Changed
