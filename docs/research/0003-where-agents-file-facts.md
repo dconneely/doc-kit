@@ -2,9 +2,9 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-17. Most scenarios ran
+Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-18. Most scenarios ran
 once per repository and model, a sample rather than a rate; on the templates alone, two models ran
-each scenario three times.
+each scenario three times, one of them under two agents.
 
 ## Finding
 
@@ -33,9 +33,11 @@ a changelog entry, with things that do not exist. The harness therefore says so 
 
 The agent matters less than the model. On the templates alone, Gemini 3.8 Flash under `agy`, which
 reads `AGENTS.md` itself with no `CLAUDE.md` alias to follow, and DeepSeek Flash under Claude Code
-placed 71 of 72 sessions across three runs each and kept the rules in 71. GPT-OSS 120B under `agy`
-did not: it placed no research finding where the map says, and broke the rules in every decision
-session, twice leaving the index stale and once numbering a record `0000`.
+placed 71 of 72 sessions across three runs each and kept the rules in 71. DeepSeek Flash under
+OpenCode, which also reads `AGENTS.md` itself, placed 36 of 36 and kept the rules in 35; the one
+break, a stale index, is the same one Gemini made. GPT-OSS 120B under `agy` did not: it placed no
+research finding where the map says, and broke the rules in every decision session, twice leaving
+the index stale and once numbering a record `0000`.
 
 In single runs before the scenarios changed, Gemini and DeepSeek each placed 11 of 12. Each miss
 followed a passage of the kit that the scenario did not allow for. DeepSeek put the 25 MB cap and
@@ -130,6 +132,17 @@ reported no capacity for the model (HTTP 503) and the harness stopped. Decisions
 kept the rules 0 of 3; quirks 3 of 3 on both; research placed 0 of 3, in a new
 `docs/sources/api-limits.md` twice and in the specification once; the one plan session declined.
 
+The same templates, harness as of `c945c28`, 2026-11-18, OpenCode 2.3.2 as
+`opencode run --standalone --archived --auto -m deepseek/deepseek-flash#low`, with
+`OPENCODE_DISABLE_CLAUDE_CODE=1` and a configuration that allows the index generator and denies
+every other shell command and every path outside the repository. The logs do not show whether the
+low effort was applied. One run: 12 of 12 placed, 12 of 12 rules kept. Three runs: 36 of 36 placed,
+35 of 36 rules kept. The break was a history record whose index was not regenerated: the session's
+first shell command, an unrelated one, was refused, and it ended by telling the user to run the
+generator rather than trying it. Most other sessions also had a shell command refused and carried
+on. All three rule-and-reason sessions in the repeated runs put the cap in the specification alone;
+the single run also wrote a decision record.
+
 ## Dead ends
 
 Running five repositories in parallel exhausted the account's usage limit mid-run, and every session
@@ -141,12 +154,19 @@ refused, so the session failed the rules for the harness's reason. On Windows, C
 generator through its PowerShell tool, so a `Bash(...)` permission alone does not match; the harness
 documents both.
 
+On Windows, `opencode run` started from PowerShell worked in the home directory rather than the
+current one, so it read neither the repository's `AGENTS.md` nor its permission rules, and wrote its
+note outside the repository. It takes its directory from `PWD`, which PowerShell does not set and
+`sh` does; the harness runs agents from `sh`, and its usage notes say so.
+
 ## Open questions
 
 - Whether placement holds across runs for Claude models and in customised repositories: only Gemini
   Flash and DeepSeek Flash, on the templates alone, ran each scenario three times.
 - How GPT-OSS 120B scores over a full run: its run stopped after ten of the 36 sessions.
-- Whether it holds for other agents: `agy` is the only one tried that reads `AGENTS.md` without a
-  `CLAUDE.md` alias, with one model, once.- How placement compares when scored against each
-  repository's own map rather than the template's; every miss here was a repository-specific choice
-  the template expectations did not know.
+- Whether it holds for other agents: `agy` and OpenCode are the only ones tried that read
+  `AGENTS.md` without a `CLAUDE.md` alias, on the templates alone.
+- Whether an agent refused one shell command still tries the index generator: one OpenCode session
+  did not, and nothing yet shows how often.
+- How placement compares when scored against each repository's own map rather than the template's;
+  every miss here was a repository-specific choice the template expectations did not know.

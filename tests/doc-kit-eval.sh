@@ -10,6 +10,11 @@
 #
 #         The agent must be allowed to run the index generator, or every new decision record fails
 #         the rules on a stale index; on Windows, Claude runs it through its PowerShell tool.
+#         For OpenCode, use "opencode run --standalone --auto -m PROVIDER/MODEL" with
+#         OPENCODE_CONFIG naming a config whose permissions deny external_directory and every shell
+#         command but the generator, and OPENCODE_DISABLE_CLAUDE_CODE=1, or it also loads
+#         ~/.claude/CLAUDE.md. On Windows it takes its directory from PWD, which sh sets; without
+#         PWD it works in the home directory.
 #
 #         DOC_KIT_EVAL_BASE  a repository to start from, by path or URL (default: an empty one)
 #         DOC_KIT_EVAL_OUT   a directory to keep each session's agent log and diff in, with the
