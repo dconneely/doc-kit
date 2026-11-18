@@ -25,6 +25,10 @@ Check the target's `git status` first. Anything already uncommitted there isn't 
 keep it separate from what you touch, so it isn't swept into a summary or a blanket `git add -A`. A
 person would notice a dirty working tree unprompted; an agent needs telling.
 
+Keep the adoption's changes apart from any the target's own tooling makes. If its hooks or
+formatters change files the adoption did not touch, stop and report those changes rather than
+including them.
+
 ## The procedure
 
 `ADOPTING.md` is the procedure - read it and follow Steps 0-5 in order. Don't work from memory of
@@ -45,7 +49,9 @@ treat it as a pointer to this procedure and `ADOPTING.md`, not as a separate spe
    the target. Present the inventory and stop.
 2. **Part 2, in the target.** Start a session rooted in the target, so its `AGENTS.md`/`CLAUDE.md`
    load automatically. Read the kit's `ADOPTING.md` and this skill from the kit path. Execute the
-   approved dispositions, finish Step 4 and run Step 5.
+   approved dispositions, finish Step 4 and run Step 5. A session rooted in the target may be unable
+   to read outside it: start it with read access to the kit (in Claude Code, `--add-dir <kit>`). If
+   that also grants writing, the rule above still holds - nothing in the kit changes.
 
 If the target has no instruction files of its own, one session may do both. The rule is the same:
 read what exists, and follow it. If the session is already rooted in the target, its instruction
@@ -77,6 +83,10 @@ Real adoptions span weeks and get interrupted. Before starting, check whether
 **A target with a `DOC-MAP.md` adopted an earlier version. Do not copy templates over its map, plan
 or specification.** Read the kit's `CHANGELOG.md` from the version its adoption record names through
 the current one, inventory what the changes touch, write the worksheet, and stop at the inventory.
+For each copied tool or template the changes touch, compare the target's copy with the kit's at the
+version it adopted: a difference is a local change, to keep or offer to the kit, never to overwrite
+unremarked. When fixing links to moved files, change pointers, never a statement of what was true
+then (`ADOPTING.md` Step 4b).
 
 The worksheet _is_ the state. Keeping it accurate matters more than speed - the next session has
 nothing else to go on.

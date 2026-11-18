@@ -135,6 +135,20 @@ sed -i.bak 's/^## Artefacts$/## Artifacts/' DOC-MAP.md
 expect "another spelling of the Artefacts heading fails" 1 "the artefacts table names nothing" map
 
 fixture
+sed -i.bak 's/^## Artefacts$/## Artifacts/' DOC-MAP.md
+expect "the old Artifacts heading is named in the hint" 1 "rename the '## Artifacts' heading" map
+
+fixture
+sed -i.bak 's/^## Artefacts$/## Artifacts/' DOC-MAP.md
+echo x >notes.md
+expect "without an artefacts table, only that is reported" 1 "doc-kit: 1 failure(s)" map
+
+fixture
+sed -i.bak 's/^## Artefacts$/## Artifacts/' DOC-MAP.md
+echo x >docs/decisions.md
+expect "without an artefacts table, a file beside its directory still fails" 1 "FAIL [map] docs/decisions.md sits beside docs/decisions/" map
+
+fixture
 echo x >notes.md
 expect "unmapped file fails" 1 "FAIL [map] notes.md is not named in the map" map
 

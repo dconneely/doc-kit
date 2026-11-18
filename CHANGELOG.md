@@ -11,6 +11,14 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - Research notes are `rewritten in place` in the template map, not `append-only`, matching the
   research template and section 3.4: a note states the current answer, its confidence included. An
   adopted map can change the row to match.
+- `ADOPTING.md` and the `doc-kit-adopt` skill cover four things agents got wrong when re-adopting
+  the kit: a session rooted in the target needs read access to the kit; a move changes links, never
+  a statement of what was true then; a copied tool or template is compared with the version taken
+  before it is replaced, so a local change is not lost; and changes the target's own hooks or
+  formatters make stay out of the adoption's.
+- `tools/doc-kit-check.sh map` reports a map with no artefacts table once, naming the old
+  `## Artifacts` heading when that is the cause, instead of also reporting every documentation file
+  as unmapped.
 
 ### Fixed
 

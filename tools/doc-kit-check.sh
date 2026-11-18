@@ -154,7 +154,48 @@ check_map() {
 	lifes=$(table_paths '## Lifecycle' | norm | sort)
 	lays=$(layout_paths | norm | sort)
 
-	[ -n "$arts" ] || fail "the artefacts table names nothing" "§2.2 - is the heading exactly '## Artefacts'?"
+	# The documentation files. Files below the conventional archive other than its own README.md
+	# (§5.1), the kit's templates (§2.8), and vendored files (§1) are not documentation files; an
+	# archive elsewhere is covered by its map entry. Split on newlines only, so a path may contain
+	# spaces.
+	files=$(find . -name '*.md' ! -path './.git/*' \
+		\( ! -path './docs/archive/*' -o -path './docs/archive/README.md' \) | sed 's:^\./::' |
+		not_templates | sort)
+
+	# §2.6 - name.md never sits beside a directory name/: the directory's entry point is
+	# name/README.md. A vendored file is not documentation (§1); a gitignored one is advisory (§2.9).
+	set -f
+	oldifs=$IFS
+	beside=''
+	IFS=$NL
+	for f in $files; do
+		[ ! -d "${f%.md}" ] || beside="$beside$f$NL"
+	done
+	vendored=$(printf '%s' "$beside" | vendored_of)
+	ignored=$(printf '%s' "$beside" | ignored_of)
+	for m in $beside; do
+		d=${m%.md}
+		if within "$vendored" "$m"; then
+			continue
+		elif within "$ignored" "$m"; then
+			warn "$m sits beside $d/ (gitignored)" "§2.9 - advisory; move it to $d/README.md"
+		else
+			fail "$m sits beside $d/" "§2.6 - move it to $d/README.md, or give it another name"
+		fi
+	done
+	IFS=$oldifs
+	set +f
+
+	# The checks below read the artefacts table, so without one they report only noise - every
+	# documentation file unmapped.
+	if [ -z "$arts" ]; then
+		if grep -q '^## Artifacts *$' "$MAP"; then
+			fail "the artefacts table names nothing" "§2.2 - rename the '## Artifacts' heading '## Artefacts'"
+		else
+			fail "the artefacts table names nothing" "§2.2 - is the heading exactly '## Artefacts'?"
+		fi
+		return
+	fi
 
 	# §2.2 - all three lists name the same set, artefacts table authoritative.
 	# Globbing off: these lists contain patterns like docs/decisions/*.md, and an
@@ -183,15 +224,7 @@ check_map() {
 		set -f
 	done
 
-	# §2.4 - every documentation file appears in the map. Files below the conventional archive
-	# other than its own README.md (§5.1), the kit's templates (§2.8), and vendored files (§1) are not
-	# documentation files; an archive elsewhere is covered by its map entry. Split on newlines
-	# only, so a path may contain spaces.
-	set +f
-	files=$(find . -name '*.md' ! -path './.git/*' \
-		\( ! -path './docs/archive/*' -o -path './docs/archive/README.md' \) | sed 's:^\./::' |
-		not_templates | sort)
-	set -f
+	# §2.4 - every documentation file appears in the map.
 	unmapped=''
 	oldifs=$IFS
 	IFS=$NL
@@ -226,29 +259,6 @@ check_map() {
 	'); do
 		IFS=$oldifs
 		warn "$g is not named in the map (gitignored)" "§2.9 - advisory; add a row to map it"
-	done
-	IFS=$oldifs
-	set +f
-
-	# §2.6 - name.md never sits beside a directory name/: the directory's entry point is
-	# name/README.md. A vendored file is not documentation (§1); a gitignored one is advisory (§2.9).
-	set -f
-	beside=''
-	IFS=$NL
-	for f in $files; do
-		[ ! -d "${f%.md}" ] || beside="$beside$f$NL"
-	done
-	vendored=$(printf '%s' "$beside" | vendored_of)
-	ignored=$(printf '%s' "$beside" | ignored_of)
-	for m in $beside; do
-		d=${m%.md}
-		if within "$vendored" "$m"; then
-			continue
-		elif within "$ignored" "$m"; then
-			warn "$m sits beside $d/ (gitignored)" "§2.9 - advisory; move it to $d/README.md"
-		else
-			fail "$m sits beside $d/" "§2.6 - move it to $d/README.md, or give it another name"
-		fi
 	done
 	IFS=$oldifs
 	set +f

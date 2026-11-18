@@ -168,7 +168,9 @@ supported path and running anything is optional (ADR-0005).
 migration tooling, no obligation to follow this repository (ADR-0010). Most of it diverges within
 the hour anyway - your specification describes your system. If you ever want to know what has
 changed here since, the kit's `CHANGELOG.md` is the whole mechanism, and applying any of it is your
-choice by hand.
+choice by hand. Before replacing a copied tool or template with a newer one, compare your copy with
+the version you took: anything changed since is yours, and a replacement discards it unless you
+carry it over or offer it to the kit.
 
 A map that names a file which does not exist is worse than no map, because it is believed. For each
 artefact you kept:
@@ -281,7 +283,9 @@ every point rather than only at the end.
 
 **Split the session when the target has its own agent instructions.** Steps 0-4a can run from the
 kit; write the plan and worksheet into the target, because they are the handoff. Start a session
-rooted in the target for 4b-5, so its `AGENTS.md` or `CLAUDE.md` loads automatically.
+rooted in the target for 4b-5, so its `AGENTS.md` or `CLAUDE.md` loads automatically, and give it
+read access to the kit's path: a session rooted in one repository may be unable to read another, and
+4b-5 refer back to this file.
 
 ### 4a - Build the inventory
 
@@ -328,6 +332,11 @@ do not follow renames.
 `docs/archive/` is renamed (`old-readme.md`, say), because that name is the archive's own page
 (`docs/spec.md` §5.5), as Step 0 renames an existing plan. Renaming is simpler than any rule for
 telling the two apart.
+
+**A move changes pointers, not history.** Fix every link and path that leads a reader to a moved
+file. Leave a statement of what was true at the time - a changelog entry, or a record saying where a
+file was when it was decided - naming the path it named then: rewritten to the new path, it becomes
+false.
 
 Get the owner to review the dispositions before acting on them. It is the cheapest point at which
 someone who remembers why a document exists can say so.
