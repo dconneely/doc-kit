@@ -17,6 +17,18 @@ changes neither where facts land nor whether the rules are kept is a candidate f
 whose removal changes results stays, with its point and its reason. The harness and its scenarios
 need work first: [`find-text-agents-do-not-need.md`](find-text-agents-do-not-need.md).
 
+## Close the re-adoption gaps an agent ran into
+
+**Type:** docs - **Importance:** medium - **Effort:** medium
+
+Research note 0004 found four gaps in `ADOPTING.md` and the `doc-kit-adopt` skill when agents
+re-adopted the kit in four repositories. Say that a session rooted in the target must be given
+access to the kit's path; that fixing links changes pointers, never statements of what was true
+then; that a copied tool or template is compared with the kit's before it is replaced, so a local
+change is kept or offered to the kit; and that a re-adoption's commit stays apart from changes the
+target's own hooks or formatters make. A checker message naming the old `## Artifacts` heading,
+rather than reporting every file unmapped, belongs with it.
+
 ## Evaluate the adoption procedure
 
 **Type:** docs - **Importance:** low - **Effort:** high
