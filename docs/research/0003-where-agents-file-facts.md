@@ -2,9 +2,10 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-18. Most scenarios ran
-once per repository and model, a sample rather than a rate; on the templates alone, two models ran
-each scenario three times, one of them under two agents.
+Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-19. Most scenarios ran
+once per repository and model, a sample rather than a rate; on the templates alone, four models ran
+each scenario three times, one of them under two agents, and Haiku also did in two customised
+repositories.
 
 ## Finding
 
@@ -19,6 +20,16 @@ The "Deliberately not here" section of a customised map steers as strongly as th
 In play-bazlang, which records that it has no glossary and that terms are defined where each is
 introduced, both models defined a new term in `docs/spec/mcp.md`; where its map records no how-to
 guides, both created a single `docs/howto.md` and mapped it, as the growth rule (ADR-0014) allows.
+
+Over three runs in play-bazlang and identigon, Haiku kept the rules in all 72 sessions and placed 7
+of 12 scenarios in every run in each. Most misses followed the repository's map: where it leaves out
+the template's home for a term, a how-to or a known defect, sessions used the home the map names
+instead, or declined, and both are readings of a map that says the artefact is absent. Declining the
+how-to in play-bazlang differs from the single runs, which created one. Three sessions declined an
+invented fact foreign to the project - a vendor API's rate limit, a proxy's upload cap, an HTTP
+status in a repository with no HTTP - although the prompt says to treat it as true. Two were real
+misses: a rule and its reason filed as a quirk, and the same rule in a decision record with nothing
+in the specification.
 
 Those eight scenarios each have one obvious home, so near-perfect scores there are a ceiling of the
 test. Four harder ones hold up too. A rule with its reason is split into the specification and a
@@ -35,9 +46,11 @@ The agent matters less than the model. On the templates alone, Gemini 3.8 Flash 
 reads `AGENTS.md` itself with no `CLAUDE.md` alias to follow, and DeepSeek Flash under Claude Code
 placed 71 of 72 sessions across three runs each and kept the rules in 71. DeepSeek Flash under
 OpenCode, which also reads `AGENTS.md` itself, placed 36 of 36 and kept the rules in 35; the one
-break, a stale index, is the same one Gemini made. GPT-OSS 120B under `agy` did not: it placed no
-research finding where the map says, and broke the rules in every decision session, twice leaving
-the index stale and once numbering a record `0000`.
+break, a stale index, is the same one Gemini made. Claude Haiku under Claude Code placed 36 of 36
+and kept the rules in 36. GPT-OSS 120B under `agy` did not: it placed 19 of 36 sessions and kept the
+rules in 33, all three breaks in decision sessions. It placed no research finding where the map
+says, often described where a fact belonged and what to write without writing it, and three times
+out of three did not recognise the plan scenario's fact as a fact to record.
 
 In single runs before the scenarios changed, Gemini and DeepSeek each placed 11 of 12. Each miss
 followed a passage of the kit that the scenario did not allow for. DeepSeek put the 25 MB cap and
@@ -127,10 +140,22 @@ above: 35 of 36 sessions placed, 36 of 36 rules kept. The miss filed the kept CS
 `docs/quirks.md` and also as a plan entry to restore ISO dates once the customer import no longer
 needs them; the quirk's "Expires when" already holds that trigger, so the fact had two homes. Gemini
 3.8 Flash as above: 36 of 36 placed, 35 of 36 rules kept; the break was a decision record whose
-index was not regenerated. `agy --model gpt-oss-120b-medium`: ten sessions before the server
-reported no capacity for the model (HTTP 503) and the harness stopped. Decisions placed 3 of 3 but
-kept the rules 0 of 3; quirks 3 of 3 on both; research placed 0 of 3, in a new
-`docs/sources/api-limits.md` twice and in the specification once; the one plan session declined.
+index was not regenerated. A run with `agy --model gpt-oss-120b-medium` stopped after ten sessions
+when the server reported no capacity for the model (HTTP 503).
+
+GPT-OSS again, harness as of `4b63972`, 2026-11-19, `agy` 1.5.10 with
+`--model gpt-oss-120b-medium --sandbox`, three runs: 19 of 36 sessions placed, 33 of 36 rules kept,
+3 of 12 scenarios placed in every run. Every decision session broke the rules: two left the index
+stale, and one numbered its record `0001`, already taken; one record was named by date,
+`20231119-sqlite-choice.md`. No research finding went to `docs/research/`: twice to
+`docs/sources/README.md`, once also to the specification, and once to a new
+`docs/sources/api-limits.md`. All three plan sessions asked for the fact to record, not recognising
+"Later, the uploader needs retry with backoff" as one. Five sessions - two changelog, two
+specification, one rule and its reason - described the destination and the text to add, then wrote
+nothing. Two history sessions logged the move in the changelog alone, one kept defect went to
+`docs/testing.md` as well as the quirks, one rule and its reason went to the quirks as well as the
+specification, and one no-home fact went to the quirks. The glossary, how-to and correction
+scenarios placed in every run.
 
 The same templates, harness as of `c945c28`, 2026-11-18, OpenCode 2.3.2 as
 `opencode run --standalone --archived --auto -m deepseek/deepseek-flash#low`, with
@@ -142,6 +167,26 @@ first shell command, an unrelated one, was refused, and it ended by telling the 
 generator rather than trying it. Most other sessions also had a shell command refused and carried
 on. All three rule-and-reason sessions in the repeated runs put the cap in the specification alone;
 the single run also wrote a decision record.
+
+Harness as of `4b63972`, 2026-11-19,
+`claude -p --permission-mode acceptEdits --model claude-haiku-5-5` with the index generator allowed,
+`DOC_KIT_EVAL_RUNS=3`:
+
+| Repository                | Base commit | Placed in every run | Sessions keeping the rules |
+| ------------------------- | ----------- | ------------------- | -------------------------- |
+| templates on an empty one | -           | 12 / 12             | 36 / 36                    |
+| `dconneely/play-bazlang`  | `37697b1`   | 7 / 12              | 36 / 36                    |
+| `identigon/identigon`     | `1a27658`   | 7 / 12              | 36 / 36                    |
+
+On the templates, the rule and its reason went to the specification alone once and with a decision
+record twice, and the history once also took a changelog entry; the scenarios allow both. In
+play-bazlang the term was declined twice and put in `docs/spec/mcp.md` once, and the how-to declined
+three times; the research finding and the upload cap were each declined once, the cap filed once in
+`docs/quirks.md`, and the correction missed once (see Dead ends). In identigon the kept defect went
+to a specification member with a decision record three times, twice also to `docs/testing.md`; the
+term went to a specification member and the how-to was declined, three times each; the 413 rule was
+declined once, as fitting none of its three members; and the upload cap went once to a decision
+record alone.
 
 ## Dead ends
 
@@ -159,14 +204,22 @@ current one, so it read neither the repository's `AGENTS.md` nor its permission 
 note outside the repository. It takes its directory from `PWD`, which PowerShell does not set and
 `sh` does; the harness runs agents from `sh`, and its usage notes say so.
 
+The correction scenario seeded its 5 MB limit by appending to `docs/spec.md`, which in a repository
+whose specification is a tree creates an unmapped file beside `docs/spec/`. In play-bazlang one
+session logged the change only and asked whether to delete that file, one edited it and one edited
+`docs/spec/mcp.md`; in identigon all three edited it and passed. Neither repository's correction
+result says anything about its map. The seed now goes to the specification's entry point.
+
 ## Open questions
 
-- Whether placement holds across runs for Claude models and in customised repositories: only Gemini
-  Flash and DeepSeek Flash, on the templates alone, ran each scenario three times.
-- How GPT-OSS 120B scores over a full run: its run stopped after ten of the 36 sessions.
+- Whether placement holds across runs for Opus and Sonnet, and in other customised repositories:
+  only Haiku ran three times in a customised one.
+- How to make an agent record an invented fact foreign to the project rather than decline it: the
+  prompt's instruction to treat it as true did not stop three Haiku sessions.
 - Whether it holds for other agents: `agy` and OpenCode are the only ones tried that read
   `AGENTS.md` without a `CLAUDE.md` alias, on the templates alone.
 - Whether an agent refused one shell command still tries the index generator: one OpenCode session
   did not, and nothing yet shows how often.
 - How placement compares when scored against each repository's own map rather than the template's;
-  every miss here was a repository-specific choice the template expectations did not know.
+  most misses in the customised repositories followed that map, which the template's expectations do
+  not know.
