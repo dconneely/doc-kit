@@ -27,10 +27,11 @@
 
 4. **Measure the baseline.**
 
-   Run the current text several times. `docs/research/0003-where-agents-file-facts.md` has single
-   runs, some from before 0.7.1 changed the stanza. Eight of the twelve scenarios score at or near
-   full marks, so they can show only harm; the hard scenarios and those from step 2 are the ones
-   that tell cuts apart.
+   Run the current text several times. `docs/research/0003-where-agents-file-facts.md` has three
+   runs on the templates for several models, and on two customised maps for Haiku; rerun the
+   baseline with the pinned model on the kit as it stands. Eight of the twelve scenarios score at or
+   near full marks, so they can show only harm; the hard scenarios and those from step 2 are the
+   ones that tell cuts apart.
 
 5. **Cut in scratch copies.**
 
