@@ -164,9 +164,13 @@ every other shell command and every path outside the repository. The logs do not
 low effort was applied. One run: 12 of 12 placed, 12 of 12 rules kept. Three runs: 36 of 36 placed,
 35 of 36 rules kept. The break was a history record whose index was not regenerated: the session's
 first shell command, an unrelated one, was refused, and it ended by telling the user to run the
-generator rather than trying it. Most other sessions also had a shell command refused and carried
-on. All three rule-and-reason sessions in the repeated runs put the cap in the specification alone;
-the single run also wrote a decision record.
+generator rather than trying it. Across both OpenCode runs, all nine sessions that wrote a decision
+record had a shell command refused; in six the refusal came before the generator was due, and five
+of those six ran it anyway. A refusal is not the only cause of a stale index: Gemini's came with
+nothing refused, and GPT-OSS never ran the generator. Only OpenCode's logs show refusals - Claude
+Code's hold only its final reply, and `agy` refused nothing. All three rule-and-reason sessions in
+the repeated runs put the cap in the specification alone; the single run also wrote a decision
+record.
 
 Harness as of `4b63972`, 2026-11-19,
 `claude -p --permission-mode acceptEdits --model claude-haiku-5-5` with the index generator allowed,
@@ -218,8 +222,8 @@ result says anything about its map. The seed now goes to the specification's ent
   prompt's instruction to treat it as true did not stop three Haiku sessions.
 - Whether it holds for other agents: `agy` and OpenCode are the only ones tried that read
   `AGENTS.md` without a `CLAUDE.md` alias, on the templates alone.
-- Whether an agent refused one shell command still tries the index generator: one OpenCode session
-  did not, and nothing yet shows how often.
+- How often a refused shell command stops an agent running the index generator: one of six OpenCode
+  sessions refused first did not, and no other agent's logs show refusals.
 - How placement compares when scored against each repository's own map rather than the template's;
   most misses in the customised repositories followed that map, which the template's expectations do
   not know.
