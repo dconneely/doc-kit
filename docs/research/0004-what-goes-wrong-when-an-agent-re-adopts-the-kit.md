@@ -2,8 +2,9 @@
 
 **Confidence:** medium
 
-Observed directly in the diffs of four re-adoptions on 2026-11-17, but each ran once, with one
-model, so it shows what can go wrong rather than how often.
+Observed directly in the diffs of four re-adoptions on 2026-11-17 and of eight sessions repeating
+two of them on 2026-11-19, with two models, each once: it shows what goes wrong and that the fixes
+held, not how often.
 
 ## Finding
 
@@ -32,19 +33,31 @@ An agent given a reviewed worksheet carries out a re-adoption: every row was don
    formatter change failed play-bazlang's CI after the re-adoption was pushed. The procedure says
    nothing about keeping a re-adoption's commit apart from changes the target's own tooling makes.
 
+With those four points added to `ADOPTING.md` and the skill, a second re-adoption of identigon and
+play-retroemu, from the commits before the first, avoided each gap with both DeepSeek and Haiku.
+Every Part 1 report said to start Part 2 with read access to the kit. No session rewrote a statement
+of what was true then; both identigon sessions left its records on consolidating the documentation
+and on the site repository alone for that reason. Every play-retroemu session found the generator's
+local change, recorded that the kit now carries it, and replaced the tool with nothing lost. In
+identigon the formatter again reformatted about 50 unrelated Java files: Haiku stopped and asked,
+and DeepSeek reported them as separate, unstaged changes and carried on, where the skill says to
+stop. What the rule protects held in both: no change the formatter made entered the adoption's.
+Stronger wording is left until a session mixes them in, since one session cannot show whether
+DeepSeek would follow it.
+
 The worksheet-first gate worked as intended: the inventory surfaced every decision that needed the
 owner - five accepted records to reopen, research mutability, a checker false positive - before
 anything moved, and the sessions applied exactly the permissions recorded in it.
 
 ## Evidence
 
-Kit as of `93ab7a4`, 2026-11-17; the fenced-block checker fix was made while the sessions ran. Part
-1 - reading the changelog from each adoption record's version, the inventory and the worksheet - ran
-in a session rooted in the kit. Part 2 ran once per repository as `claude -p` pointed at DeepSeek's
-Anthropic-compatible endpoint, model `deepseek-flash`, high effort, `--permission-mode acceptEdits`,
-with `git mv`, `git status`, `git diff`, `git grep` and the repository's own `sh` tools allowed, and
-the worksheet's owner decisions in the prompt. Every changed line was then compared with its
-worksheet row.
+Kit as of 2026-11-17, 0.10.0 with some unreleased changes; the fenced-block checker fix was made
+while the sessions ran. Part 1 - reading the changelog from each adoption record's version, the
+inventory and the worksheet - ran in a session rooted in the kit. Part 2 ran once per repository as
+`claude -p` pointed at DeepSeek's Anthropic-compatible endpoint, model `deepseek-flash`, high
+effort, `--permission-mode acceptEdits`, with `git mv`, `git status`, `git diff`, `git grep` and the
+repository's own `sh` tools allowed, and the worksheet's owner decisions in the prompt. Every
+changed line was then compared with its worksheet row.
 
 | Repository                    | From  | Moves                                     | Result                                     |
 | ----------------------------- | ----- | ----------------------------------------- | ------------------------------------------ |
@@ -57,6 +70,30 @@ Each session stopped and asked when it could not read the kit, rather than worki
 it. In identigon it also reported, without fixing, a deviation in its adoption record made stale by
 the new tools, because the owner's permission covered paths and the kit version only.
 
+The repeat, kit as of 2026-11-19 with the four points added, in scratch clones of the kit and of
+each target, so neither real repository changed: identigon from the commit before its formatter
+change, and play-retroemu from the commit before its first re-adoption. Each model ran Part 1 rooted
+in its kit clone, told only to follow the skill, stop at the gate and say how to start Part 2; the
+owner's answers, the same as in the first run, were then added to each worksheet. Part 2 used the
+first run's prompt with the date and the kit path changed, and one addition: to run the repository's
+hooks on the files it changed, as a commit would. DeepSeek as above; Haiku as
+`claude -p --model claude-haiku-5-5`.
+
+| Gap                | DeepSeek, identigon       | Haiku, identigon          | DeepSeek, play-retroemu | Haiku, play-retroemu |
+| ------------------ | ------------------------- | ------------------------- | ----------------------- | -------------------- |
+| Kit access         | named in Part 1's report  | named                     | named                   | named                |
+| History kept       | yes                       | yes                       | yes                     | yes                  |
+| Copied tools       | compared in Part 1        | compared in Part 2        | local change found      | local change found   |
+| Hooks' own changes | reported, carried on      | stopped and asked         | none made               | none made            |
+| Checker at the end | 2 failures, both expected | 2 failures, both expected | 3, all expected         | 3, all expected      |
+
+The expected failures are files absent from a scratch clone: identigon's sibling repository, and
+play-retroemu's ignored or generated artefacts. Haiku left two lines of identigon's adoption
+record's deviation list naming the old paths, so they no longer describe the repository; DeepSeek
+updated one and reworded the other, which the move made no longer a deviation and which could have
+been deleted instead. Haiku also copied the plan template into play-retroemu during Part 1, which
+Part 1 does not do.
+
 ## Dead ends
 
 The checker's failure count misled. play-bazlang reported 87 failures and identigon 129, almost all
@@ -68,10 +105,13 @@ entry format shown in a fenced block.
 Checking a scratch clone of identigon reported its sibling paths `../identigon.github.io/*.md` as
 missing; they exist beside the real repository.
 
+The repeat first started play-retroemu from its 0.9.0 adoption, which predates the generator's local
+change, so Part 1 found nothing to keep. It was rerun from the commit before its first re-adoption.
+
 ## Open questions
 
-- Whether other models make the same mistakes: one model, one session per repository.
-- Whether fixing the four gaps in `ADOPTING.md` and the skill prevents them; a second re-adoption
-  after the fix would show it.
-- How a first adoption into a repository with messy documentation goes; these were re-adoptions of
-  repositories already shaped by the kit.
+Nothing outstanding. One question is left to the plan rather than answered here:
+
+- How a first adoption into a repository with messy documentation goes: these were re-adoptions of
+  repositories already shaped by the kit, and the plan entry "Evaluate the adoption procedure"
+  covers it.
