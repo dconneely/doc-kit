@@ -112,10 +112,13 @@ commit() {
 	git -C "$1" -c user.name=eval -c user.email=eval@example.invalid commit -q --allow-empty -m "$2"
 }
 
-# seed_limit DIR - give the specification an upload limit for the correction scenario to change
+# seed_limit DIR - give the specification an upload limit for the correction scenario to change, in
+# its entry point: docs/spec/README.md when the specification is a tree (section 2.6)
 seed_limit() {
+	spec=docs/spec.md
+	[ -f "$1/$spec" ] || [ ! -f "$1/docs/spec/README.md" ] || spec=docs/spec/README.md
 	printf '\n## Upload limit\n\nThe system rejects an upload larger than 5 MB with HTTP 413.\n' \
-		>>"$1/docs/spec.md"
+		>>"$1/$spec"
 	commit "$1" 'Specify the upload limit'
 }
 
