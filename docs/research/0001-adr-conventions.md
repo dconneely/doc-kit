@@ -105,13 +105,17 @@ convention this kit cites - see "Open questions".
 
 ## Open questions
 
+Nothing outstanding.
+
 Closed by [`0002-conventions-this-kit-cites.md`](0002-conventions-this-kit-cites.md): Nygard's
 original post, `adr-tools` numbering, and Keep a Changelog's categories were all checked and all
 proved accurate. Nygard's statuses turned out to be lowercase in the original, which supports
 ADR-0007 on a ground it had not claimed.
 
-- Whether MADR's front-matter should be adopted beyond `status`, `date` and `decision-makers`
-  remains open; `consulted` and `informed` were judged overhead for a small project rather than
-  wrong.
-- Whether the map should route anything to code comments, in-code Y-statements included: see
-  ADR-0012.
+The two questions this note left are settled elsewhere:
+
+- MADR's front-matter beyond `status`, `date` and `decision-makers`: `docs/spec.md` §3.1 permits
+  `consulted` and `informed` and requires neither, since they are overhead for a small project
+  rather than wrong.
+- What goes in code comments, in-code Y-statements included: ADR-0012 governs their tense and
+  volume, and a comment names the record or plan entry that holds a fuller reason.

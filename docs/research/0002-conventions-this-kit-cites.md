@@ -148,5 +148,5 @@ same as checking the artefact it generates.
 
 - Nothing outstanding. The genre's 2025 timeline is the one claim here still resting on a secondary
   source, and nothing in this kit depends on it.
-- MADR's `consulted` and `informed` fields remain unadopted by choice, not by evidence - carried
-  over from `0001-adr-conventions.md`.
+- MADR's `consulted` and `informed` fields are permitted and not required (`docs/spec.md` §3.1), by
+  choice, not by evidence.
