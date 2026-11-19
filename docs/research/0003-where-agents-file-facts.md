@@ -49,10 +49,11 @@ OpenCode, which also reads `AGENTS.md` itself, placed 36 of 36 and kept the rule
 break, a stale index, is the same one Gemini made. Claude Haiku under Claude Code placed 36 of 36
 and kept the rules in 36; Claude Sonnet under `agy` placed 35 of 36, and under Claude Code kept the
 rules in all nine sessions that write a decision record. GPT-OSS 120B under `agy` did not: it placed
-19 of 36 sessions and kept the rules in 33, all three breaks in decision sessions. It placed no
-research finding where the map says, often described where a fact belonged and what to write without
-writing it, and three times out of three did not recognise the plan scenario's fact as a fact to
-record.
+19 of 36 sessions and kept the rules in 33, all three breaks in decision sessions. Outside `agy`'s
+sandbox, every session that wrote a decision record left the index stale too, so the breaks would
+have happened without it. It placed no research finding where the map says, often described where a
+fact belonged and what to write without writing it, and three times out of three did not recognise
+the plan scenario's fact as a fact to record.
 
 In single runs before the scenarios changed, Gemini and DeepSeek each placed 11 of 12. Each miss
 followed a passage of the kit that the scenario did not allow for. DeepSeek put the 25 MB cap and
@@ -147,12 +148,13 @@ ten sessions when the server reported no capacity for the model (HTTP 503).
 GPT-OSS again, 2026-11-19, `agy` 1.5.10 with `--model gpt-oss-120b-medium --sandbox`, three runs: 19
 of 36 sessions placed, 33 of 36 rules kept, 3 of 12 scenarios placed in every run. Every decision
 session broke the rules: two left the index stale, and one numbered its record `0001`, already
-taken; one record was named by date, `20231119-sqlite-choice.md`. No research finding went to
-`docs/research/`: twice to `docs/sources/README.md`, once also to the specification, and once to a
-new `docs/sources/api-limits.md`. All three plan sessions asked for the fact to record, not
-recognising "Later, the uploader needs retry with backoff" as one. Five sessions - two changelog,
-two specification, one rule and its reason - described the destination and the text to add, then
-wrote nothing. Two history sessions logged the move in the changelog alone, one kept defect went to
+taken; one record was named by date, `20231119-sqlite-choice.md`, a placement miss, since a record's
+name starts with a four-digit number. No research finding went to `docs/research/`: twice to
+`docs/sources/README.md`, once also to the specification, and once to a new
+`docs/sources/api-limits.md`. All three plan sessions asked for the fact to record, not recognising
+"Later, the uploader needs retry with backoff" as one. Five sessions - two changelog, two
+specification, one rule and its reason - described the destination and the text to add, then wrote
+nothing. Two history sessions logged the move in the changelog alone, one kept defect went to
 `docs/testing.md` as well as the quirks, one rule and its reason went to the quirks as well as the
 specification, and one no-home fact went to the quirks. The glossary, how-to and correction
 scenarios placed in every run.
@@ -206,6 +208,17 @@ allowed, three runs of the decision, rule-and-reason and history scenarios: 9 of
 rules kept. Every decision and history session wrote a `proposed` record and regenerated the index;
 every rule and its reason went to the specification alone.
 
+GPT-OSS again for the rules, 2026-11-19, outside the sandbox: `agy` 1.5.12 with
+`--model gpt-oss-120b-medium --dangerously-skip-permissions`, a deny list for network, package,
+remote Git and deletion commands, and the repository added with `--add-dir`; three runs of the
+decision, rule-and-reason and history scenarios, one session at a time. 7 of 9 placed, 5 of 9 rules
+kept. All four sessions that wrote a decision record - three decisions and one history - left the
+index stale. Across the nine, GPT-OSS tried the generator once, as `powershell -File` on the `sh`
+script, which cannot run it; nothing was denied, and every command was a read-only listing, most of
+them of the repository. One decision record was named after the eval's token rather than numbered,
+and one rule and its reason went to `docs/quirks.md`; two history sessions wrote nothing, which the
+scenario allows.
+
 ## Dead ends
 
 Running five repositories in parallel exhausted the account's usage limit mid-run, and every session
@@ -222,12 +235,24 @@ current one, so it read neither the repository's `AGENTS.md` nor its permission 
 note outside the repository. It takes its directory from `PWD`, which PowerShell does not set and
 `sh` does; the harness runs agents from `sh`, and its usage notes say so.
 
-On Windows, `agy` 1.5.12 under `--sandbox` cannot start `sh`: it fails with
+On Windows, `agy` 1.5.12's terminal sandbox cannot start `sh`: it fails with
 `fatal error - NtCreateDirectoryObject ... 0xC0000022`, an access denial, so the index generator
 never runs. Sessions reported it as an exit code 0 with no change, or as exit code 1 followed by a
-hand-edited index. Gemini's three runs on 2026-11-17, under an earlier version's sandbox,
-regenerated the index, so the change probably came with an update; until it is fixed, the rule
-results of an `agy` run are void.
+hand-edited index. The sandbox is not only `--sandbox`'s: print mode starts in `auto` mode, which
+runs every command in it, so dropping the flag changes nothing. Gemini's three runs on 2026-11-17
+under 1.5.2 regenerated the index in the same mode, so the fault came with a later version.
+
+An allow list does not get around it. Under `--mode accept-edits`, commands run outside the sandbox
+and only those a rule allows run at all, since print mode cannot ask, but a denied command ends the
+session. With the generator alone allowed, GPT-OSS's two sessions ended at their first listing; with
+common read-only commands allowed too, listings in forms the list did not foresee - a pipeline,
+`pwsh -Command` - ended two of five with nothing written. Under `--dangerously-skip-permissions`,
+deny rules still hold and a denial is reported to the model, which carries on, so a deny list is the
+workable guard. `--settings` replaces the global permission lists for the session; on Windows a rule
+matches only the exact command line unless it uses `regex:`; and with non-workspace access off and
+no `--add-dir`, a session wrote its record into `agy`'s own state directory. A bare `ls -R`, aliased
+in that shell to a recursive listing tool, ran outside the repository and hung one session until the
+listing was stopped.
 
 The correction scenario seeded its 5 MB limit by appending to `docs/spec.md`, which in a repository
 whose specification is a tree creates an unmapped file beside `docs/spec/`. In play-bazlang one
@@ -239,9 +264,9 @@ result says anything about its map. The seed now goes to the specification's ent
 
 Nothing outstanding. These are left unanswered deliberately, each for the reason given:
 
-- Repeated runs for Opus, and in customised repositories other than play-bazlang and identigon: five
-  models agree on the templates and Haiku is stable in two customised maps, so more runs would add
-  little.
+- Repeated runs for Opus, and in customised repositories other than play-bazlang and identigon: four
+  of the five models run three times agree on the templates and Haiku is stable in two customised
+  maps, so more runs would add little.
 - How to make an agent record an invented fact foreign to the project rather than decline it:
   declining a fact the project cannot have is defensible, and such a miss is the scenario's, not the
   map's.
