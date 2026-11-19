@@ -3,7 +3,7 @@
 **Confidence:** medium
 
 Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-19. Most scenarios ran
-once per repository and model, a sample rather than a rate; on the templates alone, four models ran
+once per repository and model, a sample rather than a rate; on the templates alone, five models ran
 each scenario three times, one of them under two agents, and Haiku also did in two customised
 repositories.
 
@@ -47,10 +47,11 @@ reads `AGENTS.md` itself with no `CLAUDE.md` alias to follow, and DeepSeek Flash
 placed 71 of 72 sessions across three runs each and kept the rules in 71. DeepSeek Flash under
 OpenCode, which also reads `AGENTS.md` itself, placed 36 of 36 and kept the rules in 35; the one
 break, a stale index, is the same one Gemini made. Claude Haiku under Claude Code placed 36 of 36
-and kept the rules in 36. GPT-OSS 120B under `agy` did not: it placed 19 of 36 sessions and kept the
-rules in 33, all three breaks in decision sessions. It placed no research finding where the map
-says, often described where a fact belonged and what to write without writing it, and three times
-out of three did not recognise the plan scenario's fact as a fact to record.
+and kept the rules in 36, and Claude Sonnet under `agy` placed 35 of 36. GPT-OSS 120B under `agy`
+did not: it placed 19 of 36 sessions and kept the rules in 33, all three breaks in decision
+sessions. It placed no research finding where the map says, often described where a fact belonged
+and what to write without writing it, and three times out of three did not recognise the plan
+scenario's fact as a fact to record.
 
 In single runs before the scenarios changed, Gemini and DeepSeek each placed 11 of 12. Each miss
 followed a passage of the kit that the scenario did not allow for. DeepSeek put the 25 MB cap and
@@ -192,6 +193,14 @@ term went to a specification member and the how-to was declined, three times eac
 declined once, as fitting none of its three members; and the upload cap went once to a decision
 record alone.
 
+The same templates, harness as of `fb34d4c`, 2026-11-19, `agy` 1.5.12 with
+`--model claude-sonnet-5-5-low --sandbox`, three runs, in two parts because the account's quota ran
+out at the second history session; history then ran again from its first run. 35 of 36 sessions
+placed, 11 of 12 scenarios in every run; the miss filed the CSV-date defect in `docs/quirks.md` and
+also as a plan entry, as DeepSeek did once. 30 of 36 sessions kept the rules, and the six breaks
+were the six decision and history sessions, each leaving the index stale because the sandbox could
+not run `sh` (see Dead ends). The rule result says nothing about the model.
+
 ## Dead ends
 
 Running five repositories in parallel exhausted the account's usage limit mid-run, and every session
@@ -208,6 +217,13 @@ current one, so it read neither the repository's `AGENTS.md` nor its permission 
 note outside the repository. It takes its directory from `PWD`, which PowerShell does not set and
 `sh` does; the harness runs agents from `sh`, and its usage notes say so.
 
+On Windows, `agy` 1.5.12 under `--sandbox` cannot start `sh`: it fails with
+`fatal error - NtCreateDirectoryObject ... 0xC0000022`, an access denial, so the index generator
+never runs. Sessions reported it as an exit code 0 with no change, or as exit code 1 followed by a
+hand-edited index. Gemini's three runs on 2026-11-17, under an earlier version's sandbox,
+regenerated the index, so the change probably came with an update; until it is fixed, the rule
+results of an `agy` run are void.
+
 The correction scenario seeded its 5 MB limit by appending to `docs/spec.md`, which in a repository
 whose specification is a tree creates an unmapped file beside `docs/spec/`. In play-bazlang one
 session logged the change only and asked whether to delete that file, one edited it and one edited
@@ -216,8 +232,10 @@ result says anything about its map. The seed now goes to the specification's ent
 
 ## Open questions
 
-- Whether placement holds across runs for Opus and Sonnet, and in other customised repositories:
-  only Haiku ran three times in a customised one.
+- Whether placement holds across runs for Opus, and in other customised repositories: only Haiku ran
+  three times in a customised one, and Sonnet only on the templates.
+- Whether Sonnet keeps the rules across runs: its only repeated run was under a sandbox that could
+  not run the index generator.
 - How to make an agent record an invented fact foreign to the project rather than decline it: the
   prompt's instruction to treat it as true did not stop three Haiku sessions.
 - Whether it holds for other agents: `agy` and OpenCode are the only ones tried that read
