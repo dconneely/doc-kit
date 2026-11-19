@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.11.0] - 2026-11-19
+
 ### Changed
 
 - Research notes are `rewritten in place` in the template map, not `append-only`, matching the
