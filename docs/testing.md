@@ -140,6 +140,12 @@ adopted minimally if it has no map, so that a customised map and existing docume
 the fact; `DOC_KIT_EVAL_OUT` keeps each session's log and diff, and the agent command;
 `DOC_KIT_EVAL_RUNS` repeats each scenario and reports its pass rate.
 
+`tests/doc-kit-eval-variant.sh` runs the same scenarios on a copy of the kit at `HEAD` with given
+lines removed - from the stanza in `ADOPTING.md`, say, or from the template map - to test whether
+agents need a passage without editing the real file.
+[`docs/plan/find-text-agents-do-not-need.md`](plan/find-text-agents-do-not-need.md) says how its
+results are read.
+
 ## Running everything
 
 ```sh

@@ -26,11 +26,11 @@ to `claude-haiku-5-5` under Claude Code, and the baseline is its three runs of e
 
 4. **Cut in scratch copies.**
 
-   Copy the whole kit: the harness finds the kit from its own location, so an edited copy evaluates
-   itself. Give each variant its own `DOC_KIT_EVAL_OUT`, cut one passage per variant, rerun the
-   scenarios that cover it, then run the full suite once on all the candidates cut together. Eight
-   of the twelve filing scenarios score at or near full marks, so they can show only harm; the hard
-   and seeded scenarios are the ones that tell cuts apart.
+   `tests/doc-kit-eval-variant.sh` builds each copy from `HEAD` with the given lines removed. Give
+   each variant its own `DOC_KIT_EVAL_OUT`, cut one passage per variant, rerun the scenarios that
+   cover it, then run the full suite once on all the candidates cut together. Eight of the twelve
+   filing scenarios score at or near full marks, so they can show only harm; the hard and seeded
+   scenarios are the ones that tell cuts apart.
 
 ## Definition of done
 
