@@ -38,8 +38,9 @@
 # Each scenario starts from a fresh copy of the repository, adopted from templates/ and tools/ with
 # the AGENTS.md stanza from ADOPTING.md unless it already has a map, asks the agent to record one
 # fact carrying a unique token, and reports every file the token lands in. Placement passes when
-# every such file matches an allowed pattern, each required pattern is matched, and no stale text is
-# left in the specification; a scenario allowing nothing passes when nothing is written. Where the
+# every such file matches an allowed pattern, each required pattern is matched, and the scenario's
+# check, if it has one, finds nothing wrong; a scenario allowing nothing passes when nothing is
+# written. Where the
 # kit's text supports two placements, a scenario accepts both rather than choosing one. The rules
 # pass when the session adds no checker failure and leaves every record it touches "proposed".
 
@@ -53,11 +54,11 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT HUP INT TERM
 
-# id|allowed|required|stale|seed|fact
+# id|allowed|required|check|seed|fact
 #   allowed   space-separated EREs; every file the token lands in must match one. A - among them
 #             means writing nothing also passes, and - alone that nothing must be written
 #   required  space-separated EREs; each must match a file the token lands in, or -
-#   stale     text that must not be in the specification afterwards, or -
+#   check     a check_* function run after the session, or -
 #   seed      a seed_* function run before the session, or -
 SPEC='^docs/spec(/[a-z0-9/-]+)?\.md$'
 ADR='^docs/decisions/[0-9]{4}-[a-z0-9-]+\.md$'
@@ -71,8 +72,8 @@ changelog|^CHANGELOG\.md$ $SPEC|^CHANGELOG\.md$|-|-|We have just shipped this: t
 spec|$SPEC|-|-|-|The system rejects an upload larger than 10 MB with HTTP 413.
 howto|^docs/howto/[a-z0-9-]+\.md$|-|-|-|To rotate the API key: generate a new key in the vendor console, update the KEY secret in CI, redeploy, then revoke the old key.
 rule-and-why|$SPEC $ADR|$SPEC|-|-|Uploads are capped at 25 MB, because the reverse proxy in front of the service rejects larger request bodies.
-correction|$SPEC ^CHANGELOG\.md$|$SPEC ^CHANGELOG\.md$|larger than 5 MB|limit|The upload limit has just changed from 5 MB to 20 MB: the system now rejects an upload larger than 20 MB with HTTP 413.
-history|- $ADR ^CHANGELOG\.md$ $SPEC|$ADR|MySQL|-|The project used MySQL until 2023, then moved to SQLite because the hosted database cost more than the product earned.
+correction|$SPEC ^CHANGELOG\.md$|$SPEC ^CHANGELOG\.md$|limit|limit|The upload limit has just changed from 5 MB to 20 MB: the system now rejects an upload larger than 20 MB with HTTP 413.
+history|- $ADR ^CHANGELOG\.md$ $SPEC|$ADR|history|-|The project used MySQL until 2023, then moved to SQLite because the hosted database cost more than the product earned.
 no-home|-|-|-|-|The owner's favourite programming font is Iosevka."
 
 # stanza - the AGENTS.md stanza: the first markdown block after "Paste the stanza" in ADOPTING.md
@@ -116,14 +117,37 @@ commit() {
 	git -C "$1" -c user.name=eval -c user.email=eval@example.invalid commit -q --allow-empty -m "$2"
 }
 
-# seed_limit DIR - give the specification an upload limit for the correction scenario to change, in
-# its entry point: docs/spec/README.md when the specification is a tree (section 2.6)
+# spec_path DIR - the specification's entry point: docs/spec/README.md when it is a tree (section 2.6)
+spec_path() {
+	if [ ! -f "$1/docs/spec.md" ] && [ -f "$1/docs/spec/README.md" ]; then
+		echo docs/spec/README.md
+	else
+		echo docs/spec.md
+	fi
+}
+
+# in_spec DIR TEXT - whether any file of the specification holds TEXT
+in_spec() {
+	(cd "$1" && find docs -path 'docs/spec*' -name '*.md' -exec grep -lF -- "$2" {} +) >/dev/null 2>&1
+}
+
+# seed_limit DIR - give the specification an upload limit for the correction scenario to change
 seed_limit() {
-	spec=docs/spec.md
-	[ -f "$1/$spec" ] || [ ! -f "$1/docs/spec/README.md" ] || spec=docs/spec/README.md
 	printf '\n## Upload limit\n\nThe system rejects an upload larger than 5 MB with HTTP 413.\n' \
-		>>"$1/$spec"
+		>>"$1/$(spec_path "$1")"
 	commit "$1" 'Specify the upload limit'
+}
+
+# Each check_* DIR LOG prints why the session missed, or nothing; LOG is the agent's output.
+
+# check_limit - the correction replaced the old limit in the specification
+check_limit() {
+	if in_spec "$1" 'larger than 5 MB'; then echo "the specification still holds 'larger than 5 MB'"; fi
+}
+
+# check_history - the history stayed out of the specification
+check_history() {
+	if in_spec "$1" MySQL; then echo "the specification holds 'MySQL'"; fi
 }
 
 # failures DIR - the checker's failure lines for DIR, sorted, without line numbers and with each
@@ -166,7 +190,7 @@ for line in $scenarios; do
 	rest=${rest#*|}
 	required=${rest%%|*}
 	rest=${rest#*|}
-	stale=${rest%%|*}
+	check=${rest%%|*}
 	rest=${rest#*|}
 	seed=${rest%%|*}
 	fact=${rest#*|}
@@ -222,10 +246,10 @@ for line in $scenarios; do
 					[ -n "$(matches "$landed" "$p")" ] || { verdict="MISS     landed in [$shown], none matches $p"; break; }
 				done
 			fi
-			if [ -z "$verdict" ] && [ "$stale" != - ] &&
-				(cd "$dir" && find docs -path 'docs/spec*' -name '*.md' -exec grep -lF -- "$stale" {} +) >/dev/null 2>&1; then
-				verdict="MISS     the specification still holds '$stale'"
-			fi
+		fi
+		if [ -z "$verdict" ] && [ "$check" != - ]; then
+			why=$("check_$check" "$dir" "$TMP/$name.log")
+			[ -z "$why" ] || verdict="MISS     $why"
 		fi
 		[ -n "$verdict" ] || { run_placed=$((run_placed + 1)); verdict="ok       ${shown:-nothing written}"; }
 
