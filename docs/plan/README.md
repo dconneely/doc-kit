@@ -6,19 +6,15 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR or a plan note. `docs/spec.md` §3.3 defines the scales.
 
-## Evaluate whether agents stop text accumulating
+## Run the decay scenarios on the other models
 
-**Type:** docs - **Importance:** high - **Effort:** medium
+**Type:** docs - **Importance:** medium - **Effort:** low
 
-The kit exists to stop documentation accumulating into stale, contradictory text across sessions
-(ADR-0001). The `decay-*` scenarios in `tests/doc-kit-eval.sh` seed that decay - a finished plan
-entry marked done, two passages of the specification that disagree, code the specification
-contradicts - and score whether a session filing an unrelated fact reports it; `plan-done` scores
-whether a session deletes the plan entry it finishes. The stanza does not ask for that report - only
-this repository's `AGENTS.md` does - so run them with the baseline in
-[`find-text-agents-do-not-need.md`](find-text-agents-do-not-need.md), and if sessions do not report,
-add the rule to the stanza and run them again. Until they pass, the kit's central claim rests on
-argument rather than evidence.
+Haiku and Sonnet report the decay they meet in a file they edit without the stanza asking them to
+(research note 0005), so the stanza has no line asking for it. Gemini, DeepSeek and GPT-OSS have not
+run `decay-plan`, `decay-spec` and `decay-code`; GPT-OSS, which missed most in research note 0003,
+is the likeliest to need the line. Run the three scenarios three times on each, with the commands in
+0003, and add a report line to the stanza only if a model misses decay it read.
 
 ## Find the text agents do not need
 

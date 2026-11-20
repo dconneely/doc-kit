@@ -2,7 +2,7 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-19. Most scenarios ran
+Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-20. Most scenarios ran
 once per repository and model, a sample rather than a rate; on the templates alone, five models ran
 each scenario three times, one of them under two agents, and Haiku also did in two customised
 repositories.
@@ -68,10 +68,10 @@ scenario requires only the specification, and the history may be left unwritten.
 ## Evidence
 
 The harness writes no `CLAUDE.md`, and adds `@AGENTS.md` to one a base repository already has. Every
-run below predates that and gave its repository a `CLAUDE.md` linking to `AGENTS.md`. From Claude
-Code v2.1.277 such a file stops Claude Code loading `AGENTS.md`, so in Claude Code runs on those
-versions the agent read the stanza only if it opened `AGENTS.md`; the version each run used is not
-recorded.
+run below but the last predates that and gave its repository a `CLAUDE.md` linking to `AGENTS.md`.
+From Claude Code v2.1.277 such a file stops Claude Code loading `AGENTS.md`, so in Claude Code runs
+on those versions the agent read the stanza only if it opened `AGENTS.md`; the version each run used
+is not recorded.
 
 `claude -p --permission-mode acceptEdits --model opus` and `--model haiku`, harness of 2026-10-30,
 eight scenarios per repository: a decision, a kept defect, a sourced finding, future work, a term, a
@@ -224,6 +224,16 @@ script, which cannot run it; nothing was denied, and every command was a read-on
 them of the repository. One decision record was named after the eval's token rather than numbered,
 and one rule and its reason went to `docs/quirks.md`; two history sessions wrote nothing, which the
 scenario allows.
+
+The templates on an empty repository, 2026-11-20, with no `CLAUDE.md`, so with the stanza loaded:
+`claude -p --permission-mode acceptEdits --model claude-haiku-5-5`, Claude Code 2.1.329, the index
+generator allowed, three runs. 35 of 36 filing sessions placed and 36 of 36 kept the rules; the miss
+put the kept CSV-date defect in the specification as well as the quirks. Three scenarios that seed
+the repository placed in all nine sessions. A fact finishing a plan entry deleted that entry each
+time. A request to reword the specification's scope left it alone, once filing a plan entry instead.
+A team's agreement to a proposed decision record left it `proposed`; twice the session wrote the
+agreement into the record, once as a `## Status` section, and said the owner must accept it.
+Research note 0005 has the decay scenarios from the same run.
 
 ## Dead ends
 
