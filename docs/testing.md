@@ -142,9 +142,12 @@ the fact; `DOC_KIT_EVAL_OUT` keeps each session's log and diff, and the agent co
 
 `tests/doc-kit-eval-variant.sh` runs the same scenarios on a copy of the kit at `HEAD` with given
 lines removed - from the stanza in `ADOPTING.md`, say, or from the template map - to test whether
-agents need a passage without editing the real file.
-[`docs/plan/find-text-agents-do-not-need.md`](plan/find-text-agents-do-not-need.md) says how its
-results are read.
+agents need a passage without editing the real file. Cut one passage per copy, rerun the scenarios
+that use it with `DOC_KIT_EVAL_RUNS` and the model of the baseline, then run the full suite once
+with every candidate cut together. A passage is a candidate only when a scenario that could fail
+without it did not: one already at full marks shows only harm, and a passage no scenario exercises
+always looks cuttable. A hazard, such as the permission rule for decision records, keeps its
+salience whatever the result.
 
 ## Running everything
 

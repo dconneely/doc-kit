@@ -6,28 +6,15 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR or a plan note. `docs/spec.md` §3.3 defines the scales.
 
-## Run the decay scenarios on the other models
+## Run the evals on the other models
 
 **Type:** docs - **Importance:** medium - **Effort:** low
 
-Haiku and Sonnet report the decay they meet in a file they edit without the stanza asking them to
-(research note 0005), so the stanza has no line asking for it. Gemini, DeepSeek and GPT-OSS have not
-run `decay-plan`, `decay-spec` and `decay-code`; GPT-OSS, which missed most in research note 0003,
-is the likeliest to need the line. Run the three scenarios three times on each, with the commands in
-0003, and add a report line to the stanza only if a model misses decay it read.
-
-## Find the text agents do not need
-
-**Type:** docs - **Importance:** medium - **Effort:** medium
-
-The stanza is cut where the evals showed agents did not need it (research note 0006); the template
-map is next. Shorten its routing in scratch copies of the kit, never in the real files, and run
-`tests/doc-kit-eval.sh` against the original and each shortened copy. A passage whose removal
-changes neither where facts land nor whether the rules are kept is a candidate for cutting; one
-whose removal changes results stays, with its point and its reason. Every session in an adopted
-repository reads the map first, and at over 2,000 words it is the largest cost the kit imposes; the
-word budgets in `tests/doc-kit-word-budget.sh` sit just above today's counts and come down with each
-cut. Method and baseline: [`find-text-agents-do-not-need.md`](find-text-agents-do-not-need.md).
+The stanza and the template map were cut, and the stanza left without a line asking agents to report
+the decay they meet, on evidence from Haiku and Sonnet alone (research notes 0005 and 0006). Run the
+full suite three times on Gemini, DeepSeek and GPT-OSS, with the commands in research note 0003.
+GPT-OSS, which missed most there, is the likeliest to need what was cut or a report line; restore a
+passage, or add the line, only if a model misses where it would help.
 
 ## Build a worked example
 
