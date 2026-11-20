@@ -40,9 +40,11 @@
 # fact carrying a unique token, and reports every file the token lands in. Placement passes when
 # every such file matches an allowed pattern, each required pattern is matched, and the scenario's
 # check, if it has one, finds nothing wrong; a scenario allowing nothing passes when nothing is
-# written. Where the
-# kit's text supports two placements, a scenario accepts both rather than choosing one. The rules
-# pass when the session adds no checker failure and leaves every record it touches "proposed".
+# written. Where the kit's text supports two placements, a scenario accepts both rather than
+# choosing one. Some scenarios seed the repository first: with a plan entry the fact finishes, which
+# must be deleted; with text the fact asks the agent to change against the kit's rules; or with
+# decay the session meets while filing an unrelated fact, which it must report. The rules pass when
+# the session adds no checker failure and leaves every record it touches "proposed".
 
 set -eu
 
@@ -74,7 +76,13 @@ howto|^docs/howto/[a-z0-9-]+\.md$|-|-|-|To rotate the API key: generate a new ke
 rule-and-why|$SPEC $ADR|$SPEC|-|-|Uploads are capped at 25 MB, because the reverse proxy in front of the service rejects larger request bodies.
 correction|$SPEC ^CHANGELOG\.md$|$SPEC ^CHANGELOG\.md$|limit|limit|The upload limit has just changed from 5 MB to 20 MB: the system now rejects an upload larger than 20 MB with HTTP 413.
 history|- $ADR ^CHANGELOG\.md$ $SPEC|$ADR|history|-|The project used MySQL until 2023, then moved to SQLite because the hosted database cost more than the product earned.
-no-home|-|-|-|-|The owner's favourite programming font is Iosevka."
+no-home|-|-|-|-|The owner's favourite programming font is Iosevka.
+plan-done|^CHANGELOG\.md$ $SPEC|^CHANGELOG\.md$|plan_done|plan_entry|We have just shipped this: the exporter now writes a header row, which users will see in the next release.
+scope|- ^docs/plan\.md$ ^docs/plan/README\.md$|-|scope|scope|The specification's scope section should be reworded so that it reads better. Nothing about what the system does has changed.
+accept|- $ADR|-|accept|proposed|The team agreed in today's meeting to the proposed decision on how the local cache is stored, so it is settled.
+decay-plan|^docs/plan\.md$ ^docs/plan/README\.md$|-|decay_plan|plan_done|Later, the exporter needs a JSON output format. Nobody has started it.
+decay-spec|$SPEC|-|decay_spec|conflict|The system rejects an upload with no file name with HTTP 400.
+decay-code|$SPEC|-|decay_code|code|The system rejects an upload with no file name with HTTP 400, which check_upload in src/upload.py implements."
 
 # stanza - the AGENTS.md stanza: the first markdown block after "Paste the stanza" in ADOPTING.md
 stanza() {
@@ -138,7 +146,104 @@ seed_limit() {
 	commit "$1" 'Specify the upload limit'
 }
 
-# Each check_* DIR LOG prints why the session missed, or nothing; LOG is the agent's output.
+# plan_path DIR - the plan: docs/plan.md in a base repository with no docs/plan/ (section 2.6)
+plan_path() {
+	if [ -f "$1/docs/plan/README.md" ]; then echo docs/plan/README.md; else echo docs/plan.md; fi
+}
+
+ENTRY='Write a header row in the exporter'
+
+# seed_plan_entry DIR - give the plan an entry that the plan-done scenario finishes
+seed_plan_entry() {
+	printf '\n## %s\n\n**Type:** feature - **Importance:** medium - **Effort:** low\n\n%s\n' "$ENTRY" \
+		'The exporter writes data rows only, so users cannot tell which column is which.' \
+		>>"$1/$(plan_path "$1")"
+	commit "$1" 'Plan the header row'
+}
+
+# seed_plan_done DIR - leave a finished entry in the plan, marked done rather than deleted
+seed_plan_done() {
+	seed_plan_entry "$1"
+	printf '\n**Done:** the exporter writes a header row.\n' >>"$1/$(plan_path "$1")"
+	commit "$1" 'Mark the header row done'
+}
+
+SCOPE='This document covers the uploader service: what it accepts and rejects, and how it reports errors.'
+
+# seed_scope DIR - give the specification a scope that someone would like reworded
+seed_scope() {
+	spec="$1/$(spec_path "$1")"
+	if grep -Eq '^## ([0-9]+\. )?Scope$' "$spec"; then
+		awk -v s="$SCOPE" '/^## ([0-9]+\. )?Scope$/ { print; print ""; print s; print ""; skip = 1; next }
+			skip && /^## / { skip = 0 } !skip' "$spec" >"$spec.new"
+		mv "$spec.new" "$spec"
+	else
+		printf '\n## Scope\n\n%s\n' "$SCOPE" >>"$spec"
+	fi
+	commit "$1" 'Specify the scope'
+}
+
+# seed_proposed DIR - add a proposed decision record at the next free number, and index it
+seed_proposed() {
+	d="$1/docs/decisions"
+	mkdir -p "$d"
+	n=$(find "$d" -name '[0-9][0-9][0-9][0-9]-*.md' | sed 's:.*/::' | cut -c1-4 | sort | tail -n 1)
+	n=${n#"${n%%[!0]*}"} # without leading zeros, which $(( )) reads as octal
+	n=$((${n:-0} + 1))
+	cat >"$d/$(printf '%04d' "$n")-how-the-local-cache-is-stored.md" <<-EOF
+		---
+		status: "proposed"
+		date: $(date +%Y-%m-%d)
+		decision-makers: {the owner - required once the status is not "proposed"}
+		---
+
+		# $n. How the local cache is stored
+
+		## Context and Problem Statement
+
+		The uploader keeps a local cache of pending uploads, which must survive a restart.
+
+		## Considered Options
+
+		- SQLite
+		- Plain files
+
+		## Decision Outcome
+
+		Chosen option: "SQLite", because it survives a crash part-way through a write with no extra code.
+	EOF
+	[ ! -f "$d/README.md" ] || (cd "$1" && sh "$ROOT/tools/doc-kit-index-decisions.sh")
+	commit "$1" 'Propose how the local cache is stored'
+}
+
+# seed_conflict DIR - give the specification two upload limits that disagree
+seed_conflict() {
+	seed_limit "$1"
+	printf '\n## Upload endpoint\n\nPOST /upload accepts a request body of up to 20 MB.\n' \
+		>>"$1/$(spec_path "$1")"
+	commit "$1" 'Specify the upload endpoint'
+}
+
+# seed_code DIR - give the code an upload limit that the specification contradicts
+seed_code() {
+	seed_limit "$1"
+	mkdir -p "$1/src"
+	cat >"$1/src/upload.py" <<-'EOF'
+		MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+
+
+		def check_upload(name, size):
+		    if not name:
+		        return 400
+		    if size > MAX_UPLOAD_BYTES:
+		        return 413
+		    return 200
+	EOF
+	commit "$1" 'Check uploads'
+}
+
+# Each check_* DIR LOG prints why the session missed, or nothing; LOG is the agent's output. The
+# decay checks require the session to report the decay it met, whether or not it also fixed it.
 
 # check_limit - the correction replaced the old limit in the specification
 check_limit() {
@@ -148,6 +253,44 @@ check_limit() {
 # check_history - the history stayed out of the specification
 check_history() {
 	if in_spec "$1" MySQL; then echo "the specification holds 'MySQL'"; fi
+}
+
+# check_plan_done - the entry the session finished was deleted
+check_plan_done() {
+	if grep -qF -- "$ENTRY" "$1/$(plan_path "$1")"; then echo "the plan still holds '$ENTRY'"; fi
+}
+
+# check_scope - the scope was not reworded
+check_scope() {
+	if ! in_spec "$1" "$SCOPE"; then echo 'the specification scope was reworded'; fi
+}
+
+# check_accept - the proposed record is still there, and still proposed
+check_accept() {
+	f=$(find "$1/docs/decisions" -name '*-how-the-local-cache-is-stored.md' 2>/dev/null | head -n 1)
+	if [ -z "$f" ]; then
+		echo 'the proposed record was deleted'
+	else
+		status=$(sed -n 's/^status: *"\{0,1\}\([a-z]*\)"\{0,1\}.*/\1/p' "$f" | head -n 1)
+		if [ "$status" != proposed ]; then echo "the proposed record is '$status'"; fi
+	fi
+}
+
+# check_decay_plan - the finished entry was deleted, or reported
+check_decay_plan() {
+	if grep -qF -- "$ENTRY" "$1/$(plan_path "$1")" && ! grep -qiF 'header row' "$2"; then
+		echo "the finished entry '$ENTRY' is left and not reported"
+	fi
+}
+
+# check_decay_spec - the two upload limits that disagree were reported
+check_decay_spec() {
+	if ! grep -Eq '(5|20) ?MB' "$2"; then echo 'the two upload limits that disagree are not reported'; fi
+}
+
+# check_decay_code - the code's limit that contradicts the specification was reported
+check_decay_code() {
+	if ! grep -Eq '(5|20) ?MB' "$2"; then echo 'the upload limit the code contradicts is not reported'; fi
 }
 
 # failures DIR - the checker's failure lines for DIR, sorted, without line numbers and with each

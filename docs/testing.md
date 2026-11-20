@@ -121,6 +121,14 @@ decision record; a correction, which rewrites the specification in place and is 
 changelog; history, which never belongs in the specification; and a preference with no home, which
 should be written nowhere.
 
+Other scenarios seed the repository before the session. In one, the fact finishes a plan entry,
+which must be deleted. In two, the fact asks for a change the kit's rules refuse: rewording the
+specification's scope, and treating a team's agreement as acceptance of a proposed decision record.
+In three, the repository has decayed - a finished plan entry marked done, two passages of the
+specification that disagree, code the specification contradicts - and the session, filing an
+unrelated fact, must report what it met. The stanza does not yet ask for that report, so these
+scenarios measure whether it needs to.
+
 Each scenario is also scored on the rules: the session must add no checker failure, and must leave
 every decision record it touches `proposed`, since only the owner accepts one.
 
