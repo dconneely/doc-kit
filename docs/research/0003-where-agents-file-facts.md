@@ -67,6 +67,12 @@ scenario requires only the specification, and the history may be left unwritten.
 
 ## Evidence
 
+The harness writes no `CLAUDE.md`, and adds `@AGENTS.md` to one a base repository already has. Every
+run below predates that and gave its repository a `CLAUDE.md` linking to `AGENTS.md`. From Claude
+Code v2.1.277 such a file stops Claude Code loading `AGENTS.md`, so in Claude Code runs on those
+versions the agent read the stanza only if it opened `AGENTS.md`; the version each run used is not
+recorded.
+
 `claude -p --permission-mode acceptEdits --model opus` and `--model haiku`, harness of 2026-10-30,
 eight scenarios per repository: a decision, a kept defect, a sourced finding, future work, a term, a
 shipped change, a behaviour rule and a procedure, each repository run in sequence. Opus ran

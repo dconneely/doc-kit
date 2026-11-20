@@ -104,12 +104,8 @@ setup() {
 		done
 		if [ -f "$1/AGENTS.md" ]; then printf '\n' >>"$1/AGENTS.md"; else printf '# AGENTS.md\n\n' >"$1/AGENTS.md"; fi
 		stanza >>"$1/AGENTS.md"
-		# shellcheck disable=SC2016  # backticks are literal Markdown
-		if [ -f "$1/CLAUDE.md" ]; then
-			printf '\nSee [`AGENTS.md`](AGENTS.md) for where documentation belongs.\n' >>"$1/CLAUDE.md"
-		else
-			printf '# CLAUDE.md\n\nSee [`AGENTS.md`](AGENTS.md).\n' >"$1/CLAUDE.md"
-		fi
+		# Claude Code reads AGENTS.md only when there is no CLAUDE.md; an existing one imports it.
+		if [ -f "$1/CLAUDE.md" ]; then printf '\n@AGENTS.md\n' >>"$1/CLAUDE.md"; fi
 	fi
 	commit "$1" 'Adopt doc-kit'
 }
