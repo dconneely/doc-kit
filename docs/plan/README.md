@@ -20,15 +20,14 @@ is the likeliest to need the line. Run the three scenarios three times on each, 
 
 **Type:** docs - **Importance:** medium - **Effort:** medium
 
-Shorten the text agents read in an adopted repository - the `AGENTS.md` stanza, then the template
-map's routing - in scratch copies of the kit, never in the real files, and run
+The stanza is cut where the evals showed agents did not need it (research note 0006); the template
+map is next. Shorten its routing in scratch copies of the kit, never in the real files, and run
 `tests/doc-kit-eval.sh` against the original and each shortened copy. A passage whose removal
 changes neither where facts land nor whether the rules are kept is a candidate for cutting; one
 whose removal changes results stays, with its point and its reason. Every session in an adopted
-repository reads the map first, and at 2,161 words it is the largest cost the kit imposes; the word
-budgets in `tests/doc-kit-word-budget.sh` sit just above today's counts and come down with each cut.
-The harness and its scenarios need work first:
-[`find-text-agents-do-not-need.md`](find-text-agents-do-not-need.md).
+repository reads the map first, and at over 2,000 words it is the largest cost the kit imposes; the
+word budgets in `tests/doc-kit-word-budget.sh` sit just above today's counts and come down with each
+cut. Method and baseline: [`find-text-agents-do-not-need.md`](find-text-agents-do-not-need.md).
 
 ## Build a worked example
 

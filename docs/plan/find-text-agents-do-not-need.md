@@ -1,20 +1,22 @@
 # Find the text agents do not need
 
-**Status:** not started. Pin the model and measure the baseline (steps 1 and 4) before any text is
-cut.
+**Status:** the stanza is done (research note 0006); the template map is next. The model is pinned
+to `claude-haiku-5-5` under Claude Code, and the baseline is its three runs of every scenario on
+2026-11-20 (research notes 0003 and 0005).
 
 ## Steps
 
-1. **Pin the model.**
+1. **Measure with repeats.**
 
-   Pin the model in `DOC_KIT_AGENT`; `DOC_KIT_EVAL_OUT` records the command. Use `DOC_KIT_EVAL_RUNS`
-   for every measurement: without a known spread, one miss after a cut cannot be told from noise.
+   Use `DOC_KIT_EVAL_RUNS` for every measurement, `DOC_KIT_EVAL_OUT` to keep the command and logs,
+   and the pinned model: without a known spread, one miss after a cut cannot be told from noise.
 
 2. **Cover what may be cut.**
 
-   A passage no scenario exercises always looks cuttable. Map each passage of the stanza and the
-   template map to the scenario that covers it; only covered passages are candidates. Stanza lines
-   with no scenario: the archive line; setting `decision-makers` on accepting, and fixing citations.
+   A passage no scenario exercises always looks cuttable. Map each passage of the template map to
+   the scenario that covers it; only covered passages are candidates. Stanza lines with no scenario:
+   the archive line; setting `decision-makers` on accepting, and fixing citations; updating the map
+   when adding a document, which needs a fact that no mapped artefact holds.
 
 3. **Leave the hazards out.**
 
@@ -22,18 +24,13 @@ cut.
    eval says (`AGENTS.md`, Conventions). The `accept` scenario shows whether cuts elsewhere weaken
    it.
 
-4. **Measure the baseline.**
-
-   Run the current text several times. `docs/research/0003-where-agents-file-facts.md` has three
-   runs on the templates for several models, and on two customised maps for Haiku; rerun the
-   baseline with the pinned model on the kit as it stands. Eight of the twelve filing scenarios
-   score at or near full marks, so they can show only harm; the hard and seeded scenarios are the
-   ones that tell cuts apart.
-
-5. **Cut in scratch copies.**
+4. **Cut in scratch copies.**
 
    Copy the whole kit: the harness finds the kit from its own location, so an edited copy evaluates
-   itself. Give each variant its own `DOC_KIT_EVAL_OUT`.
+   itself. Give each variant its own `DOC_KIT_EVAL_OUT`, cut one passage per variant, rerun the
+   scenarios that cover it, then run the full suite once on all the candidates cut together. Eight
+   of the twelve filing scenarios score at or near full marks, so they can show only harm; the hard
+   and seeded scenarios are the ones that tell cuts apart.
 
 ## Definition of done
 
