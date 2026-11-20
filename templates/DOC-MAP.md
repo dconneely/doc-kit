@@ -3,10 +3,6 @@
 What each document in this project is for, who reads it, how long it lives, and **where a given fact
 belongs**. Start here when you have something to write down and are not sure which file it goes in.
 
-Each artefact holds its own format and rules - in its preamble, or in its `0000-template.md` - and
-this map does not restate them. Why the structure is shaped this way is in the adoption record,
-`docs/decisions/0001-how-the-documentation-is-organised.md`.
-
 ## Where does it go?
 
 The tense of the sentence you are writing usually settles it:
@@ -32,8 +28,6 @@ The tense of the sentence you are writing usually settles it:
 | "where did this external source come from?" | "source A was retrieved from URL B"                      | `docs/sources/`                                                                           |
 | "what must an agent know to work here?"     | "an agent working here needs to know X"                  | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact     |
 | "where does this go?"                       | "this is how each document is used"                      | this file                                                                                 |
-
-If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
 
 ## Layout
 
@@ -138,18 +132,16 @@ Most changes skip the ADR and the plan note. Nothing skips the deletion.
 
 1. **Facts have one home.** A table, a list of more than three values, or a process of three or more
    steps should appear once; short instructional copies and template/instance pairs may repeat.
-2. **Tense routes it:** rationale -> ADR, behaviour -> specification, history -> changelog or commit
-   message, intent -> plan.
-3. **Prose links to a machine-readable contract and never restates it.** It covers only what the
+2. **Prose links to a machine-readable contract and never restates it.** It covers only what the
    contract cannot express: rationale, invariants, units, ownership, policy.
-4. **A generated view is never hand-edited.** It carries a header naming what generates it, and
+3. **A generated view is never hand-edited.** It carries a header naming what generates it, and
    regenerating it produces no diff. An ordered, immutable-once-applied sequence - migrations - is
    changelog-shaped; the specification is the current shape.
-5. **Write the least that is true.** No history or account of how you got there, in documents or
+4. **Write the least that is true.** No history or account of how you got there, in documents or
    code comments.
-6. **Code names the record, not the reverse.** A comment beside constrained code names the ADR or
+5. **Code names the record, not the reverse.** A comment beside constrained code names the ADR or
    quirk that governs it. Only quirk entries name code, in their `Where:` field.
-7. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
+6. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
    says as little about the record as it can, and is fixed in the same commit as a change to the
    record that makes it untrue.
 

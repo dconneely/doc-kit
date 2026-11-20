@@ -12,6 +12,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   artefact's tense, which the map gives, and no longer repeats the map's rule to write the least
   that is true; it keeps the quirks and archive lines. Agent evals filed facts and kept the rules as
   well without either passage. An adopted stanza can drop both.
+- The template map is shorter by three passages agent evals showed it did not need: the paragraph
+  saying each artefact holds its own rules and pointing to the adoption record, the advice to split
+  a sentence that fits two places, and the rule that tense routes a fact, which the routing table
+  already does. Its rules are renumbered, so "write the least that is true" is now rule 4. An
+  adopted map can drop the same passages.
 
 ### Fixed
 
