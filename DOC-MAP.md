@@ -47,7 +47,6 @@ If a sentence seems to fit two places, it is usually two sentences. Split it and
 DOC-MAP.md               this file - the map
 README.md                orientation, one screen, links outward
 AGENTS.md                orientation for coding agents - routes here
-CLAUDE.md                one line pointing at AGENTS.md
 CHANGELOG.md             what shipped
 ADOPTING.md              product - the procedure for applying the kit to a repository
 ADOPTING-NOTES.md        product - the reasoning behind that procedure
@@ -77,7 +76,6 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `DOC-MAP.md`                | This map: what each document is for, and where a fact belongs. **No standard**; nearest practice is a `docs/README.md` index, with [Diátaxis](https://diataxis.fr) supplying the rationale for splitting docs at all  | present     | rewritten in place | contributor                  |
 | `README.md`                 | Orient a newcomer fast. Loose convention; [Standard Readme](https://github.com/RichardLitt/standard-readme) is the nearest written spec                                                                               | present     | rewritten in place | owner, contributor, consumer |
 | `AGENTS.md`                 | Routes a coding agent to this map, and names the hazards specific to working here. Routes rather than restates. Convention: [agents.md](https://agents.md)                                                            | present     | rewritten in place | contributor (agents)         |
-| `CLAUDE.md`                 | **Alias** (§2.7) for `AGENTS.md`, existing only because some tools look for that filename                                                                                                                             | present     | rewritten in place | contributor (agents)         |
 | `docs/spec.md`              | What a conformant repository looks like - the contract a checker checks against. **No standard for the file.** Uses [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) keywords for requirement strength              | present     | rewritten in place | consumer, contributor        |
 | `ADOPTING.md`               | **Product. Source of truth, not description** - the procedure half of what the kit ships. A how-to in [Diátaxis](https://diataxis.fr) terms                                                                           | imperative  | rewritten in place | consumer                     |
 | `ADOPTING-NOTES.md`         | **Product.** The reasoning behind the procedure - judgement calls, how far to trust each convention cited, what the rules prevent                                                                                     | explanatory | rewritten in place | consumer                     |
@@ -102,7 +100,6 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `DOC-MAP.md`                | the structure is first agreed                                | never - revised when an artefact is added, removed or repurposed |
 | `README.md`                 | project starts                                               | never                                                            |
 | `AGENTS.md`                 | agents began working in the repository                       | never                                                            |
-| `CLAUDE.md`                 | a tool looks for that filename specifically                  | when no tool needs the alias any more                            |
 | `docs/spec.md`              | behaviour is decided                                         | never - edited forever                                           |
 | `ADOPTING.md`               | the kit is first given to someone else                       | never                                                            |
 | `ADOPTING-NOTES.md`         | the procedure accumulated reasoning that was slowing it down | never                                                            |

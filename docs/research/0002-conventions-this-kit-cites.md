@@ -45,8 +45,7 @@ Consequences.
 There is **no required structure**: "AGENTS.md is just standard Markdown. Use any headings you like;
 the agent simply parses the text you provide." It supports nested files - "Agents automatically read
 the nearest file in the directory tree, so the closest one takes precedence" - and says nothing at
-all about `CLAUDE.md` or other tool-specific files. So the kit's `CLAUDE.md` pointer is neither
-blessed nor contradicted by it.
+all about `CLAUDE.md` or other tool-specific files.
 
 ### GitHub Spec Kit - not the source of this kit's filenames
 
