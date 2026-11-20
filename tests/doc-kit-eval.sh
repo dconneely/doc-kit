@@ -216,12 +216,13 @@ seed_proposed() {
 	commit "$1" 'Propose how the local cache is stored'
 }
 
-# seed_conflict DIR - give the specification two upload limits that disagree
+# seed_conflict DIR - give the specification two upload limits that disagree: the same rule with
+# different numbers, so that neither reads as a separate limit
 seed_conflict() {
 	seed_limit "$1"
-	printf '\n## Upload endpoint\n\nPOST /upload accepts a request body of up to 20 MB.\n' \
+	printf '\n## Errors\n\nAn upload larger than 20 MB is rejected with HTTP 413.\n' \
 		>>"$1/$(spec_path "$1")"
-	commit "$1" 'Specify the upload endpoint'
+	commit "$1" 'Specify the errors'
 }
 
 # seed_code DIR - give the code an upload limit that the specification contradicts
