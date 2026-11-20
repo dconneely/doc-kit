@@ -13,9 +13,10 @@ stanza does not ask it to. Given a specification stating one limit with two numb
 named both passages and left the choice to the owner. Given a plan entry marked done, both reported
 it in nearly every session. No session edited decayed text to resolve it.
 
-No session deleted the entry marked done. Agents read the stanza's "Delete finished plan entries" as
-covering the entries a session finishes, and those they delete (the `plan-done` scenario). Decay of
-that kind is therefore reported but stays until the owner acts on the report.
+No session deleted the entry marked done. Agents delete the entries a session finishes (the
+`plan-done` scenario), and treat any other edit as outside the request, even when the stanza says to
+delete finished entries whoever finished them. Decay of that kind is therefore reported but stays
+until the owner acts on the report.
 
 Decay outside the file being edited is reported only when the agent opens the file that shows it.
 Given a fact naming the code that implements it, Haiku usually opened the code and reported the
@@ -52,6 +53,11 @@ and it needs deciding which before the spec is corrected" (`decay-code`, no line
 `decay-plan` report left the entry because deleting it was outside the request. All 65 decay
 sessions, those in Dead ends included, kept the rules.
 
+With the stanza's plan line changed to "Delete finished plan entries, whoever finished them; don't
+mark them done.", five Haiku `decay-plan` sessions each reported the entry and none deleted it: "I
+left it alone because it is outside this request, and it is yours to decide." Three `plan` sessions
+under the same line removed nothing from the plan.
+
 ## Dead ends
 
 The first `decay-spec` seed paired "The system rejects an upload larger than 5 MB with HTTP 413"
@@ -71,7 +77,5 @@ The check now looks for "done", which every report used and no other session did
 
 - Whether Gemini, DeepSeek or GPT-OSS report decay unprompted: none has run these scenarios. Running
   them would settle whether any model needs the report line.
-- Whether an agent should delete a finished plan entry it did not finish: the stanza does not say,
-  and the answer changes what the kit asks of agents.
 - Decay in a file the session never opens: no scenario measures it, and a session cannot report what
   it does not read.
