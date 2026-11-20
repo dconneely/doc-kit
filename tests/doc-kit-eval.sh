@@ -356,8 +356,13 @@ for line in $scenarios; do
 		before="$TMP/$name.before"
 		failures "$dir" >"$before"
 		token="EVAL-$id-$(od -An -N4 -tx4 /dev/urandom | tr -d ' ')"
+		# Seeded code makes the fact true of it, and the scenario needs the agent free to read it.
+		case $seed in
+			code) given='The fact below is true of this repository and its code. Do not ask for details' ;;
+			*) given='The fact below is invented: treat it as true of this repository even where the code has no such feature, and do not check it against the code or ask for details' ;;
+		esac
 		# shellcheck disable=SC2034  # read by the eval below
-		prompt="This is an evaluation of where documentation is filed. The fact below is invented: treat it as true of this repository even where the code has no such feature, and do not check it against the code or ask for details - where a document wants a path or a test name it lacks, write unknown, but choose every other field, such as a type or a priority, yourself. Record it in the documentation, wherever it belongs. Only if information of its kind has no place in this repository's documentation at all, say so and write nothing: $fact Include the token $token, verbatim, in each place you write it. Do not commit."
+		prompt="This is an evaluation of where documentation is filed. $given - where a document wants a path or a test name it lacks, write unknown, but choose every other field, such as a type or a priority, yourself. Record it in the documentation, wherever it belongs. Only if information of its kind has no place in this repository's documentation at all, say so and write nothing: $fact Include the token $token, verbatim, in each place you write it. Do not commit."
 
 		set +e
 		(cd "$dir" && eval "$DOC_KIT_AGENT" '"$prompt"') >"$TMP/$name.log" 2>&1
