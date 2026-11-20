@@ -277,9 +277,11 @@ check_accept() {
 	fi
 }
 
-# check_decay_plan - the finished entry was deleted, or reported
+# check_decay_plan - the finished entry was deleted, or reported. A report names its done marking;
+# the entry's own words also appear where a session says where it put a new entry.
 check_decay_plan() {
-	if grep -qF -- "$ENTRY" "$1/$(plan_path "$1")" && ! grep -qiF 'header row' "$2"; then
+	if grep -qF -- "$ENTRY" "$1/$(plan_path "$1")" &&
+		! grep -qiE '(^|[^a-z])done([^a-z]|$)' "$2"; then
 		echo "the finished entry '$ENTRY' is left and not reported"
 	fi
 }
