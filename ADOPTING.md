@@ -207,19 +207,22 @@ this structure by hand is fully conformant. See ADR-0005.
 
 ### If coding agents work in this repository
 
-Agents read `AGENTS.md` or `CLAUDE.md`, and nothing there points at the map - so the structure you
-have just built is unreachable to the reader most able to damage it. Before editing either, read it
-and follow it as the target's rules; this kit's `AGENTS.md` does not apply there.
+Agents read `AGENTS.md`, and nothing there points at the map - so the structure you have just built
+is unreachable to the reader most able to damage it. Before editing it, read it and follow it as the
+target's rules; this kit's `AGENTS.md` does not apply there.
 
 The rule is simple even though the states it applies to aren't: **never throw away user-generated
-content in an `AGENTS.md` or `CLAUDE.md` you didn't write.** Create one if neither exists. If one
-does, ask before editing it rather than pasting over it. If both exist and disagree, don't assume
-either is a stale duplicate of the other - ask how the user wants them reconciled; if it turns out
-they genuinely serve different audiences (`CLAUDE.md` for Claude Code specifically, `AGENTS.md` for
-other agents), the right answer may be that both stay content-bearing, both get their own row in the
-map, and the stanza below goes into both files rather than one. Whichever you keep, keep its row in
-`DOC-MAP.md`; the stanza is not a substitute for the map entry. And flag it if any of these turn out
-to be untracked by git - an unusual state for a file whose whole purpose is being read by tooling.
+content in an `AGENTS.md` or `CLAUDE.md` you didn't write.** Create `AGENTS.md` if it does not
+exist. If it does, ask before editing it rather than pasting over it. Keep its row in `DOC-MAP.md`;
+the stanza is not a substitute for the map entry. Flag it if it turns out to be untracked by git -
+an unusual state for a file whose whole purpose is being read by tooling.
+
+**Claude Code reads `AGENTS.md` only when there is no `CLAUDE.md`** in the directory a session
+starts in or above it. A `CLAUDE.md` that only points at `AGENTS.md` therefore keeps the stanza out
+of every Claude Code session: ask the owner, then delete it. A `CLAUDE.md` with content of its own
+stays - ask how the owner wants it reconciled with `AGENTS.md`, rather than assuming either is a
+stale duplicate. If both stay, each gets its own row in the map, and `CLAUDE.md` gains an
+`@AGENTS.md` line so that Claude Code loads both.
 
 The same rule extends to any other per-tool instruction file the repository might already have -
 `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, or similar. Check for
@@ -227,8 +230,8 @@ them; if you find one, ask rather than deciding on your own whether it should po
 folded into `AGENTS.md`, or stay exactly as it is. The intent is to improve the documentation, not
 to replace instructions the user already wrote for a tool of their choosing.
 
-Paste the stanza below into whichever file(s) you keep, deleting lines for artefacts you did not
-create and giving the rest their real paths:
+Paste the stanza below into `AGENTS.md`, deleting lines for artefacts you did not create and giving
+the rest their real paths:
 
 ```markdown
 ## Documentation

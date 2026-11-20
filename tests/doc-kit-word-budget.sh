@@ -15,7 +15,7 @@ export LC_ALL
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
 STANZA_BUDGET=270
-MAP_BUDGET=2180
+MAP_BUDGET=2120
 
 # The stanza: the first markdown block after "Paste the stanza" in ADOPTING.md.
 stanza=$(awk '/^Paste the stanza/ { f = 1 } f && /^```markdown$/ { s = 1; next } s && /^```$/ { exit } s' \

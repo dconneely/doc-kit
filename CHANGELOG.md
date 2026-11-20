@@ -6,6 +6,14 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Fixed
+
+- The template map no longer has a `CLAUDE.md` alias. Claude Code reads `AGENTS.md` only when there
+  is no `CLAUDE.md`, so the alias kept the `AGENTS.md` stanza out of every Claude Code session.
+  `ADOPTING.md` says to delete a `CLAUDE.md` that only points at `AGENTS.md`, and to add an
+  `@AGENTS.md` line to one with content of its own. In an adopted repository, delete the alias and
+  its rows in the map.
+
 ## [0.11.0] - 2026-11-19
 
 ### Changed

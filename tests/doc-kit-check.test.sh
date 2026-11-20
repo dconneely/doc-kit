@@ -305,7 +305,6 @@ rm -rf docs
 mkdir -p docs/decisions docs/research docs/plan docs/howto docs/sources docs/archive
 : >README.md
 : >AGENTS.md
-: >CLAUDE.md
 : >CHANGELOG.md
 : >docs/spec.md
 : >docs/decisions/README.md
@@ -342,7 +341,6 @@ cp -R "$ROOT/templates/." .
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-check.sh" "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 : >AGENTS.md
-: >CLAUDE.md
 expect "an untouched copy of the templates fails only on the example plan entry" 1 "docs/plan/README.md:14 is the template's example entry"
 expect "an untouched copy of the templates has one failure" 1 "doc-kit: 1 failure(s)"
 

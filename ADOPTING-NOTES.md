@@ -163,11 +163,10 @@ anyone, which would normally mean merging them (`templates/DOC-MAP.md` "Adding a
 document"), but a module `README.md` exists so a newcomer working there finds orientation without
 first navigating to the root. Mark it `**Alias**` in the artefacts table, give it no content of its
 own, and let it inherit the properties of what it points to - the same applies to a specification
-member repeated per module, or any file some tool looks for by exact name (`CLAUDE.md` pointing at
-`AGENTS.md` is the case this kit's own map uses). See `templates/DOC-MAP.md`'s "Adding a new kind of
-document" for the shape, and resist the temptation to word the audience column differently just to
-dodge the duplicate-properties check - that hides the fact that the file has nothing of its own to
-say.
+member repeated per module, or any file some tool looks for by exact name. See
+`templates/DOC-MAP.md`'s "Adding a new kind of document" for the shape, and resist the temptation to
+word the audience column differently just to dodge the duplicate-properties check - that hides the
+fact that the file has nothing of its own to say.
 
 ### How far do I trust each convention?
 
