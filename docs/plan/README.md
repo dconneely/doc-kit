@@ -8,16 +8,17 @@ needs more, it needs an ADR or a plan note. `docs/spec.md` §3.3 defines the sca
 
 ## Evaluate whether agents stop text accumulating
 
-**Type:** docs - **Importance:** high - **Effort:** high
+**Type:** docs - **Importance:** high - **Effort:** medium
 
 The kit exists to stop documentation accumulating into stale, contradictory text across sessions
-(ADR-0001), but every scenario in `tests/doc-kit-eval.sh` is a fresh session filing one new fact, so
-nothing measures that. Add scenarios that seed an adopted repository with the decay the kit guards
-against - a finished plan entry still present, a specification clause the code contradicts, a fact
-restated in a second file - and give the agent an unrelated task in it. Score whether the session
-reports what it touched, as `AGENTS.md` and the stanza require, or adds to it, and whether it
-deletes a plan entry it completes. Until a scenario like this passes, the kit's central claim rests
-on argument rather than evidence.
+(ADR-0001). The `decay-*` scenarios in `tests/doc-kit-eval.sh` seed that decay - a finished plan
+entry marked done, two passages of the specification that disagree, code the specification
+contradicts - and score whether a session filing an unrelated fact reports it; `plan-done` scores
+whether a session deletes the plan entry it finishes. The stanza does not ask for that report - only
+this repository's `AGENTS.md` does - so run them with the baseline in
+[`find-text-agents-do-not-need.md`](find-text-agents-do-not-need.md), and if sessions do not report,
+add the rule to the stanza and run them again. Until they pass, the kit's central claim rests on
+argument rather than evidence.
 
 ## Find the text agents do not need
 

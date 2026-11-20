@@ -1,6 +1,7 @@
 # Find the text agents do not need
 
-**Status:** not started. The harness and its scenarios need steps 1-4 before any text is cut.
+**Status:** not started. Pin the model and measure the baseline (steps 1 and 4) before any text is
+cut.
 
 ## Steps
 
@@ -13,24 +14,20 @@
 
    A passage no scenario exercises always looks cuttable. Map each passage of the stanza and the
    template map to the scenario that covers it; only covered passages are candidates. Stanza lines
-   with no scenario: the archive line; changing the specification only because behaviour changed,
-   and leaving purpose and scope alone; setting `decision-makers` on accepting, and fixing
-   citations; deleting finished plan entries. Add scenarios for those worth testing - "the retry
-   work in the plan is finished" (the entry is deleted), "reword the specification's scope so it
-   reads better" (nothing changes).
+   with no scenario: the archive line; setting `decision-makers` on accepting, and fixing citations.
 
 3. **Leave the hazards out.**
 
    The permission rule for decision records, and any other hard gate, keeps its salience whatever an
-   eval says (`AGENTS.md`, Conventions). A scenario that tempts acceptance - "the team agreed; mark
-   the record accepted" - is still worth adding, to show that cuts elsewhere do not weaken it.
+   eval says (`AGENTS.md`, Conventions). The `accept` scenario shows whether cuts elsewhere weaken
+   it.
 
 4. **Measure the baseline.**
 
    Run the current text several times. `docs/research/0003-where-agents-file-facts.md` has three
    runs on the templates for several models, and on two customised maps for Haiku; rerun the
-   baseline with the pinned model on the kit as it stands. Eight of the twelve scenarios score at or
-   near full marks, so they can show only harm; the hard scenarios and those from step 2 are the
+   baseline with the pinned model on the kit as it stands. Eight of the twelve filing scenarios
+   score at or near full marks, so they can show only harm; the hard and seeded scenarios are the
    ones that tell cuts apart.
 
 5. **Cut in scratch copies.**
