@@ -238,15 +238,7 @@ the rest their real paths:
 
 `DOC-MAP.md` says which file a fact belongs in. Read it first.
 
-Tense settles disagreements:
-
-- `docs/spec.md` - present tense: what the system does now.
-- `CHANGELOG.md` - past tense: what changed, never what's true today.
-- `docs/plan/README.md` - intent: nothing in it exists yet.
-- `docs/decisions/` - why: decision records; only `accepted` ones bind.
 - `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
-- `docs/howto/` - step-by-step recurring operational procedures.
-- `docs/sources/README.md` - pinned external specifications and standards.
 - `docs/archive/README.md` - kept but not migrated; not authoritative. Never cite what it holds.
 
 Before you edit:
@@ -263,8 +255,6 @@ Before you edit:
 - After creating or changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
   the decisions index, if kept.
 - Delete finished plan entries; don't mark them done.
-- **Write the least that is true.** No history or account of how you got there, in documents or
-  code comments - the map says where those go.
 - Adding a document means updating `DOC-MAP.md` in the same commit.
 ```
 

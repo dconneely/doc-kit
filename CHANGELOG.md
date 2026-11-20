@@ -6,6 +6,13 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- The `AGENTS.md` stanza in `ADOPTING.md` is about a third shorter. It no longer lists each
+  artefact's tense, which the map gives, and no longer repeats the map's rule to write the least
+  that is true; it keeps the quirks and archive lines. Agent evals filed facts and kept the rules as
+  well without either passage. An adopted stanza can drop both.
+
 ### Fixed
 
 - The template map no longer has a `CLAUDE.md` alias. Claude Code reads `AGENTS.md` only when there
