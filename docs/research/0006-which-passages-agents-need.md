@@ -70,8 +70,8 @@ map.
 
 Cut together, the stanza's tense list, plan line and write-the-least line placed 51 of 54 full-suite
 sessions; the one `plan-done` miss among them is why the plan line stays. The three map passages cut
-together placed 52 of 54: one `quirk` session also filed the defect as a plan entry, and one
-`decay-plan` session did not report, each within its baseline spread. Both combined runs kept the
+together placed 51 of 54: one `quirk` session also filed the defect as a plan entry, and two
+`decay-plan` sessions did not report, each within its baseline spread. Both combined runs kept the
 rules in all 54.
 
 The full suite on the cut kit at `a395432`, three runs, before the decision-record template's
