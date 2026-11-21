@@ -8,9 +8,9 @@
 #         LINES  comma-separated line numbers and ranges, such as 16,18-20
 #         id     the scenarios to run, as tests/doc-kit-eval.sh takes them (default: every one)
 #
-#         DOC_KIT_AGENT, DOC_KIT_EVAL_RUNS and DOC_KIT_EVAL_OUT pass through to tests/doc-kit-eval.sh.
-#         The removed lines are printed first, and kept in DOC_KIT_EVAL_OUT/variant.txt when it is
-#         set.
+#         DOC_KIT_AGENT, DOC_KIT_EVAL_RUNS and DOC_KIT_EVAL_OUT pass through to
+#         tests/doc-kit-eval.sh. The removed lines are printed first, and kept in
+#         DOC_KIT_EVAL_OUT/variant.txt when it is set.
 #
 # Exits as tests/doc-kit-eval.sh does, and 2 on a usage error or a line that does not exist.
 

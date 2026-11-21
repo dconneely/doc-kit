@@ -128,7 +128,8 @@ commit() {
 	git -C "$1" -c user.name=eval -c user.email=eval@example.invalid commit -q --allow-empty -m "$2"
 }
 
-# spec_path DIR - the specification's entry point: docs/spec/README.md when it is a tree (section 2.6)
+# spec_path DIR - the specification's entry point: docs/spec/README.md when it is a tree
+# (section 2.6)
 spec_path() {
 	if [ ! -f "$1/docs/spec.md" ] && [ -f "$1/docs/spec/README.md" ]; then
 		echo docs/spec/README.md
