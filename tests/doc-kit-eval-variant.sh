@@ -38,6 +38,16 @@ $2"
 done
 [ -n "$cuts" ] || { echo "$usage" >&2; exit 2; }
 
+# One cut per file, so that every line number is as at HEAD however many cuts name the file.
+cuts=$(printf '%s\n' "$cuts" | awk 'NF {
+	i = index($0, ":")
+	if (i == 0) { printf "bad cut %s\n", $0 >"/dev/stderr"; bad = 1; next }
+	f = substr($0, 1, i - 1)
+	if (f in lines) lines[f] = lines[f] "," substr($0, i + 1)
+	else { order[++n] = f; lines[f] = substr($0, i + 1) }
+}
+END { for (k = 1; k <= n; k++) print order[k] ":" lines[order[k]]; exit bad }') || exit 2
+
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT HUP INT TERM
 KIT="$TMP/kit"
