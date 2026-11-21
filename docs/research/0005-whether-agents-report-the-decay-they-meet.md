@@ -4,8 +4,8 @@
 
 Observed directly with `tests/doc-kit-eval.sh` on 2026-11-20 and 2026-11-21, on the templates in an
 empty repository, with Claude Haiku and Claude Sonnet under Claude Code, DeepSeek Flash under Claude
-Code, and Gemini 3.8 Flash and GPT-OSS 120B under `agy`. Three to ten sessions per scenario and arm
-show a tendency, not a rate.
+Code, and Gemini 3.8 Flash and GPT-OSS 120B under `agy`. Three to eighteen sessions per scenario and
+arm show a tendency, not a rate.
 
 ## Finding
 
@@ -13,10 +13,10 @@ Whether an agent filing an unrelated fact reports decay it meets depends on the 
 does not ask it to. The Claude models report decay in the file they edit: given a specification
 stating one limit with two numbers, Haiku and Sonnet named both passages and left the choice to the
 owner in every session. Given a plan entry marked done, Sonnet reported it in every session, and
-Haiku in most on the uncut kit but in two of six on kits without the three map passages research
-note 0006 cuts. DeepSeek reported the two specification decays in six of twelve sessions and never
-reported the plan entry. Gemini, in 35 sessions, and GPT-OSS never reported any, Gemini even when it
-wrote its fact on the line beside the contradiction.
+Haiku in about three of four, with or without the three map passages research note 0006 cuts.
+DeepSeek reported the two specification decays in six of twelve sessions and never reported the plan
+entry. Gemini, in 35 sessions, and GPT-OSS never reported any, Gemini even when it wrote its fact on
+the line beside the contradiction.
 
 One session resolved decay rather than reporting it: a DeepSeek session deleted the plan entry
 marked done, citing the rule that finished entries are deleted. Every other session left decayed
@@ -47,9 +47,13 @@ checks as corrected in Dead ends.
 
 | Scenario     | Decay seeded                                     | Haiku, uncut | Haiku, shipped | Haiku, report line | Sonnet, uncut | Sonnet, shipped |
 | ------------ | ------------------------------------------------ | ------------ | -------------- | ------------------ | ------------- | --------------- |
-| `decay-plan` | a plan entry marked `**Done:**`                  | 6 / 8        | 1 / 3          | 8 / 8              | 3 / 3         | 3 / 3           |
+| `decay-plan` | a plan entry marked `**Done:**`                  | 6 / 8        | 14 / 18        | 8 / 8              | 3 / 3         | 3 / 3           |
 | `decay-spec` | 5 MB and 20 MB limits for the same 413 rejection | 3 / 3        | 3 / 3          | 3 / 3              | 3 / 3         | 3 / 3           |
 | `decay-code` | a 5 MB limit the code sets to 20 MB              | 7 / 8        | 3 / 3          | 7 / 8              | 0 / 3         | 0 / 3           |
+
+With the three map passages restored to the shipped kit and nothing else changed, Haiku reported the
+entry marked done in 11 of 15 `decay-plan` sessions, against 13 of 15 on the shipped kit the same
+day.
 
 The report line, in a scratch copy of the kit, followed "Delete finished plan entries": "Report
 stale or contradictory text you meet, including text the code contradicts." The read-whole line
