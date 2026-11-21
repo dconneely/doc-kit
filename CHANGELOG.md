@@ -29,6 +29,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   `ADOPTING.md` says to delete a `CLAUDE.md` that only points at `AGENTS.md`, and to add an
   `@AGENTS.md` line to one with content of its own. In an adopted repository, delete the alias and
   its rows in the map.
+- `doc-kit-check.sh` no longer reports `AGENTS.md sits beside AGENTS/` on Windows or macOS when the
+  repository has an `agents/` directory. A directory now sits beside `name.md` only when its name
+  matches exactly, case included.
+- The root files a tool or convention looks for - the map, `README.md`, `AGENTS.md` and its aliases,
+  `CHANGELOG.md` - may sit beside a directory of the same name, since they cannot move into it.
 
 ## [0.11.0] - 2026-11-19
 

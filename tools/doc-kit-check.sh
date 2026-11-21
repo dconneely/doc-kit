@@ -164,12 +164,27 @@ check_map() {
 
 	# §2.6 - name.md never sits beside a directory name/: the directory's entry point is
 	# name/README.md. A vendored file is not documentation (§1); a gitignored one is advisory (§2.9).
+	# The root files a tool or convention looks for - the map, README.md, AGENTS.md and its aliases,
+	# CHANGELOG.md - are exempt, since they cannot move into a directory. The directory's name must
+	# match exactly: on a case-insensitive filesystem `[ -d AGENTS ]` also finds agents/, so find,
+	# which compares the names the directory lists, confirms it.
+	# shellcheck disable=SC2016  # the backticks are literal Markdown
+	root_aliases=$(section "$MAP" '## Artefacts' | grep '\*\*Alias\*\*' |
+		sed -n 's/^| `\([^`/]*\)`.*/\1/p')
 	set -f
 	oldifs=$IFS
 	beside=''
 	IFS=$NL
 	for f in $files; do
-		[ ! -d "${f%.md}" ] || beside="$beside$f$NL"
+		case $f in
+		"$MAP" | README.md | AGENTS.md | CHANGELOG.md) continue ;;
+		*/*) ;;
+		*) if within "$root_aliases" "$f"; then continue; fi ;;
+		esac
+		d=${f%.md}
+		[ -d "$d" ] || continue
+		[ -n "$(find "$(dirname "$d")" -maxdepth 1 -type d -name "$(basename "$d")")" ] || continue
+		beside="$beside$f$NL"
 	done
 	vendored=$(printf '%s' "$beside" | vendored_of)
 	ignored=$(printf '%s' "$beside" | ignored_of)

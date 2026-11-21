@@ -98,8 +98,10 @@ An artefact `name.md` that outgrows one file becomes a directory `name/`. The fi
 `name/README.md` as the entry point - an index or summary linking to the parts - with every link to
 it fixed in the same change, and each part the map distinguishes gets its own row. A directory's
 entry point, where it has one, is its `README.md`. `name.md` MUST NOT exist beside a directory
-`name/` (ADR-0014). Where this specification names `name.md`, it means `name/README.md` once the
-directory exists.
+`name/` whose name matches exactly, case included (ADR-0014). The root files §2.6 names - the map,
+`README.md`, `AGENTS.md` and its aliases, `CHANGELOG.md` - are exempt, since a tool or convention
+looks for them at that path and they cannot move into a directory. Where this specification names
+`name.md`, it means `name/README.md` once the directory exists.
 
 2.7 A map MAY name artefacts this specification does not define. It MUST give each one a tense, a
 mutability and an audience, drawn from the sets in the `Property values` table in

@@ -185,6 +185,41 @@ echo x >docs/decisions/README.md
 echo x >docs/decisions.md
 expect "a file beside a directory of its name fails" 1 "FAIL [map] docs/decisions.md sits beside docs/decisions/" map
 
+# On a case-sensitive filesystem this passes either way; on a case-insensitive one (Windows, and
+# macOS by default) `[ -d docs/Notes ]` also finds docs/notes/, which is not beside docs/Notes.md.
+fixture
+after '^DOC-MAP.md ' 'docs/Notes.md  notes'
+after '^[|] `DOC-MAP.md` ' '| `docs/Notes.md` | notes | present | rewritten in place | owner |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `docs/Notes.md` | start | never |'
+mkdir docs/notes
+echo x >docs/notes/data.txt
+echo x >docs/Notes.md
+expect "a directory whose name differs only in case is not beside the file" 0 "checks passed" map
+
+fixture
+after '^DOC-MAP.md ' 'AGENTS.md      agent guide'
+after '^[|] `DOC-MAP.md` ' '| `AGENTS.md` | agent guide | present | rewritten in place | owner |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `AGENTS.md` | start | never |'
+mkdir AGENTS
+echo x >AGENTS/data.txt
+echo x >AGENTS.md
+expect "a root file a tool looks for may sit beside a directory of its name" 0 "checks passed" map
+
+fixture
+after '^DOC-MAP.md ' 'GEMINI.md      alias'
+after '^[|] `DOC-MAP.md` ' '| `GEMINI.md` | **Alias** for `DOC-MAP.md` | present | rewritten in place | contributor |'
+after '^[|] `DOC-MAP.md` +[|] start' '| `GEMINI.md` | start | never |'
+mkdir GEMINI
+echo x >GEMINI/data.txt
+echo x >GEMINI.md
+expect "a root alias may sit beside a directory of its name" 0 "checks passed" map
+
+fixture
+mkdir docs/AGENTS
+echo x >docs/AGENTS/data.txt
+echo x >docs/AGENTS.md
+expect "the root exemption does not reach below the root" 1 "FAIL [map] docs/AGENTS.md sits beside docs/AGENTS/" map
+
 fixture
 mkdir -p docs/archive
 printf 'See ADR-0099.\n' >docs/archive/stale.md
