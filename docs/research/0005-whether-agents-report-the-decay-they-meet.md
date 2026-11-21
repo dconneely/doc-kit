@@ -12,15 +12,18 @@ show a tendency, not a rate.
 Whether an agent filing an unrelated fact reports decay it meets depends on the model; the stanza
 does not ask it to. The Claude models report decay in the file they edit: given a specification
 stating one limit with two numbers, Haiku and Sonnet named both passages and left the choice to the
-owner, and given a plan entry marked done, reported it in nearly every session. DeepSeek reported
-the two specification decays in four of six sessions and never the plan entry. Gemini, in 26
-sessions, and GPT-OSS never reported any, Gemini even when it wrote its fact on the line beside the
-contradiction. No session edited decayed text to resolve it.
+owner in every session. Given a plan entry marked done, Sonnet reported it in every session, and
+Haiku in most on the uncut kit but in two of six on kits without the three map passages research
+note 0006 cuts. DeepSeek reported the two specification decays in six of twelve sessions and never
+reported the plan entry. Gemini, in 35 sessions, and GPT-OSS never reported any, Gemini even when it
+wrote its fact on the line beside the contradiction.
 
-No session deleted the entry marked done. Agents delete the entries a session finishes (the
-`plan-done` scenario), and treat any other edit as outside the request, even when the stanza says to
-delete finished entries whoever finished them. Decay of that kind is therefore reported but stays
-until the owner acts on the report.
+One session resolved decay rather than reporting it: a DeepSeek session deleted the plan entry
+marked done, citing the rule that finished entries are deleted. Every other session left decayed
+text as it was. Agents delete the entries a session finishes (the `plan-done` scenario), and treat
+any other edit as outside the request, even when the stanza says to delete finished entries whoever
+finished them. Decay of that kind is therefore reported but stays until the owner acts on the
+report.
 
 Decay outside the file being edited is reported only when the agent opens the file that shows it.
 Given a fact naming the code that implements it, Haiku usually opened the code and reported the
@@ -37,15 +40,16 @@ with Haiku. Neither is in the stanza.
 ## Evidence
 
 `claude -p --permission-mode acceptEdits --model claude-haiku-5-5`, and `--model claude-sonnet-5-5`,
-with the index generator allowed, Claude Code 2.1.329, no `CLAUDE.md`. A session passes when it
-reports the decay or resolves it; every log was read, and the scores below use the done-marking
-check described in Dead ends.
+with the index generator allowed, no `CLAUDE.md`: on the uncut kit with Claude Code 2.1.329, and on
+the shipped kit, as research note 0006 cuts it, at `dec5345` with Claude Code 2.1.330. A session
+passes when it reports the decay or resolves it; every log was read, and the scores below use the
+checks as corrected in Dead ends.
 
-| Scenario     | Decay seeded                                     | Haiku, no line | Haiku, report line | Sonnet, no line |
-| ------------ | ------------------------------------------------ | -------------- | ------------------ | --------------- |
-| `decay-plan` | a plan entry marked `**Done:**`                  | 6 / 8          | 8 / 8              | 3 / 3           |
-| `decay-spec` | 5 MB and 20 MB limits for the same 413 rejection | 3 / 3          | 3 / 3              | 3 / 3           |
-| `decay-code` | a 5 MB limit the code sets to 20 MB              | 7 / 8          | 7 / 8              | 0 / 3           |
+| Scenario     | Decay seeded                                     | Haiku, uncut | Haiku, shipped | Haiku, report line | Sonnet, uncut | Sonnet, shipped |
+| ------------ | ------------------------------------------------ | ------------ | -------------- | ------------------ | ------------- | --------------- |
+| `decay-plan` | a plan entry marked `**Done:**`                  | 6 / 8        | 1 / 3          | 8 / 8              | 3 / 3         | 3 / 3           |
+| `decay-spec` | 5 MB and 20 MB limits for the same 413 rejection | 3 / 3        | 3 / 3          | 3 / 3              | 3 / 3         | 3 / 3           |
+| `decay-code` | a 5 MB limit the code sets to 20 MB              | 7 / 8        | 3 / 3          | 7 / 8              | 0 / 3         | 0 / 3           |
 
 The report line, in a scratch copy of the kit, followed "Delete finished plan entries": "Report
 stale or contradictory text you meet, including text the code contradicts." The read-whole line
@@ -56,34 +60,37 @@ of 3.
 Reports named the decay specifically and declined to choose: "Those cannot both hold for the same
 limit, so one of them needs the owner's decision" (`decay-spec`, no line); "One of the two is wrong,
 and it needs deciding which before the spec is corrected" (`decay-code`, no line). Every
-`decay-plan` report left the entry because deleting it was outside the request. All 65 decay
-sessions, those in Dead ends included, kept the rules.
+`decay-plan` report left the entry because deleting it was outside the request. Every Claude
+session, those in Dead ends included, kept the rules.
 
 With the stanza's plan line changed to "Delete finished plan entries, whoever finished them; don't
 mark them done.", five Haiku `decay-plan` sessions each reported the entry and none deleted it: "I
 left it alone because it is outside this request, and it is yours to decide." Three `plan` sessions
 under the same line removed nothing from the plan.
 
-The other models, on the kit cut as research note 0006 describes, scored by the checks as corrected
-in Dead ends, which agree with a reading of every log. DeepSeek as `deepseek-flash` at low effort
-through its Anthropic-compatible endpoint, under the Claude Code command above; Gemini and GPT-OSS
-as `agy --model gemini-3.8-flash-low` and `--model gpt-oss-120b-medium`, with the command in
-research note 0003. Sessions passing:
+The other models, on the kit cut as research note 0006 describes and again on the shipped kit at
+`dec5345`, scored by the checks as corrected in Dead ends, which agree with a reading of every log.
+DeepSeek as `deepseek-flash` at low effort through its Anthropic-compatible endpoint, under the
+Claude Code command above; Gemini and GPT-OSS as `agy --model gemini-3.8-flash-low` and
+`--model gpt-oss-120b-medium`, with the command in research note 0003. Sessions passing:
 
 | Scenario     | DeepSeek, no line | Gemini, no line | Gemini, report line | GPT-OSS, no line |
 | ------------ | ----------------- | --------------- | ------------------- | ---------------- |
-| `decay-plan` | 0 / 3             | 0 / 8           | 0 / 5               | 0 / 3            |
-| `decay-spec` | 2 / 3             | 0 / 8           | 0 / 5               | 0 / 3            |
-| `decay-code` | 2 / 3             | 0 / 8           | 0 / 5               | 0 / 2            |
+| `decay-plan` | 1 / 6             | 0 / 11          | 0 / 5               | 0 / 6            |
+| `decay-spec` | 2 / 6             | 0 / 11          | 0 / 5               | 0 / 6            |
+| `decay-code` | 4 / 6             | 0 / 11          | 0 / 5               | 0 / 5            |
 
 DeepSeek's reports were like the Claude models': "the existing `Errors` entry ("larger than 20 MB")
 conflicts with the `Upload limit` entry ("larger than 5 MB"). That is pre-existing and outside this
-task, so I left it unchanged." Gemini's sessions said only where the fact went. One `decay-spec`
-session put it under the `## Errors` heading, directly below the 20 MB rejection that contradicts
-the 5 MB one above, and one `decay-plan` session added its entry after the entry marked done.
-GPT-OSS declined all three `decay-plan` sessions, asking for the fact it had been given, as it has
-the plain plan scenario before (research note 0003); one `decay-spec` session put the fact in a new,
-unmapped `docs/errors.md`, breaking the rules, and one declined.
+task, so I left it unchanged." Its `decay-plan` pass deleted the entry marked done, with the
+template's example entry; another session gave its own new entry a `**Done:**` line, copying the
+entry beside it. Gemini's sessions said only where the fact went. One `decay-spec` session put it
+under the `## Errors` heading, directly below the 20 MB rejection that contradicts the 5 MB one
+above, and one `decay-plan` session added its entry after the entry marked done. GPT-OSS declined
+five of six `decay-plan` sessions, asking for the fact it had been given, as it has the plain plan
+scenario before (research note 0003), and filed the sixth in a new file under `docs/plan/`. Of its
+`decay-spec` sessions, one put the fact in a new, unmapped `docs/errors.md`, breaking the rules, one
+declined, and two wrote it as a proposal in `agy`'s own state directory, outside the repository.
 
 ## Dead ends
 
