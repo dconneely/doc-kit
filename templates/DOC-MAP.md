@@ -7,27 +7,25 @@ belongs**. Start here when you have something to write down and are not sure whi
 
 The tense of the sentence you are writing usually settles it:
 
-| If you are asking...                        | If you are writing...                                    | It belongs in                                                                             |
-| ------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| "what does it do? can I rely on X?"         | "the system does X"                                      | the specification                                                                         |
-| "should it do X at all?"                    | "X is out of scope" or "callers must not rely on X"      | the specification's scope, or what it leaves unspecified                                  |
-| "why is it like this? was X tried?"         | "we chose X because Y", or "we chose not to do X"        | an ADR                                                                                    |
-| "when did this change?"                     | "X used to be Y, now it is Z"                            | the changelog                                                                             |
-| "is this known? is anyone fixing it?"       | "we should do X"                                         | the plan                                                                                  |
-| "could this be faster, or smarter?"         | "X is worth doing once Y is true"                        | the plan, with Y named as the trigger                                                     |
-| "is this a bug, or a decision?"             | "we knowingly differ from the reference/spec here"       | `docs/quirks.md`                                                                          |
-| "why does it fail on X?"                    | "X is unhandled, and we know it"                         | `docs/quirks.md` as accepted-wrong, pinned by a test or assert                            |
-| "is X tested?"                              | "X is deliberately not tested"                           | `docs/testing.md`                                                                         |
-| "how do we know that?"                      | "source A says X, source B says Y, and A won because..." | a research note                                                                           |
-| "why is this code like this?"               | "this code is like this because..."                      | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
-| "what did this code do before?"             | "this code used to..." or "fixed the bug where..."       | the commit message - never a comment                                                      |
-| "is anything left to do here?"              | "this code should also..."                               | the plan - a `TODO` beside the code names the entry, never replaces it                    |
-| "what does this word mean here?"            | "X means Y in this codebase"                             | the glossary                                                                              |
-| "exactly what does the API accept?"         | "the schema / wire format / API accepts X"               | the machine-readable contract, linked from the specification - never restated in prose    |
-| "how do I perform this procedure?"          | "run step 1, then step 2"                                | a how-to guide (`docs/howto/`)                                                            |
-| "where did this external source come from?" | "source A was retrieved from URL B"                      | `docs/sources/`                                                                           |
-| "what must an agent know to work here?"     | "an agent working here needs to know X"                  | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact     |
-| "where does this go?"                       | "this is how each document is used"                      | this file                                                                                 |
+| If you are writing...                                                                   | It belongs in                                                     |
+| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| "the system does X"                                                                     | the specification                                                 |
+| "X is out of scope"                                                                     | the specification's scope                                         |
+| "we chose X because Y"                                                                  | an ADR                                                            |
+| "X used to be Y, now it is Z"                                                           | the changelog                                                     |
+| "we should do X", or "X is worth doing once Y is true"                                  | the plan, naming any trigger Y                                    |
+| "we knowingly differ from the reference/spec here", or "X is unhandled, and we know it" | `docs/quirks.md`, accepted-wrong behaviour pinned by a test       |
+| "X is deliberately not tested"                                                          | `docs/testing.md`                                                 |
+| "source A says X, and I checked"                                                        | a research note                                                   |
+| "this code is like this because..."                                                     | a comment beside it, or an ADR it names if the reason spans files |
+| "this code used to..."                                                                  | the commit message, never a comment                               |
+| "this code should also..."                                                              | the plan; a `TODO` names the entry                                |
+| "X means Y here"                                                                        | the glossary                                                      |
+| "the API accepts X"                                                                     | the machine-readable contract, linked from the specification      |
+| "run step 1, then step 2"                                                               | a how-to guide (`docs/howto/`)                                    |
+| "source A was retrieved from URL B"                                                     | `docs/sources/`                                                   |
+| "an agent working here needs to know X"                                                 | `AGENTS.md` if routing or a hazard, else the fact's own document  |
+| "this is how each document is used"                                                     | this file                                                         |
 
 ## Layout
 

@@ -5,8 +5,8 @@
 Observed directly with `tests/doc-kit-eval.sh` on 2026-11-20 and 2026-11-21, on the templates in an
 empty repository. The variants ran with Claude Haiku under Claude Code; DeepSeek Flash, Gemini 3.8
 Flash and GPT-OSS 120B then ran the full suite on the cut kit, and Haiku its decay scenarios
-(research note 0005). Three runs per scenario and variant show whether a passage changes results,
-not by how much.
+(research note 0005). A shorter routing table ran with Haiku and Gemini 3.8 Flash. Three runs per
+scenario and variant show whether a passage changes results, not by how much.
 
 ## Finding
 
@@ -16,7 +16,7 @@ gives, and the bold "Write the least that is true" line, which the map states as
 From the template map: the paragraph saying each artefact holds its own rules and pointing to the
 adoption record, the advice to split a sentence that fits two places, and the rule that tense routes
 a fact, which the routing table already does. The stanza went from 264 words to 178, the map from
-2,106 to 2,031.
+2,106 to 2,031, and to 1,819 with the shorter routing table below.
 
 Three passages are needed:
 
@@ -27,9 +27,13 @@ Three passages are needed:
   them done.", or without the Flow ending in the entry's deletion, a session that finished planned
   work sometimes never opened the plan and left the entry; with both, none did.
 
-The ten routing rows a scenario covers made no difference to Haiku either. Without them, facts
-landed where they belong, and Haiku reported a finished plan entry it met while adding one as often
-as on the shipped map. The rows are not cut: no other model has run without them.
+The routing table is shorter, not cut. Without its "If you are asking..." column, with the two plan
+rows and the two quirks rows each merged into one and the longer cells shortened, it went from 395
+words to 216, and Haiku and Gemini placed facts and kept the rules as well as on the full table. The
+quirks row keeps "from the reference/spec": shortened to "we knowingly differ here", it drew a rule
+with its reason into the quirks file. Cut outright, the ten rows a scenario covers made no
+difference to Haiku, which also reported a finished plan entry it met while adding one as often as
+on the full map; no other model has run without them.
 
 The three map passages, cut together, did not cost that report either: on the same day, Haiku
 reported a finished plan entry in 13 of 15 sessions on the shipped kit and in 11 of 15 with the
@@ -42,8 +46,7 @@ that stays should have prevented them, or where the map allows the reading the m
 Most of the map is not a candidate: the layout, artefacts and lifecycle tables and the property
 values are what the checker and the specification read, and `ADOPTING.md` names the sections. The
 passages no scenario exercises stay, untested: the stanza's archive, `decision-makers`, citation and
-map-update lines; the map's other routing rows, its "If you are asking..." column, which serves a
-reader looking for a fact rather than filing one, "Deliberately not here", and "Adding a new kind of
+map-update lines; the map's other routing rows, "Deliberately not here", and "Adding a new kind of
 document".
 
 ## Evidence
@@ -97,6 +100,26 @@ against 19 of 36 on the uncut kit, with the same kinds of miss - a record reusin
 named without one, a research note numbered `0000` or not at all, and the future-work fact not
 recognised. It reworded the specification's scope in all three `scope` sessions and left the
 finished entry in two `plan-done` sessions; the lines that forbid both are in the stanza.
+
+The shorter routing table ran on 2026-11-21 on the kit at `e8f3e2c`, the 13 filing scenarios three
+times per arm and model, side by side: Haiku under Claude Code 2.1.330 as above, and Gemini 3.8
+Flash under `agy` 1.5.14 with the command in the how-to. Sessions placed, and sessions that kept the
+rules:
+
+| Routing table                                  | Words | Haiku placed | Haiku kept | Gemini placed | Gemini kept |
+| ---------------------------------------------- | ----- | ------------ | ---------- | ------------- | ----------- |
+| full                                           | 395   | 38 / 39      | 38 / 39    | 39 / 39       | 39 / 39     |
+| without the asking column                      | 275   | 39 / 39      | 38 / 39    | 37 / 38       | 37 / 38     |
+| also merged and shortened, quirks row as above | 213   | 39 / 39      | 39 / 39    | 38 / 39       | 38 / 39     |
+
+Haiku's one miss, on the full table, was a `plan-done` session that never opened the plan. Both its
+rule breaks left the decisions index stale because PowerShell timed out on every command with six
+runs sharing the machine, which the sessions reported; such timeouts appear in all three arms.
+Gemini's misses: a quirk also filed as a plan entry; a history fact placed in a decision record and
+the generated index hand-edited, the same rule break as one `decision` session; and the rule with
+its reason filed as a quirk, citing the shortened quirks row. One Gemini session, a rule with its
+reason without the asking column, ran past the 30-minute limit and is not counted. Gemini's three
+and two problems against none on the full table are within what three runs can tell apart.
 
 ## Dead ends
 
