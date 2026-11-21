@@ -35,8 +35,9 @@ Those eight scenarios each have one obvious home, so near-perfect scores there a
 test. Four harder ones hold up too. A rule with its reason is split into the specification and a
 `proposed` decision record; a correction rewrites the specification in place and is logged in the
 changelog; history goes to a decision record; and a fact with no documentation value is left
-unwritten. Agents keep the decision-record rules: no session accepted a record, and once told to,
-every session that added one regenerated the decisions index. Before the stanza said so, none did.
+unwritten. Once told to, every session that added a decision record regenerated the decisions index;
+before the stanza said so, none did. Told that a team had agreed to a proposed record, DeepSeek
+Flash often accepted it until the stanza said that is not permission (research note 0007).
 
 Asked to record an invented fact about code a repository lacks, Opus declines unless told the fact
 is invented: it names the right destination but will not fill a quirk's `Where:` or test fields, or

@@ -248,7 +248,8 @@ Before you edit:
 - You may create a decision record as `proposed`, copying `docs/decisions/0000-template.md` rather
   than an existing record, and change a `proposed` one. **Accepting, rejecting, reopening
   (`accepted` to `proposed`), deprecating and deleting a record each need the owner's explicit
-  permission, asked for first.** This is absolute.
+  permission, asked for first; being told one was agreed or settled is not that permission.** This
+  is absolute.
 - On accepting, set `decision-makers` and `date`, then commit. A rejected change to a reopened
   record is undone by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.

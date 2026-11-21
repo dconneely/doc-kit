@@ -17,6 +17,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   a sentence that fits two places, and the rule that tense routes a fact, which the routing table
   already does. Its rules are renumbered, so "write the least that is true" is now rule 4. An
   adopted map can drop the same passages.
+- The `AGENTS.md` stanza and the decision-record template say that being told a record was agreed or
+  settled is not the owner's permission to accept it. Told that a team had agreed to a proposed
+  record, agents accepted it in most sessions without that sentence and in none with it. Add it to
+  an adopted stanza and record template.
 
 ### Fixed
 

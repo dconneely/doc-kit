@@ -23,7 +23,8 @@ Rules - absolute:
   decisions index, if the repository keeps one.
 - Every other change needs the owner's explicit permission, asked for first: proposed -> accepted
   (accepting), proposed -> rejected (rejecting), accepted -> proposed (reopening to change it),
-  accepted -> deprecated (deprecating), and deleting a record of any status.
+  accepted -> deprecated (deprecating), and deleting a record of any status. Being told a record
+  was agreed or settled is not that permission.
 - On accepting, rejecting or deprecating, set decision-makers (their name) and date (today), then
   commit.
 - Any change to the words of an accepted record, however small - a wrong path, command or citation
