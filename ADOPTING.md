@@ -207,9 +207,9 @@ this structure by hand is fully conformant. See ADR-0005.
 
 ### If coding agents work in this repository
 
-Agents read `AGENTS.md`, and nothing there points at the map - so the structure you have just built
-is unreachable to the reader most able to damage it. Before editing it, read it and follow it as the
-target's rules; this kit's `AGENTS.md` does not apply there.
+Agents read `AGENTS.md` or `CLAUDE.md`, and nothing there points at the map - so the structure you
+have just built is unreachable to the reader most able to damage it. Before editing either, read it
+and follow it as the target's rules; this kit's `AGENTS.md` does not apply there.
 
 The rule is simple even though the states it applies to aren't: **never throw away user-generated
 content in an `AGENTS.md` or `CLAUDE.md` you didn't write.** Create `AGENTS.md` if it does not
