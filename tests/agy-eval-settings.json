@@ -1,0 +1,12 @@
+{
+  "allowNonWorkspaceAccess": false,
+  "permissions": {
+    "allow": [],
+    "deny": [
+      "command(regex:.*\\b(gh|curl|wget|Invoke-WebRequest|iwr|Invoke-RestMethod|irm|Start-BitsTransfer|npm|npx|pip|pip3|winget|scoop|choco|ssh|scp)\\b.*)",
+      "command(regex:.*\\bgit\\s+(push|pull|fetch|clone|remote|config|credential)\\b.*)",
+      "command(regex:.*(\\brm\\s+-[a-zA-Z]*[rf]|\\bRemove-Item\\b|\\brmdir\\b|\\brd\\s|\\bdel\\s|\\bFormat-|\\bStop-Process\\b|\\bSet-ExecutionPolicy\\b).*)",
+      "command(regex:.*(\\b(ls|dir|gci|Get-ChildItem|eza|tree)\\b.*\\s-(R|r|Recurse)\\b|\\btree\\b|\\beza\\b).*)"
+    ]
+  }
+}
