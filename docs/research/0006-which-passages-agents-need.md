@@ -18,7 +18,7 @@ adoption record, the advice to split a sentence that fits two places, and the ru
 a fact, which the routing table already does. The stanza went from 264 words to 178, the map from
 2,106 to 2,031.
 
-Four passages are needed:
+Three passages are needed:
 
 - **The stanza's specification line.** Without "Change the specification because behaviour changed,
   never because it'd read better. Purpose and scope aren't yours to revise.", sessions asked to
@@ -26,12 +26,14 @@ Four passages are needed:
 - **The stanza's plan line, and the map's Flow.** Without "Delete finished plan entries; don't mark
   them done.", or without the Flow ending in the entry's deletion, a session that finished planned
   work sometimes never opened the plan and left the entry; with both, none did.
-- **The map's routing rows.** With the ten rows a scenario covers removed, facts still landed where
-  they belong, but sessions far less often reported a finished plan entry they met while adding one.
 
-The three map passages, cut together, did not cost that report: on the same day, Haiku reported a
-finished plan entry in 13 of 15 sessions on the shipped kit and in 11 of 15 with the three restored
-(research note 0005).
+The ten routing rows a scenario covers made no difference to Haiku either. Without them, facts
+landed where they belong, and Haiku reported a finished plan entry it met while adding one as often
+as on the shipped map. The rows are not cut: no other model has run without them.
+
+The three map passages, cut together, did not cost that report either: on the same day, Haiku
+reported a finished plan entry in 13 of 15 sessions on the shipped kit and in 11 of 15 with the
+three restored (research note 0005).
 
 The other three models placed as well on the cut kit as on the uncut one (research note 0003), and
 none of their misses was where a cut passage would have helped. Their misses came where a passage
@@ -52,26 +54,27 @@ removed, running the scenarios that use the passage; `tests/doc-kit-eval-variant
 copy. The baseline is the same model's full-suite runs on the uncut kit that day (research notes
 0003 and 0005). Sessions placed:
 
-| Passage removed                                                  | Scenarios run                                                                                                               | Baseline                  | Without it                |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------- |
-| stanza: the tense list, keeping the quirks and archive lines     | decision, quirk, research, plan, changelog, spec, howto, rule-and-why, correction, history, plan-done, accept               | 35 / 36                   | 36 / 36                   |
-| stanza: "Change the specification because behaviour changed ..." | spec, changelog, correction, rule-and-why, scope                                                                            | 15 / 15                   | 13 / 15                   |
-| stanza: "Delete finished plan entries; don't mark them done."    | plan-done, decay-plan                                                                                                       | 3 / 3, 6 / 8              | 3 / 3, 2 / 3              |
-| stanza: "Write the least that is true. ..."                      | history, correction, decision, rule-and-why                                                                                 | 12 / 12                   | 12 / 12                   |
-| stanza: "Adding a document means updating `DOC-MAP.md` ..."      | howto, research, decision                                                                                                   | 9 / 9                     | 9 / 9                     |
-| map: the ten covered routing rows                                | decision, quirk, research, plan, glossary, changelog, spec, howto, rule-and-why, correction, history, plan-done, decay-plan | 35 / 36, decay-plan 6 / 8 | 36 / 36, decay-plan 2 / 8 |
-| map: the Flow                                                    | plan-done, correction, changelog, decision, rule-and-why, history                                                           | 18 / 18                   | 17 / 18                   |
-| map: rule 2, "Tense routes it"                                   | spec, decision, changelog, plan, history, correction                                                                        | 18 / 18                   | 18 / 18                   |
-| map: "If a sentence seems to fit two places ..."                 | rule-and-why, correction, changelog, history                                                                                | 12 / 12                   | 12 / 12                   |
-| map: "Each artefact holds its own format and rules ..."          | decision, research, howto, quirk, plan                                                                                      | 14 / 15                   | 15 / 15                   |
+| Passage removed                                                  | Scenarios run                                                                                                               | Baseline                    | Without it                  |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------- | --------------------------- |
+| stanza: the tense list, keeping the quirks and archive lines     | decision, quirk, research, plan, changelog, spec, howto, rule-and-why, correction, history, plan-done, accept               | 35 / 36                     | 36 / 36                     |
+| stanza: "Change the specification because behaviour changed ..." | spec, changelog, correction, rule-and-why, scope                                                                            | 15 / 15                     | 13 / 15                     |
+| stanza: "Delete finished plan entries; don't mark them done."    | plan-done, decay-plan                                                                                                       | 3 / 3, 6 / 8                | 3 / 3, 2 / 3                |
+| stanza: "Write the least that is true. ..."                      | history, correction, decision, rule-and-why                                                                                 | 12 / 12                     | 12 / 12                     |
+| stanza: "Adding a document means updating `DOC-MAP.md` ..."      | howto, research, decision                                                                                                   | 9 / 9                       | 9 / 9                       |
+| map: the ten covered routing rows                                | decision, quirk, research, plan, glossary, changelog, spec, howto, rule-and-why, correction, history, plan-done, decay-plan | 35 / 36, decay-plan 11 / 15 | 36 / 36, decay-plan 13 / 15 |
+| map: the Flow                                                    | plan-done, correction, changelog, decision, rule-and-why, history                                                           | 18 / 18                     | 17 / 18                     |
+| map: rule 2, "Tense routes it"                                   | spec, decision, changelog, plan, history, correction                                                                        | 18 / 18                     | 18 / 18                     |
+| map: "If a sentence seems to fit two places ..."                 | rule-and-why, correction, changelog, history                                                                                | 12 / 12                     | 12 / 12                     |
+| map: "Each artefact holds its own format and rules ..."          | decision, research, howto, quirk, plan                                                                                      | 14 / 15                     | 15 / 15                     |
 
 Every session in every variant kept the rules. Both misses without the specification line were
 `scope`: the session rewrote the scope sentence in place, one saying "The meaning is the same, and
 nothing about what the system does has changed." Each `plan-done` miss, without the plan line or
 without the Flow, recorded the shipped change in the changelog and the specification and never
-opened the plan. Without the routing rows, six of eight `decay-plan` sessions filed their new entry
-correctly and said nothing of the entry marked done beside it, against two of eight on the uncut
-map.
+opened the plan. The routing rows' `decay-plan` counts are fifteen sessions per arm, run side by
+side on 2026-11-21 on the kit at `e9fb1ea` with Claude Code 2.1.330; every session that reported
+named the entry marked done and said finished entries are deleted, and every miss filed its own
+entry and said nothing of the other.
 
 Cut together, the stanza's tense list, plan line and write-the-least line placed 51 of 54 full-suite
 sessions; the one `plan-done` miss among them is why the plan line stays. The three map passages cut
@@ -104,11 +107,11 @@ and `agy` waited on it. A deny rule for recursive listings, added to the command
 with an agent error and no log. One Gemini session, before the rule, hung the same way, waiting on a
 background task; what that task was is not recorded.
 
-Three `decay-plan` sessions per kit suggested that the three map passages, cut together, cost the
-report of a finished plan entry: two of six sessions on kits without them reported it, against six
-of eight on the uncut kit. Fifteen sessions per kit on the same day, with only those passages
-differing, showed no such effect. Three runs show a passage that changes everything, not one that
-changes a rate.
+Three `decay-plan` sessions per kit suggested that two cuts cost the report of a finished plan
+entry. Without the routing rows, two of eight sessions reported it, against six of eight on the
+uncut map; without the three map passages cut together, two of six. Fifteen sessions per kit on the
+same day, with only the cut differing, showed no such effect for either. Three runs show a passage
+that changes everything, not one that changes a rate.
 
 ## Open questions
 
