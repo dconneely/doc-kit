@@ -78,7 +78,9 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
    `DOC_KIT_EVAL_OUT` keeps each session's log and diff, and the agent command; without it they are
    deleted with the run. Runs for different models or kits can go side by side, each in its own
-   shell and output directory.
+   shell and output directory, but not too many: with six at once on Windows, Claude's PowerShell
+   tool timed out, and sessions that could not run the index generator broke a rule. Look for
+   timeouts in the logs, and compare arms only when they ran under the same load.
 
 5. **Set the time limit for slow models.**
 
