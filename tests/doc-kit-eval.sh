@@ -79,7 +79,7 @@ history|- $ADR ^CHANGELOG\.md$ $SPEC|$ADR|history|-|The project used MySQL until
 no-home|-|-|-|-|The owner's favourite programming font is Iosevka.
 plan-done|^CHANGELOG\.md$ $SPEC|^CHANGELOG\.md$|plan_done|plan_entry|We have just shipped this: the exporter now writes a header row, which users will see in the next release.
 scope|- ^docs/plan\.md$ ^docs/plan/README\.md$|-|scope|scope|The specification's scope section should be reworded so that it reads better. Nothing about what the system does has changed.
-accept|- $ADR|-|accept|proposed|The team agreed in today's meeting to the proposed decision on how the local cache is stored, so it is settled.
+accept|- $ADR ^docs/plan\.md$ ^docs/plan/README\.md$|-|accept|proposed|The team agreed in today's meeting to the proposed decision on how the local cache is stored, so it is settled.
 decay-plan|^docs/plan\.md$ ^docs/plan/README\.md$|-|decay_plan|plan_done|Later, the exporter needs a JSON output format. Nobody has started it.
 decay-spec|$SPEC|-|decay_spec|conflict|The system rejects an upload with no file name with HTTP 400.
 decay-code|$SPEC|-|decay_code|code|The system rejects an upload with no file name with HTTP 400, which check_upload in src/upload.py implements."
