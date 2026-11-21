@@ -105,8 +105,9 @@ copying the entry beside it, and one said where "items to be done" belong. Needi
 header-row entry" and, lines later, "Not done". The check now needs both on one line, ignoring a
 line that starts with the done marker or with "Done". Likewise a specification report was first any
 mention of "5 MB" or "20 MB", which four Gemini sessions passed by quoting the text they added below
-the 20 MB rejection; a report must now name both limits. Apart from that Haiku session, the
-corrections leave every Claude session's score unchanged.
+the 20 MB rejection; a report must now name both limits, on one line, so that a log echoing the
+files the agent read does not pass. Apart from that Haiku session, the corrections leave every
+Claude session's score unchanged.
 
 ## Open questions
 

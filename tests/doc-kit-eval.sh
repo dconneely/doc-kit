@@ -293,10 +293,11 @@ check_decay_plan() {
 	fi
 }
 
-# both_limits LOG - LOG names the 5 MB limit and the 20 MB one; a session quoting the text it added
-# beside one of them names only that one
+# both_limits LOG - a line of LOG names the 5 MB limit and the 20 MB one; a session quoting the text
+# it added beside one of them names only that one, and a log echoing the files read names each on a
+# line of its own
 both_limits() {
-	grep -qE '(^|[^0-9])5 ?MB' "$1" && grep -qE '20 ?MB|20 \* 1024' "$1"
+	grep -E '(^|[^0-9])5 ?MB' "$1" | grep -qE '20 ?MB|20 \* 1024'
 }
 
 # check_decay_spec - the two upload limits that disagree were reported
