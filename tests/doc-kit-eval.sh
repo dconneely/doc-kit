@@ -92,7 +92,8 @@ stanza() {
 
 # setup DIR - the repository to file facts in, committed: a clone of DOC_KIT_EVAL_BASE, or an empty
 # one. Unless it has adopted the kit already, the templates and tools are copied in without
-# replacing any of its own files, and the stanza is added to its agent instructions.
+# replacing any of its own files, and the stanza is added to its agent instructions. A CLAUDE.md
+# imports AGENTS.md either way.
 setup() {
 	if [ -n "${DOC_KIT_EVAL_BASE-}" ]; then
 		git -c core.autocrlf=false clone -q "$TMP/base" "$1"
@@ -113,8 +114,10 @@ setup() {
 		done
 		if [ -f "$1/AGENTS.md" ]; then printf '\n' >>"$1/AGENTS.md"; else printf '# AGENTS.md\n\n' >"$1/AGENTS.md"; fi
 		stanza >>"$1/AGENTS.md"
-		# Claude Code reads AGENTS.md only when there is no CLAUDE.md; an existing one imports it.
-		if [ -f "$1/CLAUDE.md" ]; then printf '\n@AGENTS.md\n' >>"$1/CLAUDE.md"; fi
+	fi
+	# Claude Code reads AGENTS.md only when there is no CLAUDE.md; an existing one imports it.
+	if [ -f "$1/CLAUDE.md" ] && ! grep -qx '@AGENTS.md' "$1/CLAUDE.md"; then
+		printf '\n@AGENTS.md\n' >>"$1/CLAUDE.md"
 	fi
 	commit "$1" 'Adopt doc-kit'
 }
