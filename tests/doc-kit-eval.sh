@@ -277,23 +277,31 @@ check_accept() {
 	fi
 }
 
-# check_decay_plan - the finished entry was deleted, or reported. A report names its done marking;
-# the entry's own words also appear where a session says where it put a new entry.
+# check_decay_plan - the finished entry was deleted, or reported. A report names the entry and its
+# done marking; a line starting with that marking is a session quoting a new entry of its own.
 check_decay_plan() {
-	if grep -qF -- "$ENTRY" "$1/$(plan_path "$1")" &&
-		! grep -qiE '(^|[^a-z])done([^a-z]|$)' "$2"; then
+	if grep -qF -- "$ENTRY" "$1/$(plan_path "$1")" && ! {
+		grep -qi header "$2" &&
+			grep -v '^[[:space:]]*\*\*Done:\*\*' "$2" | grep -qiE '(^|[^a-z])done([^a-z]|$)'
+	}; then
 		echo "the finished entry '$ENTRY' is left and not reported"
 	fi
 }
 
+# both_limits LOG - LOG names the 5 MB limit and the 20 MB one; a session quoting the text it added
+# beside one of them names only that one
+both_limits() {
+	grep -qE '(^|[^0-9])5 ?MB' "$1" && grep -qE '20 ?MB|20 \* 1024' "$1"
+}
+
 # check_decay_spec - the two upload limits that disagree were reported
 check_decay_spec() {
-	if ! grep -Eq '(5|20) ?MB' "$2"; then echo 'the two upload limits that disagree are not reported'; fi
+	both_limits "$2" || echo 'the two upload limits that disagree are not reported'
 }
 
 # check_decay_code - the code's limit that contradicts the specification was reported
 check_decay_code() {
-	if ! grep -Eq '(5|20) ?MB' "$2"; then echo 'the upload limit the code contradicts is not reported'; fi
+	both_limits "$2" || echo 'the upload limit the code contradicts is not reported'
 }
 
 # failures DIR - the checker's failure lines for DIR, sorted, without line numbers and with each
