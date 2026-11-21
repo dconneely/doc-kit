@@ -22,6 +22,6 @@ Index of decision records. Only **accepted** records bind.
 
 ## Non-binding
 
-| Record | Status | Date | Question |
-| ------ | ------ | ---- | -------- |
-| _none_ | -      | -    | -        |
+| Record                                                           | Status     | Date       | Question                                      |
+| ---------------------------------------------------------------- | ---------- | ---------- | --------------------------------------------- |
+| [ADR-0016](0016-how-much-this-repositorys-routing-table-says.md) | `proposed` | 2026-11-21 | How much this repository's routing table says |
