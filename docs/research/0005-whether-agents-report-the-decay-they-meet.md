@@ -100,11 +100,13 @@ Matching a `decay-plan` report by the entry's own words failed both ways: "heade
 "header-row entry", and a looser match accepted a session saying only where it put its new entry.
 Looking for "done" alone, which every Claude report used, then passed five sessions of other models
 that reported nothing: four quoted a new entry they had given a `**Done:**` line of their own,
-copying the entry beside it, and one said where "items to be done" belong. The check now needs
-"header" and "done" both, ignoring a line that starts with the done marker. Likewise a specification
-report was first any mention of "5 MB" or "20 MB", which four Gemini sessions passed by quoting the
-text they added below the 20 MB rejection; a report must now name both limits. Both corrections
-leave every Claude session's score unchanged.
+copying the entry beside it, and one said where "items to be done" belong. Needing "header" and
+"done" anywhere in the log then passed a Haiku session in research note 0006 that wrote "after the
+header-row entry" and, lines later, "Not done". The check now needs both on one line, ignoring a
+line that starts with the done marker or with "Done". Likewise a specification report was first any
+mention of "5 MB" or "20 MB", which four Gemini sessions passed by quoting the text they added below
+the 20 MB rejection; a report must now name both limits. Apart from that Haiku session, the
+corrections leave every Claude session's score unchanged.
 
 ## Open questions
 

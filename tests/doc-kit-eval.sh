@@ -281,11 +281,13 @@ check_accept() {
 }
 
 # check_decay_plan - the finished entry was deleted, or reported. A report names the entry and its
-# done marking; a line starting with that marking is a session quoting a new entry of its own.
+# done marking on one line; a line starting with that marking is a session quoting a new entry of
+# its own, and one starting with "Done" is a session reporting its own work.
 check_decay_plan() {
 	if grep -qF -- "$ENTRY" "$1/$(plan_path "$1")" && ! {
-		grep -qi header "$2" &&
-			grep -v '^[[:space:]]*\*\*Done:\*\*' "$2" | grep -qiE '(^|[^a-z])done([^a-z]|$)'
+		grep -v '^[[:space:]]*\*\*Done:\*\*' "$2" | grep -i header |
+			sed -E 's/^[^A-Za-z]*[Dd][Oo][Nn][Ee]([^A-Za-z]|$)//' |
+			grep -qiE '(^|[^a-z])done([^a-z]|$)'
 	}; then
 		echo "the finished entry '$ENTRY' is left and not reported"
 	fi
