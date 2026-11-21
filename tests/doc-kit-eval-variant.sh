@@ -1,12 +1,15 @@
 #!/bin/sh
-# doc-kit-eval-variant - run the agent evals on a copy of the kit with some lines removed, to see
-# whether agents need them. The copy is HEAD exported to a temporary directory, so uncommitted
-# changes are not in it, and line numbers are as at HEAD.
+# doc-kit-eval-variant - run the agent evals on a copy of the kit with some lines removed, or some
+# files as they were at another commit, to see whether agents need what differs. The copy is HEAD
+# exported to a temporary directory, so uncommitted changes are not in it, and line numbers are as
+# at HEAD.
 #
-# Usage:  sh tests/doc-kit-eval-variant.sh -d FILE:LINES [-d FILE:LINES ...] [id ...]
+# Usage:  sh tests/doc-kit-eval-variant.sh [-d FILE:LINES ...] [-r FILE:REV ...] [id ...]
 #         FILE   a path in the kit, such as ADOPTING.md or templates/DOC-MAP.md
 #         LINES  comma-separated line numbers and ranges, such as 16,18-20
+#         REV    a commit to take FILE from, such as a00b431^; applied before any cut to FILE
 #         id     the scenarios to run, as tests/doc-kit-eval.sh takes them (default: every one)
+#         At least one -d or -r is required.
 #
 #         DOC_KIT_AGENT, DOC_KIT_EVAL_RUNS and DOC_KIT_EVAL_OUT pass through to
 #         tests/doc-kit-eval.sh. The removed lines are printed first, and kept in
@@ -20,15 +23,21 @@ LC_ALL=C
 export LC_ALL
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
-usage='usage: sh tests/doc-kit-eval-variant.sh -d FILE:LINES [-d FILE:LINES ...] [id ...]'
+usage='usage: sh tests/doc-kit-eval-variant.sh [-d FILE:LINES ...] [-r FILE:REV ...] [id ...]'
 
 cuts=''
+restores=''
 while [ $# -gt 0 ]; do
 	case $1 in
-		-d)
+		-d | -r)
 			[ $# -ge 2 ] || { echo "$usage" >&2; exit 2; }
-			cuts="$cuts
+			if [ "$1" = -d ]; then
+				cuts="$cuts
 $2"
+			else
+				restores="$restores
+$2"
+			fi
 			shift 2
 			;;
 		-h | --help) echo "$usage"; exit 0 ;;
@@ -36,7 +45,7 @@ $2"
 		*) break ;;
 	esac
 done
-[ -n "$cuts" ] || { echo "$usage" >&2; exit 2; }
+[ -n "$cuts$restores" ] || { echo "$usage" >&2; exit 2; }
 
 # One cut per file, so that every line number is as at HEAD however many cuts name the file.
 cuts=$(printf '%s\n' "$cuts" | awk 'NF {
@@ -59,6 +68,17 @@ removed="$TMP/variant.txt"
 oldifs=$IFS
 IFS='
 '
+for restore in $restores; do
+	IFS=$oldifs
+	file=${restore%%:*}
+	rev=${restore#*:}
+	case $restore in *:?*) ;; *) echo "bad restore $restore" >&2; exit 2 ;; esac
+	mkdir -p "$(dirname "$KIT/$file")"
+	git -C "$ROOT" show "$rev:$file" >"$KIT/$file" || { echo "no $file at $rev" >&2; exit 2; }
+	printf '%s  restored from %s\n' "$file" "$rev" >>"$removed"
+	IFS='
+'
+done
 for cut in $cuts; do
 	IFS=$oldifs
 	file=${cut%%:*}
