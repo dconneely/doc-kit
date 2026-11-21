@@ -309,6 +309,15 @@ failures() {
 			-e 's#^(FAIL \[[a-z]+\] [^ :]*/)([^/ :]+)/README\.md#\1\2.md#' | sort || true)
 }
 
+# keep - save the current session's log and diff in DOC_KIT_EVAL_OUT, if set, whether or not the
+# session finished
+keep() {
+	[ -n "${DOC_KIT_EVAL_OUT-}" ] || return 0
+	cp "$TMP/$name.log" "$DOC_KIT_EVAL_OUT/$name.log"
+	git -C "$dir" add -A
+	git -C "$dir" diff --cached "$start" >"$DOC_KIT_EVAL_OUT/$name.diff"
+}
+
 # kill_tree PID - stop PID and every process it started: through taskkill on Windows, where an agent
 # behind a .cmd wrapper is a grandchild the shell cannot signal, and child by child elsewhere
 kill_tree() {
@@ -412,12 +421,14 @@ for line in $scenarios; do
 		[ -z "$watcher" ] || wait "$watcher"
 		set -e
 		if [ -f "$TMP/$name.timeout" ]; then
+			keep
 			printf 'ERROR %-12s agent stopped after %s seconds\n' "$name" "$limit"
 			exit 2
 		fi
 		if [ "$code" -ne 0 ]; then
 			# A failed session says nothing about the map. Stop rather than spend more on a run that is
 			# failing - on a usage limit, say.
+			keep
 			printf 'ERROR %-12s agent exit %s: %s\n' "$name" "$code" "$(tail -n 1 "$TMP/$name.log")"
 			exit 2
 		fi
@@ -469,11 +480,7 @@ for line in $scenarios; do
 		[ -n "$rule" ] || { run_kept=$((run_kept + 1)); rule='rules kept'; }
 
 		printf '%-14s %s; %s\n' "$name" "$verdict" "$rule"
-
-		if [ -n "${DOC_KIT_EVAL_OUT-}" ]; then
-			cp "$TMP/$name.log" "$DOC_KIT_EVAL_OUT/$name.log"
-			git -C "$dir" diff --cached "$start" >"$DOC_KIT_EVAL_OUT/$name.diff"
-		fi
+		keep
 	done
 
 	[ "$runs" -eq 1 ] ||

@@ -92,8 +92,8 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    A session that ends with an `ERROR` line stops the run with exit status 2. When the cause is the
    provider's, such as no capacity or a usage limit, or a session that hung, rerun the unfinished
    sessions with `DOC_KIT_EVAL_RUNS` set to the number missing, into a new output directory. Do not
-   count the failed session. A model that hangs repeatedly is a finding for the research note, as
-   GPT-OSS's hangs were (research note 0006).
+   count the failed session, but read its log, which is kept with the others: a model that hangs
+   repeatedly is a finding for the research note, as GPT-OSS's hangs were (research note 0006).
 
 7. **Read every log.**
 
