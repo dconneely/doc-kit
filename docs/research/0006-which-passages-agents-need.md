@@ -29,10 +29,9 @@ Four passages are needed:
 - **The map's routing rows.** With the ten rows a scenario covers removed, facts still landed where
   they belong, but sessions far less often reported a finished plan entry they met while adding one.
 
-The three map passages, cut together, may cost the same report: Haiku reported a finished plan entry
-in two of six sessions on kits without them, against six of eight on the uncut kit and two of three
-with only the stanza's passages cut. No variant without one of the three alone ran that scenario, so
-which passage matters, if any, is not known.
+The three map passages, cut together, did not cost that report: on the same day, Haiku reported a
+finished plan entry in 13 of 15 sessions on the shipped kit and in 11 of 15 with the three restored
+(research note 0005).
 
 The other three models placed as well on the cut kit as on the uncut one (research note 0003), and
 none of their misses was where a cut passage would have helped. Their misses came where a passage
@@ -76,10 +75,10 @@ map.
 
 Cut together, the stanza's tense list, plan line and write-the-least line placed 51 of 54 full-suite
 sessions; the one `plan-done` miss among them is why the plan line stays. The three map passages cut
-together placed 51 of 54: one `quirk` session also filed the defect as a plan entry, within its
-baseline spread, and two `decay-plan` sessions did not report, against two of eight on the uncut
-map. On the shipped kit, with both sets cut, one of three Haiku `decay-plan` sessions reported the
-entry (research note 0005). Both combined runs kept the rules in all 54.
+together placed 51 of 54: one `quirk` session also filed the defect as a plan entry, and two
+`decay-plan` sessions did not report, each within its baseline spread; on the shipped kit, Haiku
+reported the entry in 14 of 18 `decay-plan` sessions (research note 0005). Both combined runs kept
+the rules in all 54.
 
 The full suite on the cut kit at `a395432`, three runs, before the decision-record template's
 sentence on agreement (research note 0007). DeepSeek Flash, as in research note 0007, placed every
@@ -105,10 +104,13 @@ and `agy` waited on it. A deny rule for recursive listings, added to the command
 with an agent error and no log. One Gemini session, before the rule, hung the same way, waiting on a
 background task; what that task was is not recorded.
 
+Three `decay-plan` sessions per kit suggested that the three map passages, cut together, cost the
+report of a finished plan entry: two of six sessions on kits without them reported it, against six
+of eight on the uncut kit. Fifteen sessions per kit on the same day, with only those passages
+differing, showed no such effect. Three runs show a passage that changes everything, not one that
+changes a rate.
+
 ## Open questions
 
-- Whether the three map passages cut together cost the report of a finished plan entry. More Haiku
-  `decay-plan` sessions on the uncut and shipped kits would settle whether there is an effect, and a
-  `decay-plan` run without each passage alone, which passage causes it.
 - Whether the untested passages are needed. Each needs a scenario that could fail without it: for
   the map-update line, a fact no mapped artefact holds, so that the agent must add a document.
