@@ -2,9 +2,10 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` on 2026-11-20, on the templates in an empty
-repository, with Claude Haiku under Claude Code only. Three runs per scenario and variant show
-whether a passage changes results, not by how much.
+Observed directly with `tests/doc-kit-eval.sh` on 2026-11-20 and 2026-11-21, on the templates in an
+empty repository. The variants ran with Claude Haiku under Claude Code; DeepSeek Flash, Gemini 3.8
+Flash and GPT-OSS 120B then ran the full suite on the cut kit. Three runs per scenario and variant
+show whether a passage changes results, not by how much.
 
 ## Finding
 
@@ -26,6 +27,10 @@ Four passages are needed:
   work sometimes never opened the plan and left the entry; with both, none did.
 - **The map's routing rows.** With the ten rows a scenario covers removed, facts still landed where
   they belong, but sessions far less often reported a finished plan entry they met while adding one.
+
+The other three models placed as well on the cut kit as on the uncut one (research note 0003), and
+none of their misses was where a cut passage would have helped. Their misses came where a passage
+that stays should have prevented them, or where the map allows the reading the model took.
 
 Most of the map is not a candidate: the layout, artefacts and lifecycle tables and the property
 values are what the checker and the specification read, and `ADOPTING.md` names the sections. The
@@ -69,14 +74,31 @@ together placed 52 of 54: one `quirk` session also filed the defect as a plan en
 `decay-plan` session did not report, each within its baseline spread. Both combined runs kept the
 rules in all 54.
 
+The full suite on the cut kit at `a395432`, three runs, before the decision-record template's
+sentence on agreement (research note 0007). DeepSeek Flash, as in research note 0007, placed every
+filing scenario in all three runs, against 35 of 36 sessions on the uncut kit; its one `plan-done`
+miss logged the shipped change in the changelog and never opened the plan, as Haiku's did without
+the plan line, which DeepSeek had. Gemini 3.8 Flash under `agy`, as in research note 0003, placed 13
+of the 14 filing and refusal scenarios in all three runs. The exception was the rule and its reason,
+placed once: one session wrote nothing, reading the proxy's upload cap as deployment detail, which
+the map's "Deliberately not here" leaves out ("runbooks, unless this is a deployed service"), and
+one filed it as a quirk. GPT-OSS 120B under `agy`, on the kit at `95f2399`, with seven sessions hung
+and four ended by an error (see Dead ends): of the 28 filing sessions that finished, it placed 23,
+against 19 of 36 on the uncut kit, with the same kinds of miss - a record reusing a taken number or
+named without one, a research note numbered `0000` or not at all, and the future-work fact not
+recognised. It reworded the specification's scope in all three `scope` sessions and left the
+finished entry in two `plan-done` sessions; the lines that forbid both are in the stanza.
+
 ## Dead ends
 
-None.
+GPT-OSS's sessions under `agy` hung in seven of its first fifteen: the model listed the repository
+with `ls -R`, which the shell `agy` starts resolves to a recursive listing tool that never returned,
+and `agy` waited on it. A deny rule for recursive listings, added to the command in research note
+0003, stopped the hangs; the model, told the command was refused, carried on. Four sessions ended
+with an agent error and no log. One Gemini session, before the rule, hung the same way, waiting on a
+background task; what that task was is not recorded.
 
 ## Open questions
 
-- Whether other models need the cut passages. Only Haiku ran; research note 0003 shows the filing
-  scenarios agree across five models, so a full-suite run of one other model on the cut kit would
-  settle it.
 - Whether the untested passages are needed. Each needs a scenario that could fail without it: for
   the map-update line, a fact no mapped artefact holds, so that the agent must add a document.

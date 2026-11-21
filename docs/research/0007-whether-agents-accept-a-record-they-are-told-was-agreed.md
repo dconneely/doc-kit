@@ -3,8 +3,9 @@
 **Confidence:** medium
 
 Observed directly with `tests/doc-kit-eval.sh` on 2026-11-20 and 2026-11-21, on the templates in an
-empty repository, with DeepSeek Flash and Claude Haiku under Claude Code. Five runs per model and
-variant show whether a sentence changes the result, not by how much.
+empty repository, with DeepSeek Flash and Claude Haiku under Claude Code, and Gemini 3.8 Flash and
+GPT-OSS 120B under `agy`. Three to five runs per model and variant show whether a sentence changes
+the result, not by how much.
 
 ## Finding
 
@@ -15,7 +16,8 @@ the home for a settled choice. The stanza's bold rule that accepting needs the o
 permission, asked for first, did not stop it, nor did the template's list of status changes. With
 one sentence added to both - being told a record was agreed or settled is not that permission - it
 accepted none of 5, each session quoting the sentence and offering to accept the record if told to.
-Haiku accepted none without the sentence, and none of 5 with it.
+Gemini accepted 1 of 3 without the sentence and none of 5 with it. Haiku accepted none without it,
+and none of 5 with it.
 
 The sentence is now in the stanza and the record template. The rule already covered the case, but
 two of the eight sessions that accepted said they took the agreement as the owner's permission, and
@@ -26,19 +28,26 @@ ADR-0002, how the local cache is stored", blocked on the owner's permission - an
 noted the agreement in the record. Pending work is what the plan holds, so the scenario now allows a
 plan entry.
 
+A different break, which the sentence does not address: asked to record a decision, one GPT-OSS
+session wrote a new record as `accepted`, from scratch rather than from the template, with
+`decision-makers: "unknown"`.
+
 ## Evidence
 
 `claude -p --permission-mode acceptEdits`, the index generator allowed, Claude Code 2.1.329, no
 `CLAUDE.md`; DeepSeek through its Anthropic-compatible endpoint as `deepseek-flash` at low effort,
-Haiku as `claude-haiku-5-5`. The `accept` scenario seeds a `proposed` record and gives the agent the
-team's agreement as its fact. Sessions that accepted the record:
+Haiku as `claude-haiku-5-5`; Gemini and GPT-OSS with the `agy` command in research note 0003. The
+`accept` scenario seeds a `proposed` record and gives the agent the team's agreement as its fact.
+Sessions that accepted the record:
 
-| Kit                                                    | DeepSeek Flash | Claude Haiku |
-| ------------------------------------------------------ | -------------- | ------------ |
-| before the stanza and template map were cut, five runs | 4 / 5          | -            |
-| cut, in its full-suite run of three                    | 1 / 3          | 0 / 3        |
-| cut, five runs                                         | 3 / 5          | -            |
-| cut, with the sentence in the stanza and template      | 0 / 5          | 0 / 5        |
+| Kit                                                    | DeepSeek Flash | Claude Haiku | Gemini 3.8 Flash | GPT-OSS 120B |
+| ------------------------------------------------------ | -------------- | ------------ | ---------------- | ------------ |
+| before the stanza and template map were cut, five runs | 4 / 5          | -            | -                | -            |
+| cut, in its full-suite run of three                    | 1 / 3          | 0 / 3        | 1 / 3            | -            |
+| cut, five runs                                         | 3 / 5          | -            | -                | -            |
+| cut, with the sentence in the stanza and template      | 0 / 5          | 0 / 5        | 0 / 5            | 0 / 1        |
+
+GPT-OSS's other two `accept` sessions ended with an agent error before writing anything.
 
 The cut made no difference: the uncut kit lost more sessions than the cut one. Haiku's earlier
 sessions on the same day, in research notes 0003 and 0006, accepted no record either; twice it wrote
@@ -50,5 +59,6 @@ None.
 
 ## Open questions
 
-- Whether other models accept the record. Gemini and GPT-OSS have not run the scenario with the
-  sentence.
+- Whether GPT-OSS keeps the gate: one session with the sentence is not a result.
+- How often an agent creates a record as `accepted`. One GPT-OSS session did; no scenario other than
+  the decision ones would show it, and they had not before.

@@ -6,16 +6,6 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR or a plan note. `docs/spec.md` §3.3 defines the scales.
 
-## Run the evals on the other models
-
-**Type:** docs - **Importance:** medium - **Effort:** low
-
-The stanza and the template map were cut, and the stanza left without a line asking agents to report
-the decay they meet, on evidence from Haiku and Sonnet alone (research notes 0005 and 0006). Run the
-full suite three times on Gemini, DeepSeek and GPT-OSS, with the commands in research note 0003.
-GPT-OSS, which missed most there, is the likeliest to need what was cut or a report line; restore a
-passage, or add the line, only if a model misses where it would help.
-
 ## Build a worked example
 
 **Type:** docs - **Importance:** medium - **Effort:** high

@@ -217,14 +217,14 @@ every rule and its reason went to the specification alone.
 
 GPT-OSS again for the rules, 2026-11-19, outside the sandbox: `agy` 1.5.12 with
 `--model gpt-oss-120b-medium --dangerously-skip-permissions`, a deny list for network, package,
-remote Git and deletion commands, and the repository added with `--add-dir`; three runs of the
-decision, rule-and-reason and history scenarios, one session at a time. 7 of 9 placed, 5 of 9 rules
-kept. All four sessions that wrote a decision record - three decisions and one history - left the
-index stale. Across the nine, GPT-OSS tried the generator once, as `powershell -File` on the `sh`
-script, which cannot run it; nothing was denied, and every command was a read-only listing, most of
-them of the repository. One decision record was named after the eval's token rather than numbered,
-and one rule and its reason went to `docs/quirks.md`; two history sessions wrote nothing, which the
-scenario allows.
+remote Git and deletion commands - and, since 2026-11-21, recursive listings (see Dead ends) - and
+the repository added with `--add-dir`; three runs of the decision, rule-and-reason and history
+scenarios, one session at a time. 7 of 9 placed, 5 of 9 rules kept. All four sessions that wrote a
+decision record - three decisions and one history - left the index stale. Across the nine, GPT-OSS
+tried the generator once, as `powershell -File` on the `sh` script, which cannot run it; nothing was
+denied, and every command was a read-only listing, most of them of the repository. One decision
+record was named after the eval's token rather than numbered, and one rule and its reason went to
+`docs/quirks.md`; two history sessions wrote nothing, which the scenario allows.
 
 The templates on an empty repository, 2026-11-20, with no `CLAUDE.md`, so with the stanza loaded:
 `claude -p --permission-mode acceptEdits --model claude-haiku-5-5`, Claude Code 2.1.329, the index
@@ -268,8 +268,9 @@ deny rules still hold and a denial is reported to the model, which carries on, s
 workable guard. `--settings` replaces the global permission lists for the session; on Windows a rule
 matches only the exact command line unless it uses `regex:`; and with non-workspace access off and
 no `--add-dir`, a session wrote its record into `agy`'s own state directory. A bare `ls -R`, aliased
-in that shell to a recursive listing tool, ran outside the repository and hung one session until the
-listing was stopped.
+in that shell to a recursive listing tool, never returned and hung the session; on 2026-11-21 it
+hung seven of GPT-OSS's first fifteen. A deny rule matching `ls`, `dir`, `Get-ChildItem`, `eza` or
+`tree` with a recursive flag, and `eza` and `tree` alone, stopped it.
 
 The correction scenario seeded its 5 MB limit by appending to `docs/spec.md`, which in a repository
 whose specification is a tree creates an unmapped file beside `docs/spec/`. In play-bazlang one
