@@ -70,13 +70,23 @@ for cut in $cuts; do
 		BEGIN {
 			n = split(r, part, ",")
 			for (i = 1; i <= n; i++) {
-				if (split(part[i], b, "-") == 2) { for (j = b[1]; j <= b[2]; j++) cut[j] = 1 }
-				else cut[part[i] + 0] = 1
+				if (part[i] ~ /^[0-9]+$/) { cut[part[i] + 0] = 1; continue }
+				split(part[i], b, "-")
+				if (part[i] !~ /^[0-9]+-[0-9]+$/ || b[1] + 0 > b[2] + 0) {
+					printf "bad line range %s\n", part[i] >"/dev/stderr"
+					badrange = 1
+					exit 2
+				}
+				for (j = b[1] + 0; j <= b[2] + 0; j++) cut[j] = 1
 			}
 		}
 		(FNR in cut) { printf "%5d  %s\n", FNR, $0 >>gone; delete cut[FNR]; next }
 		{ print >out }
-		END { for (k in cut) { printf "line %s does not exist\n", k >"/dev/stderr"; bad = 1 } exit bad }
+		END {
+			if (badrange) exit 2
+			for (k in cut) { printf "line %s does not exist\n", k >"/dev/stderr"; bad = 1 }
+			exit bad
+		}
 	' "$KIT/$file" || exit 2
 	mv "$KIT/$file.new" "$KIT/$file"
 	IFS='
