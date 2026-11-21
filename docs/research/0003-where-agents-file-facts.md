@@ -60,11 +60,12 @@ In single runs before the scenarios changed, Gemini and DeepSeek each placed 11 
 followed a passage of the kit that the scenario did not allow for. DeepSeek put the 25 MB cap and
 its reason in the specification alone, citing the record template's note that a record with only one
 option is usually a misfiled specification entry. Gemini declined the MySQL history, citing the
-map's rule 5 ("No history or account of how you got there, in documents") and the template's warning
-against a record reconstructed years afterwards. The map's row for "was X tried?" and `ADOPTING.md`
-Step 2, which converts old reasoning into records, support a decision record instead. Since the
-kit's text supports both readings in each case, the scenarios now accept both: the rule-and-reason
-scenario requires only the specification, and the history may be left unwritten.
+map's rule to write the least that is true ("No history or account of how you got there, in
+documents") and the template's warning against a record reconstructed years afterwards. The map's
+row for "was X tried?" and `ADOPTING.md` Step 2, which converts old reasoning into records, support
+a decision record instead. Since the kit's text supports both readings in each case, the scenarios
+now accept both: the rule-and-reason scenario requires only the specification, and the history may
+be left unwritten.
 
 ## Evidence
 
