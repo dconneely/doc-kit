@@ -8,21 +8,8 @@
 #         with no ids, runs every scenario, where
 #         INDEX='Bash(sh tools/doc-kit-index-decisions.sh),PowerShell(sh tools/doc-kit-index-decisions.sh)'
 #
-#         The agent must be allowed to run the index generator, or every new decision record fails
-#         the rules on a stale index; on Windows, Claude runs it through its PowerShell tool.
-#         For OpenCode, use "opencode run --standalone --auto -m PROVIDER/MODEL" with
-#         OPENCODE_CONFIG naming a config whose permissions deny external_directory and every shell
-#         command but the generator, and OPENCODE_DISABLE_CLAUDE_CODE=1, or it also loads
-#         ~/.claude/CLAUDE.md. On Windows it takes its directory from PWD, which sh sets; without
-#         PWD it works in the home directory.
-#         For agy, use 'agy --model MODEL --dangerously-skip-permissions --add-dir "$PWD"
-#         --settings FILE -p', with -p last, where FILE sets "allowNonWorkspaceAccess": false
-#         and denies network, package, remote Git and deletion commands, each as
-#         "command(regex:.*\\bgh\\b.*)" and so on. Its default mode, auto, runs commands in its
-#         sandbox, where on Windows sh cannot start; an allow list instead fails because a denied
-#         command ends the session, whereas a deny rule is reported to the model. --settings
-#         replaces the global permission lists; without --add-dir, it writes into its own state
-#         directory.
+#         docs/howto/run-the-agent-evals.md gives the command for each agent, and how to run,
+#         watch and record an evaluation.
 #
 #         DOC_KIT_EVAL_BASE  a repository to start from, by path or URL (default: an empty one)
 #         DOC_KIT_EVAL_OUT   a directory to keep each session's agent log and diff in, with the

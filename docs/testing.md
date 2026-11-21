@@ -141,13 +141,10 @@ the fact; `DOC_KIT_EVAL_OUT` keeps each session's log and diff, and the agent co
 `DOC_KIT_EVAL_RUNS` repeats each scenario and reports its pass rate.
 
 `tests/doc-kit-eval-variant.sh` runs the same scenarios on a copy of the kit at `HEAD` with given
-lines removed - from the stanza in `ADOPTING.md`, say, or from the template map - to test whether
-agents need a passage without editing the real file. Cut one passage per copy, rerun the scenarios
-that use it with `DOC_KIT_EVAL_RUNS` and the model of the baseline, then run the full suite once
-with every candidate cut together. A passage is a candidate only when a scenario that could fail
-without it did not: one already at full marks shows only harm, and a passage no scenario exercises
-always looks cuttable. A hazard, such as the permission rule for decision records, keeps its
-salience whatever the result.
+lines removed - from the stanza in `ADOPTING.md`, say, or from the template map - or given files as
+they were at another commit, to test whether agents need a passage without editing the real file.
+[`docs/howto/run-the-agent-evals.md`](howto/run-the-agent-evals.md) says how to run, watch and
+record an evaluation.
 
 ## Running everything
 
@@ -156,7 +153,7 @@ sh tools/doc-kit-check.sh              # conformance
 sh tests/doc-kit-check.test.sh         # the checker's own tests
 sh tests/doc-kit-duplicate-check.sh    # advisory duplication report
 sh tests/doc-kit-word-budget.sh        # the stanza and the template map stay within budget
-sh tests/doc-kit-eval.sh               # agent evals, by hand; see its header for DOC_KIT_AGENT
+sh tests/doc-kit-eval.sh               # agent evals, by hand; see docs/howto/run-the-agent-evals.md
 prek run --all-files                   # hygiene, line length, drift guards
 prek run --hook-stage manual lychee-system --all-files
 ```
