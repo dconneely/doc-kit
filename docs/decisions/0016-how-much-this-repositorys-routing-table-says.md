@@ -1,7 +1,7 @@
 ---
-status: "proposed"
+status: "accepted"
 date: 2026-11-21
-decision-makers: {the owner - required once the status is not "proposed"}
+decision-makers: David Conneely
 ---
 
 # 16. How much this repository's routing table says

@@ -21,24 +21,24 @@ Start here when you have something to write down and are not sure which file it 
 
 The tense of the sentence you are writing usually settles it:
 
-| If you are asking...                        | If you are writing...                              | It belongs in                                                                             |
-| ------------------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| "what makes a repository conformant?"       | "a conformant repository does X"                   | `docs/spec.md`                                                                            |
-| "why is the kit shaped like this?"          | "we chose X because Y"                             | an ADR                                                                                    |
-| "has anyone checked that?"                  | "source A says X, and I checked"                   | a research note                                                                           |
-| "what changed in this release?"             | "X used to be Y, now it is Z"                      | the changelog                                                                             |
-| "is this known? is it planned?"             | "we should do X"                                   | the plan                                                                                  |
-| "how do I adopt this?"                      | "here is how you adopt this"                       | `ADOPTING.md`                                                                             |
-| "why does the procedure say that?"          | "here is why the procedure is shaped this way"     | `ADOPTING-NOTES.md`                                                                       |
-| "what does an adopter start from?"          | "here is the text an adopter starts from"          | `templates/` - never restated in prose                                                    |
-| "why is this code like this?"               | "this code is like this because..."                | a comment beside it - or an ADR the comment names, if the reason spans more than one site |
-| "what did this code do before?"             | "this code used to..." or "fixed the bug where..." | the commit message - never a comment                                                      |
-| "is anything left to do here?"              | "this code should also..."                         | the plan - a `TODO` beside the code names the entry, never replaces it                    |
-| "what does this word mean here?"            | "X means Y in this project"                        | the glossary                                                                              |
-| "how do I do this recurring task here?"     | "run step 1, then step 2"                          | a how-to guide (`docs/howto/`)                                                            |
-| "what must an agent know to work here?"     | "an agent working here needs to know X"            | `AGENTS.md`, if it is routing or a hazard - otherwise the document that owns the fact     |
-| "where does this cited document come from?" | "source A was retrieved from URL B"                | `docs/sources/` (indexed in `docs/sources/README.md`)                                     |
-| "where does this go?"                       | "this is how each document is used"                | this file                                                                                 |
+| If you are writing...                          | It belongs in                                                     |
+| ---------------------------------------------- | ----------------------------------------------------------------- |
+| "a conformant repository does X"               | `docs/spec.md`                                                    |
+| "we chose X because Y"                         | an ADR                                                            |
+| "source A says X, and I checked"               | a research note                                                   |
+| "X used to be Y, now it is Z"                  | the changelog                                                     |
+| "we should do X"                               | the plan                                                          |
+| "here is how you adopt this"                   | `ADOPTING.md`                                                     |
+| "here is why the procedure is shaped this way" | `ADOPTING-NOTES.md`                                               |
+| "here is the text an adopter starts from"      | `templates/`, never restated in prose                             |
+| "this code is like this because..."            | a comment beside it, or an ADR it names if the reason spans files |
+| "this code used to..."                         | the commit message, never a comment                               |
+| "this code should also..."                     | the plan; a `TODO` names the entry                                |
+| "X means Y here"                               | the glossary                                                      |
+| "run step 1, then step 2"                      | a how-to guide (`docs/howto/`)                                    |
+| "an agent working here needs to know X"        | `AGENTS.md` if routing or a hazard, else the fact's own document  |
+| "source A was retrieved from URL B"            | `docs/sources/`                                                   |
+| "this is how each document is used"            | this file                                                         |
 
 If a sentence seems to fit two places, it is usually two sentences. Split it and file each half.
 

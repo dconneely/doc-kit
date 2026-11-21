@@ -19,9 +19,10 @@ Index of decision records. Only **accepted** records bind.
 | [ADR-0012](0012-what-tense-and-how-much-is-written.md)                          | 2026-10-25 | David Conneely | What tense, and how much, is written                               | `review`                                                                                          |
 | [ADR-0014](0014-where-each-artefact-lives-and-how-it-grows.md)                  | 2026-11-12 | David Conneely | Where each artefact lives, and how it grows                        | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`                                          |
 | [ADR-0015](0015-whether-this-repository-keeps-how-to-guides.md)                 | 2026-11-21 | David Conneely | Whether this repository keeps how-to guides                        | `sh tools/doc-kit-check.sh map, which fails while the guide exists and the map does not name it.` |
+| [ADR-0016](0016-how-much-this-repositorys-routing-table-says.md)                | 2026-11-21 | David Conneely | How much this repository's routing table says                      | `sh tools/doc-kit-check.sh map passes, and the routing table has the template's columns.`         |
 
 ## Non-binding
 
-| Record                                                           | Status     | Date       | Question                                      |
-| ---------------------------------------------------------------- | ---------- | ---------- | --------------------------------------------- |
-| [ADR-0016](0016-how-much-this-repositorys-routing-table-says.md) | `proposed` | 2026-11-21 | How much this repository's routing table says |
+| Record | Status | Date | Question |
+| ------ | ------ | ---- | -------- |
+| _none_ | -      | -    | -        |
