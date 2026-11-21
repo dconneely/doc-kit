@@ -80,21 +80,20 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    deleted with the run. Runs for different models or kits can go side by side, each in its own
    shell and output directory.
 
-5. **Watch for hung sessions.**
+5. **Set the time limit for slow models.**
 
-   The eval sets no time limit, so a hung agent stops its run without a word. Every ten minutes or
-   so, check each run's output for when the last session line appeared, and how long the running
-   agent process has been going. An agent that has run for more than twenty minutes with no new
-   session line is hung: stop that agent process. Its run then ends with an `ERROR` line; rerun the
-   sessions it did not finish. In Claude Code, `/loop 10m` followed by the check runs it on that
-   schedule.
+   A session whose agent runs longer than `DOC_KIT_EVAL_TIMEOUT` seconds, 1800 unless set, is
+   stopped with everything it started, and its run ends with an `ERROR ... agent stopped` line.
+   Raise the limit for a model whose sessions are slow, rather than setting it to 0, which leaves a
+   hung agent stopping its run without a word.
 
-6. **Rerun what the provider failed.**
+6. **Rerun failed sessions.**
 
-   A session that ends with `ERROR ... agent exit` stops the run with exit status 2. When the error
-   is the provider's, such as no capacity or a usage limit, rerun the unfinished sessions with
-   `DOC_KIT_EVAL_RUNS` set to the number missing, into a new output directory. Do not count the
-   failed session.
+   A session that ends with an `ERROR` line stops the run with exit status 2. When the cause is the
+   provider's, such as no capacity or a usage limit, or a session that hung, rerun the unfinished
+   sessions with `DOC_KIT_EVAL_RUNS` set to the number missing, into a new output directory. Do not
+   count the failed session. A model that hangs repeatedly is a finding for the research note, as
+   GPT-OSS's hangs were (research note 0006).
 
 7. **Read every log.**
 

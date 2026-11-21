@@ -16,6 +16,8 @@
 #                            agent command in agent.txt
 #         DOC_KIT_EVAL_RUNS  how many times to run each scenario (default: 1); with more than one,
 #                            a scenario passes only when every run does, and its pass rate is shown
+#         DOC_KIT_EVAL_TIMEOUT  seconds a session may run before its agent and everything it
+#                            started are stopped, as a failed session (default: 1800; 0: no limit)
 #
 # Not run in CI: each scenario starts a real agent session, which costs money and whose result
 # varies between runs. Exits 0 when every scenario is placed as expected and keeps the rules, 1
@@ -307,6 +309,20 @@ failures() {
 			-e 's#^(FAIL \[[a-z]+\] [^ :]*/)([^/ :]+)/README\.md#\1\2.md#' | sort || true)
 }
 
+# kill_tree PID - stop PID and every process it started: through taskkill on Windows, where an agent
+# behind a .cmd wrapper is a grandchild the shell cannot signal, and child by child elsewhere
+kill_tree() {
+	if [ -r "/proc/$1/winpid" ]; then
+		taskkill //T //F //PID "$(cat "/proc/$1/winpid")" >/dev/null 2>&1
+	else
+		for child in $(ps -A -o pid= -o ppid= | awk -v p="$1" '$2 == p { print $1 }'); do
+			kill_tree "$child"
+		done
+		kill "$1" 2>/dev/null
+	fi
+	return 0
+}
+
 # matches FILES PATTERNS - the FILES (one per line) matching any of the space-separated PATTERNS
 matches() {
 	for p in $2; do printf '%s\n' "$1" | grep -E -- "$p" || true; done | sed '/^$/d' | sort -u
@@ -319,6 +335,8 @@ fi
 
 runs=${DOC_KIT_EVAL_RUNS:-1}
 case "$runs" in '' | *[!0-9]* | 0) echo 'DOC_KIT_EVAL_RUNS must be a positive integer' >&2; exit 2 ;; esac
+limit=${DOC_KIT_EVAL_TIMEOUT:-1800}
+case "$limit" in '' | *[!0-9]*) echo 'DOC_KIT_EVAL_TIMEOUT must be a whole number of seconds' >&2; exit 2 ;; esac
 if [ -n "${DOC_KIT_EVAL_OUT-}" ]; then
 	mkdir -p "$DOC_KIT_EVAL_OUT"
 	printf 'agent: %s\nruns: %s\n' "$DOC_KIT_AGENT" "$runs" >"$DOC_KIT_EVAL_OUT/agent.txt"
@@ -370,9 +388,33 @@ for line in $scenarios; do
 		prompt="This is an evaluation of where documentation is filed. $given - where a document wants a path or a test name it lacks, write unknown, but choose every other field, such as a type or a priority, yourself. Record it in the documentation, wherever it belongs. Only if information of its kind has no place in this repository's documentation at all, say so and write nothing: $fact Include the token $token, verbatim, in each place you write it. Do not commit."
 
 		set +e
-		(cd "$dir" && eval "$DOC_KIT_AGENT" '"$prompt"') >"$TMP/$name.log" 2>&1
+		(cd "$dir" && eval "$DOC_KIT_AGENT" '"$prompt"') >"$TMP/$name.log" 2>&1 &
+		agent=$!
+		watcher=''
+		if [ "$limit" -gt 0 ]; then
+			# Polled rather than one long sleep, which outlives the session and holds its output open.
+			(
+				waited=0
+				while kill -0 "$agent" 2>/dev/null; do
+					if [ "$waited" -ge "$limit" ]; then
+						: >"$TMP/$name.timeout"
+						kill_tree "$agent"
+						break
+					fi
+					sleep 1
+					waited=$((waited + 1))
+				done
+			) >/dev/null 2>&1 &
+			watcher=$!
+		fi
+		wait "$agent"
 		code=$?
+		[ -z "$watcher" ] || wait "$watcher"
 		set -e
+		if [ -f "$TMP/$name.timeout" ]; then
+			printf 'ERROR %-12s agent stopped after %s seconds\n' "$name" "$limit"
+			exit 2
+		fi
 		if [ "$code" -ne 0 ]; then
 			# A failed session says nothing about the map. Stop rather than spend more on a run that is
 			# failing - on a usage limit, say.

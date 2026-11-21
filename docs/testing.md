@@ -138,7 +138,8 @@ prompt to read the agent's reasoning and the map together; the fix may belong in
 a scenario starts from an empty repository. `DOC_KIT_EVAL_BASE` starts it from a real one instead,
 adopted minimally if it has no map, so that a customised map and existing documentation compete for
 the fact; `DOC_KIT_EVAL_OUT` keeps each session's log and diff, and the agent command;
-`DOC_KIT_EVAL_RUNS` repeats each scenario and reports its pass rate.
+`DOC_KIT_EVAL_RUNS` repeats each scenario and reports its pass rate; `DOC_KIT_EVAL_TIMEOUT` stops a
+session that runs too long, as a failed one.
 
 `tests/doc-kit-eval-variant.sh` runs the same scenarios on a copy of the kit at `HEAD` with given
 lines removed - from the stanza in `ADOPTING.md`, say, or from the template map - or given files as
