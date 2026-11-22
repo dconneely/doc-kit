@@ -33,7 +33,9 @@ words to 216, and Haiku and Gemini placed facts and kept the rules as well as on
 either table, Gemini filed the rule with its reason, an upload cap the reverse proxy imposes, as a
 quirk in about half its sessions, reading the cap as a constraint the system knowingly lives with,
 and edited the generated decisions index by hand in about a third of the sessions that wrote a
-record. Cut outright, the ten rows a scenario covers made no difference to Haiku, which also
+record. Adding "never edit the index by hand" to the stanza's generator line stopped the hand edits
+but not the stale index: those sessions left it untouched instead, and half the records still left
+it out of date. Cut outright, the ten rows a scenario covers made no difference to Haiku, which also
 reported a finished plan entry it met while adding one as often as on the full map; no other model
 has run without them.
 
@@ -132,6 +134,20 @@ seven edited the index by hand - four on the shipped table, three on the full on
 untouched, although the stanza says to run the generator and the index's header says not to edit it
 by hand.
 
+The stanza's generator line ending "if kept; never edit the index by hand." ran against the shipped
+line on 2026-11-22, on the kit at `b6c339f`, `decision` and `history` fifteen times per arm, side by
+side, with Gemini as above. One session failed at the provider and was rerun. Both arms placed all
+30 sessions. Of the sessions that wrote a record, the index was left:
+
+| Generator line          | Records | Current | Edited by hand, stale | Untouched, stale |
+| ----------------------- | ------- | ------- | --------------------- | ---------------- |
+| shipped                 | 22      | 11      | 8                     | 3                |
+| "never edit it by hand" | 20      | 10      | 1                     | 9                |
+
+No stale session's answer said it had tried the generator; those that edited the index said they had
+updated it, and those that left it said nothing of it. A hand edit that matched the generator's
+output exactly would count as current.
+
 Allowing Haiku to run `tools/doc-kit-check.sh` as well as the index generator changed nothing: on
 the same day and kit, with and without it, Haiku placed 38 of 39 sessions and kept the rules in
 all 39. Fewer sessions said they could not run the checker, but none filed a fact differently.
@@ -160,3 +176,5 @@ that changes everything, not one that changes a rate.
 
 - Whether the untested passages are needed. Each needs a scenario that could fail without it: for
   the map-update line, a fact no mapped artefact holds, so that the agent must add a document.
+- What gets Gemini to run the index generator. Its logs keep only its final answer, so whether it
+  tries the command and is refused, or never tries, is not recorded.
