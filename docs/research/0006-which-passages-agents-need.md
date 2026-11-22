@@ -2,7 +2,7 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` on 2026-11-20 and 2026-11-21, on the templates in an
+Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-22, on the templates in an
 empty repository. The variants ran with Claude Haiku under Claude Code; DeepSeek Flash, Gemini 3.8
 Flash and GPT-OSS 120B then ran the full suite on the cut kit, and Haiku its decay scenarios
 (research note 0005). A shorter routing table ran with Haiku and Gemini 3.8 Flash. Three runs per
@@ -29,11 +29,13 @@ Three passages are needed:
 
 The routing table is shorter, not cut. Without its "If you are asking..." column, with the two plan
 rows and the two quirks rows each merged into one and the longer cells shortened, it went from 395
-words to 216, and Haiku and Gemini placed facts and kept the rules as well as on the full table. The
-quirks row keeps "from the reference/spec": shortened to "we knowingly differ here", it drew a rule
-with its reason into the quirks file. Cut outright, the ten rows a scenario covers made no
-difference to Haiku, which also reported a finished plan entry it met while adding one as often as
-on the full map; no other model has run without them.
+words to 216, and Haiku and Gemini placed facts and kept the rules as well as on the full table. On
+either table, Gemini filed the rule with its reason, an upload cap the reverse proxy imposes, as a
+quirk in about half its sessions, reading the cap as a constraint the system knowingly lives with,
+and edited the generated decisions index by hand in about a third of the sessions that wrote a
+record. Cut outright, the ten rows a scenario covers made no difference to Haiku, which also
+reported a finished plan entry it met while adding one as often as on the full map; no other model
+has run without them.
 
 The three map passages, cut together, did not cost that report either: on the same day, Haiku
 reported a finished plan entry in 13 of 15 sessions on the shipped kit and in 11 of 15 with the
@@ -117,11 +119,29 @@ rule breaks left the decisions index stale because PowerShell timed out on every
 runs sharing the machine, which the sessions reported; such timeouts appear in all three arms.
 Gemini's misses: a quirk also filed as a plan entry; a history fact placed in a decision record and
 the generated index hand-edited, the same rule break as one `decision` session; and the rule with
-its reason filed as a quirk, citing the shortened quirks row. One Gemini session, a rule with its
-reason without the asking column, ran past the 30-minute limit and is not counted. Gemini's three
-and two problems against none on the full table are within what three runs can tell apart.
+its reason filed as a quirk. One Gemini session, a rule with its reason without the asking column,
+ran past the 30-minute limit and is not counted. The third table, with the quirks row's "from the
+reference/spec" restored, is the one shipped.
+
+Gemini then ran six more times on the shipped table and on the full one, side by side on 2026-11-22
+on the kit at `e840bce`. It placed 74 of 78 sessions on the shipped table and 75 of 78 on the full
+one, and kept the rules in 74 of 78 on each. Every miss was the rule with its reason filed as a
+quirk: four on the shipped table, one of them also writing it in the specification, and three on the
+full one. Every rule break was a stale decisions index: of the 24 sessions that wrote a record,
+seven edited the index by hand - four on the shipped table, three on the full one - and one left it
+untouched, although the stanza says to run the generator and the index's header says not to edit it
+by hand.
+
+Allowing Haiku to run `tools/doc-kit-check.sh` as well as the index generator changed nothing: on
+the same day and kit, with and without it, Haiku placed 38 of 39 sessions and kept the rules in
+all 39. Fewer sessions said they could not run the checker, but none filed a fact differently.
 
 ## Dead ends
+
+One Gemini session on the shortest table filed the rule with its reason as a quirk, citing the
+quirks row shortened to "we knowingly differ here", which suggested the shortening caused it.
+Restoring "from the reference/spec" did not help: with the original wording, on the shipped table
+and on the full one, Gemini made the same miss in seven of twelve sessions.
 
 GPT-OSS's sessions under `agy` hung in seven of its first fifteen: the model listed the repository
 with `ls -R`, which the shell `agy` starts resolves to a recursive listing tool that never returned,
