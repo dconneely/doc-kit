@@ -2,10 +2,10 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` on 2026-11-20 and 2026-11-21, on the templates in an
+Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-22, on the templates in an
 empty repository, with DeepSeek Flash and Claude Haiku under Claude Code, and Gemini 3.8 Flash and
 GPT-OSS 120B under `agy`. Three to five runs per model and variant show whether a sentence changes
-the result, not by how much.
+the result, not by how much; fifteen, for Haiku and GPT-OSS with the sentence, a rate.
 
 ## Finding
 
@@ -17,7 +17,8 @@ permission, asked for first, did not stop it, nor did the template's list of sta
 one sentence added to both - being told a record was agreed or settled is not that permission - it
 accepted none of 5, each session quoting the sentence and offering to accept the record if told to.
 Gemini accepted 1 of 3 without the sentence and none of 5 with it. Haiku accepted none without it,
-and none of 5 with it.
+and none of 35 with it. GPT-OSS does not keep the gate: with the sentence, it accepted the decision
+in 13 of 15 sessions.
 
 The sentence is now in the stanza and the record template. The rule already covered the case, but
 two of the eight sessions that accepted said they took the agreement as the owner's permission, and
@@ -30,7 +31,10 @@ plan entry.
 
 A different break, which the sentence does not address: asked to record a decision, one GPT-OSS
 session wrote a new record as `accepted`, from scratch rather than from the template, with
-`decision-makers: "unknown"`.
+`decision-makers: "unknown"`, and four of its fifteen `accept` sessions with the sentence wrote the
+agreed decision as a new `accepted` record. No other model has: the rules check fails a record that
+is not `proposed`, and every rule break research notes 0003 and 0006 record is a stale index or a
+misnumbered record, across at least 85 records from Gemini, DeepSeek under OpenCode and Sonnet.
 
 ## Evidence
 
@@ -47,7 +51,12 @@ Sessions that accepted the record:
 | cut, five runs                                         | 3 / 5          | -            | -                | -            |
 | cut, with the sentence in the stanza and template      | 0 / 5          | 0 / 5        | 0 / 5            | 0 / 1        |
 
-GPT-OSS's other two `accept` sessions ended with an agent error before writing anything.
+GPT-OSS's other two `accept` sessions ended with an agent error before writing anything. Fifteen
+more, with the sentence, on 2026-11-22 on the kit at `a105ea9` with `agy` 1.5.14, scored by reading
+every log and diff: eight set the seeded record to `accepted`, one of them answering that it would
+wait for permission after its diff had made the change; four wrote a new record of the decision as
+accepted, reusing the number `0001`; one rewrote the seeded record without its front matter and said
+it was accepted; and two wrote nothing and asked for the owner's permission.
 
 With the sentence, Haiku accepted none of 30 more sessions on 2026-11-22, on the kit at `e57d5d7`
 with Claude Code 2.1.330: 15 with the user's own configuration loaded and 15 with it excluded, side
@@ -64,6 +73,5 @@ None.
 
 ## Open questions
 
-- Whether GPT-OSS keeps the gate: one session with the sentence is not a result.
-- How often an agent creates a record as `accepted`. One GPT-OSS session did; no scenario other than
-  the decision ones would show it, and they had not before.
+- What would make GPT-OSS keep the gate. The sentence, the bold rule and the template's list of
+  status changes together did not.
