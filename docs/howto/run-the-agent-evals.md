@@ -141,6 +141,12 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    it. The script cannot rescore, and keeps no session's repository, so do it by reading or with a
    script of your own.
 
+   A log holds the agent's final answer, not its tool calls: whether a session read the map, or ran
+   a command and was refused, is not in it. `agy --output-format stream-json` records each call,
+   refused ones included, but leave it out of the command: the checks read the log as lines of text,
+   and in its JSON a whole answer, or a file a tool read, is one line, so a check needing two facts
+   on one line passes when it should not.
+
 8. **Record the result.**
 
    Write it in the research note that asks the question, or a new one copied from
