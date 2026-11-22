@@ -41,6 +41,7 @@ LC_ALL=C
 export LC_ALL
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
+TAB=$(printf '\t')
 : "${DOC_KIT_AGENT:?set DOC_KIT_AGENT to an agent command that takes a prompt as its last argument}"
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT HUP INT TERM
@@ -300,13 +301,14 @@ check_decay_code() {
 	both_limits "$2" || echo 'the upload limit the code contradicts is not reported'
 }
 
-# failures DIR - the checker's failure lines for DIR, sorted, without line numbers and with each
-# entry point named as the file it replaced, so that a failure the session only moved, such as the
-# plan's example entry, is not counted as new
+# failures DIR - the checker's failure lines for DIR, sorted, each as a key, a tab and the line. The
+# key has no line numbers and names each entry point as the file it replaced, so that a failure the
+# session only moved, such as the plan's example entry, is not counted as new
 failures() {
 	(cd "$1" && sh "$ROOT/tools/doc-kit-check.sh" 2>&1 | grep '^FAIL' |
-		sed -E -e 's/^(FAIL \[[a-z]+\] [^ :]+):[0-9]+ /\1 /' \
-			-e 's#^(FAIL \[[a-z]+\] [^ :]*/)([^/ :]+)/README\.md#\1\2.md#' | sort || true)
+		sed -E -e h -e 's/^(FAIL \[[a-z]+\] [^ :]+):[0-9]+ /\1 /' \
+			-e 's#^(FAIL \[[a-z]+\] [^ :]*/)([^/ :]+)/README\.md#\1\2.md#' \
+			-e G -e "s/\n/$TAB/" | sort || true)
 }
 
 # keep - save the current session's log and diff in DOC_KIT_EVAL_OUT, if set, whether or not the
@@ -466,9 +468,9 @@ for line in $scenarios; do
 		# not new, but a second copy of one that was already there is.
 		after="$TMP/$name.after"
 		failures "$dir" >"$after"
-		new=$(awk 'FILENAME == ARGV[1] { seen[$0]++; next }
-			seen[$0] > 0 { seen[$0]--; next }
-			{ print }' "$before" "$after" | head -n 1 || true)
+		new=$(awk -F "$TAB" 'FILENAME == ARGV[1] { seen[$1]++; next }
+			seen[$1] > 0 { seen[$1]--; next }
+			{ print $2 }' "$before" "$after" | head -n 1 || true)
 		[ -z "$new" ] || rule="rules broken: $new"
 		if [ -z "$rule" ]; then
 			for f in $(git -C "$dir" diff --cached --name-only "$start" -- docs/decisions | grep -E "$ADR" | grep -v '/0000-' || true); do
