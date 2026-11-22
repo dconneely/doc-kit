@@ -49,11 +49,11 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    repository's `CLAUDE.md`, but only for sessions outside your home directory: below it, Claude
    still loads the first two, without their imports. Sessions run in `mktemp -d`, which on Windows
    is below it, so set `TMPDIR` to an existing directory outside it, such as `export TMPDIR=/d/tmp`.
-   `--disable-slash-commands`, in Claude's command or `agy`'s, leaves skills out. `agy` still loads
-   `~/.gemini/GEMINI.md`, and has no flag to stop it. Not `--bare`: it skips the `CLAUDE.md` that
-   brings in the stanza, and needs an API key. Give every arm the same flags, and compare an
-   isolated arm only with a baseline rerun the same way: results so far ran with the user-level
-   configuration loaded.
+   `--disable-slash-commands` leaves Claude's skills out. `agy` loads `~/.gemini/GEMINI.md` and its
+   skills wherever the session runs, with or without `--disable-slash-commands`, and has no flag to
+   stop either. Not `--bare`: it skips the `CLAUDE.md` that brings in the stanza, and needs an API
+   key. Give every arm the same flags, and compare an isolated arm only with a baseline rerun the
+   same way: results so far ran with the user-level configuration loaded.
 
    - **Another model under Claude Code**, such as DeepSeek through its Anthropic-compatible
      endpoint: set the endpoint, key and model name its provider documents for Claude Code, and keep
@@ -78,9 +78,9 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
    - **OpenCode**: `opencode run --standalone --auto -m PROVIDER/MODEL`, with `OPENCODE_CONFIG`
      naming a configuration whose permissions deny `external_directory` and every shell command but
-     the generator, and `OPENCODE_DISABLE_CLAUDE_CODE=1`, or it also loads `~/.claude/CLAUDE.md`. On
-     Windows it takes its directory from `PWD`, which `sh` sets; without `PWD` it works in the home
-     directory.
+     the generator, and `OPENCODE_DISABLE_CLAUDE_CODE=1`, or it also loads `~/.claude/CLAUDE.md` and
+     Claude's skills. On Windows it takes its directory from `PWD`, which `sh` sets; without `PWD`
+     it works in the home directory.
 
 3. **Choose the kit.**
 
