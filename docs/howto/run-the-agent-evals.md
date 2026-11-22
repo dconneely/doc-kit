@@ -141,10 +141,10 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
    The verdicts are heuristics. Read each session's log and diff, and score it yourself: a report
    names the decay specifically; a session that only says where it put its own fact has not
-   reported. Where a verdict and your reading disagree, use your reading, fix the check in
-   `tests/doc-kit-eval.sh`, and rescore every saved log and diff by the fixed rule before relying on
-   it. The script cannot rescore, and keeps no session's repository, so do it by reading or with a
-   script of your own.
+   reported. In `decay-plan`, deleting the finished entry also passes. Where a verdict and your
+   reading disagree, use your reading, fix the check in `tests/doc-kit-eval.sh`, and rescore every
+   saved log and diff by the fixed rule before relying on it. The script cannot rescore, and keeps
+   no session's repository, so do it by reading or with a script of your own.
 
    A log holds the agent's final answer, not its tool calls: whether a session read the map, or ran
    a command and was refused, is not in it. `agy --output-format stream-json` records each call,

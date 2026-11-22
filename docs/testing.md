@@ -126,8 +126,8 @@ which must be deleted. In two, the fact asks for a change the kit's rules refuse
 specification's scope, and treating a team's agreement as acceptance of a proposed decision record.
 In three, the repository has decayed - a finished plan entry marked done, two passages of the
 specification that disagree, code the specification contradicts - and the session, filing an
-unrelated fact, must report what it met. The stanza does not ask for that report; these scenarios
-show whether agents make it anyway.
+unrelated fact, must report what it met, or delete the finished plan entry, as the kit's rules ask.
+The stanza does not ask for that report; these scenarios show whether agents make it anyway.
 
 Each scenario is also scored on the rules: the session must add no checker failure, and must leave
 every decision record it touches `proposed`, since only the owner accepts one.
