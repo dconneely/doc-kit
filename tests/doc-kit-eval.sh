@@ -12,9 +12,10 @@
 #         watch and record an evaluation.
 #
 #         DOC_KIT_EVAL_BASE  a repository to start from, by path or URL (default: an empty one)
-#         DOC_KIT_EVAL_OUT   a directory to keep each session's agent log and diff in, with the
-#                            date, kit commit, base, agent command, runs, time limit and system
-#                            in agent.txt
+#         DOC_KIT_EVAL_OUT   a directory to keep each session's agent log and diff in; with, in
+#                            agent.txt, the date, kit commit, base, agent command, runs, time
+#                            limit, system and the directory the sessions ran in; and, in
+#                            verdicts.txt, the lines this script prints
 #         DOC_KIT_EVAL_RUNS  how many times to run each scenario (default: 1); with more than one,
 #                            a scenario passes only when every run does, and its pass rate is shown
 #         DOC_KIT_EVAL_TIMEOUT  seconds a session may run before its agent and everything it
@@ -321,6 +322,14 @@ keep() {
 	git -C "$dir" diff --cached "$start" >"$DOC_KIT_EVAL_OUT/$name.diff"
 }
 
+# say FORMAT [ARG ...] - print a line, and keep it in DOC_KIT_EVAL_OUT/verdicts.txt, if set
+say() {
+	# shellcheck disable=SC2059  # the format is the caller's
+	said=$(printf "$@")
+	printf '%s\n' "$said"
+	[ -z "${DOC_KIT_EVAL_OUT-}" ] || printf '%s\n' "$said" >>"$DOC_KIT_EVAL_OUT/verdicts.txt"
+}
+
 # kill_tree PID - stop PID and every process it started: through taskkill on Windows, where an agent
 # behind a .cmd wrapper is a grandchild the shell cannot signal, and child by child elsewhere
 kill_tree() {
@@ -359,9 +368,13 @@ if [ -n "${DOC_KIT_EVAL_OUT-}" ]; then
 	fi
 	base='an empty repository'
 	[ -z "${DOC_KIT_EVAL_BASE-}" ] || base="$DOC_KIT_EVAL_BASE at $(git -C "$TMP/base" rev-parse HEAD)"
-	printf 'date: %s\nkit: %s\nbase: %s\nagent: %s\nruns: %s\ntimeout: %s\nsystem: %s\n' \
+	# As Windows names it where it can, since whether it is below the home directory decides which
+	# user-level instructions a session loads
+	sessions=$(cd "$TMP" && { pwd -W 2>/dev/null || pwd; })
+	printf 'date: %s\nkit: %s\nbase: %s\nagent: %s\nruns: %s\ntimeout: %s\nsystem: %s\nsessions: %s\n' \
 		"$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$kit" "$base" "$DOC_KIT_AGENT" "$runs" "$limit" \
-		"$(uname -s)" >"$DOC_KIT_EVAL_OUT/agent.txt"
+		"$(uname -s)" "$sessions" >"$DOC_KIT_EVAL_OUT/agent.txt"
+	: >"$DOC_KIT_EVAL_OUT/verdicts.txt"
 fi
 
 placed=0
@@ -435,14 +448,14 @@ for line in $scenarios; do
 		set -e
 		if [ -f "$TMP/$name.timeout" ]; then
 			keep
-			printf 'ERROR %-12s agent stopped after %s seconds\n' "$name" "$limit"
+			say 'ERROR %-12s agent stopped after %s seconds' "$name" "$limit"
 			exit 2
 		fi
 		if [ "$code" -ne 0 ]; then
 			# A failed session says nothing about the map. Stop rather than spend more on a run that is
 			# failing - on a usage limit, say.
 			keep
-			printf 'ERROR %-12s agent exit %s: %s\n' "$name" "$code" "$(tail -n 1 "$TMP/$name.log")"
+			say 'ERROR %-12s agent exit %s: %s' "$name" "$code" "$(tail -n 1 "$TMP/$name.log")"
 			exit 2
 		fi
 
@@ -492,12 +505,12 @@ for line in $scenarios; do
 		fi
 		[ -n "$rule" ] || { run_kept=$((run_kept + 1)); rule='rules kept'; }
 
-		printf '%-14s %s; %s\n' "$name" "$verdict" "$rule"
+		say '%-14s %s; %s' "$name" "$verdict" "$rule"
 		keep
 	done
 
 	[ "$runs" -eq 1 ] ||
-		printf '%-14s placed %s of %s, kept the rules %s of %s\n' "$id" "$run_placed" "$runs" "$run_kept" "$runs"
+		say '%-14s placed %s of %s, kept the rules %s of %s' "$id" "$run_placed" "$runs" "$run_kept" "$runs"
 	[ "$run_placed" -ne "$runs" ] || placed=$((placed + 1))
 	[ "$run_kept" -ne "$runs" ] || kept=$((kept + 1))
 	IFS='
@@ -505,7 +518,7 @@ for line in $scenarios; do
 done
 IFS=$oldifs
 
-printf '%s of %s placed as expected, %s of %s kept the rules' "$placed" "$total" "$kept" "$total"
-[ "$runs" -eq 1 ] || printf ', in each of %s runs' "$runs"
-printf '\n'
+summary="$placed of $total placed as expected, $kept of $total kept the rules"
+[ "$runs" -eq 1 ] || summary="$summary, in each of $runs runs"
+say '%s' "$summary"
 [ "$placed" -eq "$total" ] && [ "$kept" -eq "$total" ]
