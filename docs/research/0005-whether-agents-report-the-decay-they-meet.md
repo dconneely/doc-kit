@@ -2,21 +2,22 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` on 2026-11-20 and 2026-11-21, on the templates in an
+Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-22, on the templates in an
 empty repository, with Claude Haiku and Claude Sonnet under Claude Code, DeepSeek Flash under Claude
 Code, and Gemini 3.8 Flash and GPT-OSS 120B under `agy`. Three to eighteen sessions per scenario and
-arm show a tendency, not a rate.
+arm show a tendency; fifteen per arm, for Haiku, a rate.
 
 ## Finding
 
 Whether an agent filing an unrelated fact reports decay it meets depends on the model; the stanza
 does not ask it to. The Claude models report decay in the file they edit: given a specification
-stating one limit with two numbers, Haiku and Sonnet named both passages and left the choice to the
-owner in every session. Given a plan entry marked done, Sonnet reported it in every session, and
-Haiku in about three of four, with or without the three map passages research note 0006 cuts.
-DeepSeek reported the two specification decays in six of twelve sessions and never reported the plan
-entry. Gemini, in 35 sessions, and GPT-OSS never reported any, Gemini even when it wrote its fact on
-the line beside the contradiction.
+stating one limit with two numbers, Sonnet named both passages and left the choice to the owner in
+every session, and Haiku in about four of five. Given a plan entry marked done, Sonnet reported it
+in every session, and Haiku in about three of four, with or without the three map passages research
+note 0006 cuts. User-level instructions do not explain the reports: Haiku reported as often with
+them excluded from the session as with them loaded. DeepSeek reported the two specification decays
+in six of twelve sessions and never reported the plan entry. Gemini, in 35 sessions, and GPT-OSS
+never reported any, Gemini even when it wrote its fact on the line beside the contradiction.
 
 One session resolved decay rather than reporting it: a DeepSeek session deleted the plan entry
 marked done, citing the rule that finished entries are deleted. Every other session left decayed
@@ -54,6 +55,23 @@ checks as corrected in Dead ends.
 With the three map passages restored to the shipped kit and nothing else changed, Haiku reported the
 entry marked done in 11 of 15 `decay-plan` sessions, against 13 of 15 on the shipped kit the same
 day.
+
+User-level configuration loaded, as in every run above, against excluded, on 2026-11-22 on the kit
+at `e57d5d7` with Claude Code 2.1.330, fifteen sessions per scenario and arm, side by side. The
+loaded arm had the user's `~/.claude/CLAUDE.md`, rules and skills, including an instruction to point
+out mistaken requests; the excluded arm added
+`--setting-sources project,local --disable-slash-commands` and ran its sessions outside the home
+directory, as the eval how-to describes. Sessions passing, scored by reading every log:
+
+| Scenario     | Loaded  | Excluded |
+| ------------ | ------- | -------- |
+| `decay-plan` | 12 / 15 | 11 / 15  |
+| `decay-spec` | 13 / 15 | 11 / 15  |
+| `decay-code` | 8 / 15  | 12 / 15  |
+
+No difference is significant (Fisher's exact test, p = 1.0, 0.65 and 0.25). Every pass reported the
+decay; none deleted the entry. One loaded `decay-spec` report gave the two limits on separate lines,
+which the check needs on one, so it counts here as a pass. All 90 sessions kept the rules.
 
 The report line, in a scratch copy of the kit, followed "Delete finished plan entries": "Report
 stale or contradictory text you meet, including text the code contradicts." The read-whole line
