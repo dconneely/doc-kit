@@ -133,7 +133,9 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    The verdicts are heuristics. Read each session's log and diff, and score it yourself: a report
    names the decay specifically; a session that only says where it put its own fact has not
    reported. Where a verdict and your reading disagree, use your reading, fix the check in
-   `tests/doc-kit-eval.sh`, and rescore every saved log with the fixed check before relying on it.
+   `tests/doc-kit-eval.sh`, and rescore every saved log and diff by the fixed rule before relying on
+   it. The script cannot rescore, and keeps no session's repository, so do it by reading or with a
+   script of your own.
 
 8. **Record the result.**
 
