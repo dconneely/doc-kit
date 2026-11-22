@@ -116,9 +116,10 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
 6. **Rerun failed sessions.**
 
-   A session that ends with an `ERROR` line stops the run with exit status 2. Rerun the unfinished
-   sessions with `DOC_KIT_EVAL_RUNS` set to the number missing, into a new output directory, and
-   read the failed session's log, which is kept with the others.
+   A session that ends with an `ERROR` line stops the run with exit status 2. The script runs every
+   session of one scenario before the next, so rerun, into a new output directory, the stopped
+   scenario with `DOC_KIT_EVAL_RUNS` set to the number missing, then any scenario not reached with
+   the full number. Read the failed session's log, which is kept with the others.
 
    - **The provider's failure**, such as no capacity, a usage limit or a server error: do not count
      the session.
