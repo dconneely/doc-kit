@@ -49,10 +49,14 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    - **Another model under Claude Code**, such as DeepSeek through its Anthropic-compatible
      endpoint: set the endpoint, key and model name its provider documents for Claude Code, and keep
      the rest of the command.
-   - **`agy`**:
-     `agy --model MODEL --dangerously-skip-permissions --add-dir "$PWD" --settings FILE -p`, with
-     `-p` last and `$PWD` left for the session to expand. `FILE` is the absolute path of
-     [`tests/agy-eval-settings.json`](../../tests/agy-eval-settings.json), in the form `agy`
+   - **`agy`**, in single quotes so that `$PWD` is left for each session to expand, with `-p` last:
+
+     ```sh
+     DOC_KIT_AGENT='agy --model MODEL --dangerously-skip-permissions --add-dir "$PWD" --settings FILE -p'
+     ```
+
+     Double quotes would expand `$PWD` once, to where you ran the eval. `FILE` is the absolute path
+     of [`tests/agy-eval-settings.json`](../../tests/agy-eval-settings.json), in the form `agy`
      accepts: on Windows, `D:/...` rather than `/d/...`. Its deny rules stop network, package,
      remote Git, deletion and recursive-listing commands; the last stops GPT-OSS hanging. Keep them
      as deny rules: `agy`'s default mode runs commands in a sandbox where, on Windows, `sh` cannot
@@ -60,6 +64,7 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
      reported to the model. `--settings` replaces the global permission lists. Without `--add-dir`,
      `agy` writes into its own state directory; GPT-OSS sometimes does even with it (research note
      0005).
+
    - **OpenCode**: `opencode run --standalone --auto -m PROVIDER/MODEL`, with `OPENCODE_CONFIG`
      naming a configuration whose permissions deny `external_directory` and every shell command but
      the generator, and `OPENCODE_DISABLE_CLAUDE_CODE=1`, or it also loads `~/.claude/CLAUDE.md`. On
