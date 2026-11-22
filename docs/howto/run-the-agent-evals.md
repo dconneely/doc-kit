@@ -45,12 +45,15 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    Claude Code also loads your user-level instructions, skills and settings, as `agy` and OpenCode
    may load theirs; note any that could change where a session files a fact, since they can differ
    between the days or machines of runs you compare. Claude's `--setting-sources project,local`
-   leaves out `~/.claude/CLAUDE.md` and the user's settings, and still loads the repository's
-   `CLAUDE.md`; `--disable-slash-commands`, in Claude's command or `agy`'s, leaves skills out. `agy`
-   still loads `~/.gemini/GEMINI.md`, and has no flag to stop it. Not `--bare`: it skips the
-   `CLAUDE.md` that brings in the stanza, and needs an API key. Give every arm the same flags, and
-   compare an isolated arm only with a baseline rerun the same way: results so far ran with the
-   user-level configuration loaded.
+   leaves out `~/.claude/CLAUDE.md`, `~/.claude/rules/` and the user's settings, and still loads the
+   repository's `CLAUDE.md`, but only for sessions outside your home directory: below it, Claude
+   still loads the first two, without their imports. Sessions run in `mktemp -d`, which on Windows
+   is below it, so set `TMPDIR` to an existing directory outside it, such as `export TMPDIR=/d/tmp`.
+   `--disable-slash-commands`, in Claude's command or `agy`'s, leaves skills out. `agy` still loads
+   `~/.gemini/GEMINI.md`, and has no flag to stop it. Not `--bare`: it skips the `CLAUDE.md` that
+   brings in the stanza, and needs an API key. Give every arm the same flags, and compare an
+   isolated arm only with a baseline rerun the same way: results so far ran with the user-level
+   configuration loaded.
 
    - **Another model under Claude Code**, such as DeepSeek through its Anthropic-compatible
      endpoint: set the endpoint, key and model name its provider documents for Claude Code, and keep
