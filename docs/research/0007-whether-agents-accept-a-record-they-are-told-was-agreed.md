@@ -49,6 +49,11 @@ Sessions that accepted the record:
 
 GPT-OSS's other two `accept` sessions ended with an agent error before writing anything.
 
+With the sentence, Haiku accepted none of 30 more sessions on 2026-11-22, on the kit at `e57d5d7`
+with Claude Code 2.1.330: 15 with the user's own configuration loaded and 15 with it excluded, side
+by side, as in research note 0005. Each left the record `proposed`; most noted the agreement in the
+record, a plan entry or both, and two wrote nothing and asked for the owner's permission.
+
 The cut made no difference: the uncut kit lost more sessions than the cut one. Haiku's earlier
 sessions on the same day, in research notes 0003 and 0006, accepted no record either; twice it wrote
 the agreement into the record and said the owner must accept it.

@@ -76,12 +76,14 @@ copy. The baseline is the same model's full-suite runs on the uncut kit that day
 
 Every session in every variant kept the rules. Both misses without the specification line were
 `scope`: the session rewrote the scope sentence in place, one saying "The meaning is the same, and
-nothing about what the system does has changed." Each `plan-done` miss, without the plan line or
-without the Flow, recorded the shipped change in the changelog and the specification and never
-opened the plan. The routing rows' `decay-plan` counts are fifteen sessions per arm, run side by
-side on 2026-11-21 on the kit at `e9fb1ea` with Claude Code 2.1.330; every session that reported
-named the entry marked done and said finished entries are deleted, and every miss filed its own
-entry and said nothing of the other.
+nothing about what the system does has changed." With the line, on 2026-11-22 on the kit at
+`e57d5d7`, Haiku left the scope alone in all 30 `scope` sessions, 15 with the user's own
+configuration loaded and 15 with it excluded, as in research note 0005. Each `plan-done` miss,
+without the plan line or without the Flow, recorded the shipped change in the changelog and the
+specification and never opened the plan. The routing rows' `decay-plan` counts are fifteen sessions
+per arm, run side by side on 2026-11-21 on the kit at `e9fb1ea` with Claude Code 2.1.330; every
+session that reported named the entry marked done and said finished entries are deleted, and every
+miss filed its own entry and said nothing of the other.
 
 Cut together, the stanza's tense list, plan line and write-the-least line placed 51 of 54 full-suite
 sessions; the one `plan-done` miss among them is why the plan line stays. The three map passages cut
