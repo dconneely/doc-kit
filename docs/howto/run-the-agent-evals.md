@@ -84,10 +84,10 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
 5. **Set the time limit for slow models.**
 
-   A session whose agent runs longer than `DOC_KIT_EVAL_TIMEOUT` seconds, 1800 unless set, is
-   stopped with everything it started, and its run ends with an `ERROR ... agent stopped` line.
-   Raise the limit for a model whose sessions are slow, rather than setting it to 0, which leaves a
-   hung agent stopping its run without a word.
+   A session whose agent runs longer than `DOC_KIT_EVAL_TIMEOUT` seconds, 900 unless set, is stopped
+   with everything it started, and its run ends with an `ERROR ... agent stopped` line. Raise the
+   limit for a model whose sessions are slow, rather than setting it to 0, which leaves a hung agent
+   stopping its run without a word.
 
 6. **Rerun failed sessions.**
 

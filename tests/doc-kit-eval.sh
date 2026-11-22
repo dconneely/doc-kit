@@ -17,7 +17,7 @@
 #         DOC_KIT_EVAL_RUNS  how many times to run each scenario (default: 1); with more than one,
 #                            a scenario passes only when every run does, and its pass rate is shown
 #         DOC_KIT_EVAL_TIMEOUT  seconds a session may run before its agent and everything it
-#                            started are stopped, as a failed session (default: 1800; 0: no limit)
+#                            started are stopped, as a failed session (default: 900; 0: no limit)
 #
 # Not run in CI: each scenario starts a real agent session, which costs money and whose result
 # varies between runs. Exits 0 when every scenario is placed as expected and keeps the rules, 1
@@ -344,7 +344,7 @@ fi
 
 runs=${DOC_KIT_EVAL_RUNS:-1}
 case "$runs" in '' | *[!0-9]* | 0) echo 'DOC_KIT_EVAL_RUNS must be a positive integer' >&2; exit 2 ;; esac
-limit=${DOC_KIT_EVAL_TIMEOUT:-1800}
+limit=${DOC_KIT_EVAL_TIMEOUT:-900}
 case "$limit" in '' | *[!0-9]*) echo 'DOC_KIT_EVAL_TIMEOUT must be a whole number of seconds' >&2; exit 2 ;; esac
 if [ -n "${DOC_KIT_EVAL_OUT-}" ]; then
 	mkdir -p "$DOC_KIT_EVAL_OUT"
