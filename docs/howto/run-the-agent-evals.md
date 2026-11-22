@@ -95,11 +95,16 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
 6. **Rerun failed sessions.**
 
-   A session that ends with an `ERROR` line stops the run with exit status 2. When the cause is the
-   provider's, such as no capacity or a usage limit, or a session that hung, rerun the unfinished
-   sessions with `DOC_KIT_EVAL_RUNS` set to the number missing, into a new output directory. Do not
-   count the failed session, but read its log, which is kept with the others: a model that hangs
-   repeatedly is a finding for the research note, as GPT-OSS's hangs were (research note 0006).
+   A session that ends with an `ERROR` line stops the run with exit status 2. Rerun the unfinished
+   sessions with `DOC_KIT_EVAL_RUNS` set to the number missing, into a new output directory, and
+   read the failed session's log, which is kept with the others.
+
+   - **The provider's failure**, such as no capacity, a usage limit or a server error: do not count
+     the session.
+   - **The model's**, such as a hang or a session stopped at the time limit (`agent stopped`): count
+     it as failing, or report how many sessions finished beside the scores of those that did. A hang
+     tracks the scenario and the model, so leaving it out flatters the arm. A model that hangs
+     repeatedly is a finding, as GPT-OSS's hangs were (research note 0006).
 
 7. **Read every log.**
 
@@ -117,6 +122,7 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
 ## Verification
 
-- Every arm ran the planned number of sessions, and no session that ended with `ERROR` is counted.
+- Every arm ran the planned number of sessions. No session the provider failed is counted, and every
+  one the model hung in is counted as failing or reported.
 - Every score in the note agrees with a reading of its session's log.
 - `sh tools/doc-kit-check.sh` passes.
