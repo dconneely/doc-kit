@@ -35,9 +35,11 @@ Those eight scenarios each have one obvious home, so near-perfect scores there a
 test. Four harder ones hold up too. A rule with its reason is split into the specification and a
 `proposed` decision record; a correction rewrites the specification in place and is logged in the
 changelog; history goes to a decision record; and a fact with no documentation value is left
-unwritten. Once told to, every session that added a decision record regenerated the decisions index;
-before the stanza said so, none did. Told that a team had agreed to a proposed record, DeepSeek
-Flash often accepted it until the stanza said that is not permission (research note 0007).
+unwritten. Once told to, every Claude Code session that added a decision record and could run the
+generator regenerated the decisions index; before the stanza said so, none did. Under `agy` and
+OpenCode, sessions sometimes left it stale (below, and research note 0006). Told that a team had
+agreed to a proposed record, DeepSeek Flash often accepted it until the stanza said that is not
+permission (research note 0007).
 
 Asked to record an invented fact about code a repository lacks, Opus declines unless told the fact
 is invented: it names the right destination but will not fill a quirk's `Where:` or test fields, or
@@ -77,9 +79,9 @@ is not recorded.
 
 `claude -p --permission-mode acceptEdits --model opus` and `--model haiku`, harness of 2026-10-30,
 eight scenarios per repository: a decision, a kept defect, a sourced finding, future work, a term, a
-shipped change, a behaviour rule and a procedure, each repository run in sequence. Opus ran
-play-looplang and cobra, and Haiku every repository, with the how-to pattern widened partway through
-to accept a single file.
+shipped change, a behaviour rule and a procedure, each repository run in sequence. The how-to
+pattern was widened partway through to accept a single file: Opus ran play-looplang and cobra after
+the widening, and Haiku every repository.
 
 | Repository                | Base commit    | Starting state                  | Opus  | Haiku |
 | ------------------------- | -------------- | ------------------------------- | ----- | ----- |
