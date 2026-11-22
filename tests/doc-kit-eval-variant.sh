@@ -11,7 +11,7 @@
 #         id     the scenarios to run, as tests/doc-kit-eval.sh takes them (default: every one)
 #         At least one -d or -r is required.
 #
-#         DOC_KIT_AGENT, DOC_KIT_EVAL_RUNS and DOC_KIT_EVAL_OUT pass through to
+#         DOC_KIT_AGENT and every DOC_KIT_EVAL_ setting pass through to
 #         tests/doc-kit-eval.sh. The commit copied and the removed lines are printed first, and
 #         kept in DOC_KIT_EVAL_OUT/variant.txt when it is set.
 #
