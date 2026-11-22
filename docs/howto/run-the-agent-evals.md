@@ -20,9 +20,12 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
    Three sessions per scenario show a change that flips most sessions, such as a line whose removal
    makes agents reword the scope. To compare rates, such as how often agents report decay, run
-   fifteen sessions per arm, on the same day, on kits that differ only in what is being tested.
+   fifteen sessions per arm, on kits that differ only in what is being tested, with the arms side by
+   side rather than one after the other, so that both meet the provider's load at the same hours.
    Three per arm once suggested an effect that fifteen showed was not there (research note 0006,
-   Dead ends).
+   Dead ends). At fifteen per arm, only a difference of five to seven sessions or more is unlikely
+   to be chance (Fisher's exact test, p < 0.05); for other counts, run the test before claiming one
+   arm does better.
 
 2. **Set the agent command.**
 
@@ -83,8 +86,8 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    `DOC_KIT_EVAL_OUT` keeps each session's log and diff, and the agent command; without it they are
    deleted with the run. Runs for different models or kits can go side by side, each in its own
    shell and output directory, but not too many: with six at once on Windows, Claude's PowerShell
-   tool timed out, and sessions that could not run the index generator broke a rule. Look for
-   timeouts in the logs, and compare arms only when they ran under the same load.
+   tool timed out, and sessions that could not run the index generator broke a rule; four ran
+   cleanly. Look for timeouts in the logs, and compare arms only when they ran under the same load.
 
 5. **Set the time limit for slow models.**
 
