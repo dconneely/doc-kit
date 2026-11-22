@@ -35,9 +35,12 @@ quirk in about half its sessions, reading the cap as a constraint the system kno
 and edited the generated decisions index by hand in about a third of the sessions that wrote a
 record. Adding "never edit the index by hand" to the stanza's generator line stopped the hand edits
 but not the stale index: those sessions left it untouched instead, and half the records still left
-it out of date. Cut outright, the ten rows a scenario covers made no difference to Haiku, which also
-reported a finished plan entry it met while adding one as often as on the full map; no other model
-has run without them.
+it out of date. Gemini does try the generator. Where a user's global `agy` settings turn the
+terminal sandbox on, as the eval settings did not prevent until 2026-11-22, `sh` cannot start and
+every attempt fails; whether the runs above had it on is not recorded. With the sandbox off, Gemini
+still edited the index by hand in 3 of 10 sessions. Cut outright, the ten rows a scenario covers
+made no difference to Haiku, which also reported a finished plan entry it met while adding one as
+often as on the full map; no other model has run without them.
 
 The three map passages, cut together, did not cost that report either: on the same day, Haiku
 reported a finished plan entry in 13 of 15 sessions on the shipped kit and in 11 of 15 with the
@@ -150,6 +153,15 @@ No stale session's answer said it had tried the generator; those that edited the
 updated it, and those that left it said nothing of it. A hand edit that matched the generator's
 output exactly would count as current.
 
+Gemini's `decision` scenario on 2026-11-22, `agy` 1.5.14 as above, ten sessions with the sandbox on
+and ten with it off. With it on, on the kit at `a105ea9` with `--output-format stream-json`, which
+records each tool call: every session ran `sh tools/doc-kit-index-decisions.sh`, one to four times,
+and every attempt but one exited 1 with no output, as did `sh -c "echo hello"`; four left the index
+current, one where that attempt succeeded and three by a hand edit matching the generator's output.
+With it off, on the kit at `09f1f17`: seven left it current and three edited it by hand. Every
+session placed its record and left it `proposed`. Seven against four of ten is not a significant
+difference (Fisher's exact test, p = 0.37).
+
 Allowing Haiku to run `tools/doc-kit-check.sh` as well as the index generator changed nothing: on
 the same day and kit, with and without it, Haiku placed 38 of 39 sessions and kept the rules in
 all 39. Fewer sessions said they could not run the checker, but none filed a fact differently.
@@ -178,5 +190,6 @@ that changes everything, not one that changes a rate.
 
 - Whether the untested passages are needed. Each needs a scenario that could fail without it: for
   the map-update line, a fact no mapped artefact holds, so that the agent must add a document.
-- What gets Gemini to run the index generator. Its logs keep only its final answer, so whether it
-  tries the command and is refused, or never tries, is not recorded.
+- Why Gemini edits the index by hand in some sessions where the generator can run. Its plain-text
+  logs keep only its final answer, so whether those sessions tried the generator first is not
+  recorded; `--output-format stream-json` records it.
