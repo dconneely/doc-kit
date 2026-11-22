@@ -72,9 +72,10 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
      remote Git, deletion and recursive-listing commands; the last stops GPT-OSS hanging. Keep them
      as deny rules: `agy`'s default mode runs commands in a sandbox where, on Windows, `sh` cannot
      start, and an allow list ends the session at the first refused command, where a deny rule is
-     reported to the model. `--settings` replaces the global permission lists. Without `--add-dir`,
-     `agy` writes into its own state directory; GPT-OSS sometimes does even with it (research note
-     0005).
+     reported to the model. `--settings` replaces the global permission lists but not other keys, so
+     the file also turns off `enableTerminalSandbox`, which global settings can turn on, and with it
+     `sh` and the index generator. Without `--add-dir`, `agy` writes into its own state directory;
+     GPT-OSS sometimes does even with it (research note 0005).
 
    - **OpenCode**: `opencode run --standalone --auto -m PROVIDER/MODEL`, with `OPENCODE_CONFIG`
      naming a configuration whose permissions deny `external_directory` and every shell command but

@@ -1,5 +1,6 @@
 {
   "allowNonWorkspaceAccess": false,
+  "enableTerminalSandbox": false,
   "permissions": {
     "allow": [],
     "deny": [
