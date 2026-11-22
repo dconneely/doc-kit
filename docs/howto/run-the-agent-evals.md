@@ -36,6 +36,9 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    export DOC_KIT_AGENT
    ```
 
+   Claude Code also loads your user-level instructions, skills and settings, as `agy` and OpenCode
+   may load theirs; note any that could change where a session files a fact.
+
    - **Another model under Claude Code**, such as DeepSeek through its Anthropic-compatible
      endpoint: set the endpoint, key and model name its provider documents for Claude Code, and keep
      the rest of the command.
@@ -62,7 +65,8 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    - With lines removed: `sh tests/doc-kit-eval-variant.sh -d FILE:LINES [id ...]`, line numbers as
      at `HEAD`.
    - With a file as it was at another commit: `-r FILE:REV`, such as
-     `-r templates/DOC-MAP.md:a00b431^` to compare the shipped map with the one before a cut.
+     `-r templates/DOC-MAP.md:a00b431^` to compare the shipped map with the one before a cut. The
+     revision can be a branch never checked out, so a variant need not be committed where you work.
 
    To find passages agents do not need, cut one passage per copy and rerun the scenarios that use
    it, with the baseline's model; then run the full suite once with every candidate cut together. A
