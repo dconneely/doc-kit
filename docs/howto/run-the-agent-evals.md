@@ -40,7 +40,11 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    ```
 
    Claude Code also loads your user-level instructions, skills and settings, as `agy` and OpenCode
-   may load theirs; note any that could change where a session files a fact.
+   may load theirs; note any that could change where a session files a fact, since they can differ
+   between the days or machines of runs you compare. `--disable-slash-commands`, in Claude's command
+   or `agy`'s, leaves skills out, and Claude's `--setting-sources project,local` leaves out the
+   user's settings. Not `--bare`: it skips the `CLAUDE.md` that brings in the stanza, and needs an
+   API key. Results so far ran with the user-level configuration loaded.
 
    - **Another model under Claude Code**, such as DeepSeek through its Anthropic-compatible
      endpoint: set the endpoint, key and model name its provider documents for Claude Code, and keep
