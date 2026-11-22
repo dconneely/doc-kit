@@ -57,10 +57,12 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
      ```sh
      DOC_KIT_AGENT='agy --model MODEL --dangerously-skip-permissions --add-dir "$PWD" --settings FILE -p'
+     export DOC_KIT_AGENT
      ```
 
-     Double quotes would expand `$PWD` once, to where you ran the eval. `FILE` is the absolute path
-     of [`tests/agy-eval-settings.json`](../../tests/agy-eval-settings.json), in the form `agy`
+     Double quotes would expand `$PWD` once, to where you ran the eval. `agy models` lists the model
+     names. `FILE` is the absolute path of
+     [`tests/agy-eval-settings.json`](../../tests/agy-eval-settings.json), in the form `agy`
      accepts: on Windows, `D:/...` rather than `/d/...`. Its deny rules stop network, package,
      remote Git, deletion and recursive-listing commands; the last stops GPT-OSS hanging. Keep them
      as deny rules: `agy`'s default mode runs commands in a sandbox where, on Windows, `sh` cannot
@@ -150,3 +152,5 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
   one the model hung in is counted as failing or reported.
 - Every score in the note agrees with a reading of its session's log.
 - `sh tools/doc-kit-check.sh` passes.
+- `git status` shows only the research note and any check you fixed: the output directories are
+  outside the repository.
