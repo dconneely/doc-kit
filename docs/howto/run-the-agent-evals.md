@@ -84,7 +84,8 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
 3. **Choose the kit.**
 
-   - As it stands: `sh tests/doc-kit-eval.sh [id ...]`.
+   - As it stands: `sh tests/doc-kit-eval.sh [id ...]`. It runs the working tree, uncommitted
+     changes included, where a variant copies `HEAD`: compare the two only from a clean tree.
    - With lines removed: `sh tests/doc-kit-eval-variant.sh -d FILE:LINES [id ...]`, line numbers as
      at `HEAD`.
    - With a file as it was at another commit: `-r FILE:REV`, such as
