@@ -12,8 +12,8 @@
 #         At least one -d or -r is required.
 #
 #         DOC_KIT_AGENT, DOC_KIT_EVAL_RUNS and DOC_KIT_EVAL_OUT pass through to
-#         tests/doc-kit-eval.sh. The removed lines are printed first, and kept in
-#         DOC_KIT_EVAL_OUT/variant.txt when it is set.
+#         tests/doc-kit-eval.sh. The commit copied and the removed lines are printed first, and
+#         kept in DOC_KIT_EVAL_OUT/variant.txt when it is set.
 #
 # Exits as tests/doc-kit-eval.sh does, and 2 on a usage error or a line that does not exist.
 
@@ -64,7 +64,7 @@ mkdir "$KIT"
 git -C "$ROOT" archive HEAD | tar -x -C "$KIT"
 
 removed="$TMP/variant.txt"
-: >"$removed"
+printf 'copied from %s\n' "$(git -C "$ROOT" rev-parse HEAD)" >"$removed"
 oldifs=$IFS
 IFS='
 '

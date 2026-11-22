@@ -13,7 +13,8 @@
 #
 #         DOC_KIT_EVAL_BASE  a repository to start from, by path or URL (default: an empty one)
 #         DOC_KIT_EVAL_OUT   a directory to keep each session's agent log and diff in, with the
-#                            agent command in agent.txt
+#                            date, kit commit, base, agent command, runs, time limit and system
+#                            in agent.txt
 #         DOC_KIT_EVAL_RUNS  how many times to run each scenario (default: 1); with more than one,
 #                            a scenario passes only when every run does, and its pass rate is shown
 #         DOC_KIT_EVAL_TIMEOUT  seconds a session may run before its agent and everything it
@@ -350,7 +351,17 @@ limit=${DOC_KIT_EVAL_TIMEOUT:-900}
 case "$limit" in '' | *[!0-9]*) echo 'DOC_KIT_EVAL_TIMEOUT must be a whole number of seconds' >&2; exit 2 ;; esac
 if [ -n "${DOC_KIT_EVAL_OUT-}" ]; then
 	mkdir -p "$DOC_KIT_EVAL_OUT"
-	printf 'agent: %s\nruns: %s\n' "$DOC_KIT_AGENT" "$runs" >"$DOC_KIT_EVAL_OUT/agent.txt"
+	# The kit's commit, unless it is a copy, such as the variant script's, which records its own
+	kit='not a Git checkout'
+	if [ -e "$ROOT/.git" ]; then
+		kit=$(git -C "$ROOT" rev-parse HEAD)
+		[ -z "$(git -C "$ROOT" status --porcelain)" ] || kit="$kit, with uncommitted changes"
+	fi
+	base='an empty repository'
+	[ -z "${DOC_KIT_EVAL_BASE-}" ] || base="$DOC_KIT_EVAL_BASE at $(git -C "$TMP/base" rev-parse HEAD)"
+	printf 'date: %s\nkit: %s\nbase: %s\nagent: %s\nruns: %s\ntimeout: %s\nsystem: %s\n' \
+		"$(date -u '+%Y-%m-%dT%H:%M:%SZ')" "$kit" "$base" "$DOC_KIT_AGENT" "$runs" "$limit" \
+		"$(uname -s)" >"$DOC_KIT_EVAL_OUT/agent.txt"
 fi
 
 placed=0
