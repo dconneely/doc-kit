@@ -12,7 +12,8 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 - `sh` and `git`; on Windows, the `sh` that comes with Git.
 - The agent's command-line tool, signed in: Claude Code (`claude`), `agy` or OpenCode.
 - Agreement to spend: every session is a paid agent run.
-- For a variant run, the change to test committed: the variant script copies `HEAD`.
+- For a variant run, the change to test committed: the variant script copies `HEAD`, without
+  uncommitted changes, and takes a restored file from any revision, such as another branch.
 
 ## Steps
 
@@ -80,9 +81,12 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
      `-r templates/DOC-MAP.md:a00b431^` to compare the shipped map with the one before a cut. The
      revision can be a branch never checked out, so a variant need not be committed where you work.
 
+   Each takes the settings in step 4; without `DOC_KIT_EVAL_OUT`, there are no logs to read.
+
    To find passages agents do not need, cut one passage per copy and rerun the scenarios that use
-   it, with the baseline's model; then run the full suite once with every candidate cut together. A
-   passage is a candidate only when a scenario that could fail without it did not: one already at
+   it, with the baseline's model; then run the full suite once with every candidate cut together,
+   since two passages can back each other up, so that each cut passes alone and both fail together.
+   A passage is a candidate only when a scenario that could fail without it did not: one already at
    full marks shows only harm, and a passage no scenario exercises always looks cuttable. A hazard,
    such as the permission rule for decision records, keeps its salience whatever the result.
 
