@@ -46,7 +46,17 @@ ROOT=$(cd "$(dirname "$0")/.." && pwd)
 TAB=$(printf '\t')
 : "${DOC_KIT_AGENT:?set DOC_KIT_AGENT to an agent command that takes a prompt as its last argument}"
 TMP=$(mktemp -d)
-trap 'rm -rf "$TMP"' EXIT HUP INT TERM
+agent=''
+watcher=''
+# On any exit, stop a session still running, so that it does not outlive the run in a deleted
+# directory; a signal exits, which runs this.
+cleanup() {
+	if [ -n "$watcher" ]; then kill "$watcher" 2>/dev/null || :; fi
+	if [ -n "$agent" ] && kill -0 "$agent" 2>/dev/null; then kill_tree "$agent"; fi
+	rm -rf "$TMP" || :
+}
+trap cleanup EXIT
+trap 'exit 130' HUP INT TERM
 
 # id|allowed|required|check|seed|fact
 #   allowed   space-separated EREs; every file the token lands in must match one. A - among them
@@ -331,17 +341,37 @@ say() {
 }
 
 # kill_tree PID - stop PID and every process it started: through taskkill on Windows, where an agent
-# behind a .cmd wrapper is a grandchild the shell cannot signal, and child by child elsewhere
+# behind a .cmd wrapper is a grandchild the shell cannot signal; elsewhere with SIGTERM to the whole
+# tree, then SIGKILL to any process that ignored it
 kill_tree() {
 	if [ -r "/proc/$1/winpid" ]; then
 		taskkill //T //F //PID "$(cat "/proc/$1/winpid")" >/dev/null 2>&1
 	else
-		for child in $(ps -A -o pid= -o ppid= | awk -v p="$1" '$2 == p { print $1 }'); do
-			kill_tree "$child"
+		tree=$(tree_pids "$1")
+		# shellcheck disable=SC2086  # one PID per word
+		kill $tree 2>/dev/null || :
+		# Up to two seconds for the tree to stop, then SIGKILL to what is left.
+		for _ in 1 2; do
+			left=''
+			for p in $tree; do
+				if kill -0 "$p" 2>/dev/null; then left="$left $p"; fi
+			done
+			[ -n "$left" ] || return 0
+			tree=$left
+			sleep 1
 		done
-		kill "$1" 2>/dev/null
+		# shellcheck disable=SC2086
+		kill -9 $tree 2>/dev/null || :
 	fi
 	return 0
+}
+
+# tree_pids PID - PID and every process it started, children first
+tree_pids() {
+	for child in $(ps -A -o pid= -o ppid= | awk -v p="$1" '$2 == p { print $1 }'); do
+		tree_pids "$child"
+	done
+	echo "$1"
 }
 
 # matches FILES PATTERNS - the FILES (one per line) matching any of the space-separated PATTERNS
@@ -445,6 +475,9 @@ for line in $scenarios; do
 		wait "$agent"
 		code=$?
 		[ -z "$watcher" ] || wait "$watcher"
+		# Reaped, so their PIDs may be reused: cleanup must not signal them.
+		agent=''
+		watcher=''
 		set -e
 		if [ -f "$TMP/$name.timeout" ]; then
 			keep
