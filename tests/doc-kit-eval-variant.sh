@@ -72,7 +72,7 @@ for restore in $restores; do
 	IFS=$oldifs
 	file=${restore%%:*}
 	rev=${restore#*:}
-	case $restore in *:?*) ;; *) echo "bad restore $restore" >&2; exit 2 ;; esac
+	case $restore in ?*:?*) ;; *) echo "bad restore $restore" >&2; exit 2 ;; esac
 	mkdir -p "$(dirname "$KIT/$file")"
 	git -C "$ROOT" show "$rev:$file" >"$KIT/$file" || { echo "no $file at $rev" >&2; exit 2; }
 	printf '%s  restored from %s\n' "$file" "$rev" >>"$removed"
