@@ -141,10 +141,9 @@ without ever blocking on content the map was never meant to describe (ADR-0011).
 
 **How much ceremony an artefact needs follows from its mutability, not from its importance.**
 
-- **Amendable** artefacts - decision records - need the owner. A contributor creates and changes
-  `proposed` records freely; accepting, rejecting, reopening, deprecating and deleting a record each
-  need the owner's explicit permission (§3.1). It is the only place this specification requires a
-  decision by a person.
+- **Amendable** artefacts - decision records - need the owner, who decides every change of status
+  and every deletion (§3.1). It is the only place this specification requires a decision by a
+  person.
 - **Rewritten-in-place** artefacts - the specification, the map, quirks, the glossary, research
   notes - need no freeze point. A wrong statement is corrected, not superseded. Where such a change
   encodes a real choice, the choice belongs in a record and is decided there; deciding it again here

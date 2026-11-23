@@ -6,18 +6,17 @@ decision resists, or when something is not working.
 
 ## Why the procedure is shaped the way it is
 
-The reasoning behind `ADOPTING.md`'s four numbered consequences:
+The reasoning behind each of `ADOPTING.md`'s four numbered consequences:
 
-1. **You customise mostly by deleting.** The template is roughly the union of what projects need;
-   any given repository needs a subset. Almost nothing has to be invented.
-2. **What you keep is decided by capabilities, not taste.** A data store earns a data dictionary; a
-   network API earns an interface definition; a deployed service earns a runbook.
-3. **The rules are not the customisable part.** The map's rules and its test for adding a new
-   document survive customisation verbatim. They are what stops the structure decaying back into the
-   mixed-tense file it replaced.
-4. **Resist growth.** Most proposed additions share all three properties with something that already
-   exists, which usually makes them a section or a tag rather than a file. The structure works
-   because it is small enough to hold in your head.
+1. The template is roughly the union of what projects need; any given repository needs a subset.
+   Almost nothing has to be invented.
+2. A data store earns a data dictionary; a network API earns an interface definition; a deployed
+   service earns a runbook.
+3. The map's rules and its test for adding a document are what stops the structure decaying back
+   into the mixed-tense file it replaced.
+4. Most proposed additions share all three properties with something that already exists, which
+   usually makes them a section or a tag rather than a file. The structure works because it is small
+   enough to hold in your head.
 
 ## What the rules prevent
 

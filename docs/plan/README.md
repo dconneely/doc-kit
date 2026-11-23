@@ -16,16 +16,6 @@ offers this repository as the example, but it is a documentation kit with almost
 quirks and no archive, so it shows an outside adopter few of the artefacts they would keep. It can
 wait until the procedure has stopped moving.
 
-## State each repeated rule and list once
-
-**Type:** docs - **Importance:** low - **Effort:** low
-
-`docs/spec.md` states the owner's permission rule for decision records in full twice, in §3's
-mutability bullets and in §3.1, and `ADOPTING.md`'s four consequences reappear as a numbered list in
-`ADOPTING-NOTES.md`. Keep one copy of each and point to it from the other place, as §4.1 requires;
-the copies agree today, so this guards a future edit that changes only one.
-`tests/doc-kit-duplicate-check.sh` reports neither, which is worth a look while doing it.
-
 ## Rewrite research note 0003 as its current answer
 
 **Type:** docs - **Importance:** low - **Effort:** medium
