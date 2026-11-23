@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.12.0] - 2026-11-23
+
 ### Changed
 
 - The `AGENTS.md` stanza in `ADOPTING.md` is about a third shorter. It no longer lists each
