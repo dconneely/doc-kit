@@ -144,7 +144,7 @@ session that runs too long, as a failed one.
 `tests/doc-kit-eval-variant.sh` runs the same scenarios on a copy of the kit at `HEAD` with given
 lines removed - from the stanza in `ADOPTING.md`, say, or from the template map - or given files as
 they were at another commit, to test whether agents need a passage without editing the real file.
-[`docs/howto/run-the-agent-evals.md`](howto/run-the-agent-evals.md) says how to run, watch and
+[`docs/howto/run-the-agent-evals.md`](howto/run-the-agent-evals.md) says how to run, score and
 record an evaluation.
 
 ## Running everything

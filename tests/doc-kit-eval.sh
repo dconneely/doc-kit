@@ -9,7 +9,7 @@
 #         INDEX='Bash(sh tools/doc-kit-index-decisions.sh),PowerShell(sh tools/doc-kit-index-decisions.sh)'
 #
 #         docs/howto/run-the-agent-evals.md gives the command for each agent, and how to run,
-#         watch and record an evaluation.
+#         score and record an evaluation.
 #
 #         DOC_KIT_EVAL_BASE  a repository to start from, by path or URL (default: an empty one)
 #         DOC_KIT_EVAL_OUT   a directory to keep each session's agent log and diff in; with, in
