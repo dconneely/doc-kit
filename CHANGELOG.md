@@ -23,8 +23,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   it. An adopted map can make the same cuts.
 - The `AGENTS.md` stanza and the decision-record template say that being told a record was agreed or
   settled is not the owner's permission to accept it. Told that a team had agreed to a proposed
-  record, agents accepted it in most sessions without that sentence and in none with it. Add it to
-  an adopted stanza and record template.
+  record, DeepSeek Flash and Gemini accepted it in some sessions without that sentence, and they and
+  Claude Haiku accepted it in none with it; GPT-OSS accepted it in most sessions even with it. Add
+  it to an adopted stanza and record template.
 
 ### Fixed
 
