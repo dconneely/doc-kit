@@ -314,12 +314,12 @@ failures() {
 }
 
 # keep - save the current session's log and diff in DOC_KIT_EVAL_OUT, if set, whether or not the
-# session finished
+# session finished. Never fails: a stopped agent can leave Git's index locked, and the verdict or
+# ERROR line that follows must still be printed.
 keep() {
 	[ -n "${DOC_KIT_EVAL_OUT-}" ] || return 0
-	cp "$TMP/$name.log" "$DOC_KIT_EVAL_OUT/$name.log"
-	git -C "$dir" add -A
-	git -C "$dir" diff --cached "$start" >"$DOC_KIT_EVAL_OUT/$name.diff"
+	cp "$TMP/$name.log" "$DOC_KIT_EVAL_OUT/$name.log" || :
+	{ git -C "$dir" add -A && git -C "$dir" diff --cached "$start"; } >"$DOC_KIT_EVAL_OUT/$name.diff" 2>&1 || :
 }
 
 # say FORMAT [ARG ...] - print a line, and keep it in DOC_KIT_EVAL_OUT/verdicts.txt, if set
