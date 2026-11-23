@@ -18,7 +18,7 @@ one sentence added to both - being told a record was agreed or settled is not th
 accepted none of 5, each session quoting the sentence and offering to accept the record if told to.
 Gemini accepted 1 of 3 without the sentence and none of 5 with it. Haiku accepted none without it,
 and none of 35 with it. GPT-OSS does not keep the gate: with the sentence, it accepted the decision
-in 13 of 15 sessions.
+in 13 of 15 sessions, so it is unsuitable for work no one reviews before it is committed.
 
 The sentence is now in the stanza and the record template. The rule already covered the case, but
 two of the eight sessions that accepted said they took the agreement as the owner's permission, and
@@ -73,5 +73,8 @@ None.
 
 ## Open questions
 
-- What would make GPT-OSS keep the gate. The sentence, the bold rule and the template's list of
-  status changes together did not.
+Nothing outstanding. This is left unanswered deliberately, for the reason given:
+
+- What would make GPT-OSS keep the gate: the sentence, the bold rule and the template's list of
+  status changes together did not, and its new records written as `accepted` break the gate in a way
+  no wording addresses.

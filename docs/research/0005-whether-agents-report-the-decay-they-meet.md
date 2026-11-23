@@ -140,7 +140,10 @@ Claude session's score unchanged.
 
 ## Open questions
 
-- What would make Gemini report decay it sees. The report line did not; a line naming what to look
-  for, or asking for a closing list of anything stale, is untested.
-- Decay in a file the session never opens: no scenario measures it, and a session cannot report what
-  it does not read.
+Nothing outstanding. These are left unanswered deliberately, each for the reason given:
+
+- What would make Gemini report decay it sees: the report line did not, and testing a line naming
+  what to look for, or asking for a closing list of anything stale, means adding to the stanza, the
+  text the kit cuts hardest, for one model.
+- Decay in a file the session never opens: a session cannot report what it does not read, so no
+  scenario can measure it.
