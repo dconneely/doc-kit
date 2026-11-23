@@ -117,14 +117,12 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    could not run the index generator broke a rule; four ran cleanly. Look for timeouts in the logs,
    and compare arms only when they ran under the same load.
 
-5. **Set the time limit for slow models.**
-
    A session whose agent runs longer than `DOC_KIT_EVAL_TIMEOUT` seconds, 900 unless set, is stopped
-   with everything it started, and its run ends with an `ERROR ... agent stopped` line. Raise the
-   limit for a model whose sessions are slow, rather than setting it to 0, which leaves a hung agent
-   stopping its run without a word.
+   with everything it started, and its run ends with an `ERROR ... agent stopped` line. For a model
+   whose sessions are slow, raise the limit before running, rather than setting it to 0, which
+   leaves a hung agent stopping its run without a word.
 
-6. **Rerun failed sessions.**
+5. **Rerun failed sessions.**
 
    A session that ends with an `ERROR` line stops the run with exit status 2. The script runs every
    session of one scenario before the next, so rerun, into a new output directory, the stopped
@@ -138,7 +136,7 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
      tracks the scenario and the model, so leaving it out flatters the arm. A model that hangs
      repeatedly is a finding, as GPT-OSS's hangs were (research note 0006).
 
-7. **Read every log.**
+6. **Read every log.**
 
    The verdicts are heuristics. Read each session's log and diff, and score it yourself: a report
    names the decay specifically; a session that only says where it put its own fact has not
@@ -153,7 +151,7 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    and in its JSON a whole answer, or a file a tool read, is one line, so a check needing two facts
    on one line passes when it should not.
 
-8. **Record the result.**
+7. **Record the result.**
 
    Write it in the research note that asks the question, or a new one copied from
    `templates/docs/research/0000-template.md`. Rewrite the finding in place as the current answer.
