@@ -98,28 +98,28 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 
 ## Lifecycle
 
-| Artefact                    | Created when                                                 | Removed / closed when                                            |
-| --------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------- |
-| `DOC-MAP.md`                | the structure is first agreed                                | never - revised when an artefact is added, removed or repurposed |
-| `README.md`                 | project starts                                               | never                                                            |
-| `AGENTS.md`                 | agents began working in the repository                       | never                                                            |
-| `docs/spec.md`              | behaviour is decided                                         | never - edited forever                                           |
-| `ADOPTING.md`               | the kit is first given to someone else                       | never                                                            |
-| `ADOPTING-NOTES.md`         | the procedure accumulated reasoning that was slowing it down | never                                                            |
-| `templates/*`               | an artefact earns a place in the product                     | when the artefact leaves the product                             |
-| `tools/*`                   | a specification rule becomes worth checking mechanically     | when the rule it checks or the view it generates is removed      |
-| `.agents/skills/*/SKILL.md` | adoptions began being driven by an agent                     | when the procedure it drives no longer exists                    |
-| `docs/decisions/README.md`  | first decision is recorded                                   | never                                                            |
-| `docs/decisions/*.md`       | a choice a newcomer would question                           | deprecated or deleted, with the owner's permission               |
-| `CHANGELOG.md` entry        | at release, if visible to adopters                           | never                                                            |
-| `docs/plan/README.md` entry | idea occurs - one paragraph, no design                       | **deleted** when done, not struck through                        |
-| `docs/plan/*.md`            | work on an entry needs more than its paragraph               | with its entry, when the work lands or is dropped                |
-| `docs/research/*.md`        | a cited convention is checked, or an agent eval is run       | never - confidence gets revised                                  |
-| `docs/testing.md`           | something started verifying the documentation mechanically   | never                                                            |
-| `docs/howto/*.md`           | a procedure recurs across several places                     | when automated away or obsolete                                  |
-| `docs/glossary.md` entry    | a term acquires a project-specific meaning                   | when the term leaves the project                                 |
-| `docs/sources/README.md`    | an external standard is cited                                | when no artefact cites it                                        |
-| `docs/sources/`             | the fetch script is adopted, or a source is cached           | when no artefact cites it                                        |
+| Artefact                    | Created when                                                    | Removed / closed when                                            |
+| --------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `DOC-MAP.md`                | the structure is first agreed                                   | never - revised when an artefact is added, removed or repurposed |
+| `README.md`                 | project starts                                                  | never                                                            |
+| `AGENTS.md`                 | agents began working in the repository                          | never                                                            |
+| `docs/spec.md`              | behaviour is decided                                            | never - edited forever                                           |
+| `ADOPTING.md`               | the kit is first given to someone else                          | never                                                            |
+| `ADOPTING-NOTES.md`         | the procedure accumulated reasoning that was slowing it down    | never                                                            |
+| `templates/*`               | an artefact earns a place in the product                        | when the artefact leaves the product                             |
+| `tools/*`                   | a specification rule becomes worth checking mechanically        | when the rule it checks or the view it generates is removed      |
+| `.agents/skills/*/SKILL.md` | adoptions began being driven by an agent                        | when the procedure it drives no longer exists                    |
+| `docs/decisions/README.md`  | first decision is recorded                                      | never                                                            |
+| `docs/decisions/*.md`       | a choice a newcomer would question                              | deprecated or deleted, with the owner's permission               |
+| `CHANGELOG.md` entry        | at release, if visible to adopters                              | never                                                            |
+| `docs/plan/README.md` entry | idea occurs - one paragraph, no design                          | **deleted** when done, not struck through                        |
+| `docs/plan/*.md`            | work on an entry needs more than its paragraph                  | with its entry, when the work lands or is dropped                |
+| `docs/research/*.md`        | a cited convention is checked, or an agent eval is run          | never - confidence gets revised                                  |
+| `docs/testing.md`           | something started verifying the documentation mechanically      | never                                                            |
+| `docs/howto/*.md`           | a procedure recurs and needs more than one paragraph (ADR-0015) | when automated away or obsolete                                  |
+| `docs/glossary.md` entry    | a term acquires a project-specific meaning                      | when the term leaves the project                                 |
+| `docs/sources/README.md`    | an external standard is cited                                   | when no artefact cites it                                        |
+| `docs/sources/`             | the fetch script is adopted, or a source is cached              | when no artefact cites it                                        |
 
 ## Flow
 
