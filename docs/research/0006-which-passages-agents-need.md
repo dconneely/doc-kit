@@ -84,9 +84,10 @@ nothing about what the system does has changed." With the line, on 2026-11-22 on
 configuration loaded and 15 with it excluded, as in research note 0005. Each `plan-done` miss,
 without the plan line or without the Flow, recorded the shipped change in the changelog and the
 specification and never opened the plan. The routing rows' `decay-plan` counts are fifteen sessions
-per arm, run side by side on 2026-11-21 on the kit at `e9fb1ea` with Claude Code 2.1.330; every
-session that reported named the entry marked done and said finished entries are deleted, and every
-miss filed its own entry and said nothing of the other.
+per arm, run side by side on 2026-11-21 on the kit at `e9fb1ea` with Claude Code 2.1.330, and their
+baseline is the shipped kit, not the uncut one; every session that reported named the entry marked
+done and said finished entries are deleted, and every miss filed its own entry and said nothing of
+the other.
 
 Cut together, the stanza's tense list, plan line and write-the-least line placed 51 of 54 full-suite
 sessions; the one `plan-done` miss among them is why the plan line stays. The three map passages cut
@@ -180,11 +181,11 @@ and `agy` waited on it. A deny rule for recursive listings, added to the command
 with an agent error and no log. One Gemini session, before the rule, hung the same way, waiting on a
 background task; what that task was is not recorded.
 
-Three `decay-plan` sessions per kit suggested that two cuts cost the report of a finished plan
-entry. Without the routing rows, two of eight sessions reported it, against six of eight on the
+Six to eight `decay-plan` sessions per kit suggested that two cuts cost the report of a finished
+plan entry. Without the routing rows, two of eight sessions reported it, against six of eight on the
 uncut map; without the three map passages cut together, two of six. Fifteen sessions per kit on the
-same day, with only the cut differing, showed no such effect for either. Three runs show a passage
-that changes everything, not one that changes a rate.
+same day, with only the cut differing, showed no such effect for either. A handful of sessions shows
+a passage that changes everything, not one that changes a rate.
 
 ## Open questions
 

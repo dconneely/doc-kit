@@ -23,12 +23,12 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    makes agents reword the scope. To compare rates, such as how often agents report decay, run
    fifteen sessions per scenario and arm, on kits that differ only in what is being tested, with the
    arms side by side rather than one after the other, so that both meet the provider's load at the
-   same hours. Three per arm once suggested an effect that fifteen showed was not there (research
-   note 0006, Dead ends). At fifteen per scenario and arm, only a difference of five to seven
-   sessions or more is unlikely to be chance (Fisher's exact test, p < 0.05); for other counts, run
-   the test before claiming one arm does better. Test each scenario on its own: scenarios differ in
-   difficulty, and pooling them can show or hide a difference no scenario has. To combine them, use
-   a test stratified by scenario, such as Cochran-Mantel-Haenszel.
+   same hours. Six to eight per arm once suggested an effect that fifteen showed was not there
+   (research note 0006, Dead ends). At fifteen per scenario and arm, only a difference of five to
+   seven sessions or more is unlikely to be chance (Fisher's exact test, p < 0.05); for other
+   counts, run the test before claiming one arm does better. Test each scenario on its own:
+   scenarios differ in difficulty, and pooling them can show or hide a difference no scenario has.
+   To combine them, use a test stratified by scenario, such as Cochran-Mantel-Haenszel.
 
 2. **Set the agent command.**
 
