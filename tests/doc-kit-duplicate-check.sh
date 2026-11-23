@@ -2,8 +2,9 @@
 # doc-kit-duplicate-check - report repeated tables, value lists and numbered step sequences.
 #
 # Advisory: prints findings and always exits 0. Templates are excluded because a template and its
-# instance may repeat content (ADR-0006). A step sequence is a run of three or more numbered lines
-# under a heading that names a step, procedure, process, or one of the decision-record actions.
+# instance may repeat content (ADR-0006). A step sequence is a run of three or more numbered items,
+# compared by their first lines, under a heading that names a step, procedure, process, or one of
+# the decision-record actions.
 #
 # Usage: sh tests/doc-kit-duplicate-check.sh
 
@@ -25,7 +26,6 @@ hits=$(
 		awk -v file="$f" '
 			function norm(s) { gsub(/`/, "", s); gsub(/[ \t|]/, "", s); return s }
 			FNR == 1 { prev = ""; heading = ""; steps = 0; sig = "" }
-			/^#+ / { heading = $0 }
 			/^\|/ && prev ~ /^\|/ && $0 ~ /^\|[ :|-]*-/ {
 				h = norm(prev)
 				if (h != "") print "table\t" file "\t" (FNR - 1) "\t" h
@@ -38,11 +38,14 @@ hits=$(
 				steps++
 				sig = sig (steps > 1 ? " | " : "") t
 			}
-			!/^[0-9]+\. / {
+			# An indented or blank line continues a wrapped or spaced list rather than ending it.
+			!/^[0-9]+\. / && !/^([ \t]|$)/ {
 				if (steps >= 3 && heading ~ /[Ss]tep|[Pp]rocedure|[Pp]rocess|[Pp]ropose|[Aa]ccept|[Aa]mend|[Aa]dopt/) print "steps\t" file "\t" start "\t" sig
 				steps = 0
 				sig = ""
 			}
+			# After the flush, so that a list is judged by the heading it sits under.
+			/^#+ / { heading = $0 }
 			{ prev = $0 }
 			END {
 				if (steps >= 3 && heading ~ /[Ss]tep|[Pp]rocedure|[Pp]rocess|[Pp]ropose|[Aa]ccept|[Aa]mend|[Aa]dopt/) print "steps\t" file "\t" start "\t" sig
