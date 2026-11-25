@@ -328,9 +328,9 @@ do not follow renames.
 telling the two apart.
 
 **A move changes pointers, not history.** Fix every link and path that leads a reader to a moved
-file. Leave a statement of what was true at the time - a changelog entry, or a record saying where a
-file was when it was decided - naming the path it named then: rewritten to the new path, it becomes
-false.
+file, in an accepted decision record too, without reopening it. Leave a statement of what was true
+at the time - a changelog entry, or a record saying where a file was when it was decided - naming
+the path it named then: rewritten to the new path, it becomes false.
 
 Get the owner to review the dispositions before acting on them. It is the cheapest point at which
 someone who remembers why a document exists can say so.
