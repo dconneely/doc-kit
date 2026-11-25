@@ -13,8 +13,8 @@ When two documents disagree, tense settles it:
 - **`docs/spec.md`** - present tense, authoritative about what a conformant repository is.
 - **`CHANGELOG.md`** - past tense. Records what changed, never what is currently true.
 - **`docs/plan/README.md`** - intent. Nothing described in it exists yet.
-- **`docs/decisions/`** - past tense, and records _why_. Check `status` before relying on one; only
-  `accepted` binds.
+- **`docs/decisions/`** - the current answer to each question, and _why_. Check `status` before
+  relying on one; only `accepted` binds.
 
 ## This repository is its own first adopter
 

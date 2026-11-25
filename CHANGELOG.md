@@ -6,6 +6,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Changed
+
+- Decision records are `present` tense in the template map, not `past`: an accepted record is the
+  current answer to its question, amended in place. An adopted map can change the row to match.
+
 ### Fixed
 
 - The decision-record template lets a link, path or citation that a move or renumbering made untrue
