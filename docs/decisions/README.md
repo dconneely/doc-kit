@@ -9,6 +9,7 @@ Index of decision records. Only **accepted** records bind.
 | Record                                                                          | Date       | Deciders       | Question                                                           | Confirmation                                                                                      |
 | ------------------------------------------------------------------------------- | ---------- | -------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
 | [ADR-0001](0001-what-the-kit-is-for-and-who-decides.md)                         | 2026-10-28 | David Conneely | What the kit is for, and who decides                               | `review`                                                                                          |
+| [ADR-0002](0002-how-documentation-is-divided-into-artefacts.md)                 | 2026-11-26 | David Conneely | How documentation is divided into artefacts                        | `tools/doc-kit-check.sh`                                                                          |
 | [ADR-0005](0005-what-is-product-documentation-or-infrastructure.md)             | 2026-10-28 | David Conneely | What is product, what is documentation, and what is infrastructure | `review`                                                                                          |
 | [ADR-0006](0006-where-rules-and-their-reasons-live.md)                          | 2026-11-16 | David Conneely | Where rules and their reasons live                                 | `review`                                                                                          |
 | [ADR-0007](0007-how-a-decision-record-is-decided-and-changed.md)                | 2026-11-16 | David Conneely | How a decision record is decided and changed                       | `tools/doc-kit-check.sh and prek run lowercase-adr-status`                                        |
@@ -22,6 +23,6 @@ Index of decision records. Only **accepted** records bind.
 
 ## Non-binding
 
-| Record                                                          | Status     | Date       | Question                                    |
-| --------------------------------------------------------------- | ---------- | ---------- | ------------------------------------------- |
-| [ADR-0002](0002-how-documentation-is-divided-into-artefacts.md) | `proposed` | 2026-11-26 | How documentation is divided into artefacts |
+| Record | Status | Date | Question |
+| ------ | ------ | ---- | -------- |
+| _none_ | -      | -    | -        |
