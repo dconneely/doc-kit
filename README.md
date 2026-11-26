@@ -7,7 +7,7 @@ written down, and it writes more. Left alone, that text accumulates: documents r
 contradicting each other, describing code that has since changed. A new session cannot tell the
 current text from the stale, so it trusts all of it.
 
-The kit is a small set of documents organised by three properties - **tense**, **mutability** and
+The kit is a small set of documents organised by three properties - **content**, **mutability** and
 **audience** - with rules for where each fact goes, when it is deleted, and who may change what.
 **The owner decides; every other contributor, agent or human, proposes.** It also carries a
 procedure for migrating documentation that has already accumulated.

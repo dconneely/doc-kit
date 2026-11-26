@@ -8,8 +8,14 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Changed
 
-- Decision records are `present` tense in the template map, not `past`: an accepted record is the
-  current answer to its question, amended in place. An adopted map can change the row to match.
+- **Breaking:** the map's artefacts table has a `Content` column in place of `Tense`, naming the
+  kind of fact each artefact holds: `routing`, `orientation`, `behaviour`, `deviation`, `rationale`,
+  `intent`, `history`, `finding`, `vocabulary`, `procedure`, `coverage`, `index`, `source` or
+  `template`. Mutability gains `generated`, used by the decisions index. Two artefacts holding
+  different facts now differ in content, so `doc-kit-check.sh` no longer exempts named pairs from
+  the shared-triple warning, and it reports an old `Tense` column once. In an adopted map, rename
+  the column and give each row the value the template map gives it; a custom artefact takes the kind
+  of fact it holds.
 - The template map's rule 5 says a document names code only where it must, as a quirk does, because
   the reference goes stale. It said only quirk entries name code, and in agent evals Claude Sonnet
   and Gemini left a fact's code reference out because of it. Change an adopted map to match.

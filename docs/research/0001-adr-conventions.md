@@ -65,9 +65,9 @@ What differs is where it lives and whether it changes:
   from the code ("more likely that they are seen, read, and updated") for discoverability from
   outside ("harder to spot").
 - **That use is mutable.** `yadr` records carry an optional changelog and are meant to be revised in
-  place. This kit's records are amended in place with the owner's permission (ADR-0007). By the
-  three-property test the tense and location still make an in-code Y-statement a different artefact
-  from an ADR, not a shorter spelling of one.
+  place. This kit's records are amended in place with the owner's permission (ADR-0007). Its
+  location and audience still make an in-code Y-statement a different artefact from an ADR, not a
+  shorter spelling of one.
 
 ADR-0007 did not consider Y-statements, and nothing here argues it should have chosen them: the
 minimal template already carries every clause.

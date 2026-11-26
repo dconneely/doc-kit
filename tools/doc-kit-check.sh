@@ -278,46 +278,31 @@ check_map() {
 	IFS=$oldifs
 	set +f
 
-	# §2.7 - tense, mutability and audience come from closed sets: free text lets near-duplicates
+	# §2.7 - the property columns. A map from before the content column has a Tense column whose
+	# every value would fail, so report that once.
+	if section "$MAP" '## Artefacts' | grep -q '^| *Artefact *| *[^|]*| *Tense *|'; then
+		fail "the artefacts table has a Tense column" "§2.7 - rename it Content and give each row a content value"
+		return 0
+	fi
+
+	# §2.7 - content, mutability and audience come from closed sets: free text lets near-duplicates
 	# escape on phrasing. Artefacts sharing all three are reported as a prompt to check, not a
 	# failure (ADR-0002). Aliases, which hold no content of their own, are exempt. One awk pass
 	# prints a tab-separated line per finding: a kind, the artefact, and the value.
 	hits=$(section "$MAP" '## Artefacts' | grep '^| `' | grep -v '\*\*Alias\*\*' | awk -F' *[|] *' '
 		BEGIN {
-			split("present past future imperative explanatory", t, " ")
-			for (i in t) tenses[t[i]] = 1
-			n = split("rewritten in place|amendable|append-only|immutable|volatile|disposable", m, "|")
+			split("routing orientation behaviour deviation rationale intent history finding vocabulary procedure coverage index source template", t, " ")
+			for (i in t) contents[t[i]] = 1
+			n = split("rewritten in place|amendable|append-only|immutable|volatile|disposable|generated", m, "|")
 			for (i = 1; i <= n; i++) muts[m[i]] = 1
 			split("owner contributor consumer end-user operator", r, " ")
 			for (i in r) roles[r[i]] = 1
-
-			exempt_pairs["DOC-MAP.md + docs/testing.md"] = 1
-			exempt_pairs["README.md + docs/glossary.md"] = 1
-			exempt_pairs["docs/quirks.md + docs/spec.md"] = 1
-			exempt_pairs["docs/archive.md + docs/decisions.md"] = 1
 		}
 		function norm_pair(a, b) {
 			return (a < b) ? (a " + " b) : (b " + " a)
 		}
-		# An entry point name/README.md stands for name.md, which it replaces (§2.6).
-		function entry(p,  q) {
-			q = p
-			sub(/\/README\.md$/, ".md", q)
-			return q
-		}
-		# The entry point of the directory holding p, as name.md, or "" at the top.
-		function owner(p,  q) {
-			q = p
-			if (!sub(/\/[^\/]+$/, ".md", q)) return ""
-			return q
-		}
-		function ratified(a, b) {
-			return (norm_pair(a, b) in exempt_pairs)
-		}
+		# The parts of one container, its entry point included, share properties by design (§2.6).
 		function is_exempt_pair(a, b,  pa, pb) {
-			if (ratified(entry(a), entry(b))) return 1
-			if (ratified(owner(a), entry(b)) || ratified(entry(a), owner(b))) return 1
-			# Sibling members in the same docs/ container
 			if (a ~ /^docs\/[^\/]+\// && b ~ /^docs\/[^\/]+\//) {
 				split(a, pa, "/"); split(b, pb, "/");
 				if (pa[2] == pb[2]) return 1
@@ -327,7 +312,7 @@ check_map() {
 		{
 			art = $2
 			gsub(/`/, "", art)
-			if (!($4 in tenses)) print "tense\t" art "\t" $4
+			if (!($4 in contents)) print "content\t" art "\t" $4
 			if (!($5 in muts)) print "mut\t" art "\t" $5
 			# Each role once, optionally marked "(agents)" or "(humans)", in any order: sorted
 			# here so that order does not hide a shared triple.
@@ -387,10 +372,10 @@ check_map() {
 		val=${art#*"$TAB"}
 		art=${art%%"$TAB"*}
 		case "$kind" in
-			tense) fail "$art has tense '$val'" "§2.7 - present, past, future, imperative, explanatory" ;;
+			content) fail "$art has content '$val'" "§2.7 - see the Property values table" ;;
 			mut) fail "$art has mutability '$val'" "§2.7 - see the permitted set" ;;
 			aud) fail "$art has audience '$val'" "§2.7 - owner, contributor, consumer, end-user, operator" ;;
-			share) warn "$art share [$val]" "§2.7 - merge them unless they hold different facts, or mark one an alias" ;;
+			share) warn "$art share [$val]" "§2.7 - merge them, or mark one an alias" ;;
 		esac
 		IFS=$NL
 	done

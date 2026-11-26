@@ -18,8 +18,8 @@ boundaries are recorded in [ADR-0001](decisions/0001-what-the-kit-is-for-and-who
 specification does not restate them (§4.1).
 
 It achieves that purpose by giving the repository one property: **every fact about the project has
-exactly one place it belongs, and the tense of the sentence tells you which.** Everything below is
-machinery for holding that property.
+exactly one place it belongs, and the kind of fact tells you which.** Everything below is machinery
+for holding that property.
 
 Three things follow, and they bound what the rest of this document is trying to achieve.
 
@@ -103,9 +103,11 @@ entry point, where it has one, is its `README.md`. `name.md` MUST NOT exist besi
 looks for them at that path and they cannot move into a directory. Where this specification names
 `name.md`, it means `name/README.md` once the directory exists.
 
-2.7 A map MAY name artefacts this specification does not define. It MUST give each one a tense, a
-mutability and an audience, drawn from the sets in the `Property values` table in
-`templates/DOC-MAP.md` - in an adopting repository, the table copied into its map.
+2.7 A map MAY name artefacts this specification does not define. It MUST give each one a content -
+the kind of fact it holds - a mutability and an audience, drawn from the sets in the
+`Property values` table in `templates/DOC-MAP.md` - in an adopting repository, the table copied into
+its map. The artefacts table's columns are `Artefact`, `Purpose`, `Content`, `Mutability` and
+`Audience`, in that order.
 
 The roles are defined in ADR-0002: the owner decides; a contributor changes the repository; a
 consumer builds on what it publishes; an end-user uses the running product; an operator deploys and
@@ -114,10 +116,9 @@ role - `contributor (agents)` or `contributor (humans)`. Roles are separated by 
 order.
 
 Two artefacts sharing all three are usually one artefact: merge them, or make one a section of the
-other, unless they hold different facts. A shared triple is a prompt to check, not a failure.
-ADR-0002 lists the pairs and structural cases that share one while holding different facts, and is
-the one place they are listed. Free-text properties defeat that test - near-duplicates escape on
-phrasing rather than substance - which is why all three are closed sets.
+other. A shared triple is a prompt to check, not a failure. The parts of one container, its entry
+point included, may share one (§2.6). Free-text properties defeat that test - near-duplicates escape
+on phrasing rather than substance - which is why all three are closed sets.
 
 An **alias** is exempt: a file whose entire content points at another artefact, existing only
 because a tool looks for that filename. It appears in the map, carries the properties of what it

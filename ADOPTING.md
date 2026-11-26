@@ -22,8 +22,8 @@ silently.
 
 ## The idea, and why it shapes the procedure
 
-Three properties define every artefact - tense, mutability, audience - and documentation rots when a
-file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoning behind each):
+Three properties define every artefact - content, mutability, audience - and documentation rots when
+a file mixes them. Four consequences follow (`ADOPTING-NOTES.md` has the reasoning behind each):
 
 1. **Customise mostly by deleting.** Step 2 is a table of deletions and substitutions, not a writing
    exercise.
@@ -287,34 +287,34 @@ List every documentation file before touching any of them, in a worksheet:
 `docs/plan/adopt-doc-kit.md`. This is the one case where a plan note earns its place below the usual
 threshold, because migration is exactly the work that spans weeks and gets interrupted.
 
-| File                   | Tense   | Destination      | Disposition | Status |
-| ---------------------- | ------- | ---------------- | ----------- | ------ |
-| `docs/design-notes.md` | mixed   | spec + changelog | split       |        |
-| `docs/old-api.md`      | present | -                | archive     | done   |
+| File                   | Content   | Destination      | Disposition | Status |
+| ---------------------- | --------- | ---------------- | ----------- | ------ |
+| `docs/design-notes.md` | mixed     | spec + changelog | split       |        |
+| `docs/old-api.md`      | behaviour | -                | archive     | done   |
 
-**Tense** is the dominant one - present, past, future, or **mixed**. Mixed is not a failure to
-classify; it is the finding, and it always means _split_.
+**Content** is the dominant kind of fact, from the map's `Property values` table, or **mixed**.
+Mixed is not a failure to classify; it is the finding, and it always means _split_.
 
 Cast wider than the repository. Wikis, Confluence spaces, shared drives and issue-tracker
 descriptions hold documentation too, and they are where the undatable material concentrates. List
 them with their location in place of a path.
 
-The worksheet mixes tenses itself - a survey of what is, plus what you intend to do about it - which
-is precisely why it is a plan note and disposable. It is a worksheet, not a record, and it gets
-emptied into its proper homes before it is deleted.
+The worksheet mixes content itself - a survey of what is, plus what you intend to do about it -
+which is precisely why it is a plan note and disposable. It is a worksheet, not a record, and it
+gets emptied into its proper homes before it is deleted.
 
 ### 4b - Assign a disposition
 
 Six, and every file gets exactly one:
 
-| Disposition | When                                                        | What it means                                                                          |
-| ----------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| **move**    | one tense, wrong place                                      | relocate as-is. Use `git mv` so history and blame survive                              |
-| **split**   | mixed tense                                                 | divide by tense and file each part. The most common outcome, and the highest-value one |
-| **absorb**  | belongs inside something that already exists                | merge the content in, delete the original                                              |
-| **archive** | undatable, or fits nothing and not worth rewriting now      | to `docs/archive/` with a provenance header, never into the specification              |
-| **delete**  | superseded, duplicated, or wrong with nothing worth keeping | git still has it                                                                       |
-| **leave**   | already correct where it is                                 | still has to appear in the map                                                         |
+| Disposition | When                                                        | What it means                                                                            |
+| ----------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **move**    | one kind of content, wrong place                            | relocate as-is. Use `git mv` so history and blame survive                                |
+| **split**   | mixed content                                               | divide by content and file each part. The most common outcome, and the highest-value one |
+| **absorb**  | belongs inside something that already exists                | merge the content in, delete the original                                                |
+| **archive** | undatable, or fits nothing and not worth rewriting now      | to `docs/archive/` with a provenance header, never into the specification                |
+| **delete**  | superseded, duplicated, or wrong with nothing worth keeping | git still has it                                                                         |
+| **leave**   | already correct where it is                                 | still has to appear in the map                                                           |
 
 Two rules stop this going wrong. **Archive is not a synonym for "not sure yet"** - it is a positive
 decision not to migrate, for a stated reason, and promoting an undatable claim into the
@@ -384,7 +384,7 @@ The customisation has been applied successfully when all of these hold:
 - [ ] Every documentation file in the repository appears in the map.
 - [ ] The artefacts table, the lifecycle table and the layout block list the same artefacts.
 - [ ] Paths in the map are the repository's real paths.
-- [ ] No file serves two tenses - nothing is part changelog and part backlog.
+- [ ] No file holds two kinds of content - nothing is part changelog and part backlog.
 - [ ] No fact appears in two places; in particular, no prose restates a machine-readable contract.
 - [ ] Generated files say so, and regenerating them produces no diff.
 - [ ] No placeholder content survives - no example artefact row, no unreplaced heading.

@@ -12,23 +12,23 @@ gets interrupted.
 Every documentation file in the repository, plus documentation held outside it - wikis, Confluence
 spaces, shared drives, long issue descriptions. Give those their location in place of a path.
 
-**Tense** is the dominant one: `present`, `past`, `future`, or `mixed`. Mixed is not a failure to
-classify - it is the finding, and it always means `split`.
+**Content** is the dominant kind of fact, from the map's `Property values` table, or `mixed`. Mixed
+is not a failure to classify - it is the finding, and it always means `split`.
 
 **Disposition** is exactly one of:
 
 |           | When                                                        | What it means                                              |
 | --------- | ----------------------------------------------------------- | ---------------------------------------------------------- |
-| `move`    | one tense, wrong place                                      | relocate as-is, with `git mv` so history and blame survive |
-| `split`   | mixed tense                                                 | divide by tense, file each part separately                 |
+| `move`    | one kind of content, wrong place                            | relocate as-is, with `git mv` so history and blame survive |
+| `split`   | mixed content                                               | divide by content, file each part separately               |
 | `absorb`  | belongs inside something that already exists                | merge in, delete the original                              |
 | `archive` | undatable, or fits nothing and not worth rewriting now      | `docs/archive/` with a provenance header                   |
 | `delete`  | superseded, duplicated, or wrong with nothing worth keeping | git still has it                                           |
 | `leave`   | already correct where it is                                 | must still appear in the map                               |
 
-| File or location | Tense | Destination | Disposition | Notes | Status |
-| ---------------- | ----- | ----------- | ----------- | ----- | ------ |
-|                  |       |             |             |       |        |
+| File or location | Content | Destination | Disposition | Notes | Status |
+| ---------------- | ------- | ----------- | ----------- | ----- | ------ |
+|                  |         |             |             |       |        |
 
 ## Decisions found
 

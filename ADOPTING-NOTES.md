@@ -13,7 +13,7 @@ The reasoning behind each of `ADOPTING.md`'s four numbered consequences:
 2. A data store earns a data dictionary; a network API earns an interface definition; a deployed
    service earns a runbook.
 3. The map's rules and its test for adding a document are what stops the structure decaying back
-   into the mixed-tense file it replaced.
+   into the mixed-content file it replaced.
 4. Most proposed additions share all three properties with something that already exists, which
    usually makes them a section or a tag rather than a file. The structure works because it is small
    enough to hold in your head.
@@ -105,15 +105,15 @@ entry rather than deleting a note that describes real work).
 No. Debt is a **type tag within the single ranked plan**, alongside `bug`, `feature` and `docs`.
 
 The worry behind the request - that features drown debt - is real, and the answer is ranking it
-higher, not filing it elsewhere. Splitting by _category_ where the structure splits on tense,
+higher, not filing it elsewhere. Splitting by _category_ where the structure splits on content,
 mutability and audience is what makes such files drift apart and go stale; the argument is
 [ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-artefacts.md), and it generalises
 to most proposed additions.
 
 ### Where do schemas, API definitions and other formal contracts go?
 
-Into the **specification**. They pass the same three tests as prose reference material - present
-tense, rewritten in place, audience of users and implementers - and being machine-checked makes them
+Into the **specification**. They pass the same three tests as prose reference material - behaviour,
+rewritten in place, audience of users and implementers - and being machine-checked makes them
 _better_ specification, not something lesser.
 
 Applying those tests reclassifies more than it adds: a conformance target is specification while its
@@ -127,7 +127,7 @@ entries. See [ADR-0002](docs/decisions/0002-how-documentation-is-divided-into-ar
 specification pre-emptively, there is nothing to group yet. `docs/spec.md` then moves to
 `docs/spec/README.md` and becomes the index; fix every link to it, the `AGENTS.md` stanza and the
 map included, in the same commit. Each member still keeps its own row in the artefacts table
-(tense/mutability/audience can genuinely differ between them - that is the whole reason they are
+(content/mutability/audience can genuinely differ between them - that is the whole reason they are
 separate files, and grouping them by directory is a convenience on top of that, not a replacement
 for it).
 
@@ -154,18 +154,18 @@ line. A directory named with trailing description text (`templates/   product - 
 leaf representing the whole directory as one artefact instead, which is also a real, useful shape -
 just a different one from a container with children.
 
-### A second README (or spec member) shares tense, mutability and audience with one that exists?
+### A second README (or spec member) shares content, mutability and audience with one that exists?
 
 Neither merge nor invent a fake distinction - if it has to exist at that path for someone to find
-it, it's an **alias**. A module `README.md` and the root one are both present/rewritten-in-place/
-anyone, which would normally mean merging them (`templates/DOC-MAP.md` "Adding a new kind of
-document"), but a module `README.md` exists so a newcomer working there finds orientation without
-first navigating to the root. Mark it `**Alias**` in the artefacts table, give it no content of its
-own, and let it inherit the properties of what it points to - the same applies to a specification
-member repeated per module, or any file some tool looks for by exact name. See
-`templates/DOC-MAP.md`'s "Adding a new kind of document" for the shape, and resist the temptation to
-word the audience column differently just to dodge the duplicate-properties check - that hides the
-fact that the file has nothing of its own to say.
+it, it's an **alias**. A module `README.md` and the root one are both
+orientation/rewritten-in-place/ anyone, which would normally mean merging them
+(`templates/DOC-MAP.md` "Adding a new kind of document"), but a module `README.md` exists so a
+newcomer working there finds orientation without first navigating to the root. Mark it `**Alias**`
+in the artefacts table, give it no content of its own, and let it inherit the properties of what it
+points to - the same applies to a specification member repeated per module, or any file some tool
+looks for by exact name. See `templates/DOC-MAP.md`'s "Adding a new kind of document" for the shape,
+and resist the temptation to word the audience column differently just to dodge the
+duplicate-properties check - that hides the fact that the file has nothing of its own to say.
 
 ### How far do I trust each convention?
 
@@ -243,9 +243,9 @@ produces both: the finding, and an ADR that cites it. That is not duplication, b
 different questions and decay differently.
 
 **"Everything seems to belong in the specification."** That is usually correct and not a problem.
-The specification is a set, and most of what a project knows about itself is present-tense contract.
-Grow it into a tree with an index rather than inventing categories. Pull something out only when its
-tense, mutability _and_ audience genuinely differ.
+The specification is a set, and most of what a project knows about itself is behaviour. Grow it into
+a tree with an index rather than inventing categories. Pull something out only when its content,
+mutability _and_ audience genuinely differ.
 
 **"The README and the specification overlap."** The README orients and links; the specification
 defines and constrains. A useful test: if the sentence would survive a complete reimplementation, it
@@ -253,7 +253,7 @@ is probably README. If it would have to be obeyed by that reimplementation, it i
 
 **"I have a document I cannot classify at all."** Two likely cases. It is a disposable working note,
 in which case it is a plan note and can be deleted when the work lands. Or it is two documents
-sharing a filename - try splitting it by tense before trying to classify it whole.
+sharing a filename - try splitting it by content before trying to classify it whole.
 
 **"The plan has grown to dozens of items and ranking has stopped meaning anything."** You are past
 the ceiling a file-based backlog was ever meant to serve. Move it to an issue tracker and leave a

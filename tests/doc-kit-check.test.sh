@@ -37,11 +37,11 @@ docs/
 
 ## Artefacts
 
-| Artefact              | Purpose   | Tense   | Mutability         | Audience    |
-| --------------------- | --------- | ------- | ------------------ | ----------- |
-| `DOC-MAP.md`          | the map   | present | rewritten in place | contributor |
-| `docs/plan.md`        | backlog   | future  | volatile           | owner       |
-| `docs/decisions/*.md` | decisions | past    | immutable          | owner, contributor |
+| Artefact              | Purpose   | Content   | Mutability         | Audience    |
+| --------------------- | --------- | --------- | ------------------ | ----------- |
+| `DOC-MAP.md`          | the map   | routing   | rewritten in place | contributor |
+| `docs/plan.md`        | backlog   | intent    | volatile           | owner       |
+| `docs/decisions/*.md` | decisions | rationale | immutable          | owner, contributor |
 
 ## Lifecycle
 
@@ -167,7 +167,7 @@ fixture
 mkdir -p old
 echo x >old/stale.md
 after '^DOC-MAP.md ' 'old/           archive, not authoritative'
-after '^[|] `docs/plan.md` +[|] backlog' '| `old/` | archive | past | volatile | contributor |'
+after '^[|] `docs/plan.md` +[|] backlog' '| `old/` | archive | index | volatile | contributor |'
 after '^[|] `docs/plan.md` +[|] start' '| `old/` | archived | never |'
 expect "an archive at any mapped path covers its files" 0 "checks passed" map
 
@@ -189,7 +189,7 @@ expect "a file beside a directory of its name fails" 1 "FAIL [map] docs/decision
 # macOS by default) `[ -d docs/Notes ]` also finds docs/notes/, which is not beside docs/Notes.md.
 fixture
 after '^DOC-MAP.md ' 'docs/Notes.md  notes'
-after '^[|] `DOC-MAP.md` ' '| `docs/Notes.md` | notes | present | rewritten in place | owner |'
+after '^[|] `DOC-MAP.md` ' '| `docs/Notes.md` | notes | vocabulary | rewritten in place | owner |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/Notes.md` | start | never |'
 mkdir docs/notes
 echo x >docs/notes/data.txt
@@ -198,7 +198,7 @@ expect "a directory whose name differs only in case is not beside the file" 0 "c
 
 fixture
 after '^DOC-MAP.md ' 'AGENTS.md      agent guide'
-after '^[|] `DOC-MAP.md` ' '| `AGENTS.md` | agent guide | present | rewritten in place | owner |'
+after '^[|] `DOC-MAP.md` ' '| `AGENTS.md` | agent guide | routing | rewritten in place | owner |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `AGENTS.md` | start | never |'
 mkdir AGENTS
 echo x >AGENTS/data.txt
@@ -207,7 +207,7 @@ expect "a root file a tool looks for may sit beside a directory of its name" 0 "
 
 fixture
 after '^DOC-MAP.md ' 'GEMINI.md      alias'
-after '^[|] `DOC-MAP.md` ' '| `GEMINI.md` | **Alias** for `DOC-MAP.md` | present | rewritten in place | contributor |'
+after '^[|] `DOC-MAP.md` ' '| `GEMINI.md` | **Alias** for `DOC-MAP.md` | routing | rewritten in place | contributor |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `GEMINI.md` | start | never |'
 mkdir GEMINI
 echo x >GEMINI/data.txt
@@ -292,19 +292,23 @@ rm docs/plan.md
 expect "named artefact missing on disk fails" 1 "the map names docs/plan.md but nothing matches it" map
 
 fixture
-sed -i.bak 's/| future  | volatile /| later   | volatile /' DOC-MAP.md
-expect "tense outside the closed set fails" 1 "docs/plan.md has tense 'later'" map
+sed -i.bak 's/| intent    | volatile /| later     | volatile /' DOC-MAP.md
+expect "content outside the closed set fails" 1 "docs/plan.md has content 'later'" map
 
 fixture
-sed -i.bak 's/| future  | volatile           | owner /| past | immutable | contributor, owner /' DOC-MAP.md
-expect "artefacts sharing all properties warn, in any role order" 0 	"WARN [map] docs/plan.md, docs/decisions/*.md share [past | immutable | contributor, owner]" map
+sed -i.bak 's/| Content   |/| Tense     |/' DOC-MAP.md
+expect "a Tense column fails once, naming the fix" 1 "the artefacts table has a Tense column" map
+
+fixture
+sed -i.bak 's/| intent    | volatile           | owner /| rationale | immutable | contributor, owner /' DOC-MAP.md
+expect "artefacts sharing all properties warn, in any role order" 0 	"WARN [map] docs/plan.md, docs/decisions/*.md share [rationale | immutable | contributor, owner]" map
 
 fixture
 echo x >docs/testing.md
 after '^DOC-MAP.md ' 'docs/testing.md test'
-after '^[|] `DOC-MAP.md` ' '| `docs/testing.md` | test | present | rewritten in place | contributor |'
+after '^[|] `DOC-MAP.md` ' '| `docs/testing.md` | test | coverage | rewritten in place | contributor |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/testing.md` | start | never |'
-refute "standard ratified pair does not warn" "WARN [map]" map
+refute "artefacts differing only in content do not warn" "WARN [map]" map
 
 fixture
 mkdir -p docs/spec
@@ -314,13 +318,13 @@ echo x >docs/spec/cli.md
 after '^DOC-MAP.md ' 'docs/quirks.md quirks'
 after '^DOC-MAP.md ' 'docs/spec/README.md spec'
 after '^DOC-MAP.md ' 'docs/spec/*.md members'
-after '^[|] `DOC-MAP.md` ' '| `docs/quirks.md` | quirks | present | rewritten in place | end-user |'
-after '^[|] `DOC-MAP.md` ' '| `docs/spec/README.md` | spec | present | rewritten in place | end-user |'
-after '^[|] `DOC-MAP.md` ' '| `docs/spec/*.md` | members | present | rewritten in place | end-user |'
+after '^[|] `DOC-MAP.md` ' '| `docs/quirks.md` | quirks | deviation | rewritten in place | end-user |'
+after '^[|] `DOC-MAP.md` ' '| `docs/spec/README.md` | spec | behaviour | rewritten in place | end-user |'
+after '^[|] `DOC-MAP.md` ' '| `docs/spec/*.md` | members | behaviour | rewritten in place | end-user |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/quirks.md` | start | never |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/spec/README.md` | start | never |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/spec/*.md` | start | never |'
-refute "ratified pair with a README.md entry point and its members does not warn" "WARN [map]" map
+refute "a container's entry point and members do not warn" "WARN [map]" map
 
 fixture
 mkdir -p docs/archive
@@ -328,11 +332,11 @@ echo x >docs/archive/README.md
 echo x >docs/decisions/README.md
 after '^DOC-MAP.md ' 'docs/archive/README.md archive'
 after '^DOC-MAP.md ' 'docs/decisions/README.md index'
-after '^[|] `DOC-MAP.md` ' '| `docs/archive/README.md` | archive | present | rewritten in place | owner, contributor |'
-after '^[|] `DOC-MAP.md` ' '| `docs/decisions/README.md` | index | present | rewritten in place | owner, contributor |'
+after '^[|] `DOC-MAP.md` ' '| `docs/archive/README.md` | archive | index | rewritten in place | owner, contributor |'
+after '^[|] `DOC-MAP.md` ' '| `docs/decisions/README.md` | index | index | generated | owner, contributor |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/archive/README.md` | start | never |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/decisions/README.md` | start | never |'
-refute "standard archive and index pair does not warn" "WARN [map]" map
+refute "a hand-written and a generated index do not warn" "WARN [map]" map
 
 fixture
 cp "$ROOT/templates/DOC-MAP.md" DOC-MAP.md
@@ -458,7 +462,7 @@ fixture
 mkdir -p docs/research
 echo x >docs/research/0000-template.md
 echo x >docs/research/0001-a-finding.md
-after '^[|] `DOC-MAP.md` ' '| `docs/research/*.md` | findings | past | rewritten in place | contributor |'
+after '^[|] `DOC-MAP.md` ' '| `docs/research/*.md` | findings | finding | rewritten in place | contributor |'
 after '^[|] `DOC-MAP.md` +[|] start' '| `docs/research/*.md` | a question | never |'
 after '^DOC-MAP.md ' 'docs/research/*.md  findings'
 expect "numbered research notes pass" 0 "checks passed"
@@ -637,7 +641,7 @@ expect "unknown check exits 2" 2 "unknown check: nope" nope
 
 # The checker's closed sets must match the template map's Property values table.
 template_values=$(awk -F'|' '
-	/^\| (Tense|Mutability|Audience) / {
+	/^\| (Content|Mutability|Audience) / {
 		v = $3
 		while (match(v, /`[^`]*`/)) {
 			print substr(v, RSTART + 1, RLENGTH - 2)
@@ -647,7 +651,7 @@ template_values=$(awk -F'|' '
 ' "$ROOT/templates/DOC-MAP.md" | sort)
 checker_values=$(
 	{
-		grep -F 'split("present ' "$CHECK" | sed -E 's/.*split\("([^"]*)".*/\1/' | tr ' ' '\n'
+		grep -F 'split("routing ' "$CHECK" | sed -E 's/.*split\("([^"]*)".*/\1/' | tr ' ' '\n'
 		grep -F 'split("rewritten in place|' "$CHECK" | sed -E 's/.*split\("([^"]*)".*/\1/' | tr '|' '\n'
 		grep -F 'split("owner ' "$CHECK" | sed -E 's/.*split\("([^"]*)".*/\1/' | tr ' ' '\n'
 	} | sed '/^$/d' | sort
@@ -658,23 +662,6 @@ else
 	failed=$((failed + 1))
 	printf 'not ok - checker value sets differ from the template\n--- template ---\n%s\n--- checker ---\n%s\n\n' \
 		"$template_values" "$checker_values"
-fi
-
-# The checker's exempt shared-triple pairs are exactly the pairs ADR-0002 lists. Each pair is
-# normalised to "A + B" in byte order, so neither side's ordering matters, and an entry point
-# name/README.md to the name.md it replaces, as the checker reads it (§2.6).
-pairs() { awk '{ if ($1 > $2) { t = $1; $1 = $2; $2 = t } print $1 " + " $2 }' | LC_ALL=C sort; }
-record_pairs=$(grep -E '^\| `[^`]+` and `[^`]+` +\|' \
-	"$ROOT/docs/decisions/0002-how-documentation-is-divided-into-artefacts.md" |
-	sed -E 's/^\| `([^`]+)` and `([^`]+)`.*/\1 \2/' | sed -E 's#/README\.md( |$)#.md\1#g' | pairs)
-checker_pairs=$(grep -F 'exempt_pairs["' "$CHECK" |
-	sed -E 's/.*exempt_pairs\["([^ ]+) \+ ([^"]+)"\].*/\1 \2/' | pairs)
-if [ -n "$record_pairs" ] && [ "$record_pairs" = "$checker_pairs" ]; then
-	passed=$((passed + 1))
-else
-	failed=$((failed + 1))
-	printf 'not ok - exempt pairs differ from ADR-0002\n--- record ---\n%s\n--- checker ---\n%s\n\n' \
-		"$record_pairs" "$checker_pairs"
 fi
 
 printf '%s passed, %s failed\n' "$passed" "$failed"

@@ -17,7 +17,7 @@ and not worth rewriting now. Exempt from the map's completeness check; every fil
 archive's own `README.md` carries a provenance header, or has one in a sibling
 `<filename>.provenance.md` for non-text formats. See ADR-0009.
 
-**Artefact** - one document, or one directory of documents, named in the map and given a tense, a
+**Artefact** - one document, or one directory of documents, named in the map and given a content, a
 mutability and an audience. The unit the structure is built from.
 
 **Audience** - who an artefact is written for: one or more of the roles `owner`, `contributor`,
@@ -28,6 +28,11 @@ in `templates/DOC-MAP.md` (or the copy in an adopting repository's map).
 `docs/spec.md` §3.4. It qualifies a finding, never a decision: decisions carry no confidence, only
 consequences.
 
+**Content** - the kind of fact an artefact holds - behaviour, rationale, history, intent and so on -
+from the closed set in the `Property values` table in `templates/DOC-MAP.md` (or the copy in an
+adopting repository's map). The most useful of the three properties, because the kind of sentence
+being written usually settles where it goes.
+
 **Documentation file** - a file the map's completeness check runs over. Defined in `docs/spec.md` §1
 and not restated here, because the check is undecidable without the exact wording.
 
@@ -37,7 +42,7 @@ and not restated here, because the check is undecidable without the exact wordin
 **Map** - `DOC-MAP.md`. Names every artefact, what each is for, and where a given fact belongs. The
 entry point, and the thing that must never promise a file that does not exist.
 
-**Mixed-tense file** - a document doing several jobs at once: part record of work done, part
+**Mixed-content file** - a document doing several jobs at once: part record of work done, part
 backlog, part assessment. The characteristic failure the structure exists to prevent, and the first
 thing to look for when adopting.
 
@@ -58,10 +63,5 @@ specification. See ADR-0002.
 generated-artefact rule in §4.3. Contrast **substantive conformance**, which adds §4.1's guideline,
 §4.2, §4.4 and §5's MUSTs, and needs a reviewer.
 
-**Tense** - whether a document describes what is, what was, what is intended, what to do, or why;
-the values are `present`, `past`, `future`, `imperative` and `explanatory`, in the `Property values`
-table in `templates/DOC-MAP.md` (or the copy in an adopting repository's map). The most useful of
-the three properties, because the tense of the sentence being written usually settles where it goes.
-
-**Three properties** - tense, mutability and audience. The axis the structure divides on, and the
+**Three properties** - content, mutability and audience. The axis the structure divides on, and the
 test every proposed new document must pass. See ADR-0002.
