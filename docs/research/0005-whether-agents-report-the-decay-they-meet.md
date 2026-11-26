@@ -28,8 +28,8 @@ report.
 
 Decay outside the file being edited is reported only when the agent opens the file that shows it.
 Given a fact naming the code that implements it, Haiku usually opened the code and reported the
-limit it contradicted; Sonnet and Gemini never opened it, and left the code reference out because
-the map says only quirk entries name code.
+limit it contradicted; Sonnet and Gemini never opened it, and left the code reference out, citing a
+map rule that only quirk entries name code.
 
 A stanza line asking agents to report stale or contradictory text made no measurable difference, for
 Haiku, whose reporting was already near the ceiling, or for Gemini, which reported nothing with or

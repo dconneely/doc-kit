@@ -10,6 +10,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 - Decision records are `present` tense in the template map, not `past`: an accepted record is the
   current answer to its question, amended in place. An adopted map can change the row to match.
+- The template map's rule 5 no longer says that only quirk entries name code. In agent evals, Claude
+  Sonnet and Gemini left a fact's code reference out because of it. An adopted map can drop the
+  sentence.
 
 ### Fixed
 
