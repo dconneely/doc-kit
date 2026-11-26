@@ -8,12 +8,12 @@ the map decides.
 
 ## Which document to trust
 
-When two documents disagree, tense settles it:
+Each document is authoritative about one thing:
 
-- **`docs/spec.md`** - present tense, authoritative about what a conformant repository is.
+- **`docs/spec.md`** - what a conformant repository is, and the invariants that hold.
 - **`CHANGELOG.md`** - past tense. Records what changed, never what is currently true.
 - **`docs/plan/README.md`** - intent. Nothing described in it exists yet.
-- **`docs/decisions/`** - the current answer to each question, and _why_. Check `status` before
+- **`docs/decisions/`** - _why_ a choice was made over its alternatives. Check `status` before
   relying on one; only `accepted` binds.
 
 ## This repository is its own first adopter
