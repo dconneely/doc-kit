@@ -1,6 +1,6 @@
 ---
-status: "accepted"
-date: 2026-10-25
+status: "proposed"
+date: 2026-11-26
 decision-makers: David Conneely
 ---
 
@@ -8,50 +8,54 @@ decision-makers: David Conneely
 
 ## Context and Problem Statement
 
-`docs/spec.md` §2.4 requires every documentation file to appear in the map. Two kinds of Markdown
-file strain that rule from opposite directions.
+`docs/spec.md` §2.4 requires every documentation file to appear in the map. Several kinds of
+Markdown file strain that rule, because the repository does not maintain them as documentation:
 
-- **Gitignored files.** A repository's own gitignored working notes are worth checking against the
-  map while they exist - they are often exactly the material a migration needs to place - but they
-  are not part of the tracked structure, and should not fail a run.
-- **Vendored files.** Third-party source copied into the repository brings its own `README.md` or
-  `docs/` tree. Naming it in the map would claim a tense, a mutability and an audience for text this
-  repository neither writes nor maintains, and editing the files to mark them is lost on the next
-  vendor update.
+- **Gitignored files.** Working notes, build output and dependency trees are not part of the tracked
+  structure, and a check over them reports on content the map was never meant to describe.
+- **Vendored and generated files.** Third-party source brings its own `README.md` or `docs/` tree,
+  and a generator writes Markdown nobody edits. Naming either in the map would claim a content, a
+  mutability and an audience for text this repository does not write, and editing the files to mark
+  them is lost on the next update.
+- **Tool configuration.** Agent commands, skills and instruction files, issue and pull-request
+  templates live in top-level dot-directories such as `.claude/` and `.github/`. They are read by a
+  tool, not filed by the structure, and they multiply as tools are added.
+- **Licence files.** Legal text, copied verbatim, holds no fact the structure routes.
 
 ## Considered Options
 
-- Exempt gitignored files entirely, as the archive is exempt
-- Treat gitignored files like tracked ones
+- Treat all of them like any other Markdown file
 - Check gitignored files, and report a hit in one as advisory
-- Mark vendored files with front matter, a map row, or a kit-specific git attribute
-- Mark vendored files with `linguist-vendored` in `.gitattributes`
+- Mark exempt files with front matter, a map row, or a kit-specific git attribute
+- Exempt them by rules a repository already follows: git's ignore rules, the `linguist-vendored` and
+  `linguist-generated` attributes, top-level dot-directories, and licence file names
 
 ## Decision Outcome
 
-Chosen option: **check gitignored files as advisory, and exempt files marked `linguist-vendored`**.
+Chosen option: **exempt them by rules a repository already follows**, because each rule is one the
+repository sets for another reason, so the exemption costs nothing to maintain.
 
-A gitignored documentation file is still checked against the map, but a hit in one is reported as a
-warning and never affects the exit status. A file whose `linguist-vendored` attribute is set is not
-a documentation file at all, and is skipped silently, as the archive is. A file both gitignored and
-vendored is vendored.
+A gitignored file, a file whose `linguist-vendored` or `linguist-generated` attribute is set, a file
+below a top-level directory whose name starts with a dot, and a file whose name starts with
+`LICENSE`, `LICENCE` or `COPYING` is not a documentation file, and is skipped silently, as the
+archive is. The root `AGENTS.md` and `CLAUDE.md` are not below a dot-directory, so they stay mapped.
 
-Full exemption of gitignored files was rejected because it hides a working-notes convention that
-deserves checking. Treating them like tracked files was rejected because it blocks on content the
-map was never meant to describe. Front matter was rejected because it edits someone else's files; a
-map row because it lies about scope; a kit-specific attribute because `linguist-vendored` already
-exists for exactly this, and repositories already set it for their language statistics.
+Treating them like any other file was rejected because it blocks on content the map was never meant
+to describe. Advisory checking of gitignored files was rejected because a warning nobody acts on is
+noise on every run. Front matter was rejected because it edits files the repository does not own; a
+map row because it lies about scope; a kit-specific attribute because the Linguist attributes
+already exist for exactly this, and repositories already set them for their language statistics.
 
 ### Consequences
 
-- Good, because one line in `.gitattributes` covers a vendored tree however many files it holds, and
-  survives vendor updates.
-- Good, because a repository marking a tree vendored for GitHub gets the exemption without doing
-  anything more.
-- Bad, because both treatments need `git`. Without it a checker cannot read ignore rules or
-  attributes, and every unmapped file fails - the stricter direction, never silence.
-- Bad, because the vendored exemption is silent by design, so marking a tree the repository actually
-  maintains hides it from the check. That is visible in `.gitattributes`, and a matter for review.
+- Good, because one line in `.gitattributes` or `.gitignore` covers a tree however many files it
+  holds, and survives updates.
+- Good, because adding an agent tool's configuration never touches the map.
+- Bad, because the git-based exemptions need `git`. Without it a checker cannot read ignore rules or
+  attributes, and checks those files like any other - the stricter direction, never silence.
+- Bad, because every exemption is silent, so ignoring or marking a file the repository actually
+  maintains, or keeping real documentation in a dot-directory, hides it from the check. That is
+  visible in `.gitignore`, `.gitattributes` and the tree, and a matter for review.
 
 ## Confirmation
 

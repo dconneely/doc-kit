@@ -56,11 +56,16 @@ neither is a claim nobody checks.
 Defined in `docs/glossary.md`. The ones this document leans on hardest are **map**, **artefact**,
 **adopting repository** and **documentation file**.
 
-A **documentation file** is any Markdown file in the repository that is not below an archive (§5)
-unless it is the archive's own `README.md` (§5.5), not below the kit's `templates/` (§2.8), and not
-vendored. A file is **vendored** when its `linguist-vendored` git attribute is set - the attribute
-GitHub Linguist defines for third-party code, conventionally set in `.gitattributes` (ADR-0011). A
-gitignored file is still a documentation file (§2.9).
+A **documentation file** is any Markdown file in the repository except:
+
+- one below an archive (§5), other than the archive's own `README.md` (§5.5);
+- one below the kit's `templates/` (§2.8);
+- one below a top-level directory whose name starts with a dot, such as `.github/` or `.claude/` -
+  configuration a tool reads;
+- a licence file, whose name starts with `LICENSE`, `LICENCE` or `COPYING` in any case;
+- one that is gitignored, or whose `linguist-vendored` or `linguist-generated` git attribute is set
+  - the attributes GitHub Linguist defines for third-party and generated files, conventionally set
+    in `.gitattributes` (ADR-0011).
 
 ## 2. The map
 
@@ -132,11 +137,6 @@ duplicate-property test (§2.7) does not apply to an artefact the map identifies
 product; its row in the map is still subject to §2.2, §2.3 and the property sets in §2.7. Product
 artefacts that are not copied into the adopter's repository, such as `ADOPTING.md`, remain
 documentation files.
-
-2.9 A documentation file that is gitignored is not exempt from §2.4, but one the map does not name
-is advisory and does not make the repository non-conformant. Gitignored documentation (a
-repository's own working-notes convention, say) is a real, recurring category: it deserves checking
-without ever blocking on content the map was never meant to describe (ADR-0011).
 
 ## 3. Artefacts
 

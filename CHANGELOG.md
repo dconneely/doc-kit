@@ -16,6 +16,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   the shared-triple warning, and it reports an old `Tense` column once. In an adopted map, rename
   the column and give each row the value the template map gives it; a custom artefact takes the kind
   of fact it holds.
+- Fewer Markdown files are documentation files that the map must name: gitignored files, files
+  marked `linguist-generated`, files below a top-level dot-directory such as `.claude/` or
+  `.github/`, and licence files are now skipped like vendored ones. `doc-kit-check.sh` no longer
+  warns about gitignored files. A map row for any of them can stay or go.
 - The template map's rule 5 says a document names code only where it must, as a quirk does, because
   the reference goes stale. It said only quirk entries name code, and in agent evals Claude Sonnet
   and Gemini left a fact's code reference out because of it. Change an adopted map to match.

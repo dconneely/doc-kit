@@ -234,7 +234,7 @@ printf 'gen.md\ngen/\n' >.gitignore
 mkdir -p gen
 echo x >gen.md
 echo x >gen/README.md
-expect "a gitignored file beside a directory of its name is advisory" 0 "WARN [map] gen.md sits beside gen/ (gitignored)" map
+refute "a gitignored file beside a directory of its name is skipped" "sits beside" map
 
 fixture
 git init -q .
@@ -276,8 +276,23 @@ mkdir -p node_modules/a node_modules/b
 echo x >node_modules/a/README.md
 echo x >node_modules/b/README.md
 echo x >scratch.md
-expect "gitignored directory warns once, grouped" 0 "WARN [map] node_modules/ (2 files)" map
-expect "gitignored file warns by name" 0 "WARN [map] scratch.md is not named" map
+refute "gitignored files are not documentation" "WARN [map]" map
+
+fixture
+git init -q .
+printf 'docs/api/** linguist-generated\n' >.gitattributes
+mkdir -p docs/api
+echo x >docs/api/index.md
+expect "a generated file is not documentation" 0 "doc-kit: checks passed (map)" map
+
+fixture
+mkdir -p .claude/commands .github
+echo x >.claude/commands/ship.md
+echo x >.github/pull_request_template.md
+echo x >LICENSE.md
+echo x >docs/COPYING.md
+printf 'See ADR-0099.\n' >.github/notes.md
+expect "dot-directories and licence files are not documentation" 0 "doc-kit: checks passed (map adr)" map adr
 
 fixture
 sed -i.bak '\#^| `docs/plan.md` *| start#d' DOC-MAP.md

@@ -15,9 +15,9 @@
 # On Windows use `sh`, not `bash` - the `bash` on PATH is usually WSL's, which
 # sees a different filesystem and will report every file missing.
 #
-# A file marked linguist-vendored in .gitattributes is skipped (§1). An unmapped
-# gitignored file is a WARN, never a FAIL (§2.9), grouped by its top-level
-# directory. Both need `git`; without it, every unmapped file is a FAIL.
+# Gitignored files, and files marked linguist-vendored or linguist-generated, are
+# not documentation files (§1). Telling them needs `git`; without it, they are
+# checked like any other file.
 
 set -eu
 
@@ -63,31 +63,42 @@ within() {
 	return 1
 }
 
-# Filter stdin (one path per line) to the gitignored ones. Prints nothing when
-# git is missing or this is not a work tree.
-ignored_of() {
-	if has_git; then
-		git -c core.quotePath=false check-ignore --stdin || true
-	else
-		cat >/dev/null
-	fi
-}
-
-# Filter stdin (one path per line) to the ones whose linguist-vendored attribute
-# is set in .gitattributes (§1). Prints nothing without git.
-vendored_of() {
-	if has_git; then
-		git -c core.quotePath=false check-attr --stdin linguist-vendored |
-			sed -n -e 's/: linguist-vendored: set$//p' -e 's/: linguist-vendored: true$//p'
-	else
-		cat >/dev/null
-	fi
+# Filter stdin (one path per line) to the ones git excludes from documentation (§1): gitignored,
+# or with linguist-vendored or linguist-generated set. Prints nothing without git.
+exempt_of() {
+	ex_in=$(cat)
+	{ has_git && [ -n "$ex_in" ]; } || return 0
+	printf '%s\n' "$ex_in" | git -c core.quotePath=false check-ignore --stdin || true
+	printf '%s\n' "$ex_in" |
+		git -c core.quotePath=false check-attr --stdin linguist-vendored linguist-generated |
+		sed -n -e 's/: linguist-vendored: set$//p' -e 's/: linguist-vendored: true$//p' \
+			-e 's/: linguist-generated: set$//p' -e 's/: linguist-generated: true$//p'
 }
 
 # not_templates - drop templates/ paths from stdin, but only in a repository distributing the kit,
 # which has templates/DOC-MAP.md (§2.8). Elsewhere a templates/ directory is documentation.
 not_templates() {
 	if [ -f templates/DOC-MAP.md ]; then grep -v '^templates/' || true; else cat; fi
+}
+
+# doc_files - the documentation files (§1), one per line, sorted: Markdown files outside the
+# conventional archive (its own README.md excepted), the kit's templates, top-level dot-directories
+# and licence files, less those git exempts. An archive elsewhere is covered by its map entry.
+doc_files() {
+	set +f
+	df_all=$(find . -name '*.md' ! -path './.git/*' \
+		\( ! -path './docs/archive/*' -o -path './docs/archive/README.md' \) | sed 's:^\./::' |
+		not_templates | { grep -v -e '^\.[^/]*/' || true; } |
+		{ grep -v -i -E '(^|/)(licen[cs]e|copying)[^/]*$' || true; } | sort)
+	df_skip=$(printf '%s' "$df_all" | exempt_of)
+	set -f
+	df_ifs=$IFS
+	IFS=$NL
+	for df_f in $df_all; do
+		within "$df_skip" "$df_f" || printf '%s\n' "$df_f"
+	done
+	IFS=$df_ifs
+	set +f
 }
 
 # section FILE HEADING - the lines under a "## Heading" up to the next "## "
@@ -154,17 +165,11 @@ check_map() {
 	lifes=$(table_paths '## Lifecycle' | norm | sort)
 	lays=$(layout_paths | norm | sort)
 
-	# The documentation files. Files below the conventional archive other than its own README.md
-	# (§5.1), the kit's templates (§2.8), and vendored files (§1) are not documentation files; an
-	# archive elsewhere is covered by its map entry. Split on newlines only, so a path may contain
-	# spaces.
-	files=$(find . -name '*.md' ! -path './.git/*' \
-		\( ! -path './docs/archive/*' -o -path './docs/archive/README.md' \) | sed 's:^\./::' |
-		not_templates | sort)
+	# Split on newlines only, so a path may contain spaces.
+	files=$(doc_files)
 
 	# §2.6 - name.md never sits beside a directory name/: the directory's entry point is
-	# name/README.md. A vendored file is not documentation (§1); a gitignored one is advisory (§2.9).
-	# The root files a tool or convention looks for - the map, README.md, AGENTS.md and its aliases,
+	# name/README.md. The root files a tool or convention looks for - the map, README.md, AGENTS.md and its aliases,
 	# CHANGELOG.md - are exempt, since they cannot move into a directory. The directory's name must
 	# match exactly: on a case-insensitive filesystem `[ -d AGENTS ]` also finds agents/, so find,
 	# which compares the names the directory lists, confirms it.
@@ -173,7 +178,6 @@ check_map() {
 		sed -n 's/^| `\([^`/]*\)`.*/\1/p')
 	set -f
 	oldifs=$IFS
-	beside=''
 	IFS=$NL
 	for f in $files; do
 		case $f in
@@ -184,19 +188,7 @@ check_map() {
 		d=${f%.md}
 		[ -d "$d" ] || continue
 		[ -n "$(find "$(dirname "$d")" -maxdepth 1 -type d -name "$(basename "$d")")" ] || continue
-		beside="$beside$f$NL"
-	done
-	vendored=$(printf '%s' "$beside" | vendored_of)
-	ignored=$(printf '%s' "$beside" | ignored_of)
-	for m in $beside; do
-		d=${m%.md}
-		if within "$vendored" "$m"; then
-			continue
-		elif within "$ignored" "$m"; then
-			warn "$m sits beside $d/ (gitignored)" "§2.9 - advisory; move it to $d/README.md"
-		else
-			fail "$m sits beside $d/" "§2.6 - move it to $d/README.md, or give it another name"
-		fi
+		fail "$f sits beside $d/" "§2.6 - move it to $d/README.md, or give it another name"
 	done
 	IFS=$oldifs
 	set +f
@@ -240,7 +232,6 @@ check_map() {
 	done
 
 	# §2.4 - every documentation file appears in the map.
-	unmapped=''
 	oldifs=$IFS
 	IFS=$NL
 	for f in $files; do
@@ -249,31 +240,8 @@ check_map() {
 			# shellcheck disable=SC2254
 			case "$f" in $a|"${a%/}"/*) hit=0; break ;; esac
 		done
-		[ "$hit" -eq 0 ] || unmapped="$unmapped$f$NL"
-	done
-	vendored=$(printf '%s' "$unmapped" | vendored_of)
-	if [ -n "$vendored" ]; then
-		rest=''
-		for f in $unmapped; do
-			within "$vendored" "$f" || rest="$rest$f$NL"
-		done
-		unmapped=$rest
-	fi
-	ignored=$(printf '%s' "$unmapped" | ignored_of)
-	for f in $unmapped; do
-		within "$ignored" "$f" ||
+		[ "$hit" -eq 0 ] ||
 			fail "$f is not named in the map" "§2.4 - add a row, or move it under an archive"
-	done
-	for g in $(printf '%s\n' "$ignored" | awk -F/ '
-		NF {
-			k = (NF > 1) ? $1 "/" : $0
-			if (!(k in n)) { first[k] = $0; order[++c] = k }
-			n[k]++
-		}
-		END { for (i = 1; i <= c; i++) { k = order[i]; print (n[k] == 1) ? first[k] : k " (" n[k] " files)" } }
-	'); do
-		IFS=$oldifs
-		warn "$g is not named in the map (gitignored)" "§2.9 - advisory; add a row to map it"
 	done
 	IFS=$oldifs
 	set +f
@@ -509,21 +477,11 @@ check_adr() {
 
 # §3.1 - every bare ADR-NNNN names a record in docs/decisions/, and no citation takes another form.
 # Code - fenced blocks and inline spans - and the text of links to other sites are not citations.
-# Vendored and gitignored files are not read, nor archived files other than the archive's README.md (§5.5).
+# Only documentation files are read (§1).
 check_citations() {
-	set +f
-	docs=$(find . -name '*.md' ! -path './.git/*' \
-		\( ! -path './docs/archive/*' -o -path './docs/archive/README.md' \) | sed 's:^\./::' |
-		not_templates | sort)
+	scan=$(doc_files)
 	set -f
-	skip=$(printf '%s\n' "$docs" | vendored_of; printf '%s\n' "$docs" | ignored_of)
-	scan=''
 	oldifs=$IFS
-	IFS=$NL
-	for f in $docs; do
-		within "$skip" "$f" || scan="$scan$f$NL"
-	done
-	IFS=$oldifs
 
 	# The file names arrive on stdin, one per line, so a name may contain spaces. Each hit is
 	# a kind, the file, the line number and the token, separated by tabs.

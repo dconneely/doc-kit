@@ -56,13 +56,10 @@ Ask; do not silently pick either default. A pre-existing gitignored documentatio
 working-notes convention, a habit inherited from a previous tool) is a real, recurring shape, and
 both silent answers are wrong often enough to matter: force-tracking it can commit something the
 author deliberately kept private or provisional, and leaving it ignored can quietly exempt a real
-artefact from ever being checked against the map. This is Step 1/4's version of a question
-`tools/doc-kit-check.sh` also has to answer once such a file is adopted - see `§2.9`, which queries
-a gitignored documentation file the same as any other but reports a hit in one as advisory rather
-than blocking. The two are related, not the same decision twice: this one is a one-time call made
-while building the inventory, the checker's is a permanent, ongoing property of every run
-afterwards. Vendored third-party source is a different case, gitignored or not: mark it
-`linguist-vendored` in `.gitattributes`, and it is not documentation at all (§1).
+artefact from ever being checked against the map, since a gitignored file is not a documentation
+file (§1). Vendored third-party source and generated files are a different case: mark them
+`linguist-vendored` or `linguist-generated` in `.gitattributes`, and they are not documentation
+either.
 
 ### Multi-module repository - one documentation structure, or one per module?
 
