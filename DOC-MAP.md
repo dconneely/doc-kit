@@ -151,7 +151,7 @@ restate them ([ADR-0006][adr6]). What each rule prevents is in `ADOPTING-NOTES.m
 4. **Write the least that is true.** No history or account of how you got there, in documents or
    code comments ([ADR-0012][adr12]).
 5. **Code names the record, not the reverse.** A comment beside constrained code names the ADR that
-   governs it.
+   governs it. A document names code only where it must; the reference goes stale.
 6. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
    says as little about the record as it can, and is fixed in the same commit as a change to the
    record that makes it untrue.

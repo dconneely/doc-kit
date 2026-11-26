@@ -10,10 +10,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 - Decision records are `present` tense in the template map, not `past`: an accepted record is the
   current answer to its question, amended in place. An adopted map can change the row to match.
-- The template map's rule 5 no longer says that only quirk entries name code. In agent evals, Claude
-  Sonnet and Gemini left a fact's code reference out because of it. An adopted map can drop the
-  sentence.
-
+- The template map's rule 5 says a document names code only where it must, as a quirk does, because
+  the reference goes stale. It said only quirk entries name code, and in agent evals Claude Sonnet
+  and Gemini left a fact's code reference out because of it. Change an adopted map to match.
 - The `AGENTS.md` stanza says to change the specification only to match behaviour, and to tell the
   owner. It said to change it because behaviour changed, which left a specification that
   misdescribes unchanged code with no rule. Change an adopted stanza to match.

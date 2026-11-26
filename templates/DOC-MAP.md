@@ -138,7 +138,8 @@ Most changes skip the ADR and the plan note. Nothing skips the deletion.
 4. **Write the least that is true.** No history or account of how you got there, in documents or
    code comments.
 5. **Code names the record, not the reverse.** A comment beside constrained code names the ADR or
-   quirk that governs it.
+   quirk that governs it. A document names code only where it must, as a quirk does; the reference
+   goes stale.
 6. **Cite a decision record as `ADR-NNNN`**, and another repository's record by a link. A citation
    says as little about the record as it can, and is fixed in the same commit as a change to the
    record that makes it untrue.
