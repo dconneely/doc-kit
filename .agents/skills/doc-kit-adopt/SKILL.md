@@ -86,7 +86,7 @@ the current one, inventory what the changes touch, write the worksheet, and stop
 For each copied tool or template the changes touch, compare the target's copy with the kit's at the
 version it adopted: a difference is a local change, to keep or offer to the kit, never to overwrite
 unremarked. When fixing links to moved files, change pointers, never a statement of what was true
-then (`ADOPTING.md` Step 4b).
+then, and ask before changing an accepted record (`ADOPTING.md` Step 4b).
 
 The worksheet _is_ the state. Keeping it accurate matters more than speed - the next session has
 nothing else to go on.

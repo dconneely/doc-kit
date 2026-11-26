@@ -27,10 +27,9 @@ Rules - absolute:
   was agreed or settled is not that permission.
 - On accepting, rejecting or deprecating, set decision-makers (their name) and date (today), then
   commit.
-- Any change to the words of an accepted record, however small - a wrong command or claim
-  included - needs reopening and accepting. Two changes do not: formatting applied by a tool, and
-  fixing a link, path or citation that a move or renumbering made untrue. A statement of what was
-  true when it was written is not a pointer and keeps the path it named.
+- Any change to the words of an accepted record, however small - a wrong path, command or citation
+  included - needs reopening and accepting. Only formatting applied by a tool, which alters no word,
+  is not a change.
 - If the owner rejects a change to a reopened record, restore its last accepted version instead of
   marking it rejected.
 

@@ -13,10 +13,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ### Fixed
 
-- The decision-record template lets a link, path or citation that a move or renumbering made untrue
-  be fixed in an accepted record without reopening it, as `ADOPTING.md` Step 4b already asked. A
-  statement of what was true when the record was written still keeps the path it named. Make the
-  same change to an adopted record template.
+- `ADOPTING.md` Step 4b says to ask the owner before fixing a link or path to a moved file in an
+  accepted decision record, since changing its words means reopening it. It said to fix every link,
+  which the record template does not allow without the owner's permission.
 
 ## [0.12.0] - 2026-11-23
 

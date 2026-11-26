@@ -198,9 +198,8 @@ copied from the template, and MAY change a `proposed` record freely. It MUST hav
 explicit permission, asked for first, to accept, reject, reopen, deprecate or delete a record;
 general approval - "looks good", approval of other work, word that a record was agreed - is not
 permission. An accepted record is the current answer to its question, and is amended in place by
-reopening it; a pointer that a move made untrue is fixed without reopening. The record template,
-`0000-template.md`, holds the rules for each of these steps and is their one home (ADR-0006);
-ADR-0007 and ADR-0001 have the reasons.
+reopening it. The record template, `0000-template.md`, holds the rules for each of these steps and
+is their one home (ADR-0006); ADR-0007 and ADR-0001 have the reasons.
 
 **Citations take one form.** A record is cited as `ADR-NNNN` - upper case, a hyphen, four digits -
 and a bare ID MUST name a record in this repository. A record in another repository is cited by a
