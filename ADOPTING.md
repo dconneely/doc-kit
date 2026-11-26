@@ -218,8 +218,9 @@ the stanza is not a substitute for the map entry. Flag it if it turns out to be 
 an unusual state for a file whose whole purpose is being read by tooling.
 
 **Claude Code reads `AGENTS.md` only when there is no `CLAUDE.md`** in the directory a session
-starts in or above it. A `CLAUDE.md` that only points at `AGENTS.md` therefore keeps the stanza out
-of every Claude Code session: ask the owner, then delete it. A `CLAUDE.md` with content of its own
+starts in or above it. A `CLAUDE.md` that only imports `AGENTS.md` (`@AGENTS.md`) is therefore
+redundant, and one that only refers to it without importing it keeps the stanza out of every Claude
+Code session: either way, ask the owner, then delete it. A `CLAUDE.md` with content of its own
 stays - ask how the owner wants it reconciled with `AGENTS.md`, rather than assuming either is a
 stale duplicate. If both stay, each gets its own row in the map, and `CLAUDE.md` gains an
 `@AGENTS.md` line so that Claude Code loads both.
@@ -228,7 +229,8 @@ The same rule extends to any other per-tool instruction file the repository migh
 `.github/copilot-instructions.md`, `.github/instructions/*.instructions.md`, or similar. Check for
 them; if you find one, ask rather than deciding on your own whether it should point at the map, get
 folded into `AGENTS.md`, or stay exactly as it is. The intent is to improve the documentation, not
-to replace instructions the user already wrote for a tool of their choosing.
+to replace instructions the user already wrote for a tool of their choosing. The two Copilot files
+named here, if kept, each need a row in the map - an alias if they only point at `AGENTS.md`.
 
 Paste the stanza below into `AGENTS.md`, deleting lines for artefacts you did not create and giving
 the rest their real paths:
@@ -329,9 +331,9 @@ telling the two apart.
 
 **A move changes pointers, not history.** Fix every link and path that leads a reader to a moved
 file. **In an accepted decision record, ask the owner first**: changing its words, a path included,
-means reopening it. Leave a statement of what was true at the time - a changelog entry, or a record
-saying where a file was when it was decided - naming the path it named then: rewritten to the new
-path, it becomes false.
+means reopening it, and one permission covers reopening, the fix and accepting it again. Leave a
+statement of what was true at the time - a changelog entry, or a record saying where a file was when
+it was decided - naming the path it named then: rewritten to the new path, it becomes false.
 
 Get the owner to review the dispositions before acting on them. It is the cheapest point at which
 someone who remembers why a document exists can say so.

@@ -61,8 +61,9 @@ A **documentation file** is any Markdown file in the repository except:
 - one below an archive (§5), other than the archive's own `README.md` (§5.5);
 - one below the kit's `templates/` (§2.8);
 - one below a top-level directory whose name starts with a dot, such as `.github/` or `.claude/` -
-  configuration a tool reads;
-- a licence file, whose name starts with `LICENSE`, `LICENCE` or `COPYING` in any case;
+  configuration a tool reads - other than the agent instruction files
+  `.github/copilot-instructions.md` and `.github/instructions/*.instructions.md`;
+- a licence file, whose name starts with `LICENSE`, `LICENCE` or `COPYING`, in upper case;
 - one that is gitignored, or whose `linguist-vendored` or `linguist-generated` git attribute is set
   - the attributes GitHub Linguist defines for third-party and generated files, conventionally set
     in `.gitattributes` (ADR-0011).

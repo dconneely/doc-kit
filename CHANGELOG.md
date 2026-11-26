@@ -18,8 +18,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   of fact it holds.
 - Fewer Markdown files are documentation files that the map must name: gitignored files, files
   marked `linguist-generated`, files below a top-level dot-directory such as `.claude/` or
-  `.github/`, and licence files are now skipped like vendored ones. `doc-kit-check.sh` no longer
-  warns about gitignored files. A map row for any of them can stay or go.
+  `.github/`, and licence files - names starting `LICENSE`, `LICENCE` or `COPYING` in upper case -
+  are now skipped like vendored ones. Copilot's instruction files, `.github/copilot-instructions.md`
+  and `.github/instructions/*.instructions.md`, still need a row. `doc-kit-check.sh` no longer warns
+  about gitignored files. A map row for any skipped file can stay or go.
 - The template map's rule 5 says a document names code only where it must, as a quirk does, because
   the reference goes stale. It said only quirk entries name code, and in agent evals Claude Sonnet
   and Gemini left a fact's code reference out because of it. Change an adopted map to match.
@@ -31,7 +33,11 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 - `ADOPTING.md` Step 4b says to ask the owner before fixing a link or path to a moved file in an
   accepted decision record, since changing its words means reopening it. It said to fix every link,
-  which the record template does not allow without the owner's permission.
+  which the record template does not allow without the owner's permission. The record template says
+  that one permission covers reopening the record, the fix and accepting it again; add the sentence
+  to an adopted template.
+- `ADOPTING.md` no longer says a `CLAUDE.md` containing only `@AGENTS.md` keeps the stanza out of
+  Claude Code sessions: the import loads it. Such a file is redundant, and is still deleted.
 
 ## [0.12.0] - 2026-11-23
 

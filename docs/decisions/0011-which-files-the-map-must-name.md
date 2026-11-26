@@ -1,5 +1,5 @@
 ---
-status: "accepted"
+status: "proposed"
 date: 2026-11-26
 decision-makers: David Conneely
 ---
@@ -19,7 +19,9 @@ Markdown file strain that rule, because the repository does not maintain them as
   them is lost on the next update.
 - **Tool configuration.** Agent commands, skills and instruction files, issue and pull-request
   templates live in top-level dot-directories such as `.claude/` and `.github/`. They are read by a
-  tool, not filed by the structure, and they multiply as tools are added.
+  tool, not filed by the structure, and they multiply as tools are added. Copilot's instruction
+  files in `.github/` are the exception: like `AGENTS.md`, they hold rules an agent follows, and can
+  contradict the map.
 - **Licence files.** Legal text, copied verbatim, holds no fact the structure routes.
 
 ## Considered Options
@@ -37,8 +39,10 @@ repository sets for another reason, so the exemption costs nothing to maintain.
 
 A gitignored file, a file whose `linguist-vendored` or `linguist-generated` attribute is set, a file
 below a top-level directory whose name starts with a dot, and a file whose name starts with
-`LICENSE`, `LICENCE` or `COPYING` is not a documentation file, and is skipped silently, as the
-archive is. The root `AGENTS.md` and `CLAUDE.md` are not below a dot-directory, so they stay mapped.
+`LICENSE`, `LICENCE` or `COPYING` in upper case is not a documentation file, and is skipped
+silently, as the archive is. The agent instruction files `.github/copilot-instructions.md` and
+`.github/instructions/*.instructions.md` stay documentation files, as the root `AGENTS.md` and
+`CLAUDE.md` do, so the map names every file that tells an agent what to do.
 
 Treating them like any other file was rejected because it blocks on content the map was never meant
 to describe. Advisory checking of gitignored files was rejected because a warning nobody acts on is

@@ -295,6 +295,17 @@ printf 'See ADR-0099.\n' >.github/notes.md
 expect "dot-directories and licence files are not documentation" 0 "doc-kit: checks passed (map adr)" map adr
 
 fixture
+mkdir -p .github/instructions/api docs/howto
+echo x >.github/copilot-instructions.md
+echo x >.github/instructions/api/go.instructions.md
+echo x >docs/howto/copying-data.md
+echo x >docs/license-faq.md
+expect "Copilot's instruction files are documentation" 1 "FAIL [map] .github/copilot-instructions.md is not named" map
+expect "nested Copilot instruction files are documentation" 1 "FAIL [map] .github/instructions/api/go.instructions.md is not named" map
+expect "a lower-case name starting copying is documentation" 1 "FAIL [map] docs/howto/copying-data.md is not named" map
+expect "a lower-case name starting license is documentation" 1 "FAIL [map] docs/license-faq.md is not named" map
+
+fixture
 sed -i.bak '\#^| `docs/plan.md` *| start#d' DOC-MAP.md
 expect "artefact missing from lifecycle fails" 1 "docs/plan.md is in the artefacts table but not the lifecycle table" map
 

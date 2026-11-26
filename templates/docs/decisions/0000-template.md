@@ -29,7 +29,8 @@ Rules - absolute:
   commit.
 - Any change to the words of an accepted record, however small - a wrong path, command or citation
   included - needs reopening and accepting. Only formatting applied by a tool, which alters no word,
-  is not a change.
+  is not a change. Permission to fix a link, path or citation that a move made untrue covers
+  reopening the record, the fix and accepting it again.
 - If the owner rejects a change to a reopened record, restore its last accepted version instead of
   marking it rejected.
 

@@ -83,13 +83,15 @@ not_templates() {
 
 # doc_files - the documentation files (§1), one per line, sorted: Markdown files outside the
 # conventional archive (its own README.md excepted), the kit's templates, top-level dot-directories
-# and licence files, less those git exempts. An archive elsewhere is covered by its map entry.
+# (other than Copilot's agent instruction files) and licence files, less those git exempts. An archive elsewhere is covered by its map entry.
 doc_files() {
 	set +f
 	df_all=$(find . -name '*.md' ! -path './.git/*' \
 		\( ! -path './docs/archive/*' -o -path './docs/archive/README.md' \) | sed 's:^\./::' |
-		not_templates | { grep -v -e '^\.[^/]*/' || true; } |
-		{ grep -v -i -E '(^|/)(licen[cs]e|copying)[^/]*$' || true; } | sort)
+		not_templates |
+		awk '!/^\.[^\/]*\// || /^\.github\/copilot-instructions\.md$/ ||
+			/^\.github\/instructions\/.*\.instructions\.md$/' |
+		{ grep -v -E '(^|/)(LICEN[CS]E|COPYING)[^/]*$' || true; } | sort)
 	df_skip=$(printf '%s' "$df_all" | exempt_of)
 	set -f
 	df_ifs=$IFS
