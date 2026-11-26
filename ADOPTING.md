@@ -243,8 +243,8 @@ the rest their real paths:
 
 Before you edit:
 
-- Change the specification because behaviour changed, never because it'd read better. Purpose and
-  scope aren't yours to revise.
+- Change the specification only to match behaviour, and tell the owner. Purpose and scope aren't
+  yours to revise.
 - You may create a decision record as `proposed`, copying `docs/decisions/0000-template.md` rather
   than an existing record, and change a `proposed` one. **Accepting, rejecting, reopening
   (`accepted` to `proposed`), deprecating and deleting a record each need the owner's explicit

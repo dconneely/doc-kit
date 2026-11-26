@@ -14,6 +14,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   Sonnet and Gemini left a fact's code reference out because of it. An adopted map can drop the
   sentence.
 
+- The `AGENTS.md` stanza says to change the specification only to match behaviour, and to tell the
+  owner. It said to change it because behaviour changed, which left a specification that
+  misdescribes unchanged code with no rule. Change an adopted stanza to match.
+
 ### Fixed
 
 - `ADOPTING.md` Step 4b says to ask the owner before fixing a link or path to a moved file in an

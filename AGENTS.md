@@ -65,6 +65,7 @@ changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
 **The specification follows the work; it does not lead it.** Change it for one of two reasons:
 behaviour changed because you implemented something, or it misdescribes what the project actually
 does. Never because you have decided it would read better, cover more, or be organised differently.
+Changes should be infrequent, and you tell the owner about each one and why.
 
 The flow in the map is the whole procedure: an ADR first if a real choice was made, then
 `docs/spec.md` in the present tense, then a `CHANGELOG.md` line if an adopter can see the change,
