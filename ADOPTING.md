@@ -346,9 +346,9 @@ In order of payoff; expect the first three to find real content and the fourth t
 would think.
 
 **1. Find the file doing several jobs at once.** Almost every repository has one - part record of
-work done, part backlog, part architecture assessment. Splitting it by tense is usually the single
-largest improvement available, and it is mechanical rather than a judgement call: past-tense entries
-to the changelog, future-tense to the plan, present-tense to the specification.
+work done, part backlog, part architecture assessment. Splitting it by content is usually the single
+largest improvement available, and tense makes it mechanical rather than a judgement call:
+past-tense entries to the changelog, future-tense to the plan, present-tense to the specification.
 
 Watch for the tell that this has already cost something: an important item filed in the "other"
 file, where nobody looks when deciding what to do next.
