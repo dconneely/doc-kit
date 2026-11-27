@@ -6,6 +6,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+## [0.13.0] - 2026-11-27
+
 ### Added
 
 - The checks are published as pre-commit hooks in `.pre-commit-hooks.yaml`, for a repository that
