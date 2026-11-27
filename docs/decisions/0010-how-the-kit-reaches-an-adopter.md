@@ -49,13 +49,13 @@ fork-and-forget, and keep the skill under `.agents/skills/`**.
 
 An action or a package would each bring a runtime, a registry and a network dependency the rest of
 the kit does not have. A hook provider as the only path would do the same; as an alternative it uses
-a hook runner the adopter already has, which fetches this repository whenever its cache is empty.
-Copies of the checks in adopters' own hook configuration drift from each other and from the release
-adopted, which a pinned hook prevents. Shipping no checker was rejected because the two checks that
-rot - every artefact the map names exists, every documentation file appears in the map - are the
-ones a person stops making. Version stamps were rejected because they put the kit's name inside
-every copied file, and imply a migration a map customised by deletion cannot have. Referenced rules
-were rejected because they make an adopter's documentation depend on this repository staying
+a hook runner the adopter already has, which fetches this repository whenever the pinned release is
+not cached. Copies of the checks in adopters' own hook configuration drift from each other and from
+the release adopted, which a pinned hook prevents. Shipping no checker was rejected because the two
+checks that rot - every artefact the map names exists, every documentation file appears in the map -
+are the ones a person stops making. Version stamps were rejected because they put the kit's name
+inside every copied file, and imply a migration a map customised by deletion cannot have. Referenced
+rules were rejected because they make an adopter's documentation depend on this repository staying
 reachable. Keeping the skill in both places was rejected because a skill is its whole content, with
 nothing for a second copy to point at.
 
@@ -68,8 +68,9 @@ nothing for a second copy to point at.
 - Good, because an adopter using the hooks takes an updated checker by changing one pin.
 - Bad, because the hook manifest must name every check, and the checks written as patterns rather
   than scripts are defined twice: in the manifest, and in this repository's own hook configuration.
-- Bad, because the hooks depend on this repository staying reachable whenever a runner's cache is
-  empty, such as on a new machine or in CI. The documentation itself does not.
+- Bad, because the hooks depend on this repository staying reachable whenever the pinned release is
+  not cached, such as on a new machine, in CI or after the pin changes. The documentation itself
+  does not.
 - Bad, because improvements do not propagate. Adopters keep what they took, mistakes included, and
   vendored tools and pinned hooks age silently, passing while no longer testing what the current
   specification requires.
