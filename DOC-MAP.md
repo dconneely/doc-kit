@@ -168,7 +168,6 @@ Absent on purpose, so that adding any of them later is a decision rather than a 
 - **An issue tracker**, until the backlog outgrows a file - roughly 20-30 open items.
 - **Community health files** - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` - which earn
   their place when outside contributions begin, not before.
-- **`RELEASING.md`**, until the release process is more than a tag and a release note.
 
 ## Adding a new kind of document
 
