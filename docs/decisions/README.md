@@ -14,6 +14,7 @@ Index of decision records. Only **accepted** records bind.
 | [ADR-0006](0006-where-rules-and-their-reasons-live.md)                          | 2026-11-16 | David Conneely | Where rules and their reasons live                                 | `review`                                                                                          |
 | [ADR-0007](0007-how-a-decision-record-is-decided-and-changed.md)                | 2026-11-16 | David Conneely | How a decision record is decided and changed                       | `tools/doc-kit-check.sh and prek run lowercase-adr-status`                                        |
 | [ADR-0009](0009-what-happens-to-documentation-that-is-kept-but-not-migrated.md) | 2026-11-12 | David Conneely | What happens to documentation that is kept but not migrated        | `review`                                                                                          |
+| [ADR-0010](0010-how-the-kit-reaches-an-adopter.md)                              | 2026-11-27 | David Conneely | How the kit reaches an adopter                                     | `review`                                                                                          |
 | [ADR-0011](0011-which-files-the-map-must-name.md)                               | 2026-11-26 | David Conneely | Which files the map must name                                      | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`                                          |
 | [ADR-0012](0012-what-tense-and-how-much-is-written.md)                          | 2026-10-25 | David Conneely | What tense, and how much, is written                               | `review`                                                                                          |
 | [ADR-0014](0014-where-each-artefact-lives-and-how-it-grows.md)                  | 2026-11-12 | David Conneely | Where each artefact lives, and how it grows                        | `tools/doc-kit-check.sh and tests/doc-kit-check.test.sh`                                          |
@@ -22,6 +23,6 @@ Index of decision records. Only **accepted** records bind.
 
 ## Non-binding
 
-| Record                                             | Status     | Date       | Question                       |
-| -------------------------------------------------- | ---------- | ---------- | ------------------------------ |
-| [ADR-0010](0010-how-the-kit-reaches-an-adopter.md) | `proposed` | 2026-11-27 | How the kit reaches an adopter |
+| Record | Status | Date | Question |
+| ------ | ------ | ---- | -------- |
+| _none_ | -      | -    | -        |
