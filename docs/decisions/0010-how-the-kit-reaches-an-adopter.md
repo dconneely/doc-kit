@@ -1,6 +1,6 @@
 ---
-status: "accepted"
-date: 2026-11-12
+status: "proposed"
+date: 2026-11-27
 decision-makers: David Conneely
 ---
 
@@ -19,20 +19,26 @@ to this repository afterwards, and where the skill that drives an adoption lives
 
 ## Considered Options
 
-- Tools: a pre-commit hook provider, a CI action, a packaged CLI on npm or PyPI, vendoring, or
-  nothing
+- Tools: a pre-commit hook provider, a CI action, a packaged CLI on npm or PyPI, vendoring,
+  vendoring with hooks pinned to a release as an alternative, or nothing
 - Afterwards: version-stamp the copied artefacts and ship migration notes; publish the shared rules
   as a referenced file; or fork-and-forget, with the changelog as the upgrade path
 - Skill: `.claude/skills/`, `.agents/skills/`, or both
 
 ## Decision Outcome
 
-Chosen option: **vendor the tools, fork-and-forget, and keep the skill under `.agents/skills/`**.
+Chosen option: **vendor the tools, with hooks pinned to a release as an alternative,
+fork-and-forget, and keep the skill under `.agents/skills/`**.
 
 - **The tools are vendored.** They are copied into the adopting repository like the templates, under
   the same MIT-0 licence, and kept at `tools/` beside `templates/`. A vendored checker versions with
-  the structure it checks: an adopter's map is frozen at adoption, and a referenced hook would keep
-  moving and could start failing a repository that never changed.
+  the structure it checks: an adopter's map is frozen at adoption.
+- **The checks are also published as pre-commit hooks**, in a `.pre-commit-hooks.yaml` here, for an
+  adopter that already runs pre-commit or prek. The adopter pins them to a release, so they change
+  only when the pin is updated, by hand or by an automatic updater, as a vendored copy changes only
+  when replaced. A hook referenced without a pin would keep moving and could start failing a
+  repository that never changed; that is rejected. The decisions-index generator stays vendored
+  only, since it writes a file in the adopter's repository rather than checking it.
 - **Adoption is fork-and-forget.** What an adopter copies is theirs. No copied file carries a
   version stamp, and there is no migration tooling and no obligation to track this repository.
   `CHANGELOG.md` is the whole upgrade mechanism: an adopter reads it from the release their adoption
@@ -41,23 +47,32 @@ Chosen option: **vendor the tools, fork-and-forget, and keep the skill under `.a
   it does under `.claude/skills/`, and the path says it is written for agents generally, as root
   `AGENTS.md` does.
 
-A hook provider, an action or a package would each bring a runtime, a registry and a network
-dependency the rest of the kit does not have. Shipping no checker was rejected because the two
-checks that rot - every artefact the map names exists, every documentation file appears in the map -
-are the ones a person stops making. Version stamps were rejected because they put the kit's name
-inside every copied file, and imply a migration a map customised by deletion cannot have. Referenced
-rules were rejected because they make an adopter's documentation depend on this repository staying
+An action or a package would each bring a runtime, a registry and a network dependency the rest of
+the kit does not have. A hook provider as the only path would do the same; as an alternative it uses
+a hook runner the adopter already has, which fetches this repository whenever its cache is empty.
+Copies of the checks in adopters' own hook configuration drift from each other and from the release
+adopted, which a pinned hook prevents. Shipping no checker was rejected because the two checks that
+rot - every artefact the map names exists, every documentation file appears in the map - are the
+ones a person stops making. Version stamps were rejected because they put the kit's name inside
+every copied file, and imply a migration a map customised by deletion cannot have. Referenced rules
+were rejected because they make an adopter's documentation depend on this repository staying
 reachable. Keeping the skill in both places was rejected because a skill is its whole content, with
 nothing for a second copy to point at.
 
 ### Consequences
 
-- Good, because the tools inherit the kit's distribution model: no runtime, no registry, no network,
-  auditable before use, and optional.
-- Good, because there is no machinery to build, version or maintain.
+- Good, because the vendored tools inherit the kit's distribution model: no runtime, no registry, no
+  network, auditable before use, and optional.
+- Good, because there is no machinery to build, beyond a hook manifest for checks the kit already
+  has.
+- Good, because an adopter using the hooks takes an updated checker by changing one pin.
+- Bad, because the hook manifest must name every check, and the checks written as patterns rather
+  than scripts are defined twice: in the manifest, and in this repository's own hook configuration.
+- Bad, because the hooks depend on this repository staying reachable whenever a runner's cache is
+  empty, such as on a new machine or in CI. The documentation itself does not.
 - Bad, because improvements do not propagate. Adopters keep what they took, mistakes included, and
-  vendored tools age silently, passing while no longer testing what the current specification
-  requires.
+  vendored tools and pinned hooks age silently, passing while no longer testing what the current
+  specification requires.
 - Neutral: a tool that reads `.agents/skills/` but expects a different skill format still needs its
   own adapter.
 
