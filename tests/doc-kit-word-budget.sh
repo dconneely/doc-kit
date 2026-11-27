@@ -14,7 +14,7 @@ export LC_ALL
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
-STANZA_BUDGET=190
+STANZA_BUDGET=200
 MAP_BUDGET=1830
 
 # The stanza: the first markdown block after "Paste the stanza" in ADOPTING.md.

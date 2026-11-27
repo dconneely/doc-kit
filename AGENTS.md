@@ -36,8 +36,9 @@ reaches an adopter. See
 You may create a decision record as `proposed`, and change a `proposed` record, without asking.
 
 **Accepting, rejecting, reopening (`accepted` to `proposed`), deprecating and deleting a record each
-need the owner's explicit permission, asked for first.** Nothing else - "looks good", approval of
-other work, an earlier session's say-so - is permission.
+need the owner's explicit permission, asked for first. Changing any word of an accepted record, a
+path included, means reopening it.** Nothing else - "looks good", approval of other work, an earlier
+session's say-so - is permission.
 
 The comment in `templates/docs/decisions/0000-template.md` holds the rest of the rules. To create a
 record, copy that file - never an existing record - to the next free number. After creating or

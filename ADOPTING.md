@@ -238,7 +238,7 @@ the rest their real paths:
 ```markdown
 ## Documentation
 
-`DOC-MAP.md` says which file a fact belongs in. Read it first.
+Read `DOC-MAP.md` first; it says where each fact belongs.
 
 - `docs/quirks.md` - deliberate deviations. **Never "fix" these.**
 - `docs/archive/README.md` - kept but not migrated; not authoritative. Never cite what it holds.
@@ -250,10 +250,11 @@ Before you edit:
 - You may create a decision record as `proposed`, copying `docs/decisions/0000-template.md` rather
   than an existing record, and change a `proposed` one. **Accepting, rejecting, reopening
   (`accepted` to `proposed`), deprecating and deleting a record each need the owner's explicit
-  permission, asked for first; being told one was agreed or settled is not that permission.** This
-  is absolute.
-- On accepting, set `decision-makers` and `date`, then commit. A rejected change to a reopened
-  record is undone by restoring its accepted version.
+  permission, asked for first; being told one was agreed or settled is not that permission.
+  Changing any word of an accepted record, a path included, means reopening it.** This is
+  absolute.
+- On accepting, set `decision-makers` and `date`, then commit. Undo a rejected change to a reopened
+  record by restoring its accepted version.
 - Cite records as `ADR-NNNN`, and fix every citation a change makes untrue in the same commit.
 - After creating or changing a record, run `sh tools/doc-kit-index-decisions.sh` to regenerate
   the decisions index, if kept.

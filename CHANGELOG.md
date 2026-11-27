@@ -28,6 +28,10 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - The `AGENTS.md` stanza says to change the specification only to match behaviour, and to tell the
   owner. It said to change it because behaviour changed, which left a specification that
   misdescribes unchanged code with no rule. Change an adopted stanza to match.
+- The `AGENTS.md` stanza says that changing any word of an accepted decision record, a path
+  included, means reopening it, so it needs the owner's permission. Only the record template said
+  so, and in agent evals Claude Haiku and Gemini edited a stale path in an accepted record in 9 of
+  10 sessions; with the sentence, in none of 10. Add it to an adopted stanza.
 
 ### Fixed
 
