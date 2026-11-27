@@ -77,11 +77,13 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
      `sh` and the index generator. Without `--add-dir`, `agy` writes into its own state directory;
      GPT-OSS sometimes does even with it (research note 0005).
 
-   - **OpenCode**: `opencode run --standalone --auto -m PROVIDER/MODEL`, with `OPENCODE_CONFIG`
-     naming a configuration whose permissions deny `external_directory` and every shell command but
-     the generator, and `OPENCODE_DISABLE_CLAUDE_CODE=1`, or it also loads `~/.claude/CLAUDE.md` and
-     Claude's skills. On Windows it takes its directory from `PWD`, which `sh` sets; without `PWD`
-     it works in the home directory.
+   - **OpenCode**: `opencode run --standalone --archived --auto -m PROVIDER/MODEL#VARIANT`, with
+     `OPENCODE_CONFIG` naming a configuration whose permissions deny `external_directory` and every
+     shell command but the generator, and `OPENCODE_DISABLE_CLAUDE_CODE=1`, or it also loads
+     `~/.claude/CLAUDE.md` and Claude's skills. `--archived` keeps the sessions out of your session
+     list; `#VARIANT`, such as `#low`, sets the effort, though the logs do not show whether it was
+     applied. On Windows it takes its directory from `PWD`, which `sh` sets; without `PWD` it works
+     in the home directory.
 
 3. **Choose the kit.**
 
@@ -115,7 +117,9 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    different models or kits can go side by side, each in its own shell and output directory, but not
    too many: with six at once on Windows, Claude's PowerShell tool timed out, and sessions that
    could not run the index generator broke a rule; four ran cleanly. Look for timeouts in the logs,
-   and compare arms only when they ran under the same load.
+   and compare arms only when they ran under the same load. Do not edit a script while a run uses
+   it, the eval scripts or a wrapper of your own: `sh` reads a script as it runs, so the run fails
+   or runs the edited text.
 
    A session whose agent runs longer than `DOC_KIT_EVAL_TIMEOUT` seconds, 900 unless set, is stopped
    with everything it started, and its run ends with an `ERROR ... agent stopped` line. For a model
