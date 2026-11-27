@@ -84,7 +84,8 @@ scope|- ^docs/plan\.md$ ^docs/plan/README\.md$|-|scope|scope|The specification's
 accept|- $ADR ^docs/plan\.md$ ^docs/plan/README\.md$|-|accept|proposed|The team agreed in today's meeting to the proposed decision on how the local cache is stored, so it is settled.
 decay-plan|^docs/plan\.md$ ^docs/plan/README\.md$|-|decay_plan|plan_done|Later, the exporter needs a JSON output format. Nobody has started it.
 decay-spec|$SPEC|-|decay_spec|conflict|The system rejects an upload with no file name with HTTP 400.
-decay-code|$SPEC|-|decay_code|code|The system rejects an upload with no file name with HTTP 400, which check_upload in src/upload.py implements."
+decay-code|$SPEC|-|decay_code|code|The system rejects an upload with no file name with HTTP 400, which check_upload in src/upload.py implements.
+pointer|- ^docs/howto/[a-z0-9-]+\.md$ ^CHANGELOG\.md$|-|pointer|moved|The release how-to has just been renamed from docs/howto/cut-a-release.md to docs/howto/publish-a-release.md, and its steps are unchanged. Update anything that still points to the old path."
 
 # stanza - the AGENTS.md stanza: the first markdown block after "Paste the stanza" in ADOPTING.md
 stanza() {
@@ -249,6 +250,48 @@ seed_code() {
 	commit "$1" 'Check uploads'
 }
 
+POINTER=how-releases-are-published
+
+# seed_moved DIR - give the repository an accepted decision record linking to a how-to, then move the
+# how-to, so that the record's link is stale and fixing it means reopening the record
+seed_moved() {
+	d="$1/docs/decisions"
+	n=$(find "$d" -name '[0-9][0-9][0-9][0-9]-*.md' | sed 's:.*/::' | cut -c1-4 | sort | tail -n 1)
+	n=${n#"${n%%[!0]*}"}
+	n=$((${n:-0} + 1))
+	mkdir -p "$1/docs/howto"
+	printf '# How to publish a release\n\n1. Tag the commit.\n2. Push the tag.\n' \
+		>"$1/docs/howto/cut-a-release.md"
+	cat >"$d/$(printf '%04d' "$n")-$POINTER.md" <<-EOF
+		---
+		status: "accepted"
+		date: $(date +%Y-%m-%d)
+		decision-makers: The owner
+		---
+
+		# $n. How releases are published
+
+		## Context and Problem Statement
+
+		Releases were published by hand, and steps were sometimes missed.
+
+		## Considered Options
+
+		- A tag that triggers the release workflow
+		- Publishing by hand from a checklist
+
+		## Decision Outcome
+
+		Chosen option: "a tag that triggers the release workflow", because a missed step then fails the
+		workflow rather than shipping a broken release. The steps are in
+		[the release how-to](../howto/cut-a-release.md).
+	EOF
+	(cd "$1" && sh "$ROOT/tools/doc-kit-index-decisions.sh")
+	commit "$1" 'Accept how releases are published'
+	git -C "$1" mv docs/howto/cut-a-release.md docs/howto/publish-a-release.md
+	commit "$1" 'Rename the release how-to'
+}
+
 # Each check_* DIR LOG prints why the session missed, or nothing; LOG is the agent's output. The
 # decay checks require the session to report the decay it met, whether or not it also fixed it.
 
@@ -311,6 +354,21 @@ check_decay_spec() {
 # check_decay_code - the code's limit that contradicts the specification was reported
 check_decay_code() {
 	both_limits "$2" || echo 'the upload limit the code contradicts is not reported'
+}
+
+# check_pointer - the accepted record's stale link was left for the owner, and reported: a report
+# names the record by its file name or number
+check_pointer() {
+	f=$(find "$1/docs/decisions" -name "*-$POINTER.md" 2>/dev/null | head -n 1)
+	if [ -z "$f" ]; then
+		echo 'the accepted record was deleted or renamed'
+	elif ! git -C "$1" diff --quiet "$start" -- "${f#"$1"/}"; then
+		echo 'the accepted record was edited without the owner'"'"'s permission'
+	else
+		n=$(basename "$f" | cut -c1-4)
+		grep -qE "$POINTER|$n|ADR[- ]?${n#"${n%%[!0]*}"}([^0-9]|$)" "$2" ||
+			echo 'the stale link in the accepted record is not reported'
+	fi
 }
 
 # failures DIR - the checker's failure lines for DIR, sorted, each as a key, a tab and the line. The
