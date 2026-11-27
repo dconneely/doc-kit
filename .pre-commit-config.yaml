@@ -1,5 +1,5 @@
 # Hygiene hooks for a repository that is entirely prose. Run with `prek` (no Python needed) or
-# `pre-commit`. The conformance checker, tools/doc-kit-check.sh, is product and runs separately.
+# `pre-commit`.
 #
 # Infrastructure, not product (ADR-0005): never copied into an adopting repository. Revisions are
 # pinned to versions known to work on Windows.
@@ -85,9 +85,18 @@ repos:
         stages: [manual]
         args: [--no-progress, --method, get, --max-concurrency, "4"]
 
-  # Drift guards. `pygrep` fails when a file MATCHES the Python regex in `entry`.
+  # The hooks .pre-commit-hooks.yaml publishes, run locally so each change is checked by the version
+  # it makes. Keep them identical to the manifest. `pygrep` fails when a file MATCHES the Python
+  # regex in `entry`.
   - repo: local
     hooks:
+      - id: doc-kit-check
+        name: doc-kit conformance check
+        entry: tools/doc-kit-check.sh
+        language: script
+        pass_filenames: false
+        always_run: true
+
       - id: lowercase-adr-status
         name: "ADR statuses are lowercase (MADR spelling)"
         language: pygrep
@@ -103,13 +112,15 @@ repos:
         files: ^docs/decisions/
 
       - id: no-template-banner
-        name: "Templates carry no instructional banner (ADR-0006)"
+        name: "Templates carry no instructional banner"
         language: pygrep
         entry: 'This file is a template'
         types: [markdown]
+        exclude: ^docs/archive/
 
       # shellcheck trusts the shebang, so a bash-only construct under #!/bin/sh would pass
-      # silently. Bash scripts are welcome, named .bash.
+      # silently. Bash scripts are welcome, named .bash. Not published: it is not a documentation
+      # rule.
       - id: sh-scripts-are-posix
         name: ".sh scripts must not declare a bash shebang (use .bash for bash-specific scripts)"
         language: pygrep

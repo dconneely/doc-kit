@@ -162,6 +162,21 @@ single POSIX shell scripts using standard utilities; the checker uses `git` when
 ignore and vendored-file checks - read them before you run them. On Windows invoke them with `sh`,
 not `bash`.
 
+If the repository already runs prek or pre-commit, you can take the checker as a hook instead of
+copying it, with three pattern checks on decision records and banners. Pin `rev` to the release your
+adoption record names: an unpinned hook would change, and could start failing, without the
+repository changing. The index generator writes a file, so it is not a hook; copy it if you want it.
+
+```yaml
+- repo: https://github.com/dconneely/doc-kit
+  rev: vX.Y.Z # the release your adoption record names
+  hooks:
+    - id: doc-kit-check
+    - id: lowercase-adr-status
+    - id: no-nygard-status-section
+    - id: no-template-banner
+```
+
 Copy everything by hand, or fetch the subtree if you would rather - `npx degit`, a sparse checkout,
 or clone-and-copy all work. The kit ships no installer, because it ships text: hand-copying is the
 supported path and running anything is optional (ADR-0005).
@@ -394,8 +409,9 @@ The customisation has been applied successfully when all of these hold:
 - [ ] Generated files say so, and regenerating them produces no diff.
 - [ ] No placeholder content survives - no example artefact row, no unreplaced heading.
 
-If you copied `tools/doc-kit-check.sh`, run it from the repository root - it covers the first three
-mechanically. The rest are for review.
+If you copied `tools/doc-kit-check.sh`, run it from the repository root; if you pinned its hook, run
+`prek run doc-kit-check --all-files` or `pre-commit run doc-kit-check --all-files`. It covers the
+first three mechanically. The rest are for review.
 
 Re-run the first two checks whenever an artefact is added or removed. They are the ones that rot.
 

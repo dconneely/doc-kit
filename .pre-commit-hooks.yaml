@@ -1,0 +1,40 @@
+# doc-kit's checks as pre-commit hooks, for an adopter that runs prek or pre-commit. Pin `rev` to a
+# release tag (ADR-0010); ADOPTING.md says how.
+#
+# Product, not infrastructure: adopters run these. The pygrep hooks are repeated as local hooks in
+# .pre-commit-config.yaml, so this repository checks each change with the version it makes; change
+# both together.
+
+# Reads the whole repository, so it runs on every commit and takes no filenames: a commit that only
+# deletes a mapped file must still fail.
+- id: doc-kit-check
+  name: doc-kit conformance check
+  description: Checks the map, decision records, research notes and plan against the specification.
+  entry: tools/doc-kit-check.sh
+  language: script
+  pass_filenames: false
+  always_run: true
+
+# `pygrep` fails when a file MATCHES the Python regex in `entry`.
+- id: lowercase-adr-status
+  name: ADR statuses are lowercase (MADR spelling)
+  description: Flags capitalised status names and Nygard's "Superseded by ADR-" in decision records.
+  language: pygrep
+  entry: 'Superseded by ADR-|`(Accepted|Proposed|Rejected)`'
+  files: ^docs/decisions/
+
+- id: no-nygard-status-section
+  name: Records use MADR front-matter, not a Status section
+  description: Flags a "## Status" heading in a decision record.
+  language: pygrep
+  entry: "^## Status$"
+  files: ^docs/decisions/
+
+- id: no-template-banner
+  name: Templates carry no instructional banner
+  description: Flags the banner "This file is a template" in any Markdown file outside the archive.
+  language: pygrep
+  entry: "This file is a template"
+  types: [markdown]
+  # Archived files are kept as they were (docs/spec.md §5).
+  exclude: ^docs/archive/

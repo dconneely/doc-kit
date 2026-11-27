@@ -6,6 +6,14 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Added
+
+- The checks are published as pre-commit hooks in `.pre-commit-hooks.yaml`, for a repository that
+  runs prek or pre-commit: `doc-kit-check` runs `tools/doc-kit-check.sh` on every commit, and
+  `lowercase-adr-status`, `no-nygard-status-section` and `no-template-banner` are the pattern checks
+  some adopters had copied into their own hook configuration. Pin them to a release, as
+  `ADOPTING.md` shows, and delete any copies they replace. Vendoring the tools is still supported.
+
 ### Changed
 
 - **Breaking:** the map's artefacts table has a `Content` column in place of `Tense`, naming the
@@ -35,6 +43,8 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 - The template map lists tutorials and an FAQ under "Deliberately not here", since both go stale
   fast. The how-to template says a guide is goal-oriented and links to its reasons rather than
   explaining. `ADOPTING.md` Step 1 sends a multi-service project's C4 diagrams to the specification.
+- `doc-kit-check.sh` compares `docs/decisions/README.md` with a fresh index only when its first line
+  is the generated header, so an index maintained by hand is no longer failed as out of date.
 
 ### Fixed
 

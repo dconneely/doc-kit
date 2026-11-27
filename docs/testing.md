@@ -18,7 +18,8 @@ are listed below.
 | `adr`  | Record and research-note filenames match `NNNN-kebab-case-title.md`; numbers are unique. Front-matter carries a `status` of `proposed`, `accepted`, `rejected` or `deprecated`, a `date` that is not blank or the template's placeholder, and - on anything not `proposed` - a `decision-makers` that is not the template's placeholder. The H1 heading repeats the record number, and the three MADR minimal headings are present. Every bare `ADR-NNNN` in a documentation file excluding `templates/`, outside code and the text of links to other sites, names a record in `docs/decisions/`, and no citation takes another form (§3.1)                                                                                                                                                                                                                                                                                                                                             |
 | `plan` | No entry heading is annotated done, struck through or marked completed. Every `##` entry carries a valid type tag (§3.3), and none is the template's example entry (§2.5)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
-The pre-commit hooks cover a second, narrower band: line length at 100 columns
+The pre-commit hooks run the checker on every commit, as the hook `.pre-commit-hooks.yaml`
+publishes, and cover a second, narrower band: line length at 100 columns
 (`.markdownlint-cli2.jsonc`), secrets, file hygiene, `pygrep` drift guards for the failure this
 repository actually produces - a convention changed in one file and not the others - and
 Conventional Commits on the `commit-msg` stage, using the hook's default type list.
@@ -73,8 +74,9 @@ artefact patterns split on whitespace. Keep artefact paths free of spaces, or ma
 glob.
 
 **Generated artefacts other than the decisions index (§4.3).** The checker regenerates the decisions
-index when `tools/doc-kit-index-decisions.sh` is present. It cannot regenerate a schema snapshot, a
-rendered reference or another generated artefact, so those are review.
+index when `doc-kit-index-decisions.sh` is beside it and the index carries the generated header; an
+index without the header is maintained by hand and not compared. It cannot regenerate a schema
+snapshot, a rendered reference or another generated artefact, so those are review.
 
 **Substantive conformance (§4.1, §4.2, §4.4 and §5).** Tables, lists of more than three values and
 multi-step processes are single-sourced; prose never restates a machine-readable contract;

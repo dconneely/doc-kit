@@ -18,10 +18,10 @@ Each document is authoritative about one thing:
 
 ## This repository is its own first adopter
 
-`ADOPTING.md` and `ADOPTING-NOTES.md` are **product**, as are `templates/`, `tools/` and
-`.agents/skills/`. `tests/` and the hook and formatting configuration are **infrastructure**. The
-documentation files at the root and in `docs/` are this repository's own documentation, produced by
-applying the kit to itself.
+`ADOPTING.md` and `ADOPTING-NOTES.md` are **product**, as are `templates/`, `tools/`,
+`.pre-commit-hooks.yaml` and `.agents/skills/`. `tests/` and the hook and formatting configuration
+are **infrastructure**. The documentation files at the root and in `docs/` are this repository's own
+documentation, produced by applying the kit to itself.
 
 The consequence that catches agents: **files under `templates/` are meant to stay uncustomised.**
 Their placeholder headings, example entries and unfilled sections are the deliverable, not an

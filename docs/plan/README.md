@@ -20,20 +20,6 @@ accepted-wrong (is the quirk left alone, or the owner asked?). The seeding patte
 already uses extends to this, and the same scenarios can later run against the worked example
 through `DOC_KIT_EVAL_BASE`.
 
-## Publish doc-kit's checks as prek hooks
-
-**Type:** feature - **Importance:** medium - **Effort:** low
-
-Adopting repositories copy doc-kit's checks into their own `.pre-commit-config.yaml` as local hooks:
-`lowercase-adr-status` and `no-nygard-status-section` appear word for word in this repository and
-one adopter, `no-template-banner` here alone, and one adopter runs its own copy of
-`tools/doc-kit-check.sh`. The copies drift from each other and from the doc-kit version adopted. A
-`.pre-commit-hooks.yaml` here would let each adopter pin them at the release it adopted, the checker
-as a `language: script` hook and the others as `pygrep`, with this repository running them as local
-hooks so each change is checked by the version it makes. `sh-scripts-are-posix` stays out: it is not
-a documentation rule, and is planned for a shared hook repository instead. `ADOPTING.md` then says
-which hooks to pin.
-
 ## Build a worked example
 
 **Type:** docs - **Importance:** medium - **Effort:** high
