@@ -21,7 +21,10 @@ changes in existing functionality, `Deprecated` for soon-to-be removed features,
 removed features, `Fixed` for any bug fixes, `Security` in case of vulnerabilities.
 
 It does prescribe an `Unreleased` section - "Keep an `Unreleased` section at the top to track
-upcoming changes" - and reverse-chronological order: "The latest version comes first."
+upcoming changes" - and reverse-chronological order: "The latest version comes first." At a release
+its entries move under a new version heading: "At release time, you can move the `Unreleased`
+section changes into a new release version section." No sentence says the heading stays when empty,
+but the example keeps it, empty, above the latest version.
 
 It also states the changelog/commit-log distinction the kit relies on: "The purpose of a changelog
 entry is to document the noteworthy difference, often across multiple commits, to communicate them
