@@ -59,6 +59,7 @@ awk '
 		file_title[f] = title
 		file_confirm[f] = (confirm != "" ? confirm : "-")
 	}
+	{ sub(/\r$/, "") }
 	FNR == 1 {
 		flush()
 		f = FILENAME

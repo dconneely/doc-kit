@@ -105,7 +105,7 @@ doc_files() {
 
 # section FILE HEADING - the lines under a "## Heading" up to the next "## "
 section() {
-	awk -v h="$2" '$0 == h { f = 1; next } /^## / && f { exit } f' "$1"
+	awk -v h="$2" '{ sub(/\r$/, "") } $0 == h { f = 1; next } /^## / && f { exit } f' "$1"
 }
 
 # First backticked cell of each table row: the artefact's path.
@@ -118,7 +118,7 @@ table_paths() {
 # keyed on indentation. Only a bare `name/` line is a container. A directory
 # followed by description text is a leaf: one artefact, matching a `name/*` row.
 layout_paths() {
-	awk '/^```text/ { f = 1; next } /^```/ { if (f) exit } f' "$MAP" | awk '
+	awk '{ sub(/\r$/, "") } /^```text/ { f = 1; next } /^```/ { if (f) exit } f' "$MAP" | awk '
 		{
 			line = $0
 			indent = 0
@@ -198,7 +198,7 @@ check_map() {
 	# The checks below read the artefacts table, so without one they report only noise - every
 	# documentation file unmapped.
 	if [ -z "$arts" ]; then
-		if grep -q '^## Artifacts *$' "$MAP"; then
+		if awk '{ sub(/\r$/, "") } /^## Artifacts *$/ { found = 1; exit } END { exit !found }' "$MAP"; then
 			fail "the artefacts table names nothing" "§2.2 - rename the '## Artifacts' heading '## Artefacts'"
 		else
 			fail "the artefacts table names nothing" "§2.2 - is the heading exactly '## Artefacts'?"
@@ -417,6 +417,7 @@ check_adr() {
 			if (status != "" && status != "proposed") {
 				if (!dm) print "nodm\t" f "\t" status
 			}
+			if (fnum != "" && !hnum) print "hnum\t" f
 			if (!h1) print "heading\t" f "\t## Context and Problem Statement"
 			if (!h2) print "heading\t" f "\t## Considered Options"
 			if (!h3) print "heading\t" f "\t## Decision Outcome"
@@ -427,22 +428,45 @@ check_adr() {
 			base = f
 			sub(/.*\//, "", base)
 			skip = (base ~ /^0000-/ || base == "README.md")
-			if (base ~ /^[0-9][0-9][0-9][0-9]-/) seen[substr(base, 1, 4)]++
-			status = ""; date = dm = h1 = h2 = h3 = 0
+			if (base ~ /^[0-9][0-9][0-9][0-9]-/) {
+				seen[substr(base, 1, 4)]++
+				fnum = substr(base, 1, 4)
+				sub(/^0+/, "", fnum)
+			} else {
+				fnum = ""
+			}
+			status = ""; date = dm = hnum = h1 = h2 = h3 = 0
+			in_yaml = 0
 		}
+		{ sub(/\r$/, "") }
 		FNR == 1 { flush(); start(FILENAME) }
-		status == "" && /^status: *"?[^"]*"? *$/ {
+		skip { next }
+		FNR == 1 && /^---$/ { in_yaml = 1; next }
+		in_yaml && /^---$/ { in_yaml = 0; next }
+		in_yaml && status == "" && /^status: *"?[^"]*"? *$/ {
 			s = $0
 			sub(/^status: */, "", s)
 			sub(/ *$/, "", s)
 			gsub(/"/, "", s)
 			status = s
 		}
-		/^date:/ { date = 1 }
-		/^decision-makers: *[^ {]/ { dm = 1 }
-		index($0, "## Context and Problem Statement") { h1 = 1 }
-		index($0, "## Considered Options") { h2 = 1 }
-		index($0, "## Decision Outcome") { h3 = 1 }
+		in_yaml && /^date:/ {
+			d = $0
+			sub(/^date:[ \t]*"?/, "", d)
+			sub(/"?[ \t]*$/, "", d)
+			if (d != "" && d !~ /^\{/) date = 1
+		}
+		in_yaml && /^decision-makers: *[^ {]/ { dm = 1 }
+		!in_yaml && !hnum && /^# [0-9]+\.[ \t]+[^ \t]/ {
+			n = $0
+			sub(/^# /, "", n)
+			sub(/\..*/, "", n)
+			sub(/^0+/, "", n)
+			if (n == fnum) hnum = 1
+		}
+		!in_yaml && index($0, "## Context and Problem Statement") { h1 = 1 }
+		!in_yaml && index($0, "## Considered Options") { h2 = 1 }
+		!in_yaml && index($0, "## Decision Outcome") { h3 = 1 }
 		END {
 			flush()
 			# An empty file has no first line, so it is visited here.
@@ -466,6 +490,7 @@ check_adr() {
 			status) fail "$f has status '$arg'" "§3.1 - proposed, accepted, rejected or deprecated" ;;
 			nodate) fail "$f has no date" "§3.1" ;;
 			nodm) fail "$f is '$arg' but names no decision-makers" "§3.1 - who decided?" ;;
+			hnum) fail "$f has no numbered heading matching its filename" "§3.1 - '# N. Question'" ;;
 			heading) fail "$f has no '$arg'" "§3.1 - MADR minimal template" ;;
 			dupe) fail "ADR number $f is used more than once" "§3.1 - numbers are unique" ;;
 		esac
@@ -493,6 +518,7 @@ check_citations() {
 			fence = 0
 			no = 0
 			while ((getline raw < name) > 0) {
+				sub(/\r$/, "", raw)
 				no++
 				if (raw ~ /^[ \t]*(```|~~~)/) { fence = !fence; continue }
 				if (fence || raw ~ /^\[[^]]*\]: /) continue
@@ -550,6 +576,7 @@ check_plan() {
 	# done" passes. A fenced block, such as the entry format shown in a preamble, holds no entries.
 	hits=$(awk '
 		function flush() { if (h && !t) print "type " h }
+		{ sub(/\r$/, "") }
 		/^ ? ? ?(```|~~~)/ { fenced = !fenced; next }
 		fenced { next }
 		/^## Short title, imperative$/ { print "example " NR }

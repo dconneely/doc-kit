@@ -45,6 +45,12 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   to an adopted template.
 - `ADOPTING.md` no longer says a `CLAUDE.md` containing only `@AGENTS.md` keeps the stanza out of
   Claude Code sessions: the import loads it. Such a file is redundant, and is still deleted.
+- `tools/doc-kit-check.sh` rejects a blank or placeholder `date` in decision-record front-matter,
+  checks that each record's H1 heading repeats its number (§3.1), and handles CRLF line endings
+  alongside `tools/doc-kit-index-decisions.sh`.
+- `ADOPTING.md` includes `Property values` in Step 2, `docs/sources/.gitignore` and a hand-kept
+  decisions-index note in Step 3, and aligns Step 4c with its six sweeps; `README.md` notes that
+  target-side agent sessions need read access to the kit (for example `--add-dir`).
 
 ## [0.12.0] - 2026-11-23
 

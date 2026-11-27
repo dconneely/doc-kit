@@ -117,6 +117,7 @@ Work top to bottom. Every edit is a deletion or a substitution; nothing needs to
 | Layout block                           | Delete unused lines; replace with **real paths**. In a multi-module repository, ask whether `docs/` should be repo-wide or move under each module before assuming either - see `ADOPTING-NOTES.md`. Nesting a directory (e.g. `docs/spec/`)? The line introducing it must be bare - nothing else on it - or the checker reads it as one leaf artefact instead of a container |
 | Specification line                     | State whether it is one file or an index, and name its machine-readable members if any                                                                                                                                                                                                                                                                                       |
 | Artefacts table                        | Delete unused rows                                                                                                                                                                                                                                                                                                                                                           |
+| Property values table                  | **Keep verbatim.** The closed sets used in the artefacts table and Step 4a                                                                                                                                                                                                                                                                                                   |
 | Lifecycle table                        | Delete the same rows, so the two tables stay aligned                                                                                                                                                                                                                                                                                                                         |
 | Flow                                   | Keep, deleting any step that names an artefact you removed - most projects drop the optional plan-note step                                                                                                                                                                                                                                                                  |
 | Rules, "Adding a new kind of document" | **Keep verbatim.** These are the parts that do the work, and they are the same in every repository                                                                                                                                                                                                                                                                           |
@@ -131,21 +132,21 @@ rather than leaving them undocumented.
 Everything in `templates/` maps onto your repository root at the same relative path, so copying is a
 matter of taking the ones Step 1 said you had earned:
 
-| From `templates/`                                                                | Take it when                                                                                          |
-| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan/README.md` | always - the core five                                                                                |
-| `docs/decisions/0000-template.md`                                                | always                                                                                                |
-| `docs/decisions/0001-how-the-documentation-is-organised.md`                      | always - renumber it if records exist, and leave it `proposed` for the owner to accept                |
-| `docs/decisions/README.md`                                                       | you want one place that shows which records bind; generate it with `tools/doc-kit-index-decisions.sh` |
-| `docs/quirks.md`                                                                 | you deviate from a reference, or carry behaviour you know is wrong                                    |
-| `docs/glossary.md`                                                               | your domain has terms, or ordinary words used precisely                                               |
-| `docs/testing.md`                                                                | you have more than one test approach                                                                  |
-| `docs/research/0000-template.md`                                                 | you reverse-engineer, or reconcile sources that disagree                                              |
-| `docs/howto/0000-template.md`                                                    | you have recurring operational procedures (deployments, rotations, migrations)                        |
-| `docs/sources/README.md` and `docs/sources/fetch.sh`                             | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts    |
-| `docs/plan/adopt-doc-kit.md`                                                     | you are migrating an existing repository - it is the migration worksheet                              |
-| `docs/plan/0000-template.md`                                                     | you keep plan notes - worth it once the backlog is past roughly 20 items                              |
-| `docs/archive/README.md`                                                         | Step 4 turned up documentation you keep but do not migrate                                            |
+| From `templates/`                                                                | Take it when                                                                                                                                                                             |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOC-MAP.md`, `README.md`, `docs/spec.md`, `CHANGELOG.md`, `docs/plan/README.md` | always - the core five                                                                                                                                                                   |
+| `docs/decisions/0000-template.md`                                                | always                                                                                                                                                                                   |
+| `docs/decisions/0001-how-the-documentation-is-organised.md`                      | always - renumber it if records exist, and leave it `proposed` for the owner to accept                                                                                                   |
+| `docs/decisions/README.md`                                                       | you want one place that shows which records bind; generate it with `tools/doc-kit-index-decisions.sh`, or drop its generated header and `generated` mutability if maintaining it by hand |
+| `docs/quirks.md`                                                                 | you deviate from a reference, or carry behaviour you know is wrong                                                                                                                       |
+| `docs/glossary.md`                                                               | your domain has terms, or ordinary words used precisely                                                                                                                                  |
+| `docs/testing.md`                                                                | you have more than one test approach                                                                                                                                                     |
+| `docs/research/0000-template.md`                                                 | you reverse-engineer, or reconcile sources that disagree                                                                                                                                 |
+| `docs/howto/0000-template.md`                                                    | you have recurring operational procedures (deployments, rotations, migrations)                                                                                                           |
+| `docs/sources/README.md`, `docs/sources/fetch.sh` and `docs/sources/.gitignore`  | you cite external standards and need pinned checksums, licence tracking, and offline fetch scripts                                                                                       |
+| `docs/plan/adopt-doc-kit.md`                                                     | you are migrating an existing repository - it is the migration worksheet                                                                                                                 |
+| `docs/plan/0000-template.md`                                                     | you keep plan notes - worth it once the backlog is past roughly 20 items                                                                                                                 |
+| `docs/archive/README.md`                                                         | Step 4 turned up documentation you keep but do not migrate                                                                                                                               |
 
 If the target has a `docs/name.md` beside a directory `docs/name/` - `docs/decisions.md` beside
 `docs/decisions/`, for example - move the file to `docs/name/README.md` and fix the links to it
@@ -342,7 +343,7 @@ someone who remembers why a document exists can say so.
 
 ### 4c - Work the sweeps
 
-In order of payoff; expect the first three to find real content and the fourth to find less than you
+In order of payoff; expect the first three to find real content and the last to find less than you
 would think.
 
 **1. Find the file doing several jobs at once.** Almost every repository has one - part record of

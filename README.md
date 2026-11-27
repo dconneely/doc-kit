@@ -75,12 +75,13 @@ If the target has its own `AGENTS.md`, `CLAUDE.md` or other agent instructions, 
 
 1. **Plan here.** Start the agent in this repository and point it at the target. It reads the
    target's instruction files, follows `ADOPTING.md` Steps 0-4a, and stops at the inventory.
-2. **Execute there.** Review the dispositions, then start the agent in the target repository. Its
-   instructions load automatically. Point it at this kit's `ADOPTING.md` and
+2. **Execute there.** Review the dispositions, then start the agent in the target repository with
+   read access to this kit (for example `--add-dir <kit-path>` in Claude Code). Its instructions
+   load automatically. Point it at this kit's `ADOPTING.md` and
    `.agents/skills/doc-kit-adopt/SKILL.md`, and tell it to finish Steps 4b-5.
 
-If you start the session in the target instead, its instructions are already loaded; it may do both
-parts in one session, with the same inventory gate.
+If you start the session in the target instead, with the same read access to this kit, its
+instructions are already loaded; it may do both parts in one session, with the same inventory gate.
 
 When the target-side session starts, this prompt is enough:
 

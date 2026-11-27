@@ -398,16 +398,17 @@ fixture
 after '^DOC-MAP.md ' 'ghost.md       named here only'
 expect "artefact in the layout alone fails" 1 "ghost.md is in the layout block but not the artefacts table" map
 
-# A copy of templates/ and tools/, as an adopter starts from: the only failure is the plan's
-# example entry, which Step 3 says to replace.
+# A copy of templates/ and tools/, as an adopter starts from: the only failures are the plan's
+# example entry and the adoption record's placeholder date, which Step 3 says to replace.
 fixture
 rm -rf DOC-MAP.md docs
 cp -R "$ROOT/templates/." .
 mkdir -p tools
 cp "$ROOT/tools/doc-kit-check.sh" "$ROOT/tools/doc-kit-index-decisions.sh" tools/
 : >AGENTS.md
-expect "an untouched copy of the templates fails only on the example plan entry" 1 "docs/plan/README.md:14 is the template's example entry"
-expect "an untouched copy of the templates has one failure" 1 "doc-kit: 1 failure(s)"
+expect "an untouched copy of the templates fails on the example plan entry" 1 "docs/plan/README.md:14 is the template's example entry"
+expect "an untouched copy of the templates fails on the placeholder adoption date" 1 "docs/decisions/0001-how-the-documentation-is-organised.md has no date"
+expect "an untouched copy of the templates has two failures" 1 "doc-kit: 2 failure(s)"
 
 # ---------------------------------------------------------------- adr
 
@@ -430,6 +431,49 @@ expect "accepted record needs no field beyond decision-makers" 0 "checks passed"
 fixture
 adr 0002 accepted 'decision-makers: {the owner}'
 expect "placeholder decision-makers fails" 1 "names no decision-makers" adr
+
+fixture
+adr 0002 proposed
+sed -i.bak 's/^date: .*/date: {YYYY-MM-DD, of the latest change of status}/' docs/decisions/0002-a-record.md
+rm docs/decisions/0002-a-record.md.bak
+expect "placeholder date fails" 1 "docs/decisions/0002-a-record.md has no date" adr
+
+fixture
+adr 0002 proposed
+sed -i.bak 's/^date: .*/date:/' docs/decisions/0002-a-record.md
+rm docs/decisions/0002-a-record.md.bak
+expect "blank date fails" 1 "docs/decisions/0002-a-record.md has no date" adr
+
+fixture
+sed -i.bak 's/^# 0001\. A record$/# A record/' docs/decisions/0001-a-record.md
+rm docs/decisions/0001-a-record.md.bak
+expect "unnumbered ADR heading fails" 1 "docs/decisions/0001-a-record.md has no numbered heading matching its filename" adr
+
+fixture
+sed -i.bak 's/^# 0001\. A record$/# 2. A record/' docs/decisions/0001-a-record.md
+rm docs/decisions/0001-a-record.md.bak
+expect "mismatched ADR heading number fails" 1 "docs/decisions/0001-a-record.md has no numbered heading matching its filename" adr
+
+fixture
+sed -i.bak 's/^# 0001\. A record$/# 1. A record/' docs/decisions/0001-a-record.md
+rm docs/decisions/0001-a-record.md.bak
+expect "unpadded ADR heading number passes" 0 "checks passed" adr
+
+fixture
+mkdir -p tools
+cp "$ROOT/tools/doc-kit-index-decisions.sh" tools/
+for crlf in DOC-MAP.md docs/plan.md docs/decisions/0001-a-record.md; do
+	awk '{ printf "%s\r\n", $0 }' "$crlf" >"$crlf.tmp"
+	mv "$crlf.tmp" "$crlf"
+done
+sh tools/doc-kit-index-decisions.sh
+expect "CRLF files pass every check" 0 "doc-kit: checks passed (map adr plan)"
+if grep -qF '[ADR-0001](0001-a-record.md)' docs/decisions/README.md && grep -qF 'A record' docs/decisions/README.md; then
+	passed=$((passed + 1))
+else
+	failed=$((failed + 1))
+	echo "not ok - index generator reads CRLF records"
+fi
 
 fixture
 adr 0002 'accepted (refined by ADR-0001)' 'decision-makers: someone'
