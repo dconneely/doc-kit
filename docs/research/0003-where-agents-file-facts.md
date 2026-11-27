@@ -2,7 +2,7 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-20. Most scenarios ran
+Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-26. Most scenarios ran
 once per repository and model, a sample rather than a rate; on the templates alone, five models ran
 each scenario three times, one of them under two agents, and Haiku also did in two customised
 repositories.
@@ -57,6 +57,10 @@ sandbox, every session that wrote a decision record left the index stale too, so
 have happened without it. It placed no research finding where the map says, often described where a
 fact belonged and what to write without writing it, and three times out of three did not recognise
 the plan scenario's fact as a fact to record.
+
+Naming each artefact's content in the map, in place of its tense, changed nothing measurable. On the
+kit with the `Content` column, Haiku and DeepSeek Flash placed all 15 filing and refusal scenarios,
+and Gemini 3.8 Flash and Gemini 4 Hydrogen 14 each; every session kept the rules.
 
 In single runs before the scenarios changed, Gemini and DeepSeek each placed 11 of 12. Each miss
 followed a passage of the kit that the scenario did not allow for. DeepSeek put the 25 MB cap and
@@ -238,6 +242,18 @@ time. A request to reword the specification's scope left it alone, once filing a
 A team's agreement to a proposed decision record left it `proposed`; twice the session wrote the
 agreement into the record, once as a `## Status` section, and said the owner must accept it.
 Research note 0005 has the decay scenarios from the same run.
+
+The templates on an empty repository, 2026-11-26, on the kit at `ca626f0`, after the map's `Tense`
+column became `Content` and its routing line and rule 5 changed; one run of the full suite, the
+index generator allowed, user-level configuration loaded. Claude Haiku under Claude Code 2.1.332 as
+above; DeepSeek Flash under OpenCode 2.3.2 as above; Gemini 3.8 Flash and Gemini 4 Hydrogen under
+`agy` 1.5.16 as `--model gemini-3.8-flash-low` and `--model gemini-4-hydrogen-low`, with
+`--dangerously-skip-permissions`, `--add-dir` and `tests/agy-eval-settings.json`. Of the 15 filing
+and refusal scenarios, Haiku and DeepSeek placed all 15, and Gemini 3.8 Flash and Hydrogen 14 each;
+all 72 sessions kept the rules. Gemini 3.8 Flash filed the rule and its reason as a quirk, as in
+research note 0006. Hydrogen, new to the suite, logged the shipped header row in the changelog and
+the specification and never opened the plan, as Haiku did without the stanza's plan line. Research
+note 0005 has the decay scenarios from the same runs.
 
 ## Dead ends
 

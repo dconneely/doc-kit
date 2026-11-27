@@ -11,12 +11,12 @@ scenario and variant show whether a passage changes results, not by how much.
 ## Finding
 
 Five passages made no difference to where Haiku filed facts or whether it kept the rules, and are
-cut. From the `AGENTS.md` stanza: the list giving each artefact's tense, which the template map also
-gives, and the bold "Write the least that is true" line, which the map states as a rule of its own.
-From the template map: the paragraph saying each artefact holds its own rules and pointing to the
-adoption record, the advice to split a sentence that fits two places, and the rule that tense routes
-a fact, which the routing table already does. The stanza went from 264 words to 178, the map from
-2,106 to 2,031, and to 1,819 with the shorter routing table below.
+cut. From the `AGENTS.md` stanza: the list giving each artefact's tense, which the template map then
+also gave, and the bold "Write the least that is true" line, which the map states as a rule of its
+own. From the template map: the paragraph saying each artefact holds its own rules and pointing to
+the adoption record, the advice to split a sentence that fits two places, and the rule that tense
+routes a fact, which the routing table already does. The stanza went from 264 words to 178, the map
+from 2,106 to 2,031, and to 1,819 with the shorter routing table below.
 
 Three passages are needed:
 

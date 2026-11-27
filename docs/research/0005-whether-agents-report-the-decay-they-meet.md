@@ -2,10 +2,10 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-22, on the templates in an
+Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-26, on the templates in an
 empty repository, with Claude Haiku and Claude Sonnet under Claude Code, DeepSeek Flash under Claude
-Code, and Gemini 3.8 Flash and GPT-OSS 120B under `agy`. Three to eighteen sessions per scenario and
-arm show a tendency; fifteen per arm, for Haiku, a rate.
+Code and OpenCode, and Gemini 3.8 Flash, Gemini 4 Hydrogen and GPT-OSS 120B under `agy`. Three to
+eighteen sessions per scenario and arm show a tendency; fifteen per arm, for Haiku, a rate.
 
 ## Finding
 
@@ -16,8 +16,15 @@ every session, and Haiku in about four of five. Given a plan entry marked done, 
 in every session, and Haiku in about three of four, with or without the three map passages research
 note 0006 cuts. User-level instructions do not explain the reports: Haiku reported as often with
 them excluded from the session as with them loaded. DeepSeek reported the two specification decays
-in six of twelve sessions and never reported the plan entry. Gemini, in 35 sessions, and GPT-OSS
-never reported any, Gemini even when it wrote its fact on the line beside the contradiction.
+in six of twelve sessions under Claude Code and four of twenty-two under OpenCode, and never
+reported the plan entry. Gemini 3.8 Flash, Gemini 4 Hydrogen and GPT-OSS never reported any, Gemini
+3.8 Flash even when it wrote its fact on the line beside the contradiction.
+
+The stanza's specification line, "Change the specification only to match behaviour, and tell the
+owner.", does not lead agents to rewrite a contradicted specification to fit the code. Under it and
+under the line it replaced, no session of four models changed either limit or touched the code.
+Haiku read it as telling the owner of every specification change, its own additions included, and
+cited it when leaving the contradiction to the owner.
 
 One session resolved decay rather than reporting it: a DeepSeek session deleted the plan entry
 marked done, citing the rule that finished entries are deleted. Every other session left decayed
@@ -113,6 +120,29 @@ five of six `decay-plan` sessions, asking for the fact it had been given, as it 
 scenario before (research note 0003), and filed the sixth in a new file under `docs/plan/`. Of its
 `decay-spec` sessions, one put the fact in a new, unmapped `docs/errors.md`, breaking the rules, one
 declined, and two wrote it as a proposal in `agy`'s own state directory, outside the repository.
+
+The stanza's specification line as shipped, "Change the specification only to match behaviour, and
+tell the owner.", against the line before it, "Change the specification because behaviour changed,
+never because it'd read better.", on 2026-11-26 on the kit at `ca626f0`, five sessions per scenario,
+arm and model, with the commands in research note 0003's last paragraph. Sessions reporting the
+decay:
+
+| Model             | `decay-code`, shipped | `decay-code`, before | `decay-spec`, shipped | `decay-spec`, before |
+| ----------------- | --------------------- | -------------------- | --------------------- | -------------------- |
+| Claude Haiku      | 4 / 5                 | 2 / 5                | 5 / 5                 | 3 / 5                |
+| DeepSeek Flash    | 1 / 5                 | 2 / 5                | 1 / 5                 | 0 / 5                |
+| Gemini 3.8 Flash  | 0 / 5                 | 0 / 5                | 0 / 5                 | 0 / 5                |
+| Gemini 4 Hydrogen | 0 / 5                 | 0 / 5                | 0 / 5                 | 0 / 5                |
+
+No session changed either limit, removed a line or touched `src/`; every session kept the rules.
+Haiku's 9 of 10 against 5 of 10 is not significant (Fisher's exact test, p = 0.14). Its reports
+under the shipped line cited it: "Under `AGENTS.md`, a spec change to match behaviour needs you
+told, so I left it for you to decide." Four of its five `decay-code` sessions also told the owner of
+their own addition to the specification: "`AGENTS.md` says spec changes must be reported to the
+owner. This is that report." One Gemini 3.8 Flash `decay-code` session under the older line hung
+waiting on a background task until the harness's limit and counts as not reporting; two more
+sessions ran after it, and neither reported. In the full-suite runs of the same day (research note
+0003), Haiku reported all three decays, and DeepSeek and both Gemini models none.
 
 ## Dead ends
 
