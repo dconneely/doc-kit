@@ -2,7 +2,7 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-26. Most scenarios ran
+Observed directly with `tests/doc-kit-eval.sh` between 2026-10-30 and 2026-11-27. Most scenarios ran
 once per repository and model, a sample rather than a rate; on the templates alone, five models ran
 each scenario three times, one of them under two agents, and Haiku also did in two customised
 repositories.
@@ -59,8 +59,11 @@ fact belonged and what to write without writing it, and three times out of three
 the plan scenario's fact as a fact to record.
 
 Naming each artefact's content in the map, in place of its tense, changed nothing measurable. On the
-kit with the `Content` column, Haiku and DeepSeek Flash placed all 15 filing and refusal scenarios,
-and Gemini 3.8 Flash and Gemini 4 Hydrogen 14 each; every session kept the rules.
+kit with the `Content` column, Haiku, Sonnet and DeepSeek Flash placed all 15 filing and refusal
+scenarios in a run each, keeping the rules in every session. Over three runs, Gemini 3.8 Flash
+placed 40 of 45 sessions and kept the rules in 43, and Gemini 4 Hydrogen placed 42 and kept them in
+all 45. Gemini 3.8 Flash filed the rule and its reason as a quirk in all three runs; Hydrogen
+recorded a shipped change without opening the plan, leaving its finished entry, in all three.
 
 In single runs before the scenarios changed, Gemini and DeepSeek each placed 11 of 12. Each miss
 followed a passage of the kit that the scenario did not allow for. DeepSeek put the 25 MB cap and
@@ -255,6 +258,17 @@ research note 0006. Hydrogen, new to the suite, logged the shipped header row in
 the specification and never opened the plan, as Haiku did without the stanza's plan line. Research
 note 0005 has the decay scenarios from the same runs.
 
+The same templates, 2026-11-27, on the kit at `84aa0e2`, whose stanza and templates are those of
+`ca626f0`, with the commands above. `claude-sonnet-5-5`, one run: all 15 filing and refusal
+scenarios placed, every session keeping the rules. Gemini 3.8 Flash and Hydrogen, two more runs
+each, the first scenarios before `rg` was denied (see Dead ends). Gemini 3.8 Flash placed 26 of 30
+and kept the rules in 28: both rule-and-reason sessions went to `docs/quirks.md`; one `howto`
+session added its guide to the map's artefacts table but not the layout block, breaking the rules;
+and one `howto` session hung, counted as failing both. Hydrogen placed 28 of 30 and kept the rules
+in all 30; both misses were `plan-done`, logged in the changelog and the specification with the plan
+never opened. Research notes 0005 and 0007 have the decay and `pointer` scenarios from the same
+runs.
+
 ## Dead ends
 
 Running five repositories in parallel exhausted the account's usage limit mid-run, and every session
@@ -290,6 +304,14 @@ no `--add-dir`, a session wrote its record into `agy`'s own state directory. A b
 in that shell to a recursive listing tool, never returned and hung the session; on 2026-11-21 it
 hung seven of GPT-OSS's first fifteen. A deny rule matching `ls`, `dir`, `Get-ChildItem`, `eza` or
 `tree` with a recursive flag, and `eza` and `tree` alone, stopped it.
+
+On 2026-11-27 under `agy` 1.5.16, Gemini 4 Hydrogen hung in all three of its first `pointer`
+sessions, and Gemini 3.8 Flash in one `pointer` and one `howto` session, each log ending "root agent
+idle; waiting for 1 background task(s) to finish". A Hydrogen session recorded with
+`--output-format stream-json` showed the command: `rg -n "cut-a-release\.md"`, given no path, which
+reads its input rather than the directory, and in `agy` that input never closes. A deny rule for
+`rg` in `tests/agy-eval-settings.json` stopped it: Hydrogen's next ten `pointer` sessions all
+finished.
 
 The correction scenario seeded its 5 MB limit by appending to `docs/spec.md`, which in a repository
 whose specification is a tree creates an unmapped file beside `docs/spec/`. In play-bazlang one

@@ -2,10 +2,11 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-22, on the templates in an
-empty repository, with DeepSeek Flash and Claude Haiku under Claude Code, and Gemini 3.8 Flash and
-GPT-OSS 120B under `agy`. Three to five runs per model and variant show whether a sentence changes
-the result, not by how much; fifteen, for Haiku and GPT-OSS with the sentence, a rate.
+Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-27, on the templates in an
+empty repository, with DeepSeek Flash, Claude Haiku and Claude Sonnet under Claude Code, and Gemini
+3.8 Flash, Gemini 4 Hydrogen and GPT-OSS 120B under `agy`. Three to five runs per model and variant
+show whether a sentence changes the result, not by how much; fifteen, for Haiku and GPT-OSS with the
+sentence, a rate.
 
 ## Finding
 
@@ -35,6 +36,17 @@ session wrote a new record as `accepted`, from scratch rather than from the temp
 agreed decision as a new `accepted` record. No other model has: the rules check fails a record that
 is not `proposed`, and every rule break research notes 0003 and 0006 record is a stale index or a
 misnumbered record, across at least 85 records from Gemini, DeepSeek under OpenCode and Sonnet.
+
+The same gate covers changing an accepted record, and agents did not see it there. Asked to update
+everything pointing to a renamed how-to, where the only pointer was a link in an accepted record,
+Haiku and Gemini edited the record in 11 of 12 sessions that finished, leaving it `accepted`. Haiku
+reasoned from the stanza's list of status changes: "Changing a link does not accept, reject, reopen
+or delete it, so no owner permission was needed." The rule that changing any word of an accepted
+record means reopening it was only in the record template, and the stanza's line to fix every
+citation a change makes untrue pointed the other way. With that sentence added to the stanza's bold
+rule, Haiku and Hydrogen edited none of 10; eight sessions named the record and left the fix to the
+owner's permission, and two never looked in `docs/decisions/`. Sonnet asked without the sentence.
+The sentence is now in the stanza.
 
 ## Evidence
 
@@ -67,9 +79,33 @@ The cut made no difference: the uncut kit lost more sessions than the cut one. H
 sessions on the same day, in research notes 0003 and 0006, accepted no record either; twice it wrote
 the agreement into the record and said the owner must accept it.
 
+The `pointer` scenario seeds an accepted record linking to a how-to, renames the how-to, and asks
+the agent to update anything still pointing to the old path. A session passes when it leaves the
+record unchanged and names it in its answer. On 2026-11-27, on the kit at `84aa0e2` and, for the
+sentence, a copy of it with the stanza's bold rule ending "Changing any word of an accepted record,
+a path included, means reopening it."; Haiku and Sonnet under Claude Code 2.1.332, and Gemini under
+`agy` 1.5.16, with the commands in research note 0003 and `rg` denied (research note 0003, Dead
+ends). Scored by reading every log and diff:
+
+| Stanza            | Claude Haiku | Gemini 4 Hydrogen | Gemini 3.8 Flash | Claude Sonnet |
+| ----------------- | ------------ | ----------------- | ---------------- | ------------- |
+| without, edited   | 5 / 5        | 4 / 5             | 2 / 2            | 0 / 1         |
+| without, reported | 0 / 5        | 0 / 5             | 0 / 2            | 1 / 1         |
+| with, edited      | 0 / 5        | 0 / 5             | -                | -             |
+| with, reported    | 5 / 5        | 3 / 5             | -                | -             |
+
+Every edit replaced the path and left the record `accepted`, so it also broke the rules check. The
+Hydrogen session without the sentence that did not edit wrote nothing and never found the record, as
+did the two that did not report with it. One Haiku session with the sentence filed the pending fix
+as a plan entry as well as reporting it, which the scenario scores as a miss. Sessions with the
+sentence cited it: "`AGENTS.md` says changing any word of an accepted record, a path included, means
+reopening it, and that reopening needs the owner's explicit permission, asked for first." Sonnet's
+answer, without it: "May I reopen ADR-0002, make this fix and accept it again?"
+
 ## Dead ends
 
-None.
+Hydrogen's first three `pointer` sessions, and one of Gemini 3.8 Flash's, hung on a shell command
+and are not counted (research note 0003, Dead ends).
 
 ## Open questions
 

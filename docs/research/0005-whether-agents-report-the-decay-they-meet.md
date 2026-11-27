@@ -2,7 +2,7 @@
 
 **Confidence:** medium
 
-Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-26, on the templates in an
+Observed directly with `tests/doc-kit-eval.sh` from 2026-11-20 to 2026-11-27, on the templates in an
 empty repository, with Claude Haiku and Claude Sonnet under Claude Code, DeepSeek Flash under Claude
 Code and OpenCode, and Gemini 3.8 Flash, Gemini 4 Hydrogen and GPT-OSS 120B under `agy`. Three to
 eighteen sessions per scenario and arm show a tendency; fifteen per arm, for Haiku, a rate.
@@ -22,9 +22,11 @@ reported the plan entry. Gemini 3.8 Flash, Gemini 4 Hydrogen and GPT-OSS never r
 
 The stanza's specification line, "Change the specification only to match behaviour, and tell the
 owner.", does not lead agents to rewrite a contradicted specification to fit the code. Under it and
-under the line it replaced, no session of four models changed either limit or touched the code.
-Haiku read it as telling the owner of every specification change, its own additions included, and
-cited it when leaving the contradiction to the owner.
+under the line it replaced, no session of five models changed either limit or touched the code. Nor
+does it change how often agents report the contradiction: over fifteen sessions per line, Haiku
+reported 26 of 30 under it and 21 of 30 under the old line, which is not significant, and Sonnet all
+20 under each. Haiku read it as telling the owner of every specification change, its own additions
+included, and cited it when leaving the contradiction to the owner.
 
 One session resolved decay rather than reporting it: a DeepSeek session deleted the plan entry
 marked done, citing the rule that finished entries are deleted. Every other session left decayed
@@ -35,8 +37,10 @@ report.
 
 Decay outside the file being edited is reported only when the agent opens the file that shows it.
 Given a fact naming the code that implements it, Haiku usually opened the code and reported the
-limit it contradicted; Sonnet and Gemini never opened it, and left the code reference out, citing a
-map rule that only quirk entries name code.
+limit it contradicted. While the map's rule 5 said only quirk entries name code, Sonnet and Gemini
+never opened it, and left the code reference out, citing that rule. Since it says a document names
+code only where it must, Sonnet opened the code and reported the limit in all 10 sessions; Gemini
+still reported nothing.
 
 A stanza line asking agents to report stale or contradictory text made no measurable difference, for
 Haiku, whose reporting was already near the ceiling, or for Gemini, which reported nothing with or
@@ -143,6 +147,26 @@ owner. This is that report." One Gemini 3.8 Flash `decay-code` session under the
 waiting on a background task until the harness's limit and counts as not reporting; two more
 sessions ran after it, and neither reported. In the full-suite runs of the same day (research note
 0003), Haiku reported all three decays, and DeepSeek and both Gemini models none.
+
+On 2026-11-27, on the kit at `84aa0e2`, whose stanza and templates are those of `ca626f0`, the same
+comparison ran side by side again: ten more sessions per scenario and arm for Haiku, under Claude
+Code 2.1.332, and five for `claude-sonnet-5-5`. Scored by reading every log; one Haiku `decay-spec`
+session under the older line that the check missed, because it also logged its fact in the
+changelog, reported the two limits.
+
+| Model and sessions per arm        | `decay-code`, shipped | `decay-code`, before | `decay-spec`, shipped | `decay-spec`, before |
+| --------------------------------- | --------------------- | -------------------- | --------------------- | -------------------- |
+| Claude Haiku, 10                  | 10 / 10               | 9 / 10               | 7 / 10                | 7 / 10               |
+| Claude Haiku, 15 with the 5 above | 14 / 15               | 11 / 15              | 12 / 15               | 10 / 15              |
+| Claude Sonnet, 5                  | 5 / 5                 | 5 / 5                | 5 / 5                 | 5 / 5                |
+
+Neither of Haiku's differences at fifteen is significant (Fisher's exact test, p = 0.33 for
+`decay-code`, 0.68 for `decay-spec`). Every Sonnet `decay-code` report named the code's line and
+left both limits to the owner: "the specification says uploads larger than 5 MB are rejected with
+HTTP 413, but the code allows up to 20 MB (`src/upload.py:1`). I changed neither." Sonnet's
+full-suite run the same day reported all three decays (research note 0003), and Gemini 3.8 Flash and
+Hydrogen none in two more runs each. No session removed a line from the specification or touched
+`src/`, and every session kept the rules.
 
 ## Dead ends
 
