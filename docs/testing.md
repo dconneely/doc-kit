@@ -19,10 +19,11 @@ are listed below.
 | `plan` | No entry heading is annotated done, struck through or marked completed. Every `##` entry carries a valid type tag (§3.3), and none is the template's example entry (§2.5)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 The pre-commit hooks run the checker on every commit, as the hook `.pre-commit-hooks.yaml`
-publishes, and cover a second, narrower band: line length at 100 columns
-(`.markdownlint-cli2.jsonc`), secrets, file hygiene, `pygrep` drift guards for the failure this
-repository actually produces - a convention changed in one file and not the others - and
-Conventional Commits on the `commit-msg` stage, using the hook's default type list.
+publishes, and cover a second, narrower band: formatting and markdownlint's default rules with line
+length at 100 columns (the owner's shared `format-markdown` and `lint-markdown` hooks), secrets,
+personal details (`check-pii`), file hygiene, `pygrep` drift guards for the failure this repository
+actually produces - a convention changed in one file and not the others - and Conventional Commits
+on the `commit-msg` stage, using the hook's default type list.
 
 ## What is verified only approximately
 

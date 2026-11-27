@@ -36,26 +36,44 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
 
-  # Formatter; markdownlint-cli2 below is the linter. Wrapping is set in .prettierrc.json, not by
-  # CLI flags. `local` because pre-commit/mirrors-prettier is stale.
-  # Rewrites `*emphasis*` to `_emphasis_`, with no option to avoid it.
-  - repo: local
+  # The owner's shared hooks. format-markdown (Prettier) and lint-markdown (markdownlint-cli2) carry
+  # their own config: prose wrapped at 100 columns, and markdownlint's full default ruleset, so
+  # templates copied from this kit already pass an adopter's linter. Prettier rewrites `*emphasis*`
+  # to `_emphasis_`, with no option to avoid it. format-markdown runs first, since lint-markdown
+  # can't fix long lines.
+  #
+  # check-pii rejects personal details in the staged diff and the commit message. Its skips are the
+  # owner's name and handle where they belong: the licence, the decisions index's decision-makers
+  # column, decision records under their old path, links to the owner's repositories, and a test's
+  # made-up address. check-pii-files and check-pii-history run by hand:
+  # `prek run --stage manual check-pii-files --all-files`, and the same for check-pii-history.
+  - repo: https://github.com/dconneely/hooks
+    rev: d6275586c17a0e55007b20d0b3c0ef9f5fdf70e3 # frozen: v0.2.1
     hooks:
-      - id: prettier-markdown
-        name: Prettier (auto-format Markdown)
-        language: system
-        entry: npx --yes prettier@3.9.6 --write
-        pass_filenames: true
-        # Parallel batches on a cold npx cache race to install Prettier and read a half-written
-        # package.json.
-        require_serial: true
-        types: [markdown]
-
-  # Config in .markdownlint-cli2.jsonc. Reports only; Prettier does the rewrapping.
-  - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.23.2
-    hooks:
-      - id: markdownlint-cli2
+      - id: format-markdown
+      - id: lint-markdown
+      # shellcheck trusts the shebang, so a bash-only construct under #!/bin/sh would pass
+      # silently. Bash scripts are welcome, named .bash.
+      - id: sh-scripts-are-posix
+      - &check-pii
+        id: check-pii
+        args:
+          - --skip-line
+          - 'LICENCE:^Copyright [0-9]{4} [A-Z][a-z]+ [A-Z][a-z]+$'
+          - --skip-line
+          - 'docs/(decisions/README|decisions)\.md:^\| \[ADR-[0-9]{4}\]'
+          - --skip-line
+          - 'docs/adr/[^/]+\.md:^decision-makers:'
+          - --skip-line
+          - '(ADOPTING\.md|docs/research/[^/]+\.md|templates/.+\.md):[a-z]+/(doc-kit|play-[a-z]+)([^a-z-]|$)'
+          - --skip-line
+          - 'tests/doc-kit-eval\.sh:(@AGENTS\.md|user\.email=[a-z]+@example\.invalid)'
+      - <<: *check-pii
+        id: check-pii-msg
+      - <<: *check-pii
+        id: check-pii-files
+      - <<: *check-pii
+        id: check-pii-history
 
   # Python rather than Docker, for the same reason as gitleaks.
   - repo: https://github.com/shellcheck-py/shellcheck-py
@@ -118,12 +136,3 @@ repos:
         entry: 'This file is a template'
         types: [markdown]
         exclude: ^docs/archive/
-
-      # shellcheck trusts the shebang, so a bash-only construct under #!/bin/sh would pass
-      # silently. Bash scripts are welcome, named .bash. Not published: it is not a documentation
-      # rule.
-      - id: sh-scripts-are-posix
-        name: ".sh scripts must not declare a bash shebang (use .bash for bash-specific scripts)"
-        language: pygrep
-        entry: '^#!.*\bbash\b'
-        files: \.sh$

@@ -42,5 +42,6 @@ jobs:
       - name: Hooks
         run: prek run --all-files --show-diff-on-failure
         env:
-          # Scans only the staged diff, which is empty in CI; it runs on commit locally.
-          SKIP: gitleaks-system
+          # Each scans only the staged diff, which is empty in CI; they run on commit locally.
+          # check-pii's patterns also come from the committer's machine.
+          SKIP: gitleaks-system,check-pii
