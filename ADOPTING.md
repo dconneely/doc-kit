@@ -77,8 +77,8 @@ almost entirely in being written contemporaneously.
 Then work through the table below and note which apply. Be strict: an artefact you will not maintain
 is worse than its absence, because the map promises it.
 
-Most of these join the **specification** rather than becoming new categories, because they are
-present tense, always current, and a contract someone relies on.
+Most of these join the **specification** rather than becoming new categories, because they describe
+behaviour, are always current, and are a contract someone relies on.
 
 | If the project has...   | It gains                                                                                                                                                                                                                                         | Where it lands                                                                                     |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
