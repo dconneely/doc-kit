@@ -96,6 +96,7 @@ repos:
         language: script
         pass_filenames: false
         always_run: true
+        stages: [pre-commit]
 
       - id: lowercase-adr-status
         name: "ADR statuses are lowercase (MADR spelling)"
