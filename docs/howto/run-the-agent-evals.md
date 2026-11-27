@@ -69,13 +69,15 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
      names. `FILE` is the absolute path of
      [`tests/agy-eval-settings.json`](../../tests/agy-eval-settings.json), in the form `agy`
      accepts: on Windows, `D:/...` rather than `/d/...`. Its deny rules stop network, package,
-     remote Git, deletion and recursive-listing commands; the last stops GPT-OSS hanging. Keep them
-     as deny rules: `agy`'s default mode runs commands in a sandbox where, on Windows, `sh` cannot
-     start, and an allow list ends the session at the first refused command, where a deny rule is
-     reported to the model. `--settings` replaces the global permission lists but not other keys, so
-     the file also turns off `enableTerminalSandbox`, which global settings can turn on, and with it
-     `sh` and the index generator. Without `--add-dir`, `agy` writes into its own state directory;
-     GPT-OSS sometimes does even with it (research note 0005).
+     remote Git, deletion and recursive-listing commands, and `rg`; the last two stop sessions
+     hanging, since a recursive listing never returned and `rg` given no path reads its input, which
+     in `agy` never closes, so Gemini 4 Hydrogen hung in every `pointer` session. Keep them as deny
+     rules: `agy`'s default mode runs commands in a sandbox where, on Windows, `sh` cannot start,
+     and an allow list ends the session at the first refused command, where a deny rule is reported
+     to the model. `--settings` replaces the global permission lists but not other keys, so the file
+     also turns off `enableTerminalSandbox`, which global settings can turn on, and with it `sh` and
+     the index generator. Without `--add-dir`, `agy` writes into its own state directory; GPT-OSS
+     sometimes does even with it (research note 0005).
 
    - **OpenCode**: `opencode run --standalone --archived --auto -m PROVIDER/MODEL#VARIANT`, with
      `OPENCODE_CONFIG` naming a configuration whose permissions deny `external_directory` and every
