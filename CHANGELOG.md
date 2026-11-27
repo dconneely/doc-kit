@@ -32,6 +32,9 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
   included, means reopening it, so it needs the owner's permission. Only the record template said
   so, and in agent evals Claude Haiku and Gemini edited a stale path in an accepted record in 9 of
   10 sessions; with the sentence, in none of 10. Add it to an adopted stanza.
+- The template map lists tutorials and an FAQ under "Deliberately not here", since both go stale
+  fast. The how-to template says a guide is goal-oriented and links to its reasons rather than
+  explaining. `ADOPTING.md` Step 1 sends a multi-service project's C4 diagrams to the specification.
 
 ### Fixed
 

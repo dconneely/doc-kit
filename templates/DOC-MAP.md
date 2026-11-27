@@ -154,6 +154,8 @@ says where its facts go meanwhile, so that an agent holding one does not invent 
 - **Community health files** - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md` - until people
   other than the owner contribute regularly.
 - **`RELEASING.md`**, until there are releases, and **runbooks**, unless this is a deployed service.
+- **Tutorials and an FAQ** - both go stale fast. Write a how-to instead, and file each answer where
+  the table above says.
 
 ## Adding a new kind of document
 

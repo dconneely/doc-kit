@@ -4,8 +4,9 @@
 Copy to a descriptive filename, e.g. release-version.md, bootstrap-environment.md.
 Keep this file as 0000; it is the template.
 
-In Diátaxis terms (https://diataxis.fr), a how-to guide is a problem-oriented sequence of steps.
-It is not a tutorial (for learning) nor a reference (for specification).
+In Diátaxis terms (https://diataxis.fr), a how-to guide is a goal-oriented sequence of steps.
+It is not a tutorial (for learning) nor a reference (for specification). Leave out explanation:
+link to the record or specification that gives the reason.
 
 Tense is imperative. Lead with action verbs: "Run", "Edit", "Verify".
 Cite conventions and exemplars rather than copying them.
@@ -27,11 +28,11 @@ Delete this comment in the copy.
 
 1. **{First action}**
 
-   {Explanation or command}
+   {Command, or what to do}
 
 2. **{Second action}**
 
-   {Explanation or command}
+   {Command, or what to do}
 
 ## Verification
 
