@@ -89,8 +89,8 @@ is a finding to report, not an edit to make.
 British spelling throughout - _customise_, _behaviour_, _licence_ as the noun - in prose we write.
 Never in quoted text: `LICENCE` holds verbatim MIT-0 and contains `sublicense`, which is correct and
 must stay. The same goes for anything quoted from a standard. Prose wraps at 100 columns. Commit
-subjects follow Conventional Commits: product changes take `feat`/`fix`/`refactor`, this
-repository's own documentation takes `docs`.
+subjects follow Conventional Commits and start in lower case, as the commit-msg hook requires:
+product changes take `feat`/`fix`/`refactor`, this repository's own documentation takes `docs`.
 
 Text an agent reads and acts on (`SKILL.md`, the `AGENTS.md` stanza, `ADOPTING.md`'s steps) gets cut
 hardest: shorter costs less context and is less likely to bury a rule until it's missed. Exception -

@@ -22,8 +22,8 @@ The pre-commit hooks run the checker on every commit, as the hook `.pre-commit-h
 publishes, and cover a second, narrower band: formatting and markdownlint's default rules with line
 length at 100 columns (the owner's shared `format-markdown` and `lint-markdown` hooks), secrets,
 personal details (`check-pii`), file hygiene, `pygrep` drift guards for the failure this repository
-actually produces - a convention changed in one file and not the others - and Conventional Commits
-on the `commit-msg` stage, using the hook's default type list.
+actually produces - a convention changed in one file and not the others - and commitlint's
+Conventional Commits rules on the `commit-msg` stage (the owner's shared `lint-commit-msg` hook).
 
 ## What is verified only approximately
 
@@ -31,10 +31,9 @@ on the `commit-msg` stage, using the hook's default type list.
 locally, and reports HTTP status rather than whether a page still says what it was cited for. A
 standards body can reorganise a document without changing its URL.
 
-**Commit types.** The commit-msg hook checks a subject's _shape_, not whether the type is the right
-one - `docs:` on a change to `templates/` passes and is still wrong, and that is the half of
-ADR-0005's mapping worth catching. It also accepts `Feat:`, since the hook has no case-sensitivity
-option and `--strict` only blocks fixup and merge commits.
+**Commit types.** The commit-msg hook checks a subject's _form_ - a type from its list, lower case,
+length - not whether the type is the right one: `docs:` on a change to `templates/` passes and is
+still wrong, and that is the half of ADR-0005's mapping worth catching.
 
 **Line length.** `MD013` is not a strict character count. It applies wrap-feasibility heuristics and
 will pass a line a few characters over the limit, or one that cannot be broken at all - a long URL,

@@ -42,14 +42,20 @@ repos:
   # to `_emphasis_`, with no option to avoid it. format-markdown runs first, since lint-markdown
   # can't fix long lines.
   #
+  # lint-commit-msg applies commitlint's Conventional Commits rules unchanged, on commit-msg: a
+  # lower-case type from its list and a lower-case subject. `build` covers infrastructure such as
+  # this file, alongside AGENTS.md's mapping. It checks a subject's form, not whether the type is
+  # right - see docs/testing.md.
+  #
   # check-pii rejects personal details in the staged diff and the commit message. Its skips are the
   # owner's name and handle where they belong: the licence, the decisions index's decision-makers
   # column, decision records under their old path, links to the owner's repositories, and a test's
   # made-up address. check-pii-files and check-pii-history run by hand:
   # `prek run --stage manual check-pii-files --all-files`, and the same for check-pii-history.
   - repo: https://github.com/dconneely/hooks
-    rev: d6275586c17a0e55007b20d0b3c0ef9f5fdf70e3 # frozen: v0.2.1
+    rev: e9bbf7281329b0bc3d8a3ee3864b932d1f7c2cc4 # frozen: v0.3.0
     hooks:
+      - id: lint-commit-msg
       - id: format-markdown
       - id: lint-markdown
       # shellcheck trusts the shebang, so a bash-only construct under #!/bin/sh would pass
@@ -80,16 +86,6 @@ repos:
     rev: v0.11.0.1
     hooks:
       - id: shellcheck
-
-  # Conventional Commits on commit-msg, with the hook's default type list; `build` covers
-  # infrastructure such as this file, alongside AGENTS.md's mapping. Python rather than Node
-  # commitlint: nothing compiled, which matters under Smart App Control. It checks a subject's
-  # shape, not whether the type is right, and accepts `Feat:` - see docs/testing.md.
-  - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v4.4.0
-    hooks:
-      - id: conventional-pre-commit
-        stages: [commit-msg]
 
   # Link rot, on demand only (`prek run --hook-stage manual lychee-system`): a hook that blocks a
   # commit because someone else's server is down gets bypassed. CI runs the same command nightly.
