@@ -13,11 +13,12 @@ on the path it took, and a `work-*` scenario also runs the seeded project's test
 starts from a fresh repository. Results are compared as pass rates, with a test of significance
 across arms. The how-to asks for a control for each behaviour - Anthropic: "Test both the cases
 where a behavior _should_ occur and where it _shouldn't_" - so `no-home` must write nothing and
-`work-refactor`, a change that alters no behaviour, must change no document. It asks for a check of
-each new scenario with stub agents, one making a correct session's changes and one doing the wrong
-thing, as Anthropic's reference solution per task is meant to show a task can be passed.
+`work-refactor`, a change that alters no behaviour, must change no document. Each scenario has a
+pair of stub agents, one making a correct session's changes and one doing the wrong thing, and
+`tests/doc-kit-eval.test.sh` runs both in CI: they show each task can be passed, as Anthropic's
+reference solution per task is meant to, and that each check misses when it should.
 
-Five gaps remain, most consequential first:
+Four gaps remain, most consequential first:
 
 - **No transcripts.** A log keeps the agent's final answer, not its tool calls, so whether a session
   opened the map, the quirks or the code cannot be seen. A session that never read the map and one
@@ -26,8 +27,6 @@ Five gaps remain, most consequential first:
   but the templates. Anthropic's course recommends at least 100 test cases, and OpenAI warns against
   cases that do not reproduce real use. Repeating a scenario measures the spread of one wording, not
   what the set leaves untested.
-- **Reference stubs are not kept.** They are run by hand when a scenario is added, so a later change
-  to a seed or a check is not caught until a paid run.
 - **Sessions are not isolated from user-level configuration** unless the command says so, and the
   how-to's default command does not. User-level instructions can bear on what a session refuses, and
   they change between runs.

@@ -6,16 +6,6 @@ Each entry is a heading, a tag line - **Type:** `bug`, `debt`, `feature` or `doc
 **Importance** and **Effort**, each `low`, `medium` or `high` - and one paragraph. No design: if it
 needs more, it needs an ADR or a plan note. `docs/spec.md` §3.3 defines the scales.
 
-## Test the eval checks with stub agents
-
-**Type:** debt - **Importance:** medium - **Effort:** low
-
-The how-to asks for each new scenario to be run with a stub agent that makes a correct session's
-changes, which must pass, and one that does the wrong thing, which must miss, but the stubs are
-written by hand and thrown away. Commit them, one pair per scenario, with a test script that runs
-`tests/doc-kit-eval.sh` against them, as `tests/doc-kit-check.test.sh` tests the checker. It costs
-no agent session, and catches a broken seed or check before a paid run does (research note 0009).
-
 ## Keep each eval session's tool calls
 
 **Type:** debt - **Importance:** medium - **Effort:** medium

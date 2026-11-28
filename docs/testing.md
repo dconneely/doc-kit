@@ -159,6 +159,11 @@ session that runs too long, as a failed one.
 `tests/doc-kit-eval-variant.sh` runs the same scenarios on a copy of the kit at `HEAD` with given
 lines removed - from the stanza in `ADOPTING.md`, say, or from the template map - or given files as
 they were at another commit, to test whether agents need a passage without editing the real file.
+
+`tests/doc-kit-eval.test.sh` tests the scenarios themselves, with `tests/doc-kit-eval-stub.sh` in
+place of the agent: every scenario must pass when the stub makes a correct session's changes, and
+miss or break the rules when it does the wrong thing the scenario exists to catch. It runs no agent
+session, so CI runs it, on Linux only, since it takes a quarter of an hour on Windows.
 [`docs/howto/run-the-agent-evals.md`](howto/run-the-agent-evals.md) says how to run, score and
 record an evaluation.
 
@@ -169,6 +174,7 @@ sh tools/doc-kit-check.sh              # conformance
 sh tests/doc-kit-check.test.sh         # the checker's own tests
 sh tests/doc-kit-duplicate-check.sh    # advisory duplication report
 sh tests/doc-kit-word-budget.sh        # the stanza and the template map stay within budget
+sh tests/doc-kit-eval.test.sh          # the eval scenarios, against stub agents
 sh tests/doc-kit-eval.sh               # agent evals, by hand; see docs/howto/run-the-agent-evals.md
 prek run --all-files                   # hygiene, line length, drift guards
 prek run --hook-stage manual lychee-system --all-files

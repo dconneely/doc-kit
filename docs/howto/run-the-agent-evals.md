@@ -34,10 +34,10 @@ a template could change what agents do. What the evals score, and what they do n
    Run a control beside each scenario that tests a behaviour: one where the behaviour must not
    happen, as `no-home` must write nothing and `work-refactor` must change no document. Without it,
    a change that makes agents do the thing every time scores as an improvement. When adding a
-   scenario, first run it with a stub `DOC_KIT_AGENT`, a script that makes the changes a correct
-   session would, and with one that does the wrong thing - nothing, where a change or a report is
-   required, or the forbidden change, where nothing must be written. The first must pass and the
-   second miss, or the scenario's check is wrong (research note 0009).
+   scenario, add its pair to `tests/doc-kit-eval-stub.sh` - a good stub making the changes a correct
+   session would, and a bad one doing the wrong thing: nothing, where a change or a report is
+   required, or the forbidden change, where nothing must be written - and run
+   `sh tests/doc-kit-eval.test.sh ID` before any paid session (research note 0009).
 
 2. **Set the agent command.**
 
