@@ -143,7 +143,7 @@ the exporter's dates, which the quirk records as wrong on purpose, so the code a
 left alone and the quirk reported. A fourth, adding type hints, changes no behaviour, so it must
 change no document: without it, a session that touches the documents after every code change would
 pass the first two. Their placement is scored on every file the session changed, since there is no
-token.
+token, and a code change counts only if the seeded tests still pass.
 
 Each scenario is also scored on the rules: the session must add no checker failure, and must leave
 every decision record it touches `proposed`, since only the owner accepts one.

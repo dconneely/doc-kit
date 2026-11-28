@@ -47,9 +47,13 @@ a template could change what agents do. What the evals score, and what they do n
 
    ```sh
    INDEX='Bash(sh tools/doc-kit-index-decisions.sh),PowerShell(sh tools/doc-kit-index-decisions.sh)'
-   DOC_KIT_AGENT="claude -p --permission-mode acceptEdits --model claude-haiku-5-5 '--allowedTools=$INDEX'"
+   TESTS='Bash(python -m unittest:*),PowerShell(python -m unittest:*),Bash(python3 -m unittest:*)'
+   DOC_KIT_AGENT="claude -p --permission-mode acceptEdits --model claude-haiku-5-5 '--allowedTools=$INDEX,$TESTS'"
    export DOC_KIT_AGENT
    ```
+
+   `TESTS` lets a `work-*` session run the seeded project's tests, as coding work would. Those
+   scenarios need Python on the `PATH`; the script runs the same tests to score them.
 
    Claude Code also loads your user-level instructions, skills and settings, as `agy` and OpenCode
    may load theirs; note any that could change where a session files a fact, since they can differ
@@ -90,11 +94,11 @@ a template could change what agents do. What the evals score, and what they do n
 
    - **OpenCode**: `opencode run --standalone --archived --auto -m PROVIDER/MODEL#VARIANT`, with
      `OPENCODE_CONFIG` naming a configuration whose permissions deny `external_directory` and every
-     shell command but the generator, and `OPENCODE_DISABLE_CLAUDE_CODE=1`, or it also loads
-     `~/.claude/CLAUDE.md` and Claude's skills. `--archived` keeps the sessions out of your session
-     list; `#VARIANT`, such as `#low`, sets the effort, though the logs do not show whether it was
-     applied. On Windows it takes its directory from `PWD`, which `sh` sets; without `PWD` it works
-     in the home directory.
+     shell command but the generator and `python -m unittest`, and `OPENCODE_DISABLE_CLAUDE_CODE=1`,
+     or it also loads `~/.claude/CLAUDE.md` and Claude's skills. `--archived` keeps the sessions out
+     of your session list; `#VARIANT`, such as `#low`, sets the effort, though the logs do not show
+     whether it was applied. On Windows it takes its directory from `PWD`, which `sh` sets; without
+     `PWD` it works in the home directory.
 
 3. **Choose the kit.**
 

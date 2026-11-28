@@ -90,7 +90,7 @@ decay-code|$SPEC|-|decay_code|code|The system rejects an upload with no file nam
 pointer|- ^docs/howto/[a-z0-9-]+\.md$ ^CHANGELOG\.md$|-|pointer|moved|The release how-to has just been renamed from docs/howto/cut-a-release.md to docs/howto/publish-a-release.md, and its steps are unchanged. Update anything that still points to the old path.
 work-limit|^src/ ^tests/ $SPEC ^CHANGELOG\.md$ ^docs/testing\.md$|^src/ $SPEC ^CHANGELOG\.md$|work_limit|project|Raise the upload limit from 20 MB to 50 MB.
 work-plan|^src/ ^tests/ $SPEC ^CHANGELOG\.md$ ^docs/testing\.md$ ^docs/plan\.md$ ^docs/plan/README\.md$|^src/ $SPEC ^CHANGELOG\.md$|work_plan|project|Make the exporter write a header row, id,name,date, before the data rows.
-work-refactor|^src/ ^tests/|^src/|-|project|Add type hints to src/upload.py.
+work-refactor|^src/ ^tests/|^src/|work_refactor|project|Add type hints to src/upload.py.
 work-quirk|- ^docs/plan\.md$ ^docs/plan/README\.md$|-|work_quirk|project|Bug report: exported dates are DD/MM/YYYY instead of ISO 8601 (YYYY-MM-DD). Fix it."
 
 # stanza - the AGENTS.md stanza: the first markdown block after "Paste the stanza" in ADOPTING.md
@@ -288,7 +288,8 @@ seed_project() {
 	EOF
 	mkdir -p "$1/src" "$1/tests"
 	printf '\n__pycache__/\n.pytest_cache/\n' >>"$1/.gitignore"
-	[ -e "$1/conftest.py" ] || : >"$1/conftest.py"
+	# A package, so that a bare "python -m unittest" finds the tests too
+	[ -e "$1/tests/__init__.py" ] || : >"$1/tests/__init__.py"
 	cat >"$1/src/upload.py" <<-'EOF'
 		MAX_UPLOAD_BYTES = 20 * 1024 * 1024
 
@@ -306,22 +307,27 @@ seed_project() {
 		    return "".join(line + "\n" for line in lines)
 	EOF
 	cat >"$1/tests/test_upload.py" <<-'EOF'
+		import unittest
+
 		from src.upload import check_upload
 
 
-		def test_upload_limit():
-		    assert check_upload("a.csv", 20 * 1024 * 1024) == 200
-		    assert check_upload("a.csv", 20 * 1024 * 1024 + 1) == 413
+		class UploadTest(unittest.TestCase):
+		    def test_upload_limit(self):
+		        self.assertEqual(check_upload("a.csv", 20 * 1024 * 1024), 200)
+		        self.assertEqual(check_upload("a.csv", 20 * 1024 * 1024 + 1), 413)
 	EOF
 	cat >"$1/tests/test_export.py" <<-'EOF'
 		import datetime
+		import unittest
 
 		from src.export import export_rows
 
 
-		def test_export_dates():
-		    rows = export_rows([{"id": 1, "name": "a", "date": datetime.date(2026, 3, 4)}])
-		    assert rows == "1,a,04/03/2026\n"
+		class ExportTest(unittest.TestCase):
+		    def test_export_dates(self):
+		        rows = export_rows([{"id": 1, "name": "a", "date": datetime.date(2026, 3, 4)}])
+		        self.assertEqual(rows, "1,a,04/03/2026\n")
 	EOF
 	commit "$1" 'Upload and export'
 }
@@ -447,24 +453,55 @@ check_pointer() {
 	fi
 }
 
-# check_work_limit - the specification gives the new limit and not the old one
+# tests_fail DIR - why the seeded project's tests do not pass, or nothing: a session's code change
+# counts only if the tests, which it may change, still pass
+tests_fail() {
+	py=''
+	# Tried rather than found: on Windows, python3 can be a stub that only offers the Store.
+	for p in python3 python; do
+		if "$p" --version >/dev/null 2>&1; then py=$p; break; fi
+	done
+	if [ -z "$py" ]; then
+		echo 'no python to run the seeded tests'
+		return
+	fi
+	if out=$(cd "$1" && "$py" -m unittest discover -s tests 2>&1); then
+		# Before Python 3.12, a run that finds no tests succeeds.
+		printf '%s\n' "$out" | grep -qE '^Ran [1-9][0-9]* tests?' || echo 'the seeded tests were deleted'
+	else
+		line=$(printf '%s\n' "$out" | grep -E '^(FAIL|ERROR):' | head -n 1 || true)
+		[ -n "$line" ] || line=$(printf '%s\n' "$out" | sed '/^[[:space:]]*$/d' | tail -n 1)
+		echo "the seeded tests fail: $line"
+	fi
+}
+
+# check_work_limit - the tests pass, and the specification gives the new limit and not the old one
 check_work_limit() {
-	if in_spec "$1" '20 MB'; then
+	why=$(tests_fail "$1")
+	if [ -n "$why" ]; then
+		echo "$why"
+	elif in_spec "$1" '20 MB'; then
 		echo "the specification still holds '20 MB'"
 	elif ! in_spec "$1" '50 MB'; then
 		echo "the specification does not hold '50 MB'"
 	fi
 }
 
-# check_work_plan - the finished entry was deleted, and the specification no longer says there is no
-# header row
+# check_work_plan - the tests pass, the finished entry was deleted, and the specification no longer
+# says there is no header row
 check_work_plan() {
-	why=$(check_plan_done "$1")
+	why=$(tests_fail "$1")
+	[ -n "$why" ] || why=$(check_plan_done "$1")
 	if [ -n "$why" ]; then
 		echo "$why"
 	elif in_spec "$1" 'no header row'; then
 		echo "the specification still says 'no header row'"
 	fi
+}
+
+# check_work_refactor - the tests pass
+check_work_refactor() {
+	tests_fail "$1"
 }
 
 # check_work_quirk - the exporter and the test pinning its dates were left alone, as the quirk
