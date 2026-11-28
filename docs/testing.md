@@ -135,6 +135,16 @@ filing an unrelated fact, must report what it met, or delete the finished plan e
 rules ask. The stanza does not ask for that report; these scenarios show whether agents make it
 anyway.
 
+The `work-*` scenarios never mention documentation. Each seeds a small project - code, tests, and a
+specification, plan entry and quirk that match them - and gives a coding task as a user would: raise
+the upload limit, and add the exporter's header row, each of which must change the code, the
+specification and the changelog, and the second must also delete the plan entry it finishes; and fix
+the exporter's dates, which the quirk records as wrong on purpose, so the code and its test must be
+left alone and the quirk reported. A fourth, adding type hints, changes no behaviour, so it must
+change no document: without it, a session that touches the documents after every code change would
+pass the first two. Their placement is scored on every file the session changed, since there is no
+token.
+
 Each scenario is also scored on the rules: the session must add no checker failure, and must leave
 every decision record it touches `proposed`, since only the owner accepts one.
 

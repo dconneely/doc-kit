@@ -34,7 +34,9 @@
 # written. Where the kit's text supports two placements, a scenario accepts both rather than
 # choosing one. Some scenarios seed the repository first: with a plan entry the fact finishes, which
 # must be deleted; with text the fact asks the agent to change against the kit's rules; or with
-# decay the session meets while filing an unrelated fact, which it must report. The rules pass when
+# decay the session meets while filing an unrelated fact, which it must report. A work-* scenario
+# instead gives a coding task in a seeded project, with no word about documentation, and its
+# placement is scored on every file the session changed. The rules pass when
 # the session adds no checker failure and leaves every record it touches "proposed".
 
 set -eu
@@ -85,7 +87,11 @@ accept|- $ADR ^docs/plan\.md$ ^docs/plan/README\.md$|-|accept|proposed|The team 
 decay-plan|^docs/plan\.md$ ^docs/plan/README\.md$|-|decay_plan|plan_done|Later, the exporter needs a JSON output format. Nobody has started it.
 decay-spec|$SPEC|-|decay_spec|conflict|The system rejects an upload with no file name with HTTP 400.
 decay-code|$SPEC|-|decay_code|code|The system rejects an upload with no file name with HTTP 400, which check_upload in src/upload.py implements.
-pointer|- ^docs/howto/[a-z0-9-]+\.md$ ^CHANGELOG\.md$|-|pointer|moved|The release how-to has just been renamed from docs/howto/cut-a-release.md to docs/howto/publish-a-release.md, and its steps are unchanged. Update anything that still points to the old path."
+pointer|- ^docs/howto/[a-z0-9-]+\.md$ ^CHANGELOG\.md$|-|pointer|moved|The release how-to has just been renamed from docs/howto/cut-a-release.md to docs/howto/publish-a-release.md, and its steps are unchanged. Update anything that still points to the old path.
+work-limit|^src/ ^tests/ $SPEC ^CHANGELOG\.md$ ^docs/testing\.md$|^src/ $SPEC ^CHANGELOG\.md$|work_limit|project|Raise the upload limit from 20 MB to 50 MB.
+work-plan|^src/ ^tests/ $SPEC ^CHANGELOG\.md$ ^docs/testing\.md$ ^docs/plan\.md$ ^docs/plan/README\.md$|^src/ $SPEC ^CHANGELOG\.md$|work_plan|project|Make the exporter write a header row, id,name,date, before the data rows.
+work-refactor|^src/ ^tests/|^src/|-|project|Add type hints to src/upload.py.
+work-quirk|- ^docs/plan\.md$ ^docs/plan/README\.md$|-|work_quirk|project|Bug report: exported dates are DD/MM/YYYY instead of ISO 8601 (YYYY-MM-DD). Fix it."
 
 # stanza - the AGENTS.md stanza: the first markdown block after "Paste the stanza" in ADOPTING.md
 stanza() {
@@ -250,6 +256,76 @@ seed_code() {
 	commit "$1" 'Check uploads'
 }
 
+QUIRK='Exported dates are DD/MM/YYYY'
+
+# seed_project DIR - give the repository code and tests, and a specification, plan entry and quirk
+# that match them: an upload limit of 20 MB, an exporter with no header row, which the plan entry
+# adds, and dates the exporter writes DD/MM/YYYY on purpose
+seed_project() {
+	seed_plan_entry "$1"
+	cat >>"$1/$(spec_path "$1")" <<-'EOF'
+
+		## Upload limit
+
+		The system rejects an upload larger than 20 MB with HTTP 413.
+
+		## Export
+
+		The exporter writes one CSV line per record - its id, name and date - with no header row.
+		Dates are written DD/MM/YYYY.
+	EOF
+	cat >>"$1/docs/quirks.md" <<-EOF
+
+		## $QUIRK
+
+		- **Kind:** accepted-wrong
+		- **Where:** \`export_rows\` in \`src/export.py\`
+		- **Expected:** ISO 8601 dates, YYYY-MM-DD.
+		- **Actual:** DD/MM/YYYY.
+		- **Why:** a customer's import reads the exported files and depends on this format.
+		- **Pinned by:** \`test_export_dates\` in \`tests/test_export.py\`
+		- **Expires when:** the customer's import reads ISO 8601.
+	EOF
+	mkdir -p "$1/src" "$1/tests"
+	printf '\n__pycache__/\n.pytest_cache/\n' >>"$1/.gitignore"
+	[ -e "$1/conftest.py" ] || : >"$1/conftest.py"
+	cat >"$1/src/upload.py" <<-'EOF'
+		MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+
+
+		def check_upload(name, size):
+		    if not name:
+		        return 400
+		    if size > MAX_UPLOAD_BYTES:
+		        return 413
+		    return 200
+	EOF
+	cat >"$1/src/export.py" <<-'EOF'
+		def export_rows(records):
+		    lines = [f"{r['id']},{r['name']},{r['date'].strftime('%d/%m/%Y')}" for r in records]
+		    return "".join(line + "\n" for line in lines)
+	EOF
+	cat >"$1/tests/test_upload.py" <<-'EOF'
+		from src.upload import check_upload
+
+
+		def test_upload_limit():
+		    assert check_upload("a.csv", 20 * 1024 * 1024) == 200
+		    assert check_upload("a.csv", 20 * 1024 * 1024 + 1) == 413
+	EOF
+	cat >"$1/tests/test_export.py" <<-'EOF'
+		import datetime
+
+		from src.export import export_rows
+
+
+		def test_export_dates():
+		    rows = export_rows([{"id": 1, "name": "a", "date": datetime.date(2026, 3, 4)}])
+		    assert rows == "1,a,04/03/2026\n"
+	EOF
+	commit "$1" 'Upload and export'
+}
+
 POINTER=how-releases-are-published
 
 # seed_moved DIR - give the repository an accepted decision record linking to a how-to, then move the
@@ -368,6 +444,38 @@ check_pointer() {
 		n=$(basename "$f" | cut -c1-4)
 		grep -qE "$POINTER|$n|ADR[- ]?${n#"${n%%[!0]*}"}([^0-9]|$)" "$2" ||
 			echo 'the stale link in the accepted record is not reported'
+	fi
+}
+
+# check_work_limit - the specification gives the new limit and not the old one
+check_work_limit() {
+	if in_spec "$1" '20 MB'; then
+		echo "the specification still holds '20 MB'"
+	elif ! in_spec "$1" '50 MB'; then
+		echo "the specification does not hold '50 MB'"
+	fi
+}
+
+# check_work_plan - the finished entry was deleted, and the specification no longer says there is no
+# header row
+check_work_plan() {
+	why=$(check_plan_done "$1")
+	if [ -n "$why" ]; then
+		echo "$why"
+	elif in_spec "$1" 'no header row'; then
+		echo "the specification still says 'no header row'"
+	fi
+}
+
+# check_work_quirk - the exporter and the test pinning its dates were left alone, as the quirk
+# keeps them, and the quirk was reported: by name, its kind or its reason
+check_work_quirk() {
+	if ! git -C "$1" diff --quiet "$start" -- src/export.py tests/test_export.py; then
+		echo 'the exporter or its test was changed, which the quirk keeps'
+	elif ! grep -qF -- "$QUIRK" "$1/docs/quirks.md"; then
+		echo 'the quirk was deleted'
+	elif ! grep -qiE 'quirk|accepted-wrong|customer' "$2"; then
+		echo 'the quirk is not reported'
 	fi
 }
 
@@ -507,8 +615,12 @@ for line in $scenarios; do
 			code) given='The fact below is true of this repository and its code. Do not ask for details' ;;
 			*) given='The fact below is invented: treat it as true of this repository even where the code has no such feature, and do not check it against the code or ask for details' ;;
 		esac
+		# A coding task is given as a user would give it, never mentioning the documentation.
 		# shellcheck disable=SC2034  # read by the eval below
-		prompt="This is an evaluation of where documentation is filed. $given - where a document wants a path or a test name it lacks, write unknown, but choose every other field, such as a type or a priority, yourself. Record it in the documentation, wherever it belongs. Only if information of its kind has no place in this repository's documentation at all, say so and write nothing: $fact Include the token $token, verbatim, in each place you write it. Do not commit."
+		case $id in
+			work-*) prompt="$fact Do not commit." ;;
+			*) prompt="This is an evaluation of where documentation is filed. $given - where a document wants a path or a test name it lacks, write unknown, but choose every other field, such as a type or a priority, yourself. Record it in the documentation, wherever it belongs. Only if information of its kind has no place in this repository's documentation at all, say so and write nothing: $fact Include the token $token, verbatim, in each place you write it. Do not commit." ;;
+		esac
 
 		set +e
 		(cd "$dir" && eval "$DOC_KIT_AGENT" '"$prompt"') >"$TMP/$name.log" 2>&1 &
@@ -550,7 +662,11 @@ for line in $scenarios; do
 			exit 2
 		fi
 
-		landed=$(cd "$dir" && grep -rlF --exclude-dir=.git -- "$token" . | sed 's:^\./::' | sort || true)
+		# A coding task carries no token, so what it lands in is every file the session changed.
+		case $id in
+			work-*) landed=$(git -C "$dir" add -A && git -C "$dir" diff --cached --name-only "$start" | sort) ;;
+			*) landed=$(cd "$dir" && grep -rlF --exclude-dir=.git -- "$token" . | sed 's:^\./::' | sort || true) ;;
+		esac
 		shown=$(printf '%s' "$landed" | tr '\n' ' ')
 		shown=${shown% }
 
