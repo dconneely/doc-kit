@@ -2,10 +2,11 @@
 
 ## Goal
 
-Measure whether agents file facts where the map says, keep the rules and report the decay they meet,
-on the kit as it stands or with a passage cut or restored, and record the result in a research note.
-Follow it when a change to the stanza, the template map or a template could change what agents do.
-What the evals score, and what they do not, is in [`docs/testing.md`](../testing.md).
+Measure whether agents file facts where the map says, keep the rules, report the decay they meet and
+keep the documents current while coding, on the kit as it stands or with a passage cut or restored,
+and record the result in a research note. Follow it when a change to the stanza, the template map or
+a template could change what agents do. What the evals score, and what they do not, is in
+[`docs/testing.md`](../testing.md).
 
 ## Prerequisites
 
@@ -29,6 +30,14 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
    counts, run the test before claiming one arm does better. Test each scenario on its own:
    scenarios differ in difficulty, and pooling them can show or hide a difference no scenario has.
    To combine them, use a test stratified by scenario, such as Cochran-Mantel-Haenszel.
+
+   Run a control beside each scenario that tests a behaviour: one where the behaviour must not
+   happen, as `no-home` must write nothing and `work-refactor` must change no document. Without it,
+   a change that makes agents do the thing every time scores as an improvement. When adding a
+   scenario, first run it with a stub `DOC_KIT_AGENT`, a script that makes the changes a correct
+   session would, and with one that does the wrong thing - nothing, where a change or a report is
+   required, or the forbidden change, where nothing must be written. The first must pass and the
+   second miss, or the scenario's check is wrong (research note 0009).
 
 2. **Set the agent command.**
 
@@ -146,10 +155,11 @@ What the evals score, and what they do not, is in [`docs/testing.md`](../testing
 
    The verdicts are heuristics. Read each session's log and diff, and score it yourself: a report
    names the decay specifically; a session that only says where it put its own fact has not
-   reported. In `decay-plan`, deleting the finished entry also passes. Where a verdict and your
-   reading disagree, use your reading, fix the check in `tests/doc-kit-eval.sh`, and rescore every
-   saved log and diff by the fixed rule before relying on it. The script cannot rescore, and keeps
-   no session's repository, so do it by reading or with a script of your own.
+   reported. In `decay-plan`, deleting the finished entry also passes. In `work-quirk`, a report
+   names the quirk or why the dates are kept. Where a verdict and your reading disagree, use your
+   reading, fix the check in `tests/doc-kit-eval.sh`, and rescore every saved log and diff by the
+   fixed rule before relying on it. The script cannot rescore, and keeps no session's repository, so
+   do it by reading or with a script of your own.
 
    A log holds the agent's final answer, not its tool calls: whether a session read the map, or ran
    a command and was refused, is not in it. `agy --output-format stream-json` records each call,
