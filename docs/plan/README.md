@@ -20,6 +20,19 @@ accepted-wrong (is the quirk left alone, or the owner asked?). The seeding patte
 already uses extends to this, and the same scenarios can later run against the worked example
 through `DOC_KIT_EVAL_BASE`.
 
+## Score reports with a model grader calibrated on saved logs
+
+**Type:** debt - **Importance:** medium - **Effort:** medium
+
+`check_decay_plan`, `both_limits`, `check_pointer` and `check_work_quirk` in `tests/doc-kit-eval.sh`
+decide whether a session reported something by matching its answer against regular expressions,
+which have failed both ways - missing a report worded another way, and passing sessions that only
+quoted text they had written (research note 0005, Dead ends) - so every log has to be read. Grade
+each report with a model instead, as research note 0009 describes: a rubric per scenario, an example
+answer for each verdict, and a verdict with its reason. Score the saved logs of earlier runs by hand
+where research note 0005 has not, measure how often the grader agrees, and use it only as far as it
+does - to replace reading every log, or to pick out the logs to read.
+
 ## Build a worked example
 
 **Type:** docs - **Importance:** medium - **Effort:** high
