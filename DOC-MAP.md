@@ -114,7 +114,7 @@ end. The checker, `tools/doc-kit-check.sh`, enforces it but is not part of it.
 | `.agents/skills/*/SKILL.md` | adoptions began being driven by an agent                        | when the procedure it drives no longer exists                    |
 | `docs/decisions/README.md`  | first decision is recorded                                      | never                                                            |
 | `docs/decisions/*.md`       | a choice a newcomer would question                              | deprecated or deleted, with the owner's permission               |
-| `CHANGELOG.md` entry        | at release, if visible to adopters                              | never                                                            |
+| `CHANGELOG.md` entry        | with each change visible to adopters                            | never                                                            |
 | `docs/plan/README.md` entry | idea occurs - one paragraph, no design                          | **deleted** when done, not struck through                        |
 | `docs/plan/*.md`            | work on an entry needs more than its paragraph                  | with its entry, when the work lands or is dropped                |
 | `docs/research/*.md`        | a cited convention is checked, or an agent eval is run          | never - confidence gets revised                                  |

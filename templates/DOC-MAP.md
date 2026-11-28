@@ -103,7 +103,7 @@ The closed sets used in the artefacts table:
 | `docs/spec.md`               | behaviour is decided                               | never - edited forever                                           |
 | `docs/decisions/README.md`   | first decision is recorded                         | never                                                            |
 | `docs/decisions/*.md`        | a choice a newcomer would question                 | deprecated or deleted, with the owner's permission               |
-| `CHANGELOG.md` entry         | at release, if user-visible                        | never                                                            |
+| `CHANGELOG.md` entry         | with each user-visible change                      | never                                                            |
 | `docs/plan/README.md` entry  | idea occurs - one paragraph, no design             | **deleted** when done, not struck through                        |
 | `docs/quirks.md` entry       | a deviation is chosen, or a bug accepted           | when the deviation ends                                          |
 | `docs/research/*.md`         | a question is investigated                         | never - confidence gets revised                                  |

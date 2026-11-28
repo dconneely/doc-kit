@@ -6,6 +6,13 @@ Entries describe effects an adopter can see, not internal refactors or plan edit
 
 ## Unreleased
 
+### Fixed
+
+- The template map's lifecycle table says a `CHANGELOG.md` entry is created with each user-visible
+  change. It said "at release", which disagreed with the map's flow, and in an agent eval one Claude
+  Haiku session in three left a change out of the changelog because of it. Change an adopted map to
+  match.
+
 ## [0.13.0] - 2026-11-27
 
 ### Added
