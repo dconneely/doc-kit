@@ -39,7 +39,7 @@ changes adopters should take.
 4. **Commit the heading.**
 
    ```sh
-   git commit -m "docs: Release X.Y.Z" CHANGELOG.md
+   git commit -m "docs: release X.Y.Z" CHANGELOG.md
    ```
 
 5. **Push the commit, and wait for CI to pass on it.**
